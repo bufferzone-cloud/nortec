@@ -139,6 +139,7 @@
             align-items: center;
             justify-content: center;
             transition: background 0.2s;
+            z-index: 10;
         }
         #detailModal .modal-close:hover { background: #cbd5e1; }
         #detailModal .modal-logo {
@@ -178,6 +179,117 @@
         }
         #detailModal .detail-body p { margin-bottom: 8px; }
         #detailModal .detail-body ul { padding-left: 20px; margin: 6px 0 12px; }
+
+        /* APPLY BUTTON inside detail modal */
+        .btn-apply {
+            display: inline-block;
+            margin: 20px 0 10px;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #00c853, #009e3d);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 24px rgba(0,200,83,0.35);
+            transition: all 0.25s ease;
+        }
+        .btn-apply:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 32px rgba(0,200,83,0.45);
+        }
+        .btn-apply:active { transform: scale(0.96); }
+
+        /* APPLICATION FORM inside detail modal */
+        .application-form {
+            display: none;
+            max-width: 600px;
+            width: 100%;
+            text-align: left;
+            color: #1e293b;
+        }
+        .application-form.active {
+            display: block;
+        }
+        .application-form .form-section {
+            margin-bottom: 24px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 16px;
+        }
+        .application-form .form-section:last-child {
+            border-bottom: none;
+        }
+        .application-form .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 12px;
+        }
+        .application-form .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+        .application-form .form-row > * {
+            flex: 1 1 200px;
+        }
+        .application-form label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 4px;
+        }
+        .application-form input, .application-form select, .application-form textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid #d1d5db;
+            background: #f8fafc;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: border 0.2s;
+        }
+        .application-form input:focus, .application-form select:focus, .application-form textarea:focus {
+            border-color: #3b82f6;
+            background: #fff;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.10);
+        }
+        .application-form .btn-submit-app {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            box-shadow: 0 6px 24px rgba(59,130,246,0.30);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            margin-top: 8px;
+        }
+        .application-form .btn-submit-app:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 32px rgba(59,130,246,0.40);
+        }
+        .application-form .btn-submit-app:active { transform: scale(0.97); }
+        .application-form .btn-back-detail {
+            background: transparent;
+            border: none;
+            color: #64748b;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+        .application-form .btn-back-detail:hover { color: #1e293b; }
 
         /* LOGO with white blur */
         .logo-wrapper {
@@ -391,7 +503,7 @@
         .btn-back:active { transform: scale(0.95); }
         .btn-back i { font-size: 14px; }
 
-        /* PROGRAMS LIST */
+        /* PROGRAMS LIST – solid cards (no glass) */
         .program-list {
             width: 100%;
             max-width: 600px;
@@ -399,30 +511,35 @@
             padding: 0 4px;
         }
         .program-card {
-            background: rgba(255,255,255,0.12);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(255,255,255,0.92);
             border-radius: 16px;
             padding: 16px 18px;
             margin-bottom: 12px;
-            border: 1px solid rgba(255,255,255,0.10);
-            color: #fff;
-            transition: background 0.2s;
+            border: 1px solid #e2e8f0;
+            color: #0f172a;
+            transition: background 0.2s, transform 0.2s;
             cursor: pointer;
             touch-action: manipulation;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
-        .program-card:hover { background: rgba(255,255,255,0.20); }
+        .program-card:hover {
+            background: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
         .program-card .prog-title {
             font-weight: 700;
             font-size: 16px;
             margin-bottom: 4px;
+            color: #0f172a;
         }
         .program-card .prog-meta {
             font-size: 13px;
-            opacity: 0.8;
+            opacity: 0.7;
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
+            color: #334155;
         }
         .program-card .prog-meta span { display: inline-flex; align-items: center; gap: 4px; }
         .program-card .prog-meta i { font-size: 12px; }
@@ -430,7 +547,7 @@
             margin-top: 8px;
             font-size: 13px;
             font-weight: 600;
-            color: #6cffa0;
+            color: #2563eb;
             display: inline-flex;
             align-items: center;
             gap: 6px;
@@ -447,14 +564,13 @@
             padding: 0 4px;
         }
         .short-item {
-            background: rgba(255,255,255,0.10);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
+            background: rgba(255,255,255,0.92);
             border-radius: 12px;
             padding: 14px 12px;
-            border: 1px solid rgba(255,255,255,0.08);
-            color: #fff;
+            border: 1px solid #e2e8f0;
+            color: #0f172a;
             text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
         .short-item .short-title { font-weight: 600; font-size: 14px; }
         .short-item .short-days { font-size: 12px; opacity: 0.7; margin-top: 2px; }
@@ -593,6 +709,7 @@
             .modal { padding: 24px 18px 18px; border-radius: 22px; }
             .modal-logo img { width: 52px; height: 52px; }
             .modal-header .modal-title { font-size: 18px; }
+            .application-form .form-row > * { flex: 1 1 100%; }
         }
         @media (max-width: 360px) {
             .intake-grid { gap: 10px; }
@@ -712,7 +829,113 @@
             <img src="logo.png" alt="NTC Logo" />
         </div>
         <div class="detail-title" id="detailTitle">Programme</div>
+
+        <!-- Program Details (visible by default) -->
         <div class="detail-body" id="detailBody"></div>
+
+        <!-- Apply Button -->
+        <button class="btn-apply" id="applyBtn"><i class="fas fa-pen"></i> Apply Now</button>
+
+        <!-- Application Form (hidden by default) -->
+        <div class="application-form" id="applicationForm">
+            <button class="btn-back-detail" id="backToDetail"><i class="fas fa-arrow-left"></i> Back to programme details</button>
+
+            <div class="form-section">
+                <div class="section-title">Personal Details</div>
+                <div class="form-row">
+                    <div><label>Full Name</label><input type="text" placeholder="John Doe" /></div>
+                    <div><label>Date of Birth</label><input type="date" /></div>
+                </div>
+                <div class="form-row">
+                    <div><label>Gender</label>
+                        <select><option>Male</option><option>Female</option><option>Other</option></select>
+                    </div>
+                    <div><label>Nationality</label><input type="text" placeholder="Zambian" /></div>
+                </div>
+                <div class="form-row">
+                    <div><label>NRC/Passport Number</label><input type="text" placeholder="123456-78-9" /></div>
+                    <div><label>Physical Address</label><input type="text" placeholder="Street, City" /></div>
+                </div>
+                <div class="form-row">
+                    <div><label>Phone Number</label><input type="tel" placeholder="+260..." /></div>
+                    <div><label>Email Address</label><input type="email" placeholder="you@example.com" /></div>
+                </div>
+                <div><label>Next of Kin/Emergency Contact</label><input type="text" placeholder="Name and phone" /></div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">Academic Background</div>
+                <div class="form-row">
+                    <div><label>Previous School/College Attended</label><input type="text" /></div>
+                    <div><label>Grade 12 School Name</label><input type="text" /></div>
+                </div>
+                <div class="form-row">
+                    <div><label>Year of Completion</label><input type="number" placeholder="2024" /></div>
+                    <div><label>Examination Number</label><input type="text" /></div>
+                </div>
+                <div><label>Subjects and Grades Obtained</label><textarea rows="2" placeholder="e.g., Mathematics – A, English – B, ..."></textarea></div>
+                <div><label>Copies of Academic Certificates/Results Slip</label><input type="file" /></div>
+                <div><label>Certified Copies of Certificates (if required)</label><input type="file" /></div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">Program Selection</div>
+                <div class="form-row">
+                    <div><label>Program/Course Applying For</label><input type="text" id="applyProgram" readonly /></div>
+                    <div><label>Mode of Study</label>
+                        <select><option>Full-time</option><option>Part-time</option><option>Distance</option></select>
+                    </div>
+                </div>
+                <div><label>Intake/Semester Applying For</label><input type="text" id="applyIntake" readonly /></div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">Document Uploads</div>
+                <div><label>Passport-size Photograph</label><input type="file" /></div>
+                <div><label>NRC Copy or Passport Copy</label><input type="file" /></div>
+                <div><label>Grade 12 Certificate/Statement of Results</label><input type="file" /></div>
+                <div><label>Diploma/Degree Certificates (for higher-level programs)</label><input type="file" /></div>
+                <div><label>Curriculum Vitae (for some programs)</label><input type="file" /></div>
+                <div><label>Recommendation Letter (if required)</label><input type="file" /></div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">Sponsor Information</div>
+                <div class="form-row">
+                    <div><label>Sponsor Details (Self, Parent, Organization)</label><input type="text" /></div>
+                    <div><label>Sponsor Contact Information</label><input type="text" /></div>
+                </div>
+                <div><label>Scholarship Information (if applicable)</label><input type="text" /></div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">Medical Information</div>
+                <div class="form-row">
+                    <div><label>Any Medical Conditions</label><input type="text" /></div>
+                    <div><label>Disability Information (if applicable)</label><input type="text" /></div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">Additional (Optional)</div>
+                <div><label>Work Experience Details</label><textarea rows="2"></textarea></div>
+                <div><label>Computer Skills</label><input type="text" /></div>
+                <div><label>Personal Statement/Motivation Letter</label><textarea rows="3"></textarea></div>
+            </div>
+
+            <div class="form-section">
+                <div class="section-title">Declaration & Submit</div>
+                <div style="display:flex; gap:12px; align-items:center; margin-bottom:12px;">
+                    <input type="checkbox" id="declare" />
+                    <label for="declare" style="font-weight:400;">I declare that the information provided is true and correct.</label>
+                </div>
+                <div class="form-row">
+                    <div><label>Applicant's Signature</label><input type="text" placeholder="Type your full name" /></div>
+                    <div><label>Date of Application</label><input type="date" /></div>
+                </div>
+                <button class="btn-submit-app" id="submitApplication"><i class="fas fa-paper-plane"></i> Submit Application</button>
+            </div>
+        </div>
     </div>
 
     <!-- LOGIN MODAL -->
@@ -997,13 +1220,19 @@
             const forgotLink = document.getElementById('forgotLink');
             const supportLink = document.getElementById('supportLink');
             const detailClose = document.getElementById('detailClose');
+            const applyBtn = document.getElementById('applyBtn');
+            const backToDetail = document.getElementById('backToDetail');
+            const applicationForm = document.getElementById('applicationForm');
+            const detailBody = document.getElementById('detailBody');
+            const detailTitle = document.getElementById('detailTitle');
+            const applyProgram = document.getElementById('applyProgram');
+            const applyIntake = document.getElementById('applyIntake');
+            const submitApp = document.getElementById('submitApplication');
 
             const intakeTitle = document.getElementById('intakeTitle');
             const intakeSub = document.getElementById('intakeSub');
             const programListContainer = document.getElementById('programListContainer');
             const shortCoursesContainer = document.getElementById('shortCoursesContainer');
-            const detailTitle = document.getElementById('detailTitle');
-            const detailBody = document.getElementById('detailBody');
 
             // ─── NAVIGATION HELPERS ──────────────────────────────
             function showPage(page) {
@@ -1053,7 +1282,10 @@
             }
 
             // ─── DETAIL MODAL ─────────────────────────────────────
+            let currentProgram = null;
+
             function openDetail(prog) {
+                currentProgram = prog;
                 detailTitle.textContent = prog.title;
                 let html = `
                     <p><strong>Duration:</strong> ${prog.duration}</p>
@@ -1068,6 +1300,13 @@
                     if (prog.extra.employment) html += `<h3>Employment Prospects</h3><p>${prog.extra.employment}</p>`;
                 }
                 detailBody.innerHTML = html;
+                // Reset form visibility
+                detailBody.style.display = 'block';
+                applyBtn.style.display = 'inline-block';
+                applicationForm.classList.remove('active');
+                // Pre-fill program and intake in form
+                applyProgram.value = prog.title;
+                applyIntake.value = prog.intake.charAt(0).toUpperCase() + prog.intake.slice(1);
                 detailModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             }
@@ -1075,7 +1314,34 @@
             function closeDetail() {
                 detailModal.classList.remove('active');
                 document.body.style.overflow = '';
+                currentProgram = null;
             }
+
+            // ─── APPLICATION FORM TOGGLE ─────────────────────────
+            applyBtn.addEventListener('click', function() {
+                detailBody.style.display = 'none';
+                this.style.display = 'none';
+                applicationForm.classList.add('active');
+            });
+
+            backToDetail.addEventListener('click', function() {
+                applicationForm.classList.remove('active');
+                detailBody.style.display = 'block';
+                applyBtn.style.display = 'inline-block';
+            });
+
+            // ─── SUBMIT APPLICATION ──────────────────────────────
+            submitApp.addEventListener('click', function(e) {
+                e.preventDefault();
+                const declare = document.getElementById('declare');
+                if (!declare.checked) {
+                    alert('Please declare that the information is true and correct.');
+                    return;
+                }
+                alert('✅ Application submitted successfully!\nWe will contact you shortly.');
+                // Optionally close modal or reset
+                closeDetail();
+            });
 
             // ─── SHORT COURSES ────────────────────────────────────
             function renderShortCourses() {
@@ -1166,7 +1432,7 @@
 
             // ─── INIT ─────────────────────────────────────────────
             showMain();
-            console.log('✅ Northern Technical College – Full programme data loaded.');
+            console.log('✅ Northern Technical College – Full programme data with application form loaded.');
         })();
     </script>
 </body>
