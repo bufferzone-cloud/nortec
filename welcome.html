@@ -7,25 +7,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
-        /* ── RESET & FULL SCREEN BASE ── */
+        /* RESET & FULL SCREEN BASE */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
-        html,
-        body {
+        html, body {
             width: 100%;
             height: 100%;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             background: #0a0e17;
             overflow: hidden;
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
         }
 
-        /* ── FULL SCREEN BACKGROUND WITH ZOOM ANIMATION ── */
+        /* FULL SCREEN BACKGROUND WITH ZOOM */
         .bg-layer {
             position: fixed;
             inset: 0;
@@ -40,34 +38,22 @@
             animation: zoomLoop 10s ease-in-out infinite alternate;
             will-change: transform;
         }
-
         @keyframes zoomLoop {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.12);
-            }
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.12); }
+            100% { transform: scale(1); }
         }
-
-        /* Light overlay for readability */
         .bg-layer::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg,
-                    rgba(0, 0, 0, 0.10) 0%,
-                    rgba(0, 0, 0, 0.25) 40%,
-                    rgba(0, 0, 0, 0.50) 100%);
+            background: linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.50) 100%);
             backdrop-filter: blur(0.5px);
             -webkit-backdrop-filter: blur(0.5px);
             pointer-events: none;
         }
 
-        /* ── CONTENT WRAPPER (shared) ── */
+        /* PAGES – shared container */
         .page {
             position: fixed;
             inset: 0;
@@ -79,23 +65,18 @@
             padding: 28px 24px;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
-            transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-                visibility 0.45s ease;
+            transition: opacity 0.45s cubic-bezier(0.22,1,0.36,1),
+                        transform 0.45s cubic-bezier(0.22,1,0.36,1),
+                        visibility 0.45s ease;
         }
+        .page::-webkit-scrollbar { width: 0; background: transparent; }
 
-        .page::-webkit-scrollbar {
-            width: 0;
-            background: transparent;
-        }
-
-        /* ── MAIN PAGE ── */
+        /* MAIN PAGE */
         #mainPage {
             opacity: 1;
             transform: scale(1);
             visibility: visible;
         }
-
         #mainPage.hidden {
             opacity: 0;
             transform: scale(0.96);
@@ -103,8 +84,8 @@
             pointer-events: none;
         }
 
-        /* ── ENROLL PAGE ── */
-        #enrollPage {
+        /* ENROLL PAGE (intake selection) */
+        #enrollPage, #programsPage, #shortCoursesPage {
             opacity: 0;
             transform: scale(0.96);
             visibility: hidden;
@@ -113,15 +94,92 @@
             padding-top: 40px;
             padding-bottom: 40px;
         }
-
-        #enrollPage.active {
+        #enrollPage.active, #programsPage.active, #shortCoursesPage.active {
             opacity: 1;
             transform: scale(1);
             visibility: visible;
             pointer-events: auto;
         }
 
-        /* ── LOGO with WHITE BLUR BACKGROUND ── */
+        /* DETAIL MODAL (white overlay) */
+        #detailModal {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px 20px;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+            touch-action: manipulation;
+        }
+        #detailModal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        #detailModal .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: #e2e8f0;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 24px;
+            color: #1e293b;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        #detailModal .modal-close:hover { background: #cbd5e1; }
+        #detailModal .modal-logo {
+            margin-top: 12px;
+            margin-bottom: 8px;
+        }
+        #detailModal .modal-logo img {
+            width: 72px;
+            height: 72px;
+            object-fit: contain;
+            border-radius: 16px;
+            background: #f8fafc;
+            padding: 8px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+        #detailModal .detail-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0f172a;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        #detailModal .detail-body {
+            max-width: 600px;
+            width: 100%;
+            text-align: left;
+            color: #1e293b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        #detailModal .detail-body h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 16px 0 6px;
+            color: #0f172a;
+        }
+        #detailModal .detail-body p { margin-bottom: 8px; }
+        #detailModal .detail-body ul { padding-left: 20px; margin: 6px 0 12px; }
+
+        /* LOGO with white blur */
         .logo-wrapper {
             flex-shrink: 0;
             display: flex;
@@ -129,63 +187,47 @@
             align-items: center;
             margin-bottom: 12px;
         }
-
         .main-logo {
             width: 88px;
             height: 88px;
             object-fit: contain;
             border-radius: 18px;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255,255,255,0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             padding: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.20);
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.20);
             transition: transform 0.3s ease;
         }
+        .main-logo:hover { transform: scale(1.03); }
 
-        .main-logo:hover {
-            transform: scale(1.03);
-        }
-
-        /* ── TITLE ── */
+        /* TITLE */
         .title {
             text-align: center;
             margin: 4px 0 28px;
             flex-shrink: 0;
         }
-
         .title h1 {
             font-size: 20px;
             font-weight: 900;
             letter-spacing: 0.2px;
             line-height: 1.3;
             color: #fff;
-            text-shadow: 0 4px 28px rgba(0, 0, 0, 0.45);
-            word-break: break-word;
+            text-shadow: 0 4px 28px rgba(0,0,0,0.45);
         }
-
-        .title h1 .accent {
-            color: #6cffa0;
-        }
-
+        .title h1 .accent { color: #6cffa0; }
         .title .sub {
             font-size: 10px;
             font-weight: 400;
-            color: rgba(255, 255, 255, 0.55);
+            color: rgba(255,255,255,0.55);
             letter-spacing: 1.8px;
             text-transform: uppercase;
             margin-top: 3px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.25);
         }
 
-        /* ── SPACER ── */
-        .spacer {
-            flex: 1;
-            min-height: 12px;
-        }
-
-        /* ── BUTTONS (main page) ── */
+        /* BUTTONS (main) */
         .button-group {
             display: flex;
             flex-direction: column;
@@ -195,7 +237,6 @@
             flex-shrink: 0;
             padding-bottom: 4px;
         }
-
         .btn {
             display: flex;
             justify-content: center;
@@ -206,11 +247,10 @@
             font-family: 'Inter', sans-serif;
             font-size: 16px;
             font-weight: 700;
-            letter-spacing: 0.2px;
             color: #fff;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
             position: relative;
             overflow: hidden;
             user-select: none;
@@ -219,84 +259,53 @@
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
         }
-
         .btn::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, transparent 60%);
+            background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 60%);
             pointer-events: none;
         }
-
-        .btn:active {
-            transform: scale(0.96);
-        }
-
+        .btn:active { transform: scale(0.96); }
         .btn-enroll {
             background: linear-gradient(135deg, #00c853, #009e3d);
-            box-shadow: 0 8px 32px rgba(0, 200, 83, 0.35);
+            box-shadow: 0 8px 32px rgba(0,200,83,0.35);
         }
         .btn-enroll:hover {
-            box-shadow: 0 12px 40px rgba(0, 200, 83, 0.45);
+            box-shadow: 0 12px 40px rgba(0,200,83,0.45);
             transform: translateY(-2px);
         }
-
         .btn-login {
             background: linear-gradient(135deg, #2979ff, #0d47a1);
-            box-shadow: 0 8px 32px rgba(41, 121, 255, 0.35);
+            box-shadow: 0 8px 32px rgba(41,121,255,0.35);
         }
         .btn-login:hover {
-            box-shadow: 0 12px 40px rgba(41, 121, 255, 0.45);
+            box-shadow: 0 12px 40px rgba(41,121,255,0.45);
             transform: translateY(-2px);
         }
+        .btn i { margin-right: 10px; font-size: 17px; }
 
-        .btn i {
-            margin-right: 10px;
-            font-size: 17px;
-            color: #fff;
-        }
-
-        /* ── FOOTER ── */
-        .footer-note {
-            margin-top: 16px;
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.20);
-            text-align: center;
-            letter-spacing: 0.5px;
-            flex-shrink: 0;
-        }
-
-        /* ════════════════════════════════════════ */
-        /* ── ENROLL PAGE – 4 BIG SQUARE BUTTONS ── */
-        /* ════════════════════════════════════════ */
-
-        .enroll-header {
+        /* ENROLL PAGE – intake buttons */
+        .page-header {
             text-align: center;
             margin-bottom: 20px;
             flex-shrink: 0;
         }
-
-        .enroll-header h2 {
+        .page-header h2 {
             font-size: 22px;
             font-weight: 800;
             color: #fff;
-            text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            text-shadow: 0 4px 24px rgba(0,0,0,0.4);
         }
-
-        .enroll-header h2 i {
-            color: #6cffa0;
-            margin-right: 8px;
-        }
-
-        .enroll-header p {
+        .page-header h2 i { color: #6cffa0; margin-right: 8px; }
+        .page-header p {
             font-size: 13px;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255,255,255,0.6);
             margin-top: 4px;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
-        /* ── 4 SQUARE BUTTONS GRID ── */
-        .program-grid {
+        .intake-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
@@ -305,25 +314,24 @@
             flex-shrink: 0;
             padding: 0 4px;
         }
-
-        .program-btn {
+        .intake-btn, .shortcourse-btn {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 1/1;
             border: none;
             border-radius: 20px;
             font-family: 'Inter', sans-serif;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 700;
             color: #fff;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.30);
+            transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.30);
             padding: 16px 12px;
             text-align: center;
-            line-height: 1.3;
+            line-height: 1.2;
             position: relative;
             overflow: hidden;
             user-select: none;
@@ -331,64 +339,26 @@
             backdrop-filter: blur(6px);
             -webkit-backdrop-filter: blur(6px);
         }
-
-        .program-btn::after {
+        .intake-btn::after, .shortcourse-btn::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, transparent 60%);
+            background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, transparent 60%);
             pointer-events: none;
         }
-
-        .program-btn i {
-            font-size: 32px;
-            margin-bottom: 10px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .program-btn:active {
-            transform: scale(0.94);
-        }
-
-        .program-btn:hover {
+        .intake-btn:active, .shortcourse-btn:active { transform: scale(0.94); }
+        .intake-btn:hover, .shortcourse-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 14px 44px rgba(0, 0, 0, 0.40);
+            box-shadow: 0 14px 44px rgba(0,0,0,0.40);
         }
+        .intake-btn i { font-size: 32px; margin-bottom: 8px; color: rgba(255,255,255,0.9); }
+        .intake-jan { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .intake-may { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+        .intake-sep { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+        .intake-aug { background: linear-gradient(135deg, #10b981, #047857); }
+        .intake-short { background: linear-gradient(135deg, #ec4899, #be185d); }
 
-        /* Individual program colours */
-        .prog-craft {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            box-shadow: 0 8px 32px rgba(245, 158, 11, 0.30);
-        }
-        .prog-craft:hover {
-            box-shadow: 0 14px 44px rgba(245, 158, 11, 0.40);
-        }
-
-        .prog-trade {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.30);
-        }
-        .prog-trade:hover {
-            box-shadow: 0 14px 44px rgba(59, 130, 246, 0.40);
-        }
-
-        .prog-advanced {
-            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.30);
-        }
-        .prog-advanced:hover {
-            box-shadow: 0 14px 44px rgba(139, 92, 246, 0.40);
-        }
-
-        .prog-diploma {
-            background: linear-gradient(135deg, #10b981, #047857);
-            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.30);
-        }
-        .prog-diploma:hover {
-            box-shadow: 0 14px 44px rgba(16, 185, 129, 0.40);
-        }
-
-        /* ── BACK BUTTON (enroll page) ── */
+        /* BACK BUTTON */
         .back-row {
             width: 100%;
             max-width: 420px;
@@ -398,7 +368,6 @@
             flex-shrink: 0;
             padding: 0 4px;
         }
-
         .btn-back {
             display: inline-flex;
             align-items: center;
@@ -406,7 +375,7 @@
             padding: 10px 20px;
             border: none;
             border-radius: 40px;
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(255,255,255,0.12);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             color: #fff;
@@ -416,28 +385,86 @@
             cursor: pointer;
             transition: all 0.25s ease;
             touch-action: manipulation;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .btn-back:hover { background: rgba(255,255,255,0.20); transform: translateX(-3px); }
+        .btn-back:active { transform: scale(0.95); }
+        .btn-back i { font-size: 14px; }
+
+        /* PROGRAMS LIST */
+        .program-list {
+            width: 100%;
+            max-width: 600px;
+            flex-shrink: 0;
+            padding: 0 4px;
+        }
+        .program-card {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 16px;
+            padding: 16px 18px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255,255,255,0.10);
+            color: #fff;
+            transition: background 0.2s;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        .program-card:hover { background: rgba(255,255,255,0.20); }
+        .program-card .prog-title {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .program-card .prog-meta {
+            font-size: 13px;
+            opacity: 0.8;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .program-card .prog-meta span { display: inline-flex; align-items: center; gap: 4px; }
+        .program-card .prog-meta i { font-size: 12px; }
+        .program-card .view-detail {
+            margin-top: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #6cffa0;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .btn-back:hover {
-            background: rgba(255, 255, 255, 0.20);
-            transform: translateX(-3px);
+        /* SHORT COURSES page */
+        .short-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            width: 100%;
+            max-width: 600px;
+            flex-shrink: 0;
+            padding: 0 4px;
         }
-
-        .btn-back:active {
-            transform: scale(0.95);
+        .short-item {
+            background: rgba(255,255,255,0.10);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border-radius: 12px;
+            padding: 14px 12px;
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #fff;
+            text-align: center;
         }
+        .short-item .short-title { font-weight: 600; font-size: 14px; }
+        .short-item .short-days { font-size: 12px; opacity: 0.7; margin-top: 2px; }
 
-        .btn-back i {
-            font-size: 14px;
-        }
-
-        /* ── LOGIN MODAL (kept from original, minimal) ── */
+        /* LOGIN MODAL (kept minimal) */
         .modal-overlay {
             position: fixed;
             inset: 0;
             z-index: 999;
-            background: rgba(0, 0, 0, 0.55);
+            background: rgba(0,0,0,0.55);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             display: flex;
@@ -447,14 +474,11 @@
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.35s ease, visibility 0.35s ease;
-            touch-action: none;
         }
-
         .modal-overlay.active {
             opacity: 1;
             visibility: visible;
         }
-
         .modal {
             background: #ffffff;
             border-radius: 28px;
@@ -465,343 +489,130 @@
             max-height: 85dvh;
             overflow-y: auto;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.35);
             transform: scale(0.92) translateY(20px);
-            transition: transform 0.40s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+            transition: transform 0.40s cubic-bezier(0.22,1,0.36,1), opacity 0.35s ease;
             opacity: 0;
             position: relative;
         }
-
         .modal-overlay.active .modal {
             transform: scale(1) translateY(0);
             opacity: 1;
         }
-
-        .modal::-webkit-scrollbar {
-            width: 4px;
-        }
-        .modal::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        .modal::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 10px;
-        }
-
         .modal-close {
             position: absolute;
-            top: 14px;
-            right: 16px;
-            width: 32px;
-            height: 32px;
+            top: 14px; right: 16px;
+            width: 32px; height: 32px;
             border-radius: 50%;
             border: none;
             background: #f1f5f9;
             color: #64748b;
             font-size: 20px;
-            line-height: 1;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
             display: flex;
-            justify-content: center;
             align-items: center;
-            padding: 0;
-            touch-action: manipulation;
+            justify-content: center;
         }
-
-        .modal-close:hover {
-            background: #e2e8f0;
-            color: #0f172a;
-        }
-
-        .modal-logo {
-            text-align: center;
-            margin-bottom: 6px;
-        }
-
+        .modal-close:hover { background: #e2e8f0; color: #0f172a; }
+        .modal-logo { text-align: center; margin-bottom: 6px; }
         .modal-logo img {
-            width: 60px;
-            height: 60px;
+            width: 60px; height: 60px;
             object-fit: contain;
             border-radius: 14px;
             background: #f8fafc;
             padding: 6px;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
         }
-
         .modal-header {
             text-align: center;
             padding-bottom: 14px;
             margin-bottom: 16px;
             border-bottom: 1px solid #e2e8f0;
+            border-top: 4px solid #3b82f6;
+            border-radius: 0;
         }
-
         .modal-header .modal-title {
             font-size: 20px;
             font-weight: 800;
             color: #0f172a;
-            letter-spacing: -0.2px;
         }
-
-        .modal-header .modal-title i {
-            margin-right: 8px;
-            color: #3b82f6;
-        }
-
-        .modal-header {
-            border-top: 4px solid #3b82f6;
-            border-radius: 0;
-        }
-
-        .form-group {
-            margin-bottom: 14px;
-        }
-
+        .modal-header .modal-title i { margin-right: 8px; color: #3b82f6; }
+        .form-group { margin-bottom: 14px; }
         .form-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #475569;
-            margin-bottom: 4px;
-            letter-spacing: 0.2px;
+            display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 4px;
         }
-
         .form-input {
-            width: 100%;
-            padding: 12px 14px;
-            border-radius: 14px;
-            border: 1px solid #d1d5db;
-            background: #f8fafc;
-            color: #0f172a;
-            font-size: 14px;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.25s ease;
-            outline: none;
-            -webkit-appearance: none;
-            appearance: none;
+            width: 100%; padding: 12px 14px; border-radius: 14px; border: 1px solid #d1d5db;
+            background: #f8fafc; color: #0f172a; font-size: 14px; font-family: 'Inter', sans-serif;
+            transition: all 0.25s ease; outline: none;
         }
-
-        .form-input:focus {
-            border-color: #3b82f6;
-            background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
-        }
-
-        .form-input::placeholder {
-            color: #94a3b8;
-        }
-
-        .password-wrapper {
-            position: relative;
-        }
-
+        .form-input:focus { border-color: #3b82f6; background: #ffffff; box-shadow: 0 0 0 3px rgba(59,130,246,0.10); }
+        .password-wrapper { position: relative; }
         .password-toggle {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #94a3b8;
-            font-size: 16px;
-            cursor: pointer;
-            padding: 4px;
-            touch-action: manipulation;
+            position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+            background: none; border: none; color: #94a3b8; font-size: 16px; cursor: pointer; padding: 4px;
             transition: color 0.2s;
         }
-
-        .password-toggle:hover {
-            color: #475569;
-        }
-
+        .password-toggle:hover { color: #475569; }
         .form-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 6px;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;
             margin: 6px 0 14px;
         }
-
         .checkbox-wrap {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: #475569;
-            font-size: 13px;
-            cursor: pointer;
-            touch-action: manipulation;
+            display: flex; align-items: center; gap: 6px; color: #475569; font-size: 13px; cursor: pointer;
         }
-
-        .checkbox-wrap input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            accent-color: #3b82f6;
-            cursor: pointer;
-            border-radius: 4px;
-            flex-shrink: 0;
-        }
-
-        .forgot-link {
-            color: #64748b;
-            font-size: 13px;
-            text-decoration: none;
-            transition: color 0.2s;
-            touch-action: manipulation;
-        }
-
-        .forgot-link:hover {
-            color: #1e293b;
-        }
-
+        .checkbox-wrap input[type="checkbox"] { width: 16px; height: 16px; accent-color: #3b82f6; cursor: pointer; }
+        .forgot-link { color: #64748b; font-size: 13px; text-decoration: none; transition: color 0.2s; }
+        .forgot-link:hover { color: #1e293b; }
         .btn-submit {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 50px;
-            font-family: 'Inter', sans-serif;
-            font-size: 15px;
-            font-weight: 700;
-            color: #fff;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            touch-action: manipulation;
+            width: 100%; padding: 14px; border: none; border-radius: 50px; font-family: 'Inter', sans-serif;
+            font-size: 15px; font-weight: 700; color: #fff; cursor: pointer; transition: all 0.25s ease;
+            background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 6px 24px rgba(59,130,246,0.30);
             margin-top: 4px;
-            letter-spacing: 0.2px;
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            box-shadow: 0 6px 24px rgba(59, 130, 246, 0.30);
         }
+        .btn-submit:hover { box-shadow: 0 10px 32px rgba(59,130,246,0.40); transform: translateY(-2px); }
+        .support-link { text-align: center; margin-top: 14px; font-size: 13px; color: #64748b; }
+        .support-link a { color: #2563eb; text-decoration: none; font-weight: 600; }
+        .support-link a:hover { color: #1d4ed8; }
 
-        .btn-submit:hover {
-            box-shadow: 0 10px 32px rgba(59, 130, 246, 0.40);
-            transform: translateY(-2px);
-        }
-
-        .btn-submit:active {
-            transform: scale(0.97);
-        }
-
-        .support-link {
-            text-align: center;
-            margin-top: 14px;
-            font-size: 13px;
-            color: #64748b;
-        }
-
-        .support-link a {
-            color: #2563eb;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.2s;
-        }
-
-        .support-link a:hover {
-            color: #1d4ed8;
-        }
-
-        /* ── RESPONSIVE TWEAKS ── */
+        /* RESPONSIVE */
         @media (max-width: 480px) {
-            .page {
-                padding: 20px 16px;
-            }
-            .main-logo {
-                width: 72px;
-                height: 72px;
-                padding: 8px;
-            }
-            .title h1 {
-                font-size: 17px;
-            }
-            .btn {
-                font-size: 14px;
-                padding: 14px 18px;
-                min-height: 46px;
-            }
-            .program-grid {
-                gap: 12px;
-                max-width: 100%;
-            }
-            .program-btn {
-                font-size: 12px;
-                border-radius: 16px;
-                padding: 12px 8px;
-            }
-            .program-btn i {
-                font-size: 26px;
-                margin-bottom: 6px;
-            }
-            .enroll-header h2 {
-                font-size: 18px;
-            }
-            .modal {
-                padding: 24px 18px 18px;
-                border-radius: 22px;
-            }
-            .modal-logo img {
-                width: 52px;
-                height: 52px;
-            }
-            .modal-header .modal-title {
-                font-size: 18px;
-            }
+            .page { padding: 20px 16px; }
+            .main-logo { width: 72px; height: 72px; padding: 8px; }
+            .title h1 { font-size: 17px; }
+            .btn { font-size: 14px; padding: 14px 18px; min-height: 46px; }
+            .intake-grid { gap: 12px; max-width: 100%; }
+            .intake-btn { font-size: 14px; border-radius: 16px; padding: 12px 8px; }
+            .intake-btn i { font-size: 26px; margin-bottom: 6px; }
+            .page-header h2 { font-size: 18px; }
+            .program-card .prog-title { font-size: 14px; }
+            .short-grid { grid-template-columns: 1fr; }
+            #detailModal .detail-title { font-size: 18px; }
+            .modal { padding: 24px 18px 18px; border-radius: 22px; }
+            .modal-logo img { width: 52px; height: 52px; }
+            .modal-header .modal-title { font-size: 18px; }
         }
-
         @media (max-width: 360px) {
-            .program-grid {
-                gap: 10px;
-            }
-            .program-btn {
-                font-size: 11px;
-                padding: 10px 6px;
-            }
-            .program-btn i {
-                font-size: 22px;
-            }
-            .title h1 {
-                font-size: 15px;
-            }
-            .btn {
-                font-size: 13px;
-                padding: 12px 14px;
-                min-height: 42px;
-            }
+            .intake-grid { gap: 10px; }
+            .intake-btn { font-size: 12px; padding: 10px 6px; }
+            .intake-btn i { font-size: 22px; }
+            .title h1 { font-size: 15px; }
+            .btn { font-size: 13px; padding: 12px 14px; min-height: 42px; }
         }
-
         @media (min-height: 800px) {
-            .main-logo {
-                width: 100px;
-                height: 100px;
-            }
-            .title h1 {
-                font-size: 24px;
-            }
-            .program-btn {
-                font-size: 16px;
-            }
-            .program-btn i {
-                font-size: 38px;
-            }
-            .program-grid {
-                max-width: 480px;
-                gap: 20px;
-            }
+            .main-logo { width: 100px; height: 100px; }
+            .title h1 { font-size: 24px; }
+            .intake-btn { font-size: 18px; }
+            .intake-btn i { font-size: 38px; }
+            .intake-grid { max-width: 480px; gap: 20px; }
         }
-
         @media (min-height: 900px) {
-            .page {
-                padding: 40px 32px;
-            }
-            .program-grid {
-                max-width: 520px;
-                gap: 24px;
-            }
-            .program-btn {
-                border-radius: 24px;
-            }
+            .page { padding: 40px 32px; }
+            .intake-grid { max-width: 520px; gap: 24px; }
+            .intake-btn { border-radius: 24px; }
         }
-
-        /* ── SAFE AREA ── */
         @supports (padding: env(safe-area-inset-top)) {
             .page {
                 padding-left: calc(24px + env(safe-area-inset-left));
@@ -816,227 +627,514 @@
                 padding-bottom: calc(28px + env(safe-area-inset-bottom));
             }
         }
-
-        /* ── SCROLLBAR HIDE ── */
-        .page::-webkit-scrollbar {
-            width: 0;
-            background: transparent;
-        }
+        .page::-webkit-scrollbar { width: 0; background: transparent; }
     </style>
 </head>
 <body>
 
-    <!-- ─── FULL-SCREEN BACKGROUND ─── -->
+    <!-- BACKGROUND -->
     <div class="bg-layer" aria-hidden="true"></div>
 
-    <!-- ─── MAIN PAGE ─── -->
+    <!-- MAIN PAGE -->
     <div class="page" id="mainPage">
         <div class="logo-wrapper">
             <img src="logo.png" class="main-logo" alt="Northern Technical College Logo" />
         </div>
-
         <div class="title">
-            <h1>
-                WELCOME TO<br />
-                <span class="accent">NORTHERN</span> TECHNICAL COLLEGE
-            </h1>
+            <h1>WELCOME TO<br /><span class="accent">NORTHERN</span> TECHNICAL COLLEGE</h1>
             <div class="sub">Excellence in Technical Education</div>
         </div>
-
-        <div class="spacer"></div>
-
+        <div class="spacer" style="flex:1; min-height:12px;"></div>
         <div class="button-group">
-            <button class="btn btn-enroll" id="enrollBtn" aria-label="Enroll now">
-                <i class="fas fa-graduation-cap"></i> Enroll
-            </button>
-            <button class="btn btn-login" id="loginBtn" aria-label="Login to your account">
-                <i class="fas fa-lock"></i> Login
-            </button>
+            <button class="btn btn-enroll" id="enrollBtn"><i class="fas fa-graduation-cap"></i> Enroll</button>
+            <button class="btn btn-login" id="loginBtn"><i class="fas fa-lock"></i> Login</button>
         </div>
-
-        <div class="footer-note">© 2026 Northern Technical College</div>
+        <div class="footer-note" style="margin-top:16px; font-size:10px; color:rgba(255,255,255,0.20); text-align:center; letter-spacing:0.5px; flex-shrink:0;">© 2026 Northern Technical College</div>
     </div>
 
-    <!-- ─── ENROLL PAGE – 4 BIG SQUARE BUTTONS ─── -->
+    <!-- ENROLL PAGE – Intake Selection -->
     <div class="page" id="enrollPage">
-        <!-- Logo on top (same white-blur style) -->
         <div class="logo-wrapper">
             <img src="logo.png" class="main-logo" alt="Northern Technical College Logo" />
         </div>
-
-        <div class="enroll-header">
-            <h2><i class="fas fa-graduation-cap"></i> Choose Your Programme</h2>
-            <p>Select a path to begin your enrollment</p>
+        <div class="page-header">
+            <h2><i class="fas fa-calendar-alt"></i> Choose Your Intake</h2>
+            <p>Select an intake to view programmes</p>
         </div>
-
-        <!-- 4 Big Square Buttons -->
-        <div class="program-grid">
-            <button class="program-btn prog-craft" data-program="Craft Certificate Programmes">
-                <i class="fas fa-tools"></i>
-                Craft Certificate
-            </button>
-            <button class="program-btn prog-trade" data-program="Trade Certificate Programmes">
-                <i class="fas fa-hard-hat"></i>
-                Trade Certificate
-            </button>
-            <button class="program-btn prog-advanced" data-program="Advanced Certificate Programmes">
-                <i class="fas fa-microchip"></i>
-                Advanced Certificate
-            </button>
-            <button class="program-btn prog-diploma" data-program="Diploma Programmes">
-                <i class="fas fa-university"></i>
-                Diploma
-            </button>
+        <div class="intake-grid">
+            <button class="intake-btn intake-jan" data-intake="january"><i class="fas fa-snowflake"></i> January</button>
+            <button class="intake-btn intake-may" data-intake="may"><i class="fas fa-leaf"></i> May</button>
+            <button class="intake-btn intake-sep" data-intake="september"><i class="fas fa-tree"></i> September</button>
+            <button class="intake-btn intake-aug" data-intake="august"><i class="fas fa-globe"></i> August (Distance)</button>
         </div>
-
-        <!-- Back button -->
+        <div style="width:100%; max-width:420px; margin-top:12px; flex-shrink:0; padding:0 4px;">
+            <button class="intake-btn intake-short" id="shortCoursesBtn" style="aspect-ratio:auto; padding:14px; border-radius:16px; width:100%;"><i class="fas fa-clock"></i> Short Courses</button>
+        </div>
         <div class="back-row">
-            <button class="btn-back" id="backFromEnroll">
-                <i class="fas fa-arrow-left"></i> Back
-            </button>
+            <button class="btn-back" id="backFromEnroll"><i class="fas fa-arrow-left"></i> Back</button>
         </div>
     </div>
 
-    <!-- ─── LOGIN MODAL ─── -->
-    <div class="modal-overlay" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+    <!-- PROGRAMS LIST PAGE -->
+    <div class="page" id="programsPage">
+        <div class="logo-wrapper">
+            <img src="logo.png" class="main-logo" alt="Northern Technical College Logo" />
+        </div>
+        <div class="page-header">
+            <h2 id="programsHeader"><i class="fas fa-list"></i> <span id="intakeTitle">Programmes</span></h2>
+            <p id="intakeSub">Tap a programme for full details</p>
+        </div>
+        <div class="program-list" id="programListContainer"></div>
+        <div class="back-row">
+            <button class="btn-back" id="backFromPrograms"><i class="fas fa-arrow-left"></i> Back</button>
+        </div>
+    </div>
+
+    <!-- SHORT COURSES PAGE -->
+    <div class="page" id="shortCoursesPage">
+        <div class="logo-wrapper">
+            <img src="logo.png" class="main-logo" alt="Northern Technical College Logo" />
+        </div>
+        <div class="page-header">
+            <h2><i class="fas fa-clock"></i> Short Courses</h2>
+            <p>Offered in April, August & December – also on corporate request</p>
+        </div>
+        <div class="short-grid" id="shortCoursesContainer"></div>
+        <div class="back-row">
+            <button class="btn-back" id="backFromShort"><i class="fas fa-arrow-left"></i> Back</button>
+        </div>
+    </div>
+
+    <!-- DETAIL MODAL (white overlay) -->
+    <div id="detailModal">
+        <button class="modal-close" id="detailClose">&times;</button>
+        <div class="modal-logo">
+            <img src="logo.png" alt="NTC Logo" />
+        </div>
+        <div class="detail-title" id="detailTitle">Programme</div>
+        <div class="detail-body" id="detailBody"></div>
+    </div>
+
+    <!-- LOGIN MODAL -->
+    <div class="modal-overlay" id="loginModal">
         <div class="modal">
-            <button class="modal-close" id="loginClose" aria-label="Close login form">&times;</button>
-
-            <div class="modal-logo">
-                <img src="logo.png" alt="NTC Logo" />
-            </div>
-
-            <div class="modal-header">
-                <div class="modal-title" id="loginTitle">
-                    <i class="fas fa-sign-in-alt"></i> Login
-                </div>
-            </div>
-
+            <button class="modal-close" id="loginClose">&times;</button>
+            <div class="modal-logo"><img src="logo.png" alt="NTC Logo" /></div>
+            <div class="modal-header"><div class="modal-title"><i class="fas fa-sign-in-alt"></i> Login</div></div>
             <form id="loginForm" novalidate>
                 <div class="form-group">
                     <label for="username">Student ID / Username</label>
                     <input class="form-input" type="text" id="username" placeholder="Enter your ID or username" required />
                 </div>
-
                 <div class="form-group">
                     <label for="password">Password</label>
                     <div class="password-wrapper">
                         <input class="form-input" type="password" id="password" placeholder="••••••••" required />
-                        <button type="button" class="password-toggle" id="passwordToggle" aria-label="Toggle password visibility"><i class="fas fa-eye"></i></button>
+                        <button type="button" class="password-toggle" id="passwordToggle"><i class="fas fa-eye"></i></button>
                     </div>
                 </div>
-
                 <div class="form-row">
-                    <label class="checkbox-wrap">
-                        <input type="checkbox" id="rememberMe" />
-                        Remember me
-                    </label>
-                    <a href="#" class="forgot-link" id="forgotLink">Forgot your Password?</a>
+                    <label class="checkbox-wrap"><input type="checkbox" id="rememberMe" /> Remember me</label>
+                    <a href="#" class="forgot-link" id="forgotLink">Forgot Password?</a>
                 </div>
-
-                <button type="submit" class="btn-submit">
-                    Sign In <i class="fas fa-arrow-right" style="margin-left:8px;"></i>
-                </button>
-
-                <div class="support-link">
-                    Need help? <a href="#" id="supportLink">Contact Support</a>
-                </div>
+                <button type="submit" class="btn-submit">Sign In <i class="fas fa-arrow-right" style="margin-left:8px;"></i></button>
+                <div class="support-link">Need help? <a href="#" id="supportLink">Contact Support</a></div>
             </form>
         </div>
     </div>
 
-    <!-- ─── JAVASCRIPT ─── -->
     <script>
         (function() {
             'use strict';
 
-            // ── DOM refs ──
+            // ─── DATA ────────────────────────────────────────────────
+            // Full programmes from PDF + extra descriptions
+            const programmes = [
+                // JANUARY INTAKE
+                { id: '1.1', title: 'Craft Certificate in Mechanical Fitting', intake: 'january', category: 'Craft',
+                    duration: '2 years',
+                    entry: 'O\' Level with 5 passes including Mathematics, Science/Physics/Chemistry, English + 2 others. Mature: TEVETA Trade Test Level I or equivalent.',
+                    extra: { dept: 'Mechanical Engineering', description: 'The Mechanical Engineering Department offers exciting programs. Our programs are highly practical; thus our graduates are ready to be absorbed by industry on graduation.',
+                        courses: 'Workshop Practice, Workshop Processes, Engineering Drawing, Applied Mechanics, Materials and Metallurgy, Applied Thermodynamics, Fluid Mechanics, Instrumentation and Control, Design Project, Management and Organization, Communication skills, Strength of Materials, Theory of Machines, Mathematics and Entrepreneurship.',
+                        employment: 'Graduates are likely to be employed in the Mining industry, Electricity Production and distribution companies, city councils, Zambia sugar, Government, Railway systems of Zambia and other companies.' } },
+                { id: '1.2', title: 'Craft Certificate in Refrigeration and Air-Conditioning', intake: 'january',
+                    category: 'Craft', duration: '2 years',
+                    entry: 'O\' Level with 5 passes including Mathematics, Science/Physics/Chemistry, English + 2 others. Mature: TEVETA Trade Test Level I or equivalent.',
+                    extra: { dept: 'Electrical and Refrigeration', description: 'The Electrical Department offers training programmes such as Electrical Instrumentation, Digital Electronics and Refrigerant Management. NORTEC is the only centre accredited by Environmental Council of Zambia to conduct training in Refrigerant Management.',
+                        courses: 'Electrical Technology, Refrigeration Technology, Air-conditioning Technology, Electronics, Refrigeration and Air-conditioning controls, Engineering Science, Engineering Mathematics, Management, Workshop Technology, Engineering Materials, Engineering Drawing, Entrepreneurship and Communication Skills and Computer Applications.',
+                        employment: 'Successful students are likely to find careers in mining companies, General hospitals Hospitality industry, Refrigeration contractors and control system.' } },
+                { id: '1.3', title: 'Craft Certificate in Auto-Electrical and Electronics', intake: 'january',
+                    category: 'Craft', duration: '2 years',
+                    entry: 'O\' Level with 5 passes including Mathematics, Science/Physics/Chemistry, English + 2 others. Mature: TEVETA Trade Test Level I or equivalent.',
+                    extra: { dept: 'Automotive & Heavy Equipment', description: 'The department offers training programmes in Automotive and Heavy Equipment Repair at technician levels. It has two sections: automotive (small and light vehicles) and heavy equipment (earthmoving machinery).',
+                        courses: 'Automotive Advanced Technology, Machine Design, Engineering Science, Statistics Calculus, Motor industry Management, Legal Aspects, Financial and Commercial Aspects, Workshop organization and Administration, Transport organization and Project work.',
+                        employment: 'Employed as workshop supervisors or Managers.' } },
+                { id: '1.4', title: 'Diploma in Computer Systems Engineering (Direct Entry)', intake: 'january',
+                    category: 'Diploma', duration: '2 years',
+                    entry: 'Grade 12 with 5 Credits including Mathematics, Science and English.',
+                    extra: { dept: 'Applied Sciences and Business Studies', description: 'The department offers various courses in computer studies and Information Technology. We train students in Microsoft office productivity software and provide free internet access.',
+                        courses: 'Information Technology & Application Packages, Computer Hardware Maintenance & Repair, Computer Networks & Communication, Digital Electronics, Management Information Systems, Operating Systems, Programming & database Technology.',
+                        employment: 'Graduates are employed in IT departments, networking, software development, and technical support.' } },
+                { id: '1.5', title: 'Advanced Certificate in Metal Fabrication', intake: 'january', category: 'Advanced',
+                    duration: '2 years',
+                    entry: 'O\' Level with 5 Credits including Mathematics, Science/Physics/Chemistry, English + 2 others. Mature: Craft Certificate in relevant field.',
+                    extra: { dept: 'Mechanical Engineering', description: 'Metal Fabrication Technician programme: highly practical training in welding and fabrication.',
+                        courses: 'Mathematics, Drawing, Welding Processes and Technology, Template Loft, Physics, Theory and design of structures, Fabrication Practice and Technology, Communication skills, Workshop practice, Workshop process and Management, Soil Mechanics.',
+                        employment: 'Graduates are likely to be employed in the Mining industry, Construction Companies and companies dealing in the Manufacturing of structures.' } },
+                { id: '1.6', title: 'Advanced Certificate in Mechanical Engineering', intake: 'january',
+                    category: 'Advanced', duration: '2 years',
+                    entry: 'O\' Level with 5 Credits including Mathematics, Science/Physics/Chemistry, English + 2 others. Mature: Craft Certificate in relevant field.',
+                    extra: { dept: 'Mechanical Engineering', description: 'Mechanical Engineering Department offers exciting programs. Our graduates are ready to be absorbed by industry.',
+                        courses: 'Workshop Practice, Workshop Processes, Engineering Drawing, Applied Mechanics, Materials and Metallurgy, Applied Thermodynamics, Fluid Mechanics, Instrumentation and Control, Design Project, Management and Organization, Communication skills, Strength of Materials, Theory of Machines, Mathematics and Entrepreneurship.',
+                        employment: 'Graduates are likely to be employed in the Mining industry, Electricity Production and distribution companies, city councils, Zambia sugar, Government, Railway systems of Zambia and other companies.' } },
+                { id: '1.7', title: 'Advanced Certificate in Heavy Equipment Repair', intake: 'january',
+                    category: 'Advanced', duration: '2 years',
+                    entry: 'O\' Level with 5 Credits including Mathematics, Science/Physics/Chemistry, English + 2 others. Mature: Craft Certificate in relevant field.',
+                    extra: { dept: 'Automotive & Heavy Equipment', description: 'Heavy Equipment Repair Technician programme. The department has qualified lecturers and well equipped workshops.',
+                        courses: 'Earth Moving Equipment Technology, Engineering Science, Engineering Mathematics, Engineering Drawing, Communication skills, Workshop practice, Workshop process and Management.',
+                        employment: 'Graduates are likely to be employed in the Mining industry, Electricity Production and distribution companies, city councils, Zambia sugar, Government, Railway systems of Zambia and many other companies with fleet of vehicles.' } },
+                { id: '1.8', title: 'Advanced Certificate in Electrical Engineering', intake: 'january',
+                    category: 'Advanced', duration: '2 years',
+                    entry: 'O\' Level with 5 Credits including Mathematics, Science/Physics/Chemistry, English + 2 others. Mature: Craft Certificate in relevant field.',
+                    extra: { dept: 'Electrical and Refrigeration', description: 'Electrical Department offers training in Electrical Instrumentation, Digital Electronics and Refrigerant Management.',
+                        courses: 'Workshop Practice, Electrical Machines, Engineering Drawing, Engineering Materials, Electrical Fundamentals, Instrumentation, Control and Protection, Electronics, Supply and Distribution, Project Management and Organisation, Communication Skills, Physics, Mathematics, Entrepreneurship, Fiber Optics, Robotics, and Digital Electronics.',
+                        employment: 'Successful students are likely to be employed in the Mining Industry, Electricity Production and Distribution Companies, City Councils, Food Industry, Government, Utility companies and other institutions.' } },
+                { id: '1.9', title: 'Diploma in Science Laboratory Technology', intake: 'january', category: 'Diploma',
+                    duration: '3 years',
+                    entry: 'Grade 12 with 5 credits including Mathematics, Science/Physics/Chemistry, Biology, English + any other.',
+                    extra: { dept: 'Applied Sciences', description: 'Diploma in Science Laboratory Technology prepares students for laboratory work in various industries.',
+                        courses: 'Chemistry, Biology, Physics, Laboratory Techniques, Quality Control, Instrumentation, Safety, Management.',
+                        employment: 'Employed in hospitals, research labs, food industry, mining, and environmental agencies.' } },
+                { id: '1.10', title: 'Diploma in Electrical Engineering (Direct Entry)', intake: 'january',
+                    category: 'Diploma', duration: '3 years',
+                    entry: 'Grade 12 with 5 Credits including Mathematics, Science/Physics/Chemistry, English + 2 others.',
+                    extra: { dept: 'Electrical and Refrigeration', description: 'Electrical Diploma programme covers a wide range of electrical engineering topics.',
+                        courses: 'Workshop Practice, Electrical Machines, Engineering Drawing, Engineering Materials, Electrical Fundamentals, Instrumentation, Control and Protection, Electronics, Supply and Distribution, Project Management and Organisation, Communication Skills, Physics, Mathematics, Entrepreneurship, Fiber Optics, Robotics, and Digital Electronics.',
+                        employment: 'Successful students are likely to be employed in the Mining Industry, Electricity Production and Distribution Companies, City Councils, Food Industry, Government, Utility companies and other institutions.' } },
+                { id: '1.11', title: 'Diploma in Production & Operation Management (Direct Entry)', intake: 'january',
+                    category: 'Diploma', duration: '3 years',
+                    entry: 'Grade 12 with 5 Credits including Mathematics, English + 3 others.',
+                    extra: { dept: 'Business Studies', description: 'Production and Operations Management diploma focuses on efficient production and business operations.',
+                        courses: 'Production Planning, Inventory Management, Quality Control, Supply Chain, Operations Research, Management, Entrepreneurship.',
+                        employment: 'Graduates work in manufacturing, logistics, supply chain, and operations management.' } },
+                { id: '1.12', title: 'Diploma in Heavy Equipment Engineering (Direct Entry)', intake: 'january',
+                    category: 'Diploma', duration: '3 years',
+                    entry: 'Grade 12 with 5 Credits including Mathematics, Science/Physics/Chemistry, English + 2 others.',
+                    extra: { dept: 'Automotive & Heavy Equipment', description: 'Heavy Equipment Engineering diploma prepares students for careers in mining and construction.',
+                        courses: 'Earth Moving Equipment Technology, Engineering Science, Engineering Mathematics, Engineering Drawing, Communication skills, Workshop practice, Workshop process and Management.',
+                        employment: 'Graduates are likely to be employed in the Mining industry, Electricity Production and distribution companies, city councils, Zambia sugar, Government, Railway systems of Zambia and many other companies with fleet of vehicles.' } },
+                { id: '1.13', title: 'Diploma in Automotive Engineering (Direct Entry)', intake: 'january',
+                    category: 'Diploma', duration: '3 years',
+                    entry: 'Grade 12 with 5 Credits including Mathematics, Science/Physics/Chemistry, English + 2 others.',
+                    extra: { dept: 'Automotive & Heavy Equipment', description: 'Automotive Engineering diploma tailored to expose students to current technological trends.',
+                        courses: 'Motor vehicle Technology, Engineering Science, Engineering Mathematics, Engineering Drawing, Communication skills, Workshop practice, Workshop process and Management.',
+                        employment: 'Graduates are employed as workshop supervisors, managers, or in automotive industry.' } },
+
+                // MAY INTAKE
+                { id: '2.1', title: 'Advanced Certificate in Mechanical Engineering', intake: 'may', category: 'Advanced',
+                    duration: '2 years',
+                    entry: 'O\' Level with 5 Credits including Mathematics, Science/Physics/Chemistry, English. Mature: Craft Certificate in relevant field.',
+                    extra: { dept: 'Mechanical Engineering', description: 'Same as January intake Mechanical Engineering advanced.' } },
+                { id: '2.2', title: 'Advanced Certificate in Heavy Equipment Repair', intake: 'may', category: 'Advanced',
+                    duration: '2 years',
+                    entry: 'Grade 12 with 5 Credits including Mathematics, Science/Physics/Chemistry, English + 2 others.',
+                    extra: { dept: 'Automotive & Heavy Equipment', description: 'Same as January intake Heavy Equipment Repair.' } },
+                { id: '2.3', title: 'Diploma in Automotive Engineering (Direct Entry)', intake: 'may', category: 'Diploma',
+                    duration: '3 years',
+                    entry: 'Grade 12 with 5 Credits including Mathematics, Science/Physics/Chemistry, English + 2 others.',
+                    extra: { dept: 'Automotive & Heavy Equipment', description: 'Same as January intake Automotive Engineering.' } },
+                { id: '2.4', title: 'Diploma in Electrical Engineering (Direct Entry)', intake: 'may', category: 'Diploma',
+                    duration: '3 years',
+                    entry: 'Grade 12 with 5 Credits including Mathematics, Science/Physics/Chemistry, English + 2 others.',
+                    extra: { dept: 'Electrical and Refrigeration', description: 'Same as January intake Electrical Engineering.' } },
+                { id: '2.5', title: 'Diploma in Science Laboratory Technology', intake: 'may', category: 'Diploma',
+                    duration: '3 years',
+                    entry: 'Grade 12 with 5 credits including Mathematics, Science/Physics/Chemistry, Biology, English + any other.',
+                    extra: { dept: 'Applied Sciences', description: 'Same as January intake Science Laboratory Technology.' } },
+                { id: '2.6', title: 'Craft Certificate in Electrical', intake: 'may', category: 'Craft', duration: '2 years',
+                    entry: 'O\' Level with 5 credits including Mathematics, Science/Physics/Chemistry, English + 2 others. Mature: TEVETA Trade Test Level I.',
+                    extra: { dept: 'Electrical and Refrigeration', description: 'Craft Certificate in Electrical provides foundational electrical skills.' } },
+                { id: '2.7', title: 'Craft Certificate in Heavy Equipment Repair', intake: 'may', category: 'Craft',
+                    duration: '2 years',
+                    entry: 'Grade 12 with 5 Credits including Mathematics, Science/Physics/Chemistry, English + 2 others. Mature: TEVETA Trade Test Level I.',
+                    extra: { dept: 'Automotive & Heavy Equipment', description: 'Craft Certificate in Heavy Equipment Repair.' } },
+                { id: '2.8', title: 'Diploma in Heavy Equipment Engineering (Direct Entry)', intake: 'may',
+                    category: 'Diploma', duration: '3 years',
+                    entry: 'Grade 12 with 5 Credits including Mathematics, Science/Physics/Chemistry, English + 2 others.',
+                    extra: { dept: 'Automotive & Heavy Equipment', description: 'Same as January intake Heavy Equipment Engineering.' } },
+                { id: '2.9', title: 'Craft Certificate in Auto-Electrical and Electronics', intake: 'may',
+                    category: 'Craft', duration: '2 years',
+                    entry: 'O\' Level with 5 credits including Mathematics, Science/Physics/Chemistry, English + 2 others. Mature: TEVETA Trade Test Level I.',
+                    extra: { dept: 'Automotive & Heavy Equipment', description: 'Same as January intake Auto-Electrical and Electronics.' } },
+                { id: '2.10', title: 'Craft Certificate in Mechanical Fitting', intake: 'may', category: 'Craft',
+                    duration: '2 years',
+                    entry: 'Grade 12 with 5 Credits including Mathematics, Science/Physics/Chemistry, English + 2 others. Mature: TEVETA Trade Test Level I.',
+                    extra: { dept: 'Mechanical Engineering', description: 'Same as January intake Mechanical Fitting.' } },
+                { id: '2.11', title: 'Craft Certificate in Rigging', intake: 'may', category: 'Craft', duration: '2 years',
+                    entry: 'O\' Level with 5 credits including Mathematics, Science/Physics/Chemistry, English + 2 others. Mature: TEVETA Trade Test Level I.',
+                    extra: { dept: 'Mechanical Engineering', description: 'Rigging craft certificate.' } },
+                { id: '2.12', title: 'Craft Certificate in Welding and Metal Fabrication', intake: 'may', category: 'Craft',
+                    duration: '2 years',
+                    entry: 'O\' Level with 5 credits including Mathematics, Science/Physics/Chemistry, English + 2 others. Mature: TEVETA Trade Test Level I.',
+                    extra: { dept: 'Mechanical Engineering', description: 'Welding and Metal Fabrication craft certificate.' } },
+                { id: '2.13', title: 'Trade Certificate in Plumbing', intake: 'may', category: 'Trade', duration: '1 year',
+                    entry: 'Grade 9 Certificate.',
+                    extra: { dept: 'Mechanical Engineering', description: 'Plumbing trade certificate.' } },
+                { id: '2.14', title: 'Trade Certificate in Mechanical Fitting', intake: 'may', category: 'Trade',
+                    duration: '1 year',
+                    entry: 'Grade 9 Certificate.',
+                    extra: { dept: 'Mechanical Engineering', description: 'Mechanical fitting trade certificate.' } },
+                { id: '2.15', title: 'Trade Certificate in Rigging', intake: 'may', category: 'Trade', duration: '1 year',
+                    entry: 'Grade 9 Certificate.',
+                    extra: { dept: 'Mechanical Engineering', description: 'Rigging trade certificate.' } },
+                { id: '2.16', title: 'Trade Certificate in Welding', intake: 'may', category: 'Trade', duration: '1 year',
+                    entry: 'Grade 9 Certificate.',
+                    extra: { dept: 'Mechanical Engineering', description: 'Welding trade certificate.' } },
+
+                // SEPTEMBER INTAKE
+                { id: '3.1', title: 'Diploma in Biomedical Engineering Technology', intake: 'september', category: 'Diploma',
+                    duration: '3 years 3 months',
+                    entry: 'Grade 12 with 5 credits including Mathematics, Science/Physics/Chemistry, Biology, English + any other.',
+                    extra: { dept: 'Electrical and Refrigeration', description: 'Biomedical Engineering programme trains students for healthcare technology.',
+                        courses: 'Biomedical instrumentation, medical electronics, hospital equipment maintenance, anatomy, physiology, engineering mathematics, communication skills.',
+                        employment: 'Graduates are likely to be employed in General Hospitals, Hospitality Industry, and medical equipment companies.' } },
+
+                // AUGUST (DISTANCE) – from PDF plus extra distance details
+                { id: '4.1', title: 'Diploma in Automotive Engineering (Mature Entry)', intake: 'august',
+                    category: 'Diploma (Distance)', duration: '2 years 8 months',
+                    entry: 'Advanced Certificate or equivalent qualification in relevant course. (For holders of Automotive technician certificate with 2 years experience: 2y8m; for Craft certificate with 2 years experience: 3y6m)',
+                    extra: { dept: 'Automotive & Heavy Equipment', description: 'Distance learning programme for mature students. The programme is flexible and designed for working professionals.',
+                        courses: 'Automotive technology, engineering science, mathematics, management, project work.',
+                        employment: 'Graduates are employed as supervisors, managers, or in automotive industry.' } },
+                { id: '4.2', title: 'Diploma in Heavy Equipment Engineering (Mature Entry)', intake: 'august',
+                    category: 'Diploma (Distance)', duration: '2 years 8 months',
+                    entry: 'Advanced Certificate or equivalent qualification in relevant course. (For holders of Heavy Equipment technician certificate with 2 years experience: 2y8m; for Craft certificate with 2 years experience: 3y6m)',
+                    extra: { dept: 'Automotive & Heavy Equipment', description: 'Distance learning for mature students in heavy equipment engineering.',
+                        courses: 'Earth moving equipment technology, hydraulics, power shift transmission, heavy equipment electrical and electronics.',
+                        employment: 'Graduates are employed in mining, construction, and heavy equipment industries.' } },
+                { id: '4.3', title: 'Diploma in Electrical Engineering (Mature Entry)', intake: 'august',
+                    category: 'Diploma (Distance)', duration: '2 years 8 months',
+                    entry: 'Advanced Certificate or equivalent qualification in relevant course. (For holders of Electrical technician certificate with 2 years experience: 2y8m; for Craft certificate with 2 years experience: 3y6m)',
+                    extra: { dept: 'Electrical and Refrigeration', description: 'Distance learning for mature students in electrical engineering.',
+                        courses: 'Electrical machines, power systems, instrumentation, control, electronics, project management.',
+                        employment: 'Graduates are employed in power generation, distribution, mining, and industrial sectors.' } },
+                { id: '4.4', title: 'Diploma in Mechanical Engineering (Mature Entry)', intake: 'august',
+                    category: 'Diploma (Distance)', duration: '2 years 8 months',
+                    entry: 'Advanced Certificate or equivalent qualification in relevant course. (For holders of Mechanical technician certificate with 2 years experience: 2y8m; for Craft certificate with 2 years experience: 3y6m)',
+                    extra: { dept: 'Mechanical Engineering', description: 'Distance learning for mature students in mechanical engineering.',
+                        courses: 'Mechanical design, thermodynamics, fluid mechanics, materials, manufacturing processes, management.',
+                        employment: 'Graduates are employed in mining, manufacturing, and engineering consulting.' } },
+                { id: '4.5', title: 'Diploma in Instrumentation (Mature Entry)', intake: 'august', category: 'Diploma (Distance)',
+                    duration: '2 years 8 months',
+                    entry: 'Advanced Certificate or equivalent qualification in relevant course. (For holders of Instrumentation technician certificate with 2 years experience: 2y8m; for Craft certificate with 3 years experience: 3y6m)',
+                    extra: { dept: 'Electrical and Refrigeration', description: 'Distance learning for mature students in instrumentation.',
+                        courses: 'Principles of Instrumentation, Electronics, Physics, Engineering Mathematics, Air supplies & accessories, Management, Workshop Technology, Engineering Materials, Engineering Drawing, Entrepreneurship, Communication Skills, Project work, Principles of Machine Control.',
+                        employment: 'Graduates are employed in power generation, process control systems, and medical laboratories.' } }
+            ];
+
+            // Short courses data
+            const shortCourses = [
+                { dept: 'Mechanical', title: 'Computer Aided Design (AutoCAD 2D)', days: 10 },
+                { dept: 'Mechanical', title: 'Computer Aided Design (AutoCAD 3D)', days: 10 },
+                { dept: 'Mechanical', title: 'Centrifugal Pump Operations', days: 10 },
+                { dept: 'Mechanical', title: 'Occupational Safety Health', days: 5 },
+                { dept: 'Mechanical', title: 'Metallic Inert Gas Welding', days: 10 },
+                { dept: 'Mechanical', title: 'Gas Welding', days: 10 },
+                { dept: 'Mechanical', title: 'Coded Welding', days: 10 },
+                { dept: 'Mechanical', title: 'Tungsten Inert Gas Welding', days: 10 },
+                { dept: 'Mechanical', title: 'Water Reticulation / House connection', days: 5 },
+                { dept: 'Mechanical', title: 'Plumbing', days: 5 },
+                { dept: 'Mechanical', title: 'Machine Laser Alignment', days: 3 },
+                { dept: 'Mechanical', title: 'Pipe Fitting', days: 5 },
+                { dept: 'Mechanical', title: 'Maintenance Management', days: 5 },
+                { dept: 'Mechanical', title: 'Scaffolding', days: 3 },
+                { dept: 'Mechanical', title: 'Basic Rigging', days: 5 },
+                { dept: 'Mechanical', title: 'Maintenance of Machinery Drives', days: 5 },
+                { dept: 'Electrical', title: 'Basic Refrigeration & Air-conditioning', days: 10 },
+                { dept: 'Electrical', title: 'Electrical Installation and Wiring', days: 10 },
+                { dept: 'Electrical', title: 'Refrigerant Management', days: 5 },
+                { dept: 'Electrical', title: 'Electrical Power System Protection', days: 10 },
+                { dept: 'Electrical', title: 'Digital Electronics', days: 10 },
+                { dept: 'Electrical', title: 'Process Instrumentation Appreciation for Electricians', days: 5 },
+                { dept: 'Automotive', title: 'Automotive Electrical', days: 10 },
+                { dept: 'Automotive', title: 'Mechanics for Drivers / Motor Vehicle Owners', days: 10 },
+                { dept: 'Automotive', title: 'Electronic Fuel Injection (EFI)', days: 10 },
+                { dept: 'Automotive', title: 'Basic Hydraulics', days: 5 },
+                { dept: 'Automotive', title: 'Advanced Hydraulics', days: 5 },
+                { dept: 'Automotive', title: 'Excavator Operator Simulation Training', days: 10 },
+                { dept: 'Automotive', title: 'Articulated Dump Truck Simulation Training', days: 5 },
+                { dept: 'Automotive', title: 'Electronically Managed Engine Training', days: 5 },
+                { dept: 'Automotive', title: 'Electronically Controlled Drive Train Repair', days: 5 },
+                { dept: 'Automotive', title: 'Gear Box maintenance', days: 5 },
+                { dept: 'Automotive', title: 'Pneumatics - Automotive and Industrial', days: 5 },
+                { dept: 'Automotive', title: 'Automotive Air-conditioning', days: 5 },
+                { dept: 'Applied Sciences', title: 'Supervisory Skills, Team Building & Conflict Management', days: 3 },
+                { dept: 'Applied Sciences', title: 'Customer Relations', days: 3 },
+                { dept: 'Applied Sciences', title: 'Computer Hardware Maintenance and Repair', days: 10 },
+                { dept: 'Applied Sciences', title: 'Local Area Networks (LAN)', days: 10 },
+                { dept: 'Applied Sciences', title: 'Project Management', days: 5 },
+                { dept: 'Applied Sciences', title: 'Microsoft Excel (Intermediate and Advanced)', days: 5 }
+            ];
+
+            // ─── DOM REFS ──────────────────────────────────────────
             const mainPage = document.getElementById('mainPage');
             const enrollPage = document.getElementById('enrollPage');
-            const enrollBtn = document.getElementById('enrollBtn');
-            const backBtn = document.getElementById('backFromEnroll');
-            const loginBtn = document.getElementById('loginBtn');
+            const programsPage = document.getElementById('programsPage');
+            const shortPage = document.getElementById('shortCoursesPage');
+            const detailModal = document.getElementById('detailModal');
             const loginModal = document.getElementById('loginModal');
+
+            const enrollBtn = document.getElementById('enrollBtn');
+            const backFromEnroll = document.getElementById('backFromEnroll');
+            const backFromPrograms = document.getElementById('backFromPrograms');
+            const backFromShort = document.getElementById('backFromShort');
+            const shortCoursesBtn = document.getElementById('shortCoursesBtn');
+            const loginBtn = document.getElementById('loginBtn');
             const loginClose = document.getElementById('loginClose');
             const loginForm = document.getElementById('loginForm');
             const passwordToggle = document.getElementById('passwordToggle');
             const passwordInput = document.getElementById('password');
             const forgotLink = document.getElementById('forgotLink');
             const supportLink = document.getElementById('supportLink');
-            const programBtns = document.querySelectorAll('.program-btn');
+            const detailClose = document.getElementById('detailClose');
 
-            // ── Helpers ──
-            function showMainPage() {
-                mainPage.classList.remove('hidden');
-                enrollPage.classList.remove('active');
-                document.body.style.overflow = 'hidden';
-            }
+            const intakeTitle = document.getElementById('intakeTitle');
+            const intakeSub = document.getElementById('intakeSub');
+            const programListContainer = document.getElementById('programListContainer');
+            const shortCoursesContainer = document.getElementById('shortCoursesContainer');
+            const detailTitle = document.getElementById('detailTitle');
+            const detailBody = document.getElementById('detailBody');
 
-            function showEnrollPage() {
-                mainPage.classList.add('hidden');
-                enrollPage.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function openLoginModal() {
-                loginModal.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                const focusable = loginModal.querySelector('input');
-                if (focusable) setTimeout(() => focusable.focus(), 120);
-            }
-
-            function closeLoginModal() {
-                loginModal.classList.remove('active');
-                document.body.style.overflow = '';
-                loginBtn.focus();
-            }
-
-            // ── Enroll button → show enroll page ──
-            enrollBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                showEnrollPage();
-            });
-
-            // ── Back button → return to main page ──
-            backBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                showMainPage();
-            });
-
-            // ── Login button → open modal ──
-            loginBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                openLoginModal();
-            });
-
-            // ── Login modal close ──
-            loginClose.addEventListener('click', closeLoginModal);
-            loginModal.addEventListener('click', function(e) {
-                if (e.target === loginModal) closeLoginModal();
-            });
-
-            // ── ESC key ──
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    if (loginModal.classList.contains('active')) {
-                        closeLoginModal();
-                    } else if (enrollPage.classList.contains('active')) {
-                        showMainPage();
-                    }
+            // ─── NAVIGATION HELPERS ──────────────────────────────
+            function showPage(page) {
+                [mainPage, enrollPage, programsPage, shortPage].forEach(p => p.classList.remove('active', 'hidden'));
+                if (page === mainPage) {
+                    mainPage.classList.remove('hidden');
+                    enrollPage.classList.remove('active');
+                    programsPage.classList.remove('active');
+                    shortPage.classList.remove('active');
+                } else {
+                    mainPage.classList.add('hidden');
+                    page.classList.add('active');
                 }
+                document.body.style.overflow = 'hidden';
+            }
+
+            function showMain() { showPage(mainPage); }
+            function showEnroll() { showPage(enrollPage); }
+            function showPrograms() { showPage(programsPage); }
+            function showShort() { showPage(shortPage); }
+
+            // ─── RENDER PROGRAMS ──────────────────────────────────
+            function renderPrograms(intakeKey, intakeLabel) {
+                const list = programmes.filter(p => p.intake === intakeKey);
+                intakeTitle.textContent = intakeLabel + ' Programmes';
+                intakeSub.textContent = 'Tap a programme for full details';
+                programListContainer.innerHTML = '';
+                if (list.length === 0) {
+                    programListContainer.innerHTML = '<div style="color:rgba(255,255,255,0.6);text-align:center;padding:20px;">No programmes available for this intake.</div>';
+                    return;
+                }
+                list.forEach(prog => {
+                    const card = document.createElement('div');
+                    card.className = 'program-card';
+                    card.innerHTML = `
+                        <div class="prog-title">${prog.id} – ${prog.title}</div>
+                        <div class="prog-meta">
+                            <span><i class="fas fa-clock"></i> ${prog.duration}</span>
+                            <span><i class="fas fa-tag"></i> ${prog.category}</span>
+                        </div>
+                        <div class="view-detail"><i class="fas fa-info-circle"></i> View Details</div>
+                    `;
+                    card.addEventListener('click', () => openDetail(prog));
+                    programListContainer.appendChild(card);
+                });
+                showPrograms();
+            }
+
+            // ─── DETAIL MODAL ─────────────────────────────────────
+            function openDetail(prog) {
+                detailTitle.textContent = prog.title;
+                let html = `
+                    <p><strong>Duration:</strong> ${prog.duration}</p>
+                    <p><strong>Entry Requirements:</strong> ${prog.entry}</p>
+                    <p><strong>Category:</strong> ${prog.category}</p>
+                    <p><strong>Intake:</strong> ${prog.intake.charAt(0).toUpperCase() + prog.intake.slice(1)}</p>
+                `;
+                if (prog.extra) {
+                    if (prog.extra.dept) html += `<h3>Department: ${prog.extra.dept}</h3>`;
+                    if (prog.extra.description) html += `<p>${prog.extra.description}</p>`;
+                    if (prog.extra.courses) html += `<h3>Course Coverage</h3><p>${prog.extra.courses}</p>`;
+                    if (prog.extra.employment) html += `<h3>Employment Prospects</h3><p>${prog.extra.employment}</p>`;
+                }
+                detailBody.innerHTML = html;
+                detailModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeDetail() {
+                detailModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            // ─── SHORT COURSES ────────────────────────────────────
+            function renderShortCourses() {
+                shortCoursesContainer.innerHTML = '';
+                const grouped = {};
+                shortCourses.forEach(c => {
+                    if (!grouped[c.dept]) grouped[c.dept] = [];
+                    grouped[c.dept].push(c);
+                });
+                for (const [dept, courses] of Object.entries(grouped)) {
+                    const header = document.createElement('div');
+                    header.style.cssText = 'grid-column:1/-1; font-weight:700; font-size:16px; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.3); margin-top:8px;';
+                    header.textContent = dept + ' Department';
+                    shortCoursesContainer.appendChild(header);
+                    courses.forEach(c => {
+                        const item = document.createElement('div');
+                        item.className = 'short-item';
+                        item.innerHTML = `<div class="short-title">${c.title}</div><div class="short-days"><i class="fas fa-calendar-day"></i> ${c.days} days</div>`;
+                        shortCoursesContainer.appendChild(item);
+                    });
+                }
+                showShort();
+            }
+
+            // ─── EVENT BINDINGS ──────────────────────────────────
+            enrollBtn.addEventListener('click', (e) => { e.preventDefault(); showEnroll(); });
+            backFromEnroll.addEventListener('click', (e) => { e.preventDefault(); showMain(); });
+            backFromPrograms.addEventListener('click', (e) => { e.preventDefault(); showEnroll(); });
+            backFromShort.addEventListener('click', (e) => { e.preventDefault(); showEnroll(); });
+
+            // Intake buttons
+            document.querySelectorAll('.intake-btn[data-intake]').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const intake = this.dataset.intake;
+                    const labels = { january: 'January', may: 'May', september: 'September', august: 'August (Distance)' };
+                    renderPrograms(intake, labels[intake] || intake);
+                });
             });
 
-            // ── Password toggle ──
+            // Short courses button
+            shortCoursesBtn.addEventListener('click', (e) => { e.preventDefault(); renderShortCourses(); });
+
+            // Detail modal close
+            detailClose.addEventListener('click', closeDetail);
+            detailModal.addEventListener('click', (e) => { if (e.target === detailModal) closeDetail(); });
+
+            // Login modal
+            loginBtn.addEventListener('click', (e) => { e.preventDefault(); loginModal.classList.add('active'); document.body.style.overflow = 'hidden'; });
+            loginClose.addEventListener('click', () => { loginModal.classList.remove('active'); document.body.style.overflow = ''; });
+            loginModal.addEventListener('click', (e) => { if (e.target === loginModal) { loginModal.classList.remove('active'); document.body.style.overflow = ''; } });
+
             passwordToggle.addEventListener('click', function() {
                 const type = passwordInput.type === 'password' ? 'text' : 'password';
                 passwordInput.type = type;
-                const icon = passwordToggle.querySelector('i');
-                if (icon) {
-                    icon.className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
-                }
+                const icon = this.querySelector('i');
+                if (icon) icon.className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
             });
 
-            // ── Login form ──
             loginForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const username = document.getElementById('username').value.trim();
@@ -1046,55 +1144,30 @@
                     else passwordInput.focus();
                     return;
                 }
-                alert('🔓 Welcome back, ' + username + '!\n\n(Simulated login — you\'re in.)');
-                closeLoginModal();
+                alert('🔓 Welcome back, ' + username + '!\n\n(Simulated login)');
+                loginModal.classList.remove('active');
+                document.body.style.overflow = '';
                 loginForm.reset();
                 passwordInput.type = 'password';
                 const icon = passwordToggle.querySelector('i');
                 if (icon) icon.className = 'fas fa-eye';
             });
 
-            // ── Forgot password / Support ──
-            forgotLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('📧 A password reset link has been sent to your registered email.\n(Simulated)');
+            forgotLink.addEventListener('click', (e) => { e.preventDefault(); alert('📧 Password reset link sent to your registered email.\n(Simulated)'); });
+            supportLink.addEventListener('click', (e) => { e.preventDefault(); alert('📞 Support: +260 97 123 4567\n✉️ support@northerntech.edu.zm\n(Simulated)'); });
+
+            // ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (detailModal.classList.contains('active')) closeDetail();
+                    else if (loginModal.classList.contains('active')) { loginModal.classList.remove('active'); document.body.style.overflow = ''; }
+                }
             });
 
-            supportLink.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('📞 Support: +260 97 123 4567\n✉️ support@northerntech.edu.zm\n(Simulated)');
-            });
-
-            // ── Program buttons – enrollment selection ──
-            programBtns.forEach(function(btn) {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const program = this.getAttribute('data-program');
-                    alert('✅ You selected: ' + program +
-                        '\n\nWe\'ll contact you shortly with enrollment details.');
-                    // Optionally return to main page after selection
-                    showMainPage();
-                });
-            });
-
-            // ── Touch passive ──
-            document.querySelectorAll('button, .btn, .program-btn, .modal-close, .password-toggle')
-                .forEach(el => {
-                    el.addEventListener('touchend', function(e) {
-                        // passive
-                    }, { passive: true });
-                });
-
-            // ── Preload background ──
-            const bg = new Image();
-            bg.src = 'home.webp';
-            bg.onerror = function() {
-                console.warn('home.webp not found, using fallback dark background.');
-            };
-
-            console.log('✅ Northern Technical College — Full-screen with zoom & 4 program buttons ready.');
+            // ─── INIT ─────────────────────────────────────────────
+            showMain();
+            console.log('✅ Northern Technical College – Full programme data loaded.');
         })();
     </script>
-
 </body>
 </html>
