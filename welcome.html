@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
-        /* RESET & FULL SCREEN BASE */
+        /* ── RESET & FULL SCREEN BASE ── */
         * {
             margin: 0;
             padding: 0;
@@ -23,7 +23,7 @@
             touch-action: manipulation;
         }
 
-        /* FULL SCREEN BACKGROUND WITH ZOOM */
+        /* ── BACKGROUND ZOOM ── */
         .bg-layer {
             position: fixed;
             inset: 0;
@@ -53,78 +53,38 @@
             pointer-events: none;
         }
 
-        /* PAGES – shared container */
-        .page {
+        /* ── PAGES – all scrollable containers ── */
+        .page-container {
             position: fixed;
             inset: 0;
             z-index: 1;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 0;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             transition: opacity 0.45s cubic-bezier(0.22,1,0.36,1),
                         transform 0.45s cubic-bezier(0.22,1,0.36,1),
                         visibility 0.45s ease;
+            padding-top: 56px; /* space for fixed header */
         }
-        .page::-webkit-scrollbar { width: 0; background: transparent; }
+        .page-container::-webkit-scrollbar { width: 0; background: transparent; }
 
-        /* MAIN PAGE */
-        #mainPage {
-            opacity: 1;
-            transform: scale(1);
-            visibility: visible;
-            justify-content: center;
-            padding: 28px 24px;
-        }
-        #mainPage.hidden {
-            opacity: 0;
-            transform: scale(0.96);
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        /* ENROLL PAGE, PROGRAMS PAGE, SHORT COURSES PAGE – with fixed top bar */
-        .page-with-header {
-            position: fixed;
-            inset: 0;
-            z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            transition: opacity 0.45s cubic-bezier(0.22,1,0.36,1),
-                        transform 0.45s cubic-bezier(0.22,1,0.36,1),
-                        visibility 0.45s ease;
-        }
-        .page-with-header::-webkit-scrollbar { width: 0; background: transparent; }
-        .page-with-header.hidden {
-            opacity: 0;
-            transform: scale(0.96);
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        /* Fixed header for pages */
+        /* ── FIXED HEADER (always on top, never scrolls) ── */
         .fixed-header {
-            position: sticky;
+            position: fixed;
             top: 0;
-            width: 100%;
-            max-width: 600px;
-            background: rgba(10, 14, 23, 0.85);
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 14, 23, 0.92);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             padding: 12px 16px;
             display: flex;
             align-items: center;
             gap: 12px;
-            z-index: 10;
             border-bottom: 1px solid rgba(255,255,255,0.06);
-            flex-shrink: 0;
+            height: 56px;
         }
         .fixed-header .btn-back {
             background: rgba(255,255,255,0.12);
@@ -132,7 +92,7 @@
             -webkit-backdrop-filter: blur(8px);
             border: 1px solid rgba(255,255,255,0.08);
             color: #fff;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 40px;
             font-size: 13px;
             font-weight: 600;
@@ -141,6 +101,7 @@
             gap: 6px;
             cursor: pointer;
             transition: all 0.25s ease;
+            flex-shrink: 0;
         }
         .fixed-header .btn-back:hover {
             background: rgba(255,255,255,0.20);
@@ -154,20 +115,48 @@
             flex: 1;
             text-align: center;
             margin-right: 30px; /* balance for back button */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .fixed-header .header-title i { margin-right: 6px; color: #6cffa0; }
 
-        /* Content below header */
+        /* ── PAGE CONTENT (below fixed header) ── */
         .page-content {
             width: 100%;
             max-width: 600px;
+            margin: 0 auto;
             padding: 20px 16px 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* LOGO with white blur (main page only) */
+        /* ── MAIN PAGE (no fixed header, centered) ── */
+        #mainPage {
+            opacity: 1;
+            transform: scale(1);
+            visibility: visible;
+            justify-content: center;
+            padding: 28px 24px;
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+            transition: opacity 0.45s ease, transform 0.45s ease, visibility 0.45s ease;
+        }
+        #mainPage.hidden {
+            opacity: 0;
+            transform: scale(0.96);
+            visibility: hidden;
+            pointer-events: none;
+        }
+        #mainPage::-webkit-scrollbar { width: 0; background: transparent; }
+
+        /* ── LOGO (main page) ── */
         .logo-wrapper {
             flex-shrink: 0;
             display: flex;
@@ -190,7 +179,7 @@
         }
         .main-logo:hover { transform: scale(1.03); }
 
-        /* TITLE (main page) */
+        /* ── TITLE (main page) ── */
         .title {
             text-align: center;
             margin: 4px 0 28px;
@@ -215,7 +204,7 @@
             text-shadow: 0 2px 10px rgba(0,0,0,0.25);
         }
 
-        /* BUTTONS (main) */
+        /* ── BUTTONS (main) ── */
         .button-group {
             display: flex;
             flex-direction: column;
@@ -273,7 +262,7 @@
         }
         .btn i { margin-right: 10px; font-size: 17px; }
 
-        /* ENROLL PAGE – intake buttons (inside .page-content) */
+        /* ── INTAKE GRID ── */
         .page-header {
             text-align: center;
             margin-bottom: 20px;
@@ -347,7 +336,7 @@
         .intake-aug { background: linear-gradient(135deg, #10b981, #047857); }
         .intake-short { background: linear-gradient(135deg, #ec4899, #be185d); }
 
-        /* PROGRAMS LIST – solid cards */
+        /* ── PROGRAM CARDS (solid white) ── */
         .program-list {
             width: 100%;
             max-width: 600px;
@@ -397,7 +386,7 @@
             gap: 6px;
         }
 
-        /* SHORT COURSES page */
+        /* ── SHORT COURSES ── */
         .short-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -437,7 +426,7 @@
             transform: scale(1.02);
         }
 
-        /* ─── DETAIL MODAL ────────────────────────────────────────── */
+        /* ─── DETAIL MODAL (white) ─── */
         #detailModal {
             position: fixed;
             inset: 0;
@@ -447,33 +436,32 @@
             -webkit-backdrop-filter: blur(4px);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 0;
             overflow-y: auto;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.35s ease, visibility 0.35s ease;
-            touch-action: manipulation;
+            padding-top: 56px; /* fixed header space */
         }
         #detailModal.active {
             opacity: 1;
             visibility: visible;
         }
+        #detailModal::-webkit-scrollbar { width: 0; background: transparent; }
 
         /* Fixed top bar inside modal */
         .modal-fixed-top {
-            position: sticky;
+            position: fixed;
             top: 0;
-            width: 100%;
-            max-width: 600px;
+            left: 0;
+            right: 0;
+            z-index: 100;
             background: rgba(255,255,255,0.97);
-            z-index: 10;
             padding: 12px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             border-bottom: 1px solid #e2e8f0;
-            flex-shrink: 0;
+            height: 56px;
         }
         .btn-back-detail {
             background: transparent;
@@ -486,6 +474,7 @@
             gap: 6px;
             transition: color 0.2s;
             font-weight: 600;
+            flex-shrink: 0;
         }
         .btn-back-detail:hover { color: #1e293b; }
         .modal-close {
@@ -501,6 +490,7 @@
             align-items: center;
             justify-content: center;
             transition: background 0.2s;
+            flex-shrink: 0;
         }
         .modal-close:hover { background: #cbd5e1; }
 
@@ -508,6 +498,7 @@
         .modal-content {
             width: 100%;
             max-width: 600px;
+            margin: 0 auto;
             padding: 20px 16px 40px;
             display: flex;
             flex-direction: column;
@@ -550,7 +541,7 @@
         .detail-body p { margin-bottom: 8px; }
         .detail-body ul { padding-left: 20px; margin: 6px 0 12px; }
 
-        /* APPLY BUTTON */
+        /* ── APPLY BUTTON ── */
         .btn-apply {
             display: inline-block;
             margin: 20px 0 10px;
@@ -571,7 +562,7 @@
         }
         .btn-apply:active { transform: scale(0.96); }
 
-        /* ─── APPLICATION FORM – STEP WIZARD ────────────────────── */
+        /* ─── APPLICATION FORM – STEP WIZARD ─── */
         .application-form {
             display: none;
             width: 100%;
@@ -582,7 +573,6 @@
             display: block;
         }
 
-        /* Progress indicator */
         .step-progress {
             display: flex;
             justify-content: center;
@@ -622,31 +612,22 @@
         .step-dot.completed .dot::after {
             content: '✓';
         }
-        .step-dot .label {
-            display: none;
-        }
+        .step-dot .label { display: none; }
         @media (min-width: 480px) {
             .step-dot .label { display: inline; }
         }
 
-        /* Step container */
-        .step-container {
-            position: relative;
-        }
+        .step-container { position: relative; }
         .step {
             display: none;
             animation: fadeIn 0.3s ease;
         }
-        .step.active {
-            display: block;
-        }
+        .step.active { display: block; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .step .form-section {
-            margin-bottom: 20px;
-        }
+        .step .form-section { margin-bottom: 20px; }
         .step .section-title {
             font-size: 18px;
             font-weight: 700;
@@ -659,9 +640,7 @@
             gap: 12px;
             margin-bottom: 8px;
         }
-        .step .form-row > * {
-            flex: 1 1 200px;
-        }
+        .step .form-row > * { flex: 1 1 200px; }
         .step label {
             display: block;
             font-size: 13px;
@@ -686,13 +665,8 @@
             box-shadow: 0 0 0 3px rgba(59,130,246,0.10);
         }
 
-        /* Highlight important words in blue */
-        .highlight {
-            color: #2563eb;
-            font-weight: 700;
-        }
+        .highlight { color: #2563eb; font-weight: 700; }
 
-        /* Navigation buttons */
         .step-nav {
             display: flex;
             justify-content: space-between;
@@ -725,7 +699,6 @@
         }
         .btn-submit-step:active, .btn-next:active { transform: scale(0.96); }
 
-        /* Declaration checkbox */
         .declaration-row {
             display: flex;
             align-items: center;
@@ -739,7 +712,7 @@
             cursor: pointer;
         }
 
-        /* ─── SIGNATURE PAD ──────────────────────────────────────── */
+        /* ─── SIGNATURE PAD ─── */
         .signature-wrapper {
             border: 2px dashed #94a3b8;
             border-radius: 12px;
@@ -776,7 +749,7 @@
         }
         .btn-clear-signature:hover { background: #cbd5e1; }
 
-        /* ─── DOCUMENT UPLOAD GRID – 3 columns ──────────────────── */
+        /* ─── UPLOAD GRID – 3 columns ─── */
         .upload-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -798,9 +771,7 @@
             position: relative;
             cursor: pointer;
         }
-        .upload-box:hover {
-            border-color: #3b82f6;
-        }
+        .upload-box:hover { border-color: #3b82f6; }
         .upload-box .upload-icon {
             font-size: 24px;
             color: #94a3b8;
@@ -843,7 +814,7 @@
             max-width: 100%;
         }
 
-        /* ─── LOGIN MODAL ────────────────────────────────────────── */
+        /* ─── LOGIN MODAL ─── */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -961,10 +932,13 @@
         .support-link a { color: #2563eb; text-decoration: none; font-weight: 600; }
         .support-link a:hover { color: #1d4ed8; }
 
-        /* RESPONSIVE */
+        /* ─── RESPONSIVE ─── */
         @media (max-width: 480px) {
             .page-content { padding: 16px 12px 30px; }
-            .fixed-header { padding: 10px 12px; }
+            .fixed-header { padding: 10px 12px; height: 50px; }
+            .page-container { padding-top: 50px; }
+            #detailModal { padding-top: 50px; }
+            .modal-fixed-top { padding: 10px 12px; height: 50px; }
             .fixed-header .header-title { font-size: 14px; }
             .main-logo { width: 72px; height: 72px; padding: 8px; }
             .title h1 { font-size: 17px; }
@@ -975,7 +949,7 @@
             .page-header h2 { font-size: 18px; }
             .program-card .prog-title { font-size: 14px; }
             .short-grid { grid-template-columns: 1fr; }
-            #detailModal .detail-title { font-size: 18px; }
+            .detail-title { font-size: 18px; }
             .modal { padding: 24px 18px 18px; border-radius: 22px; }
             .modal-logo img { width: 52px; height: 52px; }
             .modal-header .modal-title { font-size: 18px; }
@@ -1017,7 +991,7 @@
                 padding-bottom: calc(28px + env(safe-area-inset-bottom));
             }
         }
-        .page::-webkit-scrollbar, .page-with-header::-webkit-scrollbar, #detailModal::-webkit-scrollbar {
+        .page-container::-webkit-scrollbar, #detailModal::-webkit-scrollbar, #mainPage::-webkit-scrollbar {
             width: 0;
             background: transparent;
         }
@@ -1028,8 +1002,8 @@
     <!-- BACKGROUND -->
     <div class="bg-layer" aria-hidden="true"></div>
 
-    <!-- MAIN PAGE -->
-    <div class="page" id="mainPage">
+    <!-- ─── MAIN PAGE ─── -->
+    <div id="mainPage">
         <div class="logo-wrapper">
             <img src="logo.png" class="main-logo" alt="Northern Technical College Logo" />
         </div>
@@ -1037,17 +1011,16 @@
             <h1>WELCOME TO<br /><span class="accent">NORTHERN</span> TECHNICAL COLLEGE</h1>
             <div class="sub">Excellence in Technical Education</div>
         </div>
-        <div class="spacer" style="flex:1; min-height:12px;"></div>
+        <div style="flex:1; min-height:12px;"></div>
         <div class="button-group">
             <button class="btn btn-enroll" id="enrollBtn"><i class="fas fa-graduation-cap"></i> Enroll</button>
             <button class="btn btn-login" id="loginBtn"><i class="fas fa-lock"></i> Login</button>
         </div>
-        <div class="footer-note" style="margin-top:16px; font-size:10px; color:rgba(255,255,255,0.20); text-align:center; letter-spacing:0.5px; flex-shrink:0;">© 2026 Northern Technical College</div>
+        <div style="margin-top:16px; font-size:10px; color:rgba(255,255,255,0.20); text-align:center; letter-spacing:0.5px; flex-shrink:0;">© 2026 Northern Technical College</div>
     </div>
 
-    <!-- ENROLL PAGE – Intake Selection (with fixed header) -->
-    <div class="page-with-header" id="enrollPage">
-        <!-- Fixed header -->
+    <!-- ─── ENROLL PAGE ─── -->
+    <div class="page-container" id="enrollPage">
         <div class="fixed-header">
             <button class="btn-back" id="backFromEnroll"><i class="fas fa-arrow-left"></i> Back</button>
             <div class="header-title"><i class="fas fa-calendar-alt"></i> Select Intake</div>
@@ -1069,8 +1042,8 @@
         </div>
     </div>
 
-    <!-- PROGRAMS LIST PAGE (with fixed header) -->
-    <div class="page-with-header" id="programsPage">
+    <!-- ─── PROGRAMS PAGE ─── -->
+    <div class="page-container" id="programsPage">
         <div class="fixed-header">
             <button class="btn-back" id="backFromPrograms"><i class="fas fa-arrow-left"></i> Back</button>
             <div class="header-title"><i class="fas fa-list"></i> <span id="intakeTitle">Programmes</span></div>
@@ -1081,8 +1054,8 @@
         </div>
     </div>
 
-    <!-- SHORT COURSES PAGE (with fixed header) -->
-    <div class="page-with-header" id="shortCoursesPage">
+    <!-- ─── SHORT COURSES PAGE ─── -->
+    <div class="page-container" id="shortCoursesPage">
         <div class="fixed-header">
             <button class="btn-back" id="backFromShort"><i class="fas fa-arrow-left"></i> Back</button>
             <div class="header-title"><i class="fas fa-clock"></i> Short Courses</div>
@@ -1093,32 +1066,23 @@
         </div>
     </div>
 
-    <!-- DETAIL MODAL (white overlay) -->
+    <!-- ─── DETAIL MODAL ─── -->
     <div id="detailModal">
-        <!-- Fixed top: back button + close -->
         <div class="modal-fixed-top">
             <button class="btn-back-detail" id="backToDetail"><i class="fas fa-arrow-left"></i> Back to programme details</button>
             <button class="modal-close" id="detailClose">&times;</button>
         </div>
-
         <div class="modal-content">
             <div class="modal-logo">
                 <img src="logo.png" alt="NTC Logo" />
             </div>
             <div class="detail-title" id="detailTitle">Programme</div>
-
-            <!-- Program Details (visible by default) -->
             <div class="detail-body" id="detailBody"></div>
-
-            <!-- Apply Button -->
             <button class="btn-apply" id="applyBtn"><i class="fas fa-pen"></i> Apply Now</button>
 
-            <!-- Application Form – STEP WIZARD -->
+            <!-- Application Form – Step Wizard -->
             <div class="application-form" id="applicationForm">
-                <!-- Progress dots -->
                 <div class="step-progress" id="stepProgress"></div>
-
-                <!-- Step container -->
                 <div class="step-container" id="stepContainer">
                     <!-- Step 1: Personal Details -->
                     <div class="step" data-step="1">
@@ -1145,7 +1109,6 @@
                             <div><label>Next of Kin/Emergency Contact</label><input type="text" placeholder="Name and phone" /></div>
                         </div>
                     </div>
-
                     <!-- Step 2: Academic Background -->
                     <div class="step" data-step="2">
                         <div class="form-section">
@@ -1163,7 +1126,6 @@
                             <div><label>Certified Copies of Certificates (if required)</label><input type="file" /></div>
                         </div>
                     </div>
-
                     <!-- Step 3: Program Selection -->
                     <div class="step" data-step="3">
                         <div class="form-section">
@@ -1177,8 +1139,7 @@
                             <div><label>Intake/Semester Applying For</label><input type="text" id="applyIntake" readonly /></div>
                         </div>
                     </div>
-
-                    <!-- Step 4: Document Uploads – 3-column grid -->
+                    <!-- Step 4: Document Uploads -->
                     <div class="step" data-step="4">
                         <div class="form-section">
                             <div class="section-title">Document Uploads</div>
@@ -1226,7 +1187,6 @@
                             <p style="font-size:12px; color:#64748b; margin-top:8px;"><span class="highlight">*</span> Recommendation letter is mandatory.</p>
                         </div>
                     </div>
-
                     <!-- Step 5: Sponsor Information -->
                     <div class="step" data-step="5">
                         <div class="form-section">
@@ -1238,8 +1198,7 @@
                             <div><label>Scholarship Information (if applicable)</label><input type="text" /></div>
                         </div>
                     </div>
-
-                    <!-- Step 6: Declaration & Submit + Signature -->
+                    <!-- Step 6: Declaration & Submit -->
                     <div class="step" data-step="6">
                         <div class="form-section">
                             <div class="section-title">Declaration & Submit</div>
@@ -1247,7 +1206,6 @@
                                 <input type="checkbox" id="declare" />
                                 <label for="declare" style="font-weight:400;">I declare that the information provided is <span class="highlight">true and correct</span>.</label>
                             </div>
-
                             <div><label>Applicant's Signature</label></div>
                             <div class="signature-wrapper">
                                 <canvas id="signaturePad"></canvas>
@@ -1255,17 +1213,13 @@
                             <div class="signature-actions">
                                 <button class="btn-clear-signature" id="clearSignature"><i class="fas fa-undo"></i> Clear</button>
                             </div>
-
                             <div class="form-row" style="margin-top:12px;">
                                 <div><label>Date of Application</label><input type="date" id="appDate" /></div>
                             </div>
-
                             <button class="btn-submit-step" id="submitApplication"><i class="fas fa-paper-plane"></i> Submit Application</button>
                         </div>
                     </div>
                 </div>
-
-                <!-- Navigation buttons -->
                 <div class="step-nav">
                     <button class="btn-prev" id="prevStep" style="visibility:hidden;"><i class="fas fa-arrow-left"></i> Previous</button>
                     <button class="btn-next" id="nextStep">Next <i class="fas fa-arrow-right"></i></button>
@@ -1274,7 +1228,7 @@
         </div>
     </div>
 
-    <!-- LOGIN MODAL -->
+    <!-- ─── LOGIN MODAL ─── -->
     <div class="modal-overlay" id="loginModal">
         <div class="modal">
             <button class="modal-close" id="loginClose">&times;</button>
@@ -1580,7 +1534,7 @@
 
             // ─── NAVIGATION HELPERS ──────────────────────────────
             function showPage(page) {
-                // hide all pages
+                // hide all
                 [mainPage, enrollPage, programsPage, shortPage].forEach(p => {
                     p.classList.remove('active', 'hidden');
                 });
@@ -1650,20 +1604,16 @@
                     if (prog.extra.employment) html += `<h3>Employment Prospects</h3><p>${prog.extra.employment}</p>`;
                 }
                 detailBody.innerHTML = html;
-                // Reset form visibility
                 detailBody.style.display = 'block';
                 applyBtn.style.display = 'inline-block';
                 applicationForm.classList.remove('active');
-                // Pre-fill program and intake in form
                 applyProgram.value = prog.title;
                 applyIntake.value = prog.intake.charAt(0).toUpperCase() + prog.intake.slice(1);
                 detailModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
-                // Reset step wizard
                 resetWizard();
             }
 
-            // ─── SHORT COURSE DIRECT APPLY ──────────────────────
             function openShortCourseApplication(title) {
                 isShortCourse = true;
                 currentProgram = null;
@@ -1734,7 +1684,6 @@
                 resetWizard();
             });
 
-            // Back to detail from form
             backToDetail.addEventListener('click', function() {
                 applicationForm.classList.remove('active');
                 detailBody.style.display = 'block';
@@ -1749,7 +1698,6 @@
                     alert('Please declare that the information is true and correct.');
                     return;
                 }
-                // Check signature pad – simple check if canvas has drawing
                 const canvas = document.getElementById('signaturePad');
                 const ctx = canvas.getContext('2d');
                 const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -1778,9 +1726,9 @@
 
                 function resizeCanvas() {
                     const rect = canvas.parentElement.getBoundingClientRect();
-                    const width = rect.width - 8; // padding
+                    const width = rect.width - 8;
                     const height = 120;
-                    canvas.width = width * 2; // high DPI
+                    canvas.width = width * 2;
                     canvas.height = height * 2;
                     canvas.style.width = width + 'px';
                     canvas.style.height = height + 'px';
@@ -1812,7 +1760,6 @@
                     const y = (e.clientY || e.touches[0].clientY) - rect.top;
                     lastX = x;
                     lastY = y;
-                    // draw a dot
                     ctx.beginPath();
                     ctx.arc(x, y, 1, 0, Math.PI * 2);
                     ctx.fill();
@@ -1823,18 +1770,15 @@
                     drawing = false;
                 }
 
-                // Mouse events
                 canvas.addEventListener('mousedown', startDraw);
                 canvas.addEventListener('mousemove', draw);
                 canvas.addEventListener('mouseup', stopDraw);
                 canvas.addEventListener('mouseleave', stopDraw);
 
-                // Touch events
                 canvas.addEventListener('touchstart', startDraw, { passive: false });
                 canvas.addEventListener('touchmove', draw, { passive: false });
                 canvas.addEventListener('touchend', stopDraw, { passive: false });
 
-                // Clear
                 document.getElementById('clearSignature').addEventListener('click', function() {
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
                 });
@@ -1893,7 +1837,6 @@
             backFromPrograms.addEventListener('click', (e) => { e.preventDefault(); showEnroll(); });
             backFromShort.addEventListener('click', (e) => { e.preventDefault(); showEnroll(); });
 
-            // Intake buttons
             document.querySelectorAll('.intake-btn[data-intake]').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1903,14 +1846,11 @@
                 });
             });
 
-            // Short courses button
             shortCoursesBtn.addEventListener('click', (e) => { e.preventDefault(); renderShortCourses(); });
 
-            // Detail modal close
             detailClose.addEventListener('click', closeDetail);
             detailModal.addEventListener('click', (e) => { if (e.target === detailModal) closeDetail(); });
 
-            // Login modal
             loginBtn.addEventListener('click', (e) => { e.preventDefault(); loginModal.classList.add('active'); document.body.style.overflow = 'hidden'; });
             loginClose.addEventListener('click', () => { loginModal.classList.remove('active'); document.body.style.overflow = ''; });
             loginModal.addEventListener('click', (e) => { if (e.target === loginModal) { loginModal.classList.remove('active'); document.body.style.overflow = ''; } });
@@ -1943,7 +1883,6 @@
             forgotLink.addEventListener('click', (e) => { e.preventDefault(); alert('📧 Password reset link sent to your registered email.\n(Simulated)'); });
             supportLink.addEventListener('click', (e) => { e.preventDefault(); alert('📞 Support: +260 97 123 4567\n✉️ support@northerntech.edu.zm\n(Simulated)'); });
 
-            // ESC key
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
                     if (detailModal.classList.contains('active')) closeDetail();
@@ -1953,7 +1892,7 @@
 
             // ─── INIT ─────────────────────────────────────────────
             showMain();
-            console.log('✅ Northern Technical College – Step application form with signature pad, upload grid, fixed back buttons.');
+            console.log('✅ Northern Technical College – Fixed back buttons, signature pad, upload grid.');
         })();
     </script>
 </body>
