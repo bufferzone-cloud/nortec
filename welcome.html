@@ -61,8 +61,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 28px 24px;
+            justify-content: flex-start;
+            padding: 0;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             transition: opacity 0.45s cubic-bezier(0.22,1,0.36,1),
@@ -76,6 +76,8 @@
             opacity: 1;
             transform: scale(1);
             visibility: visible;
+            justify-content: center;
+            padding: 28px 24px;
         }
         #mainPage.hidden {
             opacity: 0;
@@ -84,24 +86,358 @@
             pointer-events: none;
         }
 
-        /* ENROLL PAGE (intake selection) */
-        #enrollPage, #programsPage, #shortCoursesPage {
+        /* ENROLL PAGE, PROGRAMS PAGE, SHORT COURSES PAGE – with fixed top bar */
+        .page-with-header {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            transition: opacity 0.45s cubic-bezier(0.22,1,0.36,1),
+                        transform 0.45s cubic-bezier(0.22,1,0.36,1),
+                        visibility 0.45s ease;
+        }
+        .page-with-header::-webkit-scrollbar { width: 0; background: transparent; }
+        .page-with-header.hidden {
             opacity: 0;
             transform: scale(0.96);
             visibility: hidden;
             pointer-events: none;
-            justify-content: flex-start;
-            padding-top: 40px;
-            padding-bottom: 40px;
-        }
-        #enrollPage.active, #programsPage.active, #shortCoursesPage.active {
-            opacity: 1;
-            transform: scale(1);
-            visibility: visible;
-            pointer-events: auto;
         }
 
-        /* DETAIL MODAL (white overlay) */
+        /* Fixed header for pages */
+        .fixed-header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            max-width: 600px;
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 10;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            flex-shrink: 0;
+        }
+        .fixed-header .btn-back {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .fixed-header .btn-back:hover {
+            background: rgba(255,255,255,0.20);
+            transform: translateX(-3px);
+        }
+        .fixed-header .btn-back:active { transform: scale(0.95); }
+        .fixed-header .header-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            flex: 1;
+            text-align: center;
+            margin-right: 30px; /* balance for back button */
+        }
+        .fixed-header .header-title i { margin-right: 6px; color: #6cffa0; }
+
+        /* Content below header */
+        .page-content {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px 16px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* LOGO with white blur (main page only) */
+        .logo-wrapper {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .main-logo {
+            width: 88px;
+            height: 88px;
+            object-fit: contain;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.20);
+            transition: transform 0.3s ease;
+        }
+        .main-logo:hover { transform: scale(1.03); }
+
+        /* TITLE (main page) */
+        .title {
+            text-align: center;
+            margin: 4px 0 28px;
+            flex-shrink: 0;
+        }
+        .title h1 {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 0.2px;
+            line-height: 1.3;
+            color: #fff;
+            text-shadow: 0 4px 28px rgba(0,0,0,0.45);
+        }
+        .title h1 .accent { color: #6cffa0; }
+        .title .sub {
+            font-size: 10px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.55);
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            margin-top: 3px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.25);
+        }
+
+        /* BUTTONS (main) */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            width: 100%;
+            max-width: 320px;
+            flex-shrink: 0;
+            padding-bottom: 4px;
+        }
+        .btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 60px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+            touch-action: manipulation;
+            min-height: 52px;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .btn:active { transform: scale(0.96); }
+        .btn-enroll {
+            background: linear-gradient(135deg, #00c853, #009e3d);
+            box-shadow: 0 8px 32px rgba(0,200,83,0.35);
+        }
+        .btn-enroll:hover {
+            box-shadow: 0 12px 40px rgba(0,200,83,0.45);
+            transform: translateY(-2px);
+        }
+        .btn-login {
+            background: linear-gradient(135deg, #2979ff, #0d47a1);
+            box-shadow: 0 8px 32px rgba(41,121,255,0.35);
+        }
+        .btn-login:hover {
+            box-shadow: 0 12px 40px rgba(41,121,255,0.45);
+            transform: translateY(-2px);
+        }
+        .btn i { margin-right: 10px; font-size: 17px; }
+
+        /* ENROLL PAGE – intake buttons (inside .page-content) */
+        .page-header {
+            text-align: center;
+            margin-bottom: 20px;
+            flex-shrink: 0;
+            width: 100%;
+        }
+        .page-header h2 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 0 4px 24px rgba(0,0,0,0.4);
+        }
+        .page-header h2 i { color: #6cffa0; margin-right: 8px; }
+        .page-header p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+            margin-top: 4px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .intake-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            width: 100%;
+            max-width: 420px;
+            flex-shrink: 0;
+            padding: 0 4px;
+        }
+        .intake-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 1/1;
+            border: none;
+            border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.30);
+            padding: 16px 12px;
+            text-align: center;
+            line-height: 1.2;
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+            touch-action: manipulation;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+        .intake-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .intake-btn:active { transform: scale(0.94); }
+        .intake-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 44px rgba(0,0,0,0.40);
+        }
+        .intake-btn i { font-size: 32px; margin-bottom: 8px; color: rgba(255,255,255,0.9); }
+        .intake-jan { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .intake-may { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+        .intake-sep { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+        .intake-aug { background: linear-gradient(135deg, #10b981, #047857); }
+        .intake-short { background: linear-gradient(135deg, #ec4899, #be185d); }
+
+        /* PROGRAMS LIST – solid cards */
+        .program-list {
+            width: 100%;
+            max-width: 600px;
+            flex-shrink: 0;
+            padding: 0 4px;
+        }
+        .program-card {
+            background: rgba(255,255,255,0.92);
+            border-radius: 16px;
+            padding: 16px 18px;
+            margin-bottom: 12px;
+            border: 1px solid #e2e8f0;
+            color: #0f172a;
+            transition: background 0.2s, transform 0.2s;
+            cursor: pointer;
+            touch-action: manipulation;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .program-card:hover {
+            background: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+        .program-card .prog-title {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 4px;
+            color: #0f172a;
+        }
+        .program-card .prog-meta {
+            font-size: 13px;
+            opacity: 0.7;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            color: #334155;
+        }
+        .program-card .prog-meta span { display: inline-flex; align-items: center; gap: 4px; }
+        .program-card .prog-meta i { font-size: 12px; }
+        .program-card .view-detail {
+            margin-top: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #2563eb;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* SHORT COURSES page */
+        .short-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            width: 100%;
+            max-width: 600px;
+            flex-shrink: 0;
+            padding: 0 4px;
+        }
+        .short-item {
+            background: rgba(255,255,255,0.92);
+            border-radius: 12px;
+            padding: 14px 12px;
+            border: 1px solid #e2e8f0;
+            color: #0f172a;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            position: relative;
+        }
+        .short-item .short-title { font-weight: 600; font-size: 14px; }
+        .short-item .short-days { font-size: 12px; opacity: 0.7; margin-top: 2px; }
+        .short-item .short-apply {
+            margin-top: 10px;
+            display: inline-block;
+            padding: 6px 16px;
+            background: #3b82f6;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .short-item .short-apply:hover {
+            background: #2563eb;
+            transform: scale(1.02);
+        }
+
+        /* ─── DETAIL MODAL ────────────────────────────────────────── */
         #detailModal {
             position: fixed;
             inset: 0;
@@ -112,7 +448,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 24px 20px;
+            padding: 0;
             overflow-y: auto;
             opacity: 0;
             visibility: hidden;
@@ -124,18 +460,20 @@
             visibility: visible;
         }
 
-        /* Fixed Back button (sticky) */
+        /* Fixed top bar inside modal */
         .modal-fixed-top {
             position: sticky;
             top: 0;
-            background: rgba(255,255,255,0.97);
             width: 100%;
             max-width: 600px;
+            background: rgba(255,255,255,0.97);
             z-index: 10;
-            padding: 8px 0 12px;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            border-bottom: 1px solid #e2e8f0;
+            flex-shrink: 0;
         }
         .btn-back-detail {
             background: transparent;
@@ -166,6 +504,15 @@
         }
         .modal-close:hover { background: #cbd5e1; }
 
+        /* Modal content */
+        .modal-content {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px 16px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         .modal-logo {
             margin-top: 4px;
             margin-bottom: 8px;
@@ -188,7 +535,6 @@
             margin-bottom: 12px;
         }
         .detail-body {
-            max-width: 600px;
             width: 100%;
             text-align: left;
             color: #1e293b;
@@ -204,7 +550,7 @@
         .detail-body p { margin-bottom: 8px; }
         .detail-body ul { padding-left: 20px; margin: 6px 0 12px; }
 
-        /* APPLY BUTTON inside detail modal */
+        /* APPLY BUTTON */
         .btn-apply {
             display: inline-block;
             margin: 20px 0 10px;
@@ -225,10 +571,9 @@
         }
         .btn-apply:active { transform: scale(0.96); }
 
-        /* APPLICATION FORM – STEP WIZARD */
+        /* ─── APPLICATION FORM – STEP WIZARD ────────────────────── */
         .application-form {
             display: none;
-            max-width: 600px;
             width: 100%;
             text-align: left;
             color: #1e293b;
@@ -394,309 +739,111 @@
             cursor: pointer;
         }
 
-        /* LOGO with white blur */
-        .logo-wrapper {
-            flex-shrink: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 12px;
+        /* ─── SIGNATURE PAD ──────────────────────────────────────── */
+        .signature-wrapper {
+            border: 2px dashed #94a3b8;
+            border-radius: 12px;
+            padding: 4px;
+            background: #f8fafc;
+            margin: 8px 0;
         }
-        .main-logo {
-            width: 88px;
-            height: 88px;
-            object-fit: contain;
-            border-radius: 18px;
-            background: rgba(255,255,255,0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            padding: 10px;
-            border: 1px solid rgba(255,255,255,0.4);
-            box-shadow: 0 12px 48px rgba(0,0,0,0.20);
-            transition: transform 0.3s ease;
-        }
-        .main-logo:hover { transform: scale(1.03); }
-
-        /* TITLE */
-        .title {
-            text-align: center;
-            margin: 4px 0 28px;
-            flex-shrink: 0;
-        }
-        .title h1 {
-            font-size: 20px;
-            font-weight: 900;
-            letter-spacing: 0.2px;
-            line-height: 1.3;
-            color: #fff;
-            text-shadow: 0 4px 28px rgba(0,0,0,0.45);
-        }
-        .title h1 .accent { color: #6cffa0; }
-        .title .sub {
-            font-size: 10px;
-            font-weight: 400;
-            color: rgba(255,255,255,0.55);
-            letter-spacing: 1.8px;
-            text-transform: uppercase;
-            margin-top: 3px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.25);
-        }
-
-        /* BUTTONS (main) */
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
+        .signature-wrapper canvas {
+            display: block;
             width: 100%;
-            max-width: 320px;
-            flex-shrink: 0;
-            padding-bottom: 4px;
+            height: 120px;
+            background: #ffffff;
+            border-radius: 8px;
+            touch-action: none;
+            cursor: crosshair;
         }
-        .btn {
+        .signature-actions {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 16px 24px;
-            border: none;
-            border-radius: 60px;
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            color: #fff;
-            cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-            position: relative;
-            overflow: hidden;
-            user-select: none;
-            touch-action: manipulation;
-            min-height: 52px;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            gap: 10px;
+            margin-top: 6px;
         }
-        .btn::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 60%);
-            pointer-events: none;
-        }
-        .btn:active { transform: scale(0.96); }
-        .btn-enroll {
-            background: linear-gradient(135deg, #00c853, #009e3d);
-            box-shadow: 0 8px 32px rgba(0,200,83,0.35);
-        }
-        .btn-enroll:hover {
-            box-shadow: 0 12px 40px rgba(0,200,83,0.45);
-            transform: translateY(-2px);
-        }
-        .btn-login {
-            background: linear-gradient(135deg, #2979ff, #0d47a1);
-            box-shadow: 0 8px 32px rgba(41,121,255,0.35);
-        }
-        .btn-login:hover {
-            box-shadow: 0 12px 40px rgba(41,121,255,0.45);
-            transform: translateY(-2px);
-        }
-        .btn i { margin-right: 10px; font-size: 17px; }
-
-        /* ENROLL PAGE – intake buttons */
-        .page-header {
-            text-align: center;
-            margin-bottom: 20px;
-            flex-shrink: 0;
-        }
-        .page-header h2 {
-            font-size: 22px;
-            font-weight: 800;
-            color: #fff;
-            text-shadow: 0 4px 24px rgba(0,0,0,0.4);
-        }
-        .page-header h2 i { color: #6cffa0; margin-right: 8px; }
-        .page-header p {
-            font-size: 13px;
-            color: rgba(255,255,255,0.6);
-            margin-top: 4px;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-
-        .intake-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            width: 100%;
-            max-width: 420px;
-            flex-shrink: 0;
-            padding: 0 4px;
-        }
-        .intake-btn, .shortcourse-btn {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            aspect-ratio: 1/1;
+        .signature-actions button {
+            padding: 6px 14px;
             border: none;
             border-radius: 20px;
-            font-family: 'Inter', sans-serif;
-            font-size: 16px;
-            font-weight: 700;
-            color: #fff;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.30);
-            padding: 16px 12px;
-            text-align: center;
-            line-height: 1.2;
-            position: relative;
-            overflow: hidden;
-            user-select: none;
-            touch-action: manipulation;
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-        }
-        .intake-btn::after, .shortcourse-btn::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, transparent 60%);
-            pointer-events: none;
-        }
-        .intake-btn:active, .shortcourse-btn:active { transform: scale(0.94); }
-        .intake-btn:hover, .shortcourse-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 14px 44px rgba(0,0,0,0.40);
-        }
-        .intake-btn i { font-size: 32px; margin-bottom: 8px; color: rgba(255,255,255,0.9); }
-        .intake-jan { background: linear-gradient(135deg, #f59e0b, #d97706); }
-        .intake-may { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
-        .intake-sep { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
-        .intake-aug { background: linear-gradient(135deg, #10b981, #047857); }
-        .intake-short { background: linear-gradient(135deg, #ec4899, #be185d); }
-
-        /* BACK BUTTON */
-        .back-row {
-            width: 100%;
-            max-width: 420px;
-            display: flex;
-            justify-content: flex-start;
-            margin-top: 20px;
-            flex-shrink: 0;
-            padding: 0 4px;
-        }
-        .btn-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 40px;
-            background: rgba(255,255,255,0.12);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            color: #fff;
-            font-family: 'Inter', sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            touch-action: manipulation;
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-        .btn-back:hover { background: rgba(255,255,255,0.20); transform: translateX(-3px); }
-        .btn-back:active { transform: scale(0.95); }
-        .btn-back i { font-size: 14px; }
-
-        /* PROGRAMS LIST – solid cards (no glass) */
-        .program-list {
-            width: 100%;
-            max-width: 600px;
-            flex-shrink: 0;
-            padding: 0 4px;
-        }
-        .program-card {
-            background: rgba(255,255,255,0.92);
-            border-radius: 16px;
-            padding: 16px 18px;
-            margin-bottom: 12px;
-            border: 1px solid #e2e8f0;
-            color: #0f172a;
-            transition: background 0.2s, transform 0.2s;
-            cursor: pointer;
-            touch-action: manipulation;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        .program-card:hover {
-            background: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-        }
-        .program-card .prog-title {
-            font-weight: 700;
-            font-size: 16px;
-            margin-bottom: 4px;
-            color: #0f172a;
-        }
-        .program-card .prog-meta {
-            font-size: 13px;
-            opacity: 0.7;
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            color: #334155;
-        }
-        .program-card .prog-meta span { display: inline-flex; align-items: center; gap: 4px; }
-        .program-card .prog-meta i { font-size: 12px; }
-        .program-card .view-detail {
-            margin-top: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #2563eb;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* SHORT COURSES page */
-        .short-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            width: 100%;
-            max-width: 600px;
-            flex-shrink: 0;
-            padding: 0 4px;
-        }
-        .short-item {
-            background: rgba(255,255,255,0.92);
-            border-radius: 12px;
-            padding: 14px 12px;
-            border: 1px solid #e2e8f0;
-            color: #0f172a;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            position: relative;
-        }
-        .short-item .short-title { font-weight: 600; font-size: 14px; }
-        .short-item .short-days { font-size: 12px; opacity: 0.7; margin-top: 2px; }
-        .short-item .short-apply {
-            margin-top: 10px;
-            display: inline-block;
-            padding: 6px 16px;
-            background: #3b82f6;
-            color: #fff;
-            border: none;
-            border-radius: 30px;
             font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
         }
-        .short-item .short-apply:hover {
-            background: #2563eb;
-            transform: scale(1.02);
+        .btn-clear-signature {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+        .btn-clear-signature:hover { background: #cbd5e1; }
+
+        /* ─── DOCUMENT UPLOAD GRID – 3 columns ──────────────────── */
+        .upload-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin: 8px 0;
+        }
+        .upload-box {
+            aspect-ratio: 1 / 1;
+            background: #f8fafc;
+            border: 2px dashed #d1d5db;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8px;
+            transition: border-color 0.2s;
+            position: relative;
+            cursor: pointer;
+        }
+        .upload-box:hover {
+            border-color: #3b82f6;
+        }
+        .upload-box .upload-icon {
+            font-size: 24px;
+            color: #94a3b8;
+            margin-bottom: 4px;
+        }
+        .upload-box .upload-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: #475569;
+            line-height: 1.2;
+            word-break: break-word;
+        }
+        .upload-box .upload-badge {
+            font-size: 8px;
+            font-weight: 700;
+            color: #fff;
+            background: #ef4444;
+            padding: 2px 8px;
+            border-radius: 12px;
+            position: absolute;
+            top: -6px;
+            right: -6px;
+        }
+        .upload-box .upload-badge.optional {
+            background: #94a3b8;
+        }
+        .upload-box input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .upload-box .file-name {
+            font-size: 9px;
+            color: #64748b;
+            margin-top: 4px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 100%;
         }
 
-        /* LOGIN MODAL (kept minimal) */
+        /* ─── LOGIN MODAL ────────────────────────────────────────── */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -816,7 +963,9 @@
 
         /* RESPONSIVE */
         @media (max-width: 480px) {
-            .page { padding: 20px 16px; }
+            .page-content { padding: 16px 12px 30px; }
+            .fixed-header { padding: 10px 12px; }
+            .fixed-header .header-title { font-size: 14px; }
             .main-logo { width: 72px; height: 72px; padding: 8px; }
             .title h1 { font-size: 17px; }
             .btn { font-size: 14px; padding: 14px 18px; min-height: 46px; }
@@ -832,6 +981,7 @@
             .modal-header .modal-title { font-size: 18px; }
             .step .form-row > * { flex: 1 1 100%; }
             .step-dot .label { display: none; }
+            .upload-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 360px) {
             .intake-grid { gap: 10px; }
@@ -839,6 +989,7 @@
             .intake-btn i { font-size: 22px; }
             .title h1 { font-size: 15px; }
             .btn { font-size: 13px; padding: 12px 14px; min-height: 42px; }
+            .upload-grid { grid-template-columns: 1fr 1fr; }
         }
         @media (min-height: 800px) {
             .main-logo { width: 100px; height: 100px; }
@@ -848,16 +999,16 @@
             .intake-grid { max-width: 480px; gap: 20px; }
         }
         @media (min-height: 900px) {
-            .page { padding: 40px 32px; }
+            .page-content { padding: 24px 20px 50px; }
             .intake-grid { max-width: 520px; gap: 24px; }
             .intake-btn { border-radius: 24px; }
         }
         @supports (padding: env(safe-area-inset-top)) {
-            .page {
-                padding-left: calc(24px + env(safe-area-inset-left));
-                padding-right: calc(24px + env(safe-area-inset-right));
-                padding-top: calc(28px + env(safe-area-inset-top));
-                padding-bottom: calc(28px + env(safe-area-inset-bottom));
+            .page-content {
+                padding-left: calc(16px + env(safe-area-inset-left));
+                padding-right: calc(16px + env(safe-area-inset-right));
+                padding-top: calc(20px + env(safe-area-inset-top));
+                padding-bottom: calc(30px + env(safe-area-inset-bottom));
             }
             .modal {
                 padding-left: calc(28px + env(safe-area-inset-left));
@@ -866,7 +1017,10 @@
                 padding-bottom: calc(28px + env(safe-area-inset-bottom));
             }
         }
-        .page::-webkit-scrollbar { width: 0; background: transparent; }
+        .page::-webkit-scrollbar, .page-with-header::-webkit-scrollbar, #detailModal::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+        }
     </style>
 </head>
 <body>
@@ -891,56 +1045,51 @@
         <div class="footer-note" style="margin-top:16px; font-size:10px; color:rgba(255,255,255,0.20); text-align:center; letter-spacing:0.5px; flex-shrink:0;">© 2026 Northern Technical College</div>
     </div>
 
-    <!-- ENROLL PAGE – Intake Selection -->
-    <div class="page" id="enrollPage">
-        <div class="logo-wrapper">
-            <img src="logo.png" class="main-logo" alt="Northern Technical College Logo" />
-        </div>
-        <div class="page-header">
-            <h2><i class="fas fa-calendar-alt"></i> Choose Your Intake</h2>
-            <p>Select an intake to view programmes</p>
-        </div>
-        <div class="intake-grid">
-            <button class="intake-btn intake-jan" data-intake="january"><i class="fas fa-snowflake"></i> January</button>
-            <button class="intake-btn intake-may" data-intake="may"><i class="fas fa-leaf"></i> May</button>
-            <button class="intake-btn intake-sep" data-intake="september"><i class="fas fa-tree"></i> September</button>
-            <button class="intake-btn intake-aug" data-intake="august"><i class="fas fa-globe"></i> August (Distance)</button>
-        </div>
-        <div style="width:100%; max-width:420px; margin-top:12px; flex-shrink:0; padding:0 4px;">
-            <button class="intake-btn intake-short" id="shortCoursesBtn" style="aspect-ratio:auto; padding:14px; border-radius:16px; width:100%;"><i class="fas fa-clock"></i> Short Courses</button>
-        </div>
-        <div class="back-row">
+    <!-- ENROLL PAGE – Intake Selection (with fixed header) -->
+    <div class="page-with-header" id="enrollPage">
+        <!-- Fixed header -->
+        <div class="fixed-header">
             <button class="btn-back" id="backFromEnroll"><i class="fas fa-arrow-left"></i> Back</button>
+            <div class="header-title"><i class="fas fa-calendar-alt"></i> Select Intake</div>
+        </div>
+        <div class="page-content">
+            <div class="page-header">
+                <h2>Choose Your Intake</h2>
+                <p>Select an intake to view programmes</p>
+            </div>
+            <div class="intake-grid">
+                <button class="intake-btn intake-jan" data-intake="january"><i class="fas fa-snowflake"></i> January</button>
+                <button class="intake-btn intake-may" data-intake="may"><i class="fas fa-leaf"></i> May</button>
+                <button class="intake-btn intake-sep" data-intake="september"><i class="fas fa-tree"></i> September</button>
+                <button class="intake-btn intake-aug" data-intake="august"><i class="fas fa-globe"></i> August (Distance)</button>
+            </div>
+            <div style="width:100%; max-width:420px; margin-top:12px; flex-shrink:0; padding:0 4px;">
+                <button class="intake-btn intake-short" id="shortCoursesBtn" style="aspect-ratio:auto; padding:14px; border-radius:16px; width:100%;"><i class="fas fa-clock"></i> Short Courses</button>
+            </div>
         </div>
     </div>
 
-    <!-- PROGRAMS LIST PAGE -->
-    <div class="page" id="programsPage">
-        <div class="logo-wrapper">
-            <img src="logo.png" class="main-logo" alt="Northern Technical College Logo" />
-        </div>
-        <div class="page-header">
-            <h2 id="programsHeader"><i class="fas fa-list"></i> <span id="intakeTitle">Programmes</span></h2>
-            <p id="intakeSub">Tap a programme for full details</p>
-        </div>
-        <div class="program-list" id="programListContainer"></div>
-        <div class="back-row">
+    <!-- PROGRAMS LIST PAGE (with fixed header) -->
+    <div class="page-with-header" id="programsPage">
+        <div class="fixed-header">
             <button class="btn-back" id="backFromPrograms"><i class="fas fa-arrow-left"></i> Back</button>
+            <div class="header-title"><i class="fas fa-list"></i> <span id="intakeTitle">Programmes</span></div>
+        </div>
+        <div class="page-content">
+            <p id="intakeSub" style="text-align:center; margin-bottom:16px; color:rgba(255,255,255,0.6);">Tap a programme for full details</p>
+            <div class="program-list" id="programListContainer"></div>
         </div>
     </div>
 
-    <!-- SHORT COURSES PAGE -->
-    <div class="page" id="shortCoursesPage">
-        <div class="logo-wrapper">
-            <img src="logo.png" class="main-logo" alt="Northern Technical College Logo" />
-        </div>
-        <div class="page-header">
-            <h2><i class="fas fa-clock"></i> Short Courses</h2>
-            <p>Offered in April, August & December – also on corporate request</p>
-        </div>
-        <div class="short-grid" id="shortCoursesContainer"></div>
-        <div class="back-row">
+    <!-- SHORT COURSES PAGE (with fixed header) -->
+    <div class="page-with-header" id="shortCoursesPage">
+        <div class="fixed-header">
             <button class="btn-back" id="backFromShort"><i class="fas fa-arrow-left"></i> Back</button>
+            <div class="header-title"><i class="fas fa-clock"></i> Short Courses</div>
+        </div>
+        <div class="page-content">
+            <p style="text-align:center; margin-bottom:16px; color:rgba(255,255,255,0.6);">Offered in April, August & December – also on corporate request</p>
+            <div class="short-grid" id="shortCoursesContainer"></div>
         </div>
     </div>
 
@@ -952,128 +1101,175 @@
             <button class="modal-close" id="detailClose">&times;</button>
         </div>
 
-        <div class="modal-logo">
-            <img src="logo.png" alt="NTC Logo" />
-        </div>
-        <div class="detail-title" id="detailTitle">Programme</div>
-
-        <!-- Program Details (visible by default) -->
-        <div class="detail-body" id="detailBody"></div>
-
-        <!-- Apply Button -->
-        <button class="btn-apply" id="applyBtn"><i class="fas fa-pen"></i> Apply Now</button>
-
-        <!-- Application Form – STEP WIZARD -->
-        <div class="application-form" id="applicationForm">
-            <!-- Progress dots -->
-            <div class="step-progress" id="stepProgress"></div>
-
-            <!-- Step container -->
-            <div class="step-container" id="stepContainer">
-                <!-- Step 1: Personal Details -->
-                <div class="step" data-step="1">
-                    <div class="form-section">
-                        <div class="section-title">Personal Details</div>
-                        <div class="form-row">
-                            <div><label>Full Name</label><input type="text" placeholder="John Doe" /></div>
-                            <div><label>Date of Birth</label><input type="date" /></div>
-                        </div>
-                        <div class="form-row">
-                            <div><label>Gender</label>
-                                <select><option>Male</option><option>Female</option><option>Other</option></select>
-                            </div>
-                            <div><label>Nationality</label><input type="text" placeholder="Zambian" /></div>
-                        </div>
-                        <div class="form-row">
-                            <div><label>NRC/Passport Number</label><input type="text" placeholder="123456-78-9" /></div>
-                            <div><label>Physical Address</label><input type="text" placeholder="Street, City" /></div>
-                        </div>
-                        <div class="form-row">
-                            <div><label>Phone Number</label><input type="tel" placeholder="+260..." /></div>
-                            <div><label>Email Address</label><input type="email" placeholder="you@example.com" /></div>
-                        </div>
-                        <div><label>Next of Kin/Emergency Contact</label><input type="text" placeholder="Name and phone" /></div>
-                    </div>
-                </div>
-
-                <!-- Step 2: Academic Background -->
-                <div class="step" data-step="2">
-                    <div class="form-section">
-                        <div class="section-title">Academic Background</div>
-                        <div class="form-row">
-                            <div><label>Previous School/College Attended</label><input type="text" /></div>
-                            <div><label>Grade 12 School Name</label><input type="text" /></div>
-                        </div>
-                        <div class="form-row">
-                            <div><label>Year of Completion</label><input type="number" placeholder="2024" /></div>
-                            <div><label>Examination Number</label><input type="text" /></div>
-                        </div>
-                        <div><label>Subjects and Grades Obtained</label><textarea rows="2" placeholder="e.g., Mathematics – A, English – B, ..."></textarea></div>
-                        <div><label>Copies of Academic Certificates/Results Slip</label><input type="file" /></div>
-                        <div><label>Certified Copies of Certificates (if required)</label><input type="file" /></div>
-                    </div>
-                </div>
-
-                <!-- Step 3: Program Selection -->
-                <div class="step" data-step="3">
-                    <div class="form-section">
-                        <div class="section-title">Program Selection</div>
-                        <div class="form-row">
-                            <div><label>Program/Course Applying For</label><input type="text" id="applyProgram" readonly /></div>
-                            <div><label>Mode of Study</label>
-                                <select><option>Full-time</option><option>Part-time</option><option>Distance</option></select>
-                            </div>
-                        </div>
-                        <div><label>Intake/Semester Applying For</label><input type="text" id="applyIntake" readonly /></div>
-                    </div>
-                </div>
-
-                <!-- Step 4: Document Uploads -->
-                <div class="step" data-step="4">
-                    <div class="form-section">
-                        <div class="section-title">Document Uploads</div>
-                        <div><label>Passport-size Photograph</label><input type="file" /></div>
-                        <div><label>NRC Copy or Passport Copy</label><input type="file" /></div>
-                        <div><label>Grade 12 Certificate/Statement of Results</label><input type="file" /></div>
-                        <div><label>Diploma/Degree Certificates (for higher-level programs)</label><input type="file" /></div>
-                        <div><label>Curriculum Vitae (for some programs)</label><input type="file" /></div>
-                        <div><label>Recommendation Letter (if required)</label><input type="file" /></div>
-                    </div>
-                </div>
-
-                <!-- Step 5: Sponsor Information -->
-                <div class="step" data-step="5">
-                    <div class="form-section">
-                        <div class="section-title">Sponsor Information</div>
-                        <div class="form-row">
-                            <div><label>Sponsor Details (Self, Parent, Organization)</label><input type="text" /></div>
-                            <div><label>Sponsor Contact Information</label><input type="text" /></div>
-                        </div>
-                        <div><label>Scholarship Information (if applicable)</label><input type="text" /></div>
-                    </div>
-                </div>
-
-                <!-- Step 6: Declaration & Submit -->
-                <div class="step" data-step="6">
-                    <div class="form-section">
-                        <div class="section-title">Declaration & Submit</div>
-                        <div class="declaration-row">
-                            <input type="checkbox" id="declare" />
-                            <label for="declare" style="font-weight:400;">I declare that the information provided is <span class="highlight">true and correct</span>.</label>
-                        </div>
-                        <div class="form-row">
-                            <div><label>Applicant's Signature</label><input type="text" placeholder="Type your full name" /></div>
-                            <div><label>Date of Application</label><input type="date" /></div>
-                        </div>
-                        <button class="btn-submit-step" id="submitApplication"><i class="fas fa-paper-plane"></i> Submit Application</button>
-                    </div>
-                </div>
+        <div class="modal-content">
+            <div class="modal-logo">
+                <img src="logo.png" alt="NTC Logo" />
             </div>
+            <div class="detail-title" id="detailTitle">Programme</div>
 
-            <!-- Navigation buttons -->
-            <div class="step-nav">
-                <button class="btn-prev" id="prevStep" style="visibility:hidden;"><i class="fas fa-arrow-left"></i> Previous</button>
-                <button class="btn-next" id="nextStep">Next <i class="fas fa-arrow-right"></i></button>
+            <!-- Program Details (visible by default) -->
+            <div class="detail-body" id="detailBody"></div>
+
+            <!-- Apply Button -->
+            <button class="btn-apply" id="applyBtn"><i class="fas fa-pen"></i> Apply Now</button>
+
+            <!-- Application Form – STEP WIZARD -->
+            <div class="application-form" id="applicationForm">
+                <!-- Progress dots -->
+                <div class="step-progress" id="stepProgress"></div>
+
+                <!-- Step container -->
+                <div class="step-container" id="stepContainer">
+                    <!-- Step 1: Personal Details -->
+                    <div class="step" data-step="1">
+                        <div class="form-section">
+                            <div class="section-title">Personal Details</div>
+                            <div class="form-row">
+                                <div><label>Full Name</label><input type="text" placeholder="John Doe" /></div>
+                                <div><label>Date of Birth</label><input type="date" /></div>
+                            </div>
+                            <div class="form-row">
+                                <div><label>Gender</label>
+                                    <select><option>Male</option><option>Female</option><option>Other</option></select>
+                                </div>
+                                <div><label>Nationality</label><input type="text" placeholder="Zambian" /></div>
+                            </div>
+                            <div class="form-row">
+                                <div><label>NRC/Passport Number</label><input type="text" placeholder="123456-78-9" /></div>
+                                <div><label>Physical Address</label><input type="text" placeholder="Street, City" /></div>
+                            </div>
+                            <div class="form-row">
+                                <div><label>Phone Number</label><input type="tel" placeholder="+260..." /></div>
+                                <div><label>Email Address</label><input type="email" placeholder="you@example.com" /></div>
+                            </div>
+                            <div><label>Next of Kin/Emergency Contact</label><input type="text" placeholder="Name and phone" /></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Academic Background -->
+                    <div class="step" data-step="2">
+                        <div class="form-section">
+                            <div class="section-title">Academic Background</div>
+                            <div class="form-row">
+                                <div><label>Previous School/College Attended</label><input type="text" /></div>
+                                <div><label>Grade 12 School Name</label><input type="text" /></div>
+                            </div>
+                            <div class="form-row">
+                                <div><label>Year of Completion</label><input type="number" placeholder="2024" /></div>
+                                <div><label>Examination Number</label><input type="text" /></div>
+                            </div>
+                            <div><label>Subjects and Grades Obtained</label><textarea rows="2" placeholder="e.g., Mathematics – A, English – B, ..."></textarea></div>
+                            <div><label>Copies of Academic Certificates/Results Slip</label><input type="file" /></div>
+                            <div><label>Certified Copies of Certificates (if required)</label><input type="file" /></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Program Selection -->
+                    <div class="step" data-step="3">
+                        <div class="form-section">
+                            <div class="section-title">Program Selection</div>
+                            <div class="form-row">
+                                <div><label>Program/Course Applying For</label><input type="text" id="applyProgram" readonly /></div>
+                                <div><label>Mode of Study</label>
+                                    <select><option>Full-time</option><option>Part-time</option><option>Distance</option></select>
+                                </div>
+                            </div>
+                            <div><label>Intake/Semester Applying For</label><input type="text" id="applyIntake" readonly /></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Document Uploads – 3-column grid -->
+                    <div class="step" data-step="4">
+                        <div class="form-section">
+                            <div class="section-title">Document Uploads</div>
+                            <div class="upload-grid">
+                                <div class="upload-box">
+                                    <div class="upload-icon"><i class="fas fa-camera"></i></div>
+                                    <div class="upload-label">Passport photo</div>
+                                    <input type="file" accept="image/*" />
+                                    <div class="file-name"></div>
+                                </div>
+                                <div class="upload-box">
+                                    <div class="upload-icon"><i class="fas fa-id-card"></i></div>
+                                    <div class="upload-label">NRC / Passport copy</div>
+                                    <input type="file" accept="image/*,.pdf" />
+                                    <div class="file-name"></div>
+                                </div>
+                                <div class="upload-box">
+                                    <div class="upload-icon"><i class="fas fa-certificate"></i></div>
+                                    <div class="upload-label">Grade 12 certificate</div>
+                                    <input type="file" accept="image/*,.pdf" />
+                                    <div class="file-name"></div>
+                                </div>
+                                <div class="upload-box">
+                                    <div class="upload-icon"><i class="fas fa-graduation-cap"></i></div>
+                                    <div class="upload-label">Diploma/Degree <span class="highlight">(Optional)</span></div>
+                                    <span class="upload-badge optional">Optional</span>
+                                    <input type="file" accept="image/*,.pdf" />
+                                    <div class="file-name"></div>
+                                </div>
+                                <div class="upload-box">
+                                    <div class="upload-icon"><i class="fas fa-file-alt"></i></div>
+                                    <div class="upload-label">Curriculum Vitae <span class="highlight">(Optional)</span></div>
+                                    <span class="upload-badge optional">Optional</span>
+                                    <input type="file" accept=".pdf,.doc,.docx" />
+                                    <div class="file-name"></div>
+                                </div>
+                                <div class="upload-box">
+                                    <div class="upload-icon"><i class="fas fa-envelope"></i></div>
+                                    <div class="upload-label">Recommendation Letter <span class="highlight">(Required)</span></div>
+                                    <span class="upload-badge">Required</span>
+                                    <input type="file" accept="image/*,.pdf" required />
+                                    <div class="file-name"></div>
+                                </div>
+                            </div>
+                            <p style="font-size:12px; color:#64748b; margin-top:8px;"><span class="highlight">*</span> Recommendation letter is mandatory.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Sponsor Information -->
+                    <div class="step" data-step="5">
+                        <div class="form-section">
+                            <div class="section-title">Sponsor Information</div>
+                            <div class="form-row">
+                                <div><label>Sponsor Details (Self, Parent, Organization)</label><input type="text" /></div>
+                                <div><label>Sponsor Contact Information</label><input type="text" /></div>
+                            </div>
+                            <div><label>Scholarship Information (if applicable)</label><input type="text" /></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Declaration & Submit + Signature -->
+                    <div class="step" data-step="6">
+                        <div class="form-section">
+                            <div class="section-title">Declaration & Submit</div>
+                            <div class="declaration-row">
+                                <input type="checkbox" id="declare" />
+                                <label for="declare" style="font-weight:400;">I declare that the information provided is <span class="highlight">true and correct</span>.</label>
+                            </div>
+
+                            <div><label>Applicant's Signature</label></div>
+                            <div class="signature-wrapper">
+                                <canvas id="signaturePad"></canvas>
+                            </div>
+                            <div class="signature-actions">
+                                <button class="btn-clear-signature" id="clearSignature"><i class="fas fa-undo"></i> Clear</button>
+                            </div>
+
+                            <div class="form-row" style="margin-top:12px;">
+                                <div><label>Date of Application</label><input type="date" id="appDate" /></div>
+                            </div>
+
+                            <button class="btn-submit-step" id="submitApplication"><i class="fas fa-paper-plane"></i> Submit Application</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation buttons -->
+                <div class="step-nav">
+                    <button class="btn-prev" id="prevStep" style="visibility:hidden;"><i class="fas fa-arrow-left"></i> Previous</button>
+                    <button class="btn-next" id="nextStep">Next <i class="fas fa-arrow-right"></i></button>
+                </div>
             </div>
         </div>
     </div>
@@ -1384,14 +1580,18 @@
 
             // ─── NAVIGATION HELPERS ──────────────────────────────
             function showPage(page) {
-                [mainPage, enrollPage, programsPage, shortPage].forEach(p => p.classList.remove('active', 'hidden'));
+                // hide all pages
+                [mainPage, enrollPage, programsPage, shortPage].forEach(p => {
+                    p.classList.remove('active', 'hidden');
+                });
                 if (page === mainPage) {
                     mainPage.classList.remove('hidden');
-                    enrollPage.classList.remove('active');
-                    programsPage.classList.remove('active');
-                    shortPage.classList.remove('active');
+                    enrollPage.classList.add('hidden');
+                    programsPage.classList.add('hidden');
+                    shortPage.classList.add('hidden');
                 } else {
                     mainPage.classList.add('hidden');
+                    page.classList.remove('hidden');
                     page.classList.add('active');
                 }
                 document.body.style.overflow = 'hidden';
@@ -1509,7 +1709,6 @@
             function resetWizard() {
                 currentStep = 1;
                 updateStep();
-                // Reset form fields? Not necessary; they persist.
             }
 
             function goToStep(step) {
@@ -1524,7 +1723,6 @@
             });
 
             nextBtn.addEventListener('click', function() {
-                // Simple validation: ensure required fields are filled? We'll just move forward.
                 goToStep(currentStep + 1);
             });
 
@@ -1551,9 +1749,99 @@
                     alert('Please declare that the information is true and correct.');
                     return;
                 }
+                // Check signature pad – simple check if canvas has drawing
+                const canvas = document.getElementById('signaturePad');
+                const ctx = canvas.getContext('2d');
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+                let hasDrawing = false;
+                for (let i = 3; i < data.length; i += 4) {
+                    if (data[i] !== 0) {
+                        hasDrawing = true;
+                        break;
+                    }
+                }
+                if (!hasDrawing) {
+                    alert('Please sign the application using the signature pad.');
+                    return;
+                }
                 alert('✅ Application submitted successfully!\nWe will contact you shortly.');
                 closeDetail();
             });
+
+            // ─── SIGNATURE PAD ────────────────────────────────────
+            (function initSignature() {
+                const canvas = document.getElementById('signaturePad');
+                const ctx = canvas.getContext('2d');
+                let drawing = false;
+                let lastX = 0, lastY = 0;
+
+                function resizeCanvas() {
+                    const rect = canvas.parentElement.getBoundingClientRect();
+                    const width = rect.width - 8; // padding
+                    const height = 120;
+                    canvas.width = width * 2; // high DPI
+                    canvas.height = height * 2;
+                    canvas.style.width = width + 'px';
+                    canvas.style.height = height + 'px';
+                    ctx.scale(2, 2);
+                    ctx.lineWidth = 2;
+                    ctx.strokeStyle = '#0f172a';
+                    ctx.lineCap = 'round';
+                    ctx.lineJoin = 'round';
+                }
+
+                function draw(e) {
+                    if (!drawing) return;
+                    const rect = canvas.getBoundingClientRect();
+                    const x = (e.clientX || e.touches[0].clientX) - rect.left;
+                    const y = (e.clientY || e.touches[0].clientY) - rect.top;
+                    ctx.beginPath();
+                    ctx.moveTo(lastX, lastY);
+                    ctx.lineTo(x, y);
+                    ctx.stroke();
+                    lastX = x;
+                    lastY = y;
+                }
+
+                function startDraw(e) {
+                    e.preventDefault();
+                    drawing = true;
+                    const rect = canvas.getBoundingClientRect();
+                    const x = (e.clientX || e.touches[0].clientX) - rect.left;
+                    const y = (e.clientY || e.touches[0].clientY) - rect.top;
+                    lastX = x;
+                    lastY = y;
+                    // draw a dot
+                    ctx.beginPath();
+                    ctx.arc(x, y, 1, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                function stopDraw(e) {
+                    e.preventDefault();
+                    drawing = false;
+                }
+
+                // Mouse events
+                canvas.addEventListener('mousedown', startDraw);
+                canvas.addEventListener('mousemove', draw);
+                canvas.addEventListener('mouseup', stopDraw);
+                canvas.addEventListener('mouseleave', stopDraw);
+
+                // Touch events
+                canvas.addEventListener('touchstart', startDraw, { passive: false });
+                canvas.addEventListener('touchmove', draw, { passive: false });
+                canvas.addEventListener('touchend', stopDraw, { passive: false });
+
+                // Clear
+                document.getElementById('clearSignature').addEventListener('click', function() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                });
+
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
+            })();
 
             // ─── SHORT COURSES ────────────────────────────────────
             function renderShortCourses() {
@@ -1665,7 +1953,7 @@
 
             // ─── INIT ─────────────────────────────────────────────
             showMain();
-            console.log('✅ Northern Technical College – Step application form with short course apply.');
+            console.log('✅ Northern Technical College – Step application form with signature pad, upload grid, fixed back buttons.');
         })();
     </script>
 </body>
