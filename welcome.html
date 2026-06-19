@@ -123,30 +123,54 @@
             opacity: 1;
             visibility: visible;
         }
-        #detailModal .modal-close {
-            position: absolute;
-            top: 16px;
-            right: 20px;
+
+        /* Fixed Back button (sticky) */
+        .modal-fixed-top {
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.97);
+            width: 100%;
+            max-width: 600px;
+            z-index: 10;
+            padding: 8px 0 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .btn-back-detail {
+            background: transparent;
+            border: none;
+            color: #64748b;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+            font-weight: 600;
+        }
+        .btn-back-detail:hover { color: #1e293b; }
+        .modal-close {
             background: #e2e8f0;
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            font-size: 24px;
+            font-size: 20px;
             color: #1e293b;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: background 0.2s;
-            z-index: 10;
         }
-        #detailModal .modal-close:hover { background: #cbd5e1; }
-        #detailModal .modal-logo {
-            margin-top: 12px;
+        .modal-close:hover { background: #cbd5e1; }
+
+        .modal-logo {
+            margin-top: 4px;
             margin-bottom: 8px;
         }
-        #detailModal .modal-logo img {
+        .modal-logo img {
             width: 72px;
             height: 72px;
             object-fit: contain;
@@ -156,14 +180,14 @@
             border: 1px solid #e2e8f0;
             box-shadow: 0 4px 12px rgba(0,0,0,0.04);
         }
-        #detailModal .detail-title {
+        .detail-title {
             font-size: 22px;
             font-weight: 800;
             color: #0f172a;
             text-align: center;
             margin-bottom: 12px;
         }
-        #detailModal .detail-body {
+        .detail-body {
             max-width: 600px;
             width: 100%;
             text-align: left;
@@ -171,14 +195,14 @@
             font-size: 14px;
             line-height: 1.6;
         }
-        #detailModal .detail-body h3 {
+        .detail-body h3 {
             font-size: 16px;
             font-weight: 700;
             margin: 16px 0 6px;
             color: #0f172a;
         }
-        #detailModal .detail-body p { margin-bottom: 8px; }
-        #detailModal .detail-body ul { padding-left: 20px; margin: 6px 0 12px; }
+        .detail-body p { margin-bottom: 8px; }
+        .detail-body ul { padding-left: 20px; margin: 6px 0 12px; }
 
         /* APPLY BUTTON inside detail modal */
         .btn-apply {
@@ -201,7 +225,7 @@
         }
         .btn-apply:active { transform: scale(0.96); }
 
-        /* APPLICATION FORM inside detail modal */
+        /* APPLICATION FORM – STEP WIZARD */
         .application-form {
             display: none;
             max-width: 600px;
@@ -212,37 +236,95 @@
         .application-form.active {
             display: block;
         }
-        .application-form .form-section {
-            margin-bottom: 24px;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 16px;
+
+        /* Progress indicator */
+        .step-progress {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
-        .application-form .form-section:last-child {
-            border-bottom: none;
+        .step-dot {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #94a3b8;
         }
-        .application-form .section-title {
+        .step-dot .dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: #64748b;
+            transition: all 0.3s;
+        }
+        .step-dot.active .dot {
+            background: #3b82f6;
+            color: #fff;
+        }
+        .step-dot.completed .dot {
+            background: #10b981;
+            color: #fff;
+        }
+        .step-dot.completed .dot::after {
+            content: '✓';
+        }
+        .step-dot .label {
+            display: none;
+        }
+        @media (min-width: 480px) {
+            .step-dot .label { display: inline; }
+        }
+
+        /* Step container */
+        .step-container {
+            position: relative;
+        }
+        .step {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .step.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .step .form-section {
+            margin-bottom: 20px;
+        }
+        .step .section-title {
             font-size: 18px;
             font-weight: 700;
             color: #0f172a;
             margin-bottom: 12px;
         }
-        .application-form .form-row {
+        .step .form-row {
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
             margin-bottom: 8px;
         }
-        .application-form .form-row > * {
+        .step .form-row > * {
             flex: 1 1 200px;
         }
-        .application-form label {
+        .step label {
             display: block;
             font-size: 13px;
             font-weight: 600;
             color: #475569;
             margin-bottom: 4px;
         }
-        .application-form input, .application-form select, .application-form textarea {
+        .step input, .step select, .step textarea {
             width: 100%;
             padding: 10px 12px;
             border-radius: 10px;
@@ -252,44 +334,65 @@
             font-family: 'Inter', sans-serif;
             transition: border 0.2s;
         }
-        .application-form input:focus, .application-form select:focus, .application-form textarea:focus {
+        .step input:focus, .step select:focus, .step textarea:focus {
             border-color: #3b82f6;
             background: #fff;
             outline: none;
             box-shadow: 0 0 0 3px rgba(59,130,246,0.10);
         }
-        .application-form .btn-submit-app {
-            width: 100%;
-            padding: 14px;
+
+        /* Highlight important words in blue */
+        .highlight {
+            color: #2563eb;
+            font-weight: 700;
+        }
+
+        /* Navigation buttons */
+        .step-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .btn-prev, .btn-next, .btn-submit-step {
+            padding: 12px 28px;
             border: none;
             border-radius: 50px;
-            font-size: 16px;
             font-weight: 700;
-            color: #fff;
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            box-shadow: 0 6px 24px rgba(59,130,246,0.30);
-            cursor: pointer;
-            transition: all 0.25s ease;
-            margin-top: 8px;
-        }
-        .application-form .btn-submit-app:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 32px rgba(59,130,246,0.40);
-        }
-        .application-form .btn-submit-app:active { transform: scale(0.97); }
-        .application-form .btn-back-detail {
-            background: transparent;
-            border: none;
-            color: #64748b;
             font-size: 14px;
             cursor: pointer;
-            margin-top: 12px;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: color 0.2s;
+            transition: all 0.25s ease;
         }
-        .application-form .btn-back-detail:hover { color: #1e293b; }
+        .btn-prev {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+        .btn-prev:hover { background: #cbd5e1; }
+        .btn-next, .btn-submit-step {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(59,130,246,0.25);
+        }
+        .btn-next:hover, .btn-submit-step:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(59,130,246,0.35);
+        }
+        .btn-submit-step:active, .btn-next:active { transform: scale(0.96); }
+
+        /* Declaration checkbox */
+        .declaration-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 12px 0;
+        }
+        .declaration-row input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #3b82f6;
+            cursor: pointer;
+        }
 
         /* LOGO with white blur */
         .logo-wrapper {
@@ -571,9 +674,27 @@
             color: #0f172a;
             text-align: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            position: relative;
         }
         .short-item .short-title { font-weight: 600; font-size: 14px; }
         .short-item .short-days { font-size: 12px; opacity: 0.7; margin-top: 2px; }
+        .short-item .short-apply {
+            margin-top: 10px;
+            display: inline-block;
+            padding: 6px 16px;
+            background: #3b82f6;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .short-item .short-apply:hover {
+            background: #2563eb;
+            transform: scale(1.02);
+        }
 
         /* LOGIN MODAL (kept minimal) */
         .modal-overlay {
@@ -709,7 +830,8 @@
             .modal { padding: 24px 18px 18px; border-radius: 22px; }
             .modal-logo img { width: 52px; height: 52px; }
             .modal-header .modal-title { font-size: 18px; }
-            .application-form .form-row > * { flex: 1 1 100%; }
+            .step .form-row > * { flex: 1 1 100%; }
+            .step-dot .label { display: none; }
         }
         @media (max-width: 360px) {
             .intake-grid { gap: 10px; }
@@ -824,7 +946,12 @@
 
     <!-- DETAIL MODAL (white overlay) -->
     <div id="detailModal">
-        <button class="modal-close" id="detailClose">&times;</button>
+        <!-- Fixed top: back button + close -->
+        <div class="modal-fixed-top">
+            <button class="btn-back-detail" id="backToDetail"><i class="fas fa-arrow-left"></i> Back to programme details</button>
+            <button class="modal-close" id="detailClose">&times;</button>
+        </div>
+
         <div class="modal-logo">
             <img src="logo.png" alt="NTC Logo" />
         </div>
@@ -836,104 +963,117 @@
         <!-- Apply Button -->
         <button class="btn-apply" id="applyBtn"><i class="fas fa-pen"></i> Apply Now</button>
 
-        <!-- Application Form (hidden by default) -->
+        <!-- Application Form – STEP WIZARD -->
         <div class="application-form" id="applicationForm">
-            <button class="btn-back-detail" id="backToDetail"><i class="fas fa-arrow-left"></i> Back to programme details</button>
+            <!-- Progress dots -->
+            <div class="step-progress" id="stepProgress"></div>
 
-            <div class="form-section">
-                <div class="section-title">Personal Details</div>
-                <div class="form-row">
-                    <div><label>Full Name</label><input type="text" placeholder="John Doe" /></div>
-                    <div><label>Date of Birth</label><input type="date" /></div>
-                </div>
-                <div class="form-row">
-                    <div><label>Gender</label>
-                        <select><option>Male</option><option>Female</option><option>Other</option></select>
-                    </div>
-                    <div><label>Nationality</label><input type="text" placeholder="Zambian" /></div>
-                </div>
-                <div class="form-row">
-                    <div><label>NRC/Passport Number</label><input type="text" placeholder="123456-78-9" /></div>
-                    <div><label>Physical Address</label><input type="text" placeholder="Street, City" /></div>
-                </div>
-                <div class="form-row">
-                    <div><label>Phone Number</label><input type="tel" placeholder="+260..." /></div>
-                    <div><label>Email Address</label><input type="email" placeholder="you@example.com" /></div>
-                </div>
-                <div><label>Next of Kin/Emergency Contact</label><input type="text" placeholder="Name and phone" /></div>
-            </div>
-
-            <div class="form-section">
-                <div class="section-title">Academic Background</div>
-                <div class="form-row">
-                    <div><label>Previous School/College Attended</label><input type="text" /></div>
-                    <div><label>Grade 12 School Name</label><input type="text" /></div>
-                </div>
-                <div class="form-row">
-                    <div><label>Year of Completion</label><input type="number" placeholder="2024" /></div>
-                    <div><label>Examination Number</label><input type="text" /></div>
-                </div>
-                <div><label>Subjects and Grades Obtained</label><textarea rows="2" placeholder="e.g., Mathematics – A, English – B, ..."></textarea></div>
-                <div><label>Copies of Academic Certificates/Results Slip</label><input type="file" /></div>
-                <div><label>Certified Copies of Certificates (if required)</label><input type="file" /></div>
-            </div>
-
-            <div class="form-section">
-                <div class="section-title">Program Selection</div>
-                <div class="form-row">
-                    <div><label>Program/Course Applying For</label><input type="text" id="applyProgram" readonly /></div>
-                    <div><label>Mode of Study</label>
-                        <select><option>Full-time</option><option>Part-time</option><option>Distance</option></select>
+            <!-- Step container -->
+            <div class="step-container" id="stepContainer">
+                <!-- Step 1: Personal Details -->
+                <div class="step" data-step="1">
+                    <div class="form-section">
+                        <div class="section-title">Personal Details</div>
+                        <div class="form-row">
+                            <div><label>Full Name</label><input type="text" placeholder="John Doe" /></div>
+                            <div><label>Date of Birth</label><input type="date" /></div>
+                        </div>
+                        <div class="form-row">
+                            <div><label>Gender</label>
+                                <select><option>Male</option><option>Female</option><option>Other</option></select>
+                            </div>
+                            <div><label>Nationality</label><input type="text" placeholder="Zambian" /></div>
+                        </div>
+                        <div class="form-row">
+                            <div><label>NRC/Passport Number</label><input type="text" placeholder="123456-78-9" /></div>
+                            <div><label>Physical Address</label><input type="text" placeholder="Street, City" /></div>
+                        </div>
+                        <div class="form-row">
+                            <div><label>Phone Number</label><input type="tel" placeholder="+260..." /></div>
+                            <div><label>Email Address</label><input type="email" placeholder="you@example.com" /></div>
+                        </div>
+                        <div><label>Next of Kin/Emergency Contact</label><input type="text" placeholder="Name and phone" /></div>
                     </div>
                 </div>
-                <div><label>Intake/Semester Applying For</label><input type="text" id="applyIntake" readonly /></div>
-            </div>
 
-            <div class="form-section">
-                <div class="section-title">Document Uploads</div>
-                <div><label>Passport-size Photograph</label><input type="file" /></div>
-                <div><label>NRC Copy or Passport Copy</label><input type="file" /></div>
-                <div><label>Grade 12 Certificate/Statement of Results</label><input type="file" /></div>
-                <div><label>Diploma/Degree Certificates (for higher-level programs)</label><input type="file" /></div>
-                <div><label>Curriculum Vitae (for some programs)</label><input type="file" /></div>
-                <div><label>Recommendation Letter (if required)</label><input type="file" /></div>
-            </div>
-
-            <div class="form-section">
-                <div class="section-title">Sponsor Information</div>
-                <div class="form-row">
-                    <div><label>Sponsor Details (Self, Parent, Organization)</label><input type="text" /></div>
-                    <div><label>Sponsor Contact Information</label><input type="text" /></div>
+                <!-- Step 2: Academic Background -->
+                <div class="step" data-step="2">
+                    <div class="form-section">
+                        <div class="section-title">Academic Background</div>
+                        <div class="form-row">
+                            <div><label>Previous School/College Attended</label><input type="text" /></div>
+                            <div><label>Grade 12 School Name</label><input type="text" /></div>
+                        </div>
+                        <div class="form-row">
+                            <div><label>Year of Completion</label><input type="number" placeholder="2024" /></div>
+                            <div><label>Examination Number</label><input type="text" /></div>
+                        </div>
+                        <div><label>Subjects and Grades Obtained</label><textarea rows="2" placeholder="e.g., Mathematics – A, English – B, ..."></textarea></div>
+                        <div><label>Copies of Academic Certificates/Results Slip</label><input type="file" /></div>
+                        <div><label>Certified Copies of Certificates (if required)</label><input type="file" /></div>
+                    </div>
                 </div>
-                <div><label>Scholarship Information (if applicable)</label><input type="text" /></div>
-            </div>
 
-            <div class="form-section">
-                <div class="section-title">Medical Information</div>
-                <div class="form-row">
-                    <div><label>Any Medical Conditions</label><input type="text" /></div>
-                    <div><label>Disability Information (if applicable)</label><input type="text" /></div>
+                <!-- Step 3: Program Selection -->
+                <div class="step" data-step="3">
+                    <div class="form-section">
+                        <div class="section-title">Program Selection</div>
+                        <div class="form-row">
+                            <div><label>Program/Course Applying For</label><input type="text" id="applyProgram" readonly /></div>
+                            <div><label>Mode of Study</label>
+                                <select><option>Full-time</option><option>Part-time</option><option>Distance</option></select>
+                            </div>
+                        </div>
+                        <div><label>Intake/Semester Applying For</label><input type="text" id="applyIntake" readonly /></div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Document Uploads -->
+                <div class="step" data-step="4">
+                    <div class="form-section">
+                        <div class="section-title">Document Uploads</div>
+                        <div><label>Passport-size Photograph</label><input type="file" /></div>
+                        <div><label>NRC Copy or Passport Copy</label><input type="file" /></div>
+                        <div><label>Grade 12 Certificate/Statement of Results</label><input type="file" /></div>
+                        <div><label>Diploma/Degree Certificates (for higher-level programs)</label><input type="file" /></div>
+                        <div><label>Curriculum Vitae (for some programs)</label><input type="file" /></div>
+                        <div><label>Recommendation Letter (if required)</label><input type="file" /></div>
+                    </div>
+                </div>
+
+                <!-- Step 5: Sponsor Information -->
+                <div class="step" data-step="5">
+                    <div class="form-section">
+                        <div class="section-title">Sponsor Information</div>
+                        <div class="form-row">
+                            <div><label>Sponsor Details (Self, Parent, Organization)</label><input type="text" /></div>
+                            <div><label>Sponsor Contact Information</label><input type="text" /></div>
+                        </div>
+                        <div><label>Scholarship Information (if applicable)</label><input type="text" /></div>
+                    </div>
+                </div>
+
+                <!-- Step 6: Declaration & Submit -->
+                <div class="step" data-step="6">
+                    <div class="form-section">
+                        <div class="section-title">Declaration & Submit</div>
+                        <div class="declaration-row">
+                            <input type="checkbox" id="declare" />
+                            <label for="declare" style="font-weight:400;">I declare that the information provided is <span class="highlight">true and correct</span>.</label>
+                        </div>
+                        <div class="form-row">
+                            <div><label>Applicant's Signature</label><input type="text" placeholder="Type your full name" /></div>
+                            <div><label>Date of Application</label><input type="date" /></div>
+                        </div>
+                        <button class="btn-submit-step" id="submitApplication"><i class="fas fa-paper-plane"></i> Submit Application</button>
+                    </div>
                 </div>
             </div>
 
-            <div class="form-section">
-                <div class="section-title">Additional (Optional)</div>
-                <div><label>Work Experience Details</label><textarea rows="2"></textarea></div>
-                <div><label>Computer Skills</label><input type="text" /></div>
-                <div><label>Personal Statement/Motivation Letter</label><textarea rows="3"></textarea></div>
-            </div>
-
-            <div class="form-section">
-                <div class="section-title">Declaration & Submit</div>
-                <div style="display:flex; gap:12px; align-items:center; margin-bottom:12px;">
-                    <input type="checkbox" id="declare" />
-                    <label for="declare" style="font-weight:400;">I declare that the information provided is true and correct.</label>
-                </div>
-                <div class="form-row">
-                    <div><label>Applicant's Signature</label><input type="text" placeholder="Type your full name" /></div>
-                    <div><label>Date of Application</label><input type="date" /></div>
-                </div>
-                <button class="btn-submit-app" id="submitApplication"><i class="fas fa-paper-plane"></i> Submit Application</button>
+            <!-- Navigation buttons -->
+            <div class="step-nav">
+                <button class="btn-prev" id="prevStep" style="visibility:hidden;"><i class="fas fa-arrow-left"></i> Previous</button>
+                <button class="btn-next" id="nextStep">Next <i class="fas fa-arrow-right"></i></button>
             </div>
         </div>
     </div>
@@ -971,7 +1111,6 @@
             'use strict';
 
             // ─── DATA ────────────────────────────────────────────────
-            // Full programmes from PDF + extra descriptions
             const programmes = [
                 // JANUARY INTAKE
                 { id: '1.1', title: 'Craft Certificate in Mechanical Fitting', intake: 'january', category: 'Craft',
@@ -1122,7 +1261,7 @@
                         courses: 'Biomedical instrumentation, medical electronics, hospital equipment maintenance, anatomy, physiology, engineering mathematics, communication skills.',
                         employment: 'Graduates are likely to be employed in General Hospitals, Hospitality Industry, and medical equipment companies.' } },
 
-                // AUGUST (DISTANCE) – from PDF plus extra distance details
+                // AUGUST (DISTANCE)
                 { id: '4.1', title: 'Diploma in Automotive Engineering (Mature Entry)', intake: 'august',
                     category: 'Diploma (Distance)', duration: '2 years 8 months',
                     entry: 'Advanced Certificate or equivalent qualification in relevant course. (For holders of Automotive technician certificate with 2 years experience: 2y8m; for Craft certificate with 2 years experience: 3y6m)',
@@ -1155,7 +1294,6 @@
                         employment: 'Graduates are employed in power generation, process control systems, and medical laboratories.' } }
             ];
 
-            // Short courses data
             const shortCourses = [
                 { dept: 'Mechanical', title: 'Computer Aided Design (AutoCAD 2D)', days: 10 },
                 { dept: 'Mechanical', title: 'Computer Aided Design (AutoCAD 3D)', days: 10 },
@@ -1234,6 +1372,16 @@
             const programListContainer = document.getElementById('programListContainer');
             const shortCoursesContainer = document.getElementById('shortCoursesContainer');
 
+            // Step wizard elements
+            const stepContainer = document.getElementById('stepContainer');
+            const steps = stepContainer.querySelectorAll('.step');
+            const prevBtn = document.getElementById('prevStep');
+            const nextBtn = document.getElementById('nextStep');
+            const stepProgress = document.getElementById('stepProgress');
+
+            let currentStep = 1;
+            const totalSteps = steps.length;
+
             // ─── NAVIGATION HELPERS ──────────────────────────────
             function showPage(page) {
                 [mainPage, enrollPage, programsPage, shortPage].forEach(p => p.classList.remove('active', 'hidden'));
@@ -1283,9 +1431,11 @@
 
             // ─── DETAIL MODAL ─────────────────────────────────────
             let currentProgram = null;
+            let isShortCourse = false;
 
             function openDetail(prog) {
                 currentProgram = prog;
+                isShortCourse = false;
                 detailTitle.textContent = prog.title;
                 let html = `
                     <p><strong>Duration:</strong> ${prog.duration}</p>
@@ -1309,21 +1459,84 @@
                 applyIntake.value = prog.intake.charAt(0).toUpperCase() + prog.intake.slice(1);
                 detailModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
+                // Reset step wizard
+                resetWizard();
             }
 
-            function closeDetail() {
-                detailModal.classList.remove('active');
-                document.body.style.overflow = '';
+            // ─── SHORT COURSE DIRECT APPLY ──────────────────────
+            function openShortCourseApplication(title) {
+                isShortCourse = true;
                 currentProgram = null;
+                detailTitle.textContent = title;
+                detailBody.innerHTML = `<p><strong>Short Course</strong></p><p>Apply for this short course by filling out the form below.</p>`;
+                detailBody.style.display = 'block';
+                applyBtn.style.display = 'inline-block';
+                applicationForm.classList.remove('active');
+                applyProgram.value = title;
+                applyIntake.value = 'Short Courses';
+                detailModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                resetWizard();
             }
 
-            // ─── APPLICATION FORM TOGGLE ─────────────────────────
+            // ─── STEP WIZARD ──────────────────────────────────────
+            function buildProgress() {
+                stepProgress.innerHTML = '';
+                const labels = ['Personal', 'Academic', 'Program', 'Uploads', 'Sponsor', 'Submit'];
+                for (let i = 1; i <= totalSteps; i++) {
+                    const dot = document.createElement('div');
+                    dot.className = 'step-dot';
+                    if (i === currentStep) dot.classList.add('active');
+                    if (i < currentStep) dot.classList.add('completed');
+                    dot.innerHTML = `<span class="dot">${i}</span><span class="label">${labels[i-1]}</span>`;
+                    stepProgress.appendChild(dot);
+                }
+            }
+
+            function updateStep() {
+                steps.forEach((step, index) => {
+                    step.classList.toggle('active', (index + 1) === currentStep);
+                });
+                prevBtn.style.visibility = currentStep === 1 ? 'hidden' : 'visible';
+                if (currentStep === totalSteps) {
+                    nextBtn.style.display = 'none';
+                } else {
+                    nextBtn.style.display = 'inline-block';
+                }
+                buildProgress();
+            }
+
+            function resetWizard() {
+                currentStep = 1;
+                updateStep();
+                // Reset form fields? Not necessary; they persist.
+            }
+
+            function goToStep(step) {
+                if (step < 1) step = 1;
+                if (step > totalSteps) step = totalSteps;
+                currentStep = step;
+                updateStep();
+            }
+
+            prevBtn.addEventListener('click', function() {
+                goToStep(currentStep - 1);
+            });
+
+            nextBtn.addEventListener('click', function() {
+                // Simple validation: ensure required fields are filled? We'll just move forward.
+                goToStep(currentStep + 1);
+            });
+
+            // ─── APPLY BUTTON ─────────────────────────────────────
             applyBtn.addEventListener('click', function() {
                 detailBody.style.display = 'none';
                 this.style.display = 'none';
                 applicationForm.classList.add('active');
+                resetWizard();
             });
 
+            // Back to detail from form
             backToDetail.addEventListener('click', function() {
                 applicationForm.classList.remove('active');
                 detailBody.style.display = 'block';
@@ -1339,7 +1552,6 @@
                     return;
                 }
                 alert('✅ Application submitted successfully!\nWe will contact you shortly.');
-                // Optionally close modal or reset
                 closeDetail();
             });
 
@@ -1359,11 +1571,32 @@
                     courses.forEach(c => {
                         const item = document.createElement('div');
                         item.className = 'short-item';
-                        item.innerHTML = `<div class="short-title">${c.title}</div><div class="short-days"><i class="fas fa-calendar-day"></i> ${c.days} days</div>`;
+                        item.innerHTML = `
+                            <div class="short-title">${c.title}</div>
+                            <div class="short-days"><i class="fas fa-calendar-day"></i> ${c.days} days</div>
+                            <button class="short-apply" data-title="${c.title}">Apply</button>
+                        `;
                         shortCoursesContainer.appendChild(item);
+                        const applyBtnShort = item.querySelector('.short-apply');
+                        applyBtnShort.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const title = this.dataset.title;
+                            openShortCourseApplication(title);
+                        });
                     });
                 }
                 showShort();
+            }
+
+            // ─── CLOSE DETAIL ─────────────────────────────────────
+            function closeDetail() {
+                detailModal.classList.remove('active');
+                document.body.style.overflow = '';
+                currentProgram = null;
+                isShortCourse = false;
+                applicationForm.classList.remove('active');
+                detailBody.style.display = 'block';
+                applyBtn.style.display = 'inline-block';
             }
 
             // ─── EVENT BINDINGS ──────────────────────────────────
@@ -1432,7 +1665,7 @@
 
             // ─── INIT ─────────────────────────────────────────────
             showMain();
-            console.log('✅ Northern Technical College – Full programme data with application form loaded.');
+            console.log('✅ Northern Technical College – Step application form with short course apply.');
         })();
     </script>
 </body>
