@@ -4,58 +4,53 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Northern Technical College</title>
-    <!-- Professional Icons (Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
-        /* ── RESET & BASE ── */
+        /* ── RESET & FULL SCREEN BASE ── */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html,
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #0a0e17;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            min-height: 100dvh;
-            padding: 12px;
-            margin: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* ── PHONE FRAME ── */
-        .phone-frame {
-            width: 100%;
-            max-width: 380px;
-            height: 700px;
-            max-height: 90vh;
-            max-height: 90dvh;
-            border-radius: 36px;
-            overflow: hidden;
-            box-shadow:
-                0 25px 60px rgba(0, 0, 0, 0.6),
-                0 0 0 2px rgba(255, 255, 255, 0.05) inset;
-            background: #000;
-            position: relative;
-            transition: height 0.3s ease;
-        }
-
-        /* ── BACKGROUND IMAGE – FULLY FILLS THE FRAME ── */
-        .bg-layer {
-            position: absolute;
-            inset: 0;
             width: 100%;
             height: 100%;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0e17;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        /* ── FULL SCREEN BACKGROUND WITH ZOOM ANIMATION ── */
+        .bg-layer {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
             background-image: url('home.webp');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
             z-index: 0;
+            animation: zoomLoop 10s ease-in-out infinite alternate;
+            will-change: transform;
+        }
+
+        @keyframes zoomLoop {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.12);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
 
         /* Light overlay for readability */
@@ -64,75 +59,109 @@
             position: absolute;
             inset: 0;
             background: linear-gradient(180deg,
-                    rgba(0, 0, 0, 0.15) 0%,
-                    rgba(0, 0, 0, 0.30) 40%,
+                    rgba(0, 0, 0, 0.10) 0%,
+                    rgba(0, 0, 0, 0.25) 40%,
                     rgba(0, 0, 0, 0.50) 100%);
             backdrop-filter: blur(0.5px);
             -webkit-backdrop-filter: blur(0.5px);
+            pointer-events: none;
         }
 
-        /* ── SCROLLABLE CONTENT ── */
-        .content {
-            position: relative;
+        /* ── CONTENT WRAPPER (shared) ── */
+        .page {
+            position: fixed;
+            inset: 0;
             z-index: 1;
-            height: 100%;
-            overflow-y: auto;
-            overflow-x: hidden;
-            padding: 32px 20px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            scroll-behavior: smooth;
+            justify-content: center;
+            padding: 28px 24px;
+            overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0.45s ease;
         }
 
-        .content::-webkit-scrollbar {
+        .page::-webkit-scrollbar {
             width: 0;
             background: transparent;
         }
 
-        /* ── LOGO (main page) ── */
+        /* ── MAIN PAGE ── */
+        #mainPage {
+            opacity: 1;
+            transform: scale(1);
+            visibility: visible;
+        }
+
+        #mainPage.hidden {
+            opacity: 0;
+            transform: scale(0.96);
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* ── ENROLL PAGE ── */
+        #enrollPage {
+            opacity: 0;
+            transform: scale(0.96);
+            visibility: hidden;
+            pointer-events: none;
+            justify-content: flex-start;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        #enrollPage.active {
+            opacity: 1;
+            transform: scale(1);
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        /* ── LOGO with WHITE BLUR BACKGROUND ── */
         .logo-wrapper {
-            margin-top: 8px;
-            margin-bottom: 4px;
+            flex-shrink: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-shrink: 0;
+            margin-bottom: 12px;
         }
 
         .main-logo {
-            width: 80px;
-            height: 80px;
+            width: 88px;
+            height: 88px;
             object-fit: contain;
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            padding: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.20);
             transition: transform 0.3s ease;
         }
 
         .main-logo:hover {
-            transform: scale(1.02);
+            transform: scale(1.03);
         }
 
         /* ── TITLE ── */
         .title {
             text-align: center;
-            margin: 6px 0 18px;
+            margin: 4px 0 28px;
             flex-shrink: 0;
         }
 
         .title h1 {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 900;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.2px;
             line-height: 1.3;
             color: #fff;
-            text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            text-shadow: 0 4px 28px rgba(0, 0, 0, 0.45);
             word-break: break-word;
         }
 
@@ -143,26 +172,26 @@
         .title .sub {
             font-size: 10px;
             font-weight: 400;
-            color: rgba(255, 255, 255, 0.5);
-            letter-spacing: 1.5px;
+            color: rgba(255, 255, 255, 0.55);
+            letter-spacing: 1.8px;
             text-transform: uppercase;
-            margin-top: 2px;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 3px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
         }
 
         /* ── SPACER ── */
         .spacer {
             flex: 1;
-            min-height: 10px;
+            min-height: 12px;
         }
 
-        /* ── BUTTONS ── */
+        /* ── BUTTONS (main page) ── */
         .button-group {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
             width: 100%;
-            max-width: 280px;
+            max-width: 320px;
             flex-shrink: 0;
             padding-bottom: 4px;
         }
@@ -171,22 +200,22 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 14px 20px;
+            padding: 16px 24px;
             border: none;
-            border-radius: 50px;
+            border-radius: 60px;
             font-family: 'Inter', sans-serif;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 700;
             letter-spacing: 0.2px;
             color: #fff;
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
             position: relative;
             overflow: hidden;
             user-select: none;
             touch-action: manipulation;
-            min-height: 48px;
+            min-height: 52px;
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
         }
@@ -205,55 +234,219 @@
 
         .btn-enroll {
             background: linear-gradient(135deg, #00c853, #009e3d);
-            box-shadow: 0 6px 24px rgba(0, 200, 83, 0.35);
+            box-shadow: 0 8px 32px rgba(0, 200, 83, 0.35);
         }
         .btn-enroll:hover {
-            box-shadow: 0 10px 32px rgba(0, 200, 83, 0.45);
-            transform: translateY(-1px);
+            box-shadow: 0 12px 40px rgba(0, 200, 83, 0.45);
+            transform: translateY(-2px);
         }
 
         .btn-login {
             background: linear-gradient(135deg, #2979ff, #0d47a1);
-            box-shadow: 0 6px 24px rgba(41, 121, 255, 0.35);
+            box-shadow: 0 8px 32px rgba(41, 121, 255, 0.35);
         }
         .btn-login:hover {
-            box-shadow: 0 10px 32px rgba(41, 121, 255, 0.45);
-            transform: translateY(-1px);
+            box-shadow: 0 12px 40px rgba(41, 121, 255, 0.45);
+            transform: translateY(-2px);
         }
 
         .btn i {
             margin-right: 10px;
-            font-size: 16px;
+            font-size: 17px;
             color: #fff;
         }
 
         /* ── FOOTER ── */
         .footer-note {
-            margin-top: 12px;
+            margin-top: 16px;
             font-size: 10px;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.20);
             text-align: center;
             letter-spacing: 0.5px;
             flex-shrink: 0;
         }
 
-        /* ────────────────────────────── */
-        /* ── MODAL – NICE WHITE FORM ── */
-        /* ────────────────────────────── */
+        /* ════════════════════════════════════════ */
+        /* ── ENROLL PAGE – 4 BIG SQUARE BUTTONS ── */
+        /* ════════════════════════════════════════ */
+
+        .enroll-header {
+            text-align: center;
+            margin-bottom: 20px;
+            flex-shrink: 0;
+        }
+
+        .enroll-header h2 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .enroll-header h2 i {
+            color: #6cffa0;
+            margin-right: 8px;
+        }
+
+        .enroll-header p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 4px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ── 4 SQUARE BUTTONS GRID ── */
+        .program-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            width: 100%;
+            max-width: 420px;
+            flex-shrink: 0;
+            padding: 0 4px;
+        }
+
+        .program-btn {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 1 / 1;
+            border: none;
+            border-radius: 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.30);
+            padding: 16px 12px;
+            text-align: center;
+            line-height: 1.3;
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+            touch-action: manipulation;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .program-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .program-btn i {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .program-btn:active {
+            transform: scale(0.94);
+        }
+
+        .program-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 44px rgba(0, 0, 0, 0.40);
+        }
+
+        /* Individual program colours */
+        .prog-craft {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 8px 32px rgba(245, 158, 11, 0.30);
+        }
+        .prog-craft:hover {
+            box-shadow: 0 14px 44px rgba(245, 158, 11, 0.40);
+        }
+
+        .prog-trade {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.30);
+        }
+        .prog-trade:hover {
+            box-shadow: 0 14px 44px rgba(59, 130, 246, 0.40);
+        }
+
+        .prog-advanced {
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.30);
+        }
+        .prog-advanced:hover {
+            box-shadow: 0 14px 44px rgba(139, 92, 246, 0.40);
+        }
+
+        .prog-diploma {
+            background: linear-gradient(135deg, #10b981, #047857);
+            box-shadow: 0 8px 32px rgba(16, 185, 129, 0.30);
+        }
+        .prog-diploma:hover {
+            box-shadow: 0 14px 44px rgba(16, 185, 129, 0.40);
+        }
+
+        /* ── BACK BUTTON (enroll page) ── */
+        .back-row {
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 20px;
+            flex-shrink: 0;
+            padding: 0 4px;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            touch-action: manipulation;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.20);
+            transform: translateX(-3px);
+        }
+
+        .btn-back:active {
+            transform: scale(0.95);
+        }
+
+        .btn-back i {
+            font-size: 14px;
+        }
+
+        /* ── LOGIN MODAL (kept from original, minimal) ── */
         .modal-overlay {
             position: fixed;
             inset: 0;
             z-index: 999;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 16px;
+            padding: 20px;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
             touch-action: none;
         }
 
@@ -262,20 +455,19 @@
             visibility: visible;
         }
 
-        /* ── MODAL BOX (White) ── */
         .modal {
             background: #ffffff;
             border-radius: 28px;
-            padding: 28px 24px 24px;
-            max-width: 340px;
+            padding: 32px 28px 28px;
+            max-width: 380px;
             width: 100%;
             max-height: 85vh;
             max-height: 85dvh;
             overflow-y: auto;
             border: 1px solid #e2e8f0;
             box-shadow: 0 40px 100px rgba(0, 0, 0, 0.35);
-            transform: scale(0.92) translateY(16px);
-            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+            transform: scale(0.92) translateY(20px);
+            transition: transform 0.40s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
             opacity: 0;
             position: relative;
         }
@@ -296,7 +488,6 @@
             border-radius: 10px;
         }
 
-        /* ── MODAL CLOSE (dark) ── */
         .modal-close {
             position: absolute;
             top: 14px;
@@ -323,15 +514,14 @@
             color: #0f172a;
         }
 
-        /* ── MODAL LOGO ON TOP ── */
         .modal-logo {
             text-align: center;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .modal-logo img {
-            width: 64px;
-            height: 64px;
+            width: 60px;
+            height: 60px;
             object-fit: contain;
             border-radius: 14px;
             background: #f8fafc;
@@ -340,7 +530,6 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
         }
 
-        /* ── MODAL HEADER ── */
         .modal-header {
             text-align: center;
             padding-bottom: 14px;
@@ -357,27 +546,14 @@
 
         .modal-header .modal-title i {
             margin-right: 8px;
-        }
-
-        /* Enroll modal header accent (green) */
-        .modal-enroll .modal-header {
-            border-top: 4px solid #10b981;
-            border-radius: 0;
-        }
-        .modal-enroll .modal-title i {
-            color: #10b981;
-        }
-
-        /* Login modal header accent (blue) */
-        .modal-login .modal-header {
-            border-top: 4px solid #3b82f6;
-            border-radius: 0;
-        }
-        .modal-login .modal-title i {
             color: #3b82f6;
         }
 
-        /* ── FORM ELEMENTS (Dark text on light bg) ── */
+        .modal-header {
+            border-top: 4px solid #3b82f6;
+            border-radius: 0;
+        }
+
         .form-group {
             margin-bottom: 14px;
         }
@@ -391,7 +567,6 @@
             letter-spacing: 0.2px;
         }
 
-        .form-select,
         .form-input {
             width: 100%;
             padding: 12px 14px;
@@ -407,42 +582,16 @@
             appearance: none;
         }
 
-        .form-select option {
-            background: #ffffff;
-            color: #0f172a;
-        }
-
-        .form-select:focus,
         .form-input:focus {
             border-color: #3b82f6;
             background: #ffffff;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
         }
 
-        /* Enroll-specific focus color */
-        .modal-enroll .form-select:focus,
-        .modal-enroll .form-input:focus {
-            border-color: #10b981;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
-        }
-
-        /* Login-specific focus color */
-        .modal-login .form-select:focus,
-        .modal-login .form-input:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
-        }
-
         .form-input::placeholder {
             color: #94a3b8;
         }
 
-        .form-input:-webkit-autofill {
-            -webkit-box-shadow: 0 0 0 1000px #f8fafc inset;
-            -webkit-text-fill-color: #0f172a;
-        }
-
-        /* ── PASSWORD WRAPPER ── */
         .password-wrapper {
             position: relative;
         }
@@ -466,7 +615,6 @@
             color: #475569;
         }
 
-        /* ── CHECKBOX & LINKS ── */
         .form-row {
             display: flex;
             justify-content: space-between;
@@ -507,7 +655,6 @@
             color: #1e293b;
         }
 
-        /* ── SUBMIT BUTTONS ── */
         .btn-submit {
             width: 100%;
             padding: 14px;
@@ -522,31 +669,19 @@
             touch-action: manipulation;
             margin-top: 4px;
             letter-spacing: 0.2px;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            box-shadow: 0 6px 24px rgba(59, 130, 246, 0.30);
+        }
+
+        .btn-submit:hover {
+            box-shadow: 0 10px 32px rgba(59, 130, 246, 0.40);
+            transform: translateY(-2px);
         }
 
         .btn-submit:active {
             transform: scale(0.97);
         }
 
-        .btn-submit-enroll {
-            background: linear-gradient(135deg, #10b981, #059669);
-            box-shadow: 0 6px 24px rgba(16, 185, 129, 0.30);
-        }
-        .btn-submit-enroll:hover {
-            box-shadow: 0 10px 32px rgba(16, 185, 129, 0.40);
-            transform: translateY(-1px);
-        }
-
-        .btn-submit-login {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
-            box-shadow: 0 6px 24px rgba(59, 130, 246, 0.30);
-        }
-        .btn-submit-login:hover {
-            box-shadow: 0 10px 32px rgba(59, 130, 246, 0.40);
-            transform: translateY(-1px);
-        }
-
-        /* ── SUPPORT LINK ── */
         .support-link {
             text-align: center;
             margin-top: 14px;
@@ -566,156 +701,207 @@
         }
 
         /* ── RESPONSIVE TWEAKS ── */
-        @media (max-width: 400px) {
-            .phone-frame {
-                max-width: 100%;
-                height: 100vh;
-                height: 100dvh;
-                border-radius: 0;
-                box-shadow: none;
-            }
-            .content {
-                padding: 24px 16px 16px;
+        @media (max-width: 480px) {
+            .page {
+                padding: 20px 16px;
             }
             .main-logo {
-                width: 70px;
-                height: 70px;
+                width: 72px;
+                height: 72px;
+                padding: 8px;
             }
             .title h1 {
-                font-size: 16px;
+                font-size: 17px;
             }
             .btn {
                 font-size: 14px;
-                padding: 12px 16px;
-                min-height: 44px;
+                padding: 14px 18px;
+                min-height: 46px;
+            }
+            .program-grid {
+                gap: 12px;
+                max-width: 100%;
+            }
+            .program-btn {
+                font-size: 12px;
+                border-radius: 16px;
+                padding: 12px 8px;
+            }
+            .program-btn i {
+                font-size: 26px;
+                margin-bottom: 6px;
+            }
+            .enroll-header h2 {
+                font-size: 18px;
             }
             .modal {
                 padding: 24px 18px 18px;
-                border-radius: 24px;
+                border-radius: 22px;
             }
             .modal-logo img {
-                width: 56px;
-                height: 56px;
+                width: 52px;
+                height: 52px;
             }
             .modal-header .modal-title {
                 font-size: 18px;
             }
         }
 
-        @media (min-height: 800px) {
-            .phone-frame {
-                height: 760px;
+        @media (max-width: 360px) {
+            .program-grid {
+                gap: 10px;
             }
-            .main-logo {
-                width: 90px;
-                height: 90px;
+            .program-btn {
+                font-size: 11px;
+                padding: 10px 6px;
+            }
+            .program-btn i {
+                font-size: 22px;
             }
             .title h1 {
-                font-size: 20px;
+                font-size: 15px;
+            }
+            .btn {
+                font-size: 13px;
+                padding: 12px 14px;
+                min-height: 42px;
+            }
+        }
+
+        @media (min-height: 800px) {
+            .main-logo {
+                width: 100px;
+                height: 100px;
+            }
+            .title h1 {
+                font-size: 24px;
+            }
+            .program-btn {
+                font-size: 16px;
+            }
+            .program-btn i {
+                font-size: 38px;
+            }
+            .program-grid {
+                max-width: 480px;
+                gap: 20px;
+            }
+        }
+
+        @media (min-height: 900px) {
+            .page {
+                padding: 40px 32px;
+            }
+            .program-grid {
+                max-width: 520px;
+                gap: 24px;
+            }
+            .program-btn {
+                border-radius: 24px;
             }
         }
 
         /* ── SAFE AREA ── */
         @supports (padding: env(safe-area-inset-top)) {
-            .content {
-                padding-left: calc(20px + env(safe-area-inset-left));
-                padding-right: calc(20px + env(safe-area-inset-right));
-                padding-top: calc(32px + env(safe-area-inset-top));
-                padding-bottom: calc(20px + env(safe-area-inset-bottom));
-            }
-            .modal {
+            .page {
                 padding-left: calc(24px + env(safe-area-inset-left));
                 padding-right: calc(24px + env(safe-area-inset-right));
                 padding-top: calc(28px + env(safe-area-inset-top));
-                padding-bottom: calc(24px + env(safe-area-inset-bottom));
+                padding-bottom: calc(28px + env(safe-area-inset-bottom));
             }
+            .modal {
+                padding-left: calc(28px + env(safe-area-inset-left));
+                padding-right: calc(28px + env(safe-area-inset-right));
+                padding-top: calc(32px + env(safe-area-inset-top));
+                padding-bottom: calc(28px + env(safe-area-inset-bottom));
+            }
+        }
+
+        /* ── SCROLLBAR HIDE ── */
+        .page::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
         }
     </style>
 </head>
 <body>
 
-    <!-- ─── PHONE FRAME ─── -->
-    <div class="phone-frame" role="main" aria-label="Northern Technical College app">
+    <!-- ─── FULL-SCREEN BACKGROUND ─── -->
+    <div class="bg-layer" aria-hidden="true"></div>
 
-        <!-- Background (fully fills the frame) -->
-        <div class="bg-layer" aria-hidden="true"></div>
+    <!-- ─── MAIN PAGE ─── -->
+    <div class="page" id="mainPage">
+        <div class="logo-wrapper">
+            <img src="logo.png" class="main-logo" alt="Northern Technical College Logo" />
+        </div>
 
-        <!-- Content -->
-        <div class="content">
+        <div class="title">
+            <h1>
+                WELCOME TO<br />
+                <span class="accent">NORTHERN</span> TECHNICAL COLLEGE
+            </h1>
+            <div class="sub">Excellence in Technical Education</div>
+        </div>
 
-            <!-- Main Logo (logo.png) -->
-            <div class="logo-wrapper">
-                <img src="logo.png" class="main-logo" alt="Northern Technical College Logo" />
-            </div>
+        <div class="spacer"></div>
 
-            <!-- Title -->
-            <div class="title">
-                <h1>
-                    WELCOME TO<br />
-                    <span class="accent">NORTHERN</span> TECHNICAL COLLEGE
-                </h1>
-                <div class="sub">Excellence in Technical Education</div>
-            </div>
+        <div class="button-group">
+            <button class="btn btn-enroll" id="enrollBtn" aria-label="Enroll now">
+                <i class="fas fa-graduation-cap"></i> Enroll
+            </button>
+            <button class="btn btn-login" id="loginBtn" aria-label="Login to your account">
+                <i class="fas fa-lock"></i> Login
+            </button>
+        </div>
 
-            <!-- Spacer -->
-            <div class="spacer"></div>
+        <div class="footer-note">© 2026 Northern Technical College</div>
+    </div>
 
-            <!-- Buttons -->
-            <div class="button-group">
-                <button class="btn btn-enroll" id="enrollBtn" aria-label="Enroll now">
-                    <i class="fas fa-graduation-cap"></i> Enroll
-                </button>
-                <button class="btn btn-login" id="loginBtn" aria-label="Login to your account">
-                    <i class="fas fa-lock"></i> Login
-                </button>
-            </div>
+    <!-- ─── ENROLL PAGE – 4 BIG SQUARE BUTTONS ─── -->
+    <div class="page" id="enrollPage">
+        <!-- Logo on top (same white-blur style) -->
+        <div class="logo-wrapper">
+            <img src="logo.png" class="main-logo" alt="Northern Technical College Logo" />
+        </div>
 
-            <!-- Footer -->
-            <div class="footer-note">© 2026 Northern Technical College</div>
+        <div class="enroll-header">
+            <h2><i class="fas fa-graduation-cap"></i> Choose Your Programme</h2>
+            <p>Select a path to begin your enrollment</p>
+        </div>
+
+        <!-- 4 Big Square Buttons -->
+        <div class="program-grid">
+            <button class="program-btn prog-craft" data-program="Craft Certificate Programmes">
+                <i class="fas fa-tools"></i>
+                Craft Certificate
+            </button>
+            <button class="program-btn prog-trade" data-program="Trade Certificate Programmes">
+                <i class="fas fa-hard-hat"></i>
+                Trade Certificate
+            </button>
+            <button class="program-btn prog-advanced" data-program="Advanced Certificate Programmes">
+                <i class="fas fa-microchip"></i>
+                Advanced Certificate
+            </button>
+            <button class="program-btn prog-diploma" data-program="Diploma Programmes">
+                <i class="fas fa-university"></i>
+                Diploma
+            </button>
+        </div>
+
+        <!-- Back button -->
+        <div class="back-row">
+            <button class="btn-back" id="backFromEnroll">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
         </div>
     </div>
 
-    <!-- ─── ENROLL MODAL (White, green accent) ─── -->
-    <div class="modal-overlay" id="enrollModal" role="dialog" aria-modal="true" aria-labelledby="enrollTitle">
-        <div class="modal modal-enroll">
-            <button class="modal-close" id="enrollClose" aria-label="Close enrollment form">&times;</button>
-
-            <!-- Logo on top of the modal -->
-            <div class="modal-logo">
-                <img src="logo.png" alt="NTC Logo" />
-            </div>
-
-            <div class="modal-header">
-                <div class="modal-title" id="enrollTitle">
-                    <i class="fas fa-graduation-cap"></i> Enroll Now
-                </div>
-            </div>
-
-            <form id="enrollForm" novalidate>
-                <div class="form-group">
-                    <label for="programSelect">Choose your programme</label>
-                    <select class="form-select" id="programSelect" required>
-                        <option value="" disabled selected>Select a programme</option>
-                        <option value="Craft Certificate Programmes">Craft Certificate Programmes</option>
-                        <option value="Trade Certificate Programmes">Trade Certificate Programmes</option>
-                        <option value="Advanced Certificate Programmes">Advanced Certificate Programmes</option>
-                        <option value="Diploma Programmes">Diploma Programmes</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn-submit btn-submit-enroll">
-                    Continue Enrollment <i class="fas fa-arrow-right" style="margin-left:8px;"></i>
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- ─── LOGIN MODAL (White, blue accent) ─── -->
+    <!-- ─── LOGIN MODAL ─── -->
     <div class="modal-overlay" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
-        <div class="modal modal-login">
+        <div class="modal">
             <button class="modal-close" id="loginClose" aria-label="Close login form">&times;</button>
 
-            <!-- Logo on top of the modal -->
             <div class="modal-logo">
                 <img src="logo.png" alt="NTC Logo" />
             </div>
@@ -748,7 +934,7 @@
                     <a href="#" class="forgot-link" id="forgotLink">Forgot your Password?</a>
                 </div>
 
-                <button type="submit" class="btn-submit btn-submit-login">
+                <button type="submit" class="btn-submit">
                     Sign In <i class="fas fa-arrow-right" style="margin-left:8px;"></i>
                 </button>
 
@@ -765,65 +951,78 @@
             'use strict';
 
             // ── DOM refs ──
+            const mainPage = document.getElementById('mainPage');
+            const enrollPage = document.getElementById('enrollPage');
             const enrollBtn = document.getElementById('enrollBtn');
+            const backBtn = document.getElementById('backFromEnroll');
             const loginBtn = document.getElementById('loginBtn');
-            const enrollModal = document.getElementById('enrollModal');
             const loginModal = document.getElementById('loginModal');
-            const enrollClose = document.getElementById('enrollClose');
             const loginClose = document.getElementById('loginClose');
-            const enrollForm = document.getElementById('enrollForm');
             const loginForm = document.getElementById('loginForm');
             const passwordToggle = document.getElementById('passwordToggle');
             const passwordInput = document.getElementById('password');
             const forgotLink = document.getElementById('forgotLink');
             const supportLink = document.getElementById('supportLink');
+            const programBtns = document.querySelectorAll('.program-btn');
 
             // ── Helpers ──
-            function openModal(modal) {
-                if (!modal) return;
-                modal.classList.add('active');
+            function showMainPage() {
+                mainPage.classList.remove('hidden');
+                enrollPage.classList.remove('active');
                 document.body.style.overflow = 'hidden';
-                const focusable = modal.querySelector('input, select, button:not(.modal-close)');
-                if (focusable) setTimeout(() => focusable.focus(), 100);
             }
 
-            function closeModal(modal) {
-                if (!modal) return;
-                modal.classList.remove('active');
+            function showEnrollPage() {
+                mainPage.classList.add('hidden');
+                enrollPage.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function openLoginModal() {
+                loginModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                const focusable = loginModal.querySelector('input');
+                if (focusable) setTimeout(() => focusable.focus(), 120);
+            }
+
+            function closeLoginModal() {
+                loginModal.classList.remove('active');
                 document.body.style.overflow = '';
-                if (modal === enrollModal) enrollBtn.focus();
-                else if (modal === loginModal) loginBtn.focus();
+                loginBtn.focus();
             }
 
-            // ── Open triggers ──
+            // ── Enroll button → show enroll page ──
             enrollBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                closeModal(loginModal);
-                openModal(enrollModal);
+                showEnrollPage();
             });
 
+            // ── Back button → return to main page ──
+            backBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                showMainPage();
+            });
+
+            // ── Login button → open modal ──
             loginBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                closeModal(enrollModal);
-                openModal(loginModal);
+                openLoginModal();
             });
 
-            // ── Close triggers ──
-            enrollClose.addEventListener('click', function() { closeModal(enrollModal); });
-            loginClose.addEventListener('click', function() { closeModal(loginModal); });
-
-            enrollModal.addEventListener('click', function(e) {
-                if (e.target === enrollModal) closeModal(enrollModal);
-            });
+            // ── Login modal close ──
+            loginClose.addEventListener('click', closeLoginModal);
             loginModal.addEventListener('click', function(e) {
-                if (e.target === loginModal) closeModal(loginModal);
+                if (e.target === loginModal) closeLoginModal();
             });
 
-            // ── Keyboard: ESC ──
+            // ── ESC key ──
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
-                    if (enrollModal.classList.contains('active')) closeModal(enrollModal);
-                    if (loginModal.classList.contains('active')) closeModal(loginModal);
+                    if (loginModal.classList.contains('active')) {
+                        closeLoginModal();
+                    } else if (enrollPage.classList.contains('active')) {
+                        showMainPage();
+                    }
                 }
             });
 
@@ -837,22 +1036,6 @@
                 }
             });
 
-            // ── Enroll form ──
-            enrollForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const select = document.getElementById('programSelect');
-                if (!select.value) {
-                    select.focus();
-                    select.style.borderColor = '#ef4444';
-                    setTimeout(() => select.style.borderColor = '', 1200);
-                    return;
-                }
-                alert('✅ Enrollment submitted!\n\nProgramme: ' + select.value +
-                    '\n\nWe\'ll contact you shortly with next steps.');
-                closeModal(enrollModal);
-                enrollForm.reset();
-            });
-
             // ── Login form ──
             loginForm.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -864,7 +1047,7 @@
                     return;
                 }
                 alert('🔓 Welcome back, ' + username + '!\n\n(Simulated login — you\'re in.)');
-                closeModal(loginModal);
+                closeLoginModal();
                 loginForm.reset();
                 passwordInput.type = 'password';
                 const icon = passwordToggle.querySelector('i');
@@ -882,8 +1065,20 @@
                 alert('📞 Support: +260 97 123 4567\n✉️ support@northerntech.edu.zm\n(Simulated)');
             });
 
-            // ── Passive touch ──
-            document.querySelectorAll('button, .btn, .modal-close, .password-toggle')
+            // ── Program buttons – enrollment selection ──
+            programBtns.forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const program = this.getAttribute('data-program');
+                    alert('✅ You selected: ' + program +
+                        '\n\nWe\'ll contact you shortly with enrollment details.');
+                    // Optionally return to main page after selection
+                    showMainPage();
+                });
+            });
+
+            // ── Touch passive ──
+            document.querySelectorAll('button, .btn, .program-btn, .modal-close, .password-toggle')
                 .forEach(el => {
                     el.addEventListener('touchend', function(e) {
                         // passive
@@ -897,7 +1092,7 @@
                 console.warn('home.webp not found, using fallback dark background.');
             };
 
-            console.log('✅ Northern Technical College — White Modal version ready.');
+            console.log('✅ Northern Technical College — Full-screen with zoom & 4 program buttons ready.');
         })();
     </script>
 
