@@ -604,7 +604,7 @@
         }
         .btn i { margin-right: 10px; font-size: 17px; }
 
-        /* ENROLL PAGE – intake buttons */
+        /* ─── ENROLL PAGE – streamlined, minimal colors ─── */
         .page-header {
             text-align: center;
             margin-bottom: 20px;
@@ -633,6 +633,7 @@
             flex-shrink: 0;
             padding: 0 4px;
         }
+        /* redesigned intake buttons – minimal, glassmorphic, uniform */
         .intake-btn, .shortcourse-btn {
             display: flex;
             flex-direction: column;
@@ -657,27 +658,27 @@
             touch-action: manipulation;
             backdrop-filter: blur(6px);
             -webkit-backdrop-filter: blur(6px);
+            /* uniform glassmorphic tint – subtle blue-grey, less vibrant */
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255,255,255,0.15);
         }
         .intake-btn::after, .shortcourse-btn::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, transparent 60%);
+            background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 60%);
             pointer-events: none;
         }
         .intake-btn:active, .shortcourse-btn:active { transform: scale(0.94); }
         .intake-btn:hover, .shortcourse-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 14px 44px rgba(0,0,0,0.40);
+            background: rgba(255, 255, 255, 0.20);
         }
         .intake-btn i { font-size: 32px; margin-bottom: 8px; color: rgba(255,255,255,0.9); }
-        .intake-jan { background: linear-gradient(135deg, #f59e0b, #d97706); }
-        .intake-may { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
-        .intake-sep { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
-        .intake-aug { background: linear-gradient(135deg, #10b981, #047857); }
-        .intake-short { background: linear-gradient(135deg, #ec4899, #be185d); }
+        /* no more strong gradient backgrounds – unified look */
 
-        /* BACK BUTTON */
+        /* BACK BUTTON – moved to top */
         .back-row {
             width: 100%;
             max-width: 420px;
@@ -686,6 +687,7 @@
             margin-top: 20px;
             flex-shrink: 0;
             padding: 0 4px;
+            order: -1;  /* moves back button to top of flex container */
         }
         .btn-back {
             display: inline-flex;
@@ -710,29 +712,40 @@
         .btn-back:active { transform: scale(0.95); }
         .btn-back i { font-size: 14px; }
 
-        /* PROGRAMS LIST – solid cards */
+        /* ─── PROGRAMS PAGE – floating cards with blue border ─── */
         .program-list {
             width: 100%;
             max-width: 600px;
             flex-shrink: 0;
             padding: 0 4px;
+            position: relative;
+            z-index: 2;
         }
         .program-card {
             background: rgba(255,255,255,0.92);
             border-radius: 16px;
             padding: 16px 18px;
             margin-bottom: 12px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #3b82f6;  /* thin blue border */
             color: #0f172a;
-            transition: background 0.2s, transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
             cursor: pointer;
             touch-action: manipulation;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 8px 24px rgba(59,130,246,0.08);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            transform: scale(1);
+        }
+        /* the middle card becomes biggest – we'll apply via JS based on scroll */
+        .program-card.scale-up {
+            transform: scale(1.04);
+            box-shadow: 0 12px 36px rgba(59,130,246,0.15);
+            border-color: #2563eb;
         }
         .program-card:hover {
             background: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 12px 32px rgba(59,130,246,0.12);
         }
         .program-card .prog-title {
             font-weight: 700;
@@ -758,6 +771,38 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+        }
+
+        /* SEARCH BAR – top of programs page */
+        .search-wrapper {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 16px;
+            flex-shrink: 0;
+            padding: 0 4px;
+            order: -1;
+        }
+        .search-input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 60px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #fff;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
+            outline: none;
+        }
+        .search-input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+        .search-input:focus {
+            border-color: #3b82f6;
+            background: rgba(255,255,255,0.18);
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
         }
 
         /* SHORT COURSES page */
@@ -1007,13 +1052,13 @@
             <p>Select an intake to view programmes</p>
         </div>
         <div class="intake-grid">
-            <button class="intake-btn intake-jan" data-intake="january"><i class="fas fa-snowflake"></i> January</button>
-            <button class="intake-btn intake-may" data-intake="may"><i class="fas fa-leaf"></i> May</button>
-            <button class="intake-btn intake-sep" data-intake="september"><i class="fas fa-tree"></i> September</button>
-            <button class="intake-btn intake-aug" data-intake="august"><i class="fas fa-globe"></i> August (Distance)</button>
+            <button class="intake-btn" data-intake="january"><i class="fas fa-snowflake"></i> January</button>
+            <button class="intake-btn" data-intake="may"><i class="fas fa-leaf"></i> May</button>
+            <button class="intake-btn" data-intake="september"><i class="fas fa-tree"></i> September</button>
+            <button class="intake-btn" data-intake="august"><i class="fas fa-globe"></i> August (Distance)</button>
         </div>
         <div style="width:100%; max-width:420px; margin-top:12px; flex-shrink:0; padding:0 4px;">
-            <button class="intake-btn intake-short" id="shortCoursesBtn" style="aspect-ratio:auto; padding:14px; border-radius:16px; width:100%;"><i class="fas fa-clock"></i> Short Courses</button>
+            <button class="intake-btn shortcourse-btn" id="shortCoursesBtn" style="aspect-ratio:auto; padding:14px; border-radius:16px; width:100%;"><i class="fas fa-clock"></i> Short Courses</button>
         </div>
         <div class="back-row">
             <button class="btn-back" id="backFromEnroll"><i class="fas fa-arrow-left"></i> Back</button>
@@ -1028,6 +1073,10 @@
         <div class="page-header">
             <h2 id="programsHeader"><i class="fas fa-list"></i> <span id="intakeTitle">Programmes</span></h2>
             <p id="intakeSub">Tap a programme for full details</p>
+        </div>
+        <!-- SEARCH BAR – top of programs -->
+        <div class="search-wrapper">
+            <input type="text" class="search-input" id="programSearch" placeholder="🔍 Search programmes..." />
         </div>
         <div class="program-list" id="programListContainer"></div>
         <div class="back-row">
@@ -1517,6 +1566,7 @@
             const applyProgram = document.getElementById('applyProgram');
             const applyIntake = document.getElementById('applyIntake');
             const submitApp = document.getElementById('submitApplication');
+            const programSearch = document.getElementById('programSearch');
 
             const intakeTitle = document.getElementById('intakeTitle');
             const intakeSub = document.getElementById('intakeSub');
@@ -1554,10 +1604,22 @@
             function showShort() { showPage(shortPage); }
 
             // ─── RENDER PROGRAMS ──────────────────────────────────
+            let currentIntakeKey = '';
+            let currentIntakeLabel = '';
+            let allProgramsList = [];
+
             function renderPrograms(intakeKey, intakeLabel) {
+                currentIntakeKey = intakeKey;
+                currentIntakeLabel = intakeLabel;
                 const list = programmes.filter(p => p.intake === intakeKey);
+                allProgramsList = list;
                 intakeTitle.textContent = intakeLabel + ' Programmes';
                 intakeSub.textContent = 'Tap a programme for full details';
+                displayPrograms(list);
+                showPrograms();
+            }
+
+            function displayPrograms(list) {
                 programListContainer.innerHTML = '';
                 if (list.length === 0) {
                     programListContainer.innerHTML = '<div style="color:rgba(255,255,255,0.6);text-align:center;padding:20px;">No programmes available for this intake.</div>';
@@ -1577,8 +1639,50 @@
                     card.addEventListener('click', () => openDetail(prog));
                     programListContainer.appendChild(card);
                 });
-                showPrograms();
+                // apply scroll-based scale effect
+                applyScrollEffect();
             }
+
+            // ─── SCROLL-BASED CARD SCALING ──────────────────────
+            function applyScrollEffect() {
+                const container = programListContainer;
+                const cards = container.querySelectorAll('.program-card');
+                if (!cards.length) return;
+
+                const containerRect = container.getBoundingClientRect();
+                const containerCenter = containerRect.top + containerRect.height / 2;
+
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    const cardCenter = rect.top + rect.height / 2;
+                    const distance = Math.abs(containerCenter - cardCenter);
+                    const maxDistance = containerRect.height / 2;
+                    const scaleFactor = Math.max(0, 1 - (distance / maxDistance) * 0.08);
+                    // we want the middle one biggest: scale from 1.0 to 1.04
+                    const scale = 1 + (0.04 * (1 - distance / maxDistance));
+                    card.style.transform = `scale(${Math.min(1.04, Math.max(1, scale))})`;
+                    if (scale > 1.02) {
+                        card.classList.add('scale-up');
+                    } else {
+                        card.classList.remove('scale-up');
+                    }
+                });
+            }
+
+            // ─── SEARCH ────────────────────────────────────────────
+            programSearch.addEventListener('input', function() {
+                const query = this.value.trim().toLowerCase();
+                if (!query) {
+                    displayPrograms(allProgramsList);
+                    return;
+                }
+                const filtered = allProgramsList.filter(p => 
+                    p.title.toLowerCase().includes(query) || 
+                    p.category.toLowerCase().includes(query) ||
+                    p.id.toLowerCase().includes(query)
+                );
+                displayPrograms(filtered);
+            });
 
             // ─── DETAIL MODAL ─────────────────────────────────────
             let currentProgram = null;
@@ -1695,7 +1799,6 @@
                     alert('Please declare that the information is true and correct.');
                     return;
                 }
-                // Check signature pad – simple check if canvas has drawing
                 const canvas = document.getElementById('signaturePad');
                 const ctx = canvas.getContext('2d');
                 const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -1888,9 +1991,17 @@
                 }
             });
 
+            // ─── SCROLL EVENT FOR CARD SCALING ──────────────────
+            programListContainer.addEventListener('scroll', function() {
+                applyScrollEffect();
+            });
+            window.addEventListener('resize', function() {
+                applyScrollEffect();
+            });
+
             // ─── INIT ─────────────────────────────────────────────
             showMain();
-            console.log('✅ Northern Technical College – Signature pad & upload grid ready.');
+            console.log('✅ Northern Technical College – redesigned intake, floating cards, search, back top.');
         })();
     </script>
 </body>
