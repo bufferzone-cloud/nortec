@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Northern Technical College</title>
+    <title>Jubel Mobela Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
@@ -1028,6 +1028,7 @@
             align-items: center;
             justify-content: center;
             transition: all 0.2s;
+            margin-left: auto;
         }
         .btn-sidebar-toggle:hover {
             background: #dbeafe;
@@ -1050,7 +1051,7 @@
             color: #dc2626;
         }
 
-        /* DANGLING NOTICES */
+        /* DANGLING NOTICES - No animation */
         .dangling-notices {
             position: relative;
             flex-shrink: 0;
@@ -1080,12 +1081,6 @@
             font-size: 13px;
             line-height: 1.5;
             text-align: center;
-            animation: floatNotice 3s ease-in-out infinite;
-            transform-origin: top center;
-        }
-        @keyframes floatNotice {
-            0%, 100% { transform: translateY(0) rotate(-0.5deg); }
-            50% { transform: translateY(4px) rotate(0.5deg); }
         }
         .notice-card h3 {
             font-size: 18px;
@@ -1124,7 +1119,7 @@
             font-style: italic;
         }
 
-        /* STUDENT INFO FLOATING CURVE */
+        /* STUDENT INFO FLOATING CURVE - No animation */
         .student-info-curve {
             background: #ffffff;
             border-radius: 20px 20px 40px 40px;
@@ -1141,11 +1136,6 @@
             font-size: 13px;
             font-weight: 600;
             color: #0f172a;
-            animation: floatCurve 4s ease-in-out infinite;
-        }
-        @keyframes floatCurve {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(6px) scale(1.01); }
         }
         .student-info-curve .info-item {
             display: inline-flex;
@@ -1653,6 +1643,45 @@
             margin-top: 6px;
             color: #64748b;
         }
+        .sidebar-page-body .readonly-form {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 8px;
+        }
+        .sidebar-page-body .readonly-form .field-row {
+            display: flex;
+            padding: 6px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .sidebar-page-body .readonly-form .field-row:last-child {
+            border-bottom: none;
+        }
+        .sidebar-page-body .readonly-form .field-label {
+            width: 200px;
+            font-weight: 600;
+            color: #475569;
+            flex-shrink: 0;
+        }
+        .sidebar-page-body .readonly-form .field-value {
+            flex: 1;
+            color: #0f172a;
+        }
+        .sidebar-page-body .readonly-form .field-value .subject-item {
+            display: block;
+            padding: 2px 0;
+        }
+        .sidebar-page-body .form-logo-section {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        .sidebar-page-body .form-logo-section img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+        }
 
         /* ─── RESPONSIVE ─── */
         @media (max-width: 768px) {
@@ -1677,6 +1706,14 @@
             .dashboard-content { padding: 8px 12px 16px; gap: 12px; }
             .dangling-notices { padding: 0 8px; }
             .notice-string { height: 20px; }
+            .sidebar-page-body .readonly-form .field-row {
+                flex-direction: column;
+                padding: 8px 0;
+            }
+            .sidebar-page-body .readonly-form .field-label {
+                width: 100%;
+                margin-bottom: 2px;
+            }
         }
         @media (max-width: 480px) {
             .nav-buttons { grid-template-columns: repeat(2, 1fr); }
@@ -1785,14 +1822,14 @@
             <!-- HEADER -->
             <div class="dashboard-header">
                 <img src="logo.png" class="header-logo" id="headerLogo" alt="NORTEC" />
-                <div class="header-title"><span class="accent">NORTEC</span> DASHBOARD</div>
+                <div class="header-title">JUBEL MOBELA <span class="accent">DASHBOARD</span></div>
                 <div class="header-actions">
                     <button class="btn-logout-dash" id="logoutDash"><i class="fas fa-sign-out-alt"></i> Logout</button>
                     <button class="btn-sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
                 </div>
             </div>
 
-            <!-- DANGLING NOTICES -->
+            <!-- DANGLING NOTICES - No animation -->
             <div class="dangling-notices">
                 <div class="notice-string"></div>
                 <div class="notice-card">
@@ -1812,7 +1849,7 @@
                 </div>
             </div>
 
-            <!-- STUDENT INFO FLOATING CURVE -->
+            <!-- STUDENT INFO FLOATING CURVE - No animation -->
             <div class="student-info-curve">
                 <span class="info-item"><i class="fas fa-user"></i> <span class="label">Name:</span> JUBEL MOBELA</span>
                 <span class="info-item"><i class="fas fa-id-card"></i> <span class="label">Student No:</span> 2201001157</span>
@@ -2441,49 +2478,121 @@
     <div class="sidebar-page" id="page-teveta">
         <div class="sidebar-page-header">
             <img src="logo.png" class="page-logo" alt="NORTEC" />
-            <h2><span class="accent">TEVETA</span> Approval</h2>
+            <h2><span class="accent">TEVETA</span> Exam Entry</h2>
             <button class="sidebar-page-close" data-page-close="teveta"><i class="fas fa-times"></i></button>
         </div>
         <div class="sidebar-page-body">
-            <h3><i class="fas fa-check-double"></i> Exam Approval Status</h3>
-            <p>Your application for final exams is pending with the examination board TEVETA.</p>
+            <h3><i class="fas fa-edit"></i> TEVETA Exam Entry Form</h3>
+            <p>Complete the form below to register for your TEVETA examinations. All fields are required.</p>
             
-            <div class="info-grid">
-                <div class="item">
-                    <div class="label">Application ID</div>
-                    <div class="value">TEV-2026-0452</div>
-                </div>
-                <div class="item">
-                    <div class="label">Status</div>
-                    <div class="value"><span class="status-badge pending">Pending Review</span></div>
-                </div>
-                <div class="item">
-                    <div class="label">Submitted</div>
-                    <div class="value">1st June 2026</div>
-                </div>
-                <div class="item">
-                    <div class="label">Expected Notification</div>
-                    <div class="value">30th June 2026</div>
-                </div>
+            <div class="form-logo-section">
+                <img src="logo.png" alt="NORTEC Logo" style="width:80px; height:80px; object-fit:contain;" />
             </div>
             
-            <h3><i class="fas fa-file-alt"></i> Application Details</h3>
-            <ul>
-                <li><strong>Program:</strong> Diploma in Computer Systems Engineering</li>
-                <li><strong>Exam Session:</strong> June 2026</li>
-                <li><strong>Number of Courses:</strong> 7 courses</li>
-                <li><strong>Grading:</strong> TEVETA National Examination</li>
-            </ul>
+            <div id="tevetaFormContainer">
+                <form id="tevetaForm">
+                    <div class="form-group">
+                        <label>1. COURSE</label>
+                        <input type="text" value="DIPLOMA IN COMPUTER SYSTEMS ENGINEERING - Code 41" readonly style="background:#f1f5f9;" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>2. EXAMINATION SERIES</label>
+                        <select id="examSeries" required>
+                            <option value="">Select Examination Series</option>
+                            <option value="June 2026">June 2026</option>
+                            <option value="December 2026">December 2026</option>
+                            <option value="June 2027">June 2027</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>3. TEVETA EXAM NO</label>
+                        <input type="text" id="tevetaExamNo" placeholder="Enter TEVETA Exam Number" required />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>4. EXAMINATION CENTER NAME</label>
+                        <input type="text" value="NORTHERN TECHNICAL COLLEGE" readonly style="background:#f1f5f9;" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>5. SURNAME</label>
+                        <input type="text" id="surname" value="MOBELA" required />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>6. FORENAMES</label>
+                        <input type="text" id="forenames" value="JUBEL" required />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>7. INSTITUTION OF STUDY</label>
+                        <input type="text" value="NORTHERN TECHNICAL COLLEGE" readonly style="background:#f1f5f9;" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>8. YEAR OF ENROLMENT</label>
+                        <input type="text" id="yearEnrolment" value="2022" required />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>9. Mode of Study</label>
+                        <input type="text" value="Full-time" readonly style="background:#f1f5f9;" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>10. YEAR OF STUDY</label>
+                        <select id="yearStudy" required>
+                            <option value="">Select Year of Study</option>
+                            <option value="Year 1">Year 1</option>
+                            <option value="Year 2">Year 2</option>
+                            <option value="Year 3">Year 3</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>11. SUBJECTS TO BE TAKEN (Indicate whether practical or written paper)</label>
+                        <div style="display:grid; gap:6px; margin-top:4px;">
+                            <label style="font-weight:400; font-size:13px; display:flex; align-items:center; gap:8px;">
+                                <input type="checkbox" checked disabled /> (i) 41.1 Digital Electronics
+                            </label>
+                            <label style="font-weight:400; font-size:13px; display:flex; align-items:center; gap:8px;">
+                                <input type="checkbox" checked disabled /> (ii) 41.2 Entrepreneurship
+                            </label>
+                            <label style="font-weight:400; font-size:13px; display:flex; align-items:center; gap:8px;">
+                                <input type="checkbox" checked disabled /> (iii) 41.3 Operating Systems
+                            </label>
+                            <label style="font-weight:400; font-size:13px; display:flex; align-items:center; gap:8px;">
+                                <input type="checkbox" checked disabled /> (iv) 41.4 Programming & Database Technology
+                            </label>
+                            <label style="font-weight:400; font-size:13px; display:flex; align-items:center; gap:8px;">
+                                <input type="checkbox" checked disabled /> (v) 41.5 Networks & Communications
+                            </label>
+                            <label style="font-weight:400; font-size:13px; display:flex; align-items:center; gap:8px;">
+                                <input type="checkbox" checked disabled /> (vi) 41.6 Computer Hardware Maintenance & Repair
+                            </label>
+                            <label style="font-weight:400; font-size:13px; display:flex; align-items:center; gap:8px;">
+                                <input type="checkbox" checked disabled /> (vii) 41.7 Management Information Systems
+                            </label>
+                            <label style="font-weight:400; font-size:13px; display:flex; align-items:center; gap:8px;">
+                                <input type="checkbox" checked disabled /> (viii) 41.8 Project
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-form-submit" id="submitTevetaForm"><i class="fas fa-paper-plane"></i> Submit TEVETA Application</button>
+                </form>
+            </div>
             
-            <h3><i class="fas fa-info-circle"></i> What is TEVETA?</h3>
-            <p>TEVETA (Technical Education, Vocational and Entrepreneurship Training Authority) is the regulatory body responsible for technical education and vocational training in Zambia. They ensure that all technical programs meet national standards.</p>
-            
-            <h3><i class="fas fa-clock"></i> After Approval</h3>
-            <ul>
-                <li>You will receive an official examination number.</li>
-                <li>Exams will be conducted under TEVETA supervision.</li>
-                <li>Results will be released through the TEVETA portal.</li>
-            </ul>
+            <div id="tevetaSubmitted" style="display:none;">
+                <h3><i class="fas fa-check-circle highlight-green"></i> TEVETA Application Submitted</h3>
+                <p>Your TEVETA exam entry has been submitted successfully. The details are stored locally on your device.</p>
+                <div class="readonly-form" id="tevetaReadonlyForm">
+                    <!-- Populated by JavaScript -->
+                </div>
+                <p style="margin-top:12px; font-size:12px; color:#64748b;"><i class="fas fa-lock"></i> This form is now read-only. You cannot edit the details.</p>
+            </div>
             
             <h3><i class="fas fa-upload"></i> Upload TEVETA Exam Fee Receipt</h3>
             <div class="form-group">
@@ -3485,6 +3594,73 @@
                 }
             }
 
+            // ─── TEVETA FORM ──────────────────────────────────────
+            const tevetaForm = document.getElementById('tevetaForm');
+            const tevetaFormContainer = document.getElementById('tevetaFormContainer');
+            const tevetaSubmitted = document.getElementById('tevetaSubmitted');
+            const tevetaReadonlyForm = document.getElementById('tevetaReadonlyForm');
+
+            // Check if TEVETA form is already submitted
+            if (localStorage.getItem('tevetaSubmitted')) {
+                tevetaFormContainer.style.display = 'none';
+                tevetaSubmitted.style.display = 'block';
+                const data = JSON.parse(localStorage.getItem('tevetaData'));
+                if (data) {
+                    let html = `
+                        <div class="field-row"><span class="field-label">1. COURSE:</span><span class="field-value">${data.course || 'DIPLOMA IN COMPUTER SYSTEMS ENGINEERING - Code 41'}</span></div>
+                        <div class="field-row"><span class="field-label">2. EXAMINATION SERIES:</span><span class="field-value">${data.examSeries || ''}</span></div>
+                        <div class="field-row"><span class="field-label">3. TEVETA EXAM NO:</span><span class="field-value">${data.tevetaExamNo || ''}</span></div>
+                        <div class="field-row"><span class="field-label">4. EXAMINATION CENTER NAME:</span><span class="field-value">NORTHERN TECHNICAL COLLEGE</span></div>
+                        <div class="field-row"><span class="field-label">5. SURNAME:</span><span class="field-value">${data.surname || ''}</span></div>
+                        <div class="field-row"><span class="field-label">6. FORENAMES:</span><span class="field-value">${data.forenames || ''}</span></div>
+                        <div class="field-row"><span class="field-label">7. INSTITUTION OF STUDY:</span><span class="field-value">NORTHERN TECHNICAL COLLEGE</span></div>
+                        <div class="field-row"><span class="field-label">8. YEAR OF ENROLMENT:</span><span class="field-value">${data.yearEnrolment || ''}</span></div>
+                        <div class="field-row"><span class="field-label">9. Mode of Study:</span><span class="field-value">Full-time</span></div>
+                        <div class="field-row"><span class="field-label">10. YEAR OF STUDY:</span><span class="field-value">${data.yearStudy || ''}</span></div>
+                        <div class="field-row"><span class="field-label">11. SUBJECTS TO BE TAKEN:</span><span class="field-value">
+                            <span class="subject-item">(i) 41.1 Digital Electronics</span>
+                            <span class="subject-item">(ii) 41.2 Entrepreneurship</span>
+                            <span class="subject-item">(iii) 41.3 Operating Systems</span>
+                            <span class="subject-item">(iv) 41.4 Programming & Database Technology</span>
+                            <span class="subject-item">(v) 41.5 Networks & Communications</span>
+                            <span class="subject-item">(vi) 41.6 Computer Hardware Maintenance & Repair</span>
+                            <span class="subject-item">(vii) 41.7 Management Information Systems</span>
+                            <span class="subject-item">(viii) 41.8 Project</span>
+                        </span></div>
+                    `;
+                    tevetaReadonlyForm.innerHTML = html;
+                }
+            }
+
+            tevetaForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const data = {
+                    course: 'DIPLOMA IN COMPUTER SYSTEMS ENGINEERING - Code 41',
+                    examSeries: document.getElementById('examSeries').value,
+                    tevetaExamNo: document.getElementById('tevetaExamNo').value,
+                    surname: document.getElementById('surname').value,
+                    forenames: document.getElementById('forenames').value,
+                    yearEnrolment: document.getElementById('yearEnrolment').value,
+                    yearStudy: document.getElementById('yearStudy').value
+                };
+                
+                // Validate required fields
+                if (!data.examSeries || !data.tevetaExamNo || !data.surname || !data.forenames || !data.yearEnrolment || !data.yearStudy) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                
+                // Save to localStorage
+                localStorage.setItem('tevetaSubmitted', 'true');
+                localStorage.setItem('tevetaData', JSON.stringify(data));
+                
+                alert('✅ TEVETA Exam Entry submitted successfully!\nYour details have been saved locally.');
+                
+                // Reload the page to show read-only view
+                location.reload();
+            });
+
             // ─── EVENT BINDINGS ──────────────────────────────────
             enrollBtn.addEventListener('click', (e) => { e.preventDefault(); showEnroll(); });
             backFromEnroll.addEventListener('click', (e) => { e.preventDefault(); showMain(); });
@@ -3605,7 +3781,7 @@
             // ─── INIT ─────────────────────────────────────────────
             showMain();
             switchPanel('home');
-            console.log('✅ Northern Technical College – full dashboard with sidebar on left, white theme, and all features.');
+            console.log('✅ Northern Technical College – full dashboard with sidebar on left, TEVETA form, and all features.');
         })();
     </script>
 </body>
