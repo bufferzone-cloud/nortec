@@ -85,7 +85,7 @@
         }
 
         /* ENROLL PAGE (intake selection) */
-        #enrollPage, #programsPage, #shortCoursesPage {
+        #enrollPage, #programsPage, #shortCoursesPage, #dashboardPage {
             opacity: 0;
             transform: scale(0.96);
             visibility: hidden;
@@ -94,7 +94,7 @@
             padding-top: 40px;
             padding-bottom: 40px;
         }
-        #enrollPage.active, #programsPage.active, #shortCoursesPage.active {
+        #enrollPage.active, #programsPage.active, #shortCoursesPage.active, #dashboardPage.active {
             opacity: 1;
             transform: scale(1);
             visibility: visible;
@@ -963,59 +963,498 @@
         .support-link a { color: #2563eb; text-decoration: none; font-weight: 600; }
         .support-link a:hover { color: #1d4ed8; }
 
-        /* RESPONSIVE */
-        @media (max-width: 480px) {
-            .page { padding: 20px 16px; }
-            .main-logo { width: 72px; height: 72px; padding: 8px; }
-            .title h1 { font-size: 17px; }
-            .btn { font-size: 14px; padding: 14px 18px; min-height: 46px; }
-            .intake-grid { gap: 12px; max-width: 100%; }
-            .intake-btn { font-size: 14px; border-radius: 16px; padding: 12px 8px; }
-            .intake-btn i { font-size: 26px; margin-bottom: 6px; }
-            .page-header h2 { font-size: 18px; }
-            .program-card .prog-title { font-size: 14px; }
-            .short-grid { grid-template-columns: 1fr; }
-            #detailModal .detail-title { font-size: 18px; }
-            .modal { padding: 24px 18px 18px; border-radius: 22px; }
-            .modal-logo img { width: 52px; height: 52px; }
-            .modal-header .modal-title { font-size: 18px; }
-            .step .form-row > * { flex: 1 1 100%; }
-            .step-dot .label { display: none; }
-            .upload-grid { grid-template-columns: repeat(2, 1fr); }
+        /* ─── DASHBOARD STYLES ─── */
+        #dashboardPage {
+            padding: 0;
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
-        @media (max-width: 360px) {
-            .intake-grid { gap: 10px; }
-            .intake-btn { font-size: 12px; padding: 10px 6px; }
-            .intake-btn i { font-size: 22px; }
-            .title h1 { font-size: 15px; }
-            .btn { font-size: 13px; padding: 12px 14px; min-height: 42px; }
-            .upload-grid { grid-template-columns: 1fr 1fr; }
+        .dashboard-container {
+            width: 100%;
+            max-width: 1200px;
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+        .dashboard-header {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 10;
+            min-height: 64px;
+        }
+        .header-logo {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            padding: 4px;
+        }
+        .header-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: #fff;
+            text-align: center;
+            flex: 1;
+            letter-spacing: 0.5px;
+        }
+        .header-title .accent { color: #6cffa0; }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-sidebar-toggle {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .btn-sidebar-toggle:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* DANGLING NOTICES */
+        .dangling-notices {
+            position: relative;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 16px;
+            margin-top: -4px;
+            z-index: 5;
+        }
+        .notice-string {
+            width: 2px;
+            height: 28px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.1));
+            margin-bottom: 2px;
+        }
+        .notice-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 16px;
+            padding: 20px 24px;
+            max-width: 560px;
+            width: 100%;
+            box-shadow: 0 12px 48px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 8px;
+            color: #0f172a;
+            font-size: 13px;
+            line-height: 1.5;
+            text-align: center;
+            animation: floatNotice 3s ease-in-out infinite;
+            transform-origin: top center;
+        }
+        @keyframes floatNotice {
+            0%, 100% { transform: translateY(0) rotate(-0.5deg); }
+            50% { transform: translateY(4px) rotate(0.5deg); }
+        }
+        .notice-card h3 {
+            font-size: 18px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+        .notice-card .sub {
+            font-size: 12px;
+            color: #475569;
+            letter-spacing: 1px;
+        }
+        .notice-card .notice-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: #dc2626;
+            margin: 8px 0 4px;
+        }
+        .notice-card .notice-date {
+            font-weight: 700;
+            color: #2563eb;
+        }
+        .notice-card .notice-venue {
+            font-weight: 700;
+            color: #2563eb;
+        }
+        .notice-card .notice-time {
+            font-weight: 700;
+            color: #2563eb;
+        }
+        .notice-card .footer-line {
+            font-size: 11px;
+            color: #64748b;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* STUDENT INFO FLOATING CURVE */
+        .student-info-curve {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 20px 20px 40px 40px;
+            padding: 14px 24px;
+            max-width: 560px;
+            width: 100%;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.15);
+            margin-bottom: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #0f172a;
+            animation: floatCurve 4s ease-in-out infinite;
+        }
+        @keyframes floatCurve {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(6px) scale(1.01); }
+        }
+        .student-info-curve .info-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .student-info-curve .info-item i {
+            color: #2563eb;
+            font-size: 14px;
+        }
+        .student-info-curve .info-item .label {
+            color: #64748b;
+            font-weight: 400;
+        }
+
+        /* DASHBOARD CONTENT */
+        .dashboard-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px 16px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .dashboard-content::-webkit-scrollbar {
+            width: 4px;
+            background: transparent;
+        }
+        .dashboard-content::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+        }
+
+        /* NAV BUTTONS */
+        .nav-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px;
+            padding: 12px 6px;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-align: center;
+            line-height: 1.2;
+        }
+        .nav-btn i {
+            font-size: 20px;
+            color: #6cffa0;
+        }
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+        }
+        .nav-btn:active { transform: scale(0.95); }
+        .nav-btn.active {
+            background: rgba(108, 255, 160, 0.15);
+            border-color: rgba(108, 255, 160, 0.3);
+        }
+
+        /* CONTENT PANELS */
+        .content-panel {
+            display: none;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid rgba(255,255,255,0.04);
+            color: #fff;
+            flex: 1;
+            overflow-y: auto;
+            max-height: calc(100vh - 380px);
+            max-height: calc(100dvh - 380px);
+        }
+        .content-panel.active {
+            display: block;
+        }
+        .content-panel h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #6cffa0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding-bottom: 8px;
+        }
+
+        /* CA TABLE */
+        .ca-table-wrapper {
+            overflow-x: auto;
+            font-size: 11px;
+        }
+        .ca-table-wrapper table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+        .ca-table-wrapper th, .ca-table-wrapper td {
+            padding: 6px 8px;
+            border: 1px solid rgba(255,255,255,0.08);
+            text-align: center;
+            white-space: nowrap;
+        }
+        .ca-table-wrapper th {
+            background: rgba(108, 255, 160, 0.1);
+            color: #6cffa0;
+            font-weight: 700;
+            font-size: 10px;
+        }
+        .ca-table-wrapper td {
+            color: #e2e8f0;
+        }
+        .ca-table-wrapper .subject-col {
+            text-align: left;
+            min-width: 140px;
+            font-weight: 600;
+        }
+        .ca-table-wrapper .session-col {
+            text-align: left;
+            min-width: 120px;
+            font-size: 10px;
+        }
+        .percent-bar {
+            display: inline-block;
+            height: 8px;
+            background: #10b981;
+            border-radius: 10px;
+            margin-top: 2px;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 300px;
+            height: 100vh;
+            height: 100dvh;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(255,255,255,0.06);
+            z-index: 100;
+            transition: right 0.35s cubic-bezier(0.22,1,0.36,1);
+            padding: 20px 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .sidebar.open {
+            right: 0;
+        }
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.35s ease;
+        }
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .sidebar-header h3 {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 800;
+        }
+        .sidebar-header h3 .accent { color: #6cffa0; }
+        .btn-sidebar-close {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        .btn-sidebar-close:hover { background: rgba(255,255,255,0.2); }
+
+        .sidebar-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border: none;
+            border-radius: 10px;
+            background: transparent;
+            color: #cbd5e1;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar-btn i {
+            width: 20px;
+            color: #6cffa0;
+            font-size: 16px;
+        }
+        .sidebar-btn:hover {
+            background: rgba(255,255,255,0.06);
+            color: #fff;
+        }
+        .sidebar-btn.active {
+            background: rgba(108, 255, 160, 0.1);
+            color: #fff;
+        }
+
+        /* SIDEBAR CONTENT PANELS */
+        .sidebar-content-panel {
+            display: none;
+            margin-top: 8px;
+            padding: 12px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.04);
+            color: #e2e8f0;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .sidebar-content-panel.active {
+            display: block;
+        }
+        .sidebar-content-panel h4 {
+            color: #6cffa0;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .sidebar-content-panel table {
+            width: 100%;
+            font-size: 12px;
+            border-collapse: collapse;
+        }
+        .sidebar-content-panel th, .sidebar-content-panel td {
+            padding: 4px 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            text-align: left;
+        }
+        .sidebar-content-panel th {
+            color: #6cffa0;
+            font-weight: 600;
+        }
+        .sidebar-content-panel .highlight-green {
+            color: #6cffa0;
+            font-weight: 600;
+        }
+        .sidebar-content-panel .highlight-red {
+            color: #ef4444;
+            font-weight: 600;
+        }
+        .sidebar-content-panel .balance-amount {
+            font-size: 18px;
+            font-weight: 800;
+            color: #f59e0b;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 640px) {
+            .dashboard-header { padding: 10px 14px; min-height: 56px; }
+            .header-title { font-size: 14px; }
+            .header-logo { width: 36px; height: 36px; }
+            .notice-card { padding: 16px; font-size: 12px; max-width: 100%; }
+            .notice-card .notice-title { font-size: 18px; }
+            .student-info-curve { font-size: 12px; padding: 12px 16px; gap: 6px 12px; }
+            .nav-buttons { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+            .nav-btn { font-size: 10px; padding: 8px 4px; }
+            .nav-btn i { font-size: 16px; }
+            .content-panel { padding: 12px; max-height: calc(100vh - 340px); max-height: calc(100dvh - 340px); }
+            .ca-table-wrapper { font-size: 10px; }
+            .ca-table-wrapper th, .ca-table-wrapper td { padding: 4px 4px; }
+            .ca-table-wrapper .subject-col { min-width: 100px; }
+            .sidebar { width: 280px; right: -290px; }
+            .dashboard-content { padding: 8px 12px 16px; gap: 12px; }
+            .dangling-notices { padding: 0 8px; }
+            .notice-string { height: 20px; }
+        }
+        @media (max-width: 420px) {
+            .nav-buttons { grid-template-columns: repeat(2, 1fr); }
+            .dashboard-header { flex-wrap: wrap; gap: 4px; }
+            .header-title { font-size: 12px; order: 3; width: 100%; text-align: center; }
+            .header-logo { order: 1; }
+            .header-actions { order: 2; }
         }
         @media (min-height: 800px) {
-            .main-logo { width: 100px; height: 100px; }
-            .title h1 { font-size: 24px; }
-            .intake-btn { font-size: 18px; }
-            .intake-btn i { font-size: 38px; }
-            .intake-grid { max-width: 480px; gap: 20px; }
-        }
-        @media (min-height: 900px) {
-            .page { padding: 40px 32px; }
-            .intake-grid { max-width: 520px; gap: 24px; }
-            .intake-btn { border-radius: 24px; }
+            .content-panel { max-height: calc(100vh - 420px); max-height: calc(100dvh - 420px); }
         }
         @supports (padding: env(safe-area-inset-top)) {
-            .page {
-                padding-left: calc(24px + env(safe-area-inset-left));
-                padding-right: calc(24px + env(safe-area-inset-right));
-                padding-top: calc(28px + env(safe-area-inset-top));
-                padding-bottom: calc(28px + env(safe-area-inset-bottom));
-            }
-            .modal {
-                padding-left: calc(28px + env(safe-area-inset-left));
-                padding-right: calc(28px + env(safe-area-inset-right));
-                padding-top: calc(32px + env(safe-area-inset-top));
-                padding-bottom: calc(28px + env(safe-area-inset-bottom));
-            }
+            .dashboard-header { padding-left: calc(20px + env(safe-area-inset-left)); padding-right: calc(20px + env(safe-area-inset-right)); }
+            .sidebar { padding-left: calc(16px + env(safe-area-inset-left)); padding-right: calc(16px + env(safe-area-inset-right)); }
         }
         .page::-webkit-scrollbar { width: 0; background: transparent; }
     </style>
@@ -1096,6 +1535,359 @@
         <div class="short-grid" id="shortCoursesContainer"></div>
         <div class="back-row">
             <button class="btn-back" id="backFromShort"><i class="fas fa-arrow-left"></i> Back</button>
+        </div>
+    </div>
+
+    <!-- ─── DASHBOARD PAGE ─── -->
+    <div class="page" id="dashboardPage">
+        <div class="dashboard-container">
+            <!-- HEADER -->
+            <div class="dashboard-header">
+                <img src="logo.png" class="header-logo" alt="NORTEC" />
+                <div class="header-title"><span class="accent">NORTEC</span> DASHBOARD</div>
+                <div class="header-actions">
+                    <button class="btn-sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+                </div>
+            </div>
+
+            <!-- DANGLING NOTICES -->
+            <div class="dangling-notices">
+                <div class="notice-string"></div>
+                <div class="notice-card">
+                    <h3>NORTEC</h3>
+                    <div class="sub">NORTHERN TECHNICAL COLLEGE</div>
+                    <div style="font-size:11px; color:#475569; margin-bottom:6px;">Skills • Innovation • Empowerment</div>
+                    <div class="notice-title">NOTICE OF<br />CHANGE<br />OF GRADUATION DATE</div>
+                    <p style="margin:8px 0; font-size:12px;">The Management of NORTEC wishes to inform all graduating students, parents, guardians, invited guests, and the general public that the Graduation Ceremony which was scheduled to take place on 5th June 2026 at the NORTEC Graduation Square has been postponed.</p>
+                    <p style="margin:6px 0; font-weight:700;">THE CEREMONY WILL NOW TAKE PLACE AS FOLLOWS:</p>
+                    <p><span class="notice-date">DATE:</span> 15th July 2026</p>
+                    <p><span class="notice-venue">VENUE:</span> LEVY MWANAWASA STADIUM</p>
+                    <p><span class="notice-time">TIME:</span> 08:30 HOURS</p>
+                    <p style="font-size:11px; margin:6px 0;">This change has been necessitated by the ongoing road works currently being conducted along CHELA ROAD.</p>
+                    <p style="font-size:11px; margin:6px 0;">Management regrets any inconvenience caused and appreciates your understanding and cooperation.</p>
+                    <div class="footer-line">Issued by: MANAGEMENT<br />NORTHERN TECHNICAL COLLEGE (NORTEC)</div>
+                    <div style="font-size:10px; color:#94a3b8; margin-top:6px;">Creative Minds. | Creative Hands. | Building Competence. Inspiring Success.</div>
+                </div>
+            </div>
+
+            <!-- STUDENT INFO FLOATING CURVE -->
+            <div class="student-info-curve">
+                <span class="info-item"><i class="fas fa-user"></i> <span class="label">Name:</span> JUBEL MOBELA</span>
+                <span class="info-item"><i class="fas fa-id-card"></i> <span class="label">Student No:</span> 2201001157</span>
+                <span class="info-item"><i class="fas fa-hashtag"></i> <span class="label">ID:</span> 622589/67/1</span>
+                <span class="info-item"><i class="fas fa-graduation-cap"></i> <span class="label">Program:</span> DIPLOMA IN COMPUTER SYSTEMS ENGINEERING</span>
+                <span class="info-item"><i class="fas fa-calendar"></i> <span class="label">Term:</span> TERM 2</span>
+            </div>
+
+            <!-- CONTENT AREA -->
+            <div class="dashboard-content">
+                <!-- NAV BUTTONS -->
+                <div class="nav-buttons">
+                    <button class="nav-btn active" data-panel="home"><i class="fas fa-home"></i> Home</button>
+                    <button class="nav-btn" data-panel="classes"><i class="fas fa-chalkboard"></i> Classes</button>
+                    <button class="nav-btn" data-panel="ca"><i class="fas fa-chart-bar"></i> CA</button>
+                    <button class="nav-btn" data-panel="profile"><i class="fas fa-user-circle"></i> Profile</button>
+                </div>
+
+                <!-- HOME PANEL -->
+                <div class="content-panel active" id="panel-home">
+                    <h3><i class="fas fa-home"></i> Dashboard Home</h3>
+                    <p style="color:#cbd5e1; font-size:14px;">Welcome back, <strong style="color:#6cffa0;">Jubel Mobela</strong>!</p>
+                    <p style="color:#94a3b8; font-size:13px; margin-top:4px;">Use the navigation buttons above or the sidebar menu for detailed information.</p>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px;">
+                        <div style="background:rgba(255,255,255,0.04); border-radius:12px; padding:14px; text-align:center;">
+                            <div style="font-size:28px; color:#6cffa0;">📚</div>
+                            <div style="font-size:13px; font-weight:600; margin-top:4px;">Current Term</div>
+                            <div style="font-size:11px; color:#94a3b8;">Term 2 • 2026</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.04); border-radius:12px; padding:14px; text-align:center;">
+                            <div style="font-size:28px; color:#f59e0b;">📊</div>
+                            <div style="font-size:13px; font-weight:600; margin-top:4px;">CA Average</div>
+                            <div style="font-size:11px; color:#94a3b8;">32% • 17 Subjects</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CLASSES PANEL -->
+                <div class="content-panel" id="panel-classes">
+                    <h3><i class="fas fa-chalkboard"></i> Classes (Simulated)</h3>
+                    <div style="display:grid; gap:8px;">
+                        <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
+                            <div><strong>Digital Electronics II</strong> <span style="font-size:11px; color:#94a3b8;">(41.1)</span></div>
+                            <div style="font-size:11px; color:#6cffa0;">Mon 10:00</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
+                            <div><strong>Operating Systems</strong> <span style="font-size:11px; color:#94a3b8;">(41.3)</span></div>
+                            <div style="font-size:11px; color:#6cffa0;">Tue 08:00</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
+                            <div><strong>Programming & Database Tech</strong> <span style="font-size:11px; color:#94a3b8;">(41.4)</span></div>
+                            <div style="font-size:11px; color:#6cffa0;">Wed 14:00</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
+                            <div><strong>Networks & Communications</strong> <span style="font-size:11px; color:#94a3b8;">(41.5)</span></div>
+                            <div style="font-size:11px; color:#6cffa0;">Thu 09:00</div>
+                        </div>
+                        <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
+                            <div><strong>Computer Hardware Maintenance</strong> <span style="font-size:11px; color:#94a3b8;">(41.6)</span></div>
+                            <div style="font-size:11px; color:#6cffa0;">Fri 11:00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CA PANEL -->
+                <div class="content-panel" id="panel-ca">
+                    <h3><i class="fas fa-chart-bar"></i> Continuous Assessment (CA)</h3>
+                    <div class="ca-table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">Session</th>
+                                    <th rowspan="2">Subject</th>
+                                    <th colspan="4">TERM ONE</th>
+                                    <th colspan="4">TERM TWO</th>
+                                    <th colspan="3">TERM THREE</th>
+                                    <th rowspan="2">C.A 40%</th>
+                                    <th rowspan="2">C.A Meter</th>
+                                </tr>
+                                <tr>
+                                    <th>Asst 1</th><th>Asst 2</th><th>Mid</th><th>End</th>
+                                    <th>Asst 1</th><th>Asst 2</th><th>Mid</th><th>End</th>
+                                    <th>Asst 1</th><th>Asst 2</th><th>Mid</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">DIGITAL ELECTRONICS II (41.1)</td><td>90</td><td>84</td><td>82</td><td>85</td><td>70</td><td>92</td><td>75</td><td>67</td><td>88</td><td>92</td><td>75</td><td>33</td><td><div class="percent-bar" style="width:82%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">ENTREPRENEURSHIP (41.2)</td><td>84</td><td>82</td><td>80</td><td>76</td><td>97</td><td>97</td><td>95</td><td>64</td><td>97</td><td>70</td><td>79</td><td>33</td><td><div class="percent-bar" style="width:82%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">OPERATING SYSTEMS (41.3)</td><td>95</td><td>95</td><td>53</td><td>83</td><td>70</td><td>90</td><td>33</td><td>57</td><td>80</td><td>78</td><td>80</td><td>30</td><td><div class="percent-bar" style="width:75%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">PROGRAMMING & DATABASE TECH (41.4)</td><td>35</td><td>88</td><td>100</td><td>75</td><td>64</td><td>60</td><td>60</td><td>45</td><td>100</td><td>100</td><td>79</td><td>29</td><td><div class="percent-bar" style="width:72%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">NETWORKS & COMMUNICATIONS (41.5)</td><td>90</td><td>90</td><td>68</td><td>70</td><td>90</td><td>75</td><td>90</td><td>70</td><td>90</td><td>95</td><td>85</td><td>33</td><td><div class="percent-bar" style="width:82%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">COMPUTER HARDWARE MAINTENANCE (41.6)</td><td>80</td><td>80</td><td>61</td><td>70</td><td>70</td><td>75</td><td>90</td><td>71</td><td>80</td><td>75</td><td>70</td><td>30</td><td><div class="percent-bar" style="width:75%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">MANAGEMENT INFORMATION SYSTEMS (41.7)</td><td>85</td><td>65</td><td>75</td><td>70</td><td>86</td><td>79</td><td>85</td><td>75</td><td>79</td><td>80</td><td>88</td><td>32</td><td><div class="percent-bar" style="width:80%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Engineering Mathematics (28.1)</td><td>100</td><td>100</td><td>60</td><td>100</td><td>100</td><td>100</td><td>86</td><td>75</td><td>100</td><td>100</td><td>86</td><td>37</td><td><div class="percent-bar" style="width:92%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Hardware Repair (Practical) (28.11)</td><td>50</td><td>61</td><td>70</td><td>77</td><td>76</td><td>80</td><td>68</td><td>83</td><td>74</td><td>70</td><td>68</td><td>28</td><td><div class="percent-bar" style="width:70%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Hardware Repair (Theory) (28.12)</td><td>95</td><td>100</td><td>97</td><td>53</td><td>100</td><td>80</td><td>60</td><td>85</td><td>50</td><td>63</td><td>88</td><td>32</td><td><div class="percent-bar" style="width:80%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Engineering Science (28.2)</td><td>44</td><td>80</td><td>84</td><td>65</td><td>85</td><td>95</td><td>82</td><td>60</td><td>85</td><td>95</td><td>75</td><td>31</td><td><div class="percent-bar" style="width:77%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Communication Skills (28.3)</td><td>94</td><td>91</td><td>77</td><td>67</td><td>90</td><td>92</td><td>88</td><td>71</td><td>56</td><td>91</td><td>74</td><td>32</td><td><div class="percent-bar" style="width:80%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Digital Electronics I (28.4)</td><td>90</td><td>80</td><td>70</td><td>70</td><td>85</td><td>85</td><td>74</td><td>55</td><td>94</td><td>91</td><td>74</td><td>32</td><td><div class="percent-bar" style="width:80%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Foundation of Management (28.5)</td><td>86</td><td>92</td><td>85</td><td>87</td><td>97</td><td>95</td><td>95</td><td>89</td><td>90</td><td>85</td><td>90</td><td>36</td><td><div class="percent-bar" style="width:90%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">IT & Application Packages (Theory) (28.6)</td><td>85</td><td>80</td><td>90</td><td>78</td><td>70</td><td>80</td><td>78</td><td>50</td><td>95</td><td>95</td><td>78</td><td>32</td><td><div class="percent-bar" style="width:80%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">IT & Application Packages (Practical) (28.7)</td><td>100</td><td>100</td><td>82</td><td>90</td><td>80</td><td>70</td><td>100</td><td>80</td><td>70</td><td>90</td><td>80</td><td>34</td><td><div class="percent-bar" style="width:85%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Networks (Theory) (28.8)</td><td>75</td><td>75</td><td>90</td><td>90</td><td>78</td><td>89</td><td>90</td><td>88</td><td>95</td><td>70</td><td>83</td><td>34</td><td><div class="percent-bar" style="width:85%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Networks (Practical) (28.9)</td><td>100</td><td>100</td><td>72</td><td>60</td><td>100</td><td>70</td><td>92</td><td>87</td><td>99</td><td>100</td><td>80</td><td>35</td><td><div class="percent-bar" style="width:87%;"></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="margin-top:8px; font-size:11px; color:#94a3b8; text-align:center;">* CA Meter shows percentage of CA score out of 40%</div>
+                </div>
+
+                <!-- PROFILE PANEL -->
+                <div class="content-panel" id="panel-profile">
+                    <h3><i class="fas fa-user-circle"></i> Student Profile</h3>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:13px;">
+                        <div style="color:#94a3b8;">Full Name:</div><div style="color:#fff; font-weight:600;">JUBEL MOBELA</div>
+                        <div style="color:#94a3b8;">Student Number:</div><div style="color:#fff; font-weight:600;">2201001157</div>
+                        <div style="color:#94a3b8;">ID Number:</div><div style="color:#fff; font-weight:600;">622589/67/1</div>
+                        <div style="color:#94a3b8;">Program:</div><div style="color:#fff; font-weight:600;">DIPLOMA IN COMPUTER SYSTEMS ENGINEERING</div>
+                        <div style="color:#94a3b8;">Current Term:</div><div style="color:#fff; font-weight:600;">TERM 2</div>
+                        <div style="color:#94a3b8;">Intake:</div><div style="color:#fff; font-weight:600;">January 2022</div>
+                        <div style="color:#94a3b8;">Accommodation:</div><div style="color:#fff; font-weight:600;">Kwacha Building, Kabwe Floor 3, Room 16</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIDEBAR OVERLAY -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- SIDEBAR -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3><span class="accent">NORTEC</span> MENU</h3>
+                <button class="btn-sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <button class="sidebar-btn" data-sidebar="application"><i class="fas fa-file-alt"></i> Application</button>
+            <div class="sidebar-content-panel" id="sidebar-application">
+                <h4>Application Status</h4>
+                <p>You applied for: <strong>Diploma in Computer Systems Engineering</strong></p>
+                <p>Application Date: 15th January 2022</p>
+                <p>Status: <span class="highlight-green">Approved</span></p>
+                <p>Admission Letter: <a href="#" style="color:#6cffa0;">Download (Simulated)</a></p>
+            </div>
+
+            <button class="sidebar-btn" data-sidebar="exams"><i class="fas fa-calendar-check"></i> Exams</button>
+            <div class="sidebar-content-panel" id="sidebar-exams">
+                <h4>Exam Timetable (Simulated)</h4>
+                <table>
+                    <tr><th>Date</th><th>Time</th><th>Subject</th></tr>
+                    <tr><td>Mon 20 June</td><td>09:00</td><td>Digital Electronics II</td></tr>
+                    <tr><td>Tue 21 June</td><td>10:00</td><td>Operating Systems</td></tr>
+                    <tr><td>Wed 22 June</td><td>14:00</td><td>Programming & Database</td></tr>
+                    <tr><td>Thu 23 June</td><td>09:00</td><td>Networks & Communications</td></tr>
+                    <tr><td>Fri 24 June</td><td>11:00</td><td>Computer Hardware</td></tr>
+                </table>
+            </div>
+
+            <button class="sidebar-btn" data-sidebar="clearance"><i class="fas fa-check-circle"></i> Clearance</button>
+            <div class="sidebar-content-panel" id="sidebar-clearance">
+                <h4>Clearance Status</h4>
+                <table>
+                    <tr><th>Department</th><th>Status</th></tr>
+                    <tr><td>Accounts</td><td><span class="highlight-green">Cleared</span></td></tr>
+                    <tr><td>Library</td><td><span class="highlight-green">Cleared</span></td></tr>
+                    <tr><td>Sports</td><td><span class="highlight-green">Cleared</span></td></tr>
+                    <tr><td>HOD</td><td><span class="highlight-green">Cleared</span></td></tr>
+                    <tr><td>Lab Attendant</td><td><span class="highlight-green">Cleared</span></td></tr>
+                    <tr><td>Admissions</td><td><span class="highlight-green">Cleared</span></td></tr>
+                </table>
+                <p style="margin-top:8px; font-size:12px; color:#94a3b8;">All departments cleared. You are ready to close school.</p>
+            </div>
+
+            <button class="sidebar-btn" data-sidebar="accommodation"><i class="fas fa-bed"></i> Accommodation</button>
+            <div class="sidebar-content-panel" id="sidebar-accommodation">
+                <h4>Accommodation Details</h4>
+                <p><strong>Student:</strong> Jubel Mobela</p>
+                <p><strong>Hostel:</strong> Kwacha Building</p>
+                <p><strong>Location:</strong> Kabwe Floor 3</p>
+                <p><strong>Room:</strong> 16</p>
+                <p style="font-size:12px; color:#94a3b8; margin-top:4px;">Room allocated for the academic year 2026.</p>
+            </div>
+
+            <button class="sidebar-btn" data-sidebar="finance"><i class="fas fa-coins"></i> Finance</button>
+            <div class="sidebar-content-panel" id="sidebar-finance">
+                <h4>Financial Statement</h4>
+                <table>
+                    <tr><th>Transaction</th><th>Date</th><th>Type</th><th>Description</th><th>Debit</th><th>Credit</th><th>Balance</th></tr>
+                    <tr><td>BJV-002022_1</td><td>2022-01-31</td><td>JV</td><td>MoTS-TERM 1 2022</td><td></td><td>2,000</td><td>-2,000</td></tr>
+                    <tr><td>SI-2003596</td><td>2022-03-20</td><td>Invoice</td><td>CSECTFT-FT-2021-1</td><td>2,720</td><td></td><td>720</td></tr>
+                    <tr><td>BJV-002022_2</td><td>2022-05-01</td><td>JV</td><td>MoTS-TERM 2 2022</td><td></td><td>2,000</td><td>-1,280</td></tr>
+                    <tr><td>SI-2007000</td><td>2022-07-01</td><td>Invoice</td><td>CSECTFT-FT-2021-2</td><td>2,150</td><td></td><td>870</td></tr>
+                    <tr><td>RCT-20037753</td><td>2022-07-01</td><td>Payment</td><td>TUITION_03.02.2022</td><td></td><td>920</td><td>-50</td></tr>
+                    <tr><td>BJV-002022_3</td><td>2022-09-01</td><td>JV</td><td>MoTS-TERM 3 & EXAM</td><td></td><td>3,450</td><td>-3,500</td></tr>
+                    <tr><td>SI-2008189</td><td>2022-09-09</td><td>Invoice</td><td>CSECTFT-FT-2021-3</td><td>2,150</td><td></td><td>-1,350</td></tr>
+                    <tr><td>220915496</td><td>2022-09-16</td><td>Bank</td><td>ZANACO</td><td></td><td>150</td><td>-1,500</td></tr>
+                    <tr><td>SI-20027290</td><td>2022-09-16</td><td>Invoice</td><td>exam</td><td>1,450</td><td></td><td>-50</td></tr>
+                    <tr><td>BJV-002022_2_1</td><td>2023-01-06</td><td>JV</td><td>MoTS-TERM 1 2023</td><td></td><td>3,000</td><td>-3,050</td></tr>
+                    <tr><td>230227303</td><td>2023-02-16</td><td>Bank</td><td>ZANACO</td><td></td><td>250</td><td>-3,300</td></tr>
+                    <tr><td>SI-2017119</td><td>2023-02-20</td><td>Invoice</td><td>CSEDIFT-FT-2021-1</td><td>4,400</td><td></td><td>1,100</td></tr>
+                    <tr><td>BJV-002022_2_2</td><td>2023-05-06</td><td>JV</td><td>MoTS-TERM 2 2023</td><td></td><td>3,000</td><td>-1,900</td></tr>
+                    <tr><td>SI-2019240</td><td>2023-05-22</td><td>Invoice</td><td>CSEDIFT-FT-2021-2</td><td>3,250</td><td></td><td>1,350</td></tr>
+                    <tr><td>230532230</td><td>2023-05-22</td><td>Bank</td><td>ZANACO</td><td></td><td>800</td><td>550</td></tr>
+                    <tr><td>230937853</td><td>2023-09-07</td><td>Bank</td><td>ZANACO</td><td></td><td>350</td><td>200</td></tr>
+                    <tr><td>BJV-002022_2_3</td><td>2023-09-11</td><td>JV</td><td>MoTS-TERM 3 2023</td><td></td><td>3,950</td><td>-3,750</td></tr>
+                    <tr><td>SI-2025674</td><td>2023-09-11</td><td>Invoice</td><td>CSEDIFT-FT-2021-3</td><td>4,000</td><td></td><td>250</td></tr>
+                    <tr><td>CJV-0020233</td><td>2023-09-15</td><td>JV</td><td>EXAM FEES</td><td>950</td><td></td><td>1,200</td></tr>
+                    <tr><td>230940555</td><td>2023-09-21</td><td>Bank</td><td>AIRTEL-MP</td><td></td><td>950</td><td>250</td></tr>
+                    <tr><td>CJV-30102023</td><td>2023-10-30</td><td>JV</td><td>EXAM FEES</td><td>950</td><td></td><td>1,200</td></tr>
+                    <tr><td>250979774</td><td>2025-09-08</td><td>Bank</td><td>ZANACO</td><td></td><td>1,000</td><td>200</td></tr>
+                    <tr><td>SI-20044214</td><td>2025-09-10</td><td>Invoice</td><td>HIRE OF GOWN</td><td>1,000</td><td></td><td>1,200</td></tr>
+                    <tr><td>SI-20044474</td><td>2025-09-25</td><td>Invoice</td><td>HIRE OF GOWN</td><td>600</td><td></td><td>1,800</td></tr>
+                </table>
+                <div style="margin-top:8px; text-align:right; font-size:16px; font-weight:700;">CURRENT BALANCE: <span class="balance-amount">K1,800</span></div>
+            </div>
+
+            <button class="sidebar-btn" data-sidebar="appeal"><i class="fas fa-gavel"></i> Appeal</button>
+            <div class="sidebar-content-panel" id="sidebar-appeal">
+                <h4>Appeal Status</h4>
+                <p>You have a pending appeal regarding school fees clearance.</p>
+                <p><strong>Appeal ID:</strong> APP-2026-001</p>
+                <p><strong>Status:</strong> <span style="color:#f59e0b;">Under Review</span></p>
+                <p><strong>Submitted:</strong> 10th June 2026</p>
+                <p style="font-size:12px; color:#94a3b8;">Your appeal is being processed by the finance department.</p>
+            </div>
+
+            <button class="sidebar-btn" data-sidebar="diploma"><i class="fas fa-certificate"></i> DIP/CERT/TRA/CRA</button>
+            <div class="sidebar-content-panel" id="sidebar-diploma">
+                <h4>Diploma Status</h4>
+                <p><strong>Diploma:</strong> Not yet issued</p>
+                <p style="font-size:12px; color:#94a3b8;">The following procedure will be followed once the diploma is ready for collection:</p>
+                <ol style="padding-left:18px; font-size:12px; color:#e2e8f0; line-height:1.8;">
+                    <li>Check your student portal for a notification</li>
+                    <li>Visit the examinations office with your student ID</li>
+                    <li>Clear any outstanding fees with the finance department</li>
+                    <li>Sign the diploma collection register</li>
+                    <li>Collect your diploma certificate</li>
+                </ol>
+                <p style="margin-top:8px; font-size:11px; color:#94a3b8;">Expected release date: December 2026</p>
+            </div>
+
+            <button class="sidebar-btn" data-sidebar="sup"><i class="fas fa-sync-alt"></i> SUP</button>
+            <div class="sidebar-content-panel" id="sidebar-sup">
+                <h4>Supplementary (SUP) Status</h4>
+                <p>You have been scheduled to rewrite the following course:</p>
+                <p><strong>Course:</strong> Programming and Database Technology (41.4)</p>
+                <p><strong>SUP Date:</strong> 15th July 2026</p>
+                <p><strong>Venue:</strong> Computer Lab 3</p>
+                <p style="font-size:12px; color:#94a3b8;">Please prepare accordingly and arrive 15 minutes early.</p>
+            </div>
+
+            <button class="sidebar-btn" data-sidebar="studentid"><i class="fas fa-id-badge"></i> Student ID</button>
+            <div class="sidebar-content-panel" id="sidebar-studentid">
+                <h4>Student ID Card</h4>
+                <p>Your student ID card has been collected.</p>
+                <p><strong>ID Number:</strong> 622589/67/1</p>
+                <p><strong>Valid until:</strong> December 2026</p>
+                <p style="font-size:12px; color:#94a3b8;">Keep your ID card safe and present it when required.</p>
+            </div>
+
+            <button class="sidebar-btn" data-sidebar="teveta"><i class="fas fa-check-double"></i> TEVETA Approval</button>
+            <div class="sidebar-content-panel" id="sidebar-teveta">
+                <h4>TEVETA Exam Approval</h4>
+                <p>Your application for final exams is pending with the examination board TEVETA.</p>
+                <p><strong>Application ID:</strong> TEV-2026-0452</p>
+                <p><strong>Status:</strong> <span style="color:#f59e0b;">Pending Review</span></p>
+                <p><strong>Submitted:</strong> 1st June 2026</p>
+                <p style="font-size:12px; color:#94a3b8;">Expected approval notification: 30th June 2026</p>
+            </div>
+
+            <button class="sidebar-btn" data-sidebar="attendance"><i class="fas fa-clipboard-list"></i> Attendance</button>
+            <div class="sidebar-content-panel" id="sidebar-attendance">
+                <h4>Attendance Record</h4>
+                <table>
+                    <tr><th>Term</th><th>Month</th><th>Attendance %</th></tr>
+                    <tr><td>Term 1</td><td>January</td><td>92%</td></tr>
+                    <tr><td>Term 1</td><td>February</td><td>88%</td></tr>
+                    <tr><td>Term 1</td><td>March</td><td>95%</td></tr>
+                    <tr><td>Term 2</td><td>April</td><td>90%</td></tr>
+                    <tr><td>Term 2</td><td>May</td><td>85%</td></tr>
+                    <tr><td>Term 2</td><td>June</td><td>93%</td></tr>
+                </table>
+                <p style="margin-top:8px; font-size:12px; color:#94a3b8;">Overall Attendance: <strong style="color:#6cffa0;">90.5%</strong></p>
+            </div>
+
+            <button class="sidebar-btn" data-sidebar="courses"><i class="fas fa-book"></i> Courses</button>
+            <div class="sidebar-content-panel" id="sidebar-courses">
+                <h4>Course List</h4>
+                <div style="display:grid; gap:4px; font-size:13px;">
+                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.04);"><span>Digital Electronics II (41.1)</span><span class="highlight-green">✓</span></div>
+                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.04);"><span>Entrepreneurship (41.2)</span><span class="highlight-green">✓</span></div>
+                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.04);"><span>Operating Systems (41.3)</span><span class="highlight-green">✓</span></div>
+                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.04);"><span>Programming & Database Tech (41.4)</span><span class="highlight-green">✓</span></div>
+                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.04);"><span>Networks & Communications (41.5)</span><span class="highlight-green">✓</span></div>
+                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.04);"><span>Computer Hardware Maintenance (41.6)</span><span class="highlight-green">✓</span></div>
+                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.04);"><span>Management Information Systems (41.7)</span><span class="highlight-green">✓</span></div>
+                </div>
+            </div>
+
+            <button class="sidebar-btn" data-sidebar="timetable"><i class="fas fa-clock"></i> Time Table</button>
+            <div class="sidebar-content-panel" id="sidebar-timetable">
+                <h4>Weekly Timetable (Alternating)</h4>
+                <table>
+                    <tr><th>Day</th><th>Time</th><th>Subject</th></tr>
+                    <tr><td>Monday</td><td>10:00 - 12:00</td><td>Digital Electronics II</td></tr>
+                    <tr><td>Monday</td><td>14:00 - 16:00</td><td>Operating Systems</td></tr>
+                    <tr><td>Tuesday</td><td>08:00 - 10:00</td><td>Programming & Database Tech</td></tr>
+                    <tr><td>Tuesday</td><td>11:00 - 13:00</td><td>Networks & Communications</td></tr>
+                    <tr><td>Wednesday</td><td>09:00 - 11:00</td><td>Computer Hardware Maintenance</td></tr>
+                    <tr><td>Wednesday</td><td>14:00 - 16:00</td><td>Entrepreneurship</td></tr>
+                    <tr><td>Thursday</td><td>10:00 - 12:00</td><td>Management Information Systems</td></tr>
+                    <tr><td>Thursday</td><td>13:00 - 15:00</td><td>Digital Electronics II (Lab)</td></tr>
+                    <tr><td>Friday</td><td>08:00 - 10:00</td><td>Operating Systems (Lab)</td></tr>
+                    <tr><td>Friday</td><td>11:00 - 13:00</td><td>Programming & Database Tech (Lab)</td></tr>
+                </table>
+                <p style="font-size:11px; color:#94a3b8; margin-top:4px;">* Timetable alternates weekly. Week A shown above.</p>
+            </div>
         </div>
     </div>
 
@@ -1312,7 +2104,7 @@
 
             // ─── DATA ────────────────────────────────────────────────
             const programmes = [
-                // JANUARY INTAKE (abbreviated for brevity – full data as before)
+                // JANUARY INTAKE
                 { id: '1.1', title: 'Craft Certificate in Mechanical Fitting', intake: 'january', category: 'Craft',
                     duration: '2 years',
                     entry: 'O\' Level with 5 passes including Mathematics, Science/Physics/Chemistry, English + 2 others. Mature: TEVETA Trade Test Level I or equivalent.',
@@ -1392,7 +2184,7 @@
                         courses: 'Motor vehicle Technology, Engineering Science, Engineering Mathematics, Engineering Drawing, Communication skills, Workshop practice, Workshop process and Management.',
                         employment: 'Graduates are employed as workshop supervisors, managers, or in automotive industry.' } },
 
-                // MAY INTAKE (abbreviated)
+                // MAY INTAKE
                 { id: '2.1', title: 'Advanced Certificate in Mechanical Engineering', intake: 'may', category: 'Advanced',
                     duration: '2 years',
                     entry: 'O\' Level with 5 Credits including Mathematics, Science/Physics/Chemistry, English. Mature: Craft Certificate in relevant field.',
@@ -1542,6 +2334,7 @@
             const enrollPage = document.getElementById('enrollPage');
             const programsPage = document.getElementById('programsPage');
             const shortPage = document.getElementById('shortCoursesPage');
+            const dashboardPage = document.getElementById('dashboardPage');
             const detailModal = document.getElementById('detailModal');
             const loginModal = document.getElementById('loginModal');
 
@@ -1573,6 +2366,21 @@
             const programListContainer = document.getElementById('programListContainer');
             const shortCoursesContainer = document.getElementById('shortCoursesContainer');
 
+            // Dashboard elements
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
+            const sidebar = document.getElementById('sidebar');
+            const sidebarClose = document.getElementById('sidebarClose');
+            const navBtns = document.querySelectorAll('.nav-btn');
+            const panels = {
+                home: document.getElementById('panel-home'),
+                classes: document.getElementById('panel-classes'),
+                ca: document.getElementById('panel-ca'),
+                profile: document.getElementById('panel-profile')
+            };
+            const sidebarBtns = document.querySelectorAll('.sidebar-btn');
+            const sidebarPanels = document.querySelectorAll('.sidebar-content-panel');
+
             // Step wizard elements
             const stepContainer = document.getElementById('stepContainer');
             const steps = stepContainer.querySelectorAll('.step');
@@ -1585,12 +2393,13 @@
 
             // ─── NAVIGATION ─────────────────────────────────────────
             function showPage(page) {
-                [mainPage, enrollPage, programsPage, shortPage].forEach(p => p.classList.remove('active', 'hidden'));
+                [mainPage, enrollPage, programsPage, shortPage, dashboardPage].forEach(p => p.classList.remove('active', 'hidden'));
                 if (page === mainPage) {
                     mainPage.classList.remove('hidden');
                     enrollPage.classList.remove('active');
                     programsPage.classList.remove('active');
                     shortPage.classList.remove('active');
+                    dashboardPage.classList.remove('active');
                 } else {
                     mainPage.classList.add('hidden');
                     page.classList.add('active');
@@ -1602,6 +2411,7 @@
             function showEnroll() { showPage(enrollPage); }
             function showPrograms() { showPage(programsPage); }
             function showShort() { showPage(shortPage); }
+            function showDashboard() { showPage(dashboardPage); }
 
             // ─── RENDER PROGRAMS ──────────────────────────────────
             let currentIntakeKey = '';
@@ -1932,6 +2742,39 @@
                 applyBtn.style.display = 'inline-block';
             }
 
+            // ─── DASHBOARD FUNCTIONS ────────────────────────────
+            function toggleSidebar(open) {
+                if (open) {
+                    sidebar.classList.add('open');
+                    sidebarOverlay.classList.add('active');
+                } else {
+                    sidebar.classList.remove('open');
+                    sidebarOverlay.classList.remove('active');
+                }
+            }
+
+            function switchPanel(panelId) {
+                // Update nav buttons
+                navBtns.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.panel === panelId);
+                });
+                // Update panels
+                Object.keys(panels).forEach(key => {
+                    panels[key].classList.toggle('active', key === panelId);
+                });
+            }
+
+            function switchSidebarPanel(panelId) {
+                // Update sidebar buttons
+                sidebarBtns.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.sidebar === panelId);
+                });
+                // Update sidebar panels
+                sidebarPanels.forEach(panel => {
+                    panel.classList.toggle('active', panel.id === 'sidebar-' + panelId);
+                });
+            }
+
             // ─── EVENT BINDINGS ──────────────────────────────────
             enrollBtn.addEventListener('click', (e) => { e.preventDefault(); showEnroll(); });
             backFromEnroll.addEventListener('click', (e) => { e.preventDefault(); showMain(); });
@@ -1972,13 +2815,19 @@
                     else passwordInput.focus();
                     return;
                 }
-                alert('🔓 Welcome back, ' + username + '!\n\n(Simulated login)');
-                loginModal.classList.remove('active');
-                document.body.style.overflow = '';
-                loginForm.reset();
-                passwordInput.type = 'password';
-                const icon = passwordToggle.querySelector('i');
-                if (icon) icon.className = 'fas fa-eye';
+                // Check for specific student login
+                if (username === '2201001157' && password === 'PASSWORD') {
+                    alert('🔓 Welcome, JUBEL MOBELA!\n\nRedirecting to your dashboard...');
+                    loginModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                    loginForm.reset();
+                    passwordInput.type = 'password';
+                    const icon = passwordToggle.querySelector('i');
+                    if (icon) icon.className = 'fas fa-eye';
+                    showDashboard();
+                } else {
+                    alert('❌ Invalid username or password. Please try again.\n\nHint: Student Number: 2201001157, Password: PASSWORD');
+                }
             });
 
             forgotLink.addEventListener('click', (e) => { e.preventDefault(); alert('📧 Password reset link sent to your registered email.\n(Simulated)'); });
@@ -1988,7 +2837,35 @@
                 if (e.key === 'Escape') {
                     if (detailModal.classList.contains('active')) closeDetail();
                     else if (loginModal.classList.contains('active')) { loginModal.classList.remove('active'); document.body.style.overflow = ''; }
+                    else if (sidebar.classList.contains('open')) toggleSidebar(false);
                 }
+            });
+
+            // ─── DASHBOARD EVENT BINDINGS ──────────────────────
+            sidebarToggle.addEventListener('click', () => toggleSidebar(true));
+            sidebarClose.addEventListener('click', () => toggleSidebar(false));
+            sidebarOverlay.addEventListener('click', () => toggleSidebar(false));
+
+            navBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    switchPanel(this.dataset.panel);
+                });
+            });
+
+            sidebarBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const panelId = this.dataset.sidebar;
+                    // Toggle active state
+                    const isActive = this.classList.contains('active');
+                    // Deactivate all sidebar buttons and panels
+                    sidebarBtns.forEach(b => b.classList.remove('active'));
+                    sidebarPanels.forEach(p => p.classList.remove('active'));
+                    if (!isActive) {
+                        this.classList.add('active');
+                        const panel = document.getElementById('sidebar-' + panelId);
+                        if (panel) panel.classList.add('active');
+                    }
+                });
             });
 
             // ─── SCROLL EVENT FOR CARD SCALING ──────────────────
@@ -2001,7 +2878,8 @@
 
             // ─── INIT ─────────────────────────────────────────────
             showMain();
-            console.log('✅ Northern Technical College – redesigned intake, floating cards, search, back top.');
+            switchPanel('home');
+            console.log('✅ Northern Technical College – full dashboard integrated.');
         })();
     </script>
 </body>
