@@ -1032,72 +1032,9 @@
             background: #dbeafe;
         }
 
-        /* DANGLING NOTICES - No animation */
+        /* DANGLING NOTICES - No animation - removed from main view */
         .dangling-notices {
-            position: relative;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0 16px;
-            margin-top: -4px;
-            z-index: 5;
-        }
-        .notice-string {
-            width: 2px;
-            height: 28px;
-            background: linear-gradient(180deg, #3b82f6, #93c5fd);
-            margin-bottom: 2px;
-        }
-        .notice-card {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 20px 24px;
-            max-width: 560px;
-            width: 100%;
-            box-shadow: 0 4px 20px rgba(59,130,246,0.10);
-            border: 1px solid #dbeafe;
-            margin-bottom: 8px;
-            color: #0f172a;
-            font-size: 13px;
-            line-height: 1.5;
-            text-align: center;
-        }
-        .notice-card h3 {
-            font-size: 18px;
-            font-weight: 800;
-            color: #0f172a;
-            margin-bottom: 4px;
-        }
-        .notice-card h3 .accent { color: #3b82f6; }
-        .notice-card .sub {
-            font-size: 12px;
-            color: #64748b;
-            letter-spacing: 1px;
-        }
-        .notice-card .notice-title {
-            font-size: 22px;
-            font-weight: 900;
-            color: #dc2626;
-            margin: 8px 0 4px;
-        }
-        .notice-card .notice-date {
-            font-weight: 700;
-            color: #3b82f6;
-        }
-        .notice-card .notice-venue {
-            font-weight: 700;
-            color: #3b82f6;
-        }
-        .notice-card .notice-time {
-            font-weight: 700;
-            color: #3b82f6;
-        }
-        .notice-card .footer-line {
-            font-size: 11px;
-            color: #64748b;
-            margin-top: 8px;
-            font-style: italic;
+            display: none;
         }
 
         /* STUDENT INFO - No animation, at top */
@@ -1150,125 +1087,79 @@
             border-radius: 10px;
         }
 
-        /* NAV BUTTONS */
-        .nav-buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            flex-shrink: 0;
-        }
-        .nav-btn {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 12px 6px;
-            color: #0f172a;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            text-align: center;
-            line-height: 1.2;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-        }
-        .nav-btn i {
-            font-size: 20px;
-            color: #3b82f6;
-        }
-        .nav-btn:hover {
-            background: #f8fafc;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(59,130,246,0.08);
-        }
-        .nav-btn:active { transform: scale(0.95); }
-        .nav-btn.active {
-            background: #eff6ff;
-            border-color: #3b82f6;
-            color: #1d4ed8;
-        }
-        .nav-btn.active i {
-            color: #1d4ed8;
-        }
-
-        /* CONTENT PANELS - HOME OVERVIEW */
-        .content-panel {
-            display: none;
+        /* HOME DASHBOARD - No nav buttons, just home content */
+        .home-dashboard {
             background: #ffffff;
             border-radius: 16px;
-            padding: 20px;
+            padding: 24px;
             border: 1px solid #e2e8f0;
             color: #0f172a;
             flex: 1;
             overflow-y: auto;
-            max-height: calc(100vh - 380px);
-            max-height: calc(100dvh - 380px);
+            max-height: calc(100vh - 280px);
+            max-height: calc(100dvh - 280px);
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
         }
-        .content-panel.active {
-            display: block;
-        }
-        .content-panel h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 16px;
+        .home-dashboard h2 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 20px;
             color: #0f172a;
             border-bottom: 2px solid #3b82f6;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
         }
-        .content-panel h3 i {
-            color: #3b82f6;
-            margin-right: 8px;
+        .home-dashboard h2 .accent { color: #3b82f6; }
+        .home-dashboard .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 12px;
         }
-
-        /* CA TABLE */
-        .ca-table-wrapper {
-            overflow-x: auto;
-            font-size: 12px;
-        }
-        .ca-table-wrapper table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 700px;
-        }
-        .ca-table-wrapper th, .ca-table-wrapper td {
-            padding: 6px 8px;
+        .home-dashboard .dashboard-grid .card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px;
             border: 1px solid #e2e8f0;
-            text-align: center;
-            white-space: nowrap;
         }
-        .ca-table-wrapper th {
-            background: #eff6ff;
-            color: #1d4ed8;
+        .home-dashboard .dashboard-grid .card .card-icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+        .home-dashboard .dashboard-grid .card .card-title {
+            font-size: 14px;
             font-weight: 700;
-            font-size: 11px;
-        }
-        .ca-table-wrapper td {
             color: #0f172a;
         }
-        .ca-table-wrapper .subject-col {
-            text-align: left;
-            min-width: 160px;
-            font-weight: 600;
-        }
-        .ca-table-wrapper .session-col {
-            text-align: left;
-            min-width: 140px;
-            font-size: 11px;
-        }
-        .percent-bar {
-            display: inline-block;
-            height: 8px;
-            background: #3b82f6;
-            border-radius: 10px;
+        .home-dashboard .dashboard-grid .card .card-value {
+            font-size: 13px;
+            color: #64748b;
             margin-top: 2px;
         }
-        .percent-bar.green { background: #10b981; }
-        .percent-bar.yellow { background: #f59e0b; }
-        .percent-bar.red { background: #ef4444; }
+        .home-dashboard .dashboard-grid .card .card-sub {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        .home-dashboard .quick-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #e2e8f0;
+        }
+        .home-dashboard .quick-info .info-row {
+            display: flex;
+            gap: 8px;
+            font-size: 13px;
+        }
+        .home-dashboard .quick-info .info-row .label {
+            color: #64748b;
+            font-weight: 500;
+        }
+        .home-dashboard .quick-info .info-row .value {
+            color: #0f172a;
+            font-weight: 600;
+        }
 
         /* ─── SIDEBAR MENU ─── */
         .sidebar-menu-container {
@@ -2038,19 +1929,11 @@
             .dashboard-header { padding: 10px 14px; min-height: 56px; }
             .header-title { font-size: 15px; }
             .header-logo { width: 36px; height: 36px; }
-            .notice-card { padding: 16px; font-size: 12px; max-width: 100%; }
-            .notice-card .notice-title { font-size: 18px; }
             .student-info-top { font-size: 12px; padding: 12px 16px; gap: 6px 12px; }
-            .nav-buttons { grid-template-columns: repeat(4, 1fr); gap: 6px; }
-            .nav-btn { font-size: 10px; padding: 8px 4px; }
-            .nav-btn i { font-size: 16px; }
-            .content-panel { padding: 14px; max-height: calc(100vh - 340px); max-height: calc(100dvh - 340px); }
-            .ca-table-wrapper { font-size: 10px; }
-            .ca-table-wrapper th, .ca-table-wrapper td { padding: 4px 4px; }
-            .ca-table-wrapper .subject-col { min-width: 100px; }
+            .home-dashboard { padding: 16px; max-height: calc(100vh - 280px); max-height: calc(100dvh - 280px); }
+            .home-dashboard .dashboard-grid { grid-template-columns: 1fr; }
+            .home-dashboard .quick-info { grid-template-columns: 1fr; }
             .dashboard-content { padding: 8px 12px 16px; gap: 12px; }
-            .dangling-notices { padding: 0 8px; }
-            .notice-string { height: 20px; }
             .sidebar-page-body .readonly-form .field-row {
                 flex-direction: column;
                 padding: 8px 0;
@@ -2090,15 +1973,15 @@
             }
         }
         @media (max-width: 480px) {
-            .nav-buttons { grid-template-columns: repeat(2, 1fr); }
             .dashboard-header { flex-wrap: wrap; gap: 4px; padding: 8px 12px; }
             .header-title { font-size: 13px; order: 3; width: 100%; text-align: center; }
             .header-logo { order: 1; }
             .header-actions-left { order: 2; }
             .sidebar-menu-container { width: 260px; }
+            .home-dashboard { max-height: calc(100vh - 260px); max-height: calc(100dvh - 260px); }
         }
         @media (min-height: 800px) {
-            .content-panel { max-height: calc(100vh - 420px); max-height: calc(100dvh - 420px); }
+            .home-dashboard { max-height: calc(100vh - 320px); max-height: calc(100dvh - 320px); }
         }
         @supports (padding: env(safe-area-inset-top)) {
             .dashboard-header { padding-left: calc(20px + env(safe-area-inset-left)); padding-right: calc(20px + env(safe-area-inset-right)); }
@@ -2213,150 +2096,44 @@
                 <span class="info-item"><i class="fas fa-graduation-cap"></i> <span class="label">Program:</span> DIPLOMA IN COMPUTER SYSTEMS ENGINEERING</span>
             </div>
 
-            <!-- DANGLING NOTICES - No animation -->
-            <div class="dangling-notices">
-                <div class="notice-string"></div>
-                <div class="notice-card">
-                    <h3><span class="accent">NORTEC</span></h3>
-                    <div class="sub">NORTHERN TECHNICAL COLLEGE</div>
-                    <div style="font-size:11px; color:#64748b; margin-bottom:6px;">Skills • Innovation • Empowerment</div>
-                    <div class="notice-title">NOTICE OF<br />CHANGE<br />OF GRADUATION DATE</div>
-                    <p style="margin:8px 0; font-size:12px;">The Management of NORTEC wishes to inform all graduating students, parents, guardians, invited guests, and the general public that the Graduation Ceremony which was scheduled to take place on 5th June 2026 at the NORTEC Graduation Square has been postponed.</p>
-                    <p style="margin:6px 0; font-weight:700;">THE CEREMONY WILL NOW TAKE PLACE AS FOLLOWS:</p>
-                    <p><span class="notice-date">DATE:</span> 15th July 2026</p>
-                    <p><span class="notice-venue">VENUE:</span> LEVY MWANAWASA STADIUM</p>
-                    <p><span class="notice-time">TIME:</span> 08:30 HOURS</p>
-                    <p style="font-size:11px; margin:6px 0;">This change has been necessitated by the ongoing road works currently being conducted along CHELA ROAD.</p>
-                    <p style="font-size:11px; margin:6px 0;">Management regrets any inconvenience caused and appreciates your understanding and cooperation.</p>
-                    <div class="footer-line">Issued by: MANAGEMENT<br />NORTHERN TECHNICAL COLLEGE (NORTEC)</div>
-                    <div style="font-size:10px; color:#94a3b8; margin-top:6px;">Creative Minds. | Creative Hands. | Building Competence. Inspiring Success.</div>
-                </div>
-            </div>
-
-            <!-- CONTENT AREA -->
+            <!-- HOME DASHBOARD CONTENT - Directly displayed -->
             <div class="dashboard-content">
-                <!-- NAV BUTTONS -->
-                <div class="nav-buttons">
-                    <button class="nav-btn active" data-panel="home"><i class="fas fa-home"></i> Home</button>
-                    <button class="nav-btn" data-panel="classes"><i class="fas fa-chalkboard"></i> Classes</button>
-                    <button class="nav-btn" data-panel="ca"><i class="fas fa-chart-bar"></i> CA</button>
-                    <button class="nav-btn" data-panel="profile"><i class="fas fa-user-circle"></i> Profile</button>
-                </div>
-
-                <!-- HOME PANEL -->
-                <div class="content-panel active" id="panel-home">
-                    <h3><i class="fas fa-home"></i> Dashboard Home</h3>
-                    <p style="color:#334155; font-size:14px;">Welcome back, <strong style="color:#3b82f6;">Jubel Mobela</strong>!</p>
-                    <p style="color:#64748b; font-size:13px; margin-top:4px;">Use the navigation buttons above or the sidebar menu for detailed information.</p>
-                    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:16px;">
-                        <div style="background:#f8fafc; border-radius:12px; padding:14px; text-align:center; border:1px solid #e2e8f0;">
-                            <div style="font-size:28px; color:#3b82f6;">📚</div>
-                            <div style="font-size:13px; font-weight:600; margin-top:4px; color:#0f172a;">Current Term</div>
-                            <div style="font-size:11px; color:#64748b;">Term 2 • 2026</div>
+                <div class="home-dashboard" id="homeDashboard">
+                    <h2><span class="accent">📊</span> Dashboard Overview</h2>
+                    <p style="color:#64748b; font-size:14px; margin-bottom:12px;">Welcome back, <strong style="color:#3b82f6;">Jubel Mobela</strong>! Here's your current academic overview.</p>
+                    
+                    <div class="dashboard-grid">
+                        <div class="card">
+                            <div class="card-icon">📚</div>
+                            <div class="card-title">Current Term</div>
+                            <div class="card-value">Term 2 • 2026</div>
+                            <div class="card-sub">8 weeks completed</div>
                         </div>
-                        <div style="background:#f8fafc; border-radius:12px; padding:14px; text-align:center; border:1px solid #e2e8f0;">
-                            <div style="font-size:28px; color:#f59e0b;">📊</div>
-                            <div style="font-size:13px; font-weight:600; margin-top:4px; color:#0f172a;">CA Average</div>
-                            <div style="font-size:11px; color:#64748b;">32% • 17 Subjects</div>
+                        <div class="card">
+                            <div class="card-icon">📊</div>
+                            <div class="card-title">CA Average</div>
+                            <div class="card-value">32%</div>
+                            <div class="card-sub">17 Subjects • 7 completed</div>
                         </div>
-                        <div style="background:#f8fafc; border-radius:12px; padding:14px; text-align:center; border:1px solid #e2e8f0;">
-                            <div style="font-size:28px; color:#ef4444;">⚠️</div>
-                            <div style="font-size:13px; font-weight:600; margin-top:4px; color:#0f172a;">Clearance</div>
-                            <div style="font-size:11px; color:#64748b;">Not Cleared</div>
+                        <div class="card">
+                            <div class="card-icon">✅</div>
+                            <div class="card-title">Attendance</div>
+                            <div class="card-value">90.5%</div>
+                            <div class="card-sub">Satisfactory</div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- CLASSES PANEL -->
-                <div class="content-panel" id="panel-classes">
-                    <h3><i class="fas fa-chalkboard"></i> Classes (Simulated)</h3>
-                    <div style="display:grid; gap:8px;">
-                        <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                            <div><strong>Digital Electronics II</strong> <span style="font-size:11px; color:#64748b;">(41.1)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Banda</span></div>
-                            <div style="font-size:11px; color:#3b82f6; font-weight:600;">Mon 10:00</div>
-                        </div>
-                        <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                            <div><strong>Operating Systems</strong> <span style="font-size:11px; color:#64748b;">(41.3)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Dr. Mwansa</span></div>
-                            <div style="font-size:11px; color:#3b82f6; font-weight:600;">Tue 08:00</div>
-                        </div>
-                        <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                            <div><strong>Programming & Database Tech</strong> <span style="font-size:11px; color:#64748b;">(41.4)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Tembo</span></div>
-                            <div style="font-size:11px; color:#3b82f6; font-weight:600;">Wed 14:00</div>
-                        </div>
-                        <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                            <div><strong>Networks & Communications</strong> <span style="font-size:11px; color:#64748b;">(41.5)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Ms. Phiri</span></div>
-                            <div style="font-size:11px; color:#3b82f6; font-weight:600;">Thu 09:00</div>
-                        </div>
-                        <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                            <div><strong>Computer Hardware Maintenance</strong> <span style="font-size:11px; color:#64748b;">(41.6)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Zulu</span></div>
-                            <div style="font-size:11px; color:#3b82f6; font-weight:600;">Fri 11:00</div>
-                        </div>
-                        <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                            <div><strong>Management Information Systems</strong> <span style="font-size:11px; color:#64748b;">(41.7)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Dr. Mulenga</span></div>
-                            <div style="font-size:11px; color:#3b82f6; font-weight:600;">Thu 13:00</div>
+                        <div class="card">
+                            <div class="card-icon">⚠️</div>
+                            <div class="card-title">Clearance Status</div>
+                            <div class="card-value" style="color:#ef4444;">Not Cleared</div>
+                            <div class="card-sub">6 departments pending</div>
                         </div>
                     </div>
-                </div>
 
-                <!-- CA PANEL -->
-                <div class="content-panel" id="panel-ca">
-                    <h3><i class="fas fa-chart-bar"></i> Continuous Assessment (CA)</h3>
-                    <div class="ca-table-wrapper">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th rowspan="2">Session</th>
-                                    <th rowspan="2">Subject</th>
-                                    <th colspan="4">TERM ONE</th>
-                                    <th colspan="4">TERM TWO</th>
-                                    <th colspan="3">TERM THREE</th>
-                                    <th rowspan="2">C.A 40%</th>
-                                    <th rowspan="2">C.A Meter</th>
-                                </tr>
-                                <tr>
-                                    <th>Asst 1</th><th>Asst 2</th><th>Mid</th><th>End</th>
-                                    <th>Asst 1</th><th>Asst 2</th><th>Mid</th><th>End</th>
-                                    <th>Asst 1</th><th>Asst 2</th><th>Mid</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">DIGITAL ELECTRONICS II (41.1)</td><td>90</td><td>84</td><td>82</td><td>85</td><td>70</td><td>92</td><td>75</td><td>67</td><td>88</td><td>92</td><td>75</td><td>33</td><td><div class="percent-bar green" style="width:82%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">ENTREPRENEURSHIP (41.2)</td><td>84</td><td>82</td><td>80</td><td>76</td><td>97</td><td>97</td><td>95</td><td>64</td><td>97</td><td>70</td><td>79</td><td>33</td><td><div class="percent-bar green" style="width:82%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">OPERATING SYSTEMS (41.3)</td><td>95</td><td>95</td><td>53</td><td>83</td><td>70</td><td>90</td><td>33</td><td>57</td><td>80</td><td>78</td><td>80</td><td>30</td><td><div class="percent-bar yellow" style="width:75%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">PROGRAMMING & DATABASE TECH (41.4)</td><td>35</td><td>88</td><td>100</td><td>75</td><td>64</td><td>60</td><td>60</td><td>45</td><td>100</td><td>100</td><td>79</td><td>29</td><td><div class="percent-bar yellow" style="width:72%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">NETWORKS & COMMUNICATIONS (41.5)</td><td>90</td><td>90</td><td>68</td><td>70</td><td>90</td><td>75</td><td>90</td><td>70</td><td>90</td><td>95</td><td>85</td><td>33</td><td><div class="percent-bar green" style="width:82%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">COMPUTER HARDWARE MAINTENANCE (41.6)</td><td>80</td><td>80</td><td>61</td><td>70</td><td>70</td><td>75</td><td>90</td><td>71</td><td>80</td><td>75</td><td>70</td><td>30</td><td><div class="percent-bar yellow" style="width:75%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">MANAGEMENT INFORMATION SYSTEMS (41.7)</td><td>85</td><td>65</td><td>75</td><td>70</td><td>86</td><td>79</td><td>85</td><td>75</td><td>79</td><td>80</td><td>88</td><td>32</td><td><div class="percent-bar green" style="width:80%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Engineering Mathematics (28.1)</td><td>100</td><td>100</td><td>60</td><td>100</td><td>100</td><td>100</td><td>86</td><td>75</td><td>100</td><td>100</td><td>86</td><td>37</td><td><div class="percent-bar green" style="width:92%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Hardware Repair (Practical) (28.11)</td><td>50</td><td>61</td><td>70</td><td>77</td><td>76</td><td>80</td><td>68</td><td>83</td><td>74</td><td>70</td><td>68</td><td>28</td><td><div class="percent-bar yellow" style="width:70%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Hardware Repair (Theory) (28.12)</td><td>95</td><td>100</td><td>97</td><td>53</td><td>100</td><td>80</td><td>60</td><td>85</td><td>50</td><td>63</td><td>88</td><td>32</td><td><div class="percent-bar green" style="width:80%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Engineering Science (28.2)</td><td>44</td><td>80</td><td>84</td><td>65</td><td>85</td><td>95</td><td>82</td><td>60</td><td>85</td><td>95</td><td>75</td><td>31</td><td><div class="percent-bar yellow" style="width:77%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Communication Skills (28.3)</td><td>94</td><td>91</td><td>77</td><td>67</td><td>90</td><td>92</td><td>88</td><td>71</td><td>56</td><td>91</td><td>74</td><td>32</td><td><div class="percent-bar green" style="width:80%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Digital Electronics I (28.4)</td><td>90</td><td>80</td><td>70</td><td>70</td><td>85</td><td>85</td><td>74</td><td>55</td><td>94</td><td>91</td><td>74</td><td>32</td><td><div class="percent-bar green" style="width:80%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Foundation of Management (28.5)</td><td>86</td><td>92</td><td>85</td><td>87</td><td>97</td><td>95</td><td>95</td><td>89</td><td>90</td><td>85</td><td>90</td><td>36</td><td><div class="percent-bar green" style="width:90%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">IT & Application Packages (Theory) (28.6)</td><td>85</td><td>80</td><td>90</td><td>78</td><td>70</td><td>80</td><td>78</td><td>50</td><td>95</td><td>95</td><td>78</td><td>32</td><td><div class="percent-bar green" style="width:80%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">IT & Application Packages (Practical) (28.7)</td><td>100</td><td>100</td><td>82</td><td>90</td><td>80</td><td>70</td><td>100</td><td>80</td><td>70</td><td>90</td><td>80</td><td>34</td><td><div class="percent-bar green" style="width:85%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Networks (Theory) (28.8)</td><td>75</td><td>75</td><td>90</td><td>90</td><td>78</td><td>89</td><td>90</td><td>88</td><td>95</td><td>70</td><td>83</td><td>34</td><td><div class="percent-bar green" style="width:85%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Networks (Practical) (28.9)</td><td>100</td><td>100</td><td>72</td><td>60</td><td>100</td><td>70</td><td>92</td><td>87</td><td>99</td><td>100</td><td>80</td><td>35</td><td><div class="percent-bar green" style="width:87%;"></div></td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div style="margin-top:8px; font-size:11px; color:#64748b; text-align:center;">* CA Meter shows percentage of CA score out of 40%</div>
-                </div>
-
-                <!-- PROFILE PANEL -->
-                <div class="content-panel" id="panel-profile">
-                    <h3><i class="fas fa-user-circle"></i> Student Profile</h3>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:13px;">
-                        <div style="color:#64748b;">Full Name:</div><div style="color:#0f172a; font-weight:600;">JUBEL MOBELA</div>
-                        <div style="color:#64748b;">Student Number:</div><div style="color:#0f172a; font-weight:600;">2201001157</div>
-                        <div style="color:#64748b;">ID Number:</div><div style="color:#0f172a; font-weight:600;">622589/67/1</div>
-                        <div style="color:#64748b;">Program:</div><div style="color:#0f172a; font-weight:600;">DIPLOMA IN COMPUTER SYSTEMS ENGINEERING</div>
-                        <div style="color:#64748b;">Current Term:</div><div style="color:#0f172a; font-weight:600;">TERM 2</div>
-                        <div style="color:#64748b;">Intake:</div><div style="color:#0f172a; font-weight:600;">January 2022</div>
-                        <div style="color:#64748b;">Accommodation:</div><div style="color:#0f172a; font-weight:600;">Kwacha Building, Kabwe Floor 3, Room 16</div>
-                        <div style="color:#64748b;">Email:</div><div style="color:#0f172a; font-weight:600;">jubel.mobela@northerntech.edu.zm</div>
-                        <div style="color:#64748b;">Phone:</div><div style="color:#0f172a; font-weight:600;">+260 97 123 4567</div>
+                    <div class="quick-info">
+                        <div class="info-row"><span class="label">📅 Intake:</span><span class="value">January 2022</span></div>
+                        <div class="info-row"><span class="label">🏠 Accommodation:</span><span class="value">Kwacha Building, Kabwe Floor 3, Room 16</span></div>
+                        <div class="info-row"><span class="label">📧 Email:</span><span class="value">jubel.mobela@northerntech.edu.zm</span></div>
+                        <div class="info-row"><span class="label">📱 Phone:</span><span class="value">+260 97 123 4567</span></div>
                     </div>
                 </div>
             </div>
@@ -2371,6 +2148,10 @@
             <button class="sidebar-menu-close" id="sidebarMenuClose"><i class="fas fa-times"></i></button>
         </div>
         <button class="sidebar-menu-item" data-page="application"><i class="fas fa-file-alt"></i> Application</button>
+        <button class="sidebar-menu-item" data-page="classes"><i class="fas fa-chalkboard"></i> Classes</button>
+        <button class="sidebar-menu-item" data-page="ca"><i class="fas fa-chart-bar"></i> CA</button>
+        <button class="sidebar-menu-item" data-page="profile"><i class="fas fa-user-circle"></i> Profile</button>
+        <button class="sidebar-menu-item" data-page="notice"><i class="fas fa-bullhorn"></i> Notice</button>
         <button class="sidebar-menu-item" data-page="exams"><i class="fas fa-calendar-check"></i> Exams</button>
         <button class="sidebar-menu-item" data-page="clearance"><i class="fas fa-check-circle"></i> Clearance</button>
         <button class="sidebar-menu-item" data-page="accommodation"><i class="fas fa-bed"></i> Accommodation</button>
@@ -2432,6 +2213,152 @@
                 <li>Any changes to your program must be submitted to the admissions office.</li>
                 <li>For any inquiries, contact admissions@northerntech.edu.zm</li>
             </ul>
+        </div>
+    </div>
+
+    <!-- Classes Page -->
+    <div class="sidebar-page" id="page-classes">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Classes</span> (Simulated)</h2>
+            <button class="sidebar-page-close" data-page-close="classes"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3><i class="fas fa-chalkboard"></i> Current Classes</h3>
+            <div style="display:grid; gap:8px;">
+                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Digital Electronics II</strong> <span style="font-size:11px; color:#64748b;">(41.1)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Banda</span></div>
+                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Mon 10:00</div>
+                </div>
+                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Operating Systems</strong> <span style="font-size:11px; color:#64748b;">(41.3)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Dr. Mwansa</span></div>
+                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Tue 08:00</div>
+                </div>
+                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Programming & Database Tech</strong> <span style="font-size:11px; color:#64748b;">(41.4)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Tembo</span></div>
+                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Wed 14:00</div>
+                </div>
+                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Networks & Communications</strong> <span style="font-size:11px; color:#64748b;">(41.5)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Ms. Phiri</span></div>
+                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Thu 09:00</div>
+                </div>
+                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Computer Hardware Maintenance</strong> <span style="font-size:11px; color:#64748b;">(41.6)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Zulu</span></div>
+                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Fri 11:00</div>
+                </div>
+                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Management Information Systems</strong> <span style="font-size:11px; color:#64748b;">(41.7)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Dr. Mulenga</span></div>
+                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Thu 13:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CA Page -->
+    <div class="sidebar-page" id="page-ca">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Continuous Assessment</span> (CA)</h2>
+            <button class="sidebar-page-close" data-page-close="ca"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3><i class="fas fa-chart-bar"></i> CA Results</h3>
+            <div class="ca-table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Session</th>
+                            <th rowspan="2">Subject</th>
+                            <th colspan="4">TERM ONE</th>
+                            <th colspan="4">TERM TWO</th>
+                            <th colspan="3">TERM THREE</th>
+                            <th rowspan="2">C.A 40%</th>
+                            <th rowspan="2">C.A Meter</th>
+                        </tr>
+                        <tr>
+                            <th>Asst 1</th><th>Asst 2</th><th>Mid</th><th>End</th>
+                            <th>Asst 1</th><th>Asst 2</th><th>Mid</th><th>End</th>
+                            <th>Asst 1</th><th>Asst 2</th><th>Mid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">DIGITAL ELECTRONICS II (41.1)</td><td>90</td><td>84</td><td>82</td><td>85</td><td>70</td><td>92</td><td>75</td><td>67</td><td>88</td><td>92</td><td>75</td><td>33</td><td><div class="percent-bar green" style="width:82%;"></div></td></tr>
+                        <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">ENTREPRENEURSHIP (41.2)</td><td>84</td><td>82</td><td>80</td><td>76</td><td>97</td><td>97</td><td>95</td><td>64</td><td>97</td><td>70</td><td>79</td><td>33</td><td><div class="percent-bar green" style="width:82%;"></div></td></tr>
+                        <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">OPERATING SYSTEMS (41.3)</td><td>95</td><td>95</td><td>53</td><td>83</td><td>70</td><td>90</td><td>33</td><td>57</td><td>80</td><td>78</td><td>80</td><td>30</td><td><div class="percent-bar yellow" style="width:75%;"></div></td></tr>
+                        <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">PROGRAMMING & DATABASE TECH (41.4)</td><td>35</td><td>88</td><td>100</td><td>75</td><td>64</td><td>60</td><td>60</td><td>45</td><td>100</td><td>100</td><td>79</td><td>29</td><td><div class="percent-bar yellow" style="width:72%;"></div></td></tr>
+                        <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">NETWORKS & COMMUNICATIONS (41.5)</td><td>90</td><td>90</td><td>68</td><td>70</td><td>90</td><td>75</td><td>90</td><td>70</td><td>90</td><td>95</td><td>85</td><td>33</td><td><div class="percent-bar green" style="width:82%;"></div></td></tr>
+                        <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">COMPUTER HARDWARE MAINTENANCE (41.6)</td><td>80</td><td>80</td><td>61</td><td>70</td><td>70</td><td>75</td><td>90</td><td>71</td><td>80</td><td>75</td><td>70</td><td>30</td><td><div class="percent-bar yellow" style="width:75%;"></div></td></tr>
+                        <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">MANAGEMENT INFORMATION SYSTEMS (41.7)</td><td>85</td><td>65</td><td>75</td><td>70</td><td>86</td><td>79</td><td>85</td><td>75</td><td>79</td><td>80</td><td>88</td><td>32</td><td><div class="percent-bar green" style="width:80%;"></div></td></tr>
+                        <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Engineering Mathematics (28.1)</td><td>100</td><td>100</td><td>60</td><td>100</td><td>100</td><td>100</td><td>86</td><td>75</td><td>100</td><td>100</td><td>86</td><td>37</td><td><div class="percent-bar green" style="width:92%;"></div></td></tr>
+                        <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Hardware Repair (Practical) (28.11)</td><td>50</td><td>61</td><td>70</td><td>77</td><td>76</td><td>80</td><td>68</td><td>83</td><td>74</td><td>70</td><td>68</td><td>28</td><td><div class="percent-bar yellow" style="width:70%;"></div></td></tr>
+                        <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Hardware Repair (Theory) (28.12)</td><td>95</td><td>100</td><td>97</td><td>53</td><td>100</td><td>80</td><td>60</td><td>85</td><td>50</td><td>63</td><td>88</td><td>32</td><td><div class="percent-bar green" style="width:80%;"></div></td></tr>
+                        <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Engineering Science (28.2)</td><td>44</td><td>80</td><td>84</td><td>65</td><td>85</td><td>95</td><td>82</td><td>60</td><td>85</td><td>95</td><td>75</td><td>31</td><td><div class="percent-bar yellow" style="width:77%;"></div></td></tr>
+                        <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Communication Skills (28.3)</td><td>94</td><td>91</td><td>77</td><td>67</td><td>90</td><td>92</td><td>88</td><td>71</td><td>56</td><td>91</td><td>74</td><td>32</td><td><div class="percent-bar green" style="width:80%;"></div></td></tr>
+                        <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Digital Electronics I (28.4)</td><td>90</td><td>80</td><td>70</td><td>70</td><td>85</td><td>85</td><td>74</td><td>55</td><td>94</td><td>91</td><td>74</td><td>32</td><td><div class="percent-bar green" style="width:80%;"></div></td></tr>
+                        <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Foundation of Management (28.5)</td><td>86</td><td>92</td><td>85</td><td>87</td><td>97</td><td>95</td><td>95</td><td>89</td><td>90</td><td>85</td><td>90</td><td>36</td><td><div class="percent-bar green" style="width:90%;"></div></td></tr>
+                        <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">IT & Application Packages (Theory) (28.6)</td><td>85</td><td>80</td><td>90</td><td>78</td><td>70</td><td>80</td><td>78</td><td>50</td><td>95</td><td>95</td><td>78</td><td>32</td><td><div class="percent-bar green" style="width:80%;"></div></td></tr>
+                        <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">IT & Application Packages (Practical) (28.7)</td><td>100</td><td>100</td><td>82</td><td>90</td><td>80</td><td>70</td><td>100</td><td>80</td><td>70</td><td>90</td><td>80</td><td>34</td><td><div class="percent-bar green" style="width:85%;"></div></td></tr>
+                        <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Networks (Theory) (28.8)</td><td>75</td><td>75</td><td>90</td><td>90</td><td>78</td><td>89</td><td>90</td><td>88</td><td>95</td><td>70</td><td>83</td><td>34</td><td><div class="percent-bar green" style="width:85%;"></div></td></tr>
+                        <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Networks (Practical) (28.9)</td><td>100</td><td>100</td><td>72</td><td>60</td><td>100</td><td>70</td><td>92</td><td>87</td><td>99</td><td>100</td><td>80</td><td>35</td><td><div class="percent-bar green" style="width:87%;"></div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top:8px; font-size:11px; color:#64748b; text-align:center;">* CA Meter shows percentage of CA score out of 40%</div>
+        </div>
+    </div>
+
+    <!-- Profile Page -->
+    <div class="sidebar-page" id="page-profile">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Student</span> Profile</h2>
+            <button class="sidebar-page-close" data-page-close="profile"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3><i class="fas fa-user-circle"></i> Profile Information</h3>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:13px;">
+                <div style="color:#64748b;">Full Name:</div><div style="color:#0f172a; font-weight:600;">JUBEL MOBELA</div>
+                <div style="color:#64748b;">Student Number:</div><div style="color:#0f172a; font-weight:600;">2201001157</div>
+                <div style="color:#64748b;">ID Number:</div><div style="color:#0f172a; font-weight:600;">622589/67/1</div>
+                <div style="color:#64748b;">Program:</div><div style="color:#0f172a; font-weight:600;">DIPLOMA IN COMPUTER SYSTEMS ENGINEERING</div>
+                <div style="color:#64748b;">Current Term:</div><div style="color:#0f172a; font-weight:600;">TERM 2</div>
+                <div style="color:#64748b;">Intake:</div><div style="color:#0f172a; font-weight:600;">January 2022</div>
+                <div style="color:#64748b;">Accommodation:</div><div style="color:#0f172a; font-weight:600;">Kwacha Building, Kabwe Floor 3, Room 16</div>
+                <div style="color:#64748b;">Email:</div><div style="color:#0f172a; font-weight:600;">jubel.mobela@northerntech.edu.zm</div>
+                <div style="color:#64748b;">Phone:</div><div style="color:#0f172a; font-weight:600;">+260 97 123 4567</div>
+                <div style="color:#64748b;">Date of Birth:</div><div style="color:#0f172a; font-weight:600;">15th March 2000</div>
+                <div style="color:#64748b;">Gender:</div><div style="color:#0f172a; font-weight:600;">Male</div>
+                <div style="color:#64748b;">Nationality:</div><div style="color:#0f172a; font-weight:600;">Zambian</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notice Page -->
+    <div class="sidebar-page" id="page-notice">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Notice</span> Board</h2>
+            <button class="sidebar-page-close" data-page-close="notice"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3><i class="fas fa-bullhorn"></i> Official Notice</h3>
+            <div style="background:#ffffff; border-radius:16px; padding:24px; border:1px solid #dbeafe; box-shadow:0 2px 12px rgba(59,130,246,0.08);">
+                <div style="text-align:center; margin-bottom:16px;">
+                    <h3 style="font-size:18px; font-weight:800; color:#0f172a; border-bottom:none; padding-bottom:0;">NORTEC</h3>
+                    <div style="font-size:12px; color:#64748b; letter-spacing:1px;">NORTHERN TECHNICAL COLLEGE</div>
+                    <div style="font-size:11px; color:#64748b; margin-top:4px;">Skills • Innovation • Empowerment</div>
+                    <div style="font-size:22px; font-weight:900; color:#dc2626; margin:12px 0 4px;">NOTICE OF<br />CHANGE<br />OF GRADUATION DATE</div>
+                </div>
+                <p style="font-size:13px; line-height:1.6; color:#334155; margin:8px 0;">The Management of NORTEC wishes to inform all graduating students, parents, guardians, invited guests, and the general public that the Graduation Ceremony which was scheduled to take place on 5th June 2026 at the NORTEC Graduation Square has been postponed.</p>
+                <p style="font-size:13px; font-weight:700; color:#0f172a; margin:8px 0;">THE CEREMONY WILL NOW TAKE PLACE AS FOLLOWS:</p>
+                <p style="font-size:13px; color:#334155;"><strong style="color:#3b82f6;">DATE:</strong> 15th July 2026</p>
+                <p style="font-size:13px; color:#334155;"><strong style="color:#3b82f6;">VENUE:</strong> LEVY MWANAWASA STADIUM</p>
+                <p style="font-size:13px; color:#334155;"><strong style="color:#3b82f6;">TIME:</strong> 08:30 HOURS</p>
+                <p style="font-size:12px; color:#64748b; margin:8px 0;">This change has been necessitated by the ongoing road works currently being conducted along CHELA ROAD.</p>
+                <p style="font-size:12px; color:#64748b; margin:8px 0;">Management regrets any inconvenience caused and appreciates your understanding and cooperation.</p>
+                <div style="font-size:11px; color:#64748b; text-align:center; margin-top:12px; font-style:italic;">Issued by: MANAGEMENT<br />NORTHERN TECHNICAL COLLEGE (NORTEC)</div>
+                <div style="font-size:10px; color:#94a3b8; text-align:center; margin-top:8px;">Creative Minds. | Creative Hands. | Building Competence. Inspiring Success.</div>
+            </div>
         </div>
     </div>
 
@@ -3660,13 +3587,6 @@
             const sidebarMenu = document.getElementById('sidebarMenu');
             const sidebarMenuClose = document.getElementById('sidebarMenuClose');
             const sidebarLogout = document.getElementById('sidebarLogout');
-            const navBtns = document.querySelectorAll('.nav-btn');
-            const panels = {
-                home: document.getElementById('panel-home'),
-                classes: document.getElementById('panel-classes'),
-                ca: document.getElementById('panel-ca'),
-                profile: document.getElementById('panel-profile')
-            };
             const sidebarMenuItems = document.querySelectorAll('.sidebar-menu-item');
             const sidebarPages = document.querySelectorAll('.sidebar-page');
             const pageCloseBtns = document.querySelectorAll('.sidebar-page-close');
@@ -4033,15 +3953,6 @@
                 }
             }
 
-            function switchPanel(panelId) {
-                navBtns.forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.panel === panelId);
-                });
-                Object.keys(panels).forEach(key => {
-                    panels[key].classList.toggle('active', key === panelId);
-                });
-            }
-
             function openSidebarPage(pageId) {
                 // Close sidebar menu
                 toggleSidebar(false);
@@ -4227,7 +4138,6 @@
 
             headerLogo.addEventListener('click', function() {
                 toggleSidebar(false);
-                switchPanel('home');
             });
 
             forgotLink.addEventListener('click', (e) => { e.preventDefault(); alert('📧 Password reset link sent to your registered email.\n(Simulated)'); });
@@ -4249,19 +4159,14 @@
                 }
             });
 
-            // ─── DASHBOARD EVENT BINDINGS ──────────────────────
+            // ─── SIDEBAR EVENT BINDINGS ──────────────────────
             sidebarToggle.addEventListener('click', () => toggleSidebar(true));
             sidebarMenuClose.addEventListener('click', () => toggleSidebar(false));
             sidebarOverlayMenu.addEventListener('click', () => toggleSidebar(false));
 
-            navBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    switchPanel(this.dataset.panel);
-                });
-            });
-
             sidebarMenuItems.forEach(btn => {
                 btn.addEventListener('click', function() {
+                    if (this.classList.contains('logout-item')) return;
                     const pageId = this.dataset.page;
                     openSidebarPage(pageId);
                 });
@@ -4284,8 +4189,7 @@
 
             // ─── INIT ─────────────────────────────────────────────
             showMain();
-            switchPanel('home');
-            console.log('✅ Northern Technical College – full dashboard with sidebar on left, TEVETA form with logo, logout in sidebar.');
+            console.log('✅ Northern Technical College – full dashboard with notice in sidebar, home dashboard, classes/CA/profile as sidebar pages.');
         })();
     </script>
 </body>
