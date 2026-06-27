@@ -1565,6 +1565,10 @@
             background: #d1fae5;
             color: #065f46;
         }
+        .sidebar-page-body .status-badge.notcleared {
+            background: #fee2e2;
+            color: #991b1b;
+        }
         .sidebar-page-body .status-badge.rejected {
             background: #fee2e2;
             color: #991b1b;
@@ -1678,6 +1682,352 @@
             object-fit: contain;
         }
 
+        /* ─── TEVETA FORM STYLES ─── */
+        .teveta-form-container {
+            font-family: 'Inter', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+        }
+        .teveta-form-container .form-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .teveta-form-container .form-header h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #0f172a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .teveta-form-container .form-header .logo-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .teveta-form-container .form-header .logo-section img {
+            height: 60px;
+            object-fit: contain;
+        }
+        .teveta-form-container .form-header .logo-section .address-text {
+            font-size: 10px;
+            color: #64748b;
+            text-align: right;
+            line-height: 1.4;
+        }
+        .teveta-form-container .form-header .logo-section .address-text strong {
+            color: #0f172a;
+        }
+        .teveta-form-container .form-field {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 4px;
+        }
+        .teveta-form-container .form-field .field-number {
+            font-weight: 700;
+            color: #0f172a;
+            min-width: 30px;
+            font-size: 13px;
+        }
+        .teveta-form-container .form-field .field-label {
+            font-weight: 600;
+            color: #0f172a;
+            font-size: 13px;
+            min-width: 140px;
+        }
+        .teveta-form-container .form-field .field-input {
+            flex: 1;
+            border: none;
+            border-bottom: 1px solid #0f172a;
+            padding: 2px 4px;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            background: transparent;
+            outline: none;
+        }
+        .teveta-form-container .form-field .field-input:focus {
+            border-bottom: 2px solid #3b82f6;
+        }
+        .teveta-form-container .form-field .field-input[readonly] {
+            border-bottom: 1px solid #94a3b8;
+            color: #475569;
+        }
+        .teveta-form-container .form-field .field-box-input {
+            border: 1px solid #0f172a;
+            padding: 2px 4px;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            background: transparent;
+            outline: none;
+            width: 30px;
+            text-align: center;
+        }
+        .teveta-form-container .form-field .field-box-input:focus {
+            border-color: #3b82f6;
+        }
+        .teveta-form-container .form-field .field-box-input.readonly {
+            border-color: #94a3b8;
+            color: #475569;
+        }
+        .teveta-form-container .form-field .box-group {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+        .teveta-form-container .form-field .box-group .box-label {
+            font-size: 11px;
+            color: #64748b;
+        }
+        .teveta-form-container .form-field .box-group .box-input {
+            border: 1px solid #0f172a;
+            padding: 2px 4px;
+            font-size: 12px;
+            font-family: 'Inter', sans-serif;
+            background: transparent;
+            outline: none;
+            width: 28px;
+            text-align: center;
+        }
+        .teveta-form-container .form-field .box-group .box-input:focus {
+            border-color: #3b82f6;
+        }
+        .teveta-form-container .form-field .box-group .box-input.readonly {
+            border-color: #94a3b8;
+            color: #475569;
+        }
+        .teveta-form-container .form-field .subjects-list {
+            flex: 1;
+        }
+        .teveta-form-container .form-field .subjects-list .subject-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 2px 0;
+        }
+        .teveta-form-container .form-field .subjects-list .subject-row input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #3b82f6;
+            cursor: pointer;
+        }
+        .teveta-form-container .form-field .subjects-list .subject-row input[type="checkbox"]:disabled {
+            accent-color: #94a3b8;
+            cursor: not-allowed;
+        }
+        .teveta-form-container .form-field .subjects-list .subject-row .subject-text {
+            font-size: 13px;
+            color: #0f172a;
+        }
+        .teveta-form-container .form-field .subjects-list .subject-row .subject-line {
+            flex: 1;
+            border-bottom: 1px solid #0f172a;
+            height: 1px;
+            margin-left: 4px;
+        }
+        .teveta-form-container .form-field .subjects-list .subject-row .subject-line.readonly {
+            border-color: #94a3b8;
+        }
+        .teveta-form-container .form-field .inline-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .teveta-form-container .form-field .inline-group .inline-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .teveta-form-container .form-field .inline-group .inline-item .inline-label {
+            font-size: 12px;
+            color: #475569;
+        }
+        .teveta-form-container .form-field .inline-group .inline-item .inline-box {
+            border: 1px solid #0f172a;
+            padding: 2px 4px;
+            font-size: 12px;
+            font-family: 'Inter', sans-serif;
+            background: transparent;
+            outline: none;
+            width: 28px;
+            text-align: center;
+        }
+        .teveta-form-container .form-field .inline-group .inline-item .inline-box:focus {
+            border-color: #3b82f6;
+        }
+        .teveta-form-container .form-field .inline-group .inline-item .inline-box.readonly {
+            border-color: #94a3b8;
+            color: #475569;
+        }
+        .teveta-form-container .form-field .year-box-group {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .teveta-form-container .form-field .year-box-group .year-box {
+            border: 1px solid #0f172a;
+            padding: 2px 4px;
+            font-size: 12px;
+            font-family: 'Inter', sans-serif;
+            background: transparent;
+            outline: none;
+            width: 28px;
+            text-align: center;
+        }
+        .teveta-form-container .form-field .year-box-group .year-box:focus {
+            border-color: #3b82f6;
+        }
+        .teveta-form-container .form-field .year-box-group .year-box.readonly {
+            border-color: #94a3b8;
+            color: #475569;
+        }
+        .teveta-form-container .form-field .year-box-group .year-label {
+            font-size: 11px;
+            color: #64748b;
+        }
+        .teveta-form-container .form-field .mode-select-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .teveta-form-container .form-field .mode-select-group .mode-option {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: #0f172a;
+        }
+        .teveta-form-container .form-field .mode-select-group .mode-option input[type="radio"] {
+            accent-color: #3b82f6;
+            cursor: pointer;
+        }
+        .teveta-form-container .form-field .mode-select-group .mode-option input[type="radio"]:disabled {
+            accent-color: #94a3b8;
+            cursor: not-allowed;
+        }
+        .teveta-form-container .form-field .year-select-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .teveta-form-container .form-field .year-select-group .year-option {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: #0f172a;
+        }
+        .teveta-form-container .form-field .year-select-group .year-option input[type="radio"] {
+            accent-color: #3b82f6;
+            cursor: pointer;
+        }
+        .teveta-form-container .form-field .year-select-group .year-option input[type="radio"]:disabled {
+            accent-color: #94a3b8;
+            cursor: not-allowed;
+        }
+        .teveta-form-container .form-field .exam-series-boxes {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .teveta-form-container .form-field .exam-series-boxes .series-box {
+            border: 1px solid #0f172a;
+            padding: 2px 4px;
+            font-size: 12px;
+            font-family: 'Inter', sans-serif;
+            background: transparent;
+            outline: none;
+            width: 28px;
+            text-align: center;
+        }
+        .teveta-form-container .form-field .exam-series-boxes .series-box:focus {
+            border-color: #3b82f6;
+        }
+        .teveta-form-container .form-field .exam-series-boxes .series-box.readonly {
+            border-color: #94a3b8;
+            color: #475569;
+        }
+        .teveta-form-container .form-field .exam-series-boxes .series-label {
+            font-size: 11px;
+            color: #64748b;
+        }
+        .teveta-form-container .form-field .teveta-no-boxes {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .teveta-form-container .form-field .teveta-no-boxes .no-box {
+            border: 1px solid #0f172a;
+            padding: 2px 4px;
+            font-size: 12px;
+            font-family: 'Inter', sans-serif;
+            background: transparent;
+            outline: none;
+            width: 28px;
+            text-align: center;
+        }
+        .teveta-form-container .form-field .teveta-no-boxes .no-box:focus {
+            border-color: #3b82f6;
+        }
+        .teveta-form-container .form-field .teveta-no-boxes .no-box.readonly {
+            border-color: #94a3b8;
+            color: #475569;
+        }
+        .teveta-form-container .form-field .year-enrolment-boxes {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .teveta-form-container .form-field .year-enrolment-boxes .enrol-box {
+            border: 1px solid #0f172a;
+            padding: 2px 4px;
+            font-size: 12px;
+            font-family: 'Inter', sans-serif;
+            background: transparent;
+            outline: none;
+            width: 28px;
+            text-align: center;
+        }
+        .teveta-form-container .form-field .year-enrolment-boxes .enrol-box:focus {
+            border-color: #3b82f6;
+        }
+        .teveta-form-container .form-field .year-enrolment-boxes .enrol-box.readonly {
+            border-color: #94a3b8;
+            color: #475569;
+        }
+        .teveta-form-container .form-field .year-enrolment-boxes .enrol-label {
+            font-size: 11px;
+            color: #64748b;
+        }
+        .teveta-form-container .btn-submit-teveta {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 12px 32px;
+            background: #3b82f6;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        .teveta-form-container .btn-submit-teveta:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(59,130,246,0.3);
+        }
+
         /* ─── RESPONSIVE ─── */
         @media (max-width: 768px) {
             .sidebar-menu-container { width: 280px; }
@@ -1708,6 +2058,35 @@
             .sidebar-page-body .readonly-form .field-label {
                 width: 100%;
                 margin-bottom: 2px;
+            }
+            .teveta-form-container .form-field {
+                flex-direction: column;
+                gap: 4px;
+            }
+            .teveta-form-container .form-field .field-label {
+                min-width: auto;
+            }
+            .teveta-form-container .form-field .field-number {
+                min-width: auto;
+            }
+            .teveta-form-container .form-header .logo-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .teveta-form-container .form-header .logo-section .address-text {
+                text-align: center;
+            }
+            .teveta-form-container .form-field .inline-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .teveta-form-container .form-field .mode-select-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .teveta-form-container .form-field .year-select-group {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
         @media (max-width: 480px) {
@@ -1881,9 +2260,9 @@
                             <div style="font-size:11px; color:#64748b;">32% • 17 Subjects</div>
                         </div>
                         <div style="background:#f8fafc; border-radius:12px; padding:14px; text-align:center; border:1px solid #e2e8f0;">
-                            <div style="font-size:28px; color:#10b981;">✅</div>
+                            <div style="font-size:28px; color:#ef4444;">⚠️</div>
                             <div style="font-size:13px; font-weight:600; margin-top:4px; color:#0f172a;">Clearance</div>
-                            <div style="font-size:11px; color:#64748b;">Fully Cleared</div>
+                            <div style="font-size:11px; color:#64748b;">Not Cleared</div>
                         </div>
                     </div>
                 </div>
@@ -2097,24 +2476,27 @@
         <div class="sidebar-page-body">
             <h3><i class="fas fa-check-circle"></i> Clearance Verification</h3>
             <table>
-                <tr><th>Department</th><th>Status</th><th>Date Cleared</th><th>Remarks</th></tr>
-                <tr><td>Accounts</td><td><span class="status-badge cleared">Cleared</span></td><td>15th June 2026</td><td>Balance: K0.00</td></tr>
-                <tr><td>Library</td><td><span class="status-badge cleared">Cleared</span></td><td>12th June 2026</td><td>All books returned</td></tr>
-                <tr><td>Sports</td><td><span class="status-badge cleared">Cleared</span></td><td>10th June 2026</td><td>No pending dues</td></tr>
-                <tr><td>HOD</td><td><span class="status-badge cleared">Cleared</span></td><td>14th June 2026</td><td>All projects completed</td></tr>
-                <tr><td>Lab Attendant</td><td><span class="status-badge cleared">Cleared</span></td><td>11th June 2026</td><td>Equipment returned</td></tr>
-                <tr><td>Admissions</td><td><span class="status-badge cleared">Cleared</span></td><td>16th June 2026</td><td>Records verified</td></tr>
+                <tr><th>Department</th><th>Status</th><th>Reason</th><th>Remarks</th></tr>
+                <tr><td>Accounts</td><td><span class="status-badge notcleared">Not Cleared</span></td><td>Balance: K1,800</td><td>Outstanding fees need to be settled</td></tr>
+                <tr><td>Library</td><td><span class="status-badge notcleared">Not Cleared</span></td><td>2 Books Overdue</td><td>Return books to clear</td></tr>
+                <tr><td>Sports</td><td><span class="status-badge notcleared">Not Cleared</span></td><td>Sports Equipment Pending</td><td>Return borrowed equipment</td></tr>
+                <tr><td>HOD</td><td><span class="status-badge notcleared">Not Cleared</span></td><td>Project Report Pending</td><td>Submit final project report</td></tr>
+                <tr><td>Lab Attendant</td><td><span class="status-badge notcleared">Not Cleared</span></td><td>Lab Equipment Missing</td><td>Return lab equipment</td></tr>
+                <tr><td>Admissions</td><td><span class="status-badge notcleared">Not Cleared</span></td><td>Document Verification</td><td>Submit missing documents</td></tr>
             </table>
             
             <h3><i class="fas fa-clipboard-check"></i> Clearance Summary</h3>
-            <p><strong>Overall Status:</strong> <span class="highlight-green">✓ FULLY CLEARED</span></p>
-            <p>You are ready to close your studies at NORTEC for the current academic year.</p>
+            <p><strong>Overall Status:</strong> <span class="highlight-red">✗ NOT CLEARED</span></p>
+            <p>You are currently in the middle of the term. Please clear all outstanding issues to complete your clearance.</p>
             
             <h3><i class="fas fa-arrow-right"></i> Next Steps</h3>
             <ol>
-                <li>Visit the admissions office to finalize your clearance.</li>
-                <li>Collect your clearance certificate.</li>
-                <li>Return any outstanding college property.</li>
+                <li>Settle outstanding fees with the Accounts department.</li>
+                <li>Return overdue library books.</li>
+                <li>Return borrowed sports equipment.</li>
+                <li>Submit your final project report to the HOD.</li>
+                <li>Return all lab equipment to the Lab Attendant.</li>
+                <li>Submit any missing documents to Admissions.</li>
             </ol>
         </div>
     </div>
@@ -2482,104 +2864,193 @@
             <h3><i class="fas fa-edit"></i> TEVETA Exam Entry Form</h3>
             <p>Complete the form below to register for your TEVETA examinations. All fields are required.</p>
             
-            <div class="teveta-form-logo">
-                <img src="teveta.png" alt="TEVETA Logo" />
-            </div>
-            
             <div id="tevetaFormContainer">
-                <form id="tevetaForm">
-                    <div class="form-group">
-                        <label>1. COURSE</label>
-                        <input type="text" value="DIPLOMA IN COMPUTER SYSTEMS ENGINEERING - Code 41" readonly style="background:#f1f5f9;" />
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>2. EXAMINATION SERIES</label>
-                        <select id="examSeries" required>
-                            <option value="">Select Examination Series</option>
-                            <option value="June 2026">June 2026</option>
-                            <option value="December 2026">December 2026</option>
-                            <option value="June 2027">June 2027</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>3. TEVETA EXAM NO</label>
-                        <input type="text" id="tevetaExamNo" placeholder="Enter TEVETA Exam Number" required />
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>4. EXAMINATION CENTER NAME</label>
-                        <input type="text" value="NORTHERN TECHNICAL COLLEGE" readonly style="background:#f1f5f9;" />
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>5. SURNAME</label>
-                        <input type="text" id="surname" value="MOBELA" required />
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>6. FORENAMES</label>
-                        <input type="text" id="forenames" value="JUBEL" required />
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>7. INSTITUTION OF STUDY</label>
-                        <input type="text" value="NORTHERN TECHNICAL COLLEGE" readonly style="background:#f1f5f9;" />
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>8. YEAR OF ENROLMENT</label>
-                        <input type="text" id="yearEnrolment" value="2022" required />
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>9. Mode of Study</label>
-                        <input type="text" value="Full-time" readonly style="background:#f1f5f9;" />
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>10. YEAR OF STUDY</label>
-                        <select id="yearStudy" required>
-                            <option value="">Select Year of Study</option>
-                            <option value="Year 1">Year 1</option>
-                            <option value="Year 2">Year 2</option>
-                            <option value="Year 3">Year 3</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>11. SUBJECTS TO BE TAKEN</label>
-                        <div style="display:grid; gap:6px; margin-top:4px;">
-                            <label style="font-weight:400; font-size:13px; display:flex; align-items:center; gap:8px;">
-                                <input type="checkbox" checked disabled /> (i) 41.1 Digital Electronics
-                            </label>
-                            <label style="font-weight:400; font-size:13px; display:flex; align-items:center; gap:8px;">
-                                <input type="checkbox" checked disabled /> (ii) 41.2 Entrepreneurship
-                            </label>
-                            <label style="font-weight:400; font-size:13px; display:flex; align-items:center; gap:8px;">
-                                <input type="checkbox" checked disabled /> (iii) 41.3 Operating Systems
-                            </label>
-                            <label style="font-weight:400; font-size:13px; display:flex; align-items:center; gap:8px;">
-                                <input type="checkbox" checked disabled /> (iv) 41.4 Programming & Database Technology
-                            </label>
-                            <label style="font-weight:400; font-size:13px; display:flex; align-items:center; gap:8px;">
-                                <input type="checkbox" checked disabled /> (v) 41.5 Networks & Communications
-                            </label>
-                            <label style="font-weight:400; font-size:13px; display:flex; align-items:center; gap:8px;">
-                                <input type="checkbox" checked disabled /> (vi) 41.6 Computer Hardware Maintenance & Repair
-                            </label>
-                            <label style="font-weight:400; font-size:13px; display:flex; align-items:center; gap:8px;">
-                                <input type="checkbox" checked disabled /> (vii) 41.7 Management Information Systems
-                            </label>
-                            <label style="font-weight:400; font-size:13px; display:flex; align-items:center; gap:8px;">
-                                <input type="checkbox" checked disabled /> (viii) 41.8 Project
-                            </label>
+                <div class="teveta-form-container">
+                    <div class="form-header">
+                        <div class="logo-section">
+                            <img src="teveta.png" alt="TEVETA Logo" />
+                            <div class="address-text">
+                                <strong>Post 4751, Heritage Walk, Lusaka</strong><br />
+                                P.O. Box 50163, Lusaka, Zambia<br />
+                                <strong>Tel:</strong> +260-211-255513 / 255519 / 255438<br />
+                                <strong>Fax:</strong> +260-1-253852<br />
+                                <strong>Email:</strong> teveta@teveta.org.zm<br />
+                                <strong>Website:</strong> www.teveta.org.zm
+                            </div>
                         </div>
+                        <h2>TEVETA EXAMINATION ENTRY FORM</h2>
                     </div>
-                    
-                    <button type="submit" class="btn-form-submit" id="submitTevetaForm"><i class="fas fa-paper-plane"></i> Submit TEVETA Application</button>
-                </form>
+
+                    <form id="tevetaForm">
+                        <div class="form-field">
+                            <span class="field-number">1.</span>
+                            <span class="field-label">COURSE:</span>
+                            <input type="text" class="field-input" value="DIPLOMA IN COMPUTER SYSTEMS ENGINEERING – Code 41" readonly />
+                        </div>
+                        
+                        <div class="form-field">
+                            <span class="field-number">2.</span>
+                            <span class="field-label">EXAMINATION SERIES:</span>
+                            <div class="exam-series-boxes">
+                                <input type="text" class="series-box" id="exSeriesM" maxlength="1" placeholder="M" />
+                                <input type="text" class="series-box" id="exSeriesA" maxlength="1" placeholder="A" />
+                                <input type="text" class="series-box" id="exSeriesY1" maxlength="2" placeholder="Y" />
+                                <span class="series-label">/</span>
+                                <input type="text" class="series-box" id="exSeriesY2" maxlength="2" placeholder="Y" />
+                            </div>
+                        </div>
+                        
+                        <div class="form-field">
+                            <span class="field-number">3.</span>
+                            <span class="field-label">TEVETA EXAM NO:</span>
+                            <div class="teveta-no-boxes">
+                                <input type="text" class="no-box" id="tevetaNo1" maxlength="1" placeholder="0" />
+                                <input type="text" class="no-box" id="tevetaNo2" maxlength="1" placeholder="0" />
+                                <input type="text" class="no-box" id="tevetaNo3" maxlength="1" placeholder="0" />
+                                <input type="text" class="no-box" id="tevetaNo4" maxlength="1" placeholder="0" />
+                                <input type="text" class="no-box" id="tevetaNo5" maxlength="1" placeholder="0" />
+                                <input type="text" class="no-box" id="tevetaNo6" maxlength="1" placeholder="0" />
+                                <input type="text" class="no-box" id="tevetaNo7" maxlength="1" placeholder="0" />
+                                <input type="text" class="no-box" id="tevetaNo8" maxlength="1" placeholder="0" />
+                                <input type="text" class="no-box" id="tevetaNo9" maxlength="1" placeholder="0" />
+                                <input type="text" class="no-box" id="tevetaNo10" maxlength="1" placeholder="0" />
+                            </div>
+                        </div>
+                        
+                        <div class="form-field">
+                            <span class="field-number">4.</span>
+                            <span class="field-label">EXAMINATION CENTER NAME:</span>
+                            <input type="text" class="field-input" value="NORTHERN TECHNICAL COLLEGE" readonly />
+                        </div>
+                        
+                        <div class="form-field">
+                            <span class="field-number">5.</span>
+                            <span class="field-label">SURNAME:</span>
+                            <input type="text" class="field-input" id="surname" value="MOBELA" required />
+                        </div>
+                        
+                        <div class="form-field">
+                            <span class="field-number">6.</span>
+                            <span class="field-label">FORENAMES:</span>
+                            <input type="text" class="field-input" id="forenames" value="JUBEL" required />
+                        </div>
+                        
+                        <div class="form-field">
+                            <span class="field-number">7.</span>
+                            <span class="field-label">INSTITUTION OF STUDY:</span>
+                            <input type="text" class="field-input" value="NORTHERN TECHNICAL COLLEGE" readonly />
+                        </div>
+                        
+                        <div class="form-field">
+                            <span class="field-number">8.</span>
+                            <span class="field-label">YEAR OF ENROLMENT:</span>
+                            <div class="year-enrolment-boxes">
+                                <input type="text" class="enrol-box" id="enrolY1" maxlength="2" placeholder="Y" />
+                                <input type="text" class="enrol-box" id="enrolY2" maxlength="2" placeholder="Y" />
+                                <span class="enrol-label">/</span>
+                                <input type="text" class="enrol-box" id="enrolY3" maxlength="2" placeholder="Y" />
+                                <input type="text" class="enrol-box" id="enrolY4" maxlength="2" placeholder="Y" />
+                            </div>
+                        </div>
+                        
+                        <div class="form-field">
+                            <span class="field-number">9.</span>
+                            <span class="field-label">Mode of Study:</span>
+                            <div class="mode-select-group">
+                                <label class="mode-option">
+                                    <input type="radio" name="mode" value="Full-time" checked disabled /> Full-time
+                                </label>
+                                <label class="mode-option">
+                                    <input type="radio" name="mode" value="Distance" disabled /> Distance
+                                </label>
+                                <label class="mode-option">
+                                    <input type="radio" name="mode" value="Workplace" disabled /> Workplace
+                                </label>
+                                <label class="mode-option">
+                                    <input type="radio" name="mode" value="Part-time" disabled /> Part-time
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-field">
+                            <span class="field-number">10.</span>
+                            <span class="field-label">YEAR OF STUDY</span>
+                            <div class="year-select-group">
+                                <label class="year-option">
+                                    <input type="radio" name="yearStudy" value="First" /> First
+                                </label>
+                                <label class="year-option">
+                                    <input type="radio" name="yearStudy" value="Second" checked /> Second
+                                </label>
+                                <label class="year-option">
+                                    <input type="radio" name="yearStudy" value="Third" /> Third
+                                </label>
+                                <label class="year-option">
+                                    <input type="radio" name="yearStudy" value="Fourth" /> Fourth
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-field">
+                            <span class="field-number">11.</span>
+                            <span class="field-label">SUBJECTS TO BE TAKEN (Indicate whether practical or written paper)</span>
+                            <div class="subjects-list">
+                                <div class="subject-row">
+                                    <input type="checkbox" checked disabled />
+                                    <span class="subject-text">(i) 41.1 Digital Electronics</span>
+                                    <span class="subject-line"></span>
+                                </div>
+                                <div class="subject-row">
+                                    <input type="checkbox" checked disabled />
+                                    <span class="subject-text">(ii) 41.2 Entrepreneurship</span>
+                                    <span class="subject-line"></span>
+                                </div>
+                                <div class="subject-row">
+                                    <input type="checkbox" checked disabled />
+                                    <span class="subject-text">(iii) 41.3 Operating Systems</span>
+                                    <span class="subject-line"></span>
+                                </div>
+                                <div class="subject-row">
+                                    <input type="checkbox" checked disabled />
+                                    <span class="subject-text">(iv) 41.4 Programming &amp; Database Technology</span>
+                                    <span class="subject-line"></span>
+                                </div>
+                                <div class="subject-row">
+                                    <input type="checkbox" checked disabled />
+                                    <span class="subject-text">(v) 41.5 Networks &amp; Communications</span>
+                                    <span class="subject-line"></span>
+                                </div>
+                                <div class="subject-row">
+                                    <input type="checkbox" checked disabled />
+                                    <span class="subject-text">(vi) 41.6 Computer Hardware Maintenance &amp; Repair</span>
+                                    <span class="subject-line"></span>
+                                </div>
+                                <div class="subject-row">
+                                    <input type="checkbox" checked disabled />
+                                    <span class="subject-text">(vii) 41.7 Management Information Systems</span>
+                                    <span class="subject-line"></span>
+                                </div>
+                                <div class="subject-row">
+                                    <input type="checkbox" checked disabled />
+                                    <span class="subject-text">(viii) 41.8 Project</span>
+                                    <span class="subject-line"></span>
+                                </div>
+                                <div class="subject-row">
+                                    <input type="checkbox" disabled />
+                                    <span class="subject-text">(ix)</span>
+                                    <span class="subject-line readonly"></span>
+                                </div>
+                                <div class="subject-row">
+                                    <input type="checkbox" disabled />
+                                    <span class="subject-text">(x)</span>
+                                    <span class="subject-line readonly"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit-teveta" id="submitTevetaForm"><i class="fas fa-paper-plane"></i> Submit TEVETA Application</button>
+                    </form>
+                </div>
             </div>
             
             <div id="tevetaSubmitted" style="display:none;">
@@ -3604,7 +4075,7 @@
                 const data = JSON.parse(localStorage.getItem('tevetaData'));
                 if (data) {
                     let html = `
-                        <div class="field-row"><span class="field-label">1. COURSE:</span><span class="field-value">${data.course || 'DIPLOMA IN COMPUTER SYSTEMS ENGINEERING - Code 41'}</span></div>
+                        <div class="field-row"><span class="field-label">1. COURSE:</span><span class="field-value">${data.course || 'DIPLOMA IN COMPUTER SYSTEMS ENGINEERING – Code 41'}</span></div>
                         <div class="field-row"><span class="field-label">2. EXAMINATION SERIES:</span><span class="field-value">${data.examSeries || ''}</span></div>
                         <div class="field-row"><span class="field-label">3. TEVETA EXAM NO:</span><span class="field-value">${data.tevetaExamNo || ''}</span></div>
                         <div class="field-row"><span class="field-label">4. EXAMINATION CENTER NAME:</span><span class="field-value">NORTHERN TECHNICAL COLLEGE</span></div>
@@ -3618,9 +4089,9 @@
                             <span class="subject-item">(i) 41.1 Digital Electronics</span>
                             <span class="subject-item">(ii) 41.2 Entrepreneurship</span>
                             <span class="subject-item">(iii) 41.3 Operating Systems</span>
-                            <span class="subject-item">(iv) 41.4 Programming & Database Technology</span>
-                            <span class="subject-item">(v) 41.5 Networks & Communications</span>
-                            <span class="subject-item">(vi) 41.6 Computer Hardware Maintenance & Repair</span>
+                            <span class="subject-item">(iv) 41.4 Programming &amp; Database Technology</span>
+                            <span class="subject-item">(v) 41.5 Networks &amp; Communications</span>
+                            <span class="subject-item">(vi) 41.6 Computer Hardware Maintenance &amp; Repair</span>
                             <span class="subject-item">(vii) 41.7 Management Information Systems</span>
                             <span class="subject-item">(viii) 41.8 Project</span>
                         </span></div>
@@ -3632,14 +4103,44 @@
             tevetaForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
+                // Collect data from form fields
+                const examSeries = 
+                    document.getElementById('exSeriesM').value +
+                    document.getElementById('exSeriesA').value +
+                    document.getElementById('exSeriesY1').value +
+                    '/' +
+                    document.getElementById('exSeriesY2').value;
+                
+                const tevetaExamNo = 
+                    document.getElementById('tevetaNo1').value +
+                    document.getElementById('tevetaNo2').value +
+                    document.getElementById('tevetaNo3').value +
+                    document.getElementById('tevetaNo4').value +
+                    document.getElementById('tevetaNo5').value +
+                    document.getElementById('tevetaNo6').value +
+                    document.getElementById('tevetaNo7').value +
+                    document.getElementById('tevetaNo8').value +
+                    document.getElementById('tevetaNo9').value +
+                    document.getElementById('tevetaNo10').value;
+                
+                const yearEnrolment = 
+                    document.getElementById('enrolY1').value +
+                    document.getElementById('enrolY2').value +
+                    '/' +
+                    document.getElementById('enrolY3').value +
+                    document.getElementById('enrolY4').value;
+                
+                const yearStudy = document.querySelector('input[name="yearStudy"]:checked') ? 
+                    document.querySelector('input[name="yearStudy"]:checked').value : '';
+                
                 const data = {
-                    course: 'DIPLOMA IN COMPUTER SYSTEMS ENGINEERING - Code 41',
-                    examSeries: document.getElementById('examSeries').value,
-                    tevetaExamNo: document.getElementById('tevetaExamNo').value,
+                    course: 'DIPLOMA IN COMPUTER SYSTEMS ENGINEERING – Code 41',
+                    examSeries: examSeries,
+                    tevetaExamNo: tevetaExamNo,
                     surname: document.getElementById('surname').value,
                     forenames: document.getElementById('forenames').value,
-                    yearEnrolment: document.getElementById('yearEnrolment').value,
-                    yearStudy: document.getElementById('yearStudy').value
+                    yearEnrolment: yearEnrolment,
+                    yearStudy: yearStudy
                 };
                 
                 // Validate required fields
