@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Northern Technical College</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
         /* ── RESET & FULL SCREEN BASE ── */
         * {
@@ -85,7 +85,7 @@
         }
 
         /* ENROLL PAGE (intake selection) */
-        #enrollPage, #programsPage, #shortCoursesPage {
+        #enrollPage, #programsPage, #shortCoursesPage, #dashboardPage {
             opacity: 0;
             transform: scale(0.96);
             visibility: hidden;
@@ -94,7 +94,7 @@
             padding-top: 40px;
             padding-bottom: 40px;
         }
-        #enrollPage.active, #programsPage.active, #shortCoursesPage.active {
+        #enrollPage.active, #programsPage.active, #shortCoursesPage.active, #dashboardPage.active {
             opacity: 1;
             transform: scale(1);
             visibility: visible;
@@ -963,9 +963,7 @@
         /* ─── DASHBOARD STYLES ─── */
         #dashboardPage {
             padding: 0;
-            background: rgba(10, 14, 23, 0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: #f8fafc;
         }
         .dashboard-container {
             width: 100%;
@@ -976,12 +974,11 @@
             flex-direction: column;
             overflow: hidden;
             position: relative;
+            margin: 0 auto;
         }
         .dashboard-header {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            background: #ffffff;
+            border-bottom: 2px solid #3b82f6;
             padding: 12px 20px;
             display: flex;
             align-items: center;
@@ -990,36 +987,38 @@
             position: relative;
             z-index: 10;
             min-height: 64px;
+            box-shadow: 0 2px 8px rgba(59,130,246,0.08);
         }
         .header-logo {
             width: 44px;
             height: 44px;
             object-fit: contain;
             border-radius: 10px;
-            background: rgba(255,255,255,0.1);
+            background: #eff6ff;
             padding: 4px;
             cursor: pointer;
             transition: transform 0.2s;
+            border: 1px solid #dbeafe;
         }
         .header-logo:hover { transform: scale(1.05); }
         .header-title {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 800;
-            color: #fff;
+            color: #0f172a;
             text-align: center;
             flex: 1;
             letter-spacing: 0.5px;
         }
-        .header-title .accent { color: #6cffa0; }
+        .header-title .accent { color: #3b82f6; }
         .header-actions {
             display: flex;
             align-items: center;
             gap: 8px;
         }
         .btn-sidebar-toggle {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #fff;
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
+            color: #3b82f6;
             width: 40px;
             height: 40px;
             border-radius: 10px;
@@ -1031,12 +1030,12 @@
             transition: all 0.2s;
         }
         .btn-sidebar-toggle:hover {
-            background: rgba(255,255,255,0.2);
+            background: #dbeafe;
         }
         .btn-logout-dash {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #fff;
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
+            color: #3b82f6;
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 13px;
@@ -1046,8 +1045,9 @@
             font-family: 'Inter', sans-serif;
         }
         .btn-logout-dash:hover {
-            background: rgba(255,255,255,0.2);
-            color: #ef4444;
+            background: #fee2e2;
+            border-color: #fecaca;
+            color: #dc2626;
         }
 
         /* DANGLING NOTICES */
@@ -1064,19 +1064,17 @@
         .notice-string {
             width: 2px;
             height: 28px;
-            background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.1));
+            background: linear-gradient(180deg, #3b82f6, #93c5fd);
             margin-bottom: 2px;
         }
         .notice-card {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: #ffffff;
             border-radius: 16px;
             padding: 20px 24px;
             max-width: 560px;
             width: 100%;
-            box-shadow: 0 12px 48px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 4px 20px rgba(59,130,246,0.10);
+            border: 1px solid #dbeafe;
             margin-bottom: 8px;
             color: #0f172a;
             font-size: 13px;
@@ -1095,9 +1093,10 @@
             color: #0f172a;
             margin-bottom: 4px;
         }
+        .notice-card h3 .accent { color: #3b82f6; }
         .notice-card .sub {
             font-size: 12px;
-            color: #475569;
+            color: #64748b;
             letter-spacing: 1px;
         }
         .notice-card .notice-title {
@@ -1108,15 +1107,15 @@
         }
         .notice-card .notice-date {
             font-weight: 700;
-            color: #2563eb;
+            color: #3b82f6;
         }
         .notice-card .notice-venue {
             font-weight: 700;
-            color: #2563eb;
+            color: #3b82f6;
         }
         .notice-card .notice-time {
             font-weight: 700;
-            color: #2563eb;
+            color: #3b82f6;
         }
         .notice-card .footer-line {
             font-size: 11px;
@@ -1127,15 +1126,13 @@
 
         /* STUDENT INFO FLOATING CURVE */
         .student-info-curve {
-            background: rgba(255, 255, 255, 0.88);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: #ffffff;
             border-radius: 20px 20px 40px 40px;
             padding: 14px 24px;
             max-width: 560px;
             width: 100%;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 4px 16px rgba(59,130,246,0.08);
+            border: 1px solid #dbeafe;
             margin-bottom: 12px;
             display: flex;
             flex-wrap: wrap;
@@ -1156,7 +1153,7 @@
             gap: 6px;
         }
         .student-info-curve .info-item i {
-            color: #2563eb;
+            color: #3b82f6;
             font-size: 14px;
         }
         .student-info-curve .info-item .label {
@@ -1172,13 +1169,14 @@
             display: flex;
             flex-direction: column;
             gap: 16px;
+            background: #f8fafc;
         }
         .dashboard-content::-webkit-scrollbar {
-            width: 4px;
-            background: transparent;
+            width: 6px;
+            background: #e2e8f0;
         }
         .dashboard-content::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.2);
+            background: #3b82f6;
             border-radius: 10px;
         }
 
@@ -1190,13 +1188,11 @@
             flex-shrink: 0;
         }
         .nav-btn {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
             border-radius: 14px;
             padding: 12px 6px;
-            color: #fff;
+            color: #0f172a;
             font-size: 12px;
             font-weight: 600;
             cursor: pointer;
@@ -1207,90 +1203,102 @@
             gap: 4px;
             text-align: center;
             line-height: 1.2;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
         }
         .nav-btn i {
             font-size: 20px;
-            color: #6cffa0;
+            color: #3b82f6;
         }
         .nav-btn:hover {
-            background: rgba(255,255,255,0.15);
+            background: #f8fafc;
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59,130,246,0.08);
         }
         .nav-btn:active { transform: scale(0.95); }
         .nav-btn.active {
-            background: rgba(108, 255, 160, 0.15);
-            border-color: rgba(108, 255, 160, 0.3);
+            background: #eff6ff;
+            border-color: #3b82f6;
+            color: #1d4ed8;
+        }
+        .nav-btn.active i {
+            color: #1d4ed8;
         }
 
         /* CONTENT PANELS - HOME OVERVIEW */
         .content-panel {
             display: none;
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            background: #ffffff;
             border-radius: 16px;
-            padding: 16px;
-            border: 1px solid rgba(255,255,255,0.04);
-            color: #fff;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            color: #0f172a;
             flex: 1;
             overflow-y: auto;
             max-height: calc(100vh - 380px);
             max-height: calc(100dvh - 380px);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
         }
         .content-panel.active {
             display: block;
         }
         .content-panel h3 {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 12px;
-            color: #6cffa0;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            padding-bottom: 8px;
+            margin-bottom: 16px;
+            color: #0f172a;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+        .content-panel h3 i {
+            color: #3b82f6;
+            margin-right: 8px;
         }
 
         /* CA TABLE */
         .ca-table-wrapper {
             overflow-x: auto;
-            font-size: 11px;
+            font-size: 12px;
         }
         .ca-table-wrapper table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 600px;
+            min-width: 700px;
         }
         .ca-table-wrapper th, .ca-table-wrapper td {
             padding: 6px 8px;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid #e2e8f0;
             text-align: center;
             white-space: nowrap;
         }
         .ca-table-wrapper th {
-            background: rgba(108, 255, 160, 0.1);
-            color: #6cffa0;
+            background: #eff6ff;
+            color: #1d4ed8;
             font-weight: 700;
-            font-size: 10px;
+            font-size: 11px;
         }
         .ca-table-wrapper td {
-            color: #e2e8f0;
+            color: #0f172a;
         }
         .ca-table-wrapper .subject-col {
             text-align: left;
-            min-width: 140px;
+            min-width: 160px;
             font-weight: 600;
         }
         .ca-table-wrapper .session-col {
             text-align: left;
-            min-width: 120px;
-            font-size: 10px;
+            min-width: 140px;
+            font-size: 11px;
         }
         .percent-bar {
             display: inline-block;
             height: 8px;
-            background: #10b981;
+            background: #3b82f6;
             border-radius: 10px;
             margin-top: 2px;
         }
+        .percent-bar.green { background: #10b981; }
+        .percent-bar.yellow { background: #f59e0b; }
+        .percent-bar.red { background: #ef4444; }
 
         /* ─── SIDEBAR MENU ─── */
         .sidebar-menu-container {
@@ -1304,7 +1312,7 @@
             z-index: 200;
             transform: translateX(-100%);
             transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
-            box-shadow: 4px 0 30px rgba(0,0,0,0.15);
+            box-shadow: 4px 0 30px rgba(59,130,246,0.15);
             display: flex;
             flex-direction: column;
             overflow-y: auto;
@@ -1314,7 +1322,7 @@
         }
         .sidebar-menu-header {
             padding: 20px 24px 16px;
-            border-bottom: 2px solid #3b82f6;
+            border-bottom: 3px solid #3b82f6;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -1380,7 +1388,7 @@
         .sidebar-overlay-menu {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.4);
             z-index: 199;
             opacity: 0;
             visibility: hidden;
@@ -1397,7 +1405,7 @@
             position: fixed;
             inset: 0;
             z-index: 100;
-            background: #ffffff;
+            background: #f8fafc;
             padding: 0;
             overflow-y: auto;
             animation: slideInPage 0.35s ease;
@@ -1420,13 +1428,16 @@
             position: sticky;
             top: 0;
             z-index: 5;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(59,130,246,0.06);
         }
         .sidebar-page-header .page-logo {
             width: 40px;
             height: 40px;
             object-fit: contain;
             border-radius: 8px;
+            background: #eff6ff;
+            padding: 4px;
+            border: 1px solid #dbeafe;
         }
         .sidebar-page-header h2 {
             font-size: 20px;
@@ -1462,10 +1473,11 @@
             font-weight: 700;
             color: #0f172a;
             margin: 20px 0 12px;
-            border-bottom: 2px solid #e2e8f0;
+            border-bottom: 2px solid #3b82f6;
             padding-bottom: 8px;
         }
         .sidebar-page-body h3 .accent { color: #3b82f6; }
+        .sidebar-page-body h3 i { color: #3b82f6; margin-right: 8px; }
         .sidebar-page-body h4 {
             font-size: 15px;
             font-weight: 700;
@@ -1529,7 +1541,7 @@
             margin: 8px 0;
         }
         .sidebar-page-body .info-grid .item {
-            background: #f8fafc;
+            background: #ffffff;
             padding: 12px 16px;
             border-radius: 8px;
             border: 1px solid #e2e8f0;
@@ -1568,16 +1580,89 @@
             background: #d1fae5;
             color: #065f46;
         }
+        .sidebar-page-body .status-badge.rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .sidebar-page-body .btn-form-submit {
+            display: inline-block;
+            margin: 12px 0 8px;
+            padding: 12px 28px;
+            background: #3b82f6;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar-page-body .btn-form-submit:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(59,130,246,0.3);
+        }
+        .sidebar-page-body .form-group {
+            margin-bottom: 14px;
+        }
+        .sidebar-page-body .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 4px;
+        }
+        .sidebar-page-body .form-group input, 
+        .sidebar-page-body .form-group select,
+        .sidebar-page-body .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid #d1d5db;
+            background: #ffffff;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: border 0.2s;
+        }
+        .sidebar-page-body .form-group input:focus,
+        .sidebar-page-body .form-group select:focus,
+        .sidebar-page-body .form-group textarea:focus {
+            border-color: #3b82f6;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.10);
+        }
+        .sidebar-page-body .upload-area {
+            border: 2px dashed #d1d5db;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            background: #f8fafc;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .sidebar-page-body .upload-area:hover {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+        .sidebar-page-body .upload-area i {
+            font-size: 32px;
+            color: #94a3b8;
+        }
+        .sidebar-page-body .upload-area p {
+            margin-top: 6px;
+            color: #64748b;
+        }
 
-        /* RESPONSIVE */
-        @media (max-width: 640px) {
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
             .sidebar-menu-container { width: 280px; }
             .sidebar-page-header { padding: 12px 16px; }
             .sidebar-page-header h2 { font-size: 17px; }
             .sidebar-page-body { padding: 16px; }
             .sidebar-page-body .info-grid { grid-template-columns: 1fr; }
             .dashboard-header { padding: 10px 14px; min-height: 56px; }
-            .header-title { font-size: 14px; }
+            .header-title { font-size: 15px; }
             .header-logo { width: 36px; height: 36px; }
             .notice-card { padding: 16px; font-size: 12px; max-width: 100%; }
             .notice-card .notice-title { font-size: 18px; }
@@ -1585,7 +1670,7 @@
             .nav-buttons { grid-template-columns: repeat(4, 1fr); gap: 6px; }
             .nav-btn { font-size: 10px; padding: 8px 4px; }
             .nav-btn i { font-size: 16px; }
-            .content-panel { padding: 12px; max-height: calc(100vh - 340px); max-height: calc(100dvh - 340px); }
+            .content-panel { padding: 14px; max-height: calc(100vh - 340px); max-height: calc(100dvh - 340px); }
             .ca-table-wrapper { font-size: 10px; }
             .ca-table-wrapper th, .ca-table-wrapper td { padding: 4px 4px; }
             .ca-table-wrapper .subject-col { min-width: 100px; }
@@ -1593,12 +1678,13 @@
             .dangling-notices { padding: 0 8px; }
             .notice-string { height: 20px; }
         }
-        @media (max-width: 420px) {
+        @media (max-width: 480px) {
             .nav-buttons { grid-template-columns: repeat(2, 1fr); }
             .dashboard-header { flex-wrap: wrap; gap: 4px; }
-            .header-title { font-size: 12px; order: 3; width: 100%; text-align: center; }
+            .header-title { font-size: 13px; order: 3; width: 100%; text-align: center; }
             .header-logo { order: 1; }
             .header-actions { order: 2; }
+            .sidebar-menu-container { width: 260px; }
         }
         @media (min-height: 800px) {
             .content-panel { max-height: calc(100vh - 420px); max-height: calc(100dvh - 420px); }
@@ -1610,9 +1696,9 @@
         }
         .page::-webkit-scrollbar { width: 0; background: transparent; }
         .sidebar-page::-webkit-scrollbar { width: 6px; background: #f1f5f9; }
-        .sidebar-page::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .sidebar-page::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
         .sidebar-menu-container::-webkit-scrollbar { width: 6px; background: #f1f5f9; }
-        .sidebar-menu-container::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .sidebar-menu-container::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -1710,9 +1796,9 @@
             <div class="dangling-notices">
                 <div class="notice-string"></div>
                 <div class="notice-card">
-                    <h3>NORTEC</h3>
+                    <h3><span class="accent">NORTEC</span></h3>
                     <div class="sub">NORTHERN TECHNICAL COLLEGE</div>
-                    <div style="font-size:11px; color:#475569; margin-bottom:6px;">Skills • Innovation • Empowerment</div>
+                    <div style="font-size:11px; color:#64748b; margin-bottom:6px;">Skills • Innovation • Empowerment</div>
                     <div class="notice-title">NOTICE OF<br />CHANGE<br />OF GRADUATION DATE</div>
                     <p style="margin:8px 0; font-size:12px;">The Management of NORTEC wishes to inform all graduating students, parents, guardians, invited guests, and the general public that the Graduation Ceremony which was scheduled to take place on 5th June 2026 at the NORTEC Graduation Square has been postponed.</p>
                     <p style="margin:6px 0; font-weight:700;">THE CEREMONY WILL NOW TAKE PLACE AS FOLLOWS:</p>
@@ -1748,18 +1834,23 @@
                 <!-- HOME PANEL -->
                 <div class="content-panel active" id="panel-home">
                     <h3><i class="fas fa-home"></i> Dashboard Home</h3>
-                    <p style="color:#cbd5e1; font-size:14px;">Welcome back, <strong style="color:#6cffa0;">Jubel Mobela</strong>!</p>
-                    <p style="color:#94a3b8; font-size:13px; margin-top:4px;">Use the navigation buttons above or the sidebar menu for detailed information.</p>
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px;">
-                        <div style="background:rgba(255,255,255,0.04); border-radius:12px; padding:14px; text-align:center;">
-                            <div style="font-size:28px; color:#6cffa0;">📚</div>
-                            <div style="font-size:13px; font-weight:600; margin-top:4px;">Current Term</div>
-                            <div style="font-size:11px; color:#94a3b8;">Term 2 • 2026</div>
+                    <p style="color:#334155; font-size:14px;">Welcome back, <strong style="color:#3b82f6;">Jubel Mobela</strong>!</p>
+                    <p style="color:#64748b; font-size:13px; margin-top:4px;">Use the navigation buttons above or the sidebar menu for detailed information.</p>
+                    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:16px;">
+                        <div style="background:#f8fafc; border-radius:12px; padding:14px; text-align:center; border:1px solid #e2e8f0;">
+                            <div style="font-size:28px; color:#3b82f6;">📚</div>
+                            <div style="font-size:13px; font-weight:600; margin-top:4px; color:#0f172a;">Current Term</div>
+                            <div style="font-size:11px; color:#64748b;">Term 2 • 2026</div>
                         </div>
-                        <div style="background:rgba(255,255,255,0.04); border-radius:12px; padding:14px; text-align:center;">
+                        <div style="background:#f8fafc; border-radius:12px; padding:14px; text-align:center; border:1px solid #e2e8f0;">
                             <div style="font-size:28px; color:#f59e0b;">📊</div>
-                            <div style="font-size:13px; font-weight:600; margin-top:4px;">CA Average</div>
-                            <div style="font-size:11px; color:#94a3b8;">32% • 17 Subjects</div>
+                            <div style="font-size:13px; font-weight:600; margin-top:4px; color:#0f172a;">CA Average</div>
+                            <div style="font-size:11px; color:#64748b;">32% • 17 Subjects</div>
+                        </div>
+                        <div style="background:#f8fafc; border-radius:12px; padding:14px; text-align:center; border:1px solid #e2e8f0;">
+                            <div style="font-size:28px; color:#10b981;">✅</div>
+                            <div style="font-size:13px; font-weight:600; margin-top:4px; color:#0f172a;">Clearance</div>
+                            <div style="font-size:11px; color:#64748b;">Fully Cleared</div>
                         </div>
                     </div>
                 </div>
@@ -1768,25 +1859,29 @@
                 <div class="content-panel" id="panel-classes">
                     <h3><i class="fas fa-chalkboard"></i> Classes (Simulated)</h3>
                     <div style="display:grid; gap:8px;">
-                        <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
-                            <div><strong>Digital Electronics II</strong> <span style="font-size:11px; color:#94a3b8;">(41.1)</span></div>
-                            <div style="font-size:11px; color:#6cffa0;">Mon 10:00</div>
+                        <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                            <div><strong>Digital Electronics II</strong> <span style="font-size:11px; color:#64748b;">(41.1)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Banda</span></div>
+                            <div style="font-size:11px; color:#3b82f6; font-weight:600;">Mon 10:00</div>
                         </div>
-                        <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
-                            <div><strong>Operating Systems</strong> <span style="font-size:11px; color:#94a3b8;">(41.3)</span></div>
-                            <div style="font-size:11px; color:#6cffa0;">Tue 08:00</div>
+                        <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                            <div><strong>Operating Systems</strong> <span style="font-size:11px; color:#64748b;">(41.3)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Dr. Mwansa</span></div>
+                            <div style="font-size:11px; color:#3b82f6; font-weight:600;">Tue 08:00</div>
                         </div>
-                        <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
-                            <div><strong>Programming & Database Tech</strong> <span style="font-size:11px; color:#94a3b8;">(41.4)</span></div>
-                            <div style="font-size:11px; color:#6cffa0;">Wed 14:00</div>
+                        <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                            <div><strong>Programming & Database Tech</strong> <span style="font-size:11px; color:#64748b;">(41.4)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Tembo</span></div>
+                            <div style="font-size:11px; color:#3b82f6; font-weight:600;">Wed 14:00</div>
                         </div>
-                        <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
-                            <div><strong>Networks & Communications</strong> <span style="font-size:11px; color:#94a3b8;">(41.5)</span></div>
-                            <div style="font-size:11px; color:#6cffa0;">Thu 09:00</div>
+                        <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                            <div><strong>Networks & Communications</strong> <span style="font-size:11px; color:#64748b;">(41.5)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Ms. Phiri</span></div>
+                            <div style="font-size:11px; color:#3b82f6; font-weight:600;">Thu 09:00</div>
                         </div>
-                        <div style="background:rgba(255,255,255,0.04); border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center;">
-                            <div><strong>Computer Hardware Maintenance</strong> <span style="font-size:11px; color:#94a3b8;">(41.6)</span></div>
-                            <div style="font-size:11px; color:#6cffa0;">Fri 11:00</div>
+                        <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                            <div><strong>Computer Hardware Maintenance</strong> <span style="font-size:11px; color:#64748b;">(41.6)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Zulu</span></div>
+                            <div style="font-size:11px; color:#3b82f6; font-weight:600;">Fri 11:00</div>
+                        </div>
+                        <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                            <div><strong>Management Information Systems</strong> <span style="font-size:11px; color:#64748b;">(41.7)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Dr. Mulenga</span></div>
+                            <div style="font-size:11px; color:#3b82f6; font-weight:600;">Thu 13:00</div>
                         </div>
                     </div>
                 </div>
@@ -1813,41 +1908,43 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">DIGITAL ELECTRONICS II (41.1)</td><td>90</td><td>84</td><td>82</td><td>85</td><td>70</td><td>92</td><td>75</td><td>67</td><td>88</td><td>92</td><td>75</td><td>33</td><td><div class="percent-bar" style="width:82%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">ENTREPRENEURSHIP (41.2)</td><td>84</td><td>82</td><td>80</td><td>76</td><td>97</td><td>97</td><td>95</td><td>64</td><td>97</td><td>70</td><td>79</td><td>33</td><td><div class="percent-bar" style="width:82%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">OPERATING SYSTEMS (41.3)</td><td>95</td><td>95</td><td>53</td><td>83</td><td>70</td><td>90</td><td>33</td><td>57</td><td>80</td><td>78</td><td>80</td><td>30</td><td><div class="percent-bar" style="width:75%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">PROGRAMMING & DATABASE TECH (41.4)</td><td>35</td><td>88</td><td>100</td><td>75</td><td>64</td><td>60</td><td>60</td><td>45</td><td>100</td><td>100</td><td>79</td><td>29</td><td><div class="percent-bar" style="width:72%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">NETWORKS & COMMUNICATIONS (41.5)</td><td>90</td><td>90</td><td>68</td><td>70</td><td>90</td><td>75</td><td>90</td><td>70</td><td>90</td><td>95</td><td>85</td><td>33</td><td><div class="percent-bar" style="width:82%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">COMPUTER HARDWARE MAINTENANCE (41.6)</td><td>80</td><td>80</td><td>61</td><td>70</td><td>70</td><td>75</td><td>90</td><td>71</td><td>80</td><td>75</td><td>70</td><td>30</td><td><div class="percent-bar" style="width:75%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">MANAGEMENT INFORMATION SYSTEMS (41.7)</td><td>85</td><td>65</td><td>75</td><td>70</td><td>86</td><td>79</td><td>85</td><td>75</td><td>79</td><td>80</td><td>88</td><td>32</td><td><div class="percent-bar" style="width:80%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Engineering Mathematics (28.1)</td><td>100</td><td>100</td><td>60</td><td>100</td><td>100</td><td>100</td><td>86</td><td>75</td><td>100</td><td>100</td><td>86</td><td>37</td><td><div class="percent-bar" style="width:92%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Hardware Repair (Practical) (28.11)</td><td>50</td><td>61</td><td>70</td><td>77</td><td>76</td><td>80</td><td>68</td><td>83</td><td>74</td><td>70</td><td>68</td><td>28</td><td><div class="percent-bar" style="width:70%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Hardware Repair (Theory) (28.12)</td><td>95</td><td>100</td><td>97</td><td>53</td><td>100</td><td>80</td><td>60</td><td>85</td><td>50</td><td>63</td><td>88</td><td>32</td><td><div class="percent-bar" style="width:80%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Engineering Science (28.2)</td><td>44</td><td>80</td><td>84</td><td>65</td><td>85</td><td>95</td><td>82</td><td>60</td><td>85</td><td>95</td><td>75</td><td>31</td><td><div class="percent-bar" style="width:77%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Communication Skills (28.3)</td><td>94</td><td>91</td><td>77</td><td>67</td><td>90</td><td>92</td><td>88</td><td>71</td><td>56</td><td>91</td><td>74</td><td>32</td><td><div class="percent-bar" style="width:80%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Digital Electronics I (28.4)</td><td>90</td><td>80</td><td>70</td><td>70</td><td>85</td><td>85</td><td>74</td><td>55</td><td>94</td><td>91</td><td>74</td><td>32</td><td><div class="percent-bar" style="width:80%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Foundation of Management (28.5)</td><td>86</td><td>92</td><td>85</td><td>87</td><td>97</td><td>95</td><td>95</td><td>89</td><td>90</td><td>85</td><td>90</td><td>36</td><td><div class="percent-bar" style="width:90%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">IT & Application Packages (Theory) (28.6)</td><td>85</td><td>80</td><td>90</td><td>78</td><td>70</td><td>80</td><td>78</td><td>50</td><td>95</td><td>95</td><td>78</td><td>32</td><td><div class="percent-bar" style="width:80%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">IT & Application Packages (Practical) (28.7)</td><td>100</td><td>100</td><td>82</td><td>90</td><td>80</td><td>70</td><td>100</td><td>80</td><td>70</td><td>90</td><td>80</td><td>34</td><td><div class="percent-bar" style="width:85%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Networks (Theory) (28.8)</td><td>75</td><td>75</td><td>90</td><td>90</td><td>78</td><td>89</td><td>90</td><td>88</td><td>95</td><td>70</td><td>83</td><td>34</td><td><div class="percent-bar" style="width:85%;"></div></td></tr>
-                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Networks (Practical) (28.9)</td><td>100</td><td>100</td><td>72</td><td>60</td><td>100</td><td>70</td><td>92</td><td>87</td><td>99</td><td>100</td><td>80</td><td>35</td><td><div class="percent-bar" style="width:87%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">DIGITAL ELECTRONICS II (41.1)</td><td>90</td><td>84</td><td>82</td><td>85</td><td>70</td><td>92</td><td>75</td><td>67</td><td>88</td><td>92</td><td>75</td><td>33</td><td><div class="percent-bar green" style="width:82%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">ENTREPRENEURSHIP (41.2)</td><td>84</td><td>82</td><td>80</td><td>76</td><td>97</td><td>97</td><td>95</td><td>64</td><td>97</td><td>70</td><td>79</td><td>33</td><td><div class="percent-bar green" style="width:82%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">OPERATING SYSTEMS (41.3)</td><td>95</td><td>95</td><td>53</td><td>83</td><td>70</td><td>90</td><td>33</td><td>57</td><td>80</td><td>78</td><td>80</td><td>30</td><td><div class="percent-bar yellow" style="width:75%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">PROGRAMMING & DATABASE TECH (41.4)</td><td>35</td><td>88</td><td>100</td><td>75</td><td>64</td><td>60</td><td>60</td><td>45</td><td>100</td><td>100</td><td>79</td><td>29</td><td><div class="percent-bar yellow" style="width:72%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">NETWORKS & COMMUNICATIONS (41.5)</td><td>90</td><td>90</td><td>68</td><td>70</td><td>90</td><td>75</td><td>90</td><td>70</td><td>90</td><td>95</td><td>85</td><td>33</td><td><div class="percent-bar green" style="width:82%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">COMPUTER HARDWARE MAINTENANCE (41.6)</td><td>80</td><td>80</td><td>61</td><td>70</td><td>70</td><td>75</td><td>90</td><td>71</td><td>80</td><td>75</td><td>70</td><td>30</td><td><div class="percent-bar yellow" style="width:75%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2023</td><td class="subject-col">MANAGEMENT INFORMATION SYSTEMS (41.7)</td><td>85</td><td>65</td><td>75</td><td>70</td><td>86</td><td>79</td><td>85</td><td>75</td><td>79</td><td>80</td><td>88</td><td>32</td><td><div class="percent-bar green" style="width:80%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Engineering Mathematics (28.1)</td><td>100</td><td>100</td><td>60</td><td>100</td><td>100</td><td>100</td><td>86</td><td>75</td><td>100</td><td>100</td><td>86</td><td>37</td><td><div class="percent-bar green" style="width:92%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Hardware Repair (Practical) (28.11)</td><td>50</td><td>61</td><td>70</td><td>77</td><td>76</td><td>80</td><td>68</td><td>83</td><td>74</td><td>70</td><td>68</td><td>28</td><td><div class="percent-bar yellow" style="width:70%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Hardware Repair (Theory) (28.12)</td><td>95</td><td>100</td><td>97</td><td>53</td><td>100</td><td>80</td><td>60</td><td>85</td><td>50</td><td>63</td><td>88</td><td>32</td><td><div class="percent-bar green" style="width:80%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Engineering Science (28.2)</td><td>44</td><td>80</td><td>84</td><td>65</td><td>85</td><td>95</td><td>82</td><td>60</td><td>85</td><td>95</td><td>75</td><td>31</td><td><div class="percent-bar yellow" style="width:77%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Communication Skills (28.3)</td><td>94</td><td>91</td><td>77</td><td>67</td><td>90</td><td>92</td><td>88</td><td>71</td><td>56</td><td>91</td><td>74</td><td>32</td><td><div class="percent-bar green" style="width:80%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Digital Electronics I (28.4)</td><td>90</td><td>80</td><td>70</td><td>70</td><td>85</td><td>85</td><td>74</td><td>55</td><td>94</td><td>91</td><td>74</td><td>32</td><td><div class="percent-bar green" style="width:80%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Foundation of Management (28.5)</td><td>86</td><td>92</td><td>85</td><td>87</td><td>97</td><td>95</td><td>95</td><td>89</td><td>90</td><td>85</td><td>90</td><td>36</td><td><div class="percent-bar green" style="width:90%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">IT & Application Packages (Theory) (28.6)</td><td>85</td><td>80</td><td>90</td><td>78</td><td>70</td><td>80</td><td>78</td><td>50</td><td>95</td><td>95</td><td>78</td><td>32</td><td><div class="percent-bar green" style="width:80%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">IT & Application Packages (Practical) (28.7)</td><td>100</td><td>100</td><td>82</td><td>90</td><td>80</td><td>70</td><td>100</td><td>80</td><td>70</td><td>90</td><td>80</td><td>34</td><td><div class="percent-bar green" style="width:85%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Networks (Theory) (28.8)</td><td>75</td><td>75</td><td>90</td><td>90</td><td>78</td><td>89</td><td>90</td><td>88</td><td>95</td><td>70</td><td>83</td><td>34</td><td><div class="percent-bar green" style="width:85%;"></div></td></tr>
+                                <tr><td class="session-col">Nov/Dec 2022</td><td class="subject-col">Computer Networks (Practical) (28.9)</td><td>100</td><td>100</td><td>72</td><td>60</td><td>100</td><td>70</td><td>92</td><td>87</td><td>99</td><td>100</td><td>80</td><td>35</td><td><div class="percent-bar green" style="width:87%;"></div></td></tr>
                             </tbody>
                         </table>
                     </div>
-                    <div style="margin-top:8px; font-size:11px; color:#94a3b8; text-align:center;">* CA Meter shows percentage of CA score out of 40%</div>
+                    <div style="margin-top:8px; font-size:11px; color:#64748b; text-align:center;">* CA Meter shows percentage of CA score out of 40%</div>
                 </div>
 
                 <!-- PROFILE PANEL -->
                 <div class="content-panel" id="panel-profile">
                     <h3><i class="fas fa-user-circle"></i> Student Profile</h3>
                     <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:13px;">
-                        <div style="color:#94a3b8;">Full Name:</div><div style="color:#fff; font-weight:600;">JUBEL MOBELA</div>
-                        <div style="color:#94a3b8;">Student Number:</div><div style="color:#fff; font-weight:600;">2201001157</div>
-                        <div style="color:#94a3b8;">ID Number:</div><div style="color:#fff; font-weight:600;">622589/67/1</div>
-                        <div style="color:#94a3b8;">Program:</div><div style="color:#fff; font-weight:600;">DIPLOMA IN COMPUTER SYSTEMS ENGINEERING</div>
-                        <div style="color:#94a3b8;">Current Term:</div><div style="color:#fff; font-weight:600;">TERM 2</div>
-                        <div style="color:#94a3b8;">Intake:</div><div style="color:#fff; font-weight:600;">January 2022</div>
-                        <div style="color:#94a3b8;">Accommodation:</div><div style="color:#fff; font-weight:600;">Kwacha Building, Kabwe Floor 3, Room 16</div>
+                        <div style="color:#64748b;">Full Name:</div><div style="color:#0f172a; font-weight:600;">JUBEL MOBELA</div>
+                        <div style="color:#64748b;">Student Number:</div><div style="color:#0f172a; font-weight:600;">2201001157</div>
+                        <div style="color:#64748b;">ID Number:</div><div style="color:#0f172a; font-weight:600;">622589/67/1</div>
+                        <div style="color:#64748b;">Program:</div><div style="color:#0f172a; font-weight:600;">DIPLOMA IN COMPUTER SYSTEMS ENGINEERING</div>
+                        <div style="color:#64748b;">Current Term:</div><div style="color:#0f172a; font-weight:600;">TERM 2</div>
+                        <div style="color:#64748b;">Intake:</div><div style="color:#0f172a; font-weight:600;">January 2022</div>
+                        <div style="color:#64748b;">Accommodation:</div><div style="color:#0f172a; font-weight:600;">Kwacha Building, Kabwe Floor 3, Room 16</div>
+                        <div style="color:#64748b;">Email:</div><div style="color:#0f172a; font-weight:600;">jubel.mobela@northerntech.edu.zm</div>
+                        <div style="color:#64748b;">Phone:</div><div style="color:#0f172a; font-weight:600;">+260 97 123 4567</div>
                     </div>
                 </div>
             </div>
@@ -1885,7 +1982,7 @@
             <button class="sidebar-page-close" data-page-close="application"><i class="fas fa-times"></i></button>
         </div>
         <div class="sidebar-page-body">
-            <h3>Application Information</h3>
+            <h3><i class="fas fa-file-alt"></i> Application Information</h3>
             <div class="info-grid">
                 <div class="item">
                     <div class="label">Program Applied For</div>
@@ -1905,18 +2002,18 @@
                 </div>
             </div>
             
-            <h3>Admission Details</h3>
+            <h3><i class="fas fa-graduation-cap"></i> Admission Details</h3>
             <p>Your application for the <strong>Diploma in Computer Systems Engineering</strong> program has been reviewed and approved.</p>
             <p>You were admitted on <strong>20th January 2022</strong> and commenced your studies on <strong>1st February 2022</strong>.</p>
             
-            <h3>Documents</h3>
+            <h3><i class="fas fa-file-pdf"></i> Documents</h3>
             <ul>
                 <li>Admission Letter: <a href="#" style="color:#3b82f6;">Download (Simulated)</a></li>
                 <li>Student ID Card: Collected</li>
                 <li>Academic Transcript: Available on request</li>
             </ul>
             
-            <h3>Important Notes</h3>
+            <h3><i class="fas fa-info-circle"></i> Important Notes</h3>
             <ul>
                 <li>Your admission is valid for the duration of your program.</li>
                 <li>Any changes to your program must be submitted to the admissions office.</li>
@@ -1933,7 +2030,7 @@
             <button class="sidebar-page-close" data-page-close="exams"><i class="fas fa-times"></i></button>
         </div>
         <div class="sidebar-page-body">
-            <h3>End of Term 2 Exams – June 2026</h3>
+            <h3><i class="fas fa-calendar-alt"></i> End of Term 2 Exams – June 2026</h3>
             <table>
                 <tr><th>Date</th><th>Time</th><th>Subject</th><th>Venue</th></tr>
                 <tr><td>Monday, 20th June</td><td>09:00 - 11:00</td><td>Digital Electronics II (41.1)</td><td>Hall A</td></tr>
@@ -1943,7 +2040,7 @@
                 <tr><td>Friday, 24th June</td><td>11:00 - 13:00</td><td>Computer Hardware Maintenance (41.6)</td><td>Lab 3</td></tr>
             </table>
             
-            <h3>Exam Guidelines</h3>
+            <h3><i class="fas fa-clipboard-list"></i> Exam Guidelines</h3>
             <ul>
                 <li>Arrive at least 30 minutes before the exam start time.</li>
                 <li>Bring your student ID card for verification.</li>
@@ -1951,7 +2048,7 @@
                 <li>All exams are closed book unless stated otherwise.</li>
             </ul>
             
-            <h3>Previous Exam Results</h3>
+            <h3><i class="fas fa-history"></i> Previous Exam Results</h3>
             <p>Your Term 1 exam results are available for review on the CA panel.</p>
         </div>
     </div>
@@ -1964,7 +2061,7 @@
             <button class="sidebar-page-close" data-page-close="clearance"><i class="fas fa-times"></i></button>
         </div>
         <div class="sidebar-page-body">
-            <h3>Clearance Verification</h3>
+            <h3><i class="fas fa-check-circle"></i> Clearance Verification</h3>
             <table>
                 <tr><th>Department</th><th>Status</th><th>Date Cleared</th><th>Remarks</th></tr>
                 <tr><td>Accounts</td><td><span class="status-badge cleared">Cleared</span></td><td>15th June 2026</td><td>Balance: K0.00</td></tr>
@@ -1975,11 +2072,11 @@
                 <tr><td>Admissions</td><td><span class="status-badge cleared">Cleared</span></td><td>16th June 2026</td><td>Records verified</td></tr>
             </table>
             
-            <h3>Clearance Summary</h3>
+            <h3><i class="fas fa-clipboard-check"></i> Clearance Summary</h3>
             <p><strong>Overall Status:</strong> <span class="highlight-green">✓ FULLY CLEARED</span></p>
             <p>You are ready to close your studies at NORTEC for the current academic year.</p>
             
-            <h3>Next Steps</h3>
+            <h3><i class="fas fa-arrow-right"></i> Next Steps</h3>
             <ol>
                 <li>Visit the admissions office to finalize your clearance.</li>
                 <li>Collect your clearance certificate.</li>
@@ -1996,7 +2093,7 @@
             <button class="sidebar-page-close" data-page-close="accommodation"><i class="fas fa-times"></i></button>
         </div>
         <div class="sidebar-page-body">
-            <h3>Room Information</h3>
+            <h3><i class="fas fa-bed"></i> Room Information</h3>
             <div class="info-grid">
                 <div class="item">
                     <div class="label">Student Name</div>
@@ -2024,7 +2121,7 @@
                 </div>
             </div>
             
-            <h3>Room Features</h3>
+            <h3><i class="fas fa-home"></i> Room Features</h3>
             <ul>
                 <li>2 beds with mattresses</li>
                 <li>Built-in wardrobe</li>
@@ -2034,7 +2131,7 @@
                 <li>24/7 security</li>
             </ul>
             
-            <h3>Hostel Rules</h3>
+            <h3><i class="fas fa-gavel"></i> Hostel Rules</h3>
             <ul>
                 <li>No visitors after 22:00 hours</li>
                 <li>No loud music after 23:00 hours</li>
@@ -2042,7 +2139,7 @@
                 <li>Report any maintenance issues to the hostel warden</li>
             </ul>
             
-            <h3>Contact</h3>
+            <h3><i class="fas fa-phone"></i> Contact</h3>
             <p>Hostel Warden: +260 97 123 4567</p>
         </div>
     </div>
@@ -2055,7 +2152,7 @@
             <button class="sidebar-page-close" data-page-close="finance"><i class="fas fa-times"></i></button>
         </div>
         <div class="sidebar-page-body">
-            <h3>Transaction History</h3>
+            <h3><i class="fas fa-coins"></i> Transaction History</h3>
             <table>
                 <tr><th>Transaction</th><th>Date</th><th>Type</th><th>Description</th><th>Debit</th><th>Credit</th><th>Balance</th></tr>
                 <tr><td>BJV-002022_1</td><td>2022-01-31</td><td>JV</td><td>MoTS-TERM 1 2022</td><td></td><td>2,000</td><td>-2,000</td></tr>
@@ -2083,11 +2180,25 @@
                 <tr><td>SI-20044214</td><td>2025-09-10</td><td>Invoice</td><td>HIRE OF GOWN</td><td>1,000</td><td></td><td>1,200</td></tr>
                 <tr><td>SI-20044474</td><td>2025-09-25</td><td>Invoice</td><td>HIRE OF GOWN</td><td>600</td><td></td><td>1,800</td></tr>
             </table>
-            <div style="margin-top:16px; text-align:right; font-size:20px; font-weight:800; color:#0f172a; border-top:2px solid #e2e8f0; padding-top:12px;">
+            <div style="margin-top:16px; text-align:right; font-size:20px; font-weight:800; color:#0f172a; border-top:2px solid #3b82f6; padding-top:12px;">
                 CURRENT BALANCE: <span class="balance-amount">K1,800</span>
             </div>
             
-            <h3>Payment Instructions</h3>
+            <h3><i class="fas fa-download"></i> Download Receipt</h3>
+            <button class="btn-form-submit" onclick="alert('Receipt downloaded successfully!\n(Simulated download)')"><i class="fas fa-download"></i> Download Receipt</button>
+            
+            <h3><i class="fas fa-upload"></i> Upload Payment Receipt</h3>
+            <div class="form-group">
+                <label>Select Payment Receipt</label>
+                <div class="upload-area" onclick="document.getElementById('paymentReceipt').click()">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Click to upload payment receipt (PDF, JPG, PNG)</p>
+                    <input type="file" id="paymentReceipt" accept=".pdf,.jpg,.png" style="display:none;" />
+                </div>
+            </div>
+            <button class="btn-form-submit" onclick="alert('Payment receipt uploaded successfully!\n(Simulated upload)')"><i class="fas fa-upload"></i> Upload Receipt</button>
+            
+            <h3><i class="fas fa-info-circle"></i> Payment Instructions</h3>
             <ul>
                 <li>Bank: ZANACO Bank</li>
                 <li>Account Name: Northern Technical College</li>
@@ -2105,7 +2216,7 @@
             <button class="sidebar-page-close" data-page-close="appeal"><i class="fas fa-times"></i></button>
         </div>
         <div class="sidebar-page-body">
-            <h3>Appeal Information</h3>
+            <h3><i class="fas fa-gavel"></i> Appeal Information</h3>
             <div class="info-grid">
                 <div class="item">
                     <div class="label">Appeal ID</div>
@@ -2125,25 +2236,49 @@
                 </div>
             </div>
             
-            <h3>Appeal Details</h3>
+            <h3><i class="fas fa-file-alt"></i> Appeal Details</h3>
             <p>You submitted an appeal regarding the <strong>school fees clearance</strong> process. The finance department is currently reviewing your case.</p>
             <p><strong>Reason for Appeal:</strong> Discrepancy in fee structure for the 2023 academic year.</p>
             
-            <h3>Supporting Documents</h3>
+            <h3><i class="fas fa-paperclip"></i> Supporting Documents</h3>
             <ul>
                 <li>Fee structure 2023 (uploaded)</li>
                 <li>Bank payment receipts (uploaded)</li>
                 <li>Bursary confirmation letter (uploaded)</li>
             </ul>
             
-            <h3>Timeline</h3>
+            <h3><i class="fas fa-clock"></i> Timeline</h3>
             <ul>
                 <li>10th June 2026 – Appeal submitted</li>
                 <li>12th June 2026 – Acknowledged by finance</li>
                 <li>Expected resolution: 30th June 2026</li>
             </ul>
             
-            <h3>Contact</h3>
+            <h3><i class="fas fa-pen"></i> Submit New Appeal</h3>
+            <div class="form-group">
+                <label>Appeal Category</label>
+                <select>
+                    <option>Fees Clearance</option>
+                    <option>Exam Results</option>
+                    <option>Accommodation</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Appeal Description</label>
+                <textarea rows="4" placeholder="Describe your appeal in detail..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Upload Supporting Documents</label>
+                <div class="upload-area" onclick="document.getElementById('appealDoc').click()">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Click to upload documents (PDF, JPG, PNG)</p>
+                    <input type="file" id="appealDoc" accept=".pdf,.jpg,.png" multiple style="display:none;" />
+                </div>
+            </div>
+            <button class="btn-form-submit" onclick="alert('Appeal submitted successfully!\n(Simulated submission)')"><i class="fas fa-paper-plane"></i> Submit Appeal</button>
+            
+            <h3><i class="fas fa-envelope"></i> Contact</h3>
             <p>For any updates, contact the Finance Department: finance@northerntech.edu.zm</p>
         </div>
     </div>
@@ -2156,11 +2291,11 @@
             <button class="sidebar-page-close" data-page-close="diploma"><i class="fas fa-times"></i></button>
         </div>
         <div class="sidebar-page-body">
-            <h3>Diploma Status</h3>
+            <h3><i class="fas fa-certificate"></i> Diploma Status</h3>
             <p><strong>Diploma:</strong> <span class="highlight-orange">Not yet issued</span></p>
             <p>Your Diploma in Computer Systems Engineering is being processed. The release date is expected to be <strong>December 2026</strong>.</p>
             
-            <h3>Collection Procedure</h3>
+            <h3><i class="fas fa-list-ol"></i> Collection Procedure</h3>
             <p>The following procedure will be followed once the diploma is ready for collection:</p>
             <ol>
                 <li><strong>Notification:</strong> Check your student portal for a notification when the diploma is ready.</li>
@@ -2170,14 +2305,14 @@
                 <li><strong>Collect Diploma:</strong> Receive your diploma certificate.</li>
             </ol>
             
-            <h3>Additional Information</h3>
+            <h3><i class="fas fa-info-circle"></i> Additional Information</h3>
             <ul>
                 <li><strong>Transcript:</strong> An academic transcript will be issued alongside the diploma.</li>
                 <li><strong>Graduation:</strong> You are eligible to attend the graduation ceremony scheduled for 15th July 2026.</li>
                 <li><strong>Gown Hire:</strong> Gown hire fee has been processed (see Finance section).</li>
             </ul>
             
-            <h3>Contact</h3>
+            <h3><i class="fas fa-envelope"></i> Contact</h3>
             <p>Examinations Office: exams@northerntech.edu.zm</p>
         </div>
     </div>
@@ -2190,7 +2325,7 @@
             <button class="sidebar-page-close" data-page-close="sup"><i class="fas fa-times"></i></button>
         </div>
         <div class="sidebar-page-body">
-            <h3>Supplementary Exam Details</h3>
+            <h3><i class="fas fa-sync-alt"></i> Supplementary Exam Details</h3>
             <p>You have been scheduled to rewrite the following course:</p>
             
             <div class="info-grid">
@@ -2212,7 +2347,7 @@
                 </div>
             </div>
             
-            <h3>Preparation Guidelines</h3>
+            <h3><i class="fas fa-book"></i> Preparation Guidelines</h3>
             <ul>
                 <li>Review all course materials from Term 1 and Term 2.</li>
                 <li>Practice coding exercises from previous assignments.</li>
@@ -2221,12 +2356,19 @@
                 <li>Bring your student ID card and writing materials.</li>
             </ul>
             
-            <h3>Important Notes</h3>
+            <h3><i class="fas fa-exclamation-circle"></i> Important Notes</h3>
             <ul>
                 <li>This is your final opportunity to pass this course.</li>
                 <li>Failure to pass will result in repeating the course.</li>
                 <li>No electronic devices allowed during the exam.</li>
             </ul>
+            
+            <h3><i class="fas fa-pen"></i> Apply for SUP Extension</h3>
+            <div class="form-group">
+                <label>Reason for Extension</label>
+                <textarea rows="3" placeholder="Provide reasons for requesting an extension..."></textarea>
+            </div>
+            <button class="btn-form-submit" onclick="alert('SUP extension request submitted!\n(Simulated submission)')"><i class="fas fa-paper-plane"></i> Request Extension</button>
         </div>
     </div>
 
@@ -2238,7 +2380,7 @@
             <button class="sidebar-page-close" data-page-close="studentid"><i class="fas fa-times"></i></button>
         </div>
         <div class="sidebar-page-body">
-            <h3>ID Card Information</h3>
+            <h3><i class="fas fa-id-badge"></i> ID Card Information</h3>
             <div class="info-grid">
                 <div class="item">
                     <div class="label">Student Name</div>
@@ -2266,7 +2408,7 @@
                 </div>
             </div>
             
-            <h3>ID Card Details</h3>
+            <h3><i class="fas fa-id-card"></i> ID Card Details</h3>
             <ul>
                 <li><strong>Issue Date:</strong> 1st February 2022</li>
                 <li><strong>Expiry Date:</strong> 31st December 2026</li>
@@ -2274,13 +2416,24 @@
                 <li><strong>Barcode:</strong> Scannable barcode for campus access</li>
             </ul>
             
-            <h3>Important Information</h3>
+            <h3><i class="fas fa-shield-alt"></i> Important Information</h3>
             <ul>
                 <li>Keep your ID card safe at all times.</li>
                 <li>Present your ID card when required for exams, library, and campus access.</li>
                 <li>Report any loss immediately to the admissions office.</li>
                 <li>Replacement fee: K50 for lost or damaged cards.</li>
             </ul>
+            
+            <h3><i class="fas fa-pen"></i> Request ID Card Replacement</h3>
+            <div class="form-group">
+                <label>Reason for Replacement</label>
+                <select>
+                    <option>Lost</option>
+                    <option>Damaged</option>
+                    <option>Stolen</option>
+                </select>
+            </div>
+            <button class="btn-form-submit" onclick="alert('ID card replacement request submitted!\n(Simulated submission)')"><i class="fas fa-paper-plane"></i> Request Replacement</button>
         </div>
     </div>
 
@@ -2292,7 +2445,7 @@
             <button class="sidebar-page-close" data-page-close="teveta"><i class="fas fa-times"></i></button>
         </div>
         <div class="sidebar-page-body">
-            <h3>Exam Approval Status</h3>
+            <h3><i class="fas fa-check-double"></i> Exam Approval Status</h3>
             <p>Your application for final exams is pending with the examination board TEVETA.</p>
             
             <div class="info-grid">
@@ -2314,7 +2467,7 @@
                 </div>
             </div>
             
-            <h3>Application Details</h3>
+            <h3><i class="fas fa-file-alt"></i> Application Details</h3>
             <ul>
                 <li><strong>Program:</strong> Diploma in Computer Systems Engineering</li>
                 <li><strong>Exam Session:</strong> June 2026</li>
@@ -2322,15 +2475,26 @@
                 <li><strong>Grading:</strong> TEVETA National Examination</li>
             </ul>
             
-            <h3>What is TEVETA?</h3>
+            <h3><i class="fas fa-info-circle"></i> What is TEVETA?</h3>
             <p>TEVETA (Technical Education, Vocational and Entrepreneurship Training Authority) is the regulatory body responsible for technical education and vocational training in Zambia. They ensure that all technical programs meet national standards.</p>
             
-            <h3>After Approval</h3>
+            <h3><i class="fas fa-clock"></i> After Approval</h3>
             <ul>
                 <li>You will receive an official examination number.</li>
                 <li>Exams will be conducted under TEVETA supervision.</li>
                 <li>Results will be released through the TEVETA portal.</li>
             </ul>
+            
+            <h3><i class="fas fa-upload"></i> Upload TEVETA Exam Fee Receipt</h3>
+            <div class="form-group">
+                <label>Select Payment Receipt</label>
+                <div class="upload-area" onclick="document.getElementById('tevetaReceipt').click()">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Click to upload TEVETA exam fee receipt (PDF, JPG, PNG)</p>
+                    <input type="file" id="tevetaReceipt" accept=".pdf,.jpg,.png" style="display:none;" />
+                </div>
+            </div>
+            <button class="btn-form-submit" onclick="alert('TEVETA exam fee receipt uploaded successfully!\n(Simulated upload)')"><i class="fas fa-upload"></i> Upload Receipt</button>
         </div>
     </div>
 
@@ -2342,7 +2506,7 @@
             <button class="sidebar-page-close" data-page-close="attendance"><i class="fas fa-times"></i></button>
         </div>
         <div class="sidebar-page-body">
-            <h3>Attendance Summary – 2026 Academic Year</h3>
+            <h3><i class="fas fa-clipboard-list"></i> Attendance Summary – 2026 Academic Year</h3>
             <table>
                 <tr><th>Term</th><th>Month</th><th>Attendance %</th><th>Classes Attended</th><th>Total Classes</th></tr>
                 <tr><td>Term 1</td><td>January</td><td>92%</td><td>23</td><td>25</td></tr>
@@ -2353,7 +2517,7 @@
                 <tr><td>Term 2</td><td>June</td><td>93%</td><td>14</td><td>15</td></tr>
             </table>
             
-            <h3>Overall Statistics</h3>
+            <h3><i class="fas fa-chart-pie"></i> Overall Statistics</h3>
             <div class="info-grid">
                 <div class="item">
                     <div class="label">Total Classes</div>
@@ -2373,7 +2537,7 @@
                 </div>
             </div>
             
-            <h3>Attendance Policy</h3>
+            <h3><i class="fas fa-gavel"></i> Attendance Policy</h3>
             <ul>
                 <li>Minimum attendance requirement: 80% per term.</li>
                 <li>Medical leave must be reported within 3 days.</li>
@@ -2391,19 +2555,19 @@
             <button class="sidebar-page-close" data-page-close="courses"><i class="fas fa-times"></i></button>
         </div>
         <div class="sidebar-page-body">
-            <h3>Current Courses – Diploma in Computer Systems Engineering</h3>
+            <h3><i class="fas fa-book"></i> Current Courses – Diploma in Computer Systems Engineering</h3>
             <table>
-                <tr><th>Course Code</th><th>Course Title</th><th>Status</th><th>Credit Hours</th></tr>
-                <tr><td>41.1</td><td>Digital Electronics II</td><td><span class="highlight-green">✓ Completed</span></td><td>4</td></tr>
-                <tr><td>41.2</td><td>Entrepreneurship</td><td><span class="highlight-green">✓ Completed</span></td><td>3</td></tr>
-                <tr><td>41.3</td><td>Operating Systems</td><td><span class="highlight-green">✓ Completed</span></td><td>4</td></tr>
-                <tr><td>41.4</td><td>Programming & Database Technology</td><td><span class="highlight-orange">● In Progress (SUP)</span></td><td>4</td></tr>
-                <tr><td>41.5</td><td>Networks & Communications</td><td><span class="highlight-green">✓ Completed</span></td><td>4</td></tr>
-                <tr><td>41.6</td><td>Computer Hardware Maintenance & Repair</td><td><span class="highlight-green">✓ Completed</span></td><td>4</td></tr>
-                <tr><td>41.7</td><td>Management Information Systems</td><td><span class="highlight-green">✓ Completed</span></td><td>3</td></tr>
+                <tr><th>Course Code</th><th>Course Title</th><th>Lecturer</th><th>Status</th><th>Credit Hours</th></tr>
+                <tr><td>41.1</td><td>Digital Electronics II</td><td>Mr. Banda</td><td><span class="highlight-green">✓ Completed</span></td><td>4</td></tr>
+                <tr><td>41.2</td><td>Entrepreneurship</td><td>Ms. Phiri</td><td><span class="highlight-green">✓ Completed</span></td><td>3</td></tr>
+                <tr><td>41.3</td><td>Operating Systems</td><td>Dr. Mwansa</td><td><span class="highlight-green">✓ Completed</span></td><td>4</td></tr>
+                <tr><td>41.4</td><td>Programming & Database Technology</td><td>Mr. Tembo</td><td><span class="highlight-orange">● In Progress (SUP)</span></td><td>4</td></tr>
+                <tr><td>41.5</td><td>Networks & Communications</td><td>Ms. Phiri</td><td><span class="highlight-green">✓ Completed</span></td><td>4</td></tr>
+                <tr><td>41.6</td><td>Computer Hardware Maintenance & Repair</td><td>Mr. Zulu</td><td><span class="highlight-green">✓ Completed</span></td><td>4</td></tr>
+                <tr><td>41.7</td><td>Management Information Systems</td><td>Dr. Mulenga</td><td><span class="highlight-green">✓ Completed</span></td><td>3</td></tr>
             </table>
             
-            <h3>Course Load Summary</h3>
+            <h3><i class="fas fa-clipboard-list"></i> Course Load Summary</h3>
             <ul>
                 <li><strong>Total Courses:</strong> 7</li>
                 <li><strong>Completed:</strong> 6</li>
@@ -2411,7 +2575,7 @@
                 <li><strong>Total Credit Hours:</strong> 26</li>
             </ul>
             
-            <h3>Course Description</h3>
+            <h3><i class="fas fa-graduation-cap"></i> Course Description</h3>
             <p><strong>Diploma in Computer Systems Engineering</strong> – This program provides students with comprehensive knowledge and skills in computer systems, including hardware, software, networking, and database management. Graduates are prepared for careers in IT departments, networking, software development, and technical support.</p>
         </div>
     </div>
@@ -2424,24 +2588,29 @@
             <button class="sidebar-page-close" data-page-close="timetable"><i class="fas fa-times"></i></button>
         </div>
         <div class="sidebar-page-body">
-            <h3>Weekly Timetable – Alternating Weeks</h3>
+            <h3><i class="fas fa-clock"></i> Weekly Timetable – Alternating Weeks</h3>
             <p><strong>Note:</strong> This timetable alternates weekly. Week A is shown below.</p>
             
             <table>
-                <tr><th>Day</th><th>Time</th><th>Subject</th><th>Type</th><th>Venue</th></tr>
-                <tr><td>Monday</td><td>10:00 - 12:00</td><td>Digital Electronics II</td><td>Lecture</td><td>Hall A</td></tr>
-                <tr><td>Monday</td><td>14:00 - 16:00</td><td>Operating Systems</td><td>Lecture</td><td>Hall B</td></tr>
-                <tr><td>Tuesday</td><td>08:00 - 10:00</td><td>Programming & Database Tech</td><td>Lecture</td><td>Hall A</td></tr>
-                <tr><td>Tuesday</td><td>11:00 - 13:00</td><td>Networks & Communications</td><td>Lecture</td><td>Hall B</td></tr>
-                <tr><td>Wednesday</td><td>09:00 - 11:00</td><td>Computer Hardware Maintenance</td><td>Lecture</td><td>Hall A</td></tr>
-                <tr><td>Wednesday</td><td>14:00 - 16:00</td><td>Entrepreneurship</td><td>Lecture</td><td>Hall C</td></tr>
-                <tr><td>Thursday</td><td>10:00 - 12:00</td><td>Management Information Systems</td><td>Lecture</td><td>Hall B</td></tr>
-                <tr><td>Thursday</td><td>13:00 - 15:00</td><td>Digital Electronics II (Lab)</td><td>Lab</td><td>Lab 1</td></tr>
-                <tr><td>Friday</td><td>08:00 - 10:00</td><td>Operating Systems (Lab)</td><td>Lab</td><td>Lab 2</td></tr>
-                <tr><td>Friday</td><td>11:00 - 13:00</td><td>Programming & Database Tech (Lab)</td><td>Lab</td><td>Lab 3</td></tr>
+                <tr><th>Day</th><th>Time</th><th>Subject</th><th>Type</th><th>Venue</th><th>Lecturer</th></tr>
+                <tr><td>Monday</td><td>08:00 - 10:00</td><td>Operating Systems</td><td>Lecture</td><td>Hall A</td><td>Dr. Mwansa</td></tr>
+                <tr><td>Monday</td><td>10:00 - 12:00</td><td>Digital Electronics II</td><td>Lecture</td><td>Hall B</td><td>Mr. Banda</td></tr>
+                <tr><td>Monday</td><td>14:00 - 16:00</td><td>Programming & Database Tech</td><td>Lab</td><td>Lab 1</td><td>Mr. Tembo</td></tr>
+                <tr><td>Tuesday</td><td>08:00 - 10:00</td><td>Networks & Communications</td><td>Lecture</td><td>Hall A</td><td>Ms. Phiri</td></tr>
+                <tr><td>Tuesday</td><td>10:00 - 12:00</td><td>Digital Electronics II</td><td>Lab</td><td>Lab 2</td><td>Mr. Banda</td></tr>
+                <tr><td>Tuesday</td><td>14:00 - 16:00</td><td>Operating Systems</td><td>Lab</td><td>Lab 3</td><td>Dr. Mwansa</td></tr>
+                <tr><td>Wednesday</td><td>09:00 - 11:00</td><td>Computer Hardware Maintenance</td><td>Lecture</td><td>Hall B</td><td>Mr. Zulu</td></tr>
+                <tr><td>Wednesday</td><td>11:00 - 13:00</td><td>Management Information Systems</td><td>Lecture</td><td>Hall A</td><td>Dr. Mulenga</td></tr>
+                <tr><td>Wednesday</td><td>14:00 - 16:00</td><td>Entrepreneurship</td><td>Lecture</td><td>Hall C</td><td>Ms. Phiri</td></tr>
+                <tr><td>Thursday</td><td>09:00 - 11:00</td><td>Networks & Communications</td><td>Lab</td><td>Lab 1</td><td>Ms. Phiri</td></tr>
+                <tr><td>Thursday</td><td>11:00 - 13:00</td><td>Programming & Database Tech</td><td>Lecture</td><td>Hall B</td><td>Mr. Tembo</td></tr>
+                <tr><td>Thursday</td><td>14:00 - 16:00</td><td>Computer Hardware Maintenance</td><td>Lab</td><td>Lab 2</td><td>Mr. Zulu</td></tr>
+                <tr><td>Friday</td><td>08:00 - 10:00</td><td>Management Information Systems</td><td>Lab</td><td>Lab 3</td><td>Dr. Mulenga</td></tr>
+                <tr><td>Friday</td><td>10:00 - 12:00</td><td>Operating Systems</td><td>Lecture</td><td>Hall A</td><td>Dr. Mwansa</td></tr>
+                <tr><td>Friday</td><td>14:00 - 16:00</td><td>Digital Electronics II</td><td>Lecture</td><td>Hall B</td><td>Mr. Banda</td></tr>
             </table>
             
-            <h3>Week B Schedule</h3>
+            <h3><i class="fas fa-calendar-alt"></i> Week B Schedule</h3>
             <ul>
                 <li><strong>Monday:</strong> Networks & Communications (Lecture) + Computer Hardware (Lab)</li>
                 <li><strong>Tuesday:</strong> Digital Electronics II (Lab) + Entrepreneurship (Lecture)</li>
@@ -3376,7 +3545,6 @@
                 }
             });
 
-            // Logo click hides sidebar and shows home
             headerLogo.addEventListener('click', function() {
                 toggleSidebar(false);
                 switchPanel('home');
@@ -3391,7 +3559,6 @@
                     else if (loginModal.classList.contains('active')) { loginModal.classList.remove('active'); document.body.style.overflow = ''; }
                     else if (sidebarMenu.classList.contains('open')) toggleSidebar(false);
                     else {
-                        // Close any open sidebar page
                         sidebarPages.forEach(p => {
                             if (p.classList.contains('active')) {
                                 p.classList.remove('active');
@@ -3438,7 +3605,7 @@
             // ─── INIT ─────────────────────────────────────────────
             showMain();
             switchPanel('home');
-            console.log('✅ Northern Technical College – full dashboard with sidebar pages integrated.');
+            console.log('✅ Northern Technical College – full dashboard with sidebar on left, white theme, and all features.');
         })();
     </script>
 </body>
