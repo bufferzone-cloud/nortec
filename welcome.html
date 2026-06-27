@@ -1033,6 +1033,22 @@
         .btn-sidebar-toggle:hover {
             background: rgba(255,255,255,0.2);
         }
+        .btn-logout-dash {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-logout-dash:hover {
+            background: rgba(255,255,255,0.2);
+            color: #ef4444;
+        }
 
         /* DANGLING NOTICES */
         .dangling-notices {
@@ -1546,6 +1562,7 @@
                 <img src="logo.png" class="header-logo" alt="NORTEC" />
                 <div class="header-title"><span class="accent">NORTEC</span> DASHBOARD</div>
                 <div class="header-actions">
+                    <button class="btn-logout-dash" id="logoutDash"><i class="fas fa-sign-out-alt"></i> Logout</button>
                     <button class="btn-sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
                 </div>
             </div>
@@ -2360,6 +2377,7 @@
             const applyIntake = document.getElementById('applyIntake');
             const submitApp = document.getElementById('submitApplication');
             const programSearch = document.getElementById('programSearch');
+            const logoutDash = document.getElementById('logoutDash');
 
             const intakeTitle = document.getElementById('intakeTitle');
             const intakeSub = document.getElementById('intakeSub');
@@ -2827,6 +2845,13 @@
                     showDashboard();
                 } else {
                     alert('❌ Invalid username or password. Please try again.\n\nHint: Student Number: 2201001157, Password: PASSWORD');
+                }
+            });
+
+            // Logout from dashboard
+            logoutDash.addEventListener('click', function() {
+                if (confirm('Are you sure you want to logout?')) {
+                    showMain();
                 }
             });
 
