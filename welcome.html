@@ -85,7 +85,7 @@
         }
 
         /* ENROLL PAGE (intake selection) */
-        #enrollPage, #programsPage, #shortCoursesPage, #dashboardPage {
+        #enrollPage, #programsPage, #shortCoursesPage {
             opacity: 0;
             transform: scale(0.96);
             visibility: hidden;
@@ -94,7 +94,7 @@
             padding-top: 40px;
             padding-bottom: 40px;
         }
-        #enrollPage.active, #programsPage.active, #shortCoursesPage.active, #dashboardPage.active {
+        #enrollPage.active, #programsPage.active, #shortCoursesPage.active {
             opacity: 1;
             transform: scale(1);
             visibility: visible;
@@ -658,7 +658,6 @@
             touch-action: manipulation;
             backdrop-filter: blur(6px);
             -webkit-backdrop-filter: blur(6px);
-            /* uniform glassmorphic tint – subtle blue-grey, less vibrant */
             background: rgba(255, 255, 255, 0.12);
             border: 1px solid rgba(255,255,255,0.15);
         }
@@ -676,7 +675,6 @@
             background: rgba(255, 255, 255, 0.20);
         }
         .intake-btn i { font-size: 32px; margin-bottom: 8px; color: rgba(255,255,255,0.9); }
-        /* no more strong gradient backgrounds – unified look */
 
         /* BACK BUTTON – moved to top */
         .back-row {
@@ -687,7 +685,7 @@
             margin-top: 20px;
             flex-shrink: 0;
             padding: 0 4px;
-            order: -1;  /* moves back button to top of flex container */
+            order: -1;
         }
         .btn-back {
             display: inline-flex;
@@ -726,7 +724,7 @@
             border-radius: 16px;
             padding: 16px 18px;
             margin-bottom: 12px;
-            border: 1px solid #3b82f6;  /* thin blue border */
+            border: 1px solid #3b82f6;
             color: #0f172a;
             transition: transform 0.2s, box-shadow 0.2s;
             cursor: pointer;
@@ -736,7 +734,6 @@
             -webkit-backdrop-filter: blur(4px);
             transform: scale(1);
         }
-        /* the middle card becomes biggest – we'll apply via JS based on scroll */
         .program-card.scale-up {
             transform: scale(1.04);
             box-shadow: 0 12px 36px rgba(59,130,246,0.15);
@@ -1001,7 +998,10 @@
             border-radius: 10px;
             background: rgba(255,255,255,0.1);
             padding: 4px;
+            cursor: pointer;
+            transition: transform 0.2s;
         }
+        .header-logo:hover { transform: scale(1.05); }
         .header-title {
             font-size: 16px;
             font-weight: 800;
@@ -1222,7 +1222,7 @@
             border-color: rgba(108, 255, 160, 0.3);
         }
 
-        /* CONTENT PANELS */
+        /* CONTENT PANELS - HOME OVERVIEW */
         .content-panel {
             display: none;
             background: rgba(255, 255, 255, 0.06);
@@ -1292,154 +1292,290 @@
             margin-top: 2px;
         }
 
-        /* SIDEBAR */
-        .sidebar {
+        /* ─── SIDEBAR MENU ─── */
+        .sidebar-menu-container {
             position: fixed;
             top: 0;
-            right: -320px;
+            left: 0;
             width: 300px;
             height: 100vh;
             height: 100dvh;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-left: 1px solid rgba(255,255,255,0.06);
-            z-index: 100;
-            transition: right 0.35s cubic-bezier(0.22,1,0.36,1);
-            padding: 20px 16px;
-            overflow-y: auto;
+            background: #ffffff;
+            z-index: 200;
+            transform: translateX(-100%);
+            transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+            box-shadow: 4px 0 30px rgba(0,0,0,0.15);
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            overflow-y: auto;
         }
-        .sidebar.open {
-            right: 0;
+        .sidebar-menu-container.open {
+            transform: translateX(0);
         }
-        .sidebar-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 99;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.35s ease;
-        }
-        .sidebar-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .sidebar-header {
+        .sidebar-menu-header {
+            padding: 20px 24px 16px;
+            border-bottom: 2px solid #3b82f6;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            background: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 5;
         }
-        .sidebar-header h3 {
-            color: #fff;
-            font-size: 18px;
-            font-weight: 800;
+        .sidebar-menu-header h2 {
+            font-size: 20px;
+            font-weight: 900;
+            color: #0f172a;
         }
-        .sidebar-header h3 .accent { color: #6cffa0; }
-        .btn-sidebar-close {
-            background: rgba(255,255,255,0.1);
+        .sidebar-menu-header h2 .accent { color: #3b82f6; }
+        .sidebar-menu-close {
+            background: #f1f5f9;
             border: none;
-            color: #fff;
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             font-size: 18px;
+            color: #1e293b;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.2s;
+            transition: all 0.2s;
         }
-        .btn-sidebar-close:hover { background: rgba(255,255,255,0.2); }
+        .sidebar-menu-close:hover { background: #e2e8f0; }
 
-        .sidebar-btn {
+        .sidebar-menu-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 14px;
+            gap: 14px;
+            padding: 14px 24px;
             border: none;
-            border-radius: 10px;
             background: transparent;
-            color: #cbd5e1;
-            font-size: 14px;
+            color: #0f172a;
+            font-size: 15px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
             text-align: left;
             width: 100%;
             font-family: 'Inter', sans-serif;
+            border-bottom: 1px solid #f1f5f9;
         }
-        .sidebar-btn i {
-            width: 20px;
-            color: #6cffa0;
-            font-size: 16px;
+        .sidebar-menu-item:hover {
+            background: #f8fafc;
+            color: #3b82f6;
         }
-        .sidebar-btn:hover {
-            background: rgba(255,255,255,0.06);
-            color: #fff;
+        .sidebar-menu-item i {
+            width: 24px;
+            color: #3b82f6;
+            font-size: 18px;
         }
-        .sidebar-btn.active {
-            background: rgba(108, 255, 160, 0.1);
-            color: #fff;
+        .sidebar-menu-item.active {
+            background: #eff6ff;
+            color: #1d4ed8;
+            border-left: 4px solid #3b82f6;
         }
 
-        /* SIDEBAR CONTENT PANELS */
-        .sidebar-content-panel {
-            display: none;
-            margin-top: 8px;
-            padding: 12px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.04);
-            color: #e2e8f0;
-            font-size: 13px;
-            line-height: 1.6;
+        .sidebar-overlay-menu {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 199;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.35s ease;
         }
-        .sidebar-content-panel.active {
+        .sidebar-overlay-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ─── SIDEBAR PAGE CONTENT ─── */
+        .sidebar-page {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: #ffffff;
+            padding: 0;
+            overflow-y: auto;
+            animation: slideInPage 0.35s ease;
+        }
+        @keyframes slideInPage {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .sidebar-page.active {
             display: block;
         }
-        .sidebar-content-panel h4 {
-            color: #6cffa0;
-            font-size: 14px;
+
+        .sidebar-page-header {
+            background: #ffffff;
+            padding: 16px 24px;
+            border-bottom: 3px solid #3b82f6;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .sidebar-page-header .page-logo {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .sidebar-page-header h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #0f172a;
+            flex: 1;
+        }
+        .sidebar-page-header h2 .accent { color: #3b82f6; }
+        .sidebar-page-close {
+            background: #f1f5f9;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 18px;
+            color: #1e293b;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .sidebar-page-close:hover { background: #e2e8f0; }
+
+        .sidebar-page-body {
+            padding: 24px;
+            color: #1e293b;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .sidebar-page-body h3 {
+            font-size: 18px;
             font-weight: 700;
+            color: #0f172a;
+            margin: 20px 0 12px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+        .sidebar-page-body h3 .accent { color: #3b82f6; }
+        .sidebar-page-body h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 14px 0 6px;
+        }
+        .sidebar-page-body p {
+            line-height: 1.7;
             margin-bottom: 8px;
+            color: #334155;
         }
-        .sidebar-content-panel table {
+        .sidebar-page-body ul, .sidebar-page-body ol {
+            padding-left: 20px;
+            margin: 8px 0 12px;
+            color: #334155;
+            line-height: 1.7;
+        }
+        .sidebar-page-body table {
             width: 100%;
-            font-size: 12px;
             border-collapse: collapse;
+            font-size: 14px;
+            margin: 12px 0;
         }
-        .sidebar-content-panel th, .sidebar-content-panel td {
-            padding: 4px 6px;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
+        .sidebar-page-body th {
+            background: #eff6ff;
+            color: #1d4ed8;
+            font-weight: 700;
+            padding: 10px 12px;
             text-align: left;
+            border-bottom: 2px solid #3b82f6;
         }
-        .sidebar-content-panel th {
-            color: #6cffa0;
+        .sidebar-page-body td {
+            padding: 8px 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .sidebar-page-body .highlight-blue {
+            color: #3b82f6;
             font-weight: 600;
         }
-        .sidebar-content-panel .highlight-green {
-            color: #6cffa0;
+        .sidebar-page-body .highlight-green {
+            color: #10b981;
             font-weight: 600;
         }
-        .sidebar-content-panel .highlight-red {
+        .sidebar-page-body .highlight-red {
             color: #ef4444;
             font-weight: 600;
         }
-        .sidebar-content-panel .balance-amount {
-            font-size: 18px;
+        .sidebar-page-body .highlight-orange {
+            color: #f59e0b;
+            font-weight: 600;
+        }
+        .sidebar-page-body .balance-amount {
+            font-size: 24px;
             font-weight: 800;
             color: #f59e0b;
+        }
+        .sidebar-page-body .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 8px 0;
+        }
+        .sidebar-page-body .info-grid .item {
+            background: #f8fafc;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        .sidebar-page-body .info-grid .item .label {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 500;
+        }
+        .sidebar-page-body .info-grid .item .value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0f172a;
+            margin-top: 2px;
+        }
+        .sidebar-page-body .status-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .sidebar-page-body .status-badge.approved {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .sidebar-page-body .status-badge.pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .sidebar-page-body .status-badge.review {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .sidebar-page-body .status-badge.cleared {
+            background: #d1fae5;
+            color: #065f46;
         }
 
         /* RESPONSIVE */
         @media (max-width: 640px) {
+            .sidebar-menu-container { width: 280px; }
+            .sidebar-page-header { padding: 12px 16px; }
+            .sidebar-page-header h2 { font-size: 17px; }
+            .sidebar-page-body { padding: 16px; }
+            .sidebar-page-body .info-grid { grid-template-columns: 1fr; }
             .dashboard-header { padding: 10px 14px; min-height: 56px; }
             .header-title { font-size: 14px; }
             .header-logo { width: 36px; height: 36px; }
@@ -1453,7 +1589,6 @@
             .ca-table-wrapper { font-size: 10px; }
             .ca-table-wrapper th, .ca-table-wrapper td { padding: 4px 4px; }
             .ca-table-wrapper .subject-col { min-width: 100px; }
-            .sidebar { width: 280px; right: -290px; }
             .dashboard-content { padding: 8px 12px 16px; gap: 12px; }
             .dangling-notices { padding: 0 8px; }
             .notice-string { height: 20px; }
@@ -1470,9 +1605,14 @@
         }
         @supports (padding: env(safe-area-inset-top)) {
             .dashboard-header { padding-left: calc(20px + env(safe-area-inset-left)); padding-right: calc(20px + env(safe-area-inset-right)); }
-            .sidebar { padding-left: calc(16px + env(safe-area-inset-left)); padding-right: calc(16px + env(safe-area-inset-right)); }
+            .sidebar-menu-container { padding-left: calc(0px + env(safe-area-inset-left)); }
+            .sidebar-page-header { padding-left: calc(24px + env(safe-area-inset-left)); padding-right: calc(24px + env(safe-area-inset-right)); }
         }
         .page::-webkit-scrollbar { width: 0; background: transparent; }
+        .sidebar-page::-webkit-scrollbar { width: 6px; background: #f1f5f9; }
+        .sidebar-page::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .sidebar-menu-container::-webkit-scrollbar { width: 6px; background: #f1f5f9; }
+        .sidebar-menu-container::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -1529,7 +1669,6 @@
             <h2 id="programsHeader"><i class="fas fa-list"></i> <span id="intakeTitle">Programmes</span></h2>
             <p id="intakeSub">Tap a programme for full details</p>
         </div>
-        <!-- SEARCH BAR – top of programs -->
         <div class="search-wrapper">
             <input type="text" class="search-input" id="programSearch" placeholder="🔍 Search programmes..." />
         </div>
@@ -1559,7 +1698,7 @@
         <div class="dashboard-container">
             <!-- HEADER -->
             <div class="dashboard-header">
-                <img src="logo.png" class="header-logo" alt="NORTEC" />
+                <img src="logo.png" class="header-logo" id="headerLogo" alt="NORTEC" />
                 <div class="header-title"><span class="accent">NORTEC</span> DASHBOARD</div>
                 <div class="header-actions">
                     <button class="btn-logout-dash" id="logoutDash"><i class="fas fa-sign-out-alt"></i> Logout</button>
@@ -1713,204 +1852,608 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- SIDEBAR OVERLAY -->
-        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <!-- ─── SIDEBAR MENU ─── -->
+    <div class="sidebar-overlay-menu" id="sidebarOverlayMenu"></div>
+    <div class="sidebar-menu-container" id="sidebarMenu">
+        <div class="sidebar-menu-header">
+            <h2><span class="accent">NORTEC</span> MENU</h2>
+            <button class="sidebar-menu-close" id="sidebarMenuClose"><i class="fas fa-times"></i></button>
+        </div>
+        <button class="sidebar-menu-item" data-page="application"><i class="fas fa-file-alt"></i> Application</button>
+        <button class="sidebar-menu-item" data-page="exams"><i class="fas fa-calendar-check"></i> Exams</button>
+        <button class="sidebar-menu-item" data-page="clearance"><i class="fas fa-check-circle"></i> Clearance</button>
+        <button class="sidebar-menu-item" data-page="accommodation"><i class="fas fa-bed"></i> Accommodation</button>
+        <button class="sidebar-menu-item" data-page="finance"><i class="fas fa-coins"></i> Finance</button>
+        <button class="sidebar-menu-item" data-page="appeal"><i class="fas fa-gavel"></i> Appeal</button>
+        <button class="sidebar-menu-item" data-page="diploma"><i class="fas fa-certificate"></i> DIP/CERT/TRA/CRA</button>
+        <button class="sidebar-menu-item" data-page="sup"><i class="fas fa-sync-alt"></i> SUP</button>
+        <button class="sidebar-menu-item" data-page="studentid"><i class="fas fa-id-badge"></i> Student ID</button>
+        <button class="sidebar-menu-item" data-page="teveta"><i class="fas fa-check-double"></i> TEVETA Approval</button>
+        <button class="sidebar-menu-item" data-page="attendance"><i class="fas fa-clipboard-list"></i> Attendance</button>
+        <button class="sidebar-menu-item" data-page="courses"><i class="fas fa-book"></i> Courses</button>
+        <button class="sidebar-menu-item" data-page="timetable"><i class="fas fa-clock"></i> Time Table</button>
+    </div>
 
-        <!-- SIDEBAR -->
-        <div class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <h3><span class="accent">NORTEC</span> MENU</h3>
-                <button class="btn-sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
-            </div>
-            
-            <button class="sidebar-btn" data-sidebar="application"><i class="fas fa-file-alt"></i> Application</button>
-            <div class="sidebar-content-panel" id="sidebar-application">
-                <h4>Application Status</h4>
-                <p>You applied for: <strong>Diploma in Computer Systems Engineering</strong></p>
-                <p>Application Date: 15th January 2022</p>
-                <p>Status: <span class="highlight-green">Approved</span></p>
-                <p>Admission Letter: <a href="#" style="color:#6cffa0;">Download (Simulated)</a></p>
-            </div>
-
-            <button class="sidebar-btn" data-sidebar="exams"><i class="fas fa-calendar-check"></i> Exams</button>
-            <div class="sidebar-content-panel" id="sidebar-exams">
-                <h4>Exam Timetable (Simulated)</h4>
-                <table>
-                    <tr><th>Date</th><th>Time</th><th>Subject</th></tr>
-                    <tr><td>Mon 20 June</td><td>09:00</td><td>Digital Electronics II</td></tr>
-                    <tr><td>Tue 21 June</td><td>10:00</td><td>Operating Systems</td></tr>
-                    <tr><td>Wed 22 June</td><td>14:00</td><td>Programming & Database</td></tr>
-                    <tr><td>Thu 23 June</td><td>09:00</td><td>Networks & Communications</td></tr>
-                    <tr><td>Fri 24 June</td><td>11:00</td><td>Computer Hardware</td></tr>
-                </table>
-            </div>
-
-            <button class="sidebar-btn" data-sidebar="clearance"><i class="fas fa-check-circle"></i> Clearance</button>
-            <div class="sidebar-content-panel" id="sidebar-clearance">
-                <h4>Clearance Status</h4>
-                <table>
-                    <tr><th>Department</th><th>Status</th></tr>
-                    <tr><td>Accounts</td><td><span class="highlight-green">Cleared</span></td></tr>
-                    <tr><td>Library</td><td><span class="highlight-green">Cleared</span></td></tr>
-                    <tr><td>Sports</td><td><span class="highlight-green">Cleared</span></td></tr>
-                    <tr><td>HOD</td><td><span class="highlight-green">Cleared</span></td></tr>
-                    <tr><td>Lab Attendant</td><td><span class="highlight-green">Cleared</span></td></tr>
-                    <tr><td>Admissions</td><td><span class="highlight-green">Cleared</span></td></tr>
-                </table>
-                <p style="margin-top:8px; font-size:12px; color:#94a3b8;">All departments cleared. You are ready to close school.</p>
-            </div>
-
-            <button class="sidebar-btn" data-sidebar="accommodation"><i class="fas fa-bed"></i> Accommodation</button>
-            <div class="sidebar-content-panel" id="sidebar-accommodation">
-                <h4>Accommodation Details</h4>
-                <p><strong>Student:</strong> Jubel Mobela</p>
-                <p><strong>Hostel:</strong> Kwacha Building</p>
-                <p><strong>Location:</strong> Kabwe Floor 3</p>
-                <p><strong>Room:</strong> 16</p>
-                <p style="font-size:12px; color:#94a3b8; margin-top:4px;">Room allocated for the academic year 2026.</p>
-            </div>
-
-            <button class="sidebar-btn" data-sidebar="finance"><i class="fas fa-coins"></i> Finance</button>
-            <div class="sidebar-content-panel" id="sidebar-finance">
-                <h4>Financial Statement</h4>
-                <table>
-                    <tr><th>Transaction</th><th>Date</th><th>Type</th><th>Description</th><th>Debit</th><th>Credit</th><th>Balance</th></tr>
-                    <tr><td>BJV-002022_1</td><td>2022-01-31</td><td>JV</td><td>MoTS-TERM 1 2022</td><td></td><td>2,000</td><td>-2,000</td></tr>
-                    <tr><td>SI-2003596</td><td>2022-03-20</td><td>Invoice</td><td>CSECTFT-FT-2021-1</td><td>2,720</td><td></td><td>720</td></tr>
-                    <tr><td>BJV-002022_2</td><td>2022-05-01</td><td>JV</td><td>MoTS-TERM 2 2022</td><td></td><td>2,000</td><td>-1,280</td></tr>
-                    <tr><td>SI-2007000</td><td>2022-07-01</td><td>Invoice</td><td>CSECTFT-FT-2021-2</td><td>2,150</td><td></td><td>870</td></tr>
-                    <tr><td>RCT-20037753</td><td>2022-07-01</td><td>Payment</td><td>TUITION_03.02.2022</td><td></td><td>920</td><td>-50</td></tr>
-                    <tr><td>BJV-002022_3</td><td>2022-09-01</td><td>JV</td><td>MoTS-TERM 3 & EXAM</td><td></td><td>3,450</td><td>-3,500</td></tr>
-                    <tr><td>SI-2008189</td><td>2022-09-09</td><td>Invoice</td><td>CSECTFT-FT-2021-3</td><td>2,150</td><td></td><td>-1,350</td></tr>
-                    <tr><td>220915496</td><td>2022-09-16</td><td>Bank</td><td>ZANACO</td><td></td><td>150</td><td>-1,500</td></tr>
-                    <tr><td>SI-20027290</td><td>2022-09-16</td><td>Invoice</td><td>exam</td><td>1,450</td><td></td><td>-50</td></tr>
-                    <tr><td>BJV-002022_2_1</td><td>2023-01-06</td><td>JV</td><td>MoTS-TERM 1 2023</td><td></td><td>3,000</td><td>-3,050</td></tr>
-                    <tr><td>230227303</td><td>2023-02-16</td><td>Bank</td><td>ZANACO</td><td></td><td>250</td><td>-3,300</td></tr>
-                    <tr><td>SI-2017119</td><td>2023-02-20</td><td>Invoice</td><td>CSEDIFT-FT-2021-1</td><td>4,400</td><td></td><td>1,100</td></tr>
-                    <tr><td>BJV-002022_2_2</td><td>2023-05-06</td><td>JV</td><td>MoTS-TERM 2 2023</td><td></td><td>3,000</td><td>-1,900</td></tr>
-                    <tr><td>SI-2019240</td><td>2023-05-22</td><td>Invoice</td><td>CSEDIFT-FT-2021-2</td><td>3,250</td><td></td><td>1,350</td></tr>
-                    <tr><td>230532230</td><td>2023-05-22</td><td>Bank</td><td>ZANACO</td><td></td><td>800</td><td>550</td></tr>
-                    <tr><td>230937853</td><td>2023-09-07</td><td>Bank</td><td>ZANACO</td><td></td><td>350</td><td>200</td></tr>
-                    <tr><td>BJV-002022_2_3</td><td>2023-09-11</td><td>JV</td><td>MoTS-TERM 3 2023</td><td></td><td>3,950</td><td>-3,750</td></tr>
-                    <tr><td>SI-2025674</td><td>2023-09-11</td><td>Invoice</td><td>CSEDIFT-FT-2021-3</td><td>4,000</td><td></td><td>250</td></tr>
-                    <tr><td>CJV-0020233</td><td>2023-09-15</td><td>JV</td><td>EXAM FEES</td><td>950</td><td></td><td>1,200</td></tr>
-                    <tr><td>230940555</td><td>2023-09-21</td><td>Bank</td><td>AIRTEL-MP</td><td></td><td>950</td><td>250</td></tr>
-                    <tr><td>CJV-30102023</td><td>2023-10-30</td><td>JV</td><td>EXAM FEES</td><td>950</td><td></td><td>1,200</td></tr>
-                    <tr><td>250979774</td><td>2025-09-08</td><td>Bank</td><td>ZANACO</td><td></td><td>1,000</td><td>200</td></tr>
-                    <tr><td>SI-20044214</td><td>2025-09-10</td><td>Invoice</td><td>HIRE OF GOWN</td><td>1,000</td><td></td><td>1,200</td></tr>
-                    <tr><td>SI-20044474</td><td>2025-09-25</td><td>Invoice</td><td>HIRE OF GOWN</td><td>600</td><td></td><td>1,800</td></tr>
-                </table>
-                <div style="margin-top:8px; text-align:right; font-size:16px; font-weight:700;">CURRENT BALANCE: <span class="balance-amount">K1,800</span></div>
-            </div>
-
-            <button class="sidebar-btn" data-sidebar="appeal"><i class="fas fa-gavel"></i> Appeal</button>
-            <div class="sidebar-content-panel" id="sidebar-appeal">
-                <h4>Appeal Status</h4>
-                <p>You have a pending appeal regarding school fees clearance.</p>
-                <p><strong>Appeal ID:</strong> APP-2026-001</p>
-                <p><strong>Status:</strong> <span style="color:#f59e0b;">Under Review</span></p>
-                <p><strong>Submitted:</strong> 10th June 2026</p>
-                <p style="font-size:12px; color:#94a3b8;">Your appeal is being processed by the finance department.</p>
-            </div>
-
-            <button class="sidebar-btn" data-sidebar="diploma"><i class="fas fa-certificate"></i> DIP/CERT/TRA/CRA</button>
-            <div class="sidebar-content-panel" id="sidebar-diploma">
-                <h4>Diploma Status</h4>
-                <p><strong>Diploma:</strong> Not yet issued</p>
-                <p style="font-size:12px; color:#94a3b8;">The following procedure will be followed once the diploma is ready for collection:</p>
-                <ol style="padding-left:18px; font-size:12px; color:#e2e8f0; line-height:1.8;">
-                    <li>Check your student portal for a notification</li>
-                    <li>Visit the examinations office with your student ID</li>
-                    <li>Clear any outstanding fees with the finance department</li>
-                    <li>Sign the diploma collection register</li>
-                    <li>Collect your diploma certificate</li>
-                </ol>
-                <p style="margin-top:8px; font-size:11px; color:#94a3b8;">Expected release date: December 2026</p>
-            </div>
-
-            <button class="sidebar-btn" data-sidebar="sup"><i class="fas fa-sync-alt"></i> SUP</button>
-            <div class="sidebar-content-panel" id="sidebar-sup">
-                <h4>Supplementary (SUP) Status</h4>
-                <p>You have been scheduled to rewrite the following course:</p>
-                <p><strong>Course:</strong> Programming and Database Technology (41.4)</p>
-                <p><strong>SUP Date:</strong> 15th July 2026</p>
-                <p><strong>Venue:</strong> Computer Lab 3</p>
-                <p style="font-size:12px; color:#94a3b8;">Please prepare accordingly and arrive 15 minutes early.</p>
-            </div>
-
-            <button class="sidebar-btn" data-sidebar="studentid"><i class="fas fa-id-badge"></i> Student ID</button>
-            <div class="sidebar-content-panel" id="sidebar-studentid">
-                <h4>Student ID Card</h4>
-                <p>Your student ID card has been collected.</p>
-                <p><strong>ID Number:</strong> 622589/67/1</p>
-                <p><strong>Valid until:</strong> December 2026</p>
-                <p style="font-size:12px; color:#94a3b8;">Keep your ID card safe and present it when required.</p>
-            </div>
-
-            <button class="sidebar-btn" data-sidebar="teveta"><i class="fas fa-check-double"></i> TEVETA Approval</button>
-            <div class="sidebar-content-panel" id="sidebar-teveta">
-                <h4>TEVETA Exam Approval</h4>
-                <p>Your application for final exams is pending with the examination board TEVETA.</p>
-                <p><strong>Application ID:</strong> TEV-2026-0452</p>
-                <p><strong>Status:</strong> <span style="color:#f59e0b;">Pending Review</span></p>
-                <p><strong>Submitted:</strong> 1st June 2026</p>
-                <p style="font-size:12px; color:#94a3b8;">Expected approval notification: 30th June 2026</p>
-            </div>
-
-            <button class="sidebar-btn" data-sidebar="attendance"><i class="fas fa-clipboard-list"></i> Attendance</button>
-            <div class="sidebar-content-panel" id="sidebar-attendance">
-                <h4>Attendance Record</h4>
-                <table>
-                    <tr><th>Term</th><th>Month</th><th>Attendance %</th></tr>
-                    <tr><td>Term 1</td><td>January</td><td>92%</td></tr>
-                    <tr><td>Term 1</td><td>February</td><td>88%</td></tr>
-                    <tr><td>Term 1</td><td>March</td><td>95%</td></tr>
-                    <tr><td>Term 2</td><td>April</td><td>90%</td></tr>
-                    <tr><td>Term 2</td><td>May</td><td>85%</td></tr>
-                    <tr><td>Term 2</td><td>June</td><td>93%</td></tr>
-                </table>
-                <p style="margin-top:8px; font-size:12px; color:#94a3b8;">Overall Attendance: <strong style="color:#6cffa0;">90.5%</strong></p>
-            </div>
-
-            <button class="sidebar-btn" data-sidebar="courses"><i class="fas fa-book"></i> Courses</button>
-            <div class="sidebar-content-panel" id="sidebar-courses">
-                <h4>Course List</h4>
-                <div style="display:grid; gap:4px; font-size:13px;">
-                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.04);"><span>Digital Electronics II (41.1)</span><span class="highlight-green">✓</span></div>
-                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.04);"><span>Entrepreneurship (41.2)</span><span class="highlight-green">✓</span></div>
-                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.04);"><span>Operating Systems (41.3)</span><span class="highlight-green">✓</span></div>
-                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.04);"><span>Programming & Database Tech (41.4)</span><span class="highlight-green">✓</span></div>
-                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.04);"><span>Networks & Communications (41.5)</span><span class="highlight-green">✓</span></div>
-                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.04);"><span>Computer Hardware Maintenance (41.6)</span><span class="highlight-green">✓</span></div>
-                    <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.04);"><span>Management Information Systems (41.7)</span><span class="highlight-green">✓</span></div>
+    <!-- ─── SIDEBAR PAGES ─── -->
+    <!-- Application Page -->
+    <div class="sidebar-page" id="page-application">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Application</span> Status</h2>
+            <button class="sidebar-page-close" data-page-close="application"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3>Application Information</h3>
+            <div class="info-grid">
+                <div class="item">
+                    <div class="label">Program Applied For</div>
+                    <div class="value">Diploma in Computer Systems Engineering</div>
+                </div>
+                <div class="item">
+                    <div class="label">Application Date</div>
+                    <div class="value">15th January 2022</div>
+                </div>
+                <div class="item">
+                    <div class="label">Application ID</div>
+                    <div class="value">APP-2022-00456</div>
+                </div>
+                <div class="item">
+                    <div class="label">Status</div>
+                    <div class="value"><span class="status-badge approved">Approved</span></div>
                 </div>
             </div>
+            
+            <h3>Admission Details</h3>
+            <p>Your application for the <strong>Diploma in Computer Systems Engineering</strong> program has been reviewed and approved.</p>
+            <p>You were admitted on <strong>20th January 2022</strong> and commenced your studies on <strong>1st February 2022</strong>.</p>
+            
+            <h3>Documents</h3>
+            <ul>
+                <li>Admission Letter: <a href="#" style="color:#3b82f6;">Download (Simulated)</a></li>
+                <li>Student ID Card: Collected</li>
+                <li>Academic Transcript: Available on request</li>
+            </ul>
+            
+            <h3>Important Notes</h3>
+            <ul>
+                <li>Your admission is valid for the duration of your program.</li>
+                <li>Any changes to your program must be submitted to the admissions office.</li>
+                <li>For any inquiries, contact admissions@northerntech.edu.zm</li>
+            </ul>
+        </div>
+    </div>
 
-            <button class="sidebar-btn" data-sidebar="timetable"><i class="fas fa-clock"></i> Time Table</button>
-            <div class="sidebar-content-panel" id="sidebar-timetable">
-                <h4>Weekly Timetable (Alternating)</h4>
-                <table>
-                    <tr><th>Day</th><th>Time</th><th>Subject</th></tr>
-                    <tr><td>Monday</td><td>10:00 - 12:00</td><td>Digital Electronics II</td></tr>
-                    <tr><td>Monday</td><td>14:00 - 16:00</td><td>Operating Systems</td></tr>
-                    <tr><td>Tuesday</td><td>08:00 - 10:00</td><td>Programming & Database Tech</td></tr>
-                    <tr><td>Tuesday</td><td>11:00 - 13:00</td><td>Networks & Communications</td></tr>
-                    <tr><td>Wednesday</td><td>09:00 - 11:00</td><td>Computer Hardware Maintenance</td></tr>
-                    <tr><td>Wednesday</td><td>14:00 - 16:00</td><td>Entrepreneurship</td></tr>
-                    <tr><td>Thursday</td><td>10:00 - 12:00</td><td>Management Information Systems</td></tr>
-                    <tr><td>Thursday</td><td>13:00 - 15:00</td><td>Digital Electronics II (Lab)</td></tr>
-                    <tr><td>Friday</td><td>08:00 - 10:00</td><td>Operating Systems (Lab)</td></tr>
-                    <tr><td>Friday</td><td>11:00 - 13:00</td><td>Programming & Database Tech (Lab)</td></tr>
-                </table>
-                <p style="font-size:11px; color:#94a3b8; margin-top:4px;">* Timetable alternates weekly. Week A shown above.</p>
+    <!-- Exams Page -->
+    <div class="sidebar-page" id="page-exams">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Exams</span> Timetable</h2>
+            <button class="sidebar-page-close" data-page-close="exams"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3>End of Term 2 Exams – June 2026</h3>
+            <table>
+                <tr><th>Date</th><th>Time</th><th>Subject</th><th>Venue</th></tr>
+                <tr><td>Monday, 20th June</td><td>09:00 - 11:00</td><td>Digital Electronics II (41.1)</td><td>Hall A</td></tr>
+                <tr><td>Tuesday, 21st June</td><td>10:00 - 12:00</td><td>Operating Systems (41.3)</td><td>Hall B</td></tr>
+                <tr><td>Wednesday, 22nd June</td><td>14:00 - 16:00</td><td>Programming & Database Tech (41.4)</td><td>Lab 2</td></tr>
+                <tr><td>Thursday, 23rd June</td><td>09:00 - 11:00</td><td>Networks & Communications (41.5)</td><td>Hall A</td></tr>
+                <tr><td>Friday, 24th June</td><td>11:00 - 13:00</td><td>Computer Hardware Maintenance (41.6)</td><td>Lab 3</td></tr>
+            </table>
+            
+            <h3>Exam Guidelines</h3>
+            <ul>
+                <li>Arrive at least 30 minutes before the exam start time.</li>
+                <li>Bring your student ID card for verification.</li>
+                <li>No electronic devices are allowed during exams.</li>
+                <li>All exams are closed book unless stated otherwise.</li>
+            </ul>
+            
+            <h3>Previous Exam Results</h3>
+            <p>Your Term 1 exam results are available for review on the CA panel.</p>
+        </div>
+    </div>
+
+    <!-- Clearance Page -->
+    <div class="sidebar-page" id="page-clearance">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Clearance</span> Status</h2>
+            <button class="sidebar-page-close" data-page-close="clearance"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3>Clearance Verification</h3>
+            <table>
+                <tr><th>Department</th><th>Status</th><th>Date Cleared</th><th>Remarks</th></tr>
+                <tr><td>Accounts</td><td><span class="status-badge cleared">Cleared</span></td><td>15th June 2026</td><td>Balance: K0.00</td></tr>
+                <tr><td>Library</td><td><span class="status-badge cleared">Cleared</span></td><td>12th June 2026</td><td>All books returned</td></tr>
+                <tr><td>Sports</td><td><span class="status-badge cleared">Cleared</span></td><td>10th June 2026</td><td>No pending dues</td></tr>
+                <tr><td>HOD</td><td><span class="status-badge cleared">Cleared</span></td><td>14th June 2026</td><td>All projects completed</td></tr>
+                <tr><td>Lab Attendant</td><td><span class="status-badge cleared">Cleared</span></td><td>11th June 2026</td><td>Equipment returned</td></tr>
+                <tr><td>Admissions</td><td><span class="status-badge cleared">Cleared</span></td><td>16th June 2026</td><td>Records verified</td></tr>
+            </table>
+            
+            <h3>Clearance Summary</h3>
+            <p><strong>Overall Status:</strong> <span class="highlight-green">✓ FULLY CLEARED</span></p>
+            <p>You are ready to close your studies at NORTEC for the current academic year.</p>
+            
+            <h3>Next Steps</h3>
+            <ol>
+                <li>Visit the admissions office to finalize your clearance.</li>
+                <li>Collect your clearance certificate.</li>
+                <li>Return any outstanding college property.</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Accommodation Page -->
+    <div class="sidebar-page" id="page-accommodation">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Accommodation</span> Details</h2>
+            <button class="sidebar-page-close" data-page-close="accommodation"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3>Room Information</h3>
+            <div class="info-grid">
+                <div class="item">
+                    <div class="label">Student Name</div>
+                    <div class="value">Jubel Mobela</div>
+                </div>
+                <div class="item">
+                    <div class="label">Student Number</div>
+                    <div class="value">2201001157</div>
+                </div>
+                <div class="item">
+                    <div class="label">Hostel Building</div>
+                    <div class="value">Kwacha Building</div>
+                </div>
+                <div class="item">
+                    <div class="label">Location</div>
+                    <div class="value">Kabwe Floor 3</div>
+                </div>
+                <div class="item">
+                    <div class="label">Room Number</div>
+                    <div class="value">Room 16</div>
+                </div>
+                <div class="item">
+                    <div class="label">Allocated Year</div>
+                    <div class="value">Academic Year 2026</div>
+                </div>
             </div>
+            
+            <h3>Room Features</h3>
+            <ul>
+                <li>2 beds with mattresses</li>
+                <li>Built-in wardrobe</li>
+                <li>Study desk and chair</li>
+                <li>Shared bathroom facilities</li>
+                <li>Common kitchen area</li>
+                <li>24/7 security</li>
+            </ul>
+            
+            <h3>Hostel Rules</h3>
+            <ul>
+                <li>No visitors after 22:00 hours</li>
+                <li>No loud music after 23:00 hours</li>
+                <li>Keep the room clean and tidy</li>
+                <li>Report any maintenance issues to the hostel warden</li>
+            </ul>
+            
+            <h3>Contact</h3>
+            <p>Hostel Warden: +260 97 123 4567</p>
+        </div>
+    </div>
+
+    <!-- Finance Page -->
+    <div class="sidebar-page" id="page-finance">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Finance</span> Statement</h2>
+            <button class="sidebar-page-close" data-page-close="finance"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3>Transaction History</h3>
+            <table>
+                <tr><th>Transaction</th><th>Date</th><th>Type</th><th>Description</th><th>Debit</th><th>Credit</th><th>Balance</th></tr>
+                <tr><td>BJV-002022_1</td><td>2022-01-31</td><td>JV</td><td>MoTS-TERM 1 2022</td><td></td><td>2,000</td><td>-2,000</td></tr>
+                <tr><td>SI-2003596</td><td>2022-03-20</td><td>Invoice</td><td>CSECTFT-FT-2021-1</td><td>2,720</td><td></td><td>720</td></tr>
+                <tr><td>BJV-002022_2</td><td>2022-05-01</td><td>JV</td><td>MoTS-TERM 2 2022</td><td></td><td>2,000</td><td>-1,280</td></tr>
+                <tr><td>SI-2007000</td><td>2022-07-01</td><td>Invoice</td><td>CSECTFT-FT-2021-2</td><td>2,150</td><td></td><td>870</td></tr>
+                <tr><td>RCT-20037753</td><td>2022-07-01</td><td>Payment</td><td>TUITION_03.02.2022</td><td></td><td>920</td><td>-50</td></tr>
+                <tr><td>BJV-002022_3</td><td>2022-09-01</td><td>JV</td><td>MoTS-TERM 3 & EXAM</td><td></td><td>3,450</td><td>-3,500</td></tr>
+                <tr><td>SI-2008189</td><td>2022-09-09</td><td>Invoice</td><td>CSECTFT-FT-2021-3</td><td>2,150</td><td></td><td>-1,350</td></tr>
+                <tr><td>220915496</td><td>2022-09-16</td><td>Bank</td><td>ZANACO</td><td></td><td>150</td><td>-1,500</td></tr>
+                <tr><td>SI-20027290</td><td>2022-09-16</td><td>Invoice</td><td>exam</td><td>1,450</td><td></td><td>-50</td></tr>
+                <tr><td>BJV-002022_2_1</td><td>2023-01-06</td><td>JV</td><td>MoTS-TERM 1 2023</td><td></td><td>3,000</td><td>-3,050</td></tr>
+                <tr><td>230227303</td><td>2023-02-16</td><td>Bank</td><td>ZANACO</td><td></td><td>250</td><td>-3,300</td></tr>
+                <tr><td>SI-2017119</td><td>2023-02-20</td><td>Invoice</td><td>CSEDIFT-FT-2021-1</td><td>4,400</td><td></td><td>1,100</td></tr>
+                <tr><td>BJV-002022_2_2</td><td>2023-05-06</td><td>JV</td><td>MoTS-TERM 2 2023</td><td></td><td>3,000</td><td>-1,900</td></tr>
+                <tr><td>SI-2019240</td><td>2023-05-22</td><td>Invoice</td><td>CSEDIFT-FT-2021-2</td><td>3,250</td><td></td><td>1,350</td></tr>
+                <tr><td>230532230</td><td>2023-05-22</td><td>Bank</td><td>ZANACO</td><td></td><td>800</td><td>550</td></tr>
+                <tr><td>230937853</td><td>2023-09-07</td><td>Bank</td><td>ZANACO</td><td></td><td>350</td><td>200</td></tr>
+                <tr><td>BJV-002022_2_3</td><td>2023-09-11</td><td>JV</td><td>MoTS-TERM 3 2023</td><td></td><td>3,950</td><td>-3,750</td></tr>
+                <tr><td>SI-2025674</td><td>2023-09-11</td><td>Invoice</td><td>CSEDIFT-FT-2021-3</td><td>4,000</td><td></td><td>250</td></tr>
+                <tr><td>CJV-0020233</td><td>2023-09-15</td><td>JV</td><td>EXAM FEES</td><td>950</td><td></td><td>1,200</td></tr>
+                <tr><td>230940555</td><td>2023-09-21</td><td>Bank</td><td>AIRTEL-MP</td><td></td><td>950</td><td>250</td></tr>
+                <tr><td>CJV-30102023</td><td>2023-10-30</td><td>JV</td><td>EXAM FEES</td><td>950</td><td></td><td>1,200</td></tr>
+                <tr><td>250979774</td><td>2025-09-08</td><td>Bank</td><td>ZANACO</td><td></td><td>1,000</td><td>200</td></tr>
+                <tr><td>SI-20044214</td><td>2025-09-10</td><td>Invoice</td><td>HIRE OF GOWN</td><td>1,000</td><td></td><td>1,200</td></tr>
+                <tr><td>SI-20044474</td><td>2025-09-25</td><td>Invoice</td><td>HIRE OF GOWN</td><td>600</td><td></td><td>1,800</td></tr>
+            </table>
+            <div style="margin-top:16px; text-align:right; font-size:20px; font-weight:800; color:#0f172a; border-top:2px solid #e2e8f0; padding-top:12px;">
+                CURRENT BALANCE: <span class="balance-amount">K1,800</span>
+            </div>
+            
+            <h3>Payment Instructions</h3>
+            <ul>
+                <li>Bank: ZANACO Bank</li>
+                <li>Account Name: Northern Technical College</li>
+                <li>Account Number: 1234567890</li>
+                <li>Reference: Your Student Number (2201001157)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Appeal Page -->
+    <div class="sidebar-page" id="page-appeal">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Appeal</span> Status</h2>
+            <button class="sidebar-page-close" data-page-close="appeal"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3>Appeal Information</h3>
+            <div class="info-grid">
+                <div class="item">
+                    <div class="label">Appeal ID</div>
+                    <div class="value">APP-2026-001</div>
+                </div>
+                <div class="item">
+                    <div class="label">Status</div>
+                    <div class="value"><span class="status-badge pending">Under Review</span></div>
+                </div>
+                <div class="item">
+                    <div class="label">Submitted Date</div>
+                    <div class="value">10th June 2026</div>
+                </div>
+                <div class="item">
+                    <div class="label">Category</div>
+                    <div class="value">Fees Clearance</div>
+                </div>
+            </div>
+            
+            <h3>Appeal Details</h3>
+            <p>You submitted an appeal regarding the <strong>school fees clearance</strong> process. The finance department is currently reviewing your case.</p>
+            <p><strong>Reason for Appeal:</strong> Discrepancy in fee structure for the 2023 academic year.</p>
+            
+            <h3>Supporting Documents</h3>
+            <ul>
+                <li>Fee structure 2023 (uploaded)</li>
+                <li>Bank payment receipts (uploaded)</li>
+                <li>Bursary confirmation letter (uploaded)</li>
+            </ul>
+            
+            <h3>Timeline</h3>
+            <ul>
+                <li>10th June 2026 – Appeal submitted</li>
+                <li>12th June 2026 – Acknowledged by finance</li>
+                <li>Expected resolution: 30th June 2026</li>
+            </ul>
+            
+            <h3>Contact</h3>
+            <p>For any updates, contact the Finance Department: finance@northerntech.edu.zm</p>
+        </div>
+    </div>
+
+    <!-- Diploma Page -->
+    <div class="sidebar-page" id="page-diploma">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">DIP/CERT/TRA/CRA</span> Status</h2>
+            <button class="sidebar-page-close" data-page-close="diploma"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3>Diploma Status</h3>
+            <p><strong>Diploma:</strong> <span class="highlight-orange">Not yet issued</span></p>
+            <p>Your Diploma in Computer Systems Engineering is being processed. The release date is expected to be <strong>December 2026</strong>.</p>
+            
+            <h3>Collection Procedure</h3>
+            <p>The following procedure will be followed once the diploma is ready for collection:</p>
+            <ol>
+                <li><strong>Notification:</strong> Check your student portal for a notification when the diploma is ready.</li>
+                <li><strong>Visit Exams Office:</strong> Visit the examinations office with your student ID card.</li>
+                <li><strong>Clear Outstanding Fees:</strong> Ensure all fees are cleared with the finance department.</li>
+                <li><strong>Sign Register:</strong> Sign the diploma collection register at the exams office.</li>
+                <li><strong>Collect Diploma:</strong> Receive your diploma certificate.</li>
+            </ol>
+            
+            <h3>Additional Information</h3>
+            <ul>
+                <li><strong>Transcript:</strong> An academic transcript will be issued alongside the diploma.</li>
+                <li><strong>Graduation:</strong> You are eligible to attend the graduation ceremony scheduled for 15th July 2026.</li>
+                <li><strong>Gown Hire:</strong> Gown hire fee has been processed (see Finance section).</li>
+            </ul>
+            
+            <h3>Contact</h3>
+            <p>Examinations Office: exams@northerntech.edu.zm</p>
+        </div>
+    </div>
+
+    <!-- SUP Page -->
+    <div class="sidebar-page" id="page-sup">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Supplementary (SUP)</span> Status</h2>
+            <button class="sidebar-page-close" data-page-close="sup"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3>Supplementary Exam Details</h3>
+            <p>You have been scheduled to rewrite the following course:</p>
+            
+            <div class="info-grid">
+                <div class="item">
+                    <div class="label">Course</div>
+                    <div class="value">Programming and Database Technology (41.4)</div>
+                </div>
+                <div class="item">
+                    <div class="label">SUP Date</div>
+                    <div class="value">15th July 2026</div>
+                </div>
+                <div class="item">
+                    <div class="label">Venue</div>
+                    <div class="value">Computer Lab 3</div>
+                </div>
+                <div class="item">
+                    <div class="label">Time</div>
+                    <div class="value">09:00 - 11:00</div>
+                </div>
+            </div>
+            
+            <h3>Preparation Guidelines</h3>
+            <ul>
+                <li>Review all course materials from Term 1 and Term 2.</li>
+                <li>Practice coding exercises from previous assignments.</li>
+                <li>Attend supplementary classes if available.</li>
+                <li>Arrive 15 minutes early on the day of the exam.</li>
+                <li>Bring your student ID card and writing materials.</li>
+            </ul>
+            
+            <h3>Important Notes</h3>
+            <ul>
+                <li>This is your final opportunity to pass this course.</li>
+                <li>Failure to pass will result in repeating the course.</li>
+                <li>No electronic devices allowed during the exam.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Student ID Page -->
+    <div class="sidebar-page" id="page-studentid">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Student ID</span> Card</h2>
+            <button class="sidebar-page-close" data-page-close="studentid"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3>ID Card Information</h3>
+            <div class="info-grid">
+                <div class="item">
+                    <div class="label">Student Name</div>
+                    <div class="value">Jubel Mobela</div>
+                </div>
+                <div class="item">
+                    <div class="label">Student Number</div>
+                    <div class="value">2201001157</div>
+                </div>
+                <div class="item">
+                    <div class="label">ID Number</div>
+                    <div class="value">622589/67/1</div>
+                </div>
+                <div class="item">
+                    <div class="label">Program</div>
+                    <div class="value">Diploma in Computer Systems Engineering</div>
+                </div>
+                <div class="item">
+                    <div class="label">Valid Until</div>
+                    <div class="value">December 2026</div>
+                </div>
+                <div class="item">
+                    <div class="label">Status</div>
+                    <div class="value"><span class="status-badge approved">Collected</span></div>
+                </div>
+            </div>
+            
+            <h3>ID Card Details</h3>
+            <ul>
+                <li><strong>Issue Date:</strong> 1st February 2022</li>
+                <li><strong>Expiry Date:</strong> 31st December 2026</li>
+                <li><strong>Photo:</strong> Student photo attached to ID</li>
+                <li><strong>Barcode:</strong> Scannable barcode for campus access</li>
+            </ul>
+            
+            <h3>Important Information</h3>
+            <ul>
+                <li>Keep your ID card safe at all times.</li>
+                <li>Present your ID card when required for exams, library, and campus access.</li>
+                <li>Report any loss immediately to the admissions office.</li>
+                <li>Replacement fee: K50 for lost or damaged cards.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- TEVETA Approval Page -->
+    <div class="sidebar-page" id="page-teveta">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">TEVETA</span> Approval</h2>
+            <button class="sidebar-page-close" data-page-close="teveta"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3>Exam Approval Status</h3>
+            <p>Your application for final exams is pending with the examination board TEVETA.</p>
+            
+            <div class="info-grid">
+                <div class="item">
+                    <div class="label">Application ID</div>
+                    <div class="value">TEV-2026-0452</div>
+                </div>
+                <div class="item">
+                    <div class="label">Status</div>
+                    <div class="value"><span class="status-badge pending">Pending Review</span></div>
+                </div>
+                <div class="item">
+                    <div class="label">Submitted</div>
+                    <div class="value">1st June 2026</div>
+                </div>
+                <div class="item">
+                    <div class="label">Expected Notification</div>
+                    <div class="value">30th June 2026</div>
+                </div>
+            </div>
+            
+            <h3>Application Details</h3>
+            <ul>
+                <li><strong>Program:</strong> Diploma in Computer Systems Engineering</li>
+                <li><strong>Exam Session:</strong> June 2026</li>
+                <li><strong>Number of Courses:</strong> 7 courses</li>
+                <li><strong>Grading:</strong> TEVETA National Examination</li>
+            </ul>
+            
+            <h3>What is TEVETA?</h3>
+            <p>TEVETA (Technical Education, Vocational and Entrepreneurship Training Authority) is the regulatory body responsible for technical education and vocational training in Zambia. They ensure that all technical programs meet national standards.</p>
+            
+            <h3>After Approval</h3>
+            <ul>
+                <li>You will receive an official examination number.</li>
+                <li>Exams will be conducted under TEVETA supervision.</li>
+                <li>Results will be released through the TEVETA portal.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Attendance Page -->
+    <div class="sidebar-page" id="page-attendance">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Attendance</span> Record</h2>
+            <button class="sidebar-page-close" data-page-close="attendance"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3>Attendance Summary – 2026 Academic Year</h3>
+            <table>
+                <tr><th>Term</th><th>Month</th><th>Attendance %</th><th>Classes Attended</th><th>Total Classes</th></tr>
+                <tr><td>Term 1</td><td>January</td><td>92%</td><td>23</td><td>25</td></tr>
+                <tr><td>Term 1</td><td>February</td><td>88%</td><td>22</td><td>25</td></tr>
+                <tr><td>Term 1</td><td>March</td><td>95%</td><td>19</td><td>20</td></tr>
+                <tr><td>Term 2</td><td>April</td><td>90%</td><td>18</td><td>20</td></tr>
+                <tr><td>Term 2</td><td>May</td><td>85%</td><td>17</td><td>20</td></tr>
+                <tr><td>Term 2</td><td>June</td><td>93%</td><td>14</td><td>15</td></tr>
+            </table>
+            
+            <h3>Overall Statistics</h3>
+            <div class="info-grid">
+                <div class="item">
+                    <div class="label">Total Classes</div>
+                    <div class="value">125</div>
+                </div>
+                <div class="item">
+                    <div class="label">Classes Attended</div>
+                    <div class="value">113</div>
+                </div>
+                <div class="item">
+                    <div class="label">Overall Attendance</div>
+                    <div class="value"><span class="highlight-blue">90.5%</span></div>
+                </div>
+                <div class="item">
+                    <div class="label">Satisfactory</div>
+                    <div class="value"><span class="highlight-green">Yes</span></div>
+                </div>
+            </div>
+            
+            <h3>Attendance Policy</h3>
+            <ul>
+                <li>Minimum attendance requirement: 80% per term.</li>
+                <li>Medical leave must be reported within 3 days.</li>
+                <li>Excessive absenteeism may affect academic standing.</li>
+                <li>Attendance is tracked through the student portal.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Courses Page -->
+    <div class="sidebar-page" id="page-courses">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Courses</span> List</h2>
+            <button class="sidebar-page-close" data-page-close="courses"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3>Current Courses – Diploma in Computer Systems Engineering</h3>
+            <table>
+                <tr><th>Course Code</th><th>Course Title</th><th>Status</th><th>Credit Hours</th></tr>
+                <tr><td>41.1</td><td>Digital Electronics II</td><td><span class="highlight-green">✓ Completed</span></td><td>4</td></tr>
+                <tr><td>41.2</td><td>Entrepreneurship</td><td><span class="highlight-green">✓ Completed</span></td><td>3</td></tr>
+                <tr><td>41.3</td><td>Operating Systems</td><td><span class="highlight-green">✓ Completed</span></td><td>4</td></tr>
+                <tr><td>41.4</td><td>Programming & Database Technology</td><td><span class="highlight-orange">● In Progress (SUP)</span></td><td>4</td></tr>
+                <tr><td>41.5</td><td>Networks & Communications</td><td><span class="highlight-green">✓ Completed</span></td><td>4</td></tr>
+                <tr><td>41.6</td><td>Computer Hardware Maintenance & Repair</td><td><span class="highlight-green">✓ Completed</span></td><td>4</td></tr>
+                <tr><td>41.7</td><td>Management Information Systems</td><td><span class="highlight-green">✓ Completed</span></td><td>3</td></tr>
+            </table>
+            
+            <h3>Course Load Summary</h3>
+            <ul>
+                <li><strong>Total Courses:</strong> 7</li>
+                <li><strong>Completed:</strong> 6</li>
+                <li><strong>In Progress:</strong> 1 (Supplementary)</li>
+                <li><strong>Total Credit Hours:</strong> 26</li>
+            </ul>
+            
+            <h3>Course Description</h3>
+            <p><strong>Diploma in Computer Systems Engineering</strong> – This program provides students with comprehensive knowledge and skills in computer systems, including hardware, software, networking, and database management. Graduates are prepared for careers in IT departments, networking, software development, and technical support.</p>
+        </div>
+    </div>
+
+    <!-- Time Table Page -->
+    <div class="sidebar-page" id="page-timetable">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Time Table</span> (Week A)</h2>
+            <button class="sidebar-page-close" data-page-close="timetable"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3>Weekly Timetable – Alternating Weeks</h3>
+            <p><strong>Note:</strong> This timetable alternates weekly. Week A is shown below.</p>
+            
+            <table>
+                <tr><th>Day</th><th>Time</th><th>Subject</th><th>Type</th><th>Venue</th></tr>
+                <tr><td>Monday</td><td>10:00 - 12:00</td><td>Digital Electronics II</td><td>Lecture</td><td>Hall A</td></tr>
+                <tr><td>Monday</td><td>14:00 - 16:00</td><td>Operating Systems</td><td>Lecture</td><td>Hall B</td></tr>
+                <tr><td>Tuesday</td><td>08:00 - 10:00</td><td>Programming & Database Tech</td><td>Lecture</td><td>Hall A</td></tr>
+                <tr><td>Tuesday</td><td>11:00 - 13:00</td><td>Networks & Communications</td><td>Lecture</td><td>Hall B</td></tr>
+                <tr><td>Wednesday</td><td>09:00 - 11:00</td><td>Computer Hardware Maintenance</td><td>Lecture</td><td>Hall A</td></tr>
+                <tr><td>Wednesday</td><td>14:00 - 16:00</td><td>Entrepreneurship</td><td>Lecture</td><td>Hall C</td></tr>
+                <tr><td>Thursday</td><td>10:00 - 12:00</td><td>Management Information Systems</td><td>Lecture</td><td>Hall B</td></tr>
+                <tr><td>Thursday</td><td>13:00 - 15:00</td><td>Digital Electronics II (Lab)</td><td>Lab</td><td>Lab 1</td></tr>
+                <tr><td>Friday</td><td>08:00 - 10:00</td><td>Operating Systems (Lab)</td><td>Lab</td><td>Lab 2</td></tr>
+                <tr><td>Friday</td><td>11:00 - 13:00</td><td>Programming & Database Tech (Lab)</td><td>Lab</td><td>Lab 3</td></tr>
+            </table>
+            
+            <h3>Week B Schedule</h3>
+            <ul>
+                <li><strong>Monday:</strong> Networks & Communications (Lecture) + Computer Hardware (Lab)</li>
+                <li><strong>Tuesday:</strong> Digital Electronics II (Lab) + Entrepreneurship (Lecture)</li>
+                <li><strong>Wednesday:</strong> Management Information Systems (Lecture) + Operating Systems (Lab)</li>
+                <li><strong>Thursday:</strong> Programming & Database Tech (Lecture) + Networks (Lab)</li>
+                <li><strong>Friday:</strong> Computer Hardware (Lecture) + MIS (Lab)</li>
+            </ul>
         </div>
     </div>
 
     <!-- ─── DETAIL MODAL ─── -->
     <div id="detailModal">
-        <!-- Fixed top: back button + close -->
         <div class="modal-fixed-top">
             <button class="btn-back-detail" id="backToDetail"><i class="fas fa-arrow-left"></i> Back to programme details</button>
             <button class="modal-close" id="detailClose">&times;</button>
@@ -1921,20 +2464,14 @@
         </div>
         <div class="detail-title" id="detailTitle">Programme</div>
 
-        <!-- Program Details (visible by default) -->
         <div class="detail-body" id="detailBody"></div>
 
-        <!-- Apply Button -->
         <button class="btn-apply" id="applyBtn"><i class="fas fa-pen"></i> Apply Now</button>
 
-        <!-- Application Form – STEP WIZARD -->
         <div class="application-form" id="applicationForm">
-            <!-- Progress dots -->
             <div class="step-progress" id="stepProgress"></div>
 
-            <!-- Step container -->
             <div class="step-container" id="stepContainer">
-                <!-- Step 1: Personal Details -->
                 <div class="step" data-step="1">
                     <div class="form-section">
                         <div class="section-title">Personal Details</div>
@@ -1960,7 +2497,6 @@
                     </div>
                 </div>
 
-                <!-- Step 2: Academic Background -->
                 <div class="step" data-step="2">
                     <div class="form-section">
                         <div class="section-title">Academic Background</div>
@@ -1978,7 +2514,6 @@
                     </div>
                 </div>
 
-                <!-- Step 3: Program Selection -->
                 <div class="step" data-step="3">
                     <div class="form-section">
                         <div class="section-title">Program Selection</div>
@@ -1992,7 +2527,6 @@
                     </div>
                 </div>
 
-                <!-- Step 4: Document Uploads – 3-column grid -->
                 <div class="step" data-step="4">
                     <div class="form-section">
                         <div class="section-title">Document Uploads</div>
@@ -2041,7 +2575,6 @@
                     </div>
                 </div>
 
-                <!-- Step 5: Sponsor Information -->
                 <div class="step" data-step="5">
                     <div class="form-section">
                         <div class="section-title">Sponsor Information</div>
@@ -2053,7 +2586,6 @@
                     </div>
                 </div>
 
-                <!-- Step 6: Declaration & Submit + Signature -->
                 <div class="step" data-step="6">
                     <div class="form-section">
                         <div class="section-title">Declaration & Submit</div>
@@ -2079,7 +2611,6 @@
                 </div>
             </div>
 
-            <!-- Navigation buttons -->
             <div class="step-nav">
                 <button class="btn-prev" id="prevStep" style="visibility:hidden;"><i class="fas fa-arrow-left"></i> Previous</button>
                 <button class="btn-next" id="nextStep">Next <i class="fas fa-arrow-right"></i></button>
@@ -2121,7 +2652,6 @@
 
             // ─── DATA ────────────────────────────────────────────────
             const programmes = [
-                // JANUARY INTAKE
                 { id: '1.1', title: 'Craft Certificate in Mechanical Fitting', intake: 'january', category: 'Craft',
                     duration: '2 years',
                     entry: 'O\' Level with 5 passes including Mathematics, Science/Physics/Chemistry, English + 2 others. Mature: TEVETA Trade Test Level I or equivalent.',
@@ -2200,8 +2730,6 @@
                     extra: { dept: 'Automotive & Heavy Equipment', description: 'Automotive Engineering diploma tailored to expose students to current technological trends.',
                         courses: 'Motor vehicle Technology, Engineering Science, Engineering Mathematics, Engineering Drawing, Communication skills, Workshop practice, Workshop process and Management.',
                         employment: 'Graduates are employed as workshop supervisors, managers, or in automotive industry.' } },
-
-                // MAY INTAKE
                 { id: '2.1', title: 'Advanced Certificate in Mechanical Engineering', intake: 'may', category: 'Advanced',
                     duration: '2 years',
                     entry: 'O\' Level with 5 Credits including Mathematics, Science/Physics/Chemistry, English. Mature: Craft Certificate in relevant field.',
@@ -2261,16 +2789,12 @@
                 { id: '2.16', title: 'Trade Certificate in Welding', intake: 'may', category: 'Trade', duration: '1 year',
                     entry: 'Grade 9 Certificate.',
                     extra: { dept: 'Mechanical Engineering', description: 'Welding trade certificate.' } },
-
-                // SEPTEMBER INTAKE
                 { id: '3.1', title: 'Diploma in Biomedical Engineering Technology', intake: 'september', category: 'Diploma',
                     duration: '3 years 3 months',
                     entry: 'Grade 12 with 5 credits including Mathematics, Science/Physics/Chemistry, Biology, English + any other.',
                     extra: { dept: 'Electrical and Refrigeration', description: 'Biomedical Engineering programme trains students for healthcare technology.',
                         courses: 'Biomedical instrumentation, medical electronics, hospital equipment maintenance, anatomy, physiology, engineering mathematics, communication skills.',
                         employment: 'Graduates are likely to be employed in General Hospitals, Hospitality Industry, and medical equipment companies.' } },
-
-                // AUGUST (DISTANCE)
                 { id: '4.1', title: 'Diploma in Automotive Engineering (Mature Entry)', intake: 'august',
                     category: 'Diploma (Distance)', duration: '2 years 8 months',
                     entry: 'Advanced Certificate or equivalent qualification in relevant course. (For holders of Automotive technician certificate with 2 years experience: 2y8m; for Craft certificate with 2 years experience: 3y6m)',
@@ -2378,6 +2902,7 @@
             const submitApp = document.getElementById('submitApplication');
             const programSearch = document.getElementById('programSearch');
             const logoutDash = document.getElementById('logoutDash');
+            const headerLogo = document.getElementById('headerLogo');
 
             const intakeTitle = document.getElementById('intakeTitle');
             const intakeSub = document.getElementById('intakeSub');
@@ -2386,9 +2911,9 @@
 
             // Dashboard elements
             const sidebarToggle = document.getElementById('sidebarToggle');
-            const sidebarOverlay = document.getElementById('sidebarOverlay');
-            const sidebar = document.getElementById('sidebar');
-            const sidebarClose = document.getElementById('sidebarClose');
+            const sidebarOverlayMenu = document.getElementById('sidebarOverlayMenu');
+            const sidebarMenu = document.getElementById('sidebarMenu');
+            const sidebarMenuClose = document.getElementById('sidebarMenuClose');
             const navBtns = document.querySelectorAll('.nav-btn');
             const panels = {
                 home: document.getElementById('panel-home'),
@@ -2396,8 +2921,9 @@
                 ca: document.getElementById('panel-ca'),
                 profile: document.getElementById('panel-profile')
             };
-            const sidebarBtns = document.querySelectorAll('.sidebar-btn');
-            const sidebarPanels = document.querySelectorAll('.sidebar-content-panel');
+            const sidebarMenuItems = document.querySelectorAll('.sidebar-menu-item');
+            const sidebarPages = document.querySelectorAll('.sidebar-page');
+            const pageCloseBtns = document.querySelectorAll('.sidebar-page-close');
 
             // Step wizard elements
             const stepContainer = document.getElementById('stepContainer');
@@ -2467,26 +2993,20 @@
                     card.addEventListener('click', () => openDetail(prog));
                     programListContainer.appendChild(card);
                 });
-                // apply scroll-based scale effect
                 applyScrollEffect();
             }
 
-            // ─── SCROLL-BASED CARD SCALING ──────────────────────
             function applyScrollEffect() {
                 const container = programListContainer;
                 const cards = container.querySelectorAll('.program-card');
                 if (!cards.length) return;
-
                 const containerRect = container.getBoundingClientRect();
                 const containerCenter = containerRect.top + containerRect.height / 2;
-
                 cards.forEach(card => {
                     const rect = card.getBoundingClientRect();
                     const cardCenter = rect.top + rect.height / 2;
                     const distance = Math.abs(containerCenter - cardCenter);
                     const maxDistance = containerRect.height / 2;
-                    const scaleFactor = Math.max(0, 1 - (distance / maxDistance) * 0.08);
-                    // we want the middle one biggest: scale from 1.0 to 1.04
                     const scale = 1 + (0.04 * (1 - distance / maxDistance));
                     card.style.transform = `scale(${Math.min(1.04, Math.max(1, scale))})`;
                     if (scale > 1.02) {
@@ -2497,7 +3017,6 @@
                 });
             }
 
-            // ─── SEARCH ────────────────────────────────────────────
             programSearch.addEventListener('input', function() {
                 const query = this.value.trim().toLowerCase();
                 if (!query) {
@@ -2605,7 +3124,6 @@
                 goToStep(currentStep + 1);
             });
 
-            // ─── APPLY BUTTON ─────────────────────────────────────
             applyBtn.addEventListener('click', function() {
                 detailBody.style.display = 'none';
                 this.style.display = 'none';
@@ -2619,7 +3137,6 @@
                 applyBtn.style.display = 'inline-block';
             });
 
-            // ─── SUBMIT APPLICATION ──────────────────────────────
             submitApp.addEventListener('click', function(e) {
                 e.preventDefault();
                 const declare = document.getElementById('declare');
@@ -2749,7 +3266,6 @@
                 showShort();
             }
 
-            // ─── CLOSE DETAIL ─────────────────────────────────────
             function closeDetail() {
                 detailModal.classList.remove('active');
                 document.body.style.overflow = '';
@@ -2763,34 +3279,41 @@
             // ─── DASHBOARD FUNCTIONS ────────────────────────────
             function toggleSidebar(open) {
                 if (open) {
-                    sidebar.classList.add('open');
-                    sidebarOverlay.classList.add('active');
+                    sidebarMenu.classList.add('open');
+                    sidebarOverlayMenu.classList.add('active');
                 } else {
-                    sidebar.classList.remove('open');
-                    sidebarOverlay.classList.remove('active');
+                    sidebarMenu.classList.remove('open');
+                    sidebarOverlayMenu.classList.remove('active');
                 }
             }
 
             function switchPanel(panelId) {
-                // Update nav buttons
                 navBtns.forEach(btn => {
                     btn.classList.toggle('active', btn.dataset.panel === panelId);
                 });
-                // Update panels
                 Object.keys(panels).forEach(key => {
                     panels[key].classList.toggle('active', key === panelId);
                 });
             }
 
-            function switchSidebarPanel(panelId) {
-                // Update sidebar buttons
-                sidebarBtns.forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.sidebar === panelId);
-                });
-                // Update sidebar panels
-                sidebarPanels.forEach(panel => {
-                    panel.classList.toggle('active', panel.id === 'sidebar-' + panelId);
-                });
+            function openSidebarPage(pageId) {
+                // Close sidebar menu
+                toggleSidebar(false);
+                // Hide all pages and show the selected one
+                sidebarPages.forEach(p => p.classList.remove('active'));
+                const targetPage = document.getElementById('page-' + pageId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            function closeSidebarPage(pageId) {
+                const page = document.getElementById('page-' + pageId);
+                if (page) {
+                    page.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
             }
 
             // ─── EVENT BINDINGS ──────────────────────────────────
@@ -2833,7 +3356,6 @@
                     else passwordInput.focus();
                     return;
                 }
-                // Check for specific student login
                 if (username === '2201001157' && password === 'PASSWORD') {
                     alert('🔓 Welcome, JUBEL MOBELA!\n\nRedirecting to your dashboard...');
                     loginModal.classList.remove('active');
@@ -2848,11 +3370,16 @@
                 }
             });
 
-            // Logout from dashboard
             logoutDash.addEventListener('click', function() {
                 if (confirm('Are you sure you want to logout?')) {
                     showMain();
                 }
+            });
+
+            // Logo click hides sidebar and shows home
+            headerLogo.addEventListener('click', function() {
+                toggleSidebar(false);
+                switchPanel('home');
             });
 
             forgotLink.addEventListener('click', (e) => { e.preventDefault(); alert('📧 Password reset link sent to your registered email.\n(Simulated)'); });
@@ -2862,14 +3389,23 @@
                 if (e.key === 'Escape') {
                     if (detailModal.classList.contains('active')) closeDetail();
                     else if (loginModal.classList.contains('active')) { loginModal.classList.remove('active'); document.body.style.overflow = ''; }
-                    else if (sidebar.classList.contains('open')) toggleSidebar(false);
+                    else if (sidebarMenu.classList.contains('open')) toggleSidebar(false);
+                    else {
+                        // Close any open sidebar page
+                        sidebarPages.forEach(p => {
+                            if (p.classList.contains('active')) {
+                                p.classList.remove('active');
+                                document.body.style.overflow = '';
+                            }
+                        });
+                    }
                 }
             });
 
             // ─── DASHBOARD EVENT BINDINGS ──────────────────────
             sidebarToggle.addEventListener('click', () => toggleSidebar(true));
-            sidebarClose.addEventListener('click', () => toggleSidebar(false));
-            sidebarOverlay.addEventListener('click', () => toggleSidebar(false));
+            sidebarMenuClose.addEventListener('click', () => toggleSidebar(false));
+            sidebarOverlayMenu.addEventListener('click', () => toggleSidebar(false));
 
             navBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -2877,19 +3413,17 @@
                 });
             });
 
-            sidebarBtns.forEach(btn => {
+            sidebarMenuItems.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const panelId = this.dataset.sidebar;
-                    // Toggle active state
-                    const isActive = this.classList.contains('active');
-                    // Deactivate all sidebar buttons and panels
-                    sidebarBtns.forEach(b => b.classList.remove('active'));
-                    sidebarPanels.forEach(p => p.classList.remove('active'));
-                    if (!isActive) {
-                        this.classList.add('active');
-                        const panel = document.getElementById('sidebar-' + panelId);
-                        if (panel) panel.classList.add('active');
-                    }
+                    const pageId = this.dataset.page;
+                    openSidebarPage(pageId);
+                });
+            });
+
+            pageCloseBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const pageId = this.dataset.pageClose;
+                    closeSidebarPage(pageId);
                 });
             });
 
@@ -2904,7 +3438,7 @@
             // ─── INIT ─────────────────────────────────────────────
             showMain();
             switchPanel('home');
-            console.log('✅ Northern Technical College – full dashboard integrated.');
+            console.log('✅ Northern Technical College – full dashboard with sidebar pages integrated.');
         })();
     </script>
 </body>
