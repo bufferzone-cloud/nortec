@@ -982,7 +982,6 @@
             padding: 12px 20px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
             flex-shrink: 0;
             position: relative;
             z-index: 10;
@@ -1010,7 +1009,7 @@
             letter-spacing: 0.5px;
         }
         .header-title .accent { color: #3b82f6; }
-        .header-actions {
+        .header-actions-left {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -1028,27 +1027,9 @@
             align-items: center;
             justify-content: center;
             transition: all 0.2s;
-            margin-left: auto;
         }
         .btn-sidebar-toggle:hover {
             background: #dbeafe;
-        }
-        .btn-logout-dash {
-            background: #eff6ff;
-            border: 1px solid #dbeafe;
-            color: #3b82f6;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: 'Inter', sans-serif;
-        }
-        .btn-logout-dash:hover {
-            background: #fee2e2;
-            border-color: #fecaca;
-            color: #dc2626;
         }
 
         /* DANGLING NOTICES - No animation */
@@ -1119,34 +1100,33 @@
             font-style: italic;
         }
 
-        /* STUDENT INFO FLOATING CURVE - No animation */
-        .student-info-curve {
+        /* STUDENT INFO - No animation, at top */
+        .student-info-top {
             background: #ffffff;
-            border-radius: 20px 20px 40px 40px;
-            padding: 14px 24px;
+            border-radius: 12px;
+            padding: 16px 20px;
             max-width: 560px;
             width: 100%;
-            box-shadow: 0 4px 16px rgba(59,130,246,0.08);
+            box-shadow: 0 2px 12px rgba(59,130,246,0.08);
             border: 1px solid #dbeafe;
             margin-bottom: 12px;
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
             gap: 8px 16px;
             font-size: 13px;
             font-weight: 600;
             color: #0f172a;
         }
-        .student-info-curve .info-item {
+        .student-info-top .info-item {
             display: inline-flex;
             align-items: center;
             gap: 6px;
         }
-        .student-info-curve .info-item i {
+        .student-info-top .info-item i {
             color: #3b82f6;
             font-size: 14px;
         }
-        .student-info-curve .info-item .label {
+        .student-info-top .info-item .label {
             color: #64748b;
             font-weight: 400;
         }
@@ -1373,6 +1353,21 @@
             background: #eff6ff;
             color: #1d4ed8;
             border-left: 4px solid #3b82f6;
+        }
+        .sidebar-menu-item.logout-item {
+            margin-top: auto;
+            border-top: 2px solid #f1f5f9;
+            color: #dc2626;
+        }
+        .sidebar-menu-item.logout-item i {
+            color: #dc2626;
+        }
+        .sidebar-menu-item.logout-item:hover {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .sidebar-menu-item.logout-item:hover i {
+            color: #991b1b;
         }
 
         .sidebar-overlay-menu {
@@ -1672,14 +1667,14 @@
             display: block;
             padding: 2px 0;
         }
-        .sidebar-page-body .form-logo-section {
+        .sidebar-page-body .teveta-form-logo {
             display: flex;
             justify-content: center;
             margin-bottom: 16px;
         }
-        .sidebar-page-body .form-logo-section img {
-            width: 80px;
-            height: 80px;
+        .sidebar-page-body .teveta-form-logo img {
+            width: 100px;
+            height: auto;
             object-fit: contain;
         }
 
@@ -1695,7 +1690,7 @@
             .header-logo { width: 36px; height: 36px; }
             .notice-card { padding: 16px; font-size: 12px; max-width: 100%; }
             .notice-card .notice-title { font-size: 18px; }
-            .student-info-curve { font-size: 12px; padding: 12px 16px; gap: 6px 12px; }
+            .student-info-top { font-size: 12px; padding: 12px 16px; gap: 6px 12px; }
             .nav-buttons { grid-template-columns: repeat(4, 1fr); gap: 6px; }
             .nav-btn { font-size: 10px; padding: 8px 4px; }
             .nav-btn i { font-size: 16px; }
@@ -1717,10 +1712,10 @@
         }
         @media (max-width: 480px) {
             .nav-buttons { grid-template-columns: repeat(2, 1fr); }
-            .dashboard-header { flex-wrap: wrap; gap: 4px; }
+            .dashboard-header { flex-wrap: wrap; gap: 4px; padding: 8px 12px; }
             .header-title { font-size: 13px; order: 3; width: 100%; text-align: center; }
             .header-logo { order: 1; }
-            .header-actions { order: 2; }
+            .header-actions-left { order: 2; }
             .sidebar-menu-container { width: 260px; }
         }
         @media (min-height: 800px) {
@@ -1821,12 +1816,22 @@
         <div class="dashboard-container">
             <!-- HEADER -->
             <div class="dashboard-header">
-                <img src="logo.png" class="header-logo" id="headerLogo" alt="NORTEC" />
-                <div class="header-title">JUBEL MOBELA <span class="accent">DASHBOARD</span></div>
-                <div class="header-actions">
-                    <button class="btn-logout-dash" id="logoutDash"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                <div class="header-actions-left">
                     <button class="btn-sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+                    <img src="logo.png" class="header-logo" id="headerLogo" alt="NORTEC" />
                 </div>
+                <div class="header-title">JUBEL MOBELA <span class="accent">DASHBOARD</span></div>
+                <div class="header-actions-left" style="justify-content:flex-end; flex:1;">
+                    <!-- Logout button removed from header, now in sidebar -->
+                </div>
+            </div>
+
+            <!-- STUDENT INFO AT TOP -->
+            <div class="student-info-top">
+                <span class="info-item"><i class="fas fa-user"></i> <span class="label">Name:</span> JUBEL MOBELA</span>
+                <span class="info-item"><i class="fas fa-id-card"></i> <span class="label">Student No:</span> 2201001157</span>
+                <span class="info-item"><i class="fas fa-hashtag"></i> <span class="label">ID:</span> 622589/67/1</span>
+                <span class="info-item"><i class="fas fa-graduation-cap"></i> <span class="label">Program:</span> DIPLOMA IN COMPUTER SYSTEMS ENGINEERING</span>
             </div>
 
             <!-- DANGLING NOTICES - No animation -->
@@ -1847,15 +1852,6 @@
                     <div class="footer-line">Issued by: MANAGEMENT<br />NORTHERN TECHNICAL COLLEGE (NORTEC)</div>
                     <div style="font-size:10px; color:#94a3b8; margin-top:6px;">Creative Minds. | Creative Hands. | Building Competence. Inspiring Success.</div>
                 </div>
-            </div>
-
-            <!-- STUDENT INFO FLOATING CURVE - No animation -->
-            <div class="student-info-curve">
-                <span class="info-item"><i class="fas fa-user"></i> <span class="label">Name:</span> JUBEL MOBELA</span>
-                <span class="info-item"><i class="fas fa-id-card"></i> <span class="label">Student No:</span> 2201001157</span>
-                <span class="info-item"><i class="fas fa-hashtag"></i> <span class="label">ID:</span> 622589/67/1</span>
-                <span class="info-item"><i class="fas fa-graduation-cap"></i> <span class="label">Program:</span> DIPLOMA IN COMPUTER SYSTEMS ENGINEERING</span>
-                <span class="info-item"><i class="fas fa-calendar"></i> <span class="label">Term:</span> TERM 2</span>
             </div>
 
             <!-- CONTENT AREA -->
@@ -2008,6 +2004,7 @@
         <button class="sidebar-menu-item" data-page="attendance"><i class="fas fa-clipboard-list"></i> Attendance</button>
         <button class="sidebar-menu-item" data-page="courses"><i class="fas fa-book"></i> Courses</button>
         <button class="sidebar-menu-item" data-page="timetable"><i class="fas fa-clock"></i> Time Table</button>
+        <button class="sidebar-menu-item logout-item" id="sidebarLogout"><i class="fas fa-sign-out-alt"></i> Logout</button>
     </div>
 
     <!-- ─── SIDEBAR PAGES ─── -->
@@ -2485,8 +2482,8 @@
             <h3><i class="fas fa-edit"></i> TEVETA Exam Entry Form</h3>
             <p>Complete the form below to register for your TEVETA examinations. All fields are required.</p>
             
-            <div class="form-logo-section">
-                <img src="logo.png" alt="NORTEC Logo" style="width:80px; height:80px; object-fit:contain;" />
+            <div class="teveta-form-logo">
+                <img src="teveta.png" alt="TEVETA Logo" />
             </div>
             
             <div id="tevetaFormContainer">
@@ -2552,7 +2549,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label>11. SUBJECTS TO BE TAKEN (Indicate whether practical or written paper)</label>
+                        <label>11. SUBJECTS TO BE TAKEN</label>
                         <div style="display:grid; gap:6px; margin-top:4px;">
                             <label style="font-weight:400; font-size:13px; display:flex; align-items:center; gap:8px;">
                                 <input type="checkbox" checked disabled /> (i) 41.1 Digital Electronics
@@ -3179,7 +3176,6 @@
             const applyIntake = document.getElementById('applyIntake');
             const submitApp = document.getElementById('submitApplication');
             const programSearch = document.getElementById('programSearch');
-            const logoutDash = document.getElementById('logoutDash');
             const headerLogo = document.getElementById('headerLogo');
 
             const intakeTitle = document.getElementById('intakeTitle');
@@ -3192,6 +3188,7 @@
             const sidebarOverlayMenu = document.getElementById('sidebarOverlayMenu');
             const sidebarMenu = document.getElementById('sidebarMenu');
             const sidebarMenuClose = document.getElementById('sidebarMenuClose');
+            const sidebarLogout = document.getElementById('sidebarLogout');
             const navBtns = document.querySelectorAll('.nav-btn');
             const panels = {
                 home: document.getElementById('panel-home'),
@@ -3715,8 +3712,14 @@
                 }
             });
 
-            logoutDash.addEventListener('click', function() {
+            // Logout from sidebar
+            sidebarLogout.addEventListener('click', function() {
                 if (confirm('Are you sure you want to logout?')) {
+                    // Close sidebar first
+                    toggleSidebar(false);
+                    // Close any open sidebar page
+                    sidebarPages.forEach(p => p.classList.remove('active'));
+                    document.body.style.overflow = '';
                     showMain();
                 }
             });
@@ -3781,7 +3784,7 @@
             // ─── INIT ─────────────────────────────────────────────
             showMain();
             switchPanel('home');
-            console.log('✅ Northern Technical College – full dashboard with sidebar on left, TEVETA form, and all features.');
+            console.log('✅ Northern Technical College – full dashboard with sidebar on left, TEVETA form with logo, logout in sidebar.');
         })();
     </script>
 </body>
