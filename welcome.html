@@ -13,17 +13,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-
-        /* ── SCALE EVERYTHING 10% SMALLER ── */
-        html {
-            zoom: 0.9;
-            -moz-transform: scale(0.9);
-            -moz-transform-origin: top center;
-        }
-        @media (-moz-transform: scale(0.9)) {
-            /* Firefox fallback – handled by zoom above, but keep as safeguard */
-        }
-        /* Ensure the page still fills the viewport after scaling */
+        html,
         body {
             width: 100%;
             height: 100%;
@@ -32,6 +22,8 @@
             overflow: hidden;
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
+            zoom: 0.9;
+            -webkit-zoom: 0.9;
         }
 
         /* ── BACKGROUND ZOOM ── */
@@ -79,7 +71,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 28px 24px;
+            padding: 25px 21px;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -114,8 +106,8 @@
             visibility: hidden;
             pointer-events: none;
             justify-content: flex-start;
-            padding-top: 40px;
-            padding-bottom: 40px;
+            padding-top: 36px;
+            padding-bottom: 36px;
         }
         #enrollPage.active,
         #programsPage.active,
@@ -138,7 +130,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 24px 20px;
+            padding: 21px 18px;
             overflow-y: auto;
             opacity: 0;
             visibility: hidden;
@@ -156,9 +148,9 @@
             top: 0;
             background: rgba(255, 255, 255, 0.97);
             width: 100%;
-            max-width: 600px;
+            max-width: 540px;
             z-index: 10;
-            padding: 8px 0 12px;
+            padding: 7px 0 10px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -167,11 +159,11 @@
             background: transparent;
             border: none;
             color: #64748b;
-            font-size: 14px;
+            font-size: 12px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             transition: color 0.2s;
             font-weight: 600;
         }
@@ -181,10 +173,10 @@
         .modal-close {
             background: #e2e8f0;
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            font-size: 20px;
+            font-size: 18px;
             color: #1e293b;
             cursor: pointer;
             display: flex;
@@ -197,58 +189,58 @@
         }
 
         .modal-logo {
-            margin-top: 4px;
-            margin-bottom: 8px;
+            margin-top: 3px;
+            margin-bottom: 7px;
         }
         .modal-logo img {
-            width: 72px;
-            height: 72px;
+            width: 64px;
+            height: 64px;
             object-fit: contain;
-            border-radius: 16px;
+            border-radius: 14px;
             background: #f8fafc;
-            padding: 8px;
+            padding: 7px;
             border: 1px solid #e2e8f0;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
         }
         .detail-title {
-            font-size: 22px;
+            font-size: 19px;
             font-weight: 800;
             color: #0f172a;
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .detail-body {
-            max-width: 600px;
+            max-width: 540px;
             width: 100%;
             text-align: left;
             color: #1e293b;
-            font-size: 14px;
+            font-size: 12px;
             line-height: 1.6;
         }
         .detail-body h3 {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
-            margin: 16px 0 6px;
+            margin: 14px 0 5px;
             color: #0f172a;
         }
         .detail-body p {
-            margin-bottom: 8px;
+            margin-bottom: 7px;
         }
         .detail-body ul {
-            padding-left: 20px;
-            margin: 6px 0 12px;
+            padding-left: 18px;
+            margin: 5px 0 10px;
         }
 
         /* APPLY BUTTON */
         .btn-apply {
             display: inline-block;
-            margin: 20px 0 10px;
-            padding: 14px 32px;
+            margin: 18px 0 9px;
+            padding: 12px 28px;
             background: linear-gradient(135deg, #00c853, #009e3d);
             color: #fff;
             border: none;
             border-radius: 50px;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             cursor: pointer;
             box-shadow: 0 6px 24px rgba(0, 200, 83, 0.35);
@@ -265,7 +257,7 @@
         /* ─── APPLICATION FORM – STEP WIZARD ─── */
         .application-form {
             display: none;
-            max-width: 600px;
+            max-width: 540px;
             width: 100%;
             text-align: left;
             color: #1e293b;
@@ -278,27 +270,27 @@
         .step-progress {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 10px;
+            margin-bottom: 18px;
             flex-wrap: wrap;
         }
         .step-dot {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 12px;
+            gap: 5px;
+            font-size: 10px;
             font-weight: 600;
             color: #94a3b8;
         }
         .step-dot .dot {
-            width: 24px;
-            height: 24px;
+            width: 21px;
+            height: 21px;
             border-radius: 50%;
             background: #e2e8f0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 700;
             color: #64748b;
             transition: all 0.3s;
@@ -337,7 +329,7 @@
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(8px);
+                transform: translateY(7px);
             }
             to {
                 opacity: 1;
@@ -345,39 +337,39 @@
             }
         }
         .step .form-section {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
         .step .section-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             color: #0f172a;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .step .form-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 8px;
+            gap: 10px;
+            margin-bottom: 7px;
         }
         .step .form-row>* {
-            flex: 1 1 200px;
+            flex: 1 1 180px;
         }
         .step label {
             display: block;
-            font-size: 13px;
+            font-size: 11px;
             font-weight: 600;
             color: #475569;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
         .step input,
         .step select,
         .step textarea {
             width: 100%;
-            padding: 10px 12px;
-            border-radius: 10px;
+            padding: 9px 10px;
+            border-radius: 9px;
             border: 1px solid #d1d5db;
             background: #f8fafc;
-            font-size: 14px;
+            font-size: 12px;
             font-family: 'Inter', sans-serif;
             transition: border 0.2s;
         }
@@ -400,18 +392,18 @@
         .step-nav {
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
-            gap: 12px;
+            margin-top: 18px;
+            gap: 10px;
             flex-wrap: wrap;
         }
         .btn-prev,
         .btn-next,
         .btn-submit-step {
-            padding: 12px 28px;
+            padding: 10px 25px;
             border: none;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 12px;
             cursor: pointer;
             transition: all 0.25s ease;
         }
@@ -442,12 +434,12 @@
         .declaration-row {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin: 12px 0;
+            gap: 9px;
+            margin: 10px 0;
         }
         .declaration-row input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             accent-color: #3b82f6;
             cursor: pointer;
         }
@@ -455,30 +447,30 @@
         /* ─── SIGNATURE PAD ─── */
         .signature-wrapper {
             border: 2px dashed #94a3b8;
-            border-radius: 12px;
-            padding: 4px;
+            border-radius: 10px;
+            padding: 3px;
             background: #f8fafc;
-            margin: 8px 0;
+            margin: 7px 0;
         }
         .signature-wrapper canvas {
             display: block;
             width: 100%;
-            height: 120px;
+            height: 108px;
             background: #ffffff;
-            border-radius: 8px;
+            border-radius: 7px;
             touch-action: none;
             cursor: crosshair;
         }
         .signature-actions {
             display: flex;
-            gap: 10px;
-            margin-top: 6px;
+            gap: 9px;
+            margin-top: 5px;
         }
         .signature-actions button {
-            padding: 6px 14px;
+            padding: 5px 12px;
             border: none;
-            border-radius: 20px;
-            font-size: 12px;
+            border-radius: 18px;
+            font-size: 10px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
@@ -495,20 +487,20 @@
         .upload-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin: 8px 0;
+            gap: 10px;
+            margin: 7px 0;
         }
         .upload-box {
             aspect-ratio: 1 / 1;
             background: #f8fafc;
             border: 2px dashed #d1d5db;
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 8px;
+            padding: 7px;
             transition: border-color 0.2s;
             position: relative;
             cursor: pointer;
@@ -517,27 +509,27 @@
             border-color: #3b82f6;
         }
         .upload-box .upload-icon {
-            font-size: 24px;
+            font-size: 21px;
             color: #94a3b8;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
         .upload-box .upload-label {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
             color: #475569;
             line-height: 1.2;
             word-break: break-word;
         }
         .upload-box .upload-badge {
-            font-size: 8px;
+            font-size: 7px;
             font-weight: 700;
             color: #fff;
             background: #ef4444;
-            padding: 2px 8px;
+            padding: 1px 7px;
             border-radius: 12px;
             position: absolute;
-            top: -6px;
-            right: -6px;
+            top: -5px;
+            right: -5px;
         }
         .upload-box .upload-badge.optional {
             background: #94a3b8;
@@ -549,9 +541,9 @@
             cursor: pointer;
         }
         .upload-box .file-name {
-            font-size: 9px;
+            font-size: 8px;
             color: #64748b;
-            margin-top: 4px;
+            margin-top: 3px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -564,17 +556,17 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         .main-logo {
-            width: 88px;
-            height: 88px;
+            width: 79px;
+            height: 79px;
             object-fit: contain;
-            border-radius: 18px;
+            border-radius: 16px;
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            padding: 10px;
+            padding: 9px;
             border: 1px solid rgba(255, 255, 255, 0.4);
             box-shadow: 0 12px 48px rgba(0, 0, 0, 0.20);
             transition: transform 0.3s ease;
@@ -586,11 +578,11 @@
         /* TITLE */
         .title {
             text-align: center;
-            margin: 4px 0 28px;
+            margin: 3px 0 25px;
             flex-shrink: 0;
         }
         .title h1 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 900;
             letter-spacing: 0.2px;
             line-height: 1.3;
@@ -601,12 +593,12 @@
             color: #6cffa0;
         }
         .title .sub {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 400;
             color: rgba(255, 255, 255, 0.55);
             letter-spacing: 1.8px;
             text-transform: uppercase;
-            margin-top: 3px;
+            margin-top: 2px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
         }
 
@@ -614,21 +606,21 @@
         .button-group {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
             width: 100%;
-            max-width: 320px;
+            max-width: 288px;
             flex-shrink: 0;
-            padding-bottom: 4px;
+            padding-bottom: 3px;
         }
         .btn {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 16px 24px;
+            padding: 14px 21px;
             border: none;
             border-radius: 60px;
             font-family: 'Inter', sans-serif;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             color: #fff;
             cursor: pointer;
@@ -638,7 +630,7 @@
             overflow: hidden;
             user-select: none;
             touch-action: manipulation;
-            min-height: 52px;
+            min-height: 46px;
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
         }
@@ -669,41 +661,41 @@
             transform: translateY(-2px);
         }
         .btn i {
-            margin-right: 10px;
-            font-size: 17px;
+            margin-right: 9px;
+            font-size: 15px;
         }
 
         /* ─── ENROLL PAGE – streamlined, minimal colors ─── */
         .page-header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             flex-shrink: 0;
         }
         .page-header h2 {
-            font-size: 22px;
+            font-size: 19px;
             font-weight: 800;
             color: #fff;
             text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
         }
         .page-header h2 i {
             color: #6cffa0;
-            margin-right: 8px;
+            margin-right: 7px;
         }
         .page-header p {
-            font-size: 13px;
+            font-size: 11px;
             color: rgba(255, 255, 255, 0.6);
-            margin-top: 4px;
+            margin-top: 3px;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .intake-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            gap: 14px;
             width: 100%;
-            max-width: 420px;
+            max-width: 378px;
             flex-shrink: 0;
-            padding: 0 4px;
+            padding: 0 3px;
         }
         /* redesigned intake buttons – minimal, glassmorphic, uniform */
         .intake-btn,
@@ -714,15 +706,15 @@
             align-items: center;
             aspect-ratio: 1/1;
             border: none;
-            border-radius: 20px;
+            border-radius: 18px;
             font-family: 'Inter', sans-serif;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             color: #fff;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.30);
-            padding: 16px 12px;
+            padding: 14px 10px;
             text-align: center;
             line-height: 1.2;
             position: relative;
@@ -753,27 +745,27 @@
             background: rgba(255, 255, 255, 0.20);
         }
         .intake-btn i {
-            font-size: 32px;
-            margin-bottom: 8px;
+            font-size: 28px;
+            margin-bottom: 7px;
             color: rgba(255, 255, 255, 0.9);
         }
 
         /* BACK BUTTON – moved to top */
         .back-row {
             width: 100%;
-            max-width: 420px;
+            max-width: 378px;
             display: flex;
             justify-content: flex-start;
-            margin-top: 20px;
+            margin-top: 18px;
             flex-shrink: 0;
-            padding: 0 4px;
+            padding: 0 3px;
             order: -1;
         }
         .btn-back {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
+            gap: 7px;
+            padding: 9px 18px;
             border: none;
             border-radius: 40px;
             background: rgba(255, 255, 255, 0.12);
@@ -781,7 +773,7 @@
             -webkit-backdrop-filter: blur(8px);
             color: #fff;
             font-family: 'Inter', sans-serif;
-            font-size: 13px;
+            font-size: 11px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.25s ease;
@@ -796,23 +788,23 @@
             transform: scale(0.95);
         }
         .btn-back i {
-            font-size: 14px;
+            font-size: 12px;
         }
 
         /* ─── PROGRAMS PAGE – floating cards with blue border ─── */
         .program-list {
             width: 100%;
-            max-width: 600px;
+            max-width: 540px;
             flex-shrink: 0;
-            padding: 0 4px;
+            padding: 0 3px;
             position: relative;
             z-index: 2;
         }
         .program-card {
             background: rgba(255, 255, 255, 0.92);
-            border-radius: 16px;
-            padding: 16px 18px;
-            margin-bottom: 12px;
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
             border: 1px solid #3b82f6;
             color: #0f172a;
             transition: transform 0.2s, box-shadow 0.2s;
@@ -835,55 +827,55 @@
         }
         .program-card .prog-title {
             font-weight: 700;
-            font-size: 16px;
-            margin-bottom: 4px;
+            font-size: 14px;
+            margin-bottom: 3px;
             color: #0f172a;
         }
         .program-card .prog-meta {
-            font-size: 13px;
+            font-size: 11px;
             opacity: 0.7;
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
             color: #334155;
         }
         .program-card .prog-meta span {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
         .program-card .prog-meta i {
-            font-size: 12px;
+            font-size: 10px;
         }
         .program-card .view-detail {
-            margin-top: 8px;
-            font-size: 13px;
+            margin-top: 7px;
+            font-size: 11px;
             font-weight: 600;
             color: #2563eb;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         /* SEARCH BAR – top of programs page */
         .search-wrapper {
             width: 100%;
-            max-width: 600px;
-            margin-bottom: 16px;
+            max-width: 540px;
+            margin-bottom: 14px;
             flex-shrink: 0;
-            padding: 0 4px;
+            padding: 0 3px;
             order: -1;
         }
         .search-input {
             width: 100%;
-            padding: 14px 18px;
+            padding: 12px 16px;
             border-radius: 60px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             color: #fff;
-            font-size: 15px;
+            font-size: 13px;
             font-family: 'Inter', sans-serif;
             transition: all 0.3s;
             outline: none;
@@ -901,16 +893,16 @@
         .short-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
             width: 100%;
-            max-width: 600px;
+            max-width: 540px;
             flex-shrink: 0;
-            padding: 0 4px;
+            padding: 0 3px;
         }
         .short-item {
             background: rgba(255, 255, 255, 0.92);
-            border-radius: 12px;
-            padding: 14px 12px;
+            border-radius: 10px;
+            padding: 12px 10px;
             border: 1px solid #e2e8f0;
             color: #0f172a;
             text-align: center;
@@ -919,22 +911,22 @@
         }
         .short-item .short-title {
             font-weight: 600;
-            font-size: 14px;
+            font-size: 12px;
         }
         .short-item .short-days {
-            font-size: 12px;
+            font-size: 10px;
             opacity: 0.7;
-            margin-top: 2px;
+            margin-top: 1px;
         }
         .short-item .short-apply {
-            margin-top: 10px;
+            margin-top: 9px;
             display: inline-block;
-            padding: 6px 16px;
+            padding: 5px 14px;
             background: #3b82f6;
             color: #fff;
             border: none;
             border-radius: 30px;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
@@ -955,7 +947,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 18px;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.35s ease, visibility 0.35s ease;
@@ -966,9 +958,9 @@
         }
         .modal {
             background: #ffffff;
-            border-radius: 28px;
-            padding: 32px 28px 28px;
-            max-width: 380px;
+            border-radius: 25px;
+            padding: 28px 25px 25px;
+            max-width: 342px;
             width: 100%;
             max-height: 85vh;
             max-height: 85dvh;
@@ -986,15 +978,15 @@
         }
         .modal-close {
             position: absolute;
-            top: 14px;
-            right: 16px;
-            width: 32px;
-            height: 32px;
+            top: 12px;
+            right: 14px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             border: none;
             background: #f1f5f9;
             color: #64748b;
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
@@ -1007,53 +999,53 @@
         }
         .modal-logo {
             text-align: center;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
         .modal-logo img {
-            width: 60px;
-            height: 60px;
+            width: 54px;
+            height: 54px;
             object-fit: contain;
-            border-radius: 14px;
+            border-radius: 12px;
             background: #f8fafc;
-            padding: 6px;
+            padding: 5px;
             border: 1px solid #e2e8f0;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
         }
         .modal-header {
             text-align: center;
-            padding-bottom: 14px;
-            margin-bottom: 16px;
+            padding-bottom: 12px;
+            margin-bottom: 14px;
             border-bottom: 1px solid #e2e8f0;
             border-top: 4px solid #3b82f6;
             border-radius: 0;
         }
         .modal-header .modal-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
             color: #0f172a;
         }
         .modal-header .modal-title i {
-            margin-right: 8px;
+            margin-right: 7px;
             color: #3b82f6;
         }
         .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
         .form-group label {
             display: block;
-            font-size: 13px;
+            font-size: 11px;
             font-weight: 600;
             color: #475569;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
         .form-input {
             width: 100%;
-            padding: 12px 14px;
-            border-radius: 14px;
+            padding: 10px 12px;
+            border-radius: 12px;
             border: 1px solid #d1d5db;
             background: #f8fafc;
             color: #0f172a;
-            font-size: 14px;
+            font-size: 12px;
             font-family: 'Inter', sans-serif;
             transition: all 0.25s ease;
             outline: none;
@@ -1068,15 +1060,15 @@
         }
         .password-toggle {
             position: absolute;
-            right: 12px;
+            right: 10px;
             top: 50%;
             transform: translateY(-50%);
             background: none;
             border: none;
             color: #94a3b8;
-            font-size: 16px;
+            font-size: 14px;
             cursor: pointer;
-            padding: 4px;
+            padding: 3px;
             transition: color 0.2s;
         }
         .password-toggle:hover {
@@ -1087,26 +1079,26 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 6px;
-            margin: 6px 0 14px;
+            gap: 5px;
+            margin: 5px 0 12px;
         }
         .checkbox-wrap {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             color: #475569;
-            font-size: 13px;
+            font-size: 11px;
             cursor: pointer;
         }
         .checkbox-wrap input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             accent-color: #3b82f6;
             cursor: pointer;
         }
         .forgot-link {
             color: #64748b;
-            font-size: 13px;
+            font-size: 11px;
             text-decoration: none;
             transition: color 0.2s;
         }
@@ -1115,18 +1107,18 @@
         }
         .btn-submit {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             border: none;
             border-radius: 50px;
             font-family: 'Inter', sans-serif;
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 700;
             color: #fff;
             cursor: pointer;
             transition: all 0.25s ease;
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             box-shadow: 0 6px 24px rgba(59, 130, 246, 0.30);
-            margin-top: 4px;
+            margin-top: 3px;
         }
         .btn-submit:hover {
             box-shadow: 0 10px 32px rgba(59, 130, 246, 0.40);
@@ -1134,8 +1126,8 @@
         }
         .support-link {
             text-align: center;
-            margin-top: 14px;
-            font-size: 13px;
+            margin-top: 12px;
+            font-size: 11px;
             color: #64748b;
         }
         .support-link a {
@@ -1154,7 +1146,7 @@
         }
         .dashboard-container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1080px;
             height: 100vh;
             height: 100dvh;
             display: flex;
@@ -1166,22 +1158,22 @@
         .dashboard-header {
             background: #ffffff;
             border-bottom: 2px solid #3b82f6;
-            padding: 12px 20px;
+            padding: 10px 18px;
             display: flex;
             align-items: center;
             flex-shrink: 0;
             position: relative;
             z-index: 10;
-            min-height: 64px;
+            min-height: 57px;
             box-shadow: 0 2px 8px rgba(59, 130, 246, 0.08);
         }
         .header-logo {
-            width: 44px;
-            height: 44px;
+            width: 39px;
+            height: 39px;
             object-fit: contain;
-            border-radius: 10px;
+            border-radius: 9px;
             background: #eff6ff;
-            padding: 4px;
+            padding: 3px;
             cursor: pointer;
             transition: transform 0.2s;
             border: 1px solid #dbeafe;
@@ -1190,7 +1182,7 @@
             transform: scale(1.05);
         }
         .header-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 800;
             color: #0f172a;
             text-align: center;
@@ -1203,16 +1195,16 @@
         .header-actions-left {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 7px;
         }
         .btn-sidebar-toggle {
             background: #eff6ff;
             border: 1px solid #dbeafe;
             color: #3b82f6;
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            font-size: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            font-size: 18px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -1231,28 +1223,28 @@
         /* STUDENT INFO - No animation, at top */
         .student-info-top {
             background: #ffffff;
-            border-radius: 12px;
-            padding: 16px 20px;
-            max-width: 560px;
+            border-radius: 10px;
+            padding: 14px 18px;
+            max-width: 504px;
             width: 100%;
             box-shadow: 0 2px 12px rgba(59, 130, 246, 0.08);
             border: 1px solid #dbeafe;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             display: flex;
             flex-wrap: wrap;
-            gap: 8px 16px;
-            font-size: 13px;
+            gap: 7px 14px;
+            font-size: 11px;
             font-weight: 600;
             color: #0f172a;
         }
         .student-info-top .info-item {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
         .student-info-top .info-item i {
             color: #3b82f6;
-            font-size: 14px;
+            font-size: 12px;
         }
         .student-info-top .info-item .label {
             color: #64748b;
@@ -1263,10 +1255,10 @@
         .dashboard-content {
             flex: 1;
             overflow-y: auto;
-            padding: 12px 16px 20px;
+            padding: 10px 14px 18px;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
             background: #f8fafc;
         }
         .dashboard-content::-webkit-scrollbar {
@@ -1281,23 +1273,23 @@
         /* HOME DASHBOARD - No nav buttons, just home content */
         .home-dashboard {
             background: #ffffff;
-            border-radius: 16px;
-            padding: 24px;
+            border-radius: 14px;
+            padding: 21px;
             border: 1px solid #e2e8f0;
             color: #0f172a;
             flex: 1;
             overflow-y: auto;
-            max-height: calc(100vh - 280px);
-            max-height: calc(100dvh - 280px);
+            max-height: calc(100vh - 252px);
+            max-height: calc(100dvh - 252px);
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
         }
         .home-dashboard h2 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             color: #0f172a;
             border-bottom: 2px solid #3b82f6;
-            padding-bottom: 12px;
+            padding-bottom: 10px;
         }
         .home-dashboard h2 .accent {
             color: #3b82f6;
@@ -1305,45 +1297,45 @@
         .home-dashboard .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 12px;
+            gap: 14px;
+            margin-top: 10px;
         }
         .home-dashboard .dashboard-grid .card {
             background: #f8fafc;
-            border-radius: 12px;
-            padding: 16px;
+            border-radius: 10px;
+            padding: 14px;
             border: 1px solid #e2e8f0;
         }
         .home-dashboard .dashboard-grid .card .card-icon {
-            font-size: 24px;
-            margin-bottom: 4px;
+            font-size: 21px;
+            margin-bottom: 3px;
         }
         .home-dashboard .dashboard-grid .card .card-title {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 700;
             color: #0f172a;
         }
         .home-dashboard .dashboard-grid .card .card-value {
-            font-size: 13px;
+            font-size: 11px;
             color: #64748b;
-            margin-top: 2px;
+            margin-top: 1px;
         }
         .home-dashboard .dashboard-grid .card .card-sub {
-            font-size: 12px;
+            font-size: 10px;
             color: #94a3b8;
         }
         .home-dashboard .quick-info {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-top: 16px;
-            padding-top: 16px;
+            gap: 7px;
+            margin-top: 14px;
+            padding-top: 14px;
             border-top: 1px solid #e2e8f0;
         }
         .home-dashboard .quick-info .info-row {
             display: flex;
-            gap: 8px;
-            font-size: 13px;
+            gap: 7px;
+            font-size: 11px;
         }
         .home-dashboard .quick-info .info-row .label {
             color: #64748b;
@@ -1359,7 +1351,7 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 300px;
+            width: 270px;
             height: 100vh;
             height: 100dvh;
             background: #ffffff;
@@ -1375,7 +1367,7 @@
             transform: translateX(0);
         }
         .sidebar-menu-header {
-            padding: 20px 24px 16px;
+            padding: 18px 21px 14px;
             border-bottom: 3px solid #3b82f6;
             display: flex;
             justify-content: space-between;
@@ -1386,7 +1378,7 @@
             z-index: 5;
         }
         .sidebar-menu-header h2 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 900;
             color: #0f172a;
         }
@@ -1396,10 +1388,10 @@
         .sidebar-menu-close {
             background: #f1f5f9;
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            font-size: 18px;
+            font-size: 16px;
             color: #1e293b;
             cursor: pointer;
             display: flex;
@@ -1414,12 +1406,12 @@
         .sidebar-menu-item {
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 14px 24px;
+            gap: 12px;
+            padding: 12px 21px;
             border: none;
             background: transparent;
             color: #0f172a;
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
@@ -1433,9 +1425,9 @@
             color: #3b82f6;
         }
         .sidebar-menu-item i {
-            width: 24px;
+            width: 21px;
             color: #3b82f6;
-            font-size: 18px;
+            font-size: 16px;
         }
         .sidebar-menu-item.active {
             background: #eff6ff;
@@ -1499,27 +1491,27 @@
 
         .sidebar-page-header {
             background: #ffffff;
-            padding: 16px 24px;
+            padding: 14px 21px;
             border-bottom: 3px solid #3b82f6;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             position: sticky;
             top: 0;
             z-index: 5;
             box-shadow: 0 2px 10px rgba(59, 130, 246, 0.06);
         }
         .sidebar-page-header .page-logo {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             object-fit: contain;
-            border-radius: 8px;
+            border-radius: 7px;
             background: #eff6ff;
-            padding: 4px;
+            padding: 3px;
             border: 1px solid #dbeafe;
         }
         .sidebar-page-header h2 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
             color: #0f172a;
             flex: 1;
@@ -1530,10 +1522,10 @@
         .sidebar-page-close {
             background: #f1f5f9;
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            font-size: 18px;
+            font-size: 16px;
             color: #1e293b;
             cursor: pointer;
             display: flex;
@@ -1546,60 +1538,60 @@
         }
 
         .sidebar-page-body {
-            padding: 24px;
+            padding: 21px;
             color: #1e293b;
-            max-width: 900px;
+            max-width: 810px;
             margin: 0 auto;
         }
         .sidebar-page-body h3 {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             color: #0f172a;
-            margin: 20px 0 12px;
+            margin: 18px 0 10px;
             border-bottom: 2px solid #3b82f6;
-            padding-bottom: 8px;
+            padding-bottom: 7px;
         }
         .sidebar-page-body h3 .accent {
             color: #3b82f6;
         }
         .sidebar-page-body h3 i {
             color: #3b82f6;
-            margin-right: 8px;
+            margin-right: 7px;
         }
         .sidebar-page-body h4 {
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 700;
             color: #1e293b;
-            margin: 14px 0 6px;
+            margin: 12px 0 5px;
         }
         .sidebar-page-body p {
             line-height: 1.7;
-            margin-bottom: 8px;
+            margin-bottom: 7px;
             color: #334155;
         }
         .sidebar-page-body ul,
         .sidebar-page-body ol {
-            padding-left: 20px;
-            margin: 8px 0 12px;
+            padding-left: 18px;
+            margin: 7px 0 10px;
             color: #334155;
             line-height: 1.7;
         }
         .sidebar-page-body table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 14px;
-            margin: 12px 0;
+            font-size: 12px;
+            margin: 10px 0;
         }
         .sidebar-page-body th {
             background: #eff6ff;
             color: #1d4ed8;
             font-weight: 700;
-            padding: 10px 12px;
+            padding: 9px 10px;
             text-align: left;
             border-bottom: 2px solid #3b82f6;
         }
         .sidebar-page-body td {
-            padding: 8px 12px;
+            padding: 7px 10px;
             border-bottom: 1px solid #e2e8f0;
         }
         .sidebar-page-body .highlight-blue {
@@ -1619,38 +1611,38 @@
             font-weight: 600;
         }
         .sidebar-page-body .balance-amount {
-            font-size: 24px;
+            font-size: 21px;
             font-weight: 800;
             color: #f59e0b;
         }
         .sidebar-page-body .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin: 8px 0;
+            gap: 10px;
+            margin: 7px 0;
         }
         .sidebar-page-body .info-grid .item {
             background: #ffffff;
-            padding: 12px 16px;
-            border-radius: 8px;
+            padding: 10px 14px;
+            border-radius: 7px;
             border: 1px solid #e2e8f0;
         }
         .sidebar-page-body .info-grid .item .label {
-            font-size: 12px;
+            font-size: 10px;
             color: #64748b;
             font-weight: 500;
         }
         .sidebar-page-body .info-grid .item .value {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
             color: #0f172a;
-            margin-top: 2px;
+            margin-top: 1px;
         }
         .sidebar-page-body .status-badge {
             display: inline-block;
-            padding: 4px 14px;
+            padding: 3px 12px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 600;
         }
         .sidebar-page-body .status-badge.approved {
@@ -1679,13 +1671,13 @@
         }
         .sidebar-page-body .btn-form-submit {
             display: inline-block;
-            margin: 12px 0 8px;
-            padding: 12px 28px;
+            margin: 10px 0 7px;
+            padding: 10px 25px;
             background: #3b82f6;
             color: #fff;
             border: none;
             border-radius: 50px;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.25s ease;
@@ -1697,24 +1689,24 @@
             box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
         }
         .sidebar-page-body .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
         .sidebar-page-body .form-group label {
             display: block;
-            font-size: 13px;
+            font-size: 11px;
             font-weight: 600;
             color: #475569;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
         .sidebar-page-body .form-group input,
         .sidebar-page-body .form-group select,
         .sidebar-page-body .form-group textarea {
             width: 100%;
-            padding: 10px 12px;
-            border-radius: 10px;
+            padding: 9px 10px;
+            border-radius: 9px;
             border: 1px solid #d1d5db;
             background: #ffffff;
-            font-size: 14px;
+            font-size: 12px;
             font-family: 'Inter', sans-serif;
             transition: border 0.2s;
         }
@@ -1727,8 +1719,8 @@
         }
         .sidebar-page-body .upload-area {
             border: 2px dashed #d1d5db;
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 10px;
+            padding: 18px;
             text-align: center;
             background: #f8fafc;
             cursor: pointer;
@@ -1739,30 +1731,30 @@
             background: #eff6ff;
         }
         .sidebar-page-body .upload-area i {
-            font-size: 32px;
+            font-size: 28px;
             color: #94a3b8;
         }
         .sidebar-page-body .upload-area p {
-            margin-top: 6px;
+            margin-top: 5px;
             color: #64748b;
         }
         .sidebar-page-body .readonly-form {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 16px;
-            margin-top: 8px;
+            border-radius: 10px;
+            padding: 14px;
+            margin-top: 7px;
         }
         .sidebar-page-body .readonly-form .field-row {
             display: flex;
-            padding: 6px 0;
+            padding: 5px 0;
             border-bottom: 1px solid #f1f5f9;
         }
         .sidebar-page-body .readonly-form .field-row:last-child {
             border-bottom: none;
         }
         .sidebar-page-body .readonly-form .field-label {
-            width: 200px;
+            width: 180px;
             font-weight: 600;
             color: #475569;
             flex-shrink: 0;
@@ -1773,15 +1765,15 @@
         }
         .sidebar-page-body .readonly-form .field-value .subject-item {
             display: block;
-            padding: 2px 0;
+            padding: 1px 0;
         }
         .sidebar-page-body .teveta-form-logo {
             display: flex;
             justify-content: center;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
         .sidebar-page-body .teveta-form-logo img {
-            width: 100px;
+            width: 90px;
             height: auto;
             object-fit: contain;
         }
@@ -1789,19 +1781,19 @@
         /* ─── TEVETA FORM STYLES ─── */
         .teveta-form-container {
             font-family: 'Inter', sans-serif;
-            max-width: 800px;
+            max-width: 720px;
             margin: 0 auto;
             background: #ffffff;
-            padding: 20px;
+            padding: 18px;
             border: 1px solid #e2e8f0;
-            border-radius: 8px;
+            border-radius: 7px;
         }
         .teveta-form-container .form-header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
         .teveta-form-container .form-header h2 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
             color: #0f172a;
             text-transform: uppercase;
@@ -1811,16 +1803,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 7px;
         }
         .teveta-form-container .form-header .logo-section img {
-            height: 60px;
+            height: 54px;
             object-fit: contain;
         }
         .teveta-form-container .form-header .logo-section .address-text {
-            font-size: 10px;
+            font-size: 9px;
             color: #64748b;
             text-align: right;
             line-height: 1.4;
@@ -1829,29 +1821,29 @@
             color: #0f172a;
         }
         .teveta-form-container .form-field {
-            margin-bottom: 8px;
+            margin-bottom: 7px;
             display: flex;
             align-items: flex-start;
-            gap: 4px;
+            gap: 3px;
         }
         .teveta-form-container .form-field .field-number {
             font-weight: 700;
             color: #0f172a;
-            min-width: 30px;
-            font-size: 13px;
+            min-width: 27px;
+            font-size: 11px;
         }
         .teveta-form-container .form-field .field-label {
             font-weight: 600;
             color: #0f172a;
-            font-size: 13px;
-            min-width: 140px;
+            font-size: 11px;
+            min-width: 126px;
         }
         .teveta-form-container .form-field .field-input {
             flex: 1;
             border: none;
             border-bottom: 1px solid #0f172a;
-            padding: 2px 4px;
-            font-size: 13px;
+            padding: 1px 3px;
+            font-size: 11px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
@@ -1865,12 +1857,12 @@
         }
         .teveta-form-container .form-field .field-box-input {
             border: 1px solid #0f172a;
-            padding: 2px 4px;
-            font-size: 13px;
+            padding: 1px 3px;
+            font-size: 11px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 30px;
+            width: 27px;
             text-align: center;
         }
         .teveta-form-container .form-field .field-box-input:focus {
@@ -1882,21 +1874,21 @@
         }
         .teveta-form-container .form-field .box-group {
             display: flex;
-            gap: 4px;
+            gap: 3px;
             align-items: center;
         }
         .teveta-form-container .form-field .box-group .box-label {
-            font-size: 11px;
+            font-size: 10px;
             color: #64748b;
         }
         .teveta-form-container .form-field .box-group .box-input {
             border: 1px solid #0f172a;
-            padding: 2px 4px;
-            font-size: 12px;
+            padding: 1px 3px;
+            font-size: 10px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 28px;
+            width: 25px;
             text-align: center;
         }
         .teveta-form-container .form-field .box-group .box-input:focus {
@@ -1912,12 +1904,12 @@
         .teveta-form-container .form-field .subjects-list .subject-row {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 2px 0;
+            gap: 7px;
+            padding: 1px 0;
         }
         .teveta-form-container .form-field .subjects-list .subject-row input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             accent-color: #3b82f6;
             cursor: pointer;
         }
@@ -1926,14 +1918,14 @@
             cursor: not-allowed;
         }
         .teveta-form-container .form-field .subjects-list .subject-row .subject-text {
-            font-size: 13px;
+            font-size: 11px;
             color: #0f172a;
         }
         .teveta-form-container .form-field .subjects-list .subject-row .subject-line {
             flex: 1;
             border-bottom: 1px solid #0f172a;
             height: 1px;
-            margin-left: 4px;
+            margin-left: 3px;
         }
         .teveta-form-container .form-field .subjects-list .subject-row .subject-line.readonly {
             border-color: #94a3b8;
@@ -1941,26 +1933,26 @@
         .teveta-form-container .form-field .inline-group {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
         .teveta-form-container .form-field .inline-group .inline-item {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
         .teveta-form-container .form-field .inline-group .inline-item .inline-label {
-            font-size: 12px;
+            font-size: 10px;
             color: #475569;
         }
         .teveta-form-container .form-field .inline-group .inline-item .inline-box {
             border: 1px solid #0f172a;
-            padding: 2px 4px;
-            font-size: 12px;
+            padding: 1px 3px;
+            font-size: 10px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 28px;
+            width: 25px;
             text-align: center;
         }
         .teveta-form-container .form-field .inline-group .inline-item .inline-box:focus {
@@ -1973,16 +1965,16 @@
         .teveta-form-container .form-field .year-box-group {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
         .teveta-form-container .form-field .year-box-group .year-box {
             border: 1px solid #0f172a;
-            padding: 2px 4px;
-            font-size: 12px;
+            padding: 1px 3px;
+            font-size: 10px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 28px;
+            width: 25px;
             text-align: center;
         }
         .teveta-form-container .form-field .year-box-group .year-box:focus {
@@ -1993,20 +1985,20 @@
             color: #475569;
         }
         .teveta-form-container .form-field .year-box-group .year-label {
-            font-size: 11px;
+            font-size: 10px;
             color: #64748b;
         }
         .teveta-form-container .form-field .mode-select-group {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 7px;
             flex-wrap: wrap;
         }
         .teveta-form-container .form-field .mode-select-group .mode-option {
             display: flex;
             align-items: center;
-            gap: 4px;
-            font-size: 12px;
+            gap: 3px;
+            font-size: 10px;
             color: #0f172a;
         }
         .teveta-form-container .form-field .mode-select-group .mode-option input[type="radio"] {
@@ -2020,14 +2012,14 @@
         .teveta-form-container .form-field .year-select-group {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 7px;
             flex-wrap: wrap;
         }
         .teveta-form-container .form-field .year-select-group .year-option {
             display: flex;
             align-items: center;
-            gap: 4px;
-            font-size: 12px;
+            gap: 3px;
+            font-size: 10px;
             color: #0f172a;
         }
         .teveta-form-container .form-field .year-select-group .year-option input[type="radio"] {
@@ -2041,16 +2033,16 @@
         .teveta-form-container .form-field .exam-series-boxes {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
         .teveta-form-container .form-field .exam-series-boxes .series-box {
             border: 1px solid #0f172a;
-            padding: 2px 4px;
-            font-size: 12px;
+            padding: 1px 3px;
+            font-size: 10px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 28px;
+            width: 25px;
             text-align: center;
         }
         .teveta-form-container .form-field .exam-series-boxes .series-box:focus {
@@ -2061,22 +2053,22 @@
             color: #475569;
         }
         .teveta-form-container .form-field .exam-series-boxes .series-label {
-            font-size: 11px;
+            font-size: 10px;
             color: #64748b;
         }
         .teveta-form-container .form-field .teveta-no-boxes {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
         .teveta-form-container .form-field .teveta-no-boxes .no-box {
             border: 1px solid #0f172a;
-            padding: 2px 4px;
-            font-size: 12px;
+            padding: 1px 3px;
+            font-size: 10px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 28px;
+            width: 25px;
             text-align: center;
         }
         .teveta-form-container .form-field .teveta-no-boxes .no-box:focus {
@@ -2089,16 +2081,16 @@
         .teveta-form-container .form-field .year-enrolment-boxes {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
         .teveta-form-container .form-field .year-enrolment-boxes .enrol-box {
             border: 1px solid #0f172a;
-            padding: 2px 4px;
-            font-size: 12px;
+            padding: 1px 3px;
+            font-size: 10px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 28px;
+            width: 25px;
             text-align: center;
         }
         .teveta-form-container .form-field .year-enrolment-boxes .enrol-box:focus {
@@ -2109,18 +2101,18 @@
             color: #475569;
         }
         .teveta-form-container .form-field .year-enrolment-boxes .enrol-label {
-            font-size: 11px;
+            font-size: 10px;
             color: #64748b;
         }
         .teveta-form-container .btn-submit-teveta {
             display: inline-block;
-            margin-top: 16px;
-            padding: 12px 32px;
+            margin-top: 14px;
+            padding: 10px 28px;
             background: #3b82f6;
             color: #fff;
             border: none;
             border-radius: 50px;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.25s ease;
@@ -2135,40 +2127,40 @@
         /* ─── RESPONSIVE ─── */
         @media (max-width: 768px) {
             .sidebar-menu-container {
-                width: 280px;
+                width: 252px;
             }
             .sidebar-page-header {
-                padding: 12px 16px;
+                padding: 10px 14px;
             }
             .sidebar-page-header h2 {
-                font-size: 17px;
+                font-size: 15px;
             }
             .sidebar-page-body {
-                padding: 16px;
+                padding: 14px;
             }
             .sidebar-page-body .info-grid {
                 grid-template-columns: 1fr;
             }
             .dashboard-header {
-                padding: 10px 14px;
-                min-height: 56px;
+                padding: 9px 12px;
+                min-height: 50px;
             }
             .header-title {
-                font-size: 15px;
+                font-size: 13px;
             }
             .header-logo {
-                width: 36px;
-                height: 36px;
+                width: 32px;
+                height: 32px;
             }
             .student-info-top {
-                font-size: 12px;
-                padding: 12px 16px;
-                gap: 6px 12px;
+                font-size: 10px;
+                padding: 10px 14px;
+                gap: 5px 10px;
             }
             .home-dashboard {
-                padding: 16px;
-                max-height: calc(100vh - 280px);
-                max-height: calc(100dvh - 280px);
+                padding: 14px;
+                max-height: calc(100vh - 252px);
+                max-height: calc(100dvh - 252px);
             }
             .home-dashboard .dashboard-grid {
                 grid-template-columns: 1fr;
@@ -2177,20 +2169,20 @@
                 grid-template-columns: 1fr;
             }
             .dashboard-content {
-                padding: 8px 12px 16px;
-                gap: 12px;
+                padding: 7px 10px 14px;
+                gap: 10px;
             }
             .sidebar-page-body .readonly-form .field-row {
                 flex-direction: column;
-                padding: 8px 0;
+                padding: 7px 0;
             }
             .sidebar-page-body .readonly-form .field-label {
                 width: 100%;
-                margin-bottom: 2px;
+                margin-bottom: 1px;
             }
             .teveta-form-container .form-field {
                 flex-direction: column;
-                gap: 4px;
+                gap: 3px;
             }
             .teveta-form-container .form-field .field-label {
                 min-width: auto;
@@ -2221,11 +2213,11 @@
         @media (max-width: 480px) {
             .dashboard-header {
                 flex-wrap: wrap;
-                gap: 4px;
-                padding: 8px 12px;
+                gap: 3px;
+                padding: 7px 10px;
             }
             .header-title {
-                font-size: 13px;
+                font-size: 11px;
                 order: 3;
                 width: 100%;
                 text-align: center;
@@ -2237,30 +2229,30 @@
                 order: 2;
             }
             .sidebar-menu-container {
-                width: 260px;
+                width: 234px;
             }
             .home-dashboard {
-                max-height: calc(100vh - 260px);
-                max-height: calc(100dvh - 260px);
+                max-height: calc(100vh - 234px);
+                max-height: calc(100dvh - 234px);
             }
         }
         @media (min-height: 800px) {
             .home-dashboard {
-                max-height: calc(100vh - 320px);
-                max-height: calc(100dvh - 320px);
+                max-height: calc(100vh - 288px);
+                max-height: calc(100dvh - 288px);
             }
         }
         @supports (padding: env(safe-area-inset-top)) {
             .dashboard-header {
-                padding-left: calc(20px + env(safe-area-inset-left));
-                padding-right: calc(20px + env(safe-area-inset-right));
+                padding-left: calc(18px + env(safe-area-inset-left));
+                padding-right: calc(18px + env(safe-area-inset-right));
             }
             .sidebar-menu-container {
                 padding-left: calc(0px + env(safe-area-inset-left));
             }
             .sidebar-page-header {
-                padding-left: calc(24px + env(safe-area-inset-left));
-                padding-right: calc(24px + env(safe-area-inset-right));
+                padding-left: calc(21px + env(safe-area-inset-left));
+                padding-right: calc(21px + env(safe-area-inset-right));
             }
         }
         .page::-webkit-scrollbar {
@@ -2299,12 +2291,12 @@
             <h1>WELCOME TO<br /><span class="accent">NORTHERN</span> TECHNICAL COLLEGE</h1>
             <div class="sub">Excellence in Technical Education</div>
         </div>
-        <div class="spacer" style="flex:1; min-height:12px;"></div>
+        <div class="spacer" style="flex:1; min-height:10px;"></div>
         <div class="button-group">
             <button class="btn btn-enroll" id="enrollBtn"><i class="fas fa-graduation-cap"></i> Enroll</button>
             <button class="btn btn-login" id="loginBtn"><i class="fas fa-lock"></i> Login</button>
         </div>
-        <div class="footer-note" style="margin-top:16px; font-size:10px; color:rgba(255,255,255,0.20); text-align:center; letter-spacing:0.5px; flex-shrink:0;">© 2026 Northern Technical College</div>
+        <div class="footer-note" style="margin-top:14px; font-size:9px; color:rgba(255,255,255,0.20); text-align:center; letter-spacing:0.5px; flex-shrink:0;">© 2026 Northern Technical College</div>
     </div>
 
     <!-- ─── ENROLL PAGE ─── -->
@@ -2322,8 +2314,8 @@
             <button class="intake-btn" data-intake="september"><i class="fas fa-tree"></i> September</button>
             <button class="intake-btn" data-intake="august"><i class="fas fa-globe"></i> August (Distance)</button>
         </div>
-        <div style="width:100%; max-width:420px; margin-top:12px; flex-shrink:0; padding:0 4px;">
-            <button class="intake-btn shortcourse-btn" id="shortCoursesBtn" style="aspect-ratio:auto; padding:14px; border-radius:16px; width:100%;"><i class="fas fa-clock"></i> Short Courses</button>
+        <div style="width:100%; max-width:378px; margin-top:10px; flex-shrink:0; padding:0 3px;">
+            <button class="intake-btn shortcourse-btn" id="shortCoursesBtn" style="aspect-ratio:auto; padding:12px; border-radius:14px; width:100%;"><i class="fas fa-clock"></i> Short Courses</button>
         </div>
         <div class="back-row">
             <button class="btn-back" id="backFromEnroll"><i class="fas fa-arrow-left"></i> Back</button>
@@ -2390,7 +2382,7 @@
             <div class="dashboard-content">
                 <div class="home-dashboard" id="homeDashboard">
                     <h2><span class="accent">📊</span> Dashboard Overview</h2>
-                    <p style="color:#64748b; font-size:14px; margin-bottom:12px;">Welcome back, <strong style="color:#3b82f6;">Jubel Mobela</strong>! Here's your current academic overview.</p>
+                    <p style="color:#64748b; font-size:12px; margin-bottom:10px;">Welcome back, <strong style="color:#3b82f6;">Jubel Mobela</strong>! Here's your current academic overview.</p>
 
                     <div class="dashboard-grid">
                         <div class="card">
@@ -2515,30 +2507,30 @@
         </div>
         <div class="sidebar-page-body">
             <h3><i class="fas fa-chalkboard"></i> Current Classes</h3>
-            <div style="display:grid; gap:8px;">
-                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                    <div><strong>Digital Electronics II</strong> <span style="font-size:11px; color:#64748b;">(41.1)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Banda</span></div>
-                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Mon 10:00</div>
+            <div style="display:grid; gap:7px;">
+                <div style="background:#f8fafc; border-radius:9px; padding:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Digital Electronics II</strong> <span style="font-size:10px; color:#64748b;">(41.1)</span><br /><span style="font-size:10px; color:#3b82f6;">Lecturer: Mr. Banda</span></div>
+                    <div style="font-size:10px; color:#3b82f6; font-weight:600;">Mon 10:00</div>
                 </div>
-                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                    <div><strong>Operating Systems</strong> <span style="font-size:11px; color:#64748b;">(41.3)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Dr. Mwansa</span></div>
-                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Tue 08:00</div>
+                <div style="background:#f8fafc; border-radius:9px; padding:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Operating Systems</strong> <span style="font-size:10px; color:#64748b;">(41.3)</span><br /><span style="font-size:10px; color:#3b82f6;">Lecturer: Dr. Mwansa</span></div>
+                    <div style="font-size:10px; color:#3b82f6; font-weight:600;">Tue 08:00</div>
                 </div>
-                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                    <div><strong>Programming & Database Tech</strong> <span style="font-size:11px; color:#64748b;">(41.4)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Tembo</span></div>
-                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Wed 14:00</div>
+                <div style="background:#f8fafc; border-radius:9px; padding:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Programming & Database Tech</strong> <span style="font-size:10px; color:#64748b;">(41.4)</span><br /><span style="font-size:10px; color:#3b82f6;">Lecturer: Mr. Tembo</span></div>
+                    <div style="font-size:10px; color:#3b82f6; font-weight:600;">Wed 14:00</div>
                 </div>
-                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                    <div><strong>Networks & Communications</strong> <span style="font-size:11px; color:#64748b;">(41.5)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Ms. Phiri</span></div>
-                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Thu 09:00</div>
+                <div style="background:#f8fafc; border-radius:9px; padding:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Networks & Communications</strong> <span style="font-size:10px; color:#64748b;">(41.5)</span><br /><span style="font-size:10px; color:#3b82f6;">Lecturer: Ms. Phiri</span></div>
+                    <div style="font-size:10px; color:#3b82f6; font-weight:600;">Thu 09:00</div>
                 </div>
-                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                    <div><strong>Computer Hardware Maintenance</strong> <span style="font-size:11px; color:#64748b;">(41.6)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Zulu</span></div>
-                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Fri 11:00</div>
+                <div style="background:#f8fafc; border-radius:9px; padding:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Computer Hardware Maintenance</strong> <span style="font-size:10px; color:#64748b;">(41.6)</span><br /><span style="font-size:10px; color:#3b82f6;">Lecturer: Mr. Zulu</span></div>
+                    <div style="font-size:10px; color:#3b82f6; font-weight:600;">Fri 11:00</div>
                 </div>
-                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                    <div><strong>Management Information Systems</strong> <span style="font-size:11px; color:#64748b;">(41.7)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Dr. Mulenga</span></div>
-                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Thu 13:00</div>
+                <div style="background:#f8fafc; border-radius:9px; padding:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Management Information Systems</strong> <span style="font-size:10px; color:#64748b;">(41.7)</span><br /><span style="font-size:10px; color:#3b82f6;">Lecturer: Dr. Mulenga</span></div>
+                    <div style="font-size:10px; color:#3b82f6; font-weight:600;">Thu 13:00</div>
                 </div>
             </div>
         </div>
@@ -2593,7 +2585,7 @@
                     </tbody>
                 </table>
             </div>
-            <div style="margin-top:8px; font-size:11px; color:#64748b; text-align:center;">* CA Meter shows percentage of CA score out of 40%</div>
+            <div style="margin-top:7px; font-size:10px; color:#64748b; text-align:center;">* CA Meter shows percentage of CA score out of 40%</div>
         </div>
     </div>
 
@@ -2606,7 +2598,7 @@
         </div>
         <div class="sidebar-page-body">
             <h3><i class="fas fa-user-circle"></i> Profile Information</h3>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:13px;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:7px; font-size:11px;">
                 <div style="color:#64748b;">Full Name:</div><div style="color:#0f172a; font-weight:600;">JUBEL MOBELA</div>
                 <div style="color:#64748b;">Student Number:</div><div style="color:#0f172a; font-weight:600;">2201001157</div>
                 <div style="color:#64748b;">ID Number:</div><div style="color:#0f172a; font-weight:600;">622589/67/1</div>
@@ -2632,22 +2624,22 @@
         </div>
         <div class="sidebar-page-body">
             <h3><i class="fas fa-bullhorn"></i> Official Notice</h3>
-            <div style="background:#ffffff; border-radius:16px; padding:24px; border:1px solid #dbeafe; box-shadow:0 2px 12px rgba(59,130,246,0.08);">
-                <div style="text-align:center; margin-bottom:16px;">
-                    <h3 style="font-size:18px; font-weight:800; color:#0f172a; border-bottom:none; padding-bottom:0;">NORTEC</h3>
-                    <div style="font-size:12px; color:#64748b; letter-spacing:1px;">NORTHERN TECHNICAL COLLEGE</div>
-                    <div style="font-size:11px; color:#64748b; margin-top:4px;">Skills • Innovation • Empowerment</div>
-                    <div style="font-size:22px; font-weight:900; color:#dc2626; margin:12px 0 4px;">NOTICE OF<br />CHANGE<br />OF GRADUATION DATE</div>
+            <div style="background:#ffffff; border-radius:14px; padding:21px; border:1px solid #dbeafe; box-shadow:0 2px 12px rgba(59,130,246,0.08);">
+                <div style="text-align:center; margin-bottom:14px;">
+                    <h3 style="font-size:16px; font-weight:800; color:#0f172a; border-bottom:none; padding-bottom:0;">NORTEC</h3>
+                    <div style="font-size:10px; color:#64748b; letter-spacing:1px;">NORTHERN TECHNICAL COLLEGE</div>
+                    <div style="font-size:10px; color:#64748b; margin-top:3px;">Skills • Innovation • Empowerment</div>
+                    <div style="font-size:19px; font-weight:900; color:#dc2626; margin:10px 0 3px;">NOTICE OF<br />CHANGE<br />OF GRADUATION DATE</div>
                 </div>
-                <p style="font-size:13px; line-height:1.6; color:#334155; margin:8px 0;">The Management of NORTEC wishes to inform all graduating students, parents, guardians, invited guests, and the general public that the Graduation Ceremony which was scheduled to take place on 5th June 2026 at the NORTEC Graduation Square has been postponed.</p>
-                <p style="font-size:13px; font-weight:700; color:#0f172a; margin:8px 0;">THE CEREMONY WILL NOW TAKE PLACE AS FOLLOWS:</p>
-                <p style="font-size:13px; color:#334155;"><strong style="color:#3b82f6;">DATE:</strong> 15th July 2026</p>
-                <p style="font-size:13px; color:#334155;"><strong style="color:#3b82f6;">VENUE:</strong> LEVY MWANAWASA STADIUM</p>
-                <p style="font-size:13px; color:#334155;"><strong style="color:#3b82f6;">TIME:</strong> 08:30 HOURS</p>
-                <p style="font-size:12px; color:#64748b; margin:8px 0;">This change has been necessitated by the ongoing road works currently being conducted along CHELA ROAD.</p>
-                <p style="font-size:12px; color:#64748b; margin:8px 0;">Management regrets any inconvenience caused and appreciates your understanding and cooperation.</p>
-                <div style="font-size:11px; color:#64748b; text-align:center; margin-top:12px; font-style:italic;">Issued by: MANAGEMENT<br />NORTHERN TECHNICAL COLLEGE (NORTEC)</div>
-                <div style="font-size:10px; color:#94a3b8; text-align:center; margin-top:8px;">Creative Minds. | Creative Hands. | Building Competence. Inspiring Success.</div>
+                <p style="font-size:11px; line-height:1.6; color:#334155; margin:7px 0;">The Management of NORTEC wishes to inform all graduating students, parents, guardians, invited guests, and the general public that the Graduation Ceremony which was scheduled to take place on 5th June 2026 at the NORTEC Graduation Square has been postponed.</p>
+                <p style="font-size:11px; font-weight:700; color:#0f172a; margin:7px 0;">THE CEREMONY WILL NOW TAKE PLACE AS FOLLOWS:</p>
+                <p style="font-size:11px; color:#334155;"><strong style="color:#3b82f6;">DATE:</strong> 15th July 2026</p>
+                <p style="font-size:11px; color:#334155;"><strong style="color:#3b82f6;">VENUE:</strong> LEVY MWANAWASA STADIUM</p>
+                <p style="font-size:11px; color:#334155;"><strong style="color:#3b82f6;">TIME:</strong> 08:30 HOURS</p>
+                <p style="font-size:10px; color:#64748b; margin:7px 0;">This change has been necessitated by the ongoing road works currently being conducted along CHELA ROAD.</p>
+                <p style="font-size:10px; color:#64748b; margin:7px 0;">Management regrets any inconvenience caused and appreciates your understanding and cooperation.</p>
+                <div style="font-size:10px; color:#64748b; text-align:center; margin-top:10px; font-style:italic;">Issued by: MANAGEMENT<br />NORTHERN TECHNICAL COLLEGE (NORTEC)</div>
+                <div style="font-size:9px; color:#94a3b8; text-align:center; margin-top:7px;">Creative Minds. | Creative Hands. | Building Competence. Inspiring Success.</div>
             </div>
         </div>
     </div>
@@ -2813,7 +2805,7 @@
                 <tr><td>SI-20044214</td><td>2025-09-10</td><td>Invoice</td><td>HIRE OF GOWN</td><td>1,000</td><td></td><td>1,200</td></tr>
                 <tr><td>SI-20044474</td><td>2025-09-25</td><td>Invoice</td><td>HIRE OF GOWN</td><td>600</td><td></td><td>1,800</td></tr>
             </table>
-            <div style="margin-top:16px; text-align:right; font-size:20px; font-weight:800; color:#0f172a; border-top:2px solid #3b82f6; padding-top:12px;">
+            <div style="margin-top:14px; text-align:right; font-size:18px; font-weight:800; color:#0f172a; border-top:2px solid #3b82f6; padding-top:10px;">
                 CURRENT BALANCE: <span class="balance-amount">K1,800</span>
             </div>
 
@@ -3276,7 +3268,7 @@
                 <div class="readonly-form" id="tevetaReadonlyForm">
                     <!-- Populated by JavaScript -->
                 </div>
-                <p style="margin-top:12px; font-size:12px; color:#64748b;"><i class="fas fa-lock"></i> This form is now read-only. You cannot edit the details.</p>
+                <p style="margin-top:10px; font-size:10px; color:#64748b;"><i class="fas fa-lock"></i> This form is now read-only. You cannot edit the details.</p>
             </div>
 
             <h3><i class="fas fa-upload"></i> Upload TEVETA Exam Fee Receipt</h3>
@@ -3534,7 +3526,7 @@
                                 <div class="file-name"></div>
                             </div>
                         </div>
-                        <p style="font-size:12px; color:#64748b; margin-top:8px;"><span class="highlight">*</span> Recommendation letter is mandatory.</p>
+                        <p style="font-size:10px; color:#64748b; margin-top:7px;"><span class="highlight">*</span> Recommendation letter is mandatory.</p>
                     </div>
                 </div>
 
@@ -3565,7 +3557,7 @@
                             <button class="btn-clear-signature" id="clearSignature"><i class="fas fa-undo"></i> Clear</button>
                         </div>
 
-                        <div class="form-row" style="margin-top:12px;">
+                        <div class="form-row" style="margin-top:10px;">
                             <div><label>Date of Application</label><input type="date" id="appDate" /></div>
                         </div>
 
@@ -3603,7 +3595,7 @@
                     <label class="checkbox-wrap"><input type="checkbox" id="rememberMe" /> Remember me</label>
                     <a href="#" class="forgot-link" id="forgotLink">Forgot Password?</a>
                 </div>
-                <button type="submit" class="btn-submit">Sign In <i class="fas fa-arrow-right" style="margin-left:8px;"></i></button>
+                <button type="submit" class="btn-submit">Sign In <i class="fas fa-arrow-right" style="margin-left:7px;"></i></button>
                 <div class="support-link">Need help? <a href="#" id="supportLink">Contact Support</a></div>
             </form>
         </div>
@@ -3938,7 +3930,7 @@
                 programListContainer.innerHTML = '';
                 if (list.length === 0) {
                     programListContainer.innerHTML =
-                        '<div style="color:rgba(255,255,255,0.6);text-align:center;padding:20px;">No programmes available for this intake.</div>';
+                        '<div style="color:rgba(255,255,255,0.6);text-align:center;padding:18px;">No programmes available for this intake.</div>';
                     return;
                 }
                 list.forEach(prog => {
@@ -4135,8 +4127,8 @@
 
                 function resizeCanvas() {
                     const rect = canvas.parentElement.getBoundingClientRect();
-                    const width = rect.width - 8;
-                    const height = 120;
+                    const width = rect.width - 7;
+                    const height = 108;
                     canvas.width = width * 2;
                     canvas.height = height * 2;
                     canvas.style.width = width + 'px';
@@ -4207,7 +4199,7 @@
                 for (const [dept, courses] of Object.entries(grouped)) {
                     const header = document.createElement('div');
                     header.style.cssText =
-                        'grid-column:1/-1; font-weight:700; font-size:16px; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.3); margin-top:8px;';
+                        'grid-column:1/-1; font-weight:700; font-size:14px; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.3); margin-top:7px;';
                     header.textContent = dept + ' Department';
                     shortCoursesContainer.appendChild(header);
                     courses.forEach(c => {
@@ -4340,8 +4332,7 @@
                     document.getElementById('enrolY4').value;
 
                 const yearStudy = document.querySelector('input[name="yearStudy"]:checked') ?
-                    document.querySelector('input[name="yearStudy"]:checked').value :
-                    '';
+                    document.querySelector('input[name="yearStudy"]:checked').value : '';
 
                 const data = {
                     course: 'DIPLOMA IN COMPUTER SYSTEMS ENGINEERING – Code 41',
