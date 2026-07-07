@@ -4499,5 +4499,21 @@
             console.log('✅ Northern Technical College – full dashboard with notice in sidebar, home dashboard, classes/CA/profile as sidebar pages.');
         })();
     </script>
+        <!-- PWA Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(function(registration) {
+                        console.log('✅ Service Worker registered with scope:', registration.scope);
+                    })
+                    .catch(function(error) {
+                        console.error('❌ Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
 </body>
 </html>
