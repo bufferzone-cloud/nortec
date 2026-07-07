@@ -1,0 +1,33 @@
+{
+  "name": "Northern Technical College Dashboard",
+  "short_name": "NORTEC",
+  "description": "Student dashboard and enrollment portal for Northern Technical College.",
+  "start_url": "https://bufferzone-cloud.github.io/nortec/welcome.html",
+  "display": "standalone",
+  "background_color": "#0a0e17",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Enroll",
+      "short_name": "Enroll",
+      "description": "Start a new application",
+      "url": "https://bufferzone-cloud.github.io/nortec/welcome.html"
+    }
+  ]
+}
