@@ -6,6 +6,8 @@
     <title>Jubel Mobela Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <!-- PWA manifest link -->
+    <link rel="manifest" href="manifest.json" />
     <style>
         /* ── RESET & FULL SCREEN BASE ── */
         * {
@@ -13,7 +15,8 @@
             padding: 0;
             box-sizing: border-box;
         }
-        html, body {
+        html,
+        body {
             width: 100%;
             height: 100%;
             font-family: 'Inter', -apple-system, sans-serif;
@@ -21,6 +24,8 @@
             overflow: hidden;
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
+            /* ─── SCALE EVERYTHING DOWN BY 10% ─── */
+            zoom: 0.9;
         }
 
         /* ── BACKGROUND ZOOM ── */
@@ -39,15 +44,21 @@
             will-change: transform;
         }
         @keyframes zoomLoop {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.12); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.12);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
         .bg-layer::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.50) 100%);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0.25) 40%, rgba(0, 0, 0, 0.50) 100%);
             backdrop-filter: blur(0.5px);
             -webkit-backdrop-filter: blur(0.5px);
             pointer-events: none;
@@ -62,14 +73,17 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 28px 24px;
+            padding: 25px 22px;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
-            transition: opacity 0.45s cubic-bezier(0.22,1,0.36,1),
-                        transform 0.45s cubic-bezier(0.22,1,0.36,1),
-                        visibility 0.45s ease;
+            transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0.45s ease;
         }
-        .page::-webkit-scrollbar { width: 0; background: transparent; }
+        .page::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+        }
 
         /* MAIN PAGE */
         #mainPage {
@@ -85,16 +99,22 @@
         }
 
         /* ENROLL PAGE (intake selection) */
-        #enrollPage, #programsPage, #shortCoursesPage, #dashboardPage {
+        #enrollPage,
+        #programsPage,
+        #shortCoursesPage,
+        #dashboardPage {
             opacity: 0;
             transform: scale(0.96);
             visibility: hidden;
             pointer-events: none;
             justify-content: flex-start;
-            padding-top: 40px;
-            padding-bottom: 40px;
+            padding-top: 36px;
+            padding-bottom: 36px;
         }
-        #enrollPage.active, #programsPage.active, #shortCoursesPage.active, #dashboardPage.active {
+        #enrollPage.active,
+        #programsPage.active,
+        #shortCoursesPage.active,
+        #dashboardPage.active {
             opacity: 1;
             transform: scale(1);
             visibility: visible;
@@ -106,13 +126,13 @@
             position: fixed;
             inset: 0;
             z-index: 999;
-            background: rgba(255,255,255,0.97);
+            background: rgba(255, 255, 255, 0.97);
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 24px 20px;
+            padding: 22px 18px;
             overflow-y: auto;
             opacity: 0;
             visibility: hidden;
@@ -128,11 +148,11 @@
         .modal-fixed-top {
             position: sticky;
             top: 0;
-            background: rgba(255,255,255,0.97);
+            background: rgba(255, 255, 255, 0.97);
             width: 100%;
-            max-width: 600px;
+            max-width: 540px;
             z-index: 10;
-            padding: 8px 0 12px;
+            padding: 7px 0 11px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -141,22 +161,24 @@
             background: transparent;
             border: none;
             color: #64748b;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             transition: color 0.2s;
             font-weight: 600;
         }
-        .btn-back-detail:hover { color: #1e293b; }
+        .btn-back-detail:hover {
+            color: #1e293b;
+        }
         .modal-close {
             background: #e2e8f0;
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            font-size: 20px;
+            font-size: 18px;
             color: #1e293b;
             cursor: pointer;
             display: flex;
@@ -164,71 +186,80 @@
             justify-content: center;
             transition: background 0.2s;
         }
-        .modal-close:hover { background: #cbd5e1; }
+        .modal-close:hover {
+            background: #cbd5e1;
+        }
 
         .modal-logo {
             margin-top: 4px;
-            margin-bottom: 8px;
+            margin-bottom: 7px;
         }
         .modal-logo img {
-            width: 72px;
-            height: 72px;
+            width: 65px;
+            height: 65px;
             object-fit: contain;
-            border-radius: 16px;
+            border-radius: 14px;
             background: #f8fafc;
-            padding: 8px;
+            padding: 7px;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
         }
         .detail-title {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 800;
             color: #0f172a;
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 11px;
         }
         .detail-body {
-            max-width: 600px;
+            max-width: 540px;
             width: 100%;
             text-align: left;
             color: #1e293b;
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.6;
         }
         .detail-body h3 {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
-            margin: 16px 0 6px;
+            margin: 14px 0 5px;
             color: #0f172a;
         }
-        .detail-body p { margin-bottom: 8px; }
-        .detail-body ul { padding-left: 20px; margin: 6px 0 12px; }
+        .detail-body p {
+            margin-bottom: 7px;
+        }
+        .detail-body ul {
+            padding-left: 18px;
+            margin: 5px 0 11px;
+        }
 
         /* APPLY BUTTON */
         .btn-apply {
             display: inline-block;
-            margin: 20px 0 10px;
-            padding: 14px 32px;
+            margin: 18px 0 9px;
+            padding: 13px 29px;
             background: linear-gradient(135deg, #00c853, #009e3d);
             color: #fff;
             border: none;
             border-radius: 50px;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 6px 24px rgba(0,200,83,0.35);
+            box-shadow: 0 6px 24px rgba(0, 200, 83, 0.35);
             transition: all 0.25s ease;
         }
         .btn-apply:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 32px rgba(0,200,83,0.45);
+            box-shadow: 0 10px 32px rgba(0, 200, 83, 0.45);
         }
-        .btn-apply:active { transform: scale(0.96); }
+        .btn-apply:active {
+            transform: scale(0.96);
+        }
 
         /* ─── APPLICATION FORM – STEP WIZARD ─── */
         .application-form {
             display: none;
-            max-width: 600px;
+            max-width: 540px;
             width: 100%;
             text-align: left;
             color: #1e293b;
@@ -241,27 +272,27 @@
         .step-progress {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 11px;
+            margin-bottom: 18px;
             flex-wrap: wrap;
         }
         .step-dot {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 12px;
+            gap: 5px;
+            font-size: 11px;
             font-weight: 600;
             color: #94a3b8;
         }
         .step-dot .dot {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             background: #e2e8f0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             color: #64748b;
             transition: all 0.3s;
@@ -281,7 +312,9 @@
             display: none;
         }
         @media (min-width: 480px) {
-            .step-dot .label { display: inline; }
+            .step-dot .label {
+                display: inline;
+            }
         }
 
         /* Step container */
@@ -296,49 +329,59 @@
             display: block;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(7px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         .step .form-section {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
         .step .section-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             color: #0f172a;
-            margin-bottom: 12px;
+            margin-bottom: 11px;
         }
         .step .form-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 8px;
+            gap: 11px;
+            margin-bottom: 7px;
         }
-        .step .form-row > * {
-            flex: 1 1 200px;
+        .step .form-row>* {
+            flex: 1 1 180px;
         }
         .step label {
             display: block;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: #475569;
             margin-bottom: 4px;
         }
-        .step input, .step select, .step textarea {
+        .step input,
+        .step select,
+        .step textarea {
             width: 100%;
-            padding: 10px 12px;
-            border-radius: 10px;
+            padding: 9px 11px;
+            border-radius: 9px;
             border: 1px solid #d1d5db;
             background: #f8fafc;
-            font-size: 14px;
+            font-size: 13px;
             font-family: 'Inter', sans-serif;
             transition: border 0.2s;
         }
-        .step input:focus, .step select:focus, .step textarea:focus {
+        .step input:focus,
+        .step select:focus,
+        .step textarea:focus {
             border-color: #3b82f6;
             background: #fff;
             outline: none;
-            box-shadow: 0 0 0 3px rgba(59,130,246,0.10);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
         }
 
         /* Highlight important words in blue */
@@ -351,16 +394,18 @@
         .step-nav {
             display: flex;
             justify-content: space-between;
-            margin-top: 20px;
-            gap: 12px;
+            margin-top: 18px;
+            gap: 11px;
             flex-wrap: wrap;
         }
-        .btn-prev, .btn-next, .btn-submit-step {
-            padding: 12px 28px;
+        .btn-prev,
+        .btn-next,
+        .btn-submit-step {
+            padding: 11px 25px;
             border: none;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.25s ease;
         }
@@ -368,28 +413,35 @@
             background: #e2e8f0;
             color: #1e293b;
         }
-        .btn-prev:hover { background: #cbd5e1; }
-        .btn-next, .btn-submit-step {
+        .btn-prev:hover {
+            background: #cbd5e1;
+        }
+        .btn-next,
+        .btn-submit-step {
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: #fff;
-            box-shadow: 0 4px 16px rgba(59,130,246,0.25);
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.25);
         }
-        .btn-next:hover, .btn-submit-step:hover {
+        .btn-next:hover,
+        .btn-submit-step:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(59,130,246,0.35);
+            box-shadow: 0 6px 24px rgba(59, 130, 246, 0.35);
         }
-        .btn-submit-step:active, .btn-next:active { transform: scale(0.96); }
+        .btn-submit-step:active,
+        .btn-next:active {
+            transform: scale(0.96);
+        }
 
         /* Declaration checkbox */
         .declaration-row {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin: 12px 0;
+            gap: 9px;
+            margin: 11px 0;
         }
         .declaration-row input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             accent-color: #3b82f6;
             cursor: pointer;
         }
@@ -397,30 +449,30 @@
         /* ─── SIGNATURE PAD ─── */
         .signature-wrapper {
             border: 2px dashed #94a3b8;
-            border-radius: 12px;
+            border-radius: 11px;
             padding: 4px;
             background: #f8fafc;
-            margin: 8px 0;
+            margin: 7px 0;
         }
         .signature-wrapper canvas {
             display: block;
             width: 100%;
-            height: 120px;
+            height: 108px;
             background: #ffffff;
-            border-radius: 8px;
+            border-radius: 7px;
             touch-action: none;
             cursor: crosshair;
         }
         .signature-actions {
             display: flex;
-            gap: 10px;
-            margin-top: 6px;
+            gap: 9px;
+            margin-top: 5px;
         }
         .signature-actions button {
-            padding: 6px 14px;
+            padding: 5px 13px;
             border: none;
-            border-radius: 20px;
-            font-size: 12px;
+            border-radius: 18px;
+            font-size: 11px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
@@ -429,26 +481,28 @@
             background: #e2e8f0;
             color: #1e293b;
         }
-        .btn-clear-signature:hover { background: #cbd5e1; }
+        .btn-clear-signature:hover {
+            background: #cbd5e1;
+        }
 
         /* ─── UPLOAD GRID – 3 columns ─── */
         .upload-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin: 8px 0;
+            gap: 11px;
+            margin: 7px 0;
         }
         .upload-box {
             aspect-ratio: 1 / 1;
             background: #f8fafc;
             border: 2px dashed #d1d5db;
-            border-radius: 12px;
+            border-radius: 11px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 8px;
+            padding: 7px;
             transition: border-color 0.2s;
             position: relative;
             cursor: pointer;
@@ -457,27 +511,27 @@
             border-color: #3b82f6;
         }
         .upload-box .upload-icon {
-            font-size: 24px;
+            font-size: 22px;
             color: #94a3b8;
             margin-bottom: 4px;
         }
         .upload-box .upload-label {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 600;
             color: #475569;
             line-height: 1.2;
             word-break: break-word;
         }
         .upload-box .upload-badge {
-            font-size: 8px;
+            font-size: 7px;
             font-weight: 700;
             color: #fff;
             background: #ef4444;
-            padding: 2px 8px;
-            border-radius: 12px;
+            padding: 2px 7px;
+            border-radius: 11px;
             position: absolute;
-            top: -6px;
-            right: -6px;
+            top: -5px;
+            right: -5px;
         }
         .upload-box .upload-badge.optional {
             background: #94a3b8;
@@ -489,7 +543,7 @@
             cursor: pointer;
         }
         .upload-box .file-name {
-            font-size: 9px;
+            font-size: 8px;
             color: #64748b;
             margin-top: 4px;
             overflow: hidden;
@@ -504,55 +558,59 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 11px;
         }
         .main-logo {
-            width: 88px;
-            height: 88px;
+            width: 79px;
+            height: 79px;
             object-fit: contain;
-            border-radius: 18px;
-            background: rgba(255,255,255,0.85);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            padding: 10px;
-            border: 1px solid rgba(255,255,255,0.4);
-            box-shadow: 0 12px 48px rgba(0,0,0,0.20);
+            padding: 9px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.20);
             transition: transform 0.3s ease;
         }
-        .main-logo:hover { transform: scale(1.03); }
+        .main-logo:hover {
+            transform: scale(1.03);
+        }
 
         /* TITLE */
         .title {
             text-align: center;
-            margin: 4px 0 28px;
+            margin: 4px 0 25px;
             flex-shrink: 0;
         }
         .title h1 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 900;
             letter-spacing: 0.2px;
             line-height: 1.3;
             color: #fff;
-            text-shadow: 0 4px 28px rgba(0,0,0,0.45);
+            text-shadow: 0 4px 28px rgba(0, 0, 0, 0.45);
         }
-        .title h1 .accent { color: #6cffa0; }
+        .title h1 .accent {
+            color: #6cffa0;
+        }
         .title .sub {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 400;
-            color: rgba(255,255,255,0.55);
-            letter-spacing: 1.8px;
+            color: rgba(255, 255, 255, 0.55);
+            letter-spacing: 1.6px;
             text-transform: uppercase;
             margin-top: 3px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.25);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
         }
 
         /* BUTTONS (main) */
         .button-group {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 13px;
             width: 100%;
-            max-width: 320px;
+            max-width: 288px;
             flex-shrink: 0;
             padding-bottom: 4px;
         }
@@ -560,21 +618,21 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 16px 24px;
+            padding: 14px 22px;
             border: none;
-            border-radius: 60px;
+            border-radius: 54px;
             font-family: 'Inter', sans-serif;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             color: #fff;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.22,1,0.36,1);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+            transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
             position: relative;
             overflow: hidden;
             user-select: none;
             touch-action: manipulation;
-            min-height: 52px;
+            min-height: 47px;
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
         }
@@ -582,74 +640,83 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, transparent 60%);
             pointer-events: none;
         }
-        .btn:active { transform: scale(0.96); }
+        .btn:active {
+            transform: scale(0.96);
+        }
         .btn-enroll {
             background: linear-gradient(135deg, #00c853, #009e3d);
-            box-shadow: 0 8px 32px rgba(0,200,83,0.35);
+            box-shadow: 0 8px 32px rgba(0, 200, 83, 0.35);
         }
         .btn-enroll:hover {
-            box-shadow: 0 12px 40px rgba(0,200,83,0.45);
+            box-shadow: 0 12px 40px rgba(0, 200, 83, 0.45);
             transform: translateY(-2px);
         }
         .btn-login {
             background: linear-gradient(135deg, #2979ff, #0d47a1);
-            box-shadow: 0 8px 32px rgba(41,121,255,0.35);
+            box-shadow: 0 8px 32px rgba(41, 121, 255, 0.35);
         }
         .btn-login:hover {
-            box-shadow: 0 12px 40px rgba(41,121,255,0.45);
+            box-shadow: 0 12px 40px rgba(41, 121, 255, 0.45);
             transform: translateY(-2px);
         }
-        .btn i { margin-right: 10px; font-size: 17px; }
+        .btn i {
+            margin-right: 9px;
+            font-size: 15px;
+        }
 
         /* ─── ENROLL PAGE – streamlined, minimal colors ─── */
         .page-header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             flex-shrink: 0;
         }
         .page-header h2 {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 800;
             color: #fff;
-            text-shadow: 0 4px 24px rgba(0,0,0,0.4);
+            text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
         }
-        .page-header h2 i { color: #6cffa0; margin-right: 8px; }
+        .page-header h2 i {
+            color: #6cffa0;
+            margin-right: 7px;
+        }
         .page-header p {
-            font-size: 13px;
-            color: rgba(255,255,255,0.6);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
             margin-top: 4px;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .intake-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            gap: 14px;
             width: 100%;
-            max-width: 420px;
+            max-width: 378px;
             flex-shrink: 0;
             padding: 0 4px;
         }
         /* redesigned intake buttons – minimal, glassmorphic, uniform */
-        .intake-btn, .shortcourse-btn {
+        .intake-btn,
+        .shortcourse-btn {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             aspect-ratio: 1/1;
             border: none;
-            border-radius: 20px;
+            border-radius: 18px;
             font-family: 'Inter', sans-serif;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             color: #fff;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.30);
-            padding: 16px 12px;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.30);
+            padding: 14px 11px;
             text-align: center;
             line-height: 1.2;
             position: relative;
@@ -659,30 +726,39 @@
             backdrop-filter: blur(6px);
             -webkit-backdrop-filter: blur(6px);
             background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
-        .intake-btn::after, .shortcourse-btn::after {
+        .intake-btn::after,
+        .shortcourse-btn::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
             pointer-events: none;
         }
-        .intake-btn:active, .shortcourse-btn:active { transform: scale(0.94); }
-        .intake-btn:hover, .shortcourse-btn:hover {
+        .intake-btn:active,
+        .shortcourse-btn:active {
+            transform: scale(0.94);
+        }
+        .intake-btn:hover,
+        .shortcourse-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 14px 44px rgba(0,0,0,0.40);
+            box-shadow: 0 14px 44px rgba(0, 0, 0, 0.40);
             background: rgba(255, 255, 255, 0.20);
         }
-        .intake-btn i { font-size: 32px; margin-bottom: 8px; color: rgba(255,255,255,0.9); }
+        .intake-btn i {
+            font-size: 29px;
+            margin-bottom: 7px;
+            color: rgba(255, 255, 255, 0.9);
+        }
 
         /* BACK BUTTON – moved to top */
         .back-row {
             width: 100%;
-            max-width: 420px;
+            max-width: 378px;
             display: flex;
             justify-content: flex-start;
-            margin-top: 20px;
+            margin-top: 18px;
             flex-shrink: 0;
             padding: 0 4px;
             order: -1;
@@ -690,149 +766,169 @@
         .btn-back {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
+            gap: 7px;
+            padding: 9px 18px;
             border: none;
-            border-radius: 40px;
-            background: rgba(255,255,255,0.12);
+            border-radius: 36px;
+            background: rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             color: #fff;
             font-family: 'Inter', sans-serif;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.25s ease;
             touch-action: manipulation;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .btn-back:hover { background: rgba(255,255,255,0.20); transform: translateX(-3px); }
-        .btn-back:active { transform: scale(0.95); }
-        .btn-back i { font-size: 14px; }
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.20);
+            transform: translateX(-3px);
+        }
+        .btn-back:active {
+            transform: scale(0.95);
+        }
+        .btn-back i {
+            font-size: 13px;
+        }
 
         /* ─── PROGRAMS PAGE – floating cards with blue border ─── */
         .program-list {
             width: 100%;
-            max-width: 600px;
+            max-width: 540px;
             flex-shrink: 0;
             padding: 0 4px;
             position: relative;
             z-index: 2;
         }
         .program-card {
-            background: rgba(255,255,255,0.92);
-            border-radius: 16px;
-            padding: 16px 18px;
-            margin-bottom: 12px;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 14px;
+            padding: 14px 16px;
+            margin-bottom: 11px;
             border: 1px solid #3b82f6;
             color: #0f172a;
             transition: transform 0.2s, box-shadow 0.2s;
             cursor: pointer;
             touch-action: manipulation;
-            box-shadow: 0 8px 24px rgba(59,130,246,0.08);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.08);
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
             transform: scale(1);
         }
         .program-card.scale-up {
             transform: scale(1.04);
-            box-shadow: 0 12px 36px rgba(59,130,246,0.15);
+            box-shadow: 0 12px 36px rgba(59, 130, 246, 0.15);
             border-color: #2563eb;
         }
         .program-card:hover {
             background: #ffffff;
             transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 12px 32px rgba(59,130,246,0.12);
+            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.12);
         }
         .program-card .prog-title {
             font-weight: 700;
-            font-size: 16px;
+            font-size: 14px;
             margin-bottom: 4px;
             color: #0f172a;
         }
         .program-card .prog-meta {
-            font-size: 13px;
+            font-size: 12px;
             opacity: 0.7;
             display: flex;
-            gap: 12px;
+            gap: 11px;
             flex-wrap: wrap;
             color: #334155;
         }
-        .program-card .prog-meta span { display: inline-flex; align-items: center; gap: 4px; }
-        .program-card .prog-meta i { font-size: 12px; }
+        .program-card .prog-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .program-card .prog-meta i {
+            font-size: 11px;
+        }
         .program-card .view-detail {
-            margin-top: 8px;
-            font-size: 13px;
+            margin-top: 7px;
+            font-size: 12px;
             font-weight: 600;
             color: #2563eb;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         /* SEARCH BAR – top of programs page */
         .search-wrapper {
             width: 100%;
-            max-width: 600px;
-            margin-bottom: 16px;
+            max-width: 540px;
+            margin-bottom: 14px;
             flex-shrink: 0;
             padding: 0 4px;
             order: -1;
         }
         .search-input {
             width: 100%;
-            padding: 14px 18px;
-            border-radius: 60px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.1);
+            padding: 13px 16px;
+            border-radius: 54px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             color: #fff;
-            font-size: 15px;
+            font-size: 14px;
             font-family: 'Inter', sans-serif;
             transition: all 0.3s;
             outline: none;
         }
         .search-input::placeholder {
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
         }
         .search-input:focus {
             border-color: #3b82f6;
-            background: rgba(255,255,255,0.18);
-            box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+            background: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
         }
 
         /* SHORT COURSES page */
         .short-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 11px;
             width: 100%;
-            max-width: 600px;
+            max-width: 540px;
             flex-shrink: 0;
             padding: 0 4px;
         }
         .short-item {
-            background: rgba(255,255,255,0.92);
-            border-radius: 12px;
-            padding: 14px 12px;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 11px;
+            padding: 13px 11px;
             border: 1px solid #e2e8f0;
             color: #0f172a;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             position: relative;
         }
-        .short-item .short-title { font-weight: 600; font-size: 14px; }
-        .short-item .short-days { font-size: 12px; opacity: 0.7; margin-top: 2px; }
+        .short-item .short-title {
+            font-weight: 600;
+            font-size: 13px;
+        }
+        .short-item .short-days {
+            font-size: 11px;
+            opacity: 0.7;
+            margin-top: 2px;
+        }
         .short-item .short-apply {
-            margin-top: 10px;
+            margin-top: 9px;
             display: inline-block;
-            padding: 6px 16px;
+            padding: 5px 14px;
             background: #3b82f6;
             color: #fff;
             border: none;
-            border-radius: 30px;
-            font-size: 12px;
+            border-radius: 27px;
+            font-size: 11px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
@@ -847,13 +943,13 @@
             position: fixed;
             inset: 0;
             z-index: 999;
-            background: rgba(0,0,0,0.55);
+            background: rgba(0, 0, 0, 0.55);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 18px;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.35s ease, visibility 0.35s ease;
@@ -864,17 +960,17 @@
         }
         .modal {
             background: #ffffff;
-            border-radius: 28px;
-            padding: 32px 28px 28px;
-            max-width: 380px;
+            border-radius: 25px;
+            padding: 29px 25px 25px;
+            max-width: 342px;
             width: 100%;
             max-height: 85vh;
             max-height: 85dvh;
             overflow-y: auto;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.35);
-            transform: scale(0.92) translateY(20px);
-            transition: transform 0.40s cubic-bezier(0.22,1,0.36,1), opacity 0.35s ease;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.35);
+            transform: scale(0.92) translateY(18px);
+            transition: transform 0.40s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
             opacity: 0;
             position: relative;
         }
@@ -884,81 +980,166 @@
         }
         .modal-close {
             position: absolute;
-            top: 14px; right: 16px;
-            width: 32px; height: 32px;
+            top: 13px;
+            right: 14px;
+            width: 29px;
+            height: 29px;
             border-radius: 50%;
             border: none;
             background: #f1f5f9;
             color: #64748b;
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .modal-close:hover { background: #e2e8f0; color: #0f172a; }
-        .modal-logo { text-align: center; margin-bottom: 6px; }
+        .modal-close:hover {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+        .modal-logo {
+            text-align: center;
+            margin-bottom: 5px;
+        }
         .modal-logo img {
-            width: 60px; height: 60px;
+            width: 54px;
+            height: 54px;
             object-fit: contain;
-            border-radius: 14px;
+            border-radius: 13px;
             background: #f8fafc;
-            padding: 6px;
+            padding: 5px;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
         }
         .modal-header {
             text-align: center;
-            padding-bottom: 14px;
-            margin-bottom: 16px;
+            padding-bottom: 13px;
+            margin-bottom: 14px;
             border-bottom: 1px solid #e2e8f0;
             border-top: 4px solid #3b82f6;
             border-radius: 0;
         }
         .modal-header .modal-title {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
             color: #0f172a;
         }
-        .modal-header .modal-title i { margin-right: 8px; color: #3b82f6; }
-        .form-group { margin-bottom: 14px; }
+        .modal-header .modal-title i {
+            margin-right: 7px;
+            color: #3b82f6;
+        }
+        .form-group {
+            margin-bottom: 13px;
+        }
         .form-group label {
-            display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 4px;
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 4px;
         }
         .form-input {
-            width: 100%; padding: 12px 14px; border-radius: 14px; border: 1px solid #d1d5db;
-            background: #f8fafc; color: #0f172a; font-size: 14px; font-family: 'Inter', sans-serif;
-            transition: all 0.25s ease; outline: none;
+            width: 100%;
+            padding: 11px 13px;
+            border-radius: 13px;
+            border: 1px solid #d1d5db;
+            background: #f8fafc;
+            color: #0f172a;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.25s ease;
+            outline: none;
         }
-        .form-input:focus { border-color: #3b82f6; background: #ffffff; box-shadow: 0 0 0 3px rgba(59,130,246,0.10); }
-        .password-wrapper { position: relative; }
+        .form-input:focus {
+            border-color: #3b82f6;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
+        }
+        .password-wrapper {
+            position: relative;
+        }
         .password-toggle {
-            position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-            background: none; border: none; color: #94a3b8; font-size: 16px; cursor: pointer; padding: 4px;
+            position: absolute;
+            right: 11px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 4px;
             transition: color 0.2s;
         }
-        .password-toggle:hover { color: #475569; }
+        .password-toggle:hover {
+            color: #475569;
+        }
         .form-row {
-            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;
-            margin: 6px 0 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin: 5px 0 13px;
         }
         .checkbox-wrap {
-            display: flex; align-items: center; gap: 6px; color: #475569; font-size: 13px; cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #475569;
+            font-size: 12px;
+            cursor: pointer;
         }
-        .checkbox-wrap input[type="checkbox"] { width: 16px; height: 16px; accent-color: #3b82f6; cursor: pointer; }
-        .forgot-link { color: #64748b; font-size: 13px; text-decoration: none; transition: color 0.2s; }
-        .forgot-link:hover { color: #1e293b; }
+        .checkbox-wrap input[type="checkbox"] {
+            width: 14px;
+            height: 14px;
+            accent-color: #3b82f6;
+            cursor: pointer;
+        }
+        .forgot-link {
+            color: #64748b;
+            font-size: 12px;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .forgot-link:hover {
+            color: #1e293b;
+        }
         .btn-submit {
-            width: 100%; padding: 14px; border: none; border-radius: 50px; font-family: 'Inter', sans-serif;
-            font-size: 15px; font-weight: 700; color: #fff; cursor: pointer; transition: all 0.25s ease;
-            background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 6px 24px rgba(59,130,246,0.30);
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            box-shadow: 0 6px 24px rgba(59, 130, 246, 0.30);
             margin-top: 4px;
         }
-        .btn-submit:hover { box-shadow: 0 10px 32px rgba(59,130,246,0.40); transform: translateY(-2px); }
-        .support-link { text-align: center; margin-top: 14px; font-size: 13px; color: #64748b; }
-        .support-link a { color: #2563eb; text-decoration: none; font-weight: 600; }
-        .support-link a:hover { color: #1d4ed8; }
+        .btn-submit:hover {
+            box-shadow: 0 10px 32px rgba(59, 130, 246, 0.40);
+            transform: translateY(-2px);
+        }
+        .support-link {
+            text-align: center;
+            margin-top: 13px;
+            font-size: 12px;
+            color: #64748b;
+        }
+        .support-link a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .support-link a:hover {
+            color: #1d4ed8;
+        }
 
         /* ─── DASHBOARD STYLES ─── */
         #dashboardPage {
@@ -967,7 +1148,7 @@
         }
         .dashboard-container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1080px;
             height: 100vh;
             height: 100dvh;
             display: flex;
@@ -979,49 +1160,53 @@
         .dashboard-header {
             background: #ffffff;
             border-bottom: 2px solid #3b82f6;
-            padding: 12px 20px;
+            padding: 11px 18px;
             display: flex;
             align-items: center;
             flex-shrink: 0;
             position: relative;
             z-index: 10;
-            min-height: 64px;
-            box-shadow: 0 2px 8px rgba(59,130,246,0.08);
+            min-height: 58px;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.08);
         }
         .header-logo {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             object-fit: contain;
-            border-radius: 10px;
+            border-radius: 9px;
             background: #eff6ff;
             padding: 4px;
             cursor: pointer;
             transition: transform 0.2s;
             border: 1px solid #dbeafe;
         }
-        .header-logo:hover { transform: scale(1.05); }
+        .header-logo:hover {
+            transform: scale(1.05);
+        }
         .header-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 800;
             color: #0f172a;
             text-align: center;
             flex: 1;
             letter-spacing: 0.5px;
         }
-        .header-title .accent { color: #3b82f6; }
+        .header-title .accent {
+            color: #3b82f6;
+        }
         .header-actions-left {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 7px;
         }
         .btn-sidebar-toggle {
             background: #eff6ff;
             border: 1px solid #dbeafe;
             color: #3b82f6;
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            font-size: 20px;
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            font-size: 18px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -1040,28 +1225,28 @@
         /* STUDENT INFO - No animation, at top */
         .student-info-top {
             background: #ffffff;
-            border-radius: 12px;
-            padding: 16px 20px;
-            max-width: 560px;
+            border-radius: 11px;
+            padding: 14px 18px;
+            max-width: 504px;
             width: 100%;
-            box-shadow: 0 2px 12px rgba(59,130,246,0.08);
+            box-shadow: 0 2px 12px rgba(59, 130, 246, 0.08);
             border: 1px solid #dbeafe;
-            margin-bottom: 12px;
+            margin-bottom: 11px;
             display: flex;
             flex-wrap: wrap;
-            gap: 8px 16px;
-            font-size: 13px;
+            gap: 7px 14px;
+            font-size: 12px;
             font-weight: 600;
             color: #0f172a;
         }
         .student-info-top .info-item {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
         .student-info-top .info-item i {
             color: #3b82f6;
-            font-size: 14px;
+            font-size: 13px;
         }
         .student-info-top .info-item .label {
             color: #64748b;
@@ -1072,10 +1257,10 @@
         .dashboard-content {
             flex: 1;
             overflow-y: auto;
-            padding: 12px 16px 20px;
+            padding: 11px 14px 18px;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
             background: #f8fafc;
         }
         .dashboard-content::-webkit-scrollbar {
@@ -1090,67 +1275,69 @@
         /* HOME DASHBOARD - No nav buttons, just home content */
         .home-dashboard {
             background: #ffffff;
-            border-radius: 16px;
-            padding: 24px;
+            border-radius: 14px;
+            padding: 22px;
             border: 1px solid #e2e8f0;
             color: #0f172a;
             flex: 1;
             overflow-y: auto;
-            max-height: calc(100vh - 280px);
-            max-height: calc(100dvh - 280px);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            max-height: calc(100vh - 252px);
+            max-height: calc(100dvh - 252px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
         }
         .home-dashboard h2 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             color: #0f172a;
             border-bottom: 2px solid #3b82f6;
-            padding-bottom: 12px;
+            padding-bottom: 11px;
         }
-        .home-dashboard h2 .accent { color: #3b82f6; }
+        .home-dashboard h2 .accent {
+            color: #3b82f6;
+        }
         .home-dashboard .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 12px;
+            gap: 14px;
+            margin-top: 11px;
         }
         .home-dashboard .dashboard-grid .card {
             background: #f8fafc;
-            border-radius: 12px;
-            padding: 16px;
+            border-radius: 11px;
+            padding: 14px;
             border: 1px solid #e2e8f0;
         }
         .home-dashboard .dashboard-grid .card .card-icon {
-            font-size: 24px;
+            font-size: 22px;
             margin-bottom: 4px;
         }
         .home-dashboard .dashboard-grid .card .card-title {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             color: #0f172a;
         }
         .home-dashboard .dashboard-grid .card .card-value {
-            font-size: 13px;
+            font-size: 12px;
             color: #64748b;
             margin-top: 2px;
         }
         .home-dashboard .dashboard-grid .card .card-sub {
-            font-size: 12px;
+            font-size: 11px;
             color: #94a3b8;
         }
         .home-dashboard .quick-info {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-top: 16px;
-            padding-top: 16px;
+            gap: 7px;
+            margin-top: 14px;
+            padding-top: 14px;
             border-top: 1px solid #e2e8f0;
         }
         .home-dashboard .quick-info .info-row {
             display: flex;
-            gap: 8px;
-            font-size: 13px;
+            gap: 7px;
+            font-size: 12px;
         }
         .home-dashboard .quick-info .info-row .label {
             color: #64748b;
@@ -1166,14 +1353,14 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 300px;
+            width: 270px;
             height: 100vh;
             height: 100dvh;
             background: #ffffff;
             z-index: 200;
             transform: translateX(-100%);
-            transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
-            box-shadow: 4px 0 30px rgba(59,130,246,0.15);
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 4px 0 30px rgba(59, 130, 246, 0.15);
             display: flex;
             flex-direction: column;
             overflow-y: auto;
@@ -1182,7 +1369,7 @@
             transform: translateX(0);
         }
         .sidebar-menu-header {
-            padding: 20px 24px 16px;
+            padding: 18px 22px 14px;
             border-bottom: 3px solid #3b82f6;
             display: flex;
             justify-content: space-between;
@@ -1193,18 +1380,20 @@
             z-index: 5;
         }
         .sidebar-menu-header h2 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 900;
             color: #0f172a;
         }
-        .sidebar-menu-header h2 .accent { color: #3b82f6; }
+        .sidebar-menu-header h2 .accent {
+            color: #3b82f6;
+        }
         .sidebar-menu-close {
             background: #f1f5f9;
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            font-size: 18px;
+            font-size: 16px;
             color: #1e293b;
             cursor: pointer;
             display: flex;
@@ -1212,17 +1401,19 @@
             justify-content: center;
             transition: all 0.2s;
         }
-        .sidebar-menu-close:hover { background: #e2e8f0; }
+        .sidebar-menu-close:hover {
+            background: #e2e8f0;
+        }
 
         .sidebar-menu-item {
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 14px 24px;
+            gap: 13px;
+            padding: 13px 22px;
             border: none;
             background: transparent;
             color: #0f172a;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
@@ -1236,9 +1427,9 @@
             color: #3b82f6;
         }
         .sidebar-menu-item i {
-            width: 24px;
+            width: 22px;
             color: #3b82f6;
-            font-size: 18px;
+            font-size: 16px;
         }
         .sidebar-menu-item.active {
             background: #eff6ff;
@@ -1264,7 +1455,7 @@
         .sidebar-overlay-menu {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0, 0, 0, 0.4);
             z-index: 199;
             opacity: 0;
             visibility: hidden;
@@ -1287,8 +1478,14 @@
             animation: slideInPage 0.35s ease;
         }
         @keyframes slideInPage {
-            from { opacity: 0; transform: scale(0.98); }
-            to { opacity: 1; transform: scale(1); }
+            from {
+                opacity: 0;
+                transform: scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
         .sidebar-page.active {
             display: block;
@@ -1296,39 +1493,41 @@
 
         .sidebar-page-header {
             background: #ffffff;
-            padding: 16px 24px;
+            padding: 14px 22px;
             border-bottom: 3px solid #3b82f6;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 11px;
             position: sticky;
             top: 0;
             z-index: 5;
-            box-shadow: 0 2px 10px rgba(59,130,246,0.06);
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.06);
         }
         .sidebar-page-header .page-logo {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             object-fit: contain;
-            border-radius: 8px;
+            border-radius: 7px;
             background: #eff6ff;
             padding: 4px;
             border: 1px solid #dbeafe;
         }
         .sidebar-page-header h2 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
             color: #0f172a;
             flex: 1;
         }
-        .sidebar-page-header h2 .accent { color: #3b82f6; }
+        .sidebar-page-header h2 .accent {
+            color: #3b82f6;
+        }
         .sidebar-page-close {
             background: #f1f5f9;
             border: none;
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            font-size: 18px;
+            font-size: 16px;
             color: #1e293b;
             cursor: pointer;
             display: flex;
@@ -1336,57 +1535,65 @@
             justify-content: center;
             transition: all 0.2s;
         }
-        .sidebar-page-close:hover { background: #e2e8f0; }
+        .sidebar-page-close:hover {
+            background: #e2e8f0;
+        }
 
         .sidebar-page-body {
-            padding: 24px;
+            padding: 22px;
             color: #1e293b;
-            max-width: 900px;
+            max-width: 810px;
             margin: 0 auto;
         }
         .sidebar-page-body h3 {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             color: #0f172a;
-            margin: 20px 0 12px;
+            margin: 18px 0 11px;
             border-bottom: 2px solid #3b82f6;
-            padding-bottom: 8px;
+            padding-bottom: 7px;
         }
-        .sidebar-page-body h3 .accent { color: #3b82f6; }
-        .sidebar-page-body h3 i { color: #3b82f6; margin-right: 8px; }
+        .sidebar-page-body h3 .accent {
+            color: #3b82f6;
+        }
+        .sidebar-page-body h3 i {
+            color: #3b82f6;
+            margin-right: 7px;
+        }
         .sidebar-page-body h4 {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: #1e293b;
-            margin: 14px 0 6px;
+            margin: 13px 0 5px;
         }
         .sidebar-page-body p {
             line-height: 1.7;
-            margin-bottom: 8px;
+            margin-bottom: 7px;
             color: #334155;
         }
-        .sidebar-page-body ul, .sidebar-page-body ol {
-            padding-left: 20px;
-            margin: 8px 0 12px;
+        .sidebar-page-body ul,
+        .sidebar-page-body ol {
+            padding-left: 18px;
+            margin: 7px 0 11px;
             color: #334155;
             line-height: 1.7;
         }
         .sidebar-page-body table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 14px;
-            margin: 12px 0;
+            font-size: 13px;
+            margin: 11px 0;
         }
         .sidebar-page-body th {
             background: #eff6ff;
             color: #1d4ed8;
             font-weight: 700;
-            padding: 10px 12px;
+            padding: 9px 11px;
             text-align: left;
             border-bottom: 2px solid #3b82f6;
         }
         .sidebar-page-body td {
-            padding: 8px 12px;
+            padding: 7px 11px;
             border-bottom: 1px solid #e2e8f0;
         }
         .sidebar-page-body .highlight-blue {
@@ -1406,38 +1613,38 @@
             font-weight: 600;
         }
         .sidebar-page-body .balance-amount {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 800;
             color: #f59e0b;
         }
         .sidebar-page-body .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin: 8px 0;
+            gap: 11px;
+            margin: 7px 0;
         }
         .sidebar-page-body .info-grid .item {
             background: #ffffff;
-            padding: 12px 16px;
-            border-radius: 8px;
+            padding: 11px 14px;
+            border-radius: 7px;
             border: 1px solid #e2e8f0;
         }
         .sidebar-page-body .info-grid .item .label {
-            font-size: 12px;
+            font-size: 11px;
             color: #64748b;
             font-weight: 500;
         }
         .sidebar-page-body .info-grid .item .value {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: #0f172a;
             margin-top: 2px;
         }
         .sidebar-page-body .status-badge {
             display: inline-block;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 12px;
+            padding: 4px 13px;
+            border-radius: 18px;
+            font-size: 11px;
             font-weight: 600;
         }
         .sidebar-page-body .status-badge.approved {
@@ -1466,13 +1673,13 @@
         }
         .sidebar-page-body .btn-form-submit {
             display: inline-block;
-            margin: 12px 0 8px;
-            padding: 12px 28px;
+            margin: 11px 0 7px;
+            padding: 11px 25px;
             background: #3b82f6;
             color: #fff;
             border: none;
             border-radius: 50px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.25s ease;
@@ -1481,27 +1688,27 @@
         .sidebar-page-body .btn-form-submit:hover {
             background: #2563eb;
             transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(59,130,246,0.3);
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
         }
         .sidebar-page-body .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 13px;
         }
         .sidebar-page-body .form-group label {
             display: block;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: #475569;
             margin-bottom: 4px;
         }
-        .sidebar-page-body .form-group input, 
+        .sidebar-page-body .form-group input,
         .sidebar-page-body .form-group select,
         .sidebar-page-body .form-group textarea {
             width: 100%;
-            padding: 10px 12px;
-            border-radius: 10px;
+            padding: 9px 11px;
+            border-radius: 9px;
             border: 1px solid #d1d5db;
             background: #ffffff;
-            font-size: 14px;
+            font-size: 13px;
             font-family: 'Inter', sans-serif;
             transition: border 0.2s;
         }
@@ -1510,12 +1717,12 @@
         .sidebar-page-body .form-group textarea:focus {
             border-color: #3b82f6;
             outline: none;
-            box-shadow: 0 0 0 3px rgba(59,130,246,0.10);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
         }
         .sidebar-page-body .upload-area {
             border: 2px dashed #d1d5db;
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 11px;
+            padding: 18px;
             text-align: center;
             background: #f8fafc;
             cursor: pointer;
@@ -1526,30 +1733,30 @@
             background: #eff6ff;
         }
         .sidebar-page-body .upload-area i {
-            font-size: 32px;
+            font-size: 29px;
             color: #94a3b8;
         }
         .sidebar-page-body .upload-area p {
-            margin-top: 6px;
+            margin-top: 5px;
             color: #64748b;
         }
         .sidebar-page-body .readonly-form {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 16px;
-            margin-top: 8px;
+            border-radius: 11px;
+            padding: 14px;
+            margin-top: 7px;
         }
         .sidebar-page-body .readonly-form .field-row {
             display: flex;
-            padding: 6px 0;
+            padding: 5px 0;
             border-bottom: 1px solid #f1f5f9;
         }
         .sidebar-page-body .readonly-form .field-row:last-child {
             border-bottom: none;
         }
         .sidebar-page-body .readonly-form .field-label {
-            width: 200px;
+            width: 180px;
             font-weight: 600;
             color: #475569;
             flex-shrink: 0;
@@ -1565,10 +1772,10 @@
         .sidebar-page-body .teveta-form-logo {
             display: flex;
             justify-content: center;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
         .sidebar-page-body .teveta-form-logo img {
-            width: 100px;
+            width: 90px;
             height: auto;
             object-fit: contain;
         }
@@ -1576,19 +1783,19 @@
         /* ─── TEVETA FORM STYLES ─── */
         .teveta-form-container {
             font-family: 'Inter', sans-serif;
-            max-width: 800px;
+            max-width: 720px;
             margin: 0 auto;
             background: #ffffff;
-            padding: 20px;
+            padding: 18px;
             border: 1px solid #e2e8f0;
-            border-radius: 8px;
+            border-radius: 7px;
         }
         .teveta-form-container .form-header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
         .teveta-form-container .form-header h2 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 800;
             color: #0f172a;
             text-transform: uppercase;
@@ -1598,16 +1805,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 11px;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 7px;
         }
         .teveta-form-container .form-header .logo-section img {
-            height: 60px;
+            height: 54px;
             object-fit: contain;
         }
         .teveta-form-container .form-header .logo-section .address-text {
-            font-size: 10px;
+            font-size: 9px;
             color: #64748b;
             text-align: right;
             line-height: 1.4;
@@ -1616,7 +1823,7 @@
             color: #0f172a;
         }
         .teveta-form-container .form-field {
-            margin-bottom: 8px;
+            margin-bottom: 7px;
             display: flex;
             align-items: flex-start;
             gap: 4px;
@@ -1624,21 +1831,21 @@
         .teveta-form-container .form-field .field-number {
             font-weight: 700;
             color: #0f172a;
-            min-width: 30px;
-            font-size: 13px;
+            min-width: 27px;
+            font-size: 12px;
         }
         .teveta-form-container .form-field .field-label {
             font-weight: 600;
             color: #0f172a;
-            font-size: 13px;
-            min-width: 140px;
+            font-size: 12px;
+            min-width: 126px;
         }
         .teveta-form-container .form-field .field-input {
             flex: 1;
             border: none;
             border-bottom: 1px solid #0f172a;
             padding: 2px 4px;
-            font-size: 13px;
+            font-size: 12px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
@@ -1653,11 +1860,11 @@
         .teveta-form-container .form-field .field-box-input {
             border: 1px solid #0f172a;
             padding: 2px 4px;
-            font-size: 13px;
+            font-size: 12px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 30px;
+            width: 27px;
             text-align: center;
         }
         .teveta-form-container .form-field .field-box-input:focus {
@@ -1673,17 +1880,17 @@
             align-items: center;
         }
         .teveta-form-container .form-field .box-group .box-label {
-            font-size: 11px;
+            font-size: 10px;
             color: #64748b;
         }
         .teveta-form-container .form-field .box-group .box-input {
             border: 1px solid #0f172a;
             padding: 2px 4px;
-            font-size: 12px;
+            font-size: 11px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 28px;
+            width: 25px;
             text-align: center;
         }
         .teveta-form-container .form-field .box-group .box-input:focus {
@@ -1699,12 +1906,12 @@
         .teveta-form-container .form-field .subjects-list .subject-row {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 7px;
             padding: 2px 0;
         }
         .teveta-form-container .form-field .subjects-list .subject-row input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             accent-color: #3b82f6;
             cursor: pointer;
         }
@@ -1713,7 +1920,7 @@
             cursor: not-allowed;
         }
         .teveta-form-container .form-field .subjects-list .subject-row .subject-text {
-            font-size: 13px;
+            font-size: 12px;
             color: #0f172a;
         }
         .teveta-form-container .form-field .subjects-list .subject-row .subject-line {
@@ -1728,7 +1935,7 @@
         .teveta-form-container .form-field .inline-group {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 11px;
             flex-wrap: wrap;
         }
         .teveta-form-container .form-field .inline-group .inline-item {
@@ -1737,17 +1944,17 @@
             gap: 4px;
         }
         .teveta-form-container .form-field .inline-group .inline-item .inline-label {
-            font-size: 12px;
+            font-size: 11px;
             color: #475569;
         }
         .teveta-form-container .form-field .inline-group .inline-item .inline-box {
             border: 1px solid #0f172a;
             padding: 2px 4px;
-            font-size: 12px;
+            font-size: 11px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 28px;
+            width: 25px;
             text-align: center;
         }
         .teveta-form-container .form-field .inline-group .inline-item .inline-box:focus {
@@ -1765,11 +1972,11 @@
         .teveta-form-container .form-field .year-box-group .year-box {
             border: 1px solid #0f172a;
             padding: 2px 4px;
-            font-size: 12px;
+            font-size: 11px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 28px;
+            width: 25px;
             text-align: center;
         }
         .teveta-form-container .form-field .year-box-group .year-box:focus {
@@ -1780,20 +1987,20 @@
             color: #475569;
         }
         .teveta-form-container .form-field .year-box-group .year-label {
-            font-size: 11px;
+            font-size: 10px;
             color: #64748b;
         }
         .teveta-form-container .form-field .mode-select-group {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 7px;
             flex-wrap: wrap;
         }
         .teveta-form-container .form-field .mode-select-group .mode-option {
             display: flex;
             align-items: center;
             gap: 4px;
-            font-size: 12px;
+            font-size: 11px;
             color: #0f172a;
         }
         .teveta-form-container .form-field .mode-select-group .mode-option input[type="radio"] {
@@ -1807,14 +2014,14 @@
         .teveta-form-container .form-field .year-select-group {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 7px;
             flex-wrap: wrap;
         }
         .teveta-form-container .form-field .year-select-group .year-option {
             display: flex;
             align-items: center;
             gap: 4px;
-            font-size: 12px;
+            font-size: 11px;
             color: #0f172a;
         }
         .teveta-form-container .form-field .year-select-group .year-option input[type="radio"] {
@@ -1833,11 +2040,11 @@
         .teveta-form-container .form-field .exam-series-boxes .series-box {
             border: 1px solid #0f172a;
             padding: 2px 4px;
-            font-size: 12px;
+            font-size: 11px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 28px;
+            width: 25px;
             text-align: center;
         }
         .teveta-form-container .form-field .exam-series-boxes .series-box:focus {
@@ -1848,7 +2055,7 @@
             color: #475569;
         }
         .teveta-form-container .form-field .exam-series-boxes .series-label {
-            font-size: 11px;
+            font-size: 10px;
             color: #64748b;
         }
         .teveta-form-container .form-field .teveta-no-boxes {
@@ -1859,11 +2066,11 @@
         .teveta-form-container .form-field .teveta-no-boxes .no-box {
             border: 1px solid #0f172a;
             padding: 2px 4px;
-            font-size: 12px;
+            font-size: 11px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 28px;
+            width: 25px;
             text-align: center;
         }
         .teveta-form-container .form-field .teveta-no-boxes .no-box:focus {
@@ -1881,11 +2088,11 @@
         .teveta-form-container .form-field .year-enrolment-boxes .enrol-box {
             border: 1px solid #0f172a;
             padding: 2px 4px;
-            font-size: 12px;
+            font-size: 11px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 28px;
+            width: 25px;
             text-align: center;
         }
         .teveta-form-container .form-field .year-enrolment-boxes .enrol-box:focus {
@@ -1896,18 +2103,18 @@
             color: #475569;
         }
         .teveta-form-container .form-field .year-enrolment-boxes .enrol-label {
-            font-size: 11px;
+            font-size: 10px;
             color: #64748b;
         }
         .teveta-form-container .btn-submit-teveta {
             display: inline-block;
-            margin-top: 16px;
-            padding: 12px 32px;
+            margin-top: 14px;
+            padding: 11px 29px;
             background: #3b82f6;
             color: #fff;
             border: none;
             border-radius: 50px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.25s ease;
@@ -1916,27 +2123,60 @@
         .teveta-form-container .btn-submit-teveta:hover {
             background: #2563eb;
             transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(59,130,246,0.3);
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
         }
 
         /* ─── RESPONSIVE ─── */
         @media (max-width: 768px) {
-            .sidebar-menu-container { width: 280px; }
-            .sidebar-page-header { padding: 12px 16px; }
-            .sidebar-page-header h2 { font-size: 17px; }
-            .sidebar-page-body { padding: 16px; }
-            .sidebar-page-body .info-grid { grid-template-columns: 1fr; }
-            .dashboard-header { padding: 10px 14px; min-height: 56px; }
-            .header-title { font-size: 15px; }
-            .header-logo { width: 36px; height: 36px; }
-            .student-info-top { font-size: 12px; padding: 12px 16px; gap: 6px 12px; }
-            .home-dashboard { padding: 16px; max-height: calc(100vh - 280px); max-height: calc(100dvh - 280px); }
-            .home-dashboard .dashboard-grid { grid-template-columns: 1fr; }
-            .home-dashboard .quick-info { grid-template-columns: 1fr; }
-            .dashboard-content { padding: 8px 12px 16px; gap: 12px; }
+            .sidebar-menu-container {
+                width: 252px;
+            }
+            .sidebar-page-header {
+                padding: 11px 14px;
+            }
+            .sidebar-page-header h2 {
+                font-size: 15px;
+            }
+            .sidebar-page-body {
+                padding: 14px;
+            }
+            .sidebar-page-body .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .dashboard-header {
+                padding: 9px 13px;
+                min-height: 50px;
+            }
+            .header-title {
+                font-size: 14px;
+            }
+            .header-logo {
+                width: 32px;
+                height: 32px;
+            }
+            .student-info-top {
+                font-size: 11px;
+                padding: 11px 14px;
+                gap: 5px 11px;
+            }
+            .home-dashboard {
+                padding: 14px;
+                max-height: calc(100vh - 252px);
+                max-height: calc(100dvh - 252px);
+            }
+            .home-dashboard .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .home-dashboard .quick-info {
+                grid-template-columns: 1fr;
+            }
+            .dashboard-content {
+                padding: 7px 11px 14px;
+                gap: 11px;
+            }
             .sidebar-page-body .readonly-form .field-row {
                 flex-direction: column;
-                padding: 8px 0;
+                padding: 7px 0;
             }
             .sidebar-page-body .readonly-form .field-label {
                 width: 100%;
@@ -1973,26 +2213,70 @@
             }
         }
         @media (max-width: 480px) {
-            .dashboard-header { flex-wrap: wrap; gap: 4px; padding: 8px 12px; }
-            .header-title { font-size: 13px; order: 3; width: 100%; text-align: center; }
-            .header-logo { order: 1; }
-            .header-actions-left { order: 2; }
-            .sidebar-menu-container { width: 260px; }
-            .home-dashboard { max-height: calc(100vh - 260px); max-height: calc(100dvh - 260px); }
+            .dashboard-header {
+                flex-wrap: wrap;
+                gap: 4px;
+                padding: 7px 11px;
+            }
+            .header-title {
+                font-size: 12px;
+                order: 3;
+                width: 100%;
+                text-align: center;
+            }
+            .header-logo {
+                order: 1;
+            }
+            .header-actions-left {
+                order: 2;
+            }
+            .sidebar-menu-container {
+                width: 234px;
+            }
+            .home-dashboard {
+                max-height: calc(100vh - 234px);
+                max-height: calc(100dvh - 234px);
+            }
         }
         @media (min-height: 800px) {
-            .home-dashboard { max-height: calc(100vh - 320px); max-height: calc(100dvh - 320px); }
+            .home-dashboard {
+                max-height: calc(100vh - 288px);
+                max-height: calc(100dvh - 288px);
+            }
         }
         @supports (padding: env(safe-area-inset-top)) {
-            .dashboard-header { padding-left: calc(20px + env(safe-area-inset-left)); padding-right: calc(20px + env(safe-area-inset-right)); }
-            .sidebar-menu-container { padding-left: calc(0px + env(safe-area-inset-left)); }
-            .sidebar-page-header { padding-left: calc(24px + env(safe-area-inset-left)); padding-right: calc(24px + env(safe-area-inset-right)); }
+            .dashboard-header {
+                padding-left: calc(18px + env(safe-area-inset-left));
+                padding-right: calc(18px + env(safe-area-inset-right));
+            }
+            .sidebar-menu-container {
+                padding-left: calc(0px + env(safe-area-inset-left));
+            }
+            .sidebar-page-header {
+                padding-left: calc(22px + env(safe-area-inset-left));
+                padding-right: calc(22px + env(safe-area-inset-right));
+            }
         }
-        .page::-webkit-scrollbar { width: 0; background: transparent; }
-        .sidebar-page::-webkit-scrollbar { width: 6px; background: #f1f5f9; }
-        .sidebar-page::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
-        .sidebar-menu-container::-webkit-scrollbar { width: 6px; background: #f1f5f9; }
-        .sidebar-menu-container::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+        .page::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+        }
+        .sidebar-page::-webkit-scrollbar {
+            width: 6px;
+            background: #f1f5f9;
+        }
+        .sidebar-page::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 10px;
+        }
+        .sidebar-menu-container::-webkit-scrollbar {
+            width: 6px;
+            background: #f1f5f9;
+        }
+        .sidebar-menu-container::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
@@ -2009,12 +2293,12 @@
             <h1>WELCOME TO<br /><span class="accent">NORTHERN</span> TECHNICAL COLLEGE</h1>
             <div class="sub">Excellence in Technical Education</div>
         </div>
-        <div class="spacer" style="flex:1; min-height:12px;"></div>
+        <div class="spacer" style="flex:1; min-height:11px;"></div>
         <div class="button-group">
             <button class="btn btn-enroll" id="enrollBtn"><i class="fas fa-graduation-cap"></i> Enroll</button>
             <button class="btn btn-login" id="loginBtn"><i class="fas fa-lock"></i> Login</button>
         </div>
-        <div class="footer-note" style="margin-top:16px; font-size:10px; color:rgba(255,255,255,0.20); text-align:center; letter-spacing:0.5px; flex-shrink:0;">© 2026 Northern Technical College</div>
+        <div class="footer-note" style="margin-top:14px; font-size:9px; color:rgba(255,255,255,0.20); text-align:center; letter-spacing:0.5px; flex-shrink:0;">© 2026 Northern Technical College</div>
     </div>
 
     <!-- ─── ENROLL PAGE ─── -->
@@ -2032,8 +2316,8 @@
             <button class="intake-btn" data-intake="september"><i class="fas fa-tree"></i> September</button>
             <button class="intake-btn" data-intake="august"><i class="fas fa-globe"></i> August (Distance)</button>
         </div>
-        <div style="width:100%; max-width:420px; margin-top:12px; flex-shrink:0; padding:0 4px;">
-            <button class="intake-btn shortcourse-btn" id="shortCoursesBtn" style="aspect-ratio:auto; padding:14px; border-radius:16px; width:100%;"><i class="fas fa-clock"></i> Short Courses</button>
+        <div style="width:100%; max-width:378px; margin-top:11px; flex-shrink:0; padding:0 4px;">
+            <button class="intake-btn shortcourse-btn" id="shortCoursesBtn" style="aspect-ratio:auto; padding:13px; border-radius:14px; width:100%;"><i class="fas fa-clock"></i> Short Courses</button>
         </div>
         <div class="back-row">
             <button class="btn-back" id="backFromEnroll"><i class="fas fa-arrow-left"></i> Back</button>
@@ -2100,8 +2384,8 @@
             <div class="dashboard-content">
                 <div class="home-dashboard" id="homeDashboard">
                     <h2><span class="accent">📊</span> Dashboard Overview</h2>
-                    <p style="color:#64748b; font-size:14px; margin-bottom:12px;">Welcome back, <strong style="color:#3b82f6;">Jubel Mobela</strong>! Here's your current academic overview.</p>
-                    
+                    <p style="color:#64748b; font-size:13px; margin-bottom:11px;">Welcome back, <strong style="color:#3b82f6;">Jubel Mobela</strong>! Here's your current academic overview.</p>
+
                     <div class="dashboard-grid">
                         <div class="card">
                             <div class="card-icon">📚</div>
@@ -2195,18 +2479,18 @@
                     <div class="value"><span class="status-badge approved">Approved</span></div>
                 </div>
             </div>
-            
+
             <h3><i class="fas fa-graduation-cap"></i> Admission Details</h3>
             <p>Your application for the <strong>Diploma in Computer Systems Engineering</strong> program has been reviewed and approved.</p>
             <p>You were admitted on <strong>20th January 2022</strong> and commenced your studies on <strong>1st February 2022</strong>.</p>
-            
+
             <h3><i class="fas fa-file-pdf"></i> Documents</h3>
             <ul>
                 <li>Admission Letter: <a href="#" style="color:#3b82f6;">Download (Simulated)</a></li>
                 <li>Student ID Card: Collected</li>
                 <li>Academic Transcript: Available on request</li>
             </ul>
-            
+
             <h3><i class="fas fa-info-circle"></i> Important Notes</h3>
             <ul>
                 <li>Your admission is valid for the duration of your program.</li>
@@ -2225,30 +2509,30 @@
         </div>
         <div class="sidebar-page-body">
             <h3><i class="fas fa-chalkboard"></i> Current Classes</h3>
-            <div style="display:grid; gap:8px;">
-                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                    <div><strong>Digital Electronics II</strong> <span style="font-size:11px; color:#64748b;">(41.1)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Banda</span></div>
-                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Mon 10:00</div>
+            <div style="display:grid; gap:7px;">
+                <div style="background:#f8fafc; border-radius:9px; padding:11px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Digital Electronics II</strong> <span style="font-size:10px; color:#64748b;">(41.1)</span><br /><span style="font-size:10px; color:#3b82f6;">Lecturer: Mr. Banda</span></div>
+                    <div style="font-size:10px; color:#3b82f6; font-weight:600;">Mon 10:00</div>
                 </div>
-                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                    <div><strong>Operating Systems</strong> <span style="font-size:11px; color:#64748b;">(41.3)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Dr. Mwansa</span></div>
-                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Tue 08:00</div>
+                <div style="background:#f8fafc; border-radius:9px; padding:11px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Operating Systems</strong> <span style="font-size:10px; color:#64748b;">(41.3)</span><br /><span style="font-size:10px; color:#3b82f6;">Lecturer: Dr. Mwansa</span></div>
+                    <div style="font-size:10px; color:#3b82f6; font-weight:600;">Tue 08:00</div>
                 </div>
-                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                    <div><strong>Programming & Database Tech</strong> <span style="font-size:11px; color:#64748b;">(41.4)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Tembo</span></div>
-                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Wed 14:00</div>
+                <div style="background:#f8fafc; border-radius:9px; padding:11px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Programming & Database Tech</strong> <span style="font-size:10px; color:#64748b;">(41.4)</span><br /><span style="font-size:10px; color:#3b82f6;">Lecturer: Mr. Tembo</span></div>
+                    <div style="font-size:10px; color:#3b82f6; font-weight:600;">Wed 14:00</div>
                 </div>
-                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                    <div><strong>Networks & Communications</strong> <span style="font-size:11px; color:#64748b;">(41.5)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Ms. Phiri</span></div>
-                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Thu 09:00</div>
+                <div style="background:#f8fafc; border-radius:9px; padding:11px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Networks & Communications</strong> <span style="font-size:10px; color:#64748b;">(41.5)</span><br /><span style="font-size:10px; color:#3b82f6;">Lecturer: Ms. Phiri</span></div>
+                    <div style="font-size:10px; color:#3b82f6; font-weight:600;">Thu 09:00</div>
                 </div>
-                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                    <div><strong>Computer Hardware Maintenance</strong> <span style="font-size:11px; color:#64748b;">(41.6)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Zulu</span></div>
-                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Fri 11:00</div>
+                <div style="background:#f8fafc; border-radius:9px; padding:11px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Computer Hardware Maintenance</strong> <span style="font-size:10px; color:#64748b;">(41.6)</span><br /><span style="font-size:10px; color:#3b82f6;">Lecturer: Mr. Zulu</span></div>
+                    <div style="font-size:10px; color:#3b82f6; font-weight:600;">Fri 11:00</div>
                 </div>
-                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                    <div><strong>Management Information Systems</strong> <span style="font-size:11px; color:#64748b;">(41.7)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Dr. Mulenga</span></div>
-                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Thu 13:00</div>
+                <div style="background:#f8fafc; border-radius:9px; padding:11px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Management Information Systems</strong> <span style="font-size:10px; color:#64748b;">(41.7)</span><br /><span style="font-size:10px; color:#3b82f6;">Lecturer: Dr. Mulenga</span></div>
+                    <div style="font-size:10px; color:#3b82f6; font-weight:600;">Thu 13:00</div>
                 </div>
             </div>
         </div>
@@ -2303,7 +2587,7 @@
                     </tbody>
                 </table>
             </div>
-            <div style="margin-top:8px; font-size:11px; color:#64748b; text-align:center;">* CA Meter shows percentage of CA score out of 40%</div>
+            <div style="margin-top:7px; font-size:10px; color:#64748b; text-align:center;">* CA Meter shows percentage of CA score out of 40%</div>
         </div>
     </div>
 
@@ -2316,7 +2600,7 @@
         </div>
         <div class="sidebar-page-body">
             <h3><i class="fas fa-user-circle"></i> Profile Information</h3>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:13px;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:7px; font-size:12px;">
                 <div style="color:#64748b;">Full Name:</div><div style="color:#0f172a; font-weight:600;">JUBEL MOBELA</div>
                 <div style="color:#64748b;">Student Number:</div><div style="color:#0f172a; font-weight:600;">2201001157</div>
                 <div style="color:#64748b;">ID Number:</div><div style="color:#0f172a; font-weight:600;">622589/67/1</div>
@@ -2342,22 +2626,22 @@
         </div>
         <div class="sidebar-page-body">
             <h3><i class="fas fa-bullhorn"></i> Official Notice</h3>
-            <div style="background:#ffffff; border-radius:16px; padding:24px; border:1px solid #dbeafe; box-shadow:0 2px 12px rgba(59,130,246,0.08);">
-                <div style="text-align:center; margin-bottom:16px;">
-                    <h3 style="font-size:18px; font-weight:800; color:#0f172a; border-bottom:none; padding-bottom:0;">NORTEC</h3>
-                    <div style="font-size:12px; color:#64748b; letter-spacing:1px;">NORTHERN TECHNICAL COLLEGE</div>
-                    <div style="font-size:11px; color:#64748b; margin-top:4px;">Skills • Innovation • Empowerment</div>
-                    <div style="font-size:22px; font-weight:900; color:#dc2626; margin:12px 0 4px;">NOTICE OF<br />CHANGE<br />OF GRADUATION DATE</div>
+            <div style="background:#ffffff; border-radius:14px; padding:22px; border:1px solid #dbeafe; box-shadow:0 2px 12px rgba(59,130,246,0.08);">
+                <div style="text-align:center; margin-bottom:14px;">
+                    <h3 style="font-size:16px; font-weight:800; color:#0f172a; border-bottom:none; padding-bottom:0;">NORTEC</h3>
+                    <div style="font-size:11px; color:#64748b; letter-spacing:1px;">NORTHERN TECHNICAL COLLEGE</div>
+                    <div style="font-size:10px; color:#64748b; margin-top:4px;">Skills • Innovation • Empowerment</div>
+                    <div style="font-size:20px; font-weight:900; color:#dc2626; margin:11px 0 4px;">NOTICE OF<br />CHANGE<br />OF GRADUATION DATE</div>
                 </div>
-                <p style="font-size:13px; line-height:1.6; color:#334155; margin:8px 0;">The Management of NORTEC wishes to inform all graduating students, parents, guardians, invited guests, and the general public that the Graduation Ceremony which was scheduled to take place on 5th June 2026 at the NORTEC Graduation Square has been postponed.</p>
-                <p style="font-size:13px; font-weight:700; color:#0f172a; margin:8px 0;">THE CEREMONY WILL NOW TAKE PLACE AS FOLLOWS:</p>
-                <p style="font-size:13px; color:#334155;"><strong style="color:#3b82f6;">DATE:</strong> 15th July 2026</p>
-                <p style="font-size:13px; color:#334155;"><strong style="color:#3b82f6;">VENUE:</strong> LEVY MWANAWASA STADIUM</p>
-                <p style="font-size:13px; color:#334155;"><strong style="color:#3b82f6;">TIME:</strong> 08:30 HOURS</p>
-                <p style="font-size:12px; color:#64748b; margin:8px 0;">This change has been necessitated by the ongoing road works currently being conducted along CHELA ROAD.</p>
-                <p style="font-size:12px; color:#64748b; margin:8px 0;">Management regrets any inconvenience caused and appreciates your understanding and cooperation.</p>
-                <div style="font-size:11px; color:#64748b; text-align:center; margin-top:12px; font-style:italic;">Issued by: MANAGEMENT<br />NORTHERN TECHNICAL COLLEGE (NORTEC)</div>
-                <div style="font-size:10px; color:#94a3b8; text-align:center; margin-top:8px;">Creative Minds. | Creative Hands. | Building Competence. Inspiring Success.</div>
+                <p style="font-size:12px; line-height:1.6; color:#334155; margin:7px 0;">The Management of NORTEC wishes to inform all graduating students, parents, guardians, invited guests, and the general public that the Graduation Ceremony which was scheduled to take place on 5th June 2026 at the NORTEC Graduation Square has been postponed.</p>
+                <p style="font-size:12px; font-weight:700; color:#0f172a; margin:7px 0;">THE CEREMONY WILL NOW TAKE PLACE AS FOLLOWS:</p>
+                <p style="font-size:12px; color:#334155;"><strong style="color:#3b82f6;">DATE:</strong> 15th July 2026</p>
+                <p style="font-size:12px; color:#334155;"><strong style="color:#3b82f6;">VENUE:</strong> LEVY MWANAWASA STADIUM</p>
+                <p style="font-size:12px; color:#334155;"><strong style="color:#3b82f6;">TIME:</strong> 08:30 HOURS</p>
+                <p style="font-size:11px; color:#64748b; margin:7px 0;">This change has been necessitated by the ongoing road works currently being conducted along CHELA ROAD.</p>
+                <p style="font-size:11px; color:#64748b; margin:7px 0;">Management regrets any inconvenience caused and appreciates your understanding and cooperation.</p>
+                <div style="font-size:10px; color:#64748b; text-align:center; margin-top:11px; font-style:italic;">Issued by: MANAGEMENT<br />NORTHERN TECHNICAL COLLEGE (NORTEC)</div>
+                <div style="font-size:9px; color:#94a3b8; text-align:center; margin-top:7px;">Creative Minds. | Creative Hands. | Building Competence. Inspiring Success.</div>
             </div>
         </div>
     </div>
@@ -2379,7 +2663,7 @@
                 <tr><td>Thursday, 23rd June</td><td>09:00 - 11:00</td><td>Networks & Communications (41.5)</td><td>Hall A</td></tr>
                 <tr><td>Friday, 24th June</td><td>11:00 - 13:00</td><td>Computer Hardware Maintenance (41.6)</td><td>Lab 3</td></tr>
             </table>
-            
+
             <h3><i class="fas fa-clipboard-list"></i> Exam Guidelines</h3>
             <ul>
                 <li>Arrive at least 30 minutes before the exam start time.</li>
@@ -2387,7 +2671,7 @@
                 <li>No electronic devices are allowed during exams.</li>
                 <li>All exams are closed book unless stated otherwise.</li>
             </ul>
-            
+
             <h3><i class="fas fa-history"></i> Previous Exam Results</h3>
             <p>Your Term 1 exam results are available for review on the CA panel.</p>
         </div>
@@ -2411,11 +2695,11 @@
                 <tr><td>Lab Attendant</td><td><span class="status-badge notcleared">Not Cleared</span></td><td>Lab Equipment Missing</td><td>Return lab equipment</td></tr>
                 <tr><td>Admissions</td><td><span class="status-badge notcleared">Not Cleared</span></td><td>Document Verification</td><td>Submit missing documents</td></tr>
             </table>
-            
+
             <h3><i class="fas fa-clipboard-check"></i> Clearance Summary</h3>
             <p><strong>Overall Status:</strong> <span class="highlight-red">✗ NOT CLEARED</span></p>
             <p>You are currently in the middle of the term. Please clear all outstanding issues to complete your clearance.</p>
-            
+
             <h3><i class="fas fa-arrow-right"></i> Next Steps</h3>
             <ol>
                 <li>Settle outstanding fees with the Accounts department.</li>
@@ -2463,7 +2747,7 @@
                     <div class="value">Academic Year 2026</div>
                 </div>
             </div>
-            
+
             <h3><i class="fas fa-home"></i> Room Features</h3>
             <ul>
                 <li>2 beds with mattresses</li>
@@ -2473,7 +2757,7 @@
                 <li>Common kitchen area</li>
                 <li>24/7 security</li>
             </ul>
-            
+
             <h3><i class="fas fa-gavel"></i> Hostel Rules</h3>
             <ul>
                 <li>No visitors after 22:00 hours</li>
@@ -2481,7 +2765,7 @@
                 <li>Keep the room clean and tidy</li>
                 <li>Report any maintenance issues to the hostel warden</li>
             </ul>
-            
+
             <h3><i class="fas fa-phone"></i> Contact</h3>
             <p>Hostel Warden: +260 97 123 4567</p>
         </div>
@@ -2523,13 +2807,13 @@
                 <tr><td>SI-20044214</td><td>2025-09-10</td><td>Invoice</td><td>HIRE OF GOWN</td><td>1,000</td><td></td><td>1,200</td></tr>
                 <tr><td>SI-20044474</td><td>2025-09-25</td><td>Invoice</td><td>HIRE OF GOWN</td><td>600</td><td></td><td>1,800</td></tr>
             </table>
-            <div style="margin-top:16px; text-align:right; font-size:20px; font-weight:800; color:#0f172a; border-top:2px solid #3b82f6; padding-top:12px;">
+            <div style="margin-top:14px; text-align:right; font-size:18px; font-weight:800; color:#0f172a; border-top:2px solid #3b82f6; padding-top:11px;">
                 CURRENT BALANCE: <span class="balance-amount">K1,800</span>
             </div>
-            
+
             <h3><i class="fas fa-download"></i> Download Receipt</h3>
             <button class="btn-form-submit" onclick="alert('Receipt downloaded successfully!\n(Simulated download)')"><i class="fas fa-download"></i> Download Receipt</button>
-            
+
             <h3><i class="fas fa-upload"></i> Upload Payment Receipt</h3>
             <div class="form-group">
                 <label>Select Payment Receipt</label>
@@ -2540,7 +2824,7 @@
                 </div>
             </div>
             <button class="btn-form-submit" onclick="alert('Payment receipt uploaded successfully!\n(Simulated upload)')"><i class="fas fa-upload"></i> Upload Receipt</button>
-            
+
             <h3><i class="fas fa-info-circle"></i> Payment Instructions</h3>
             <ul>
                 <li>Bank: ZANACO Bank</li>
@@ -2578,25 +2862,25 @@
                     <div class="value">Fees Clearance</div>
                 </div>
             </div>
-            
+
             <h3><i class="fas fa-file-alt"></i> Appeal Details</h3>
             <p>You submitted an appeal regarding the <strong>school fees clearance</strong> process. The finance department is currently reviewing your case.</p>
             <p><strong>Reason for Appeal:</strong> Discrepancy in fee structure for the 2023 academic year.</p>
-            
+
             <h3><i class="fas fa-paperclip"></i> Supporting Documents</h3>
             <ul>
                 <li>Fee structure 2023 (uploaded)</li>
                 <li>Bank payment receipts (uploaded)</li>
                 <li>Bursary confirmation letter (uploaded)</li>
             </ul>
-            
+
             <h3><i class="fas fa-clock"></i> Timeline</h3>
             <ul>
                 <li>10th June 2026 – Appeal submitted</li>
                 <li>12th June 2026 – Acknowledged by finance</li>
                 <li>Expected resolution: 30th June 2026</li>
             </ul>
-            
+
             <h3><i class="fas fa-pen"></i> Submit New Appeal</h3>
             <div class="form-group">
                 <label>Appeal Category</label>
@@ -2620,7 +2904,7 @@
                 </div>
             </div>
             <button class="btn-form-submit" onclick="alert('Appeal submitted successfully!\n(Simulated submission)')"><i class="fas fa-paper-plane"></i> Submit Appeal</button>
-            
+
             <h3><i class="fas fa-envelope"></i> Contact</h3>
             <p>For any updates, contact the Finance Department: finance@northerntech.edu.zm</p>
         </div>
@@ -2637,7 +2921,7 @@
             <h3><i class="fas fa-certificate"></i> Diploma Status</h3>
             <p><strong>Diploma:</strong> <span class="highlight-orange">Not yet issued</span></p>
             <p>Your Diploma in Computer Systems Engineering is being processed. The release date is expected to be <strong>December 2026</strong>.</p>
-            
+
             <h3><i class="fas fa-list-ol"></i> Collection Procedure</h3>
             <p>The following procedure will be followed once the diploma is ready for collection:</p>
             <ol>
@@ -2647,14 +2931,14 @@
                 <li><strong>Sign Register:</strong> Sign the diploma collection register at the exams office.</li>
                 <li><strong>Collect Diploma:</strong> Receive your diploma certificate.</li>
             </ol>
-            
+
             <h3><i class="fas fa-info-circle"></i> Additional Information</h3>
             <ul>
                 <li><strong>Transcript:</strong> An academic transcript will be issued alongside the diploma.</li>
                 <li><strong>Graduation:</strong> You are eligible to attend the graduation ceremony scheduled for 15th July 2026.</li>
                 <li><strong>Gown Hire:</strong> Gown hire fee has been processed (see Finance section).</li>
             </ul>
-            
+
             <h3><i class="fas fa-envelope"></i> Contact</h3>
             <p>Examinations Office: exams@northerntech.edu.zm</p>
         </div>
@@ -2670,7 +2954,7 @@
         <div class="sidebar-page-body">
             <h3><i class="fas fa-sync-alt"></i> Supplementary Exam Details</h3>
             <p>You have been scheduled to rewrite the following course:</p>
-            
+
             <div class="info-grid">
                 <div class="item">
                     <div class="label">Course</div>
@@ -2689,7 +2973,7 @@
                     <div class="value">09:00 - 11:00</div>
                 </div>
             </div>
-            
+
             <h3><i class="fas fa-book"></i> Preparation Guidelines</h3>
             <ul>
                 <li>Review all course materials from Term 1 and Term 2.</li>
@@ -2698,14 +2982,14 @@
                 <li>Arrive 15 minutes early on the day of the exam.</li>
                 <li>Bring your student ID card and writing materials.</li>
             </ul>
-            
+
             <h3><i class="fas fa-exclamation-circle"></i> Important Notes</h3>
             <ul>
                 <li>This is your final opportunity to pass this course.</li>
                 <li>Failure to pass will result in repeating the course.</li>
                 <li>No electronic devices allowed during the exam.</li>
             </ul>
-            
+
             <h3><i class="fas fa-pen"></i> Apply for SUP Extension</h3>
             <div class="form-group">
                 <label>Reason for Extension</label>
@@ -2750,7 +3034,7 @@
                     <div class="value"><span class="status-badge approved">Collected</span></div>
                 </div>
             </div>
-            
+
             <h3><i class="fas fa-id-card"></i> ID Card Details</h3>
             <ul>
                 <li><strong>Issue Date:</strong> 1st February 2022</li>
@@ -2758,7 +3042,7 @@
                 <li><strong>Photo:</strong> Student photo attached to ID</li>
                 <li><strong>Barcode:</strong> Scannable barcode for campus access</li>
             </ul>
-            
+
             <h3><i class="fas fa-shield-alt"></i> Important Information</h3>
             <ul>
                 <li>Keep your ID card safe at all times.</li>
@@ -2766,7 +3050,7 @@
                 <li>Report any loss immediately to the admissions office.</li>
                 <li>Replacement fee: K50 for lost or damaged cards.</li>
             </ul>
-            
+
             <h3><i class="fas fa-pen"></i> Request ID Card Replacement</h3>
             <div class="form-group">
                 <label>Reason for Replacement</label>
@@ -2790,7 +3074,7 @@
         <div class="sidebar-page-body">
             <h3><i class="fas fa-edit"></i> TEVETA Exam Entry Form</h3>
             <p>Complete the form below to register for your TEVETA examinations. All fields are required.</p>
-            
+
             <div id="tevetaFormContainer">
                 <div class="teveta-form-container">
                     <div class="form-header">
@@ -2814,7 +3098,7 @@
                             <span class="field-label">COURSE:</span>
                             <input type="text" class="field-input" value="DIPLOMA IN COMPUTER SYSTEMS ENGINEERING – Code 41" readonly />
                         </div>
-                        
+
                         <div class="form-field">
                             <span class="field-number">2.</span>
                             <span class="field-label">EXAMINATION SERIES:</span>
@@ -2826,7 +3110,7 @@
                                 <input type="text" class="series-box" id="exSeriesY2" maxlength="2" placeholder="Y" />
                             </div>
                         </div>
-                        
+
                         <div class="form-field">
                             <span class="field-number">3.</span>
                             <span class="field-label">TEVETA EXAM NO:</span>
@@ -2843,31 +3127,31 @@
                                 <input type="text" class="no-box" id="tevetaNo10" maxlength="1" placeholder="0" />
                             </div>
                         </div>
-                        
+
                         <div class="form-field">
                             <span class="field-number">4.</span>
                             <span class="field-label">EXAMINATION CENTER NAME:</span>
                             <input type="text" class="field-input" value="NORTHERN TECHNICAL COLLEGE" readonly />
                         </div>
-                        
+
                         <div class="form-field">
                             <span class="field-number">5.</span>
                             <span class="field-label">SURNAME:</span>
                             <input type="text" class="field-input" id="surname" value="MOBELA" required />
                         </div>
-                        
+
                         <div class="form-field">
                             <span class="field-number">6.</span>
                             <span class="field-label">FORENAMES:</span>
                             <input type="text" class="field-input" id="forenames" value="JUBEL" required />
                         </div>
-                        
+
                         <div class="form-field">
                             <span class="field-number">7.</span>
                             <span class="field-label">INSTITUTION OF STUDY:</span>
                             <input type="text" class="field-input" value="NORTHERN TECHNICAL COLLEGE" readonly />
                         </div>
-                        
+
                         <div class="form-field">
                             <span class="field-number">8.</span>
                             <span class="field-label">YEAR OF ENROLMENT:</span>
@@ -2879,7 +3163,7 @@
                                 <input type="text" class="enrol-box" id="enrolY4" maxlength="2" placeholder="Y" />
                             </div>
                         </div>
-                        
+
                         <div class="form-field">
                             <span class="field-number">9.</span>
                             <span class="field-label">Mode of Study:</span>
@@ -2898,7 +3182,7 @@
                                 </label>
                             </div>
                         </div>
-                        
+
                         <div class="form-field">
                             <span class="field-number">10.</span>
                             <span class="field-label">YEAR OF STUDY</span>
@@ -2917,7 +3201,7 @@
                                 </label>
                             </div>
                         </div>
-                        
+
                         <div class="form-field">
                             <span class="field-number">11.</span>
                             <span class="field-label">SUBJECTS TO BE TAKEN (Indicate whether practical or written paper)</span>
@@ -2974,21 +3258,21 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <button type="submit" class="btn-submit-teveta" id="submitTevetaForm"><i class="fas fa-paper-plane"></i> Submit TEVETA Application</button>
                     </form>
                 </div>
             </div>
-            
+
             <div id="tevetaSubmitted" style="display:none;">
                 <h3><i class="fas fa-check-circle highlight-green"></i> TEVETA Application Submitted</h3>
                 <p>Your TEVETA exam entry has been submitted successfully. The details are stored locally on your device.</p>
                 <div class="readonly-form" id="tevetaReadonlyForm">
                     <!-- Populated by JavaScript -->
                 </div>
-                <p style="margin-top:12px; font-size:12px; color:#64748b;"><i class="fas fa-lock"></i> This form is now read-only. You cannot edit the details.</p>
+                <p style="margin-top:11px; font-size:11px; color:#64748b;"><i class="fas fa-lock"></i> This form is now read-only. You cannot edit the details.</p>
             </div>
-            
+
             <h3><i class="fas fa-upload"></i> Upload TEVETA Exam Fee Receipt</h3>
             <div class="form-group">
                 <label>Select Payment Receipt</label>
@@ -3020,7 +3304,7 @@
                 <tr><td>Term 2</td><td>May</td><td>85%</td><td>17</td><td>20</td></tr>
                 <tr><td>Term 2</td><td>June</td><td>93%</td><td>14</td><td>15</td></tr>
             </table>
-            
+
             <h3><i class="fas fa-chart-pie"></i> Overall Statistics</h3>
             <div class="info-grid">
                 <div class="item">
@@ -3040,7 +3324,7 @@
                     <div class="value"><span class="highlight-green">Yes</span></div>
                 </div>
             </div>
-            
+
             <h3><i class="fas fa-gavel"></i> Attendance Policy</h3>
             <ul>
                 <li>Minimum attendance requirement: 80% per term.</li>
@@ -3070,7 +3354,7 @@
                 <tr><td>41.6</td><td>Computer Hardware Maintenance & Repair</td><td>Mr. Zulu</td><td><span class="highlight-green">✓ Completed</span></td><td>4</td></tr>
                 <tr><td>41.7</td><td>Management Information Systems</td><td>Dr. Mulenga</td><td><span class="highlight-green">✓ Completed</span></td><td>3</td></tr>
             </table>
-            
+
             <h3><i class="fas fa-clipboard-list"></i> Course Load Summary</h3>
             <ul>
                 <li><strong>Total Courses:</strong> 7</li>
@@ -3078,7 +3362,7 @@
                 <li><strong>In Progress:</strong> 1 (Supplementary)</li>
                 <li><strong>Total Credit Hours:</strong> 26</li>
             </ul>
-            
+
             <h3><i class="fas fa-graduation-cap"></i> Course Description</h3>
             <p><strong>Diploma in Computer Systems Engineering</strong> – This program provides students with comprehensive knowledge and skills in computer systems, including hardware, software, networking, and database management. Graduates are prepared for careers in IT departments, networking, software development, and technical support.</p>
         </div>
@@ -3094,7 +3378,7 @@
         <div class="sidebar-page-body">
             <h3><i class="fas fa-clock"></i> Weekly Timetable – Alternating Weeks</h3>
             <p><strong>Note:</strong> This timetable alternates weekly. Week A is shown below.</p>
-            
+
             <table>
                 <tr><th>Day</th><th>Time</th><th>Subject</th><th>Type</th><th>Venue</th><th>Lecturer</th></tr>
                 <tr><td>Monday</td><td>08:00 - 10:00</td><td>Operating Systems</td><td>Lecture</td><td>Hall A</td><td>Dr. Mwansa</td></tr>
@@ -3113,7 +3397,7 @@
                 <tr><td>Friday</td><td>10:00 - 12:00</td><td>Operating Systems</td><td>Lecture</td><td>Hall A</td><td>Dr. Mwansa</td></tr>
                 <tr><td>Friday</td><td>14:00 - 16:00</td><td>Digital Electronics II</td><td>Lecture</td><td>Hall B</td><td>Mr. Banda</td></tr>
             </table>
-            
+
             <h3><i class="fas fa-calendar-alt"></i> Week B Schedule</h3>
             <ul>
                 <li><strong>Monday:</strong> Networks & Communications (Lecture) + Computer Hardware (Lab)</li>
@@ -3244,7 +3528,7 @@
                                 <div class="file-name"></div>
                             </div>
                         </div>
-                        <p style="font-size:12px; color:#64748b; margin-top:8px;"><span class="highlight">*</span> Recommendation letter is mandatory.</p>
+                        <p style="font-size:11px; color:#64748b; margin-top:7px;"><span class="highlight">*</span> Recommendation letter is mandatory.</p>
                     </div>
                 </div>
 
@@ -3275,7 +3559,7 @@
                             <button class="btn-clear-signature" id="clearSignature"><i class="fas fa-undo"></i> Clear</button>
                         </div>
 
-                        <div class="form-row" style="margin-top:12px;">
+                        <div class="form-row" style="margin-top:11px;">
                             <div><label>Date of Application</label><input type="date" id="appDate" /></div>
                         </div>
 
@@ -3313,7 +3597,7 @@
                     <label class="checkbox-wrap"><input type="checkbox" id="rememberMe" /> Remember me</label>
                     <a href="#" class="forgot-link" id="forgotLink">Forgot Password?</a>
                 </div>
-                <button type="submit" class="btn-submit">Sign In <i class="fas fa-arrow-right" style="margin-left:8px;"></i></button>
+                <button type="submit" class="btn-submit">Sign In <i class="fas fa-arrow-right" style="margin-left:7px;"></i></button>
                 <div class="support-link">Need help? <a href="#" id="supportLink">Contact Support</a></div>
             </form>
         </div>
@@ -3603,7 +3887,8 @@
 
             // ─── NAVIGATION ─────────────────────────────────────────
             function showPage(page) {
-                [mainPage, enrollPage, programsPage, shortPage, dashboardPage].forEach(p => p.classList.remove('active', 'hidden'));
+                [mainPage, enrollPage, programsPage, shortPage, dashboardPage].forEach(p => p.classList.remove('active',
+                'hidden'));
                 if (page === mainPage) {
                     mainPage.classList.remove('hidden');
                     enrollPage.classList.remove('active');
@@ -3618,9 +3903,13 @@
             }
 
             function showMain() { showPage(mainPage); }
+
             function showEnroll() { showPage(enrollPage); }
+
             function showPrograms() { showPage(programsPage); }
+
             function showShort() { showPage(shortPage); }
+
             function showDashboard() { showPage(dashboardPage); }
 
             // ─── RENDER PROGRAMS ──────────────────────────────────
@@ -3642,7 +3931,8 @@
             function displayPrograms(list) {
                 programListContainer.innerHTML = '';
                 if (list.length === 0) {
-                    programListContainer.innerHTML = '<div style="color:rgba(255,255,255,0.6);text-align:center;padding:20px;">No programmes available for this intake.</div>';
+                    programListContainer.innerHTML =
+                        '<div style="color:rgba(255,255,255,0.6);text-align:center;padding:18px;">No programmes available for this intake.</div>';
                     return;
                 }
                 list.forEach(prog => {
@@ -3689,8 +3979,8 @@
                     displayPrograms(allProgramsList);
                     return;
                 }
-                const filtered = allProgramsList.filter(p => 
-                    p.title.toLowerCase().includes(query) || 
+                const filtered = allProgramsList.filter(p =>
+                    p.title.toLowerCase().includes(query) ||
                     p.category.toLowerCase().includes(query) ||
                     p.id.toLowerCase().includes(query)
                 );
@@ -3834,12 +4124,13 @@
                 const canvas = document.getElementById('signaturePad');
                 const ctx = canvas.getContext('2d');
                 let drawing = false;
-                let lastX = 0, lastY = 0;
+                let lastX = 0,
+                    lastY = 0;
 
                 function resizeCanvas() {
                     const rect = canvas.parentElement.getBoundingClientRect();
-                    const width = rect.width - 8;
-                    const height = 120;
+                    const width = rect.width - 7;
+                    const height = 108;
                     canvas.width = width * 2;
                     canvas.height = height * 2;
                     canvas.style.width = width + 'px';
@@ -3909,7 +4200,8 @@
                 });
                 for (const [dept, courses] of Object.entries(grouped)) {
                     const header = document.createElement('div');
-                    header.style.cssText = 'grid-column:1/-1; font-weight:700; font-size:16px; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.3); margin-top:8px;';
+                    header.style.cssText =
+                        'grid-column:1/-1; font-weight:700; font-size:14px; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.3); margin-top:7px;';
                     header.textContent = dept + ' Department';
                     shortCoursesContainer.appendChild(header);
                     courses.forEach(c => {
@@ -4013,16 +4305,16 @@
 
             tevetaForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
+
                 // Collect data from form fields
-                const examSeries = 
+                const examSeries =
                     document.getElementById('exSeriesM').value +
                     document.getElementById('exSeriesA').value +
                     document.getElementById('exSeriesY1').value +
                     '/' +
                     document.getElementById('exSeriesY2').value;
-                
-                const tevetaExamNo = 
+
+                const tevetaExamNo =
                     document.getElementById('tevetaNo1').value +
                     document.getElementById('tevetaNo2').value +
                     document.getElementById('tevetaNo3').value +
@@ -4033,17 +4325,17 @@
                     document.getElementById('tevetaNo8').value +
                     document.getElementById('tevetaNo9').value +
                     document.getElementById('tevetaNo10').value;
-                
-                const yearEnrolment = 
+
+                const yearEnrolment =
                     document.getElementById('enrolY1').value +
                     document.getElementById('enrolY2').value +
                     '/' +
                     document.getElementById('enrolY3').value +
                     document.getElementById('enrolY4').value;
-                
-                const yearStudy = document.querySelector('input[name="yearStudy"]:checked') ? 
+
+                const yearStudy = document.querySelector('input[name="yearStudy"]:checked') ?
                     document.querySelector('input[name="yearStudy"]:checked').value : '';
-                
+
                 const data = {
                     course: 'DIPLOMA IN COMPUTER SYSTEMS ENGINEERING – Code 41',
                     examSeries: examSeries,
@@ -4053,46 +4345,58 @@
                     yearEnrolment: yearEnrolment,
                     yearStudy: yearStudy
                 };
-                
+
                 // Validate required fields
-                if (!data.examSeries || !data.tevetaExamNo || !data.surname || !data.forenames || !data.yearEnrolment || !data.yearStudy) {
+                if (!data.examSeries || !data.tevetaExamNo || !data.surname || !data.forenames || !data.yearEnrolment || !
+                    data.yearStudy) {
                     alert('Please fill in all required fields.');
                     return;
                 }
-                
+
                 // Save to localStorage
                 localStorage.setItem('tevetaSubmitted', 'true');
                 localStorage.setItem('tevetaData', JSON.stringify(data));
-                
+
                 alert('✅ TEVETA Exam Entry submitted successfully!\nYour details have been saved locally.');
-                
+
                 // Reload the page to show read-only view
                 location.reload();
             });
 
             // ─── EVENT BINDINGS ──────────────────────────────────
-            enrollBtn.addEventListener('click', (e) => { e.preventDefault(); showEnroll(); });
-            backFromEnroll.addEventListener('click', (e) => { e.preventDefault(); showMain(); });
-            backFromPrograms.addEventListener('click', (e) => { e.preventDefault(); showEnroll(); });
-            backFromShort.addEventListener('click', (e) => { e.preventDefault(); showEnroll(); });
+            enrollBtn.addEventListener('click', (e) => { e.preventDefault();
+                showEnroll(); });
+            backFromEnroll.addEventListener('click', (e) => { e.preventDefault();
+                showMain(); });
+            backFromPrograms.addEventListener('click', (e) => { e.preventDefault();
+                showEnroll(); });
+            backFromShort.addEventListener('click', (e) => { e.preventDefault();
+                showEnroll(); });
 
             document.querySelectorAll('.intake-btn[data-intake]').forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
                     const intake = this.dataset.intake;
-                    const labels = { january: 'January', may: 'May', september: 'September', august: 'August (Distance)' };
+                    const labels = { january: 'January', may: 'May', september: 'September',
+                        august: 'August (Distance)' };
                     renderPrograms(intake, labels[intake] || intake);
                 });
             });
 
-            shortCoursesBtn.addEventListener('click', (e) => { e.preventDefault(); renderShortCourses(); });
+            shortCoursesBtn.addEventListener('click', (e) => { e.preventDefault();
+                renderShortCourses(); });
 
             detailClose.addEventListener('click', closeDetail);
             detailModal.addEventListener('click', (e) => { if (e.target === detailModal) closeDetail(); });
 
-            loginBtn.addEventListener('click', (e) => { e.preventDefault(); loginModal.classList.add('active'); document.body.style.overflow = 'hidden'; });
-            loginClose.addEventListener('click', () => { loginModal.classList.remove('active'); document.body.style.overflow = ''; });
-            loginModal.addEventListener('click', (e) => { if (e.target === loginModal) { loginModal.classList.remove('active'); document.body.style.overflow = ''; } });
+            loginBtn.addEventListener('click', (e) => { e.preventDefault();
+                loginModal.classList.add('active');
+                document.body.style.overflow = 'hidden'; });
+            loginClose.addEventListener('click', () => { loginModal.classList.remove('active');
+                document.body.style.overflow = ''; });
+            loginModal.addEventListener('click', (e) => { if (e.target === loginModal) { loginModal.classList.remove(
+                    'active');
+                    document.body.style.overflow = ''; } });
 
             passwordToggle.addEventListener('click', function() {
                 const type = passwordInput.type === 'password' ? 'text' : 'password';
@@ -4140,14 +4444,17 @@
                 toggleSidebar(false);
             });
 
-            forgotLink.addEventListener('click', (e) => { e.preventDefault(); alert('📧 Password reset link sent to your registered email.\n(Simulated)'); });
-            supportLink.addEventListener('click', (e) => { e.preventDefault(); alert('📞 Support: +260 97 123 4567\n✉️ support@northerntech.edu.zm\n(Simulated)'); });
+            forgotLink.addEventListener('click', (e) => { e.preventDefault();
+                alert('📧 Password reset link sent to your registered email.\n(Simulated)'); });
+            supportLink.addEventListener('click', (e) => { e.preventDefault();
+                alert('📞 Support: +260 97 123 4567\n✉️ support@northerntech.edu.zm\n(Simulated)'); });
 
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
                     if (detailModal.classList.contains('active')) closeDetail();
-                    else if (loginModal.classList.contains('active')) { loginModal.classList.remove('active'); document.body.style.overflow = ''; }
-                    else if (sidebarMenu.classList.contains('open')) toggleSidebar(false);
+                    else if (loginModal.classList.contains('active')) { loginModal.classList.remove('active');
+                        document.body.style.overflow = ''; } else if (sidebarMenu.classList.contains('open'))
+                        toggleSidebar(false);
                     else {
                         sidebarPages.forEach(p => {
                             if (p.classList.contains('active')) {
