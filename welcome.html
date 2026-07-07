@@ -4,8 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Jubel Mobela Dashboard</title>
+
+    <!-- ─── PWA MANIFEST ────────────────────────────────────────── -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="NORTEC Dashboard" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#0a0e17" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
     <style>
         /* ── RESET & FULL SCREEN BASE ── */
         * {
@@ -22,10 +32,6 @@
             overflow: hidden;
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
-            zoom: 0.9;
-            -webkit-zoom: 0.9;
-            -moz-transform: scale(0.9);
-            -moz-transform-origin: top center;
         }
 
         /* ── BACKGROUND ZOOM ── */
@@ -73,7 +79,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 25px 21px;
+            padding: 28px 24px;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
@@ -108,8 +114,8 @@
             visibility: hidden;
             pointer-events: none;
             justify-content: flex-start;
-            padding-top: 36px;
-            padding-bottom: 36px;
+            padding-top: 40px;
+            padding-bottom: 40px;
         }
         #enrollPage.active,
         #programsPage.active,
@@ -132,7 +138,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 21px 18px;
+            padding: 24px 20px;
             overflow-y: auto;
             opacity: 0;
             visibility: hidden;
@@ -152,7 +158,7 @@
             width: 100%;
             max-width: 600px;
             z-index: 10;
-            padding: 7px 0 10px;
+            padding: 8px 0 12px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -161,11 +167,11 @@
             background: transparent;
             border: none;
             color: #64748b;
-            font-size: 12px;
+            font-size: 14px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             transition: color 0.2s;
             font-weight: 600;
         }
@@ -175,10 +181,10 @@
         .modal-close {
             background: #e2e8f0;
             border: none;
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            font-size: 18px;
+            font-size: 20px;
             color: #1e293b;
             cursor: pointer;
             display: flex;
@@ -191,63 +197,62 @@
         }
 
         .modal-logo {
-            margin-top: 3px;
-            margin-bottom: 7px;
+            margin-top: 4px;
+            margin-bottom: 8px;
         }
         .modal-logo img {
-            width: 64px;
-            height: 64px;
+            width: 72px;
+            height: 72px;
             object-fit: contain;
-            border-radius: 14px;
+            border-radius: 16px;
             background: #f8fafc;
-            padding: 7px;
+            padding: 8px;
             border: 1px solid #e2e8f0;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
         }
         .detail-title {
-            font-size: 19px;
+            font-size: 22px;
             font-weight: 800;
             color: #0f172a;
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .detail-body {
             max-width: 600px;
             width: 100%;
             text-align: left;
             color: #1e293b;
-            font-size: 12px;
+            font-size: 14px;
             line-height: 1.6;
         }
         .detail-body h3 {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 700;
-            margin: 14px 0 5px;
+            margin: 16px 0 6px;
             color: #0f172a;
         }
         .detail-body p {
-            margin-bottom: 7px;
+            margin-bottom: 8px;
         }
         .detail-body ul {
-            padding-left: 18px;
-            margin: 5px 0 10px;
+            padding-left: 20px;
+            margin: 6px 0 12px;
         }
 
         /* APPLY BUTTON */
         .btn-apply {
             display: inline-block;
-            margin: 18px 0 9px;
-            padding: 12px 28px;
+            margin: 20px 0 10px;
+            padding: 14px 32px;
             background: linear-gradient(135deg, #00c853, #009e3d);
             color: #fff;
             border: none;
             border-radius: 50px;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 700;
             cursor: pointer;
             box-shadow: 0 6px 24px rgba(0, 200, 83, 0.35);
             transition: all 0.25s ease;
-            animation: floatForm 3s ease-in-out infinite;
         }
         .btn-apply:hover {
             transform: translateY(-2px);
@@ -264,7 +269,6 @@
             width: 100%;
             text-align: left;
             color: #1e293b;
-            animation: floatForm 4s ease-in-out infinite;
         }
         .application-form.active {
             display: block;
@@ -274,27 +278,27 @@
         .step-progress {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 18px;
+            gap: 12px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
         .step-dot {
             display: flex;
             align-items: center;
-            gap: 5px;
-            font-size: 10px;
+            gap: 6px;
+            font-size: 12px;
             font-weight: 600;
             color: #94a3b8;
         }
         .step-dot .dot {
-            width: 21px;
-            height: 21px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             background: #e2e8f0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 700;
             color: #64748b;
             transition: all 0.3s;
@@ -333,7 +337,7 @@
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(7px);
+                transform: translateY(8px);
             }
             to {
                 opacity: 1;
@@ -341,42 +345,41 @@
             }
         }
         .step .form-section {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
         .step .section-title {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
             color: #0f172a;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .step .form-row {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 7px;
+            gap: 12px;
+            margin-bottom: 8px;
         }
         .step .form-row>* {
-            flex: 1 1 180px;
+            flex: 1 1 200px;
         }
         .step label {
             display: block;
-            font-size: 11px;
+            font-size: 13px;
             font-weight: 600;
             color: #475569;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
         .step input,
         .step select,
         .step textarea {
             width: 100%;
-            padding: 9px 10px;
+            padding: 10px 12px;
             border-radius: 10px;
             border: 1px solid #d1d5db;
             background: #f8fafc;
-            font-size: 12px;
+            font-size: 14px;
             font-family: 'Inter', sans-serif;
             transition: border 0.2s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
         .step input:focus,
         .step select:focus,
@@ -384,7 +387,7 @@
             border-color: #3b82f6;
             background: #fff;
             outline: none;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10), 0 4px 16px rgba(59, 130, 246, 0.10);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
         }
 
         /* Highlight important words in blue */
@@ -397,21 +400,20 @@
         .step-nav {
             display: flex;
             justify-content: space-between;
-            margin-top: 18px;
-            gap: 10px;
+            margin-top: 20px;
+            gap: 12px;
             flex-wrap: wrap;
         }
         .btn-prev,
         .btn-next,
         .btn-submit-step {
-            padding: 10px 25px;
+            padding: 12px 28px;
             border: none;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 12px;
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.25s ease;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
         }
         .btn-prev {
             background: #e2e8f0;
@@ -425,7 +427,6 @@
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: #fff;
             box-shadow: 0 4px 16px rgba(59, 130, 246, 0.25);
-            animation: floatForm 3.5s ease-in-out infinite;
         }
         .btn-next:hover,
         .btn-submit-step:hover {
@@ -441,12 +442,12 @@
         .declaration-row {
             display: flex;
             align-items: center;
-            gap: 9px;
-            margin: 10px 0;
+            gap: 10px;
+            margin: 12px 0;
         }
         .declaration-row input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
+            width: 18px;
+            height: 18px;
             accent-color: #3b82f6;
             cursor: pointer;
         }
@@ -455,15 +456,14 @@
         .signature-wrapper {
             border: 2px dashed #94a3b8;
             border-radius: 12px;
-            padding: 3px;
+            padding: 4px;
             background: #f8fafc;
-            margin: 7px 0;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            margin: 8px 0;
         }
         .signature-wrapper canvas {
             display: block;
             width: 100%;
-            height: 108px;
+            height: 120px;
             background: #ffffff;
             border-radius: 8px;
             touch-action: none;
@@ -471,18 +471,17 @@
         }
         .signature-actions {
             display: flex;
-            gap: 9px;
-            margin-top: 5px;
+            gap: 10px;
+            margin-top: 6px;
         }
         .signature-actions button {
-            padding: 5px 12px;
+            padding: 6px 14px;
             border: none;
             border-radius: 20px;
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
         .btn-clear-signature {
             background: #e2e8f0;
@@ -496,8 +495,8 @@
         .upload-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin: 7px 0;
+            gap: 12px;
+            margin: 8px 0;
         }
         .upload-box {
             aspect-ratio: 1 / 1;
@@ -509,39 +508,36 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 7px;
-            transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            padding: 8px;
+            transition: border-color 0.2s;
             position: relative;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
         .upload-box:hover {
             border-color: #3b82f6;
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.12);
         }
         .upload-box .upload-icon {
-            font-size: 21px;
+            font-size: 24px;
             color: #94a3b8;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
         .upload-box .upload-label {
-            font-size: 9px;
+            font-size: 10px;
             font-weight: 600;
             color: #475569;
             line-height: 1.2;
             word-break: break-word;
         }
         .upload-box .upload-badge {
-            font-size: 7px;
+            font-size: 8px;
             font-weight: 700;
             color: #fff;
             background: #ef4444;
-            padding: 1px 7px;
+            padding: 2px 8px;
             border-radius: 12px;
             position: absolute;
-            top: -5px;
-            right: -5px;
+            top: -6px;
+            right: -6px;
         }
         .upload-box .upload-badge.optional {
             background: #94a3b8;
@@ -553,9 +549,9 @@
             cursor: pointer;
         }
         .upload-box .file-name {
-            font-size: 8px;
+            font-size: 9px;
             color: #64748b;
-            margin-top: 3px;
+            margin-top: 4px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -568,17 +564,17 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .main-logo {
-            width: 79px;
-            height: 79px;
+            width: 88px;
+            height: 88px;
             object-fit: contain;
-            border-radius: 16px;
+            border-radius: 18px;
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            padding: 9px;
+            padding: 10px;
             border: 1px solid rgba(255, 255, 255, 0.4);
             box-shadow: 0 12px 48px rgba(0, 0, 0, 0.20);
             transition: transform 0.3s ease;
@@ -590,11 +586,11 @@
         /* TITLE */
         .title {
             text-align: center;
-            margin: 3px 0 25px;
+            margin: 4px 0 28px;
             flex-shrink: 0;
         }
         .title h1 {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 900;
             letter-spacing: 0.2px;
             line-height: 1.3;
@@ -605,12 +601,12 @@
             color: #6cffa0;
         }
         .title .sub {
-            font-size: 9px;
+            font-size: 10px;
             font-weight: 400;
             color: rgba(255, 255, 255, 0.55);
-            letter-spacing: 1.6px;
+            letter-spacing: 1.8px;
             text-transform: uppercase;
-            margin-top: 2px;
+            margin-top: 3px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
         }
 
@@ -618,21 +614,21 @@
         .button-group {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
             width: 100%;
             max-width: 320px;
             flex-shrink: 0;
-            padding-bottom: 3px;
+            padding-bottom: 4px;
         }
         .btn {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 14px 21px;
+            padding: 16px 24px;
             border: none;
             border-radius: 60px;
             font-family: 'Inter', sans-serif;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 700;
             color: #fff;
             cursor: pointer;
@@ -642,10 +638,9 @@
             overflow: hidden;
             user-select: none;
             touch-action: manipulation;
-            min-height: 46px;
+            min-height: 52px;
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
-            animation: floatForm 3s ease-in-out infinite;
         }
         .btn::after {
             content: '';
@@ -674,41 +669,41 @@
             transform: translateY(-2px);
         }
         .btn i {
-            margin-right: 9px;
-            font-size: 15px;
+            margin-right: 10px;
+            font-size: 17px;
         }
 
         /* ─── ENROLL PAGE – streamlined, minimal colors ─── */
         .page-header {
             text-align: center;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             flex-shrink: 0;
         }
         .page-header h2 {
-            font-size: 19px;
+            font-size: 22px;
             font-weight: 800;
             color: #fff;
             text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
         }
         .page-header h2 i {
             color: #6cffa0;
-            margin-right: 7px;
+            margin-right: 8px;
         }
         .page-header p {
-            font-size: 11px;
+            font-size: 13px;
             color: rgba(255, 255, 255, 0.6);
-            margin-top: 3px;
+            margin-top: 4px;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .intake-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 14px;
+            gap: 16px;
             width: 100%;
             max-width: 420px;
             flex-shrink: 0;
-            padding: 0 3px;
+            padding: 0 4px;
         }
         /* redesigned intake buttons – minimal, glassmorphic, uniform */
         .intake-btn,
@@ -721,13 +716,13 @@
             border: none;
             border-radius: 20px;
             font-family: 'Inter', sans-serif;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 700;
             color: #fff;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.30);
-            padding: 14px 10px;
+            padding: 16px 12px;
             text-align: center;
             line-height: 1.2;
             position: relative;
@@ -738,7 +733,6 @@
             -webkit-backdrop-filter: blur(6px);
             background: rgba(255, 255, 255, 0.12);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            animation: floatForm 4s ease-in-out infinite;
         }
         .intake-btn::after,
         .shortcourse-btn::after {
@@ -759,8 +753,8 @@
             background: rgba(255, 255, 255, 0.20);
         }
         .intake-btn i {
-            font-size: 28px;
-            margin-bottom: 7px;
+            font-size: 32px;
+            margin-bottom: 8px;
             color: rgba(255, 255, 255, 0.9);
         }
 
@@ -770,16 +764,16 @@
             max-width: 420px;
             display: flex;
             justify-content: flex-start;
-            margin-top: 18px;
+            margin-top: 20px;
             flex-shrink: 0;
-            padding: 0 3px;
+            padding: 0 4px;
             order: -1;
         }
         .btn-back {
             display: inline-flex;
             align-items: center;
-            gap: 7px;
-            padding: 9px 18px;
+            gap: 8px;
+            padding: 10px 20px;
             border: none;
             border-radius: 40px;
             background: rgba(255, 255, 255, 0.12);
@@ -787,7 +781,7 @@
             -webkit-backdrop-filter: blur(8px);
             color: #fff;
             font-family: 'Inter', sans-serif;
-            font-size: 11px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.25s ease;
@@ -802,7 +796,7 @@
             transform: scale(0.95);
         }
         .btn-back i {
-            font-size: 12px;
+            font-size: 14px;
         }
 
         /* ─── PROGRAMS PAGE – floating cards with blue border ─── */
@@ -810,15 +804,15 @@
             width: 100%;
             max-width: 600px;
             flex-shrink: 0;
-            padding: 0 3px;
+            padding: 0 4px;
             position: relative;
             z-index: 2;
         }
         .program-card {
             background: rgba(255, 255, 255, 0.92);
             border-radius: 16px;
-            padding: 14px 16px;
-            margin-bottom: 10px;
+            padding: 16px 18px;
+            margin-bottom: 12px;
             border: 1px solid #3b82f6;
             color: #0f172a;
             transition: transform 0.2s, box-shadow 0.2s;
@@ -828,7 +822,6 @@
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
             transform: scale(1);
-            animation: floatForm 3.5s ease-in-out infinite;
         }
         .program-card.scale-up {
             transform: scale(1.04);
@@ -842,59 +835,58 @@
         }
         .program-card .prog-title {
             font-weight: 700;
-            font-size: 14px;
-            margin-bottom: 3px;
+            font-size: 16px;
+            margin-bottom: 4px;
             color: #0f172a;
         }
         .program-card .prog-meta {
-            font-size: 11px;
+            font-size: 13px;
             opacity: 0.7;
             display: flex;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
             color: #334155;
         }
         .program-card .prog-meta span {
             display: inline-flex;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
         }
         .program-card .prog-meta i {
-            font-size: 10px;
+            font-size: 12px;
         }
         .program-card .view-detail {
-            margin-top: 7px;
-            font-size: 11px;
+            margin-top: 8px;
+            font-size: 13px;
             font-weight: 600;
             color: #2563eb;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
         }
 
         /* SEARCH BAR – top of programs page */
         .search-wrapper {
             width: 100%;
             max-width: 600px;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             flex-shrink: 0;
-            padding: 0 3px;
+            padding: 0 4px;
             order: -1;
         }
         .search-input {
             width: 100%;
-            padding: 12px 16px;
+            padding: 14px 18px;
             border-radius: 60px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             color: #fff;
-            font-size: 13px;
+            font-size: 15px;
             font-family: 'Inter', sans-serif;
             transition: all 0.3s;
             outline: none;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
         }
         .search-input::placeholder {
             color: rgba(255, 255, 255, 0.5);
@@ -902,62 +894,54 @@
         .search-input:focus {
             border-color: #3b82f6;
             background: rgba(255, 255, 255, 0.18);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15), 0 4px 20px rgba(59, 130, 246, 0.10);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
         }
 
         /* SHORT COURSES page */
         .short-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 12px;
             width: 100%;
             max-width: 600px;
             flex-shrink: 0;
-            padding: 0 3px;
+            padding: 0 4px;
         }
         .short-item {
             background: rgba(255, 255, 255, 0.92);
             border-radius: 12px;
-            padding: 12px 10px;
+            padding: 14px 12px;
             border: 1px solid #e2e8f0;
             color: #0f172a;
             text-align: center;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
             position: relative;
-            animation: floatForm 4s ease-in-out infinite;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .short-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
         }
         .short-item .short-title {
             font-weight: 600;
-            font-size: 12px;
+            font-size: 14px;
         }
         .short-item .short-days {
-            font-size: 10px;
+            font-size: 12px;
             opacity: 0.7;
-            margin-top: 1px;
+            margin-top: 2px;
         }
         .short-item .short-apply {
-            margin-top: 9px;
+            margin-top: 10px;
             display: inline-block;
-            padding: 5px 14px;
+            padding: 6px 16px;
             background: #3b82f6;
             color: #fff;
             border: none;
             border-radius: 30px;
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.20);
         }
         .short-item .short-apply:hover {
             background: #2563eb;
             transform: scale(1.02);
-            box-shadow: 0 6px 24px rgba(59, 130, 246, 0.30);
         }
 
         /* LOGIN MODAL (kept minimal) */
@@ -971,7 +955,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 18px;
+            padding: 20px;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.35s ease, visibility 0.35s ease;
@@ -983,7 +967,7 @@
         .modal {
             background: #ffffff;
             border-radius: 28px;
-            padding: 28px 25px 25px;
+            padding: 32px 28px 28px;
             max-width: 380px;
             width: 100%;
             max-height: 85vh;
@@ -995,7 +979,6 @@
             transition: transform 0.40s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
             opacity: 0;
             position: relative;
-            animation: floatForm 4s ease-in-out infinite;
         }
         .modal-overlay.active .modal {
             transform: scale(1) translateY(0);
@@ -1003,15 +986,15 @@
         }
         .modal-close {
             position: absolute;
-            top: 12px;
-            right: 14px;
-            width: 28px;
-            height: 28px;
+            top: 14px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             border: none;
             background: #f1f5f9;
             color: #64748b;
-            font-size: 18px;
+            font-size: 20px;
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
@@ -1024,77 +1007,76 @@
         }
         .modal-logo {
             text-align: center;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
         .modal-logo img {
-            width: 54px;
-            height: 54px;
+            width: 60px;
+            height: 60px;
             object-fit: contain;
             border-radius: 14px;
             background: #f8fafc;
-            padding: 5px;
+            padding: 6px;
             border: 1px solid #e2e8f0;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
         }
         .modal-header {
             text-align: center;
-            padding-bottom: 12px;
-            margin-bottom: 14px;
+            padding-bottom: 14px;
+            margin-bottom: 16px;
             border-bottom: 1px solid #e2e8f0;
             border-top: 4px solid #3b82f6;
             border-radius: 0;
         }
         .modal-header .modal-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 800;
             color: #0f172a;
         }
         .modal-header .modal-title i {
-            margin-right: 7px;
+            margin-right: 8px;
             color: #3b82f6;
         }
         .form-group {
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
         .form-group label {
             display: block;
-            font-size: 11px;
+            font-size: 13px;
             font-weight: 600;
             color: #475569;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
         .form-input {
             width: 100%;
-            padding: 10px 12px;
+            padding: 12px 14px;
             border-radius: 14px;
             border: 1px solid #d1d5db;
             background: #f8fafc;
             color: #0f172a;
-            font-size: 12px;
+            font-size: 14px;
             font-family: 'Inter', sans-serif;
             transition: all 0.25s ease;
             outline: none;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
         .form-input:focus {
             border-color: #3b82f6;
             background: #ffffff;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10), 0 4px 16px rgba(59, 130, 246, 0.10);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
         }
         .password-wrapper {
             position: relative;
         }
         .password-toggle {
             position: absolute;
-            right: 10px;
+            right: 12px;
             top: 50%;
             transform: translateY(-50%);
             background: none;
             border: none;
             color: #94a3b8;
-            font-size: 14px;
+            font-size: 16px;
             cursor: pointer;
-            padding: 3px;
+            padding: 4px;
             transition: color 0.2s;
         }
         .password-toggle:hover {
@@ -1105,26 +1087,26 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 5px;
-            margin: 5px 0 12px;
+            gap: 6px;
+            margin: 6px 0 14px;
         }
         .checkbox-wrap {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             color: #475569;
-            font-size: 11px;
+            font-size: 13px;
             cursor: pointer;
         }
         .checkbox-wrap input[type="checkbox"] {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             accent-color: #3b82f6;
             cursor: pointer;
         }
         .forgot-link {
             color: #64748b;
-            font-size: 11px;
+            font-size: 13px;
             text-decoration: none;
             transition: color 0.2s;
         }
@@ -1133,19 +1115,18 @@
         }
         .btn-submit {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             border: none;
             border-radius: 50px;
             font-family: 'Inter', sans-serif;
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 700;
             color: #fff;
             cursor: pointer;
             transition: all 0.25s ease;
             background: linear-gradient(135deg, #3b82f6, #2563eb);
             box-shadow: 0 6px 24px rgba(59, 130, 246, 0.30);
-            margin-top: 3px;
-            animation: floatForm 3.5s ease-in-out infinite;
+            margin-top: 4px;
         }
         .btn-submit:hover {
             box-shadow: 0 10px 32px rgba(59, 130, 246, 0.40);
@@ -1153,8 +1134,8 @@
         }
         .support-link {
             text-align: center;
-            margin-top: 12px;
-            font-size: 11px;
+            margin-top: 14px;
+            font-size: 13px;
             color: #64748b;
         }
         .support-link a {
@@ -1185,22 +1166,22 @@
         .dashboard-header {
             background: #ffffff;
             border-bottom: 2px solid #3b82f6;
-            padding: 10px 18px;
+            padding: 12px 20px;
             display: flex;
             align-items: center;
             flex-shrink: 0;
             position: relative;
             z-index: 10;
-            min-height: 57px;
+            min-height: 64px;
             box-shadow: 0 2px 8px rgba(59, 130, 246, 0.08);
         }
         .header-logo {
-            width: 39px;
-            height: 39px;
+            width: 44px;
+            height: 44px;
             object-fit: contain;
             border-radius: 10px;
             background: #eff6ff;
-            padding: 3px;
+            padding: 4px;
             cursor: pointer;
             transition: transform 0.2s;
             border: 1px solid #dbeafe;
@@ -1209,7 +1190,7 @@
             transform: scale(1.05);
         }
         .header-title {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 800;
             color: #0f172a;
             text-align: center;
@@ -1222,22 +1203,21 @@
         .header-actions-left {
             display: flex;
             align-items: center;
-            gap: 7px;
+            gap: 8px;
         }
         .btn-sidebar-toggle {
             background: #eff6ff;
             border: 1px solid #dbeafe;
             color: #3b82f6;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 10px;
-            font-size: 18px;
+            font-size: 20px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
         .btn-sidebar-toggle:hover {
             background: #dbeafe;
@@ -1252,27 +1232,27 @@
         .student-info-top {
             background: #ffffff;
             border-radius: 12px;
-            padding: 14px 18px;
+            padding: 16px 20px;
             max-width: 560px;
             width: 100%;
-            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.08);
+            box-shadow: 0 2px 12px rgba(59, 130, 246, 0.08);
             border: 1px solid #dbeafe;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: flex;
             flex-wrap: wrap;
-            gap: 7px 14px;
-            font-size: 11px;
+            gap: 8px 16px;
+            font-size: 13px;
             font-weight: 600;
             color: #0f172a;
         }
         .student-info-top .info-item {
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
         }
         .student-info-top .info-item i {
             color: #3b82f6;
-            font-size: 12px;
+            font-size: 14px;
         }
         .student-info-top .info-item .label {
             color: #64748b;
@@ -1283,10 +1263,10 @@
         .dashboard-content {
             flex: 1;
             overflow-y: auto;
-            padding: 10px 14px 18px;
+            padding: 12px 16px 20px;
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 16px;
             background: #f8fafc;
         }
         .dashboard-content::-webkit-scrollbar {
@@ -1302,23 +1282,22 @@
         .home-dashboard {
             background: #ffffff;
             border-radius: 16px;
-            padding: 21px;
+            padding: 24px;
             border: 1px solid #e2e8f0;
             color: #0f172a;
             flex: 1;
             overflow-y: auto;
-            max-height: calc(100vh - 250px);
-            max-height: calc(100dvh - 250px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-            animation: floatForm 4s ease-in-out infinite;
+            max-height: calc(100vh - 280px);
+            max-height: calc(100dvh - 280px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
         }
         .home-dashboard h2 {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 800;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             color: #0f172a;
             border-bottom: 2px solid #3b82f6;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
         }
         .home-dashboard h2 .accent {
             color: #3b82f6;
@@ -1326,51 +1305,45 @@
         .home-dashboard .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-top: 10px;
+            gap: 16px;
+            margin-top: 12px;
         }
         .home-dashboard .dashboard-grid .card {
             background: #f8fafc;
             border-radius: 12px;
-            padding: 14px;
+            padding: 16px;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .home-dashboard .dashboard-grid .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
         }
         .home-dashboard .dashboard-grid .card .card-icon {
-            font-size: 21px;
-            margin-bottom: 3px;
+            font-size: 24px;
+            margin-bottom: 4px;
         }
         .home-dashboard .dashboard-grid .card .card-title {
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 700;
             color: #0f172a;
         }
         .home-dashboard .dashboard-grid .card .card-value {
-            font-size: 11px;
+            font-size: 13px;
             color: #64748b;
-            margin-top: 1px;
+            margin-top: 2px;
         }
         .home-dashboard .dashboard-grid .card .card-sub {
-            font-size: 10px;
+            font-size: 12px;
             color: #94a3b8;
         }
         .home-dashboard .quick-info {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 7px;
-            margin-top: 14px;
-            padding-top: 14px;
+            gap: 8px;
+            margin-top: 16px;
+            padding-top: 16px;
             border-top: 1px solid #e2e8f0;
         }
         .home-dashboard .quick-info .info-row {
             display: flex;
-            gap: 7px;
-            font-size: 11px;
+            gap: 8px;
+            font-size: 13px;
         }
         .home-dashboard .quick-info .info-row .label {
             color: #64748b;
@@ -1386,7 +1359,7 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 270px;
+            width: 300px;
             height: 100vh;
             height: 100dvh;
             background: #ffffff;
@@ -1402,7 +1375,7 @@
             transform: translateX(0);
         }
         .sidebar-menu-header {
-            padding: 18px 21px 14px;
+            padding: 20px 24px 16px;
             border-bottom: 3px solid #3b82f6;
             display: flex;
             justify-content: space-between;
@@ -1413,7 +1386,7 @@
             z-index: 5;
         }
         .sidebar-menu-header h2 {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 900;
             color: #0f172a;
         }
@@ -1423,10 +1396,10 @@
         .sidebar-menu-close {
             background: #f1f5f9;
             border: none;
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            font-size: 16px;
+            font-size: 18px;
             color: #1e293b;
             cursor: pointer;
             display: flex;
@@ -1441,12 +1414,12 @@
         .sidebar-menu-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 21px;
+            gap: 14px;
+            padding: 14px 24px;
             border: none;
             background: transparent;
             color: #0f172a;
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
@@ -1460,9 +1433,9 @@
             color: #3b82f6;
         }
         .sidebar-menu-item i {
-            width: 21px;
+            width: 24px;
             color: #3b82f6;
-            font-size: 16px;
+            font-size: 18px;
         }
         .sidebar-menu-item.active {
             background: #eff6ff;
@@ -1526,27 +1499,27 @@
 
         .sidebar-page-header {
             background: #ffffff;
-            padding: 14px 21px;
+            padding: 16px 24px;
             border-bottom: 3px solid #3b82f6;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             position: sticky;
             top: 0;
             z-index: 5;
             box-shadow: 0 2px 10px rgba(59, 130, 246, 0.06);
         }
         .sidebar-page-header .page-logo {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             object-fit: contain;
             border-radius: 8px;
             background: #eff6ff;
-            padding: 3px;
+            padding: 4px;
             border: 1px solid #dbeafe;
         }
         .sidebar-page-header h2 {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 800;
             color: #0f172a;
             flex: 1;
@@ -1557,10 +1530,10 @@
         .sidebar-page-close {
             background: #f1f5f9;
             border: none;
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            font-size: 16px;
+            font-size: 18px;
             color: #1e293b;
             cursor: pointer;
             display: flex;
@@ -1573,60 +1546,60 @@
         }
 
         .sidebar-page-body {
-            padding: 21px;
+            padding: 24px;
             color: #1e293b;
             max-width: 900px;
             margin: 0 auto;
         }
         .sidebar-page-body h3 {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
             color: #0f172a;
-            margin: 18px 0 10px;
+            margin: 20px 0 12px;
             border-bottom: 2px solid #3b82f6;
-            padding-bottom: 7px;
+            padding-bottom: 8px;
         }
         .sidebar-page-body h3 .accent {
             color: #3b82f6;
         }
         .sidebar-page-body h3 i {
             color: #3b82f6;
-            margin-right: 7px;
+            margin-right: 8px;
         }
         .sidebar-page-body h4 {
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 700;
             color: #1e293b;
-            margin: 12px 0 5px;
+            margin: 14px 0 6px;
         }
         .sidebar-page-body p {
             line-height: 1.7;
-            margin-bottom: 7px;
+            margin-bottom: 8px;
             color: #334155;
         }
         .sidebar-page-body ul,
         .sidebar-page-body ol {
-            padding-left: 18px;
-            margin: 7px 0 10px;
+            padding-left: 20px;
+            margin: 8px 0 12px;
             color: #334155;
             line-height: 1.7;
         }
         .sidebar-page-body table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 12px;
-            margin: 10px 0;
+            font-size: 14px;
+            margin: 12px 0;
         }
         .sidebar-page-body th {
             background: #eff6ff;
             color: #1d4ed8;
             font-weight: 700;
-            padding: 9px 10px;
+            padding: 10px 12px;
             text-align: left;
             border-bottom: 2px solid #3b82f6;
         }
         .sidebar-page-body td {
-            padding: 7px 10px;
+            padding: 8px 12px;
             border-bottom: 1px solid #e2e8f0;
         }
         .sidebar-page-body .highlight-blue {
@@ -1646,44 +1619,38 @@
             font-weight: 600;
         }
         .sidebar-page-body .balance-amount {
-            font-size: 21px;
+            font-size: 24px;
             font-weight: 800;
             color: #f59e0b;
         }
         .sidebar-page-body .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 7px 0;
+            gap: 12px;
+            margin: 8px 0;
         }
         .sidebar-page-body .info-grid .item {
             background: #ffffff;
-            padding: 10px 14px;
+            padding: 12px 16px;
             border-radius: 8px;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .sidebar-page-body .info-grid .item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
         }
         .sidebar-page-body .info-grid .item .label {
-            font-size: 10px;
+            font-size: 12px;
             color: #64748b;
             font-weight: 500;
         }
         .sidebar-page-body .info-grid .item .value {
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 600;
             color: #0f172a;
-            margin-top: 1px;
+            margin-top: 2px;
         }
         .sidebar-page-body .status-badge {
             display: inline-block;
-            padding: 3px 12px;
+            padding: 4px 14px;
             border-radius: 20px;
-            font-size: 10px;
+            font-size: 12px;
             font-weight: 600;
         }
         .sidebar-page-body .status-badge.approved {
@@ -1712,97 +1679,90 @@
         }
         .sidebar-page-body .btn-form-submit {
             display: inline-block;
-            margin: 10px 0 7px;
-            padding: 10px 25px;
+            margin: 12px 0 8px;
+            padding: 12px 28px;
             background: #3b82f6;
             color: #fff;
             border: none;
             border-radius: 50px;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.25s ease;
             font-family: 'Inter', sans-serif;
-            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.20);
-            animation: floatForm 3.5s ease-in-out infinite;
         }
         .sidebar-page-body .btn-form-submit:hover {
             background: #2563eb;
             transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(59, 130, 246, 0.30);
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
         }
         .sidebar-page-body .form-group {
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
         .sidebar-page-body .form-group label {
             display: block;
-            font-size: 11px;
+            font-size: 13px;
             font-weight: 600;
             color: #475569;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
         .sidebar-page-body .form-group input,
         .sidebar-page-body .form-group select,
         .sidebar-page-body .form-group textarea {
             width: 100%;
-            padding: 9px 10px;
+            padding: 10px 12px;
             border-radius: 10px;
             border: 1px solid #d1d5db;
             background: #ffffff;
-            font-size: 12px;
+            font-size: 14px;
             font-family: 'Inter', sans-serif;
             transition: border 0.2s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
         .sidebar-page-body .form-group input:focus,
         .sidebar-page-body .form-group select:focus,
         .sidebar-page-body .form-group textarea:focus {
             border-color: #3b82f6;
             outline: none;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10), 0 4px 16px rgba(59, 130, 246, 0.10);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
         }
         .sidebar-page-body .upload-area {
             border: 2px dashed #d1d5db;
             border-radius: 12px;
-            padding: 18px;
+            padding: 20px;
             text-align: center;
             background: #f8fafc;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
         .sidebar-page-body .upload-area:hover {
             border-color: #3b82f6;
             background: #eff6ff;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.10);
         }
         .sidebar-page-body .upload-area i {
-            font-size: 28px;
+            font-size: 32px;
             color: #94a3b8;
         }
         .sidebar-page-body .upload-area p {
-            margin-top: 5px;
+            margin-top: 6px;
             color: #64748b;
         }
         .sidebar-page-body .readonly-form {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
             border-radius: 12px;
-            padding: 14px;
-            margin-top: 7px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            padding: 16px;
+            margin-top: 8px;
         }
         .sidebar-page-body .readonly-form .field-row {
             display: flex;
-            padding: 5px 0;
+            padding: 6px 0;
             border-bottom: 1px solid #f1f5f9;
         }
         .sidebar-page-body .readonly-form .field-row:last-child {
             border-bottom: none;
         }
         .sidebar-page-body .readonly-form .field-label {
-            width: 180px;
+            width: 200px;
             font-weight: 600;
             color: #475569;
             flex-shrink: 0;
@@ -1813,15 +1773,15 @@
         }
         .sidebar-page-body .readonly-form .field-value .subject-item {
             display: block;
-            padding: 1px 0;
+            padding: 2px 0;
         }
         .sidebar-page-body .teveta-form-logo {
             display: flex;
             justify-content: center;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
         .sidebar-page-body .teveta-form-logo img {
-            width: 90px;
+            width: 100px;
             height: auto;
             object-fit: contain;
         }
@@ -1832,18 +1792,16 @@
             max-width: 800px;
             margin: 0 auto;
             background: #ffffff;
-            padding: 18px;
+            padding: 20px;
             border: 1px solid #e2e8f0;
             border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-            animation: floatForm 4s ease-in-out infinite;
         }
         .teveta-form-container .form-header {
             text-align: center;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
         .teveta-form-container .form-header h2 {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 800;
             color: #0f172a;
             text-transform: uppercase;
@@ -1853,16 +1811,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             flex-wrap: wrap;
-            gap: 7px;
+            gap: 8px;
         }
         .teveta-form-container .form-header .logo-section img {
-            height: 54px;
+            height: 60px;
             object-fit: contain;
         }
         .teveta-form-container .form-header .logo-section .address-text {
-            font-size: 9px;
+            font-size: 10px;
             color: #64748b;
             text-align: right;
             line-height: 1.4;
@@ -1871,29 +1829,29 @@
             color: #0f172a;
         }
         .teveta-form-container .form-field {
-            margin-bottom: 7px;
+            margin-bottom: 8px;
             display: flex;
             align-items: flex-start;
-            gap: 3px;
+            gap: 4px;
         }
         .teveta-form-container .form-field .field-number {
             font-weight: 700;
             color: #0f172a;
-            min-width: 27px;
-            font-size: 11px;
+            min-width: 30px;
+            font-size: 13px;
         }
         .teveta-form-container .form-field .field-label {
             font-weight: 600;
             color: #0f172a;
-            font-size: 11px;
-            min-width: 126px;
+            font-size: 13px;
+            min-width: 140px;
         }
         .teveta-form-container .form-field .field-input {
             flex: 1;
             border: none;
             border-bottom: 1px solid #0f172a;
-            padding: 1px 3px;
-            font-size: 11px;
+            padding: 2px 4px;
+            font-size: 13px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
@@ -1907,12 +1865,12 @@
         }
         .teveta-form-container .form-field .field-box-input {
             border: 1px solid #0f172a;
-            padding: 1px 3px;
-            font-size: 11px;
+            padding: 2px 4px;
+            font-size: 13px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 27px;
+            width: 30px;
             text-align: center;
         }
         .teveta-form-container .form-field .field-box-input:focus {
@@ -1924,21 +1882,21 @@
         }
         .teveta-form-container .form-field .box-group {
             display: flex;
-            gap: 3px;
+            gap: 4px;
             align-items: center;
         }
         .teveta-form-container .form-field .box-group .box-label {
-            font-size: 10px;
+            font-size: 11px;
             color: #64748b;
         }
         .teveta-form-container .form-field .box-group .box-input {
             border: 1px solid #0f172a;
-            padding: 1px 3px;
-            font-size: 10px;
+            padding: 2px 4px;
+            font-size: 12px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 25px;
+            width: 28px;
             text-align: center;
         }
         .teveta-form-container .form-field .box-group .box-input:focus {
@@ -1954,12 +1912,12 @@
         .teveta-form-container .form-field .subjects-list .subject-row {
             display: flex;
             align-items: center;
-            gap: 7px;
-            padding: 1px 0;
+            gap: 8px;
+            padding: 2px 0;
         }
         .teveta-form-container .form-field .subjects-list .subject-row input[type="checkbox"] {
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             accent-color: #3b82f6;
             cursor: pointer;
         }
@@ -1968,14 +1926,14 @@
             cursor: not-allowed;
         }
         .teveta-form-container .form-field .subjects-list .subject-row .subject-text {
-            font-size: 11px;
+            font-size: 13px;
             color: #0f172a;
         }
         .teveta-form-container .form-field .subjects-list .subject-row .subject-line {
             flex: 1;
             border-bottom: 1px solid #0f172a;
             height: 1px;
-            margin-left: 3px;
+            margin-left: 4px;
         }
         .teveta-form-container .form-field .subjects-list .subject-row .subject-line.readonly {
             border-color: #94a3b8;
@@ -1983,26 +1941,26 @@
         .teveta-form-container .form-field .inline-group {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
         }
         .teveta-form-container .form-field .inline-group .inline-item {
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
         }
         .teveta-form-container .form-field .inline-group .inline-item .inline-label {
-            font-size: 10px;
+            font-size: 12px;
             color: #475569;
         }
         .teveta-form-container .form-field .inline-group .inline-item .inline-box {
             border: 1px solid #0f172a;
-            padding: 1px 3px;
-            font-size: 10px;
+            padding: 2px 4px;
+            font-size: 12px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 25px;
+            width: 28px;
             text-align: center;
         }
         .teveta-form-container .form-field .inline-group .inline-item .inline-box:focus {
@@ -2015,16 +1973,16 @@
         .teveta-form-container .form-field .year-box-group {
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
         }
         .teveta-form-container .form-field .year-box-group .year-box {
             border: 1px solid #0f172a;
-            padding: 1px 3px;
-            font-size: 10px;
+            padding: 2px 4px;
+            font-size: 12px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 25px;
+            width: 28px;
             text-align: center;
         }
         .teveta-form-container .form-field .year-box-group .year-box:focus {
@@ -2035,20 +1993,20 @@
             color: #475569;
         }
         .teveta-form-container .form-field .year-box-group .year-label {
-            font-size: 10px;
+            font-size: 11px;
             color: #64748b;
         }
         .teveta-form-container .form-field .mode-select-group {
             display: flex;
             align-items: center;
-            gap: 7px;
+            gap: 8px;
             flex-wrap: wrap;
         }
         .teveta-form-container .form-field .mode-select-group .mode-option {
             display: flex;
             align-items: center;
-            gap: 3px;
-            font-size: 10px;
+            gap: 4px;
+            font-size: 12px;
             color: #0f172a;
         }
         .teveta-form-container .form-field .mode-select-group .mode-option input[type="radio"] {
@@ -2062,14 +2020,14 @@
         .teveta-form-container .form-field .year-select-group {
             display: flex;
             align-items: center;
-            gap: 7px;
+            gap: 8px;
             flex-wrap: wrap;
         }
         .teveta-form-container .form-field .year-select-group .year-option {
             display: flex;
             align-items: center;
-            gap: 3px;
-            font-size: 10px;
+            gap: 4px;
+            font-size: 12px;
             color: #0f172a;
         }
         .teveta-form-container .form-field .year-select-group .year-option input[type="radio"] {
@@ -2083,16 +2041,16 @@
         .teveta-form-container .form-field .exam-series-boxes {
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
         }
         .teveta-form-container .form-field .exam-series-boxes .series-box {
             border: 1px solid #0f172a;
-            padding: 1px 3px;
-            font-size: 10px;
+            padding: 2px 4px;
+            font-size: 12px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 25px;
+            width: 28px;
             text-align: center;
         }
         .teveta-form-container .form-field .exam-series-boxes .series-box:focus {
@@ -2103,22 +2061,22 @@
             color: #475569;
         }
         .teveta-form-container .form-field .exam-series-boxes .series-label {
-            font-size: 10px;
+            font-size: 11px;
             color: #64748b;
         }
         .teveta-form-container .form-field .teveta-no-boxes {
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
         }
         .teveta-form-container .form-field .teveta-no-boxes .no-box {
             border: 1px solid #0f172a;
-            padding: 1px 3px;
-            font-size: 10px;
+            padding: 2px 4px;
+            font-size: 12px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 25px;
+            width: 28px;
             text-align: center;
         }
         .teveta-form-container .form-field .teveta-no-boxes .no-box:focus {
@@ -2131,16 +2089,16 @@
         .teveta-form-container .form-field .year-enrolment-boxes {
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 4px;
         }
         .teveta-form-container .form-field .year-enrolment-boxes .enrol-box {
             border: 1px solid #0f172a;
-            padding: 1px 3px;
-            font-size: 10px;
+            padding: 2px 4px;
+            font-size: 12px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
-            width: 25px;
+            width: 28px;
             text-align: center;
         }
         .teveta-form-container .form-field .year-enrolment-boxes .enrol-box:focus {
@@ -2151,95 +2109,195 @@
             color: #475569;
         }
         .teveta-form-container .form-field .year-enrolment-boxes .enrol-label {
-            font-size: 10px;
+            font-size: 11px;
             color: #64748b;
         }
         .teveta-form-container .btn-submit-teveta {
             display: inline-block;
-            margin-top: 14px;
-            padding: 10px 28px;
+            margin-top: 16px;
+            padding: 12px 32px;
             background: #3b82f6;
             color: #fff;
             border: none;
             border-radius: 50px;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.25s ease;
             font-family: 'Inter', sans-serif;
-            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.20);
-            animation: floatForm 3.5s ease-in-out infinite;
         }
         .teveta-form-container .btn-submit-teveta:hover {
             background: #2563eb;
             transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        /* ─── INSTALL PROMPT POPUP ──────────────────────────────── */
+        .install-prompt-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.60);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            animation: fadeInOverlay 0.4s ease;
+        }
+        .install-prompt-overlay.active {
+            display: flex;
+        }
+        @keyframes fadeInOverlay {
+            from {
+                opacity: 0;
+                transform: scale(0.92);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .install-prompt-card {
+            background: #ffffff;
+            border-radius: 32px;
+            padding: 36px 28px 28px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.35);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .install-prompt-card .install-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 20px;
+            background: #eff6ff;
+            padding: 10px;
+            border: 1px solid #dbeafe;
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.10);
+            margin: 0 auto 12px;
+        }
+        .install-prompt-card h2 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+        .install-prompt-card h2 .accent {
+            color: #3b82f6;
+        }
+        .install-prompt-card p {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.5;
+            margin: 4px 0 16px;
+        }
+        .install-prompt-card .install-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .install-prompt-card .install-actions .btn-install {
+            padding: 14px 36px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: #fff;
             box-shadow: 0 6px 24px rgba(59, 130, 246, 0.30);
+            font-family: 'Inter', sans-serif;
         }
-
-        /* ─── FLOATING FORMS & SHADOWS ─── */
-        @keyframes floatForm {
-            0% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-6px);
-            }
-            100% {
-                transform: translateY(0px);
-            }
+        .install-prompt-card .install-actions .btn-install:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 32px rgba(59, 130, 246, 0.40);
         }
-
-        .float-form {
-            animation: floatForm 4s ease-in-out infinite;
+        .install-prompt-card .install-actions .btn-install:active {
+            transform: scale(0.96);
         }
-
-        .shadow-soft {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        .install-prompt-card .install-actions .btn-install i {
+            margin-right: 8px;
         }
-        .shadow-medium {
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10);
+        .install-prompt-card .install-actions .btn-dismiss-install {
+            padding: 14px 24px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            background: #f1f5f9;
+            color: #64748b;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
         }
-        .shadow-heavy {
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.16);
+        .install-prompt-card .install-actions .btn-dismiss-install:hover {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+        .install-prompt-card .install-actions .btn-dismiss-install:active {
+            transform: scale(0.96);
+        }
+        .install-prompt-card .install-close-x {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: color 0.2s;
+            padding: 4px 8px;
+        }
+        .install-prompt-card .install-close-x:hover {
+            color: #0f172a;
         }
 
         /* ─── RESPONSIVE ─── */
         @media (max-width: 768px) {
             .sidebar-menu-container {
-                width: 250px;
+                width: 280px;
             }
             .sidebar-page-header {
-                padding: 10px 14px;
+                padding: 12px 16px;
             }
             .sidebar-page-header h2 {
-                font-size: 15px;
+                font-size: 17px;
             }
             .sidebar-page-body {
-                padding: 14px;
+                padding: 16px;
             }
             .sidebar-page-body .info-grid {
                 grid-template-columns: 1fr;
             }
             .dashboard-header {
-                padding: 9px 12px;
-                min-height: 50px;
+                padding: 10px 14px;
+                min-height: 56px;
             }
             .header-title {
-                font-size: 13px;
+                font-size: 15px;
             }
             .header-logo {
-                width: 32px;
-                height: 32px;
+                width: 36px;
+                height: 36px;
             }
             .student-info-top {
-                font-size: 10px;
-                padding: 10px 14px;
-                gap: 5px 10px;
+                font-size: 12px;
+                padding: 12px 16px;
+                gap: 6px 12px;
             }
             .home-dashboard {
-                padding: 14px;
-                max-height: calc(100vh - 250px);
-                max-height: calc(100dvh - 250px);
+                padding: 16px;
+                max-height: calc(100vh - 280px);
+                max-height: calc(100dvh - 280px);
             }
             .home-dashboard .dashboard-grid {
                 grid-template-columns: 1fr;
@@ -2248,20 +2306,20 @@
                 grid-template-columns: 1fr;
             }
             .dashboard-content {
-                padding: 7px 10px 14px;
-                gap: 10px;
+                padding: 8px 12px 16px;
+                gap: 12px;
             }
             .sidebar-page-body .readonly-form .field-row {
                 flex-direction: column;
-                padding: 7px 0;
+                padding: 8px 0;
             }
             .sidebar-page-body .readonly-form .field-label {
                 width: 100%;
-                margin-bottom: 1px;
+                margin-bottom: 2px;
             }
             .teveta-form-container .form-field {
                 flex-direction: column;
-                gap: 3px;
+                gap: 4px;
             }
             .teveta-form-container .form-field .field-label {
                 min-width: auto;
@@ -2288,49 +2346,15 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
-            .page {
-                padding: 22px 18px;
-            }
-            .intake-grid {
-                gap: 12px;
-            }
-            .intake-btn,
-            .shortcourse-btn {
-                font-size: 12px;
-                padding: 12px 8px;
-            }
-            .intake-btn i {
-                font-size: 24px;
-            }
-            .short-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-            .short-item {
-                padding: 10px 8px;
-            }
-            .short-item .short-title {
-                font-size: 11px;
-            }
-            .program-card {
-                padding: 12px 14px;
-            }
-            .program-card .prog-title {
-                font-size: 13px;
-            }
-            .search-input {
-                padding: 10px 14px;
-                font-size: 12px;
-            }
         }
         @media (max-width: 480px) {
             .dashboard-header {
                 flex-wrap: wrap;
-                gap: 3px;
-                padding: 7px 10px;
+                gap: 4px;
+                padding: 8px 12px;
             }
             .header-title {
-                font-size: 11px;
+                font-size: 13px;
                 order: 3;
                 width: 100%;
                 text-align: center;
@@ -2342,155 +2366,40 @@
                 order: 2;
             }
             .sidebar-menu-container {
-                width: 230px;
+                width: 260px;
             }
             .home-dashboard {
-                max-height: calc(100vh - 230px);
-                max-height: calc(100dvh - 230px);
+                max-height: calc(100vh - 260px);
+                max-height: calc(100dvh - 260px);
             }
-            .page {
-                padding: 18px 14px;
+            .install-prompt-card {
+                padding: 28px 20px 24px;
             }
-            .intake-grid {
-                gap: 10px;
+            .install-prompt-card h2 {
+                font-size: 19px;
             }
-            .intake-btn,
-            .shortcourse-btn {
-                font-size: 11px;
-                padding: 10px 6px;
-            }
-            .intake-btn i {
-                font-size: 20px;
-            }
-            .short-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 6px;
-            }
-            .short-item {
-                padding: 8px 6px;
-            }
-            .short-item .short-title {
-                font-size: 10px;
-            }
-            .short-item .short-days {
-                font-size: 9px;
-            }
-            .short-item .short-apply {
-                font-size: 9px;
-                padding: 4px 10px;
-            }
-            .program-card {
-                padding: 10px 12px;
-            }
-            .program-card .prog-title {
-                font-size: 12px;
-            }
-            .program-card .prog-meta {
-                font-size: 10px;
-            }
-            .search-input {
-                padding: 8px 12px;
-                font-size: 11px;
-            }
-            .title h1 {
-                font-size: 16px;
-            }
-            .btn {
-                font-size: 12px;
-                padding: 12px 18px;
-                min-height: 40px;
-            }
-            .btn i {
-                font-size: 13px;
-                margin-right: 7px;
-            }
-            .main-logo {
-                width: 70px;
-                height: 70px;
-            }
-            .modal {
-                padding: 24px 20px 20px;
-            }
-            .modal-header .modal-title {
-                font-size: 16px;
-            }
-            .form-input {
-                padding: 8px 10px;
-                font-size: 11px;
-            }
-            .btn-submit {
-                padding: 10px;
-                font-size: 12px;
-            }
-            .student-info-top {
-                font-size: 9px;
-                padding: 8px 12px;
-                gap: 4px 8px;
-            }
-            .home-dashboard {
-                padding: 12px;
-                max-height: calc(100vh - 220px);
-                max-height: calc(100dvh - 220px);
-            }
-            .home-dashboard h2 {
-                font-size: 16px;
-                padding-bottom: 8px;
-            }
-            .home-dashboard .dashboard-grid .card {
-                padding: 10px;
-            }
-            .home-dashboard .dashboard-grid .card .card-icon {
-                font-size: 18px;
-            }
-            .home-dashboard .dashboard-grid .card .card-title {
-                font-size: 11px;
-            }
-            .home-dashboard .dashboard-grid .card .card-value {
-                font-size: 10px;
-            }
-            .home-dashboard .quick-info .info-row {
-                font-size: 10px;
-            }
-            .sidebar-page-header h2 {
+            .install-prompt-card .install-actions .btn-install {
+                padding: 12px 28px;
                 font-size: 14px;
-            }
-            .sidebar-page-body {
-                padding: 12px;
-            }
-            .sidebar-page-body h3 {
-                font-size: 14px;
-            }
-            .sidebar-page-body table {
-                font-size: 10px;
-            }
-            .sidebar-page-body th,
-            .sidebar-page-body td {
-                padding: 5px 6px;
-            }
-            .sidebar-page-body .info-grid .item {
-                padding: 8px 10px;
-            }
-            .sidebar-page-body .info-grid .item .value {
-                font-size: 11px;
             }
         }
         @media (min-height: 800px) {
             .home-dashboard {
-                max-height: calc(100vh - 290px);
-                max-height: calc(100dvh - 290px);
+                max-height: calc(100vh - 320px);
+                max-height: calc(100dvh - 320px);
             }
         }
         @supports (padding: env(safe-area-inset-top)) {
             .dashboard-header {
-                padding-left: calc(18px + env(safe-area-inset-left));
-                padding-right: calc(18px + env(safe-area-inset-right));
+                padding-left: calc(20px + env(safe-area-inset-left));
+                padding-right: calc(20px + env(safe-area-inset-right));
             }
             .sidebar-menu-container {
                 padding-left: calc(0px + env(safe-area-inset-left));
             }
             .sidebar-page-header {
-                padding-left: calc(21px + env(safe-area-inset-left));
-                padding-right: calc(21px + env(safe-area-inset-right));
+                padding-left: calc(24px + env(safe-area-inset-left));
+                padding-right: calc(24px + env(safe-area-inset-right));
             }
         }
         .page::-webkit-scrollbar {
@@ -2520,6 +2429,20 @@
     <!-- BACKGROUND -->
     <div class="bg-layer" aria-hidden="true"></div>
 
+    <!-- ─── INSTALL PROMPT OVERLAY ──────────────────────────────── -->
+    <div class="install-prompt-overlay" id="installPromptOverlay">
+        <div class="install-prompt-card">
+            <button class="install-close-x" id="installDismissX" aria-label="Dismiss">&times;</button>
+            <img src="logo.png" class="install-logo" alt="NORTEC Logo" />
+            <h2><span class="accent">NORTEC</span> App</h2>
+            <p>Install the Northern Technical College dashboard for quick access and offline support.</p>
+            <div class="install-actions">
+                <button class="btn-install" id="installBtn"><i class="fas fa-download"></i> Install App</button>
+                <button class="btn-dismiss-install" id="installDismissBtn">Not now</button>
+            </div>
+        </div>
+    </div>
+
     <!-- ─── MAIN PAGE ─── -->
     <div class="page" id="mainPage">
         <div class="logo-wrapper">
@@ -2529,12 +2452,12 @@
             <h1>WELCOME TO<br /><span class="accent">NORTHERN</span> TECHNICAL COLLEGE</h1>
             <div class="sub">Excellence in Technical Education</div>
         </div>
-        <div class="spacer" style="flex:1; min-height:10px;"></div>
+        <div class="spacer" style="flex:1; min-height:12px;"></div>
         <div class="button-group">
             <button class="btn btn-enroll" id="enrollBtn"><i class="fas fa-graduation-cap"></i> Enroll</button>
             <button class="btn btn-login" id="loginBtn"><i class="fas fa-lock"></i> Login</button>
         </div>
-        <div class="footer-note" style="margin-top:14px; font-size:9px; color:rgba(255,255,255,0.20); text-align:center; letter-spacing:0.5px; flex-shrink:0;">© 2026 Northern Technical College</div>
+        <div class="footer-note" style="margin-top:16px; font-size:10px; color:rgba(255,255,255,0.20); text-align:center; letter-spacing:0.5px; flex-shrink:0;">© 2026 Northern Technical College</div>
     </div>
 
     <!-- ─── ENROLL PAGE ─── -->
@@ -2552,8 +2475,8 @@
             <button class="intake-btn" data-intake="september"><i class="fas fa-tree"></i> September</button>
             <button class="intake-btn" data-intake="august"><i class="fas fa-globe"></i> August (Distance)</button>
         </div>
-        <div style="width:100%; max-width:420px; margin-top:10px; flex-shrink:0; padding:0 3px;">
-            <button class="intake-btn shortcourse-btn" id="shortCoursesBtn" style="aspect-ratio:auto; padding:12px; border-radius:16px; width:100%;"><i class="fas fa-clock"></i> Short Courses</button>
+        <div style="width:100%; max-width:420px; margin-top:12px; flex-shrink:0; padding:0 4px;">
+            <button class="intake-btn shortcourse-btn" id="shortCoursesBtn" style="aspect-ratio:auto; padding:14px; border-radius:16px; width:100%;"><i class="fas fa-clock"></i> Short Courses</button>
         </div>
         <div class="back-row">
             <button class="btn-back" id="backFromEnroll"><i class="fas fa-arrow-left"></i> Back</button>
@@ -2620,7 +2543,7 @@
             <div class="dashboard-content">
                 <div class="home-dashboard" id="homeDashboard">
                     <h2><span class="accent">📊</span> Dashboard Overview</h2>
-                    <p style="color:#64748b; font-size:12px; margin-bottom:10px;">Welcome back, <strong style="color:#3b82f6;">Jubel Mobela</strong>! Here's your current academic overview.</p>
+                    <p style="color:#64748b; font-size:14px; margin-bottom:12px;">Welcome back, <strong style="color:#3b82f6;">Jubel Mobela</strong>! Here's your current academic overview.</p>
 
                     <div class="dashboard-grid">
                         <div class="card">
@@ -2745,30 +2668,30 @@
         </div>
         <div class="sidebar-page-body">
             <h3><i class="fas fa-chalkboard"></i> Current Classes</h3>
-            <div style="display:grid; gap:7px;">
-                <div style="background:#f8fafc; border-radius:10px; padding:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
-                    <div><strong>Digital Electronics II</strong> <span style="font-size:10px; color:#64748b;">(41.1)</span><br /><span style="font-size:10px; color:#3b82f6;">Lecturer: Mr. Banda</span></div>
-                    <div style="font-size:10px; color:#3b82f6; font-weight:600;">Mon 10:00</div>
+            <div style="display:grid; gap:8px;">
+                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Digital Electronics II</strong> <span style="font-size:11px; color:#64748b;">(41.1)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Banda</span></div>
+                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Mon 10:00</div>
                 </div>
-                <div style="background:#f8fafc; border-radius:10px; padding:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
-                    <div><strong>Operating Systems</strong> <span style="font-size:10px; color:#64748b;">(41.3)</span><br /><span style="font-size:10px; color:#3b82f6;">Lecturer: Dr. Mwansa</span></div>
-                    <div style="font-size:10px; color:#3b82f6; font-weight:600;">Tue 08:00</div>
+                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Operating Systems</strong> <span style="font-size:11px; color:#64748b;">(41.3)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Dr. Mwansa</span></div>
+                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Tue 08:00</div>
                 </div>
-                <div style="background:#f8fafc; border-radius:10px; padding:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
-                    <div><strong>Programming & Database Tech</strong> <span style="font-size:10px; color:#64748b;">(41.4)</span><br /><span style="font-size:10px; color:#3b82f6;">Lecturer: Mr. Tembo</span></div>
-                    <div style="font-size:10px; color:#3b82f6; font-weight:600;">Wed 14:00</div>
+                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Programming & Database Tech</strong> <span style="font-size:11px; color:#64748b;">(41.4)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Tembo</span></div>
+                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Wed 14:00</div>
                 </div>
-                <div style="background:#f8fafc; border-radius:10px; padding:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
-                    <div><strong>Networks & Communications</strong> <span style="font-size:10px; color:#64748b;">(41.5)</span><br /><span style="font-size:10px; color:#3b82f6;">Lecturer: Ms. Phiri</span></div>
-                    <div style="font-size:10px; color:#3b82f6; font-weight:600;">Thu 09:00</div>
+                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Networks & Communications</strong> <span style="font-size:11px; color:#64748b;">(41.5)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Ms. Phiri</span></div>
+                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Thu 09:00</div>
                 </div>
-                <div style="background:#f8fafc; border-radius:10px; padding:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
-                    <div><strong>Computer Hardware Maintenance</strong> <span style="font-size:10px; color:#64748b;">(41.6)</span><br /><span style="font-size:10px; color:#3b82f6;">Lecturer: Mr. Zulu</span></div>
-                    <div style="font-size:10px; color:#3b82f6; font-weight:600;">Fri 11:00</div>
+                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Computer Hardware Maintenance</strong> <span style="font-size:11px; color:#64748b;">(41.6)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Zulu</span></div>
+                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Fri 11:00</div>
                 </div>
-                <div style="background:#f8fafc; border-radius:10px; padding:10px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
-                    <div><strong>Management Information Systems</strong> <span style="font-size:10px; color:#64748b;">(41.7)</span><br /><span style="font-size:10px; color:#3b82f6;">Lecturer: Dr. Mulenga</span></div>
-                    <div style="font-size:10px; color:#3b82f6; font-weight:600;">Thu 13:00</div>
+                <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
+                    <div><strong>Management Information Systems</strong> <span style="font-size:11px; color:#64748b;">(41.7)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Dr. Mulenga</span></div>
+                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Thu 13:00</div>
                 </div>
             </div>
         </div>
@@ -2823,7 +2746,7 @@
                     </tbody>
                 </table>
             </div>
-            <div style="margin-top:7px; font-size:10px; color:#64748b; text-align:center;">* CA Meter shows percentage of CA score out of 40%</div>
+            <div style="margin-top:8px; font-size:11px; color:#64748b; text-align:center;">* CA Meter shows percentage of CA score out of 40%</div>
         </div>
     </div>
 
@@ -2836,7 +2759,7 @@
         </div>
         <div class="sidebar-page-body">
             <h3><i class="fas fa-user-circle"></i> Profile Information</h3>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:7px; font-size:11px;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:13px;">
                 <div style="color:#64748b;">Full Name:</div><div style="color:#0f172a; font-weight:600;">JUBEL MOBELA</div>
                 <div style="color:#64748b;">Student Number:</div><div style="color:#0f172a; font-weight:600;">2201001157</div>
                 <div style="color:#64748b;">ID Number:</div><div style="color:#0f172a; font-weight:600;">622589/67/1</div>
@@ -2862,22 +2785,22 @@
         </div>
         <div class="sidebar-page-body">
             <h3><i class="fas fa-bullhorn"></i> Official Notice</h3>
-            <div style="background:#ffffff; border-radius:16px; padding:21px; border:1px solid #dbeafe; box-shadow:0 4px 20px rgba(59,130,246,0.08); animation:floatForm 4s ease-in-out infinite;">
-                <div style="text-align:center; margin-bottom:14px;">
-                    <h3 style="font-size:16px; font-weight:800; color:#0f172a; border-bottom:none; padding-bottom:0;">NORTEC</h3>
-                    <div style="font-size:10px; color:#64748b; letter-spacing:1px;">NORTHERN TECHNICAL COLLEGE</div>
-                    <div style="font-size:10px; color:#64748b; margin-top:3px;">Skills • Innovation • Empowerment</div>
-                    <div style="font-size:19px; font-weight:900; color:#dc2626; margin:10px 0 3px;">NOTICE OF<br />CHANGE<br />OF GRADUATION DATE</div>
+            <div style="background:#ffffff; border-radius:16px; padding:24px; border:1px solid #dbeafe; box-shadow:0 2px 12px rgba(59,130,246,0.08);">
+                <div style="text-align:center; margin-bottom:16px;">
+                    <h3 style="font-size:18px; font-weight:800; color:#0f172a; border-bottom:none; padding-bottom:0;">NORTEC</h3>
+                    <div style="font-size:12px; color:#64748b; letter-spacing:1px;">NORTHERN TECHNICAL COLLEGE</div>
+                    <div style="font-size:11px; color:#64748b; margin-top:4px;">Skills • Innovation • Empowerment</div>
+                    <div style="font-size:22px; font-weight:900; color:#dc2626; margin:12px 0 4px;">NOTICE OF<br />CHANGE<br />OF GRADUATION DATE</div>
                 </div>
-                <p style="font-size:11px; line-height:1.6; color:#334155; margin:7px 0;">The Management of NORTEC wishes to inform all graduating students, parents, guardians, invited guests, and the general public that the Graduation Ceremony which was scheduled to take place on 5th June 2026 at the NORTEC Graduation Square has been postponed.</p>
-                <p style="font-size:11px; font-weight:700; color:#0f172a; margin:7px 0;">THE CEREMONY WILL NOW TAKE PLACE AS FOLLOWS:</p>
-                <p style="font-size:11px; color:#334155;"><strong style="color:#3b82f6;">DATE:</strong> 15th July 2026</p>
-                <p style="font-size:11px; color:#334155;"><strong style="color:#3b82f6;">VENUE:</strong> LEVY MWANAWASA STADIUM</p>
-                <p style="font-size:11px; color:#334155;"><strong style="color:#3b82f6;">TIME:</strong> 08:30 HOURS</p>
-                <p style="font-size:10px; color:#64748b; margin:7px 0;">This change has been necessitated by the ongoing road works currently being conducted along CHELA ROAD.</p>
-                <p style="font-size:10px; color:#64748b; margin:7px 0;">Management regrets any inconvenience caused and appreciates your understanding and cooperation.</p>
-                <div style="font-size:10px; color:#64748b; text-align:center; margin-top:10px; font-style:italic;">Issued by: MANAGEMENT<br />NORTHERN TECHNICAL COLLEGE (NORTEC)</div>
-                <div style="font-size:9px; color:#94a3b8; text-align:center; margin-top:7px;">Creative Minds. | Creative Hands. | Building Competence. Inspiring Success.</div>
+                <p style="font-size:13px; line-height:1.6; color:#334155; margin:8px 0;">The Management of NORTEC wishes to inform all graduating students, parents, guardians, invited guests, and the general public that the Graduation Ceremony which was scheduled to take place on 5th June 2026 at the NORTEC Graduation Square has been postponed.</p>
+                <p style="font-size:13px; font-weight:700; color:#0f172a; margin:8px 0;">THE CEREMONY WILL NOW TAKE PLACE AS FOLLOWS:</p>
+                <p style="font-size:13px; color:#334155;"><strong style="color:#3b82f6;">DATE:</strong> 15th July 2026</p>
+                <p style="font-size:13px; color:#334155;"><strong style="color:#3b82f6;">VENUE:</strong> LEVY MWANAWASA STADIUM</p>
+                <p style="font-size:13px; color:#334155;"><strong style="color:#3b82f6;">TIME:</strong> 08:30 HOURS</p>
+                <p style="font-size:12px; color:#64748b; margin:8px 0;">This change has been necessitated by the ongoing road works currently being conducted along CHELA ROAD.</p>
+                <p style="font-size:12px; color:#64748b; margin:8px 0;">Management regrets any inconvenience caused and appreciates your understanding and cooperation.</p>
+                <div style="font-size:11px; color:#64748b; text-align:center; margin-top:12px; font-style:italic;">Issued by: MANAGEMENT<br />NORTHERN TECHNICAL COLLEGE (NORTEC)</div>
+                <div style="font-size:10px; color:#94a3b8; text-align:center; margin-top:8px;">Creative Minds. | Creative Hands. | Building Competence. Inspiring Success.</div>
             </div>
         </div>
     </div>
@@ -3043,7 +2966,7 @@
                 <tr><td>SI-20044214</td><td>2025-09-10</td><td>Invoice</td><td>HIRE OF GOWN</td><td>1,000</td><td></td><td>1,200</td></tr>
                 <tr><td>SI-20044474</td><td>2025-09-25</td><td>Invoice</td><td>HIRE OF GOWN</td><td>600</td><td></td><td>1,800</td></tr>
             </table>
-            <div style="margin-top:14px; text-align:right; font-size:18px; font-weight:800; color:#0f172a; border-top:2px solid #3b82f6; padding-top:10px;">
+            <div style="margin-top:16px; text-align:right; font-size:20px; font-weight:800; color:#0f172a; border-top:2px solid #3b82f6; padding-top:12px;">
                 CURRENT BALANCE: <span class="balance-amount">K1,800</span>
             </div>
 
@@ -3506,7 +3429,7 @@
                 <div class="readonly-form" id="tevetaReadonlyForm">
                     <!-- Populated by JavaScript -->
                 </div>
-                <p style="margin-top:10px; font-size:10px; color:#64748b;"><i class="fas fa-lock"></i> This form is now read-only. You cannot edit the details.</p>
+                <p style="margin-top:12px; font-size:12px; color:#64748b;"><i class="fas fa-lock"></i> This form is now read-only. You cannot edit the details.</p>
             </div>
 
             <h3><i class="fas fa-upload"></i> Upload TEVETA Exam Fee Receipt</h3>
@@ -3764,7 +3687,7 @@
                                 <div class="file-name"></div>
                             </div>
                         </div>
-                        <p style="font-size:10px; color:#64748b; margin-top:7px;"><span class="highlight">*</span> Recommendation letter is mandatory.</p>
+                        <p style="font-size:12px; color:#64748b; margin-top:8px;"><span class="highlight">*</span> Recommendation letter is mandatory.</p>
                     </div>
                 </div>
 
@@ -3795,7 +3718,7 @@
                             <button class="btn-clear-signature" id="clearSignature"><i class="fas fa-undo"></i> Clear</button>
                         </div>
 
-                        <div class="form-row" style="margin-top:10px;">
+                        <div class="form-row" style="margin-top:12px;">
                             <div><label>Date of Application</label><input type="date" id="appDate" /></div>
                         </div>
 
@@ -3833,15 +3756,109 @@
                     <label class="checkbox-wrap"><input type="checkbox" id="rememberMe" /> Remember me</label>
                     <a href="#" class="forgot-link" id="forgotLink">Forgot Password?</a>
                 </div>
-                <button type="submit" class="btn-submit">Sign In <i class="fas fa-arrow-right" style="margin-left:7px;"></i></button>
+                <button type="submit" class="btn-submit">Sign In <i class="fas fa-arrow-right" style="margin-left:8px;"></i></button>
                 <div class="support-link">Need help? <a href="#" id="supportLink">Contact Support</a></div>
             </form>
         </div>
     </div>
 
+    <!-- ─── SCRIPTS ────────────────────────────────────────────────── -->
     <script>
         (function() {
             'use strict';
+
+            // ─── INSTALL PROMPT ────────────────────────────────────
+            let deferredPrompt = null;
+            const installOverlay = document.getElementById('installPromptOverlay');
+            const installBtn = document.getElementById('installBtn');
+            const installDismissBtn = document.getElementById('installDismissBtn');
+            const installDismissX = document.getElementById('installDismissX');
+
+            // Check if the app is already installed
+            function isAppInstalled() {
+                // If in standalone mode (PWA installed)
+                if (window.matchMedia('(display-mode: standalone)').matches) return true;
+                // If in fullscreen (iOS PWA)
+                if (window.navigator.standalone === true) return true;
+                // Check localStorage flag
+                if (localStorage.getItem('pwaInstalled') === 'true') return true;
+                return false;
+            }
+
+            // Show the install prompt if not installed
+            function showInstallPrompt() {
+                if (!isAppInstalled()) {
+                    installOverlay.classList.add('active');
+                }
+            }
+
+            // Hide the install prompt
+            function hideInstallPrompt() {
+                installOverlay.classList.remove('active');
+                localStorage.setItem('pwaInstalled', 'true');
+            }
+
+            // Listen for the beforeinstallprompt event
+            window.addEventListener('beforeinstallprompt', function(e) {
+                e.preventDefault();
+                deferredPrompt = e;
+                // Show the prompt if not installed
+                if (!isAppInstalled()) {
+                    installOverlay.classList.add('active');
+                }
+            });
+
+            // Handle install button click
+            installBtn.addEventListener('click', function() {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then(function(choiceResult) {
+                        if (choiceResult.outcome === 'accepted') {
+                            localStorage.setItem('pwaInstalled', 'true');
+                            hideInstallPrompt();
+                        } else {
+                            // User dismissed the browser prompt
+                            localStorage.setItem('pwaInstalled', 'true');
+                            hideInstallPrompt();
+                        }
+                        deferredPrompt = null;
+                    });
+                } else {
+                    // Fallback: just hide the prompt and set flag
+                    localStorage.setItem('pwaInstalled', 'true');
+                    hideInstallPrompt();
+                    alert('To install, look for "Add to Home Screen" in your browser menu.');
+                }
+            });
+
+            // Dismiss handlers
+            installDismissBtn.addEventListener('click', function() {
+                localStorage.setItem('pwaInstalled', 'true');
+                hideInstallPrompt();
+            });
+
+            installDismissX.addEventListener('click', function() {
+                localStorage.setItem('pwaInstalled', 'true');
+                hideInstallPrompt();
+            });
+
+            // Show prompt on load if not installed and not already dismissed
+            // We check a separate flag for "dismissed" to avoid showing again
+            if (!localStorage.getItem('pwaInstalled') && !isAppInstalled()) {
+                // Small delay to let the page render
+                setTimeout(showInstallPrompt, 1200);
+            }
+
+            // ─── SERVICE WORKER REGISTRATION ──────────────────────
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(function(reg) {
+                        console.log('✅ Service Worker registered:', reg);
+                    })
+                    .catch(function(err) {
+                        console.log('⚠️ Service Worker registration failed:', err);
+                    });
+            }
 
             // ─── DATA ────────────────────────────────────────────────
             const programmes = [
@@ -4124,7 +4141,7 @@
             // ─── NAVIGATION ─────────────────────────────────────────
             function showPage(page) {
                 [mainPage, enrollPage, programsPage, shortPage, dashboardPage].forEach(p => p.classList.remove('active',
-                'hidden'));
+                    'hidden'));
                 if (page === mainPage) {
                     mainPage.classList.remove('hidden');
                     enrollPage.classList.remove('active');
@@ -4168,7 +4185,7 @@
                 programListContainer.innerHTML = '';
                 if (list.length === 0) {
                     programListContainer.innerHTML =
-                        '<div style="color:rgba(255,255,255,0.6);text-align:center;padding:18px;">No programmes available for this intake.</div>';
+                        '<div style="color:rgba(255,255,255,0.6);text-align:center;padding:20px;">No programmes available for this intake.</div>';
                     return;
                 }
                 list.forEach(prog => {
@@ -4365,8 +4382,8 @@
 
                 function resizeCanvas() {
                     const rect = canvas.parentElement.getBoundingClientRect();
-                    const width = rect.width - 7;
-                    const height = 108;
+                    const width = rect.width - 8;
+                    const height = 120;
                     canvas.width = width * 2;
                     canvas.height = height * 2;
                     canvas.style.width = width + 'px';
@@ -4437,7 +4454,7 @@
                 for (const [dept, courses] of Object.entries(grouped)) {
                     const header = document.createElement('div');
                     header.style.cssText =
-                        'grid-column:1/-1; font-weight:700; font-size:14px; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.3); margin-top:7px;';
+                        'grid-column:1/-1; font-weight:700; font-size:16px; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.3); margin-top:8px;';
                     header.textContent = dept + ' Department';
                     shortCoursesContainer.appendChild(header);
                     courses.forEach(c => {
@@ -4630,8 +4647,7 @@
                 document.body.style.overflow = 'hidden'; });
             loginClose.addEventListener('click', () => { loginModal.classList.remove('active');
                 document.body.style.overflow = ''; });
-            loginModal.addEventListener('click', (e) => { if (e.target === loginModal) { loginModal.classList.remove(
-                        'active');
+            loginModal.addEventListener('click', (e) => { if (e.target === loginModal) { loginModal.classList.remove('active');
                     document.body.style.overflow = ''; } });
 
             passwordToggle.addEventListener('click', function() {
@@ -4660,7 +4676,9 @@
                     if (icon) icon.className = 'fas fa-eye';
                     showDashboard();
                 } else {
-                    alert('❌ Invalid username or password. Please try again.\n\nHint: Student Number: 2201001157, Password: PASSWORD');
+                    alert(
+                        '❌ Invalid username or password. Please try again.\n\nHint: Student Number: 2201001157, Password: PASSWORD'
+                        );
                 }
             });
 
@@ -4732,7 +4750,7 @@
 
             // ─── INIT ─────────────────────────────────────────────
             showMain();
-            console.log('✅ Northern Technical College – full dashboard with notice in sidebar, home dashboard, classes/CA/profile as sidebar pages.');
+            console.log('✅ Northern Technical College – full dashboard with PWA install prompt.');
         })();
     </script>
 </body>
