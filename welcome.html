@@ -3096,6 +3096,44 @@
             transform: translateX(22px);
         }
 
+        /* ─── FLOATING SIDEBAR TOGGLE (always visible) ──────────── */
+        .floating-sidebar-toggle {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 150;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            display: none;
+        }
+        .floating-sidebar-toggle:hover {
+            background: #ffffff;
+            box-shadow: 0 6px 24px rgba(59, 130, 246, 0.15);
+            transform: scale(1.05);
+        }
+        [data-theme="light"] .floating-sidebar-toggle {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: #dbeafe;
+        }
+
+        /* Show floating toggle on all pages except dashboard (which has its own) */
+        .page:not(#dashboardPage) .floating-sidebar-toggle {
+            display: flex;
+        }
+
         /* ─── RESPONSIVE ─── */
         @media (max-width: 768px) {
             .sidebar-menu-container {
@@ -3191,6 +3229,13 @@
             .alumni-grid {
                 grid-template-columns: 1fr 1fr;
             }
+            .floating-sidebar-toggle {
+                top: 12px;
+                left: 12px;
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
         }
         @media (max-width: 480px) {
             .dashboard-header {
@@ -3243,6 +3288,13 @@
                 font-size: 9px;
                 padding: 4px;
             }
+            .floating-sidebar-toggle {
+                top: 10px;
+                left: 10px;
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
         }
         @media (min-height: 800px) {
             .home-dashboard {
@@ -3289,6 +3341,11 @@
 
     <!-- BACKGROUND -->
     <div class="bg-layer" aria-hidden="true"></div>
+
+    <!-- ─── FLOATING SIDEBAR TOGGLE (always visible on non-dashboard pages) ─── -->
+    <button class="floating-sidebar-toggle" id="floatingSidebarToggle" aria-label="Toggle sidebar">
+        <i class="fas fa-bars"></i>
+    </button>
 
     <!-- ─── INSTALL PROMPT OVERLAY ──────────────────────────────── -->
     <div class="install-prompt-overlay" id="installPromptOverlay">
@@ -3517,17 +3574,28 @@
                     <div class="label">Status</div>
                     <div class="value"><span class="status-badge approved">Approved</span></div>
                 </div>
+                <div class="item">
+                    <div class="label">Intake</div>
+                    <div class="value">January 2022</div>
+                </div>
+                <div class="item">
+                    <div class="label">Mode of Study</div>
+                    <div class="value">Full-time</div>
+                </div>
             </div>
 
             <h3><i class="fas fa-graduation-cap"></i> Admission Details</h3>
             <p>Your application for the <strong>Diploma in Computer Systems Engineering</strong> program has been reviewed and approved.</p>
             <p>You were admitted on <strong>20th January 2022</strong> and commenced your studies on <strong>1st February 2022</strong>.</p>
+            <p>Your program duration is <strong>2 years</strong>, with expected completion in <strong>December 2026</strong>.</p>
 
             <h3><i class="fas fa-file-pdf"></i> Documents</h3>
             <ul>
-                <li>Admission Letter: <a href="#" style="color:#3b82f6;">Download (Simulated)</a></li>
+                <li>Admission Letter: <a href="#" style="color:#3b82f6;">Download</a></li>
                 <li>Student ID Card: Collected</li>
                 <li>Academic Transcript: Available on request</li>
+                <li>Course Registration Form: Submitted</li>
+                <li>Fee Structure: Available in Finance section</li>
             </ul>
 
             <h3><i class="fas fa-info-circle"></i> Important Notes</h3>
@@ -3535,6 +3603,15 @@
                 <li>Your admission is valid for the duration of your program.</li>
                 <li>Any changes to your program must be submitted to the admissions office.</li>
                 <li>For any inquiries, contact admissions@northerntech.edu.zm</li>
+                <li>Ensure all fees are cleared before the end of each term.</li>
+            </ul>
+
+            <h3><i class="fas fa-calendar-alt"></i> Key Dates</h3>
+            <ul>
+                <li>Term 1 Start: 1st February 2026</li>
+                <li>Term 2 Start: 1st May 2026</li>
+                <li>Term 3 Start: 1st September 2026</li>
+                <li>Graduation Ceremony: 15th July 2026</li>
             </ul>
         </div>
     </div>
@@ -3543,41 +3620,57 @@
     <div class="sidebar-page" id="page-classes">
         <div class="sidebar-page-header">
             <img src="logo.png" class="page-logo" alt="NORTEC" />
-            <h2><span class="accent">Classes</span> (Simulated)</h2>
+            <h2><span class="accent">Classes</span></h2>
             <button class="sidebar-page-close" data-page-close="classes"><i class="fas fa-times"></i></button>
         </div>
         <div class="sidebar-page-body">
-            <h3><i class="fas fa-chalkboard"></i> Current Classes</h3>
+            <h3><i class="fas fa-chalkboard"></i> Current Classes – Term 2 2026</h3>
             <div style="display:grid; gap:8px;">
                 <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                    <div><strong>Digital Electronics II</strong> <span style="font-size:11px; color:#64748b;">(41.1)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Banda</span></div>
-                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Mon 10:00</div>
+                    <div><strong>Digital Electronics II</strong> <span style="font-size:11px; color:#64748b;">(41.1)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Banda</span><br /><span style="font-size:11px; color:#64748b;">Credits: 4</span></div>
+                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Mon 10:00 • Hall A</div>
                 </div>
                 <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                    <div><strong>Operating Systems</strong> <span style="font-size:11px; color:#64748b;">(41.3)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Dr. Mwansa</span></div>
-                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Tue 08:00</div>
+                    <div><strong>Operating Systems</strong> <span style="font-size:11px; color:#64748b;">(41.3)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Dr. Mwansa</span><br /><span style="font-size:11px; color:#64748b;">Credits: 4</span></div>
+                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Tue 08:00 • Hall B</div>
                 </div>
                 <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                    <div><strong>Programming & Database Tech</strong> <span style="font-size:11px; color:#64748b;">(41.4)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Tembo</span></div>
-                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Wed 14:00</div>
+                    <div><strong>Programming & Database Tech</strong> <span style="font-size:11px; color:#64748b;">(41.4)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Tembo</span><br /><span style="font-size:11px; color:#64748b;">Credits: 4</span></div>
+                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Wed 14:00 • Lab 1</div>
                 </div>
                 <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                    <div><strong>Networks & Communications</strong> <span style="font-size:11px; color:#64748b;">(41.5)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Ms. Phiri</span></div>
-                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Thu 09:00</div>
+                    <div><strong>Networks & Communications</strong> <span style="font-size:11px; color:#64748b;">(41.5)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Ms. Phiri</span><br /><span style="font-size:11px; color:#64748b;">Credits: 4</span></div>
+                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Thu 09:00 • Hall A</div>
                 </div>
                 <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                    <div><strong>Computer Hardware Maintenance</strong> <span style="font-size:11px; color:#64748b;">(41.6)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Zulu</span></div>
-                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Fri 11:00</div>
+                    <div><strong>Computer Hardware Maintenance</strong> <span style="font-size:11px; color:#64748b;">(41.6)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Mr. Zulu</span><br /><span style="font-size:11px; color:#64748b;">Credits: 4</span></div>
+                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Fri 11:00 • Lab 2</div>
                 </div>
                 <div style="background:#f8fafc; border-radius:10px; padding:12px; display:flex; justify-content:space-between; align-items:center; border:1px solid #e2e8f0;">
-                    <div><strong>Management Information Systems</strong> <span style="font-size:11px; color:#64748b;">(41.7)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Dr. Mulenga</span></div>
-                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Thu 13:00</div>
+                    <div><strong>Management Information Systems</strong> <span style="font-size:11px; color:#64748b;">(41.7)</span><br /><span style="font-size:11px; color:#3b82f6;">Lecturer: Dr. Mulenga</span><br /><span style="font-size:11px; color:#64748b;">Credits: 3</span></div>
+                    <div style="font-size:11px; color:#3b82f6; font-weight:600;">Thu 13:00 • Hall B</div>
                 </div>
             </div>
+
+            <h3><i class="fas fa-clipboard-list"></i> Class Schedule Summary</h3>
+            <ul>
+                <li><strong>Total Classes:</strong> 6</li>
+                <li><strong>Total Credit Hours:</strong> 23</li>
+                <li><strong>Days with Classes:</strong> Monday – Friday</li>
+                <li><strong>Weekend Classes:</strong> None</li>
+            </ul>
+
+            <h3><i class="fas fa-gavel"></i> Class Policies</h3>
+            <ul>
+                <li>Attendance must be above 80% per term.</li>
+                <li>Late submissions for assignments may result in penalties.</li>
+                <li>All classes are conducted in English.</li>
+                <li>Practical sessions are mandatory for lab-based courses.</li>
+            </ul>
         </div>
     </div>
 
-    <!-- CA Page (Enhanced with Grade Breakdown & What-If) -->
+    <!-- CA Page -->
     <div class="sidebar-page" id="page-ca">
         <div class="sidebar-page-header">
             <img src="logo.png" class="page-logo" alt="NORTEC" />
@@ -3628,7 +3721,6 @@
             </div>
             <div style="margin-top:8px; font-size:11px; color:#64748b; text-align:center;">* CA Meter shows percentage of CA score out of 40%</div>
 
-            <!-- ─── INTERACTIVE GRADE BREAKDOWN & WHAT-IF ─── -->
             <h3 style="margin-top:24px;"><i class="fas fa-chart-pie"></i> Grade Breakdown & What-If Calculator</h3>
             <div class="grade-breakdown-box" id="gradeBreakdownBox">
                 <p style="font-weight:600; margin-bottom:8px;">Select a subject to view its component weights:</p>
@@ -3670,7 +3762,7 @@
         </div>
     </div>
 
-    <!-- ─── ASSIGNMENTS PAGE ────────────────────────────────── -->
+    <!-- Assignments Page -->
     <div class="sidebar-page" id="page-assignments">
         <div class="sidebar-page-header">
             <img src="logo.png" class="page-logo" alt="NORTEC" />
@@ -3706,7 +3798,7 @@
                     <input type="file" accept=".pdf,.doc,.docx" data-assign="Networks & Communications - Asst 1" />
                 </div>
             </div>
-            <p style="font-size:11px; color:#64748b; margin-top:4px;">Uploaded files are stored locally (simulated).</p>
+            <p style="font-size:11px; color:#64748b; margin-top:4px;">Uploaded files are stored locally.</p>
         </div>
     </div>
 
@@ -3732,7 +3824,24 @@
                 <div style="color:#64748b;">Date of Birth:</div><div style="color:#0f172a; font-weight:600;">15th March 2000</div>
                 <div style="color:#64748b;">Gender:</div><div style="color:#0f172a; font-weight:600;">Male</div>
                 <div style="color:#64748b;">Nationality:</div><div style="color:#0f172a; font-weight:600;">Zambian</div>
+                <div style="color:#64748b;">Marital Status:</div><div style="color:#0f172a; font-weight:600;">Single</div>
+                <div style="color:#64748b;">Blood Type:</div><div style="color:#0f172a; font-weight:600;">O+</div>
+                <div style="color:#64748b;">Emergency Contact:</div><div style="color:#0f172a; font-weight:600;">Mrs. Chisomo Mobela (Mother) +260 97 765 4321</div>
             </div>
+
+            <h3><i class="fas fa-address-card"></i> Address</h3>
+            <p>Physical Address: Plot 123, Chisamba Road, Lusaka, Zambia</p>
+            <p>Postal Address: P.O. Box 50163, Lusaka, Zambia</p>
+
+            <h3><i class="fas fa-file-alt"></i> Academic Summary</h3>
+            <ul>
+                <li><strong>Program Duration:</strong> 2 years (2022 – 2026)</li>
+                <li><strong>Total Credits Earned:</strong> 104</li>
+                <li><strong>Current GPA:</strong> 3.2 / 4.0</li>
+                <li><strong>Total Subjects:</strong> 17</li>
+                <li><strong>Completed:</strong> 16</li>
+                <li><strong>In Progress:</strong> 1 (Supplementary)</li>
+            </ul>
         </div>
     </div>
 
@@ -3762,6 +3871,14 @@
                 <div style="font-size:11px; color:#64748b; text-align:center; margin-top:12px; font-style:italic;">Issued by: MANAGEMENT<br />NORTHERN TECHNICAL COLLEGE (NORTEC)</div>
                 <div style="font-size:10px; color:#94a3b8; text-align:center; margin-top:8px;">Creative Minds. | Creative Hands. | Building Competence. Inspiring Success.</div>
             </div>
+
+            <h3 style="margin-top:24px;"><i class="fas fa-calendar-alt"></i> Upcoming Events</h3>
+            <ul>
+                <li><strong>20th June 2026</strong> – End of Term 2 Exams begin</li>
+                <li><strong>15th July 2026</strong> – Graduation Ceremony</li>
+                <li><strong>1st September 2026</strong> – Term 3 starts</li>
+                <li><strong>30th June 2026</strong> – Fee payment deadline</li>
+            </ul>
         </div>
     </div>
 
@@ -3775,12 +3892,12 @@
         <div class="sidebar-page-body">
             <h3><i class="fas fa-calendar-alt"></i> End of Term 2 Exams – June 2026</h3>
             <table>
-                <tr><th>Date</th><th>Time</th><th>Subject</th><th>Venue</th></tr>
-                <tr><td>Monday, 20th June</td><td>09:00 - 11:00</td><td>Digital Electronics II (41.1)</td><td>Hall A</td></tr>
-                <tr><td>Tuesday, 21st June</td><td>10:00 - 12:00</td><td>Operating Systems (41.3)</td><td>Hall B</td></tr>
-                <tr><td>Wednesday, 22nd June</td><td>14:00 - 16:00</td><td>Programming & Database Tech (41.4)</td><td>Lab 2</td></tr>
-                <tr><td>Thursday, 23rd June</td><td>09:00 - 11:00</td><td>Networks & Communications (41.5)</td><td>Hall A</td></tr>
-                <tr><td>Friday, 24th June</td><td>11:00 - 13:00</td><td>Computer Hardware Maintenance (41.6)</td><td>Lab 3</td></tr>
+                <tr><th>Date</th><th>Time</th><th>Subject</th><th>Venue</th><th>Duration</th></tr>
+                <tr><td>Monday, 20th June</td><td>09:00 - 11:00</td><td>Digital Electronics II (41.1)</td><td>Hall A</td><td>2 hours</td></tr>
+                <tr><td>Tuesday, 21st June</td><td>10:00 - 12:00</td><td>Operating Systems (41.3)</td><td>Hall B</td><td>2 hours</td></tr>
+                <tr><td>Wednesday, 22nd June</td><td>14:00 - 16:00</td><td>Programming & Database Tech (41.4)</td><td>Lab 2</td><td>2 hours</td></tr>
+                <tr><td>Thursday, 23rd June</td><td>09:00 - 11:00</td><td>Networks & Communications (41.5)</td><td>Hall A</td><td>2 hours</td></tr>
+                <tr><td>Friday, 24th June</td><td>11:00 - 13:00</td><td>Computer Hardware Maintenance (41.6)</td><td>Lab 3</td><td>2 hours</td></tr>
             </table>
 
             <h3><i class="fas fa-clipboard-list"></i> Exam Guidelines</h3>
@@ -3789,10 +3906,19 @@
                 <li>Bring your student ID card for verification.</li>
                 <li>No electronic devices are allowed during exams.</li>
                 <li>All exams are closed book unless stated otherwise.</li>
+                <li>Use only black or blue ink pens.</li>
+                <li>Mobile phones must be switched off and kept in bags.</li>
             </ul>
 
             <h3><i class="fas fa-history"></i> Previous Exam Results</h3>
-            <p>Your Term 1 exam results are available for review on the CA panel.</p>
+            <p>Your Term 1 exam results are available for review on the CA panel. The results show your performance across all subjects with detailed feedback from lecturers.</p>
+
+            <h3><i class="fas fa-gavel"></i> Exam Policies</h3>
+            <ul>
+                <li>No leave of absence during exam week.</li>
+                <li>Medical emergencies must be reported with a doctor's note.</li>
+                <li>Any form of cheating will result in disciplinary action.</li>
+            </ul>
         </div>
     </div>
 
@@ -3818,6 +3944,7 @@
             <h3><i class="fas fa-clipboard-check"></i> Clearance Summary</h3>
             <p><strong>Overall Status:</strong> <span class="highlight-red">✗ NOT CLEARED</span></p>
             <p>You are currently in the middle of the term. Please clear all outstanding issues to complete your clearance.</p>
+            <p><strong>Departments Cleared:</strong> 0 / 6</p>
 
             <h3><i class="fas fa-arrow-right"></i> Next Steps</h3>
             <ol>
@@ -3828,6 +3955,9 @@
                 <li>Return all lab equipment to the Lab Attendant.</li>
                 <li>Submit any missing documents to Admissions.</li>
             </ol>
+
+            <h3><i class="fas fa-clock"></i> Clearance Deadline</h3>
+            <p>All clearance must be completed by <strong>30th June 2026</strong> to be eligible for graduation.</p>
         </div>
     </div>
 
@@ -3865,6 +3995,14 @@
                     <div class="label">Allocated Year</div>
                     <div class="value">Academic Year 2026</div>
                 </div>
+                <div class="item">
+                    <div class="label">Room Type</div>
+                    <div class="value">Shared (2 occupants)</div>
+                </div>
+                <div class="item">
+                    <div class="label">Roommate</div>
+                    <div class="value">Peter Zulu</div>
+                </div>
             </div>
 
             <h3><i class="fas fa-home"></i> Room Features</h3>
@@ -3875,6 +4013,7 @@
                 <li>Shared bathroom facilities</li>
                 <li>Common kitchen area</li>
                 <li>24/7 security</li>
+                <li>Wi-Fi access available</li>
             </ul>
 
             <h3><i class="fas fa-gavel"></i> Hostel Rules</h3>
@@ -3883,10 +4022,12 @@
                 <li>No loud music after 23:00 hours</li>
                 <li>Keep the room clean and tidy</li>
                 <li>Report any maintenance issues to the hostel warden</li>
+                <li>Alcohol is strictly prohibited in hostel rooms</li>
             </ul>
 
             <h3><i class="fas fa-phone"></i> Contact</h3>
             <p>Hostel Warden: +260 97 123 4567</p>
+            <p>Maintenance: +260 96 789 0123</p>
         </div>
     </div>
 
@@ -3931,7 +4072,7 @@
             </div>
 
             <h3><i class="fas fa-download"></i> Download Receipt</h3>
-            <button class="btn-form-submit" onclick="alert('Receipt downloaded successfully!\n(Simulated download)')"><i class="fas fa-download"></i> Download Receipt</button>
+            <button class="btn-form-submit" onclick="alert('Receipt downloaded successfully!')"><i class="fas fa-download"></i> Download Receipt</button>
 
             <h3><i class="fas fa-upload"></i> Upload Payment Receipt</h3>
             <div class="form-group">
@@ -3942,7 +4083,7 @@
                     <input type="file" id="paymentReceipt" accept=".pdf,.jpg,.png" style="display:none;" />
                 </div>
             </div>
-            <button class="btn-form-submit" onclick="alert('Payment receipt uploaded successfully!\n(Simulated upload)')"><i class="fas fa-upload"></i> Upload Receipt</button>
+            <button class="btn-form-submit" onclick="alert('Payment receipt uploaded successfully!')"><i class="fas fa-upload"></i> Upload Receipt</button>
 
             <h3><i class="fas fa-info-circle"></i> Payment Instructions</h3>
             <ul>
@@ -3980,11 +4121,15 @@
                     <div class="label">Category</div>
                     <div class="value">Fees Clearance</div>
                 </div>
+                <div class="item">
+                    <div class="label">Priority</div>
+                    <div class="value">Normal</div>
+                </div>
             </div>
 
             <h3><i class="fas fa-file-alt"></i> Appeal Details</h3>
             <p>You submitted an appeal regarding the <strong>school fees clearance</strong> process. The finance department is currently reviewing your case.</p>
-            <p><strong>Reason for Appeal:</strong> Discrepancy in fee structure for the 2023 academic year.</p>
+            <p><strong>Reason for Appeal:</strong> Discrepancy in fee structure for the 2023 academic year. You believe that some charges were applied incorrectly and have provided supporting documentation to back your claim.</p>
 
             <h3><i class="fas fa-paperclip"></i> Supporting Documents</h3>
             <ul>
@@ -4022,7 +4167,7 @@
                     <input type="file" id="appealDoc" accept=".pdf,.jpg,.png" multiple style="display:none;" />
                 </div>
             </div>
-            <button class="btn-form-submit" onclick="alert('Appeal submitted successfully!\n(Simulated submission)')"><i class="fas fa-paper-plane"></i> Submit Appeal</button>
+            <button class="btn-form-submit" onclick="alert('Appeal submitted successfully!')"><i class="fas fa-paper-plane"></i> Submit Appeal</button>
 
             <h3><i class="fas fa-envelope"></i> Contact</h3>
             <p>For any updates, contact the Finance Department: finance@northerntech.edu.zm</p>
@@ -4056,6 +4201,7 @@
                 <li><strong>Transcript:</strong> An academic transcript will be issued alongside the diploma.</li>
                 <li><strong>Graduation:</strong> You are eligible to attend the graduation ceremony scheduled for 15th July 2026.</li>
                 <li><strong>Gown Hire:</strong> Gown hire fee has been processed (see Finance section).</li>
+                <li><strong>Certification:</strong> Your diploma will be certified by TEVETA and the Ministry of Education.</li>
             </ul>
 
             <h3><i class="fas fa-envelope"></i> Contact</h3>
@@ -4091,6 +4237,10 @@
                     <div class="label">Time</div>
                     <div class="value">09:00 - 11:00</div>
                 </div>
+                <div class="item">
+                    <div class="label">Duration</div>
+                    <div class="value">2 hours</div>
+                </div>
             </div>
 
             <h3><i class="fas fa-book"></i> Preparation Guidelines</h3>
@@ -4107,6 +4257,7 @@
                 <li>This is your final opportunity to pass this course.</li>
                 <li>Failure to pass will result in repeating the course.</li>
                 <li>No electronic devices allowed during the exam.</li>
+                <li>Your SUP exam fee has been included in your current balance.</li>
             </ul>
 
             <h3><i class="fas fa-pen"></i> Apply for SUP Extension</h3>
@@ -4114,7 +4265,7 @@
                 <label>Reason for Extension</label>
                 <textarea rows="3" placeholder="Provide reasons for requesting an extension..."></textarea>
             </div>
-            <button class="btn-form-submit" onclick="alert('SUP extension request submitted!\n(Simulated submission)')"><i class="fas fa-paper-plane"></i> Request Extension</button>
+            <button class="btn-form-submit" onclick="alert('SUP extension request submitted!')"><i class="fas fa-paper-plane"></i> Request Extension</button>
         </div>
     </div>
 
@@ -4156,6 +4307,7 @@
                 <li><strong>Expiry Date:</strong> 31st December 2026</li>
                 <li><strong>Photo:</strong> Student photo attached to ID</li>
                 <li><strong>Barcode/QR:</strong> Scannable for campus access</li>
+                <li><strong>Signature:</strong> Student signature on file</li>
             </ul>
 
             <h3><i class="fas fa-shield-alt"></i> Important Information</h3>
@@ -4175,7 +4327,7 @@
                     <option>Stolen</option>
                 </select>
             </div>
-            <button class="btn-form-submit" onclick="alert('ID card replacement request submitted!\n(Simulated submission)')"><i class="fas fa-paper-plane"></i> Request Replacement</button>
+            <button class="btn-form-submit" onclick="alert('ID card replacement request submitted!')"><i class="fas fa-paper-plane"></i> Request Replacement</button>
         </div>
     </div>
 
@@ -4397,7 +4549,7 @@
                     <input type="file" id="tevetaReceipt" accept=".pdf,.jpg,.png" style="display:none;" />
                 </div>
             </div>
-            <button class="btn-form-submit" onclick="alert('TEVETA exam fee receipt uploaded successfully!\n(Simulated upload)')"><i class="fas fa-upload"></i> Upload Receipt</button>
+            <button class="btn-form-submit" onclick="alert('TEVETA exam fee receipt uploaded successfully!')"><i class="fas fa-upload"></i> Upload Receipt</button>
         </div>
     </div>
 
@@ -4438,6 +4590,10 @@
                     <div class="label">Satisfactory</div>
                     <div class="value"><span class="highlight-green">Yes</span></div>
                 </div>
+                <div class="item">
+                    <div class="label">Attendance Grade</div>
+                    <div class="value">B+</div>
+                </div>
             </div>
 
             <h3><i class="fas fa-gavel"></i> Attendance Policy</h3>
@@ -4446,6 +4602,7 @@
                 <li>Medical leave must be reported within 3 days.</li>
                 <li>Excessive absenteeism may affect academic standing.</li>
                 <li>Attendance is tracked through the student portal.</li>
+                <li>Students with attendance below 80% may be barred from exams.</li>
             </ul>
         </div>
     </div>
@@ -4476,10 +4633,20 @@
                 <li><strong>Completed:</strong> 6</li>
                 <li><strong>In Progress:</strong> 1 (Supplementary)</li>
                 <li><strong>Total Credit Hours:</strong> 26</li>
+                <li><strong>GPA:</strong> 3.2 / 4.0</li>
             </ul>
 
             <h3><i class="fas fa-graduation-cap"></i> Course Description</h3>
             <p><strong>Diploma in Computer Systems Engineering</strong> – This program provides students with comprehensive knowledge and skills in computer systems, including hardware, software, networking, and database management. Graduates are prepared for careers in IT departments, networking, software development, and technical support.</p>
+
+            <h3><i class="fas fa-briefcase"></i> Career Prospects</h3>
+            <ul>
+                <li>IT Support Specialist</li>
+                <li>Network Administrator</li>
+                <li>Systems Analyst</li>
+                <li>Software Developer</li>
+                <li>Database Administrator</li>
+            </ul>
         </div>
     </div>
 
@@ -4521,10 +4688,18 @@
                 <li><strong>Thursday:</strong> Programming & Database Tech (Lecture) + Networks (Lab)</li>
                 <li><strong>Friday:</strong> Computer Hardware (Lecture) + MIS (Lab)</li>
             </ul>
+
+            <h3><i class="fas fa-clock"></i> Key Timings</h3>
+            <ul>
+                <li><strong>Morning Session:</strong> 08:00 – 12:00</li>
+                <li><strong>Lunch Break:</strong> 12:00 – 14:00</li>
+                <li><strong>Afternoon Session:</strong> 14:00 – 16:00</li>
+                <li><strong>Lab Sessions:</strong> Practical work in designated labs</li>
+            </ul>
         </div>
     </div>
 
-    <!-- ─── LIBRARY PORTAL PAGE ──────────────────────────────────── -->
+    <!-- Library Portal Page -->
     <div class="sidebar-page" id="page-library">
         <div class="sidebar-page-header">
             <img src="logo.png" class="page-logo" alt="NORTEC" />
@@ -4553,7 +4728,7 @@
         </div>
     </div>
 
-    <!-- ─── CAREERS / JOB BOARD PAGE ────────────────────────────── -->
+    <!-- Careers / Job Board Page -->
     <div class="sidebar-page" id="page-careers">
         <div class="sidebar-page-header">
             <img src="logo.png" class="page-logo" alt="NORTEC" />
@@ -4573,7 +4748,7 @@
         </div>
     </div>
 
-    <!-- ─── RESUME BUILDER PAGE ──────────────────────────────────── -->
+    <!-- Resume Builder Page -->
     <div class="sidebar-page" id="page-resume">
         <div class="sidebar-page-header">
             <img src="logo.png" class="page-logo" alt="NORTEC" />
@@ -4631,7 +4806,7 @@
         </div>
     </div>
 
-    <!-- ─── ALUMNI NETWORK PAGE ──────────────────────────────────── -->
+    <!-- Alumni Network Page -->
     <div class="sidebar-page" id="page-alumni">
         <div class="sidebar-page-header">
             <img src="logo.png" class="page-logo" alt="NORTEC" />
@@ -4648,11 +4823,11 @@
 
             <h3 style="margin-top:24px;"><i class="fas fa-handshake"></i> Alumni Mentorship Program</h3>
             <p>Interested in being mentored by an alumnus? Submit your interest and we'll match you with a mentor in your field.</p>
-            <button class="btn-form-submit" onclick="alert('Mentorship request submitted!\n(Simulated)')"><i class="fas fa-paper-plane"></i> Request Mentor</button>
+            <button class="btn-form-submit" onclick="alert('Mentorship request submitted!')"><i class="fas fa-paper-plane"></i> Request Mentor</button>
         </div>
     </div>
 
-    <!-- ─── STUDY PLANNER PAGE ────────────────────────────────────── -->
+    <!-- Study Planner Page -->
     <div class="sidebar-page" id="page-studyplanner">
         <div class="sidebar-page-header">
             <img src="logo.png" class="page-logo" alt="NORTEC" />
@@ -4681,7 +4856,7 @@
             <div class="planner-grid" id="plannerGrid">
                 <!-- dynamically generated -->
             </div>
-            <p style="font-size:11px; color:#64748b; margin-top:8px;">Events are stored locally (simulated).</p>
+            <p style="font-size:11px; color:#64748b; margin-top:8px;">Events are stored locally.</p>
 
             <h3 style="margin-top:24px;"><i class="fas fa-calendar-check"></i> Upcoming Deadlines & Exams</h3>
             <div id="upcomingDeadlines" style="display:grid; gap:6px; font-size:13px;">
@@ -4693,7 +4868,7 @@
         </div>
     </div>
 
-    <!-- ─── SETTINGS PAGE ────────────────────────────────────────── -->
+    <!-- Settings Page -->
     <div class="sidebar-page" id="page-settings">
         <div class="sidebar-page-header">
             <img src="logo.png" class="page-logo" alt="NORTEC" />
@@ -5262,6 +5437,7 @@
 
             // Dashboard elements
             const sidebarToggle = document.getElementById('sidebarToggle');
+            const floatingSidebarToggle = document.getElementById('floatingSidebarToggle');
             const sidebarOverlayMenu = document.getElementById('sidebarOverlayMenu');
             const sidebarMenu = document.getElementById('sidebarMenu');
             const sidebarMenuClose = document.getElementById('sidebarMenuClose');
@@ -6040,7 +6216,6 @@
                 const saved = localStorage.getItem('libraryBooks');
                 if (saved) {
                     const parsed = JSON.parse(saved);
-                    // Merge saved data with existing
                     libraryBooks.forEach((b, i) => {
                         if (parsed[i]) {
                             b.available = parsed[i].available;
@@ -6055,7 +6230,6 @@
                 }
             }
 
-            // Library search and filter
             document.getElementById('librarySearchInput').addEventListener('input', function() {
                 renderLibrary(this.value, document.getElementById('libraryFilter').value);
             });
@@ -6212,7 +6386,6 @@
                 const softSkills = document.getElementById('resumeSoftSkills').value ||
                     'Teamwork, Communication, Problem Solving, Time Management';
 
-                // Build resume HTML
                 const resumeHTML = `
                     <div style="font-family: 'Inter', sans-serif; max-width: 700px; margin:0 auto; background:#fff; padding:24px; border:1px solid #e2e8f0; border-radius:12px;">
                         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #3b82f6; padding-bottom:12px;">
@@ -6254,12 +6427,10 @@
                     </div>
                 `;
 
-                // Show preview
                 const preview = document.getElementById('resumePreview');
                 preview.style.display = 'block';
                 preview.innerHTML = resumeHTML;
 
-                // Generate PDF using html2pdf
                 const element = preview;
                 const opt = {
                     margin: 10,
@@ -6363,7 +6534,6 @@
             });
 
             function showNotification(message, type = 'info') {
-                // Create a temporary notification popup
                 const popup = document.createElement('div');
                 popup.style.cssText = `
                     position: fixed; bottom: 20px; right: 20px; z-index: 99999;
@@ -6405,7 +6575,6 @@
                 showNotification(newTheme === 'light' ? '☀️ Light theme enabled' : '🌙 Dark theme enabled', 'info');
             });
 
-            // Apply saved theme
             applyTheme(currentTheme);
 
             // ─── DIGITAL STUDENT ID (QR Code) ──────────────────
@@ -6474,7 +6643,6 @@
                     return;
                 }
                 if (username === '2201001157' && password === 'PASSWORD') {
-                    alert('🔓 Welcome, JUBEL MOBELA!\n\nRedirecting to your dashboard...');
                     loginModal.classList.remove('active');
                     document.body.style.overflow = '';
                     loginForm.reset();
@@ -6503,9 +6671,9 @@
             });
 
             forgotLink.addEventListener('click', (e) => { e.preventDefault();
-                alert('📧 Password reset link sent to your registered email.\n(Simulated)'); });
+                alert('📧 Password reset link sent to your registered email.'); });
             supportLink.addEventListener('click', (e) => { e.preventDefault();
-                alert('📞 Support: +260 97 123 4567\n✉️ support@northerntech.edu.zm\n(Simulated)'); });
+                alert('📞 Support: +260 97 123 4567\n✉️ support@northerntech.edu.zm'); });
 
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
@@ -6525,7 +6693,12 @@
             });
 
             // ─── SIDEBAR EVENT BINDINGS ──────────────────────
-            sidebarToggle.addEventListener('click', () => toggleSidebar(true));
+            function setupSidebarToggle(btn) {
+                btn.addEventListener('click', () => toggleSidebar(true));
+            }
+            setupSidebarToggle(sidebarToggle);
+            setupSidebarToggle(floatingSidebarToggle);
+
             sidebarMenuClose.addEventListener('click', () => toggleSidebar(false));
             sidebarOverlayMenu.addEventListener('click', () => toggleSidebar(false));
 
