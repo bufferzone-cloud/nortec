@@ -15,8 +15,58 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <!-- QR Code generation library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- PDF generation library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <style>
+        /* ── CSS VARIABLES FOR THEMING ──────────────────────────── */
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-color: rgba(0, 0, 0, 0.04);
+            --header-bg: #ffffff;
+            --sidebar-bg: #ffffff;
+            --input-bg: #f8fafc;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --accent-orange: #f59e0b;
+            --glass-bg: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            --text-on-dark: #fff;
+            --text-on-light: #0f172a;
+            --modal-overlay: rgba(0, 0, 0, 0.55);
+        }
+
+        /* Light theme */
+        [data-theme="light"] {
+            --bg-primary: #f1f5f9;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-color: rgba(0, 0, 0, 0.06);
+            --header-bg: #ffffff;
+            --sidebar-bg: #ffffff;
+            --input-bg: #f8fafc;
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --text-on-dark: #0f172a;
+            --text-on-light: #0f172a;
+            --modal-overlay: rgba(0, 0, 0, 0.30);
+        }
+
         /* ── RESET & FULL SCREEN BASE ── */
         * {
             margin: 0;
@@ -28,10 +78,11 @@
             width: 100%;
             height: 100%;
             font-family: 'Inter', -apple-system, sans-serif;
-            background: #0a0e17;
+            background: var(--bg-primary);
             overflow: hidden;
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
+            transition: background 0.3s ease;
         }
 
         /* ── BACKGROUND ZOOM ── */
@@ -48,6 +99,9 @@
             z-index: 0;
             animation: zoomLoop 10s ease-in-out infinite alternate;
             will-change: transform;
+        }
+        [data-theme="light"] .bg-layer {
+            opacity: 0.15;
         }
         @keyframes zoomLoop {
             0% {
@@ -949,7 +1003,7 @@
             position: fixed;
             inset: 0;
             z-index: 999;
-            background: rgba(0, 0, 0, 0.55);
+            background: var(--modal-overlay);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             display: flex;
@@ -1150,7 +1204,7 @@
         /* ─── DASHBOARD STYLES ─── */
         #dashboardPage {
             padding: 0;
-            background: #f8fafc;
+            background: var(--bg-secondary);
         }
         .dashboard-container {
             width: 100%;
@@ -1164,7 +1218,7 @@
             margin: 0 auto;
         }
         .dashboard-header {
-            background: #ffffff;
+            background: var(--header-bg);
             border-bottom: 2px solid #3b82f6;
             padding: 12px 20px;
             display: flex;
@@ -1174,6 +1228,7 @@
             z-index: 10;
             min-height: 64px;
             box-shadow: 0 2px 8px rgba(59, 130, 246, 0.08);
+            transition: background 0.3s ease;
         }
         .header-logo {
             width: 44px;
@@ -1192,7 +1247,7 @@
         .header-title {
             font-size: 18px;
             font-weight: 800;
-            color: #0f172a;
+            color: var(--text-primary);
             text-align: center;
             flex: 1;
             letter-spacing: 0.5px;
@@ -1223,6 +1278,114 @@
             background: #dbeafe;
         }
 
+        /* ─── NOTIFICATION BELL ──────────────────────────────────── */
+        .notification-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .btn-notification {
+            background: transparent;
+            border: none;
+            color: #64748b;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 6px 8px;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .btn-notification:hover {
+            color: #3b82f6;
+        }
+        .notification-badge {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 18px;
+            height: 18px;
+            background: #ef4444;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 9px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ffffff;
+        }
+        .notification-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 320px;
+            max-height: 400px;
+            overflow-y: auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+            border: 1px solid #e2e8f0;
+            padding: 8px 0;
+            display: none;
+            z-index: 50;
+            margin-top: 8px;
+        }
+        .notification-dropdown.open {
+            display: block;
+        }
+        .notification-dropdown .notif-header {
+            padding: 10px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            font-weight: 700;
+            font-size: 14px;
+            color: #0f172a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .notification-dropdown .notif-header button {
+            background: none;
+            border: none;
+            color: #3b82f6;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .notification-dropdown .notif-item {
+            padding: 10px 16px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 13px;
+            color: #1e293b;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .notification-dropdown .notif-item:last-child {
+            border-bottom: none;
+        }
+        .notification-dropdown .notif-item .notif-icon {
+            color: #3b82f6;
+            font-size: 16px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .notification-dropdown .notif-item .notif-text {
+            flex: 1;
+            line-height: 1.4;
+        }
+        .notification-dropdown .notif-item .notif-time {
+            font-size: 11px;
+            color: #94a3b8;
+        }
+        .notification-dropdown .notif-empty {
+            padding: 20px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+        [data-theme="light"] .notification-dropdown {
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10);
+        }
+
         /* DANGLING NOTICES - No animation - removed from main view */
         .dangling-notices {
             display: none;
@@ -1230,7 +1393,7 @@
 
         /* STUDENT INFO - No animation, at top */
         .student-info-top {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 12px;
             padding: 16px 20px;
             max-width: 560px;
@@ -1243,7 +1406,8 @@
             gap: 8px 16px;
             font-size: 13px;
             font-weight: 600;
-            color: #0f172a;
+            color: var(--text-primary);
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
         .student-info-top .info-item {
             display: inline-flex;
@@ -1267,7 +1431,8 @@
             display: flex;
             flex-direction: column;
             gap: 16px;
-            background: #f8fafc;
+            background: var(--bg-secondary);
+            transition: background 0.3s ease;
         }
         .dashboard-content::-webkit-scrollbar {
             width: 6px;
@@ -1280,24 +1445,26 @@
 
         /* HOME DASHBOARD - No nav buttons, just home content */
         .home-dashboard {
-            background: #ffffff;
+            background: var(--bg-card);
             border-radius: 16px;
             padding: 24px;
-            border: 1px solid #e2e8f0;
-            color: #0f172a;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
             flex: 1;
             overflow-y: auto;
             max-height: calc(100vh - 280px);
             max-height: calc(100dvh - 280px);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            box-shadow: var(--card-shadow);
+            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
         .home-dashboard h2 {
             font-size: 20px;
             font-weight: 800;
             margin-bottom: 20px;
-            color: #0f172a;
+            color: var(--text-primary);
             border-bottom: 2px solid #3b82f6;
             padding-bottom: 12px;
+            transition: color 0.3s ease;
         }
         .home-dashboard h2 .accent {
             color: #3b82f6;
@@ -1309,10 +1476,11 @@
             margin-top: 12px;
         }
         .home-dashboard .dashboard-grid .card {
-            background: #f8fafc;
+            background: var(--bg-secondary);
             border-radius: 12px;
             padding: 16px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
         .home-dashboard .dashboard-grid .card .card-icon {
             font-size: 24px;
@@ -1321,7 +1489,7 @@
         .home-dashboard .dashboard-grid .card .card-title {
             font-size: 14px;
             font-weight: 700;
-            color: #0f172a;
+            color: var(--text-primary);
         }
         .home-dashboard .dashboard-grid .card .card-value {
             font-size: 13px;
@@ -1338,7 +1506,7 @@
             gap: 8px;
             margin-top: 16px;
             padding-top: 16px;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid var(--border-color);
         }
         .home-dashboard .quick-info .info-row {
             display: flex;
@@ -1350,7 +1518,7 @@
             font-weight: 500;
         }
         .home-dashboard .quick-info .info-row .value {
-            color: #0f172a;
+            color: var(--text-primary);
             font-weight: 600;
         }
 
@@ -1362,10 +1530,10 @@
             width: 300px;
             height: 100vh;
             height: 100dvh;
-            background: #ffffff;
+            background: var(--sidebar-bg);
             z-index: 200;
             transform: translateX(-100%);
-            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease;
             box-shadow: 4px 0 30px rgba(59, 130, 246, 0.15);
             display: flex;
             flex-direction: column;
@@ -1380,15 +1548,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #ffffff;
+            background: var(--sidebar-bg);
             position: sticky;
             top: 0;
             z-index: 5;
+            transition: background 0.3s ease;
         }
         .sidebar-menu-header h2 {
             font-size: 20px;
             font-weight: 900;
-            color: #0f172a;
+            color: var(--text-primary);
         }
         .sidebar-menu-header h2 .accent {
             color: #3b82f6;
@@ -1418,7 +1587,7 @@
             padding: 14px 24px;
             border: none;
             background: transparent;
-            color: #0f172a;
+            color: var(--text-primary);
             font-size: 15px;
             font-weight: 500;
             cursor: pointer;
@@ -1478,10 +1647,11 @@
             position: fixed;
             inset: 0;
             z-index: 100;
-            background: #f8fafc;
+            background: var(--bg-secondary);
             padding: 0;
             overflow-y: auto;
             animation: slideInPage 0.35s ease;
+            transition: background 0.3s ease;
         }
         @keyframes slideInPage {
             from {
@@ -1498,7 +1668,7 @@
         }
 
         .sidebar-page-header {
-            background: #ffffff;
+            background: var(--bg-card);
             padding: 16px 24px;
             border-bottom: 3px solid #3b82f6;
             display: flex;
@@ -1508,6 +1678,7 @@
             top: 0;
             z-index: 5;
             box-shadow: 0 2px 10px rgba(59, 130, 246, 0.06);
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
         .sidebar-page-header .page-logo {
             width: 40px;
@@ -1521,7 +1692,7 @@
         .sidebar-page-header h2 {
             font-size: 20px;
             font-weight: 800;
-            color: #0f172a;
+            color: var(--text-primary);
             flex: 1;
         }
         .sidebar-page-header h2 .accent {
@@ -1547,17 +1718,19 @@
 
         .sidebar-page-body {
             padding: 24px;
-            color: #1e293b;
+            color: var(--text-secondary);
             max-width: 900px;
             margin: 0 auto;
+            transition: color 0.3s ease;
         }
         .sidebar-page-body h3 {
             font-size: 18px;
             font-weight: 700;
-            color: #0f172a;
+            color: var(--text-primary);
             margin: 20px 0 12px;
             border-bottom: 2px solid #3b82f6;
             padding-bottom: 8px;
+            transition: color 0.3s ease;
         }
         .sidebar-page-body h3 .accent {
             color: #3b82f6;
@@ -1569,7 +1742,7 @@
         .sidebar-page-body h4 {
             font-size: 15px;
             font-weight: 700;
-            color: #1e293b;
+            color: var(--text-secondary);
             margin: 14px 0 6px;
         }
         .sidebar-page-body p {
@@ -1630,10 +1803,11 @@
             margin: 8px 0;
         }
         .sidebar-page-body .info-grid .item {
-            background: #ffffff;
+            background: var(--bg-card);
             padding: 12px 16px;
             border-radius: 8px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
         .sidebar-page-body .info-grid .item .label {
             font-size: 12px;
@@ -1643,7 +1817,7 @@
         .sidebar-page-body .info-grid .item .value {
             font-size: 14px;
             font-weight: 600;
-            color: #0f172a;
+            color: var(--text-primary);
             margin-top: 2px;
         }
         .sidebar-page-body .status-badge {
@@ -1713,10 +1887,10 @@
             padding: 10px 12px;
             border-radius: 10px;
             border: 1px solid #d1d5db;
-            background: #ffffff;
+            background: var(--bg-card);
             font-size: 14px;
             font-family: 'Inter', sans-serif;
-            transition: border 0.2s;
+            transition: border 0.2s, background 0.3s ease;
         }
         .sidebar-page-body .form-group input:focus,
         .sidebar-page-body .form-group select:focus,
@@ -1730,7 +1904,7 @@
             border-radius: 12px;
             padding: 20px;
             text-align: center;
-            background: #f8fafc;
+            background: var(--bg-secondary);
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -1747,11 +1921,12 @@
             color: #64748b;
         }
         .sidebar-page-body .readonly-form {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 16px;
             margin-top: 8px;
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
         .sidebar-page-body .readonly-form .field-row {
             display: flex;
@@ -1769,7 +1944,7 @@
         }
         .sidebar-page-body .readonly-form .field-value {
             flex: 1;
-            color: #0f172a;
+            color: var(--text-primary);
         }
         .sidebar-page-body .readonly-form .field-value .subject-item {
             display: block;
@@ -1791,10 +1966,11 @@
             font-family: 'Inter', sans-serif;
             max-width: 800px;
             margin: 0 auto;
-            background: #ffffff;
+            background: var(--bg-card);
             padding: 20px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
         .teveta-form-container .form-header {
             text-align: center;
@@ -1803,7 +1979,7 @@
         .teveta-form-container .form-header h2 {
             font-size: 20px;
             font-weight: 800;
-            color: #0f172a;
+            color: var(--text-primary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -1826,7 +2002,7 @@
             line-height: 1.4;
         }
         .teveta-form-container .form-header .logo-section .address-text strong {
-            color: #0f172a;
+            color: var(--text-primary);
         }
         .teveta-form-container .form-field {
             margin-bottom: 8px;
@@ -1836,25 +2012,26 @@
         }
         .teveta-form-container .form-field .field-number {
             font-weight: 700;
-            color: #0f172a;
+            color: var(--text-primary);
             min-width: 30px;
             font-size: 13px;
         }
         .teveta-form-container .form-field .field-label {
             font-weight: 600;
-            color: #0f172a;
+            color: var(--text-primary);
             font-size: 13px;
             min-width: 140px;
         }
         .teveta-form-container .form-field .field-input {
             flex: 1;
             border: none;
-            border-bottom: 1px solid #0f172a;
+            border-bottom: 1px solid var(--text-primary);
             padding: 2px 4px;
             font-size: 13px;
             font-family: 'Inter', sans-serif;
             background: transparent;
             outline: none;
+            color: var(--text-primary);
         }
         .teveta-form-container .form-field .field-input:focus {
             border-bottom: 2px solid #3b82f6;
@@ -1864,7 +2041,7 @@
             color: #475569;
         }
         .teveta-form-container .form-field .field-box-input {
-            border: 1px solid #0f172a;
+            border: 1px solid var(--text-primary);
             padding: 2px 4px;
             font-size: 13px;
             font-family: 'Inter', sans-serif;
@@ -1872,6 +2049,7 @@
             outline: none;
             width: 30px;
             text-align: center;
+            color: var(--text-primary);
         }
         .teveta-form-container .form-field .field-box-input:focus {
             border-color: #3b82f6;
@@ -1890,7 +2068,7 @@
             color: #64748b;
         }
         .teveta-form-container .form-field .box-group .box-input {
-            border: 1px solid #0f172a;
+            border: 1px solid var(--text-primary);
             padding: 2px 4px;
             font-size: 12px;
             font-family: 'Inter', sans-serif;
@@ -1898,6 +2076,7 @@
             outline: none;
             width: 28px;
             text-align: center;
+            color: var(--text-primary);
         }
         .teveta-form-container .form-field .box-group .box-input:focus {
             border-color: #3b82f6;
@@ -1927,11 +2106,11 @@
         }
         .teveta-form-container .form-field .subjects-list .subject-row .subject-text {
             font-size: 13px;
-            color: #0f172a;
+            color: var(--text-primary);
         }
         .teveta-form-container .form-field .subjects-list .subject-row .subject-line {
             flex: 1;
-            border-bottom: 1px solid #0f172a;
+            border-bottom: 1px solid var(--text-primary);
             height: 1px;
             margin-left: 4px;
         }
@@ -1954,7 +2133,7 @@
             color: #475569;
         }
         .teveta-form-container .form-field .inline-group .inline-item .inline-box {
-            border: 1px solid #0f172a;
+            border: 1px solid var(--text-primary);
             padding: 2px 4px;
             font-size: 12px;
             font-family: 'Inter', sans-serif;
@@ -1962,6 +2141,7 @@
             outline: none;
             width: 28px;
             text-align: center;
+            color: var(--text-primary);
         }
         .teveta-form-container .form-field .inline-group .inline-item .inline-box:focus {
             border-color: #3b82f6;
@@ -1976,7 +2156,7 @@
             gap: 4px;
         }
         .teveta-form-container .form-field .year-box-group .year-box {
-            border: 1px solid #0f172a;
+            border: 1px solid var(--text-primary);
             padding: 2px 4px;
             font-size: 12px;
             font-family: 'Inter', sans-serif;
@@ -1984,6 +2164,7 @@
             outline: none;
             width: 28px;
             text-align: center;
+            color: var(--text-primary);
         }
         .teveta-form-container .form-field .year-box-group .year-box:focus {
             border-color: #3b82f6;
@@ -2007,7 +2188,7 @@
             align-items: center;
             gap: 4px;
             font-size: 12px;
-            color: #0f172a;
+            color: var(--text-primary);
         }
         .teveta-form-container .form-field .mode-select-group .mode-option input[type="radio"] {
             accent-color: #3b82f6;
@@ -2028,7 +2209,7 @@
             align-items: center;
             gap: 4px;
             font-size: 12px;
-            color: #0f172a;
+            color: var(--text-primary);
         }
         .teveta-form-container .form-field .year-select-group .year-option input[type="radio"] {
             accent-color: #3b82f6;
@@ -2044,7 +2225,7 @@
             gap: 4px;
         }
         .teveta-form-container .form-field .exam-series-boxes .series-box {
-            border: 1px solid #0f172a;
+            border: 1px solid var(--text-primary);
             padding: 2px 4px;
             font-size: 12px;
             font-family: 'Inter', sans-serif;
@@ -2052,6 +2233,7 @@
             outline: none;
             width: 28px;
             text-align: center;
+            color: var(--text-primary);
         }
         .teveta-form-container .form-field .exam-series-boxes .series-box:focus {
             border-color: #3b82f6;
@@ -2070,7 +2252,7 @@
             gap: 4px;
         }
         .teveta-form-container .form-field .teveta-no-boxes .no-box {
-            border: 1px solid #0f172a;
+            border: 1px solid var(--text-primary);
             padding: 2px 4px;
             font-size: 12px;
             font-family: 'Inter', sans-serif;
@@ -2078,6 +2260,7 @@
             outline: none;
             width: 28px;
             text-align: center;
+            color: var(--text-primary);
         }
         .teveta-form-container .form-field .teveta-no-boxes .no-box:focus {
             border-color: #3b82f6;
@@ -2092,7 +2275,7 @@
             gap: 4px;
         }
         .teveta-form-container .form-field .year-enrolment-boxes .enrol-box {
-            border: 1px solid #0f172a;
+            border: 1px solid var(--text-primary);
             padding: 2px 4px;
             font-size: 12px;
             font-family: 'Inter', sans-serif;
@@ -2100,6 +2283,7 @@
             outline: none;
             width: 28px;
             text-align: center;
+            color: var(--text-primary);
         }
         .teveta-form-container .form-field .year-enrolment-boxes .enrol-box:focus {
             border-color: #3b82f6;
@@ -2261,6 +2445,657 @@
             color: #0f172a;
         }
 
+        /* ─── ASSIGNMENT UPLOAD BOX ──────────────────────────────── */
+        .assign-upload-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 8px 0;
+        }
+        .assign-upload-box {
+            background: var(--bg-secondary);
+            border: 2px dashed #d1d5db;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.3s ease;
+            position: relative;
+        }
+        .assign-upload-box:hover {
+            border-color: #3b82f6;
+        }
+        .assign-upload-box i {
+            font-size: 24px;
+            color: #94a3b8;
+        }
+        .assign-upload-box .assign-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #475569;
+            margin-top: 4px;
+        }
+        .assign-upload-box input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .assign-status-badge {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .assign-status-badge.pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .assign-status-badge.submitted {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .assign-status-badge.graded {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        /* ─── GRADE BREAKDOWN & WHAT-IF ───────────────────────────── */
+        .grade-breakdown-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 12px;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        .grade-breakdown-box .component-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 13px;
+        }
+        .grade-breakdown-box .component-row:last-child {
+            border-bottom: none;
+        }
+        .grade-breakdown-box .component-row .weight {
+            font-weight: 600;
+            color: #3b82f6;
+        }
+        .what-if-calculator {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 12px;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        .what-if-calculator .input-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+        .what-if-calculator .input-group input {
+            width: 60px;
+            padding: 6px 8px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+        .what-if-calculator .result {
+            font-weight: 700;
+            font-size: 16px;
+            margin-top: 8px;
+            color: var(--text-primary);
+        }
+
+        /* ─── STUDY PLANNER ───────────────────────────────────────── */
+        .planner-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-top: 12px;
+        }
+        .planner-grid .day-header {
+            background: #eff6ff;
+            padding: 8px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 12px;
+            color: #1d4ed8;
+            border-radius: 6px;
+        }
+        .planner-grid .time-slot {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 6px;
+            min-height: 60px;
+            font-size: 11px;
+            position: relative;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        .planner-grid .time-slot .slot-label {
+            font-weight: 600;
+            color: #64748b;
+            font-size: 10px;
+        }
+        .planner-grid .time-slot .slot-event {
+            background: #dbeafe;
+            border-radius: 4px;
+            padding: 2px 6px;
+            margin-top: 2px;
+            font-size: 10px;
+            color: #1e40af;
+            font-weight: 500;
+        }
+        .planner-add-form {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 12px 0;
+            align-items: center;
+        }
+        .planner-add-form select,
+        .planner-add-form input {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+        .planner-add-form .btn-add-event {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 20px;
+            background: #3b82f6;
+            color: #fff;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .planner-add-form .btn-add-event:hover {
+            background: #2563eb;
+        }
+
+        /* ─── LIBRARY PORTAL ──────────────────────────────────────── */
+        .library-search {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        .library-search input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid #d1d5db;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+        .library-search input:focus {
+            border-color: #3b82f6;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
+        }
+        .library-search select {
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid #d1d5db;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+        .book-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            transition: all 0.2s;
+            margin-bottom: 10px;
+        }
+        .book-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+        }
+        .book-card .book-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+        .book-card .book-author {
+            font-size: 13px;
+            color: #64748b;
+        }
+        .book-card .book-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 12px;
+        }
+        .book-card .book-meta .availability {
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+        .book-card .book-meta .availability.in-library {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .book-card .book-meta .availability.borrowed {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .book-card .book-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 4px;
+            flex-wrap: wrap;
+        }
+        .book-card .book-actions button {
+            padding: 6px 16px;
+            border: none;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .book-card .book-actions .btn-reserve {
+            background: #3b82f6;
+            color: #fff;
+        }
+        .book-card .book-actions .btn-reserve:hover {
+            background: #2563eb;
+        }
+        .book-card .book-actions .btn-reserve:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+        .book-card .book-actions .btn-reserve.reserved {
+            background: #10b981;
+        }
+        .borrowed-books-list {
+            display: grid;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .borrowed-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        .borrowed-item .book-info {
+            font-size: 14px;
+        }
+        .borrowed-item .book-info strong {
+            color: var(--text-primary);
+        }
+        .borrowed-item .due-date {
+            font-size: 13px;
+            color: #64748b;
+        }
+        .borrowed-item .due-date.overdue {
+            color: #ef4444;
+            font-weight: 600;
+        }
+
+        /* ─── DIGITAL STUDENT ID ──────────────────────────────────── */
+        .digital-id-card {
+            max-width: 400px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            border-radius: 20px;
+            padding: 24px;
+            color: #fff;
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.30);
+            position: relative;
+            overflow: hidden;
+        }
+        .digital-id-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+        .digital-id-card .id-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .digital-id-card .id-header img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px;
+        }
+        .digital-id-card .id-header .id-title {
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+        .digital-id-card .id-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            border: 3px solid rgba(255, 255, 255, 0.4);
+        }
+        .digital-id-card .id-name {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+        .digital-id-card .id-details {
+            text-align: center;
+            font-size: 13px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        .digital-id-card .id-qr {
+            display: flex;
+            justify-content: center;
+            margin-top: 16px;
+        }
+        .digital-id-card .id-qr #qrcode {
+            background: #fff;
+            padding: 8px;
+            border-radius: 8px;
+        }
+        .digital-id-card .id-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            font-size: 10px;
+            opacity: 0.7;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 8px;
+        }
+
+        /* ─── CAREERS / JOB BOARD ─────────────────────────────────── */
+        .job-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 10px;
+            transition: all 0.2s;
+        }
+        .job-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+        }
+        .job-card .job-title {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+        .job-card .job-company {
+            font-size: 13px;
+            color: #64748b;
+        }
+        .job-card .job-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: #64748b;
+            margin: 4px 0;
+        }
+        .job-card .job-description {
+            font-size: 13px;
+            color: #334155;
+            margin: 6px 0;
+        }
+        .job-card .job-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .job-card .job-actions button {
+            padding: 6px 16px;
+            border: none;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .job-card .job-actions .btn-apply-job {
+            background: #3b82f6;
+            color: #fff;
+        }
+        .job-card .job-actions .btn-apply-job:hover {
+            background: #2563eb;
+        }
+        .job-card .job-actions .btn-apply-job.applied {
+            background: #10b981;
+        }
+        .job-card .job-actions .btn-save-job {
+            background: #e2e8f0;
+            color: #1e293b;
+        }
+        .job-card .job-actions .btn-save-job:hover {
+            background: #cbd5e1;
+        }
+        .job-card .job-actions .btn-save-job.saved {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        /* ─── RESUME BUILDER ──────────────────────────────────────── */
+        .resume-builder-form {
+            display: grid;
+            gap: 16px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .resume-builder-form .form-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        .resume-builder-form .form-section h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 8px;
+        }
+        .resume-builder-form .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+        .resume-builder-form .form-row>* {
+            flex: 1 1 200px;
+        }
+        .resume-builder-form label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 4px;
+        }
+        .resume-builder-form input,
+        .resume-builder-form textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid #d1d5db;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            transition: border 0.2s;
+        }
+        .resume-builder-form input:focus,
+        .resume-builder-form textarea:focus {
+            border-color: #3b82f6;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
+        }
+        .resume-builder-form .btn-generate-resume {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 50px;
+            background: #3b82f6;
+            color: #fff;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: 'Inter', sans-serif;
+            margin-top: 8px;
+        }
+        .resume-builder-form .btn-generate-resume:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        /* ─── ALUMNI NETWORK ──────────────────────────────────────── */
+        .alumni-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 12px;
+        }
+        .alumni-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        .alumni-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.08);
+        }
+        .alumni-card .alumni-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #eff6ff;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #3b82f6;
+        }
+        .alumni-card .alumni-name {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text-primary);
+        }
+        .alumni-card .alumni-detail {
+            font-size: 13px;
+            color: #64748b;
+        }
+        .alumni-card .alumni-company {
+            font-size: 12px;
+            color: #3b82f6;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        /* ─── SETTINGS / THEME TOGGLE ────────────────────────────── */
+        .settings-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+        .settings-item .settings-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        .settings-item .settings-label i {
+            margin-right: 10px;
+            color: #3b82f6;
+        }
+        .theme-toggle-switch {
+            position: relative;
+            width: 48px;
+            height: 26px;
+            background: #cbd5e1;
+            border-radius: 13px;
+            cursor: pointer;
+            transition: background 0.3s;
+            border: none;
+            padding: 0;
+            flex-shrink: 0;
+        }
+        .theme-toggle-switch.active {
+            background: #3b82f6;
+        }
+        .theme-toggle-switch .toggle-knob {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 22px;
+            height: 22px;
+            background: #ffffff;
+            border-radius: 50%;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .theme-toggle-switch.active .toggle-knob {
+            transform: translateX(22px);
+        }
+
         /* ─── RESPONSIVE ─── */
         @media (max-width: 768px) {
             .sidebar-menu-container {
@@ -2346,6 +3181,16 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
+            .notification-dropdown {
+                width: 280px;
+                right: -60px;
+            }
+            .digital-id-card {
+                padding: 16px;
+            }
+            .alumni-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
         @media (max-width: 480px) {
             .dashboard-header {
@@ -2381,6 +3226,22 @@
             .install-prompt-card .install-actions .btn-install {
                 padding: 12px 28px;
                 font-size: 14px;
+            }
+            .alumni-grid {
+                grid-template-columns: 1fr;
+            }
+            .planner-grid {
+                grid-template-columns: repeat(7, 1fr);
+                gap: 2px;
+            }
+            .planner-grid .time-slot {
+                min-height: 40px;
+                font-size: 9px;
+                padding: 4px;
+            }
+            .planner-grid .day-header {
+                font-size: 9px;
+                padding: 4px;
             }
         }
         @media (min-height: 800px) {
@@ -2421,182 +3282,6 @@
         .sidebar-menu-container::-webkit-scrollbar-thumb {
             background: #3b82f6;
             border-radius: 10px;
-        }
-
-        /* ─── NEW FEATURE: ASSIGNMENT UPLOAD BOX ──────────────── */
-        .assign-upload-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin: 8px 0;
-        }
-        .assign-upload-box {
-            background: #f8fafc;
-            border: 2px dashed #d1d5db;
-            border-radius: 12px;
-            padding: 16px;
-            text-align: center;
-            cursor: pointer;
-            transition: border-color 0.2s;
-            position: relative;
-        }
-        .assign-upload-box:hover {
-            border-color: #3b82f6;
-        }
-        .assign-upload-box i {
-            font-size: 24px;
-            color: #94a3b8;
-        }
-        .assign-upload-box .assign-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: #475569;
-            margin-top: 4px;
-        }
-        .assign-upload-box input[type="file"] {
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            cursor: pointer;
-        }
-        .assign-status-badge {
-            display: inline-block;
-            padding: 2px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-        }
-        .assign-status-badge.pending {
-            background: #fef3c7;
-            color: #92400e;
-        }
-        .assign-status-badge.submitted {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-        .assign-status-badge.graded {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        /* ─── NEW FEATURE: GRADE BREAKDOWN & WHAT-IF ───────────── */
-        .grade-breakdown-box {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 16px;
-            margin-top: 12px;
-        }
-        .grade-breakdown-box .component-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 4px 0;
-            border-bottom: 1px solid #e2e8f0;
-            font-size: 13px;
-        }
-        .grade-breakdown-box .component-row:last-child {
-            border-bottom: none;
-        }
-        .grade-breakdown-box .component-row .weight {
-            font-weight: 600;
-            color: #3b82f6;
-        }
-        .what-if-calculator {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 16px;
-            margin-top: 12px;
-        }
-        .what-if-calculator .input-group {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 8px;
-        }
-        .what-if-calculator .input-group input {
-            width: 60px;
-            padding: 6px 8px;
-            border-radius: 8px;
-            border: 1px solid #d1d5db;
-            font-size: 13px;
-            font-family: 'Inter', sans-serif;
-            text-align: center;
-        }
-        .what-if-calculator .result {
-            font-weight: 700;
-            font-size: 16px;
-            margin-top: 8px;
-            color: #0f172a;
-        }
-
-        /* ─── NEW FEATURE: STUDY PLANNER ───────────────────────── */
-        .planner-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
-            margin-top: 12px;
-        }
-        .planner-grid .day-header {
-            background: #eff6ff;
-            padding: 8px;
-            text-align: center;
-            font-weight: 700;
-            font-size: 12px;
-            color: #1d4ed8;
-            border-radius: 6px;
-        }
-        .planner-grid .time-slot {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            padding: 6px;
-            min-height: 60px;
-            font-size: 11px;
-            position: relative;
-        }
-        .planner-grid .time-slot .slot-label {
-            font-weight: 600;
-            color: #64748b;
-            font-size: 10px;
-        }
-        .planner-grid .time-slot .slot-event {
-            background: #dbeafe;
-            border-radius: 4px;
-            padding: 2px 6px;
-            margin-top: 2px;
-            font-size: 10px;
-            color: #1e40af;
-            font-weight: 500;
-        }
-        .planner-add-form {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin: 12px 0;
-            align-items: center;
-        }
-        .planner-add-form select,
-        .planner-add-form input {
-            padding: 8px 12px;
-            border-radius: 8px;
-            border: 1px solid #d1d5db;
-            font-size: 13px;
-            font-family: 'Inter', sans-serif;
-        }
-        .planner-add-form .btn-add-event {
-            padding: 8px 20px;
-            border: none;
-            border-radius: 20px;
-            background: #3b82f6;
-            color: #fff;
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .planner-add-form .btn-add-event:hover {
-            background: #2563eb;
         }
     </style>
 </head>
@@ -2700,6 +3385,18 @@
                 <div class="header-actions-left">
                     <button class="btn-sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
                     <img src="logo.png" class="header-logo" id="headerLogo" alt="NORTEC" />
+                    <div class="notification-wrapper">
+                        <button class="btn-notification" id="notificationBtn"><i class="fas fa-bell"></i><span class="notification-badge" id="notifBadge">3</span></button>
+                        <div class="notification-dropdown" id="notificationDropdown">
+                            <div class="notif-header">
+                                <span>Notifications</span>
+                                <button id="clearNotifBtn">Mark all read</button>
+                            </div>
+                            <div id="notifList">
+                                <!-- populated by JS -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="header-title">JUBEL MOBELA <span class="accent">DASHBOARD</span></div>
                 <div class="header-actions-left" style="justify-content:flex-end; flex:1;">
@@ -2784,7 +3481,12 @@
         <button class="sidebar-menu-item" data-page="attendance"><i class="fas fa-clipboard-list"></i> Attendance</button>
         <button class="sidebar-menu-item" data-page="courses"><i class="fas fa-book"></i> Courses</button>
         <button class="sidebar-menu-item" data-page="timetable"><i class="fas fa-clock"></i> Time Table</button>
+        <button class="sidebar-menu-item" data-page="library"><i class="fas fa-book-open"></i> Library</button>
+        <button class="sidebar-menu-item" data-page="careers"><i class="fas fa-briefcase"></i> Careers</button>
+        <button class="sidebar-menu-item" data-page="resume"><i class="fas fa-file-alt"></i> Resume Builder</button>
+        <button class="sidebar-menu-item" data-page="alumni"><i class="fas fa-users"></i> Alumni Network</button>
         <button class="sidebar-menu-item" data-page="studyplanner"><i class="fas fa-calendar-plus"></i> Study Planner</button>
+        <button class="sidebar-menu-item" data-page="settings"><i class="fas fa-cog"></i> Settings</button>
         <button class="sidebar-menu-item logout-item" id="sidebarLogout"><i class="fas fa-sign-out-alt"></i> Logout</button>
     </div>
 
@@ -2968,7 +3670,7 @@
         </div>
     </div>
 
-    <!-- ─── NEW ASSIGNMENTS PAGE ────────────────────────────────── -->
+    <!-- ─── ASSIGNMENTS PAGE ────────────────────────────────── -->
     <div class="sidebar-page" id="page-assignments">
         <div class="sidebar-page-header">
             <img src="logo.png" class="page-logo" alt="NORTEC" />
@@ -3416,7 +4118,7 @@
         </div>
     </div>
 
-    <!-- Student ID Page -->
+    <!-- Student ID Page (Digital ID Card) -->
     <div class="sidebar-page" id="page-studentid">
         <div class="sidebar-page-header">
             <img src="logo.png" class="page-logo" alt="NORTEC" />
@@ -3424,40 +4126,36 @@
             <button class="sidebar-page-close" data-page-close="studentid"><i class="fas fa-times"></i></button>
         </div>
         <div class="sidebar-page-body">
-            <h3><i class="fas fa-id-badge"></i> ID Card Information</h3>
-            <div class="info-grid">
-                <div class="item">
-                    <div class="label">Student Name</div>
-                    <div class="value">Jubel Mobela</div>
+            <h3><i class="fas fa-id-badge"></i> Digital ID Card</h3>
+            <p style="font-size:13px; color:#64748b; margin-bottom:12px;">Show this digital ID card for campus access. The QR code can be scanned for verification.</p>
+
+            <div class="digital-id-card" id="digitalIdCard">
+                <div class="id-header">
+                    <img src="logo.png" alt="NORTEC" />
+                    <div class="id-title">NORTEC<br><span style="font-size:10px; opacity:0.8;">STUDENT ID</span></div>
                 </div>
-                <div class="item">
-                    <div class="label">Student Number</div>
-                    <div class="value">2201001157</div>
+                <div class="id-photo"><i class="fas fa-user"></i></div>
+                <div class="id-name">JUBEL MOBELA</div>
+                <div class="id-details">
+                    <div><strong>Student No:</strong> 2201001157</div>
+                    <div><strong>Program:</strong> DIPLOMA IN COMPUTER SYSTEMS ENGINEERING</div>
+                    <div><strong>Valid Until:</strong> December 2026</div>
                 </div>
-                <div class="item">
-                    <div class="label">ID Number</div>
-                    <div class="value">622589/67/1</div>
+                <div class="id-qr">
+                    <div id="qrcode"></div>
                 </div>
-                <div class="item">
-                    <div class="label">Program</div>
-                    <div class="value">Diploma in Computer Systems Engineering</div>
-                </div>
-                <div class="item">
-                    <div class="label">Valid Until</div>
-                    <div class="value">December 2026</div>
-                </div>
-                <div class="item">
-                    <div class="label">Status</div>
-                    <div class="value"><span class="status-badge approved">Collected</span></div>
+                <div class="id-footer">
+                    <span>Issued: 01/02/2022</span>
+                    <span>NORTEC · Zambia</span>
                 </div>
             </div>
 
-            <h3><i class="fas fa-id-card"></i> ID Card Details</h3>
+            <h3 style="margin-top:24px;"><i class="fas fa-info-circle"></i> ID Card Details</h3>
             <ul>
                 <li><strong>Issue Date:</strong> 1st February 2022</li>
                 <li><strong>Expiry Date:</strong> 31st December 2026</li>
                 <li><strong>Photo:</strong> Student photo attached to ID</li>
-                <li><strong>Barcode:</strong> Scannable barcode for campus access</li>
+                <li><strong>Barcode/QR:</strong> Scannable for campus access</li>
             </ul>
 
             <h3><i class="fas fa-shield-alt"></i> Important Information</h3>
@@ -3826,7 +4524,135 @@
         </div>
     </div>
 
-    <!-- ─── NEW STUDY PLANNER PAGE ──────────────────────────────── -->
+    <!-- ─── LIBRARY PORTAL PAGE ──────────────────────────────────── -->
+    <div class="sidebar-page" id="page-library">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Library</span> Portal</h2>
+            <button class="sidebar-page-close" data-page-close="library"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3><i class="fas fa-search"></i> Search Catalog</h3>
+            <div class="library-search">
+                <input type="text" id="librarySearchInput" placeholder="Search by title or author..." />
+                <select id="libraryFilter">
+                    <option value="all">All</option>
+                    <option value="available">Available</option>
+                    <option value="borrowed">Borrowed</option>
+                </select>
+            </div>
+
+            <div id="libraryResults" style="display:grid; gap:10px;">
+                <!-- Dynamically populated -->
+            </div>
+
+            <h3 style="margin-top:24px;"><i class="fas fa-bookmark"></i> My Borrowed Books</h3>
+            <div class="borrowed-books-list" id="borrowedBooksList">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── CAREERS / JOB BOARD PAGE ────────────────────────────── -->
+    <div class="sidebar-page" id="page-careers">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Careers</span> & Internships</h2>
+            <button class="sidebar-page-close" data-page-close="careers"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3><i class="fas fa-briefcase"></i> Job Openings</h3>
+            <div id="jobList" style="display:grid; gap:10px;">
+                <!-- Dynamically populated -->
+            </div>
+
+            <h3 style="margin-top:24px;"><i class="fas fa-heart"></i> Saved Jobs</h3>
+            <div id="savedJobsList" style="display:grid; gap:8px;">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── RESUME BUILDER PAGE ──────────────────────────────────── -->
+    <div class="sidebar-page" id="page-resume">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Resume</span> Builder</h2>
+            <button class="sidebar-page-close" data-page-close="resume"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3><i class="fas fa-file-alt"></i> Build Your Professional Resume</h3>
+            <p style="font-size:13px; color:#64748b; margin-bottom:16px;">Fill in your details below and generate a professional PDF resume.</p>
+
+            <div class="resume-builder-form" id="resumeForm">
+                <div class="form-section">
+                    <h4>Personal Information</h4>
+                    <div class="form-row">
+                        <div><label>Full Name</label><input type="text" id="resumeName" value="Jubel Mobela" /></div>
+                        <div><label>Phone</label><input type="text" id="resumePhone" value="+260 97 123 4567" /></div>
+                    </div>
+                    <div class="form-row">
+                        <div><label>Email</label><input type="email" id="resumeEmail" value="jubel.mobela@northerntech.edu.zm" /></div>
+                        <div><label>Location</label><input type="text" id="resumeLocation" value="Lusaka, Zambia" /></div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h4>Education</h4>
+                    <div class="form-row">
+                        <div><label>Institution</label><input type="text" id="resumeEduInst" value="Northern Technical College" /></div>
+                        <div><label>Degree</label><input type="text" id="resumeEduDegree" value="Diploma in Computer Systems Engineering" /></div>
+                    </div>
+                    <div class="form-row">
+                        <div><label>Years</label><input type="text" id="resumeEduYears" value="2022 – 2026" /></div>
+                        <div><label>GPA</label><input type="text" id="resumeEduGPA" value="3.2 / 4.0" /></div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h4>Work Experience</h4>
+                    <div><label>Company / Position</label><input type="text" id="resumeWork1" value="IT Intern, ZANACO Bank (2024)" /></div>
+                    <div style="margin-top:8px;"><label>Responsibilities</label><textarea rows="2" id="resumeWorkDesc1">Assisted in network maintenance, troubleshooting, and user support.</textarea></div>
+                    <div style="margin-top:8px;"><label>Additional Experience</label><input type="text" id="resumeWork2" placeholder="e.g. Freelance Web Developer" /></div>
+                </div>
+
+                <div class="form-section">
+                    <h4>Skills</h4>
+                    <div><label>Technical Skills (comma separated)</label><input type="text" id="resumeSkills" value="Python, JavaScript, Networking, Database Management, Linux, Hardware Repair" /></div>
+                    <div style="margin-top:8px;"><label>Soft Skills</label><input type="text" id="resumeSoftSkills" value="Teamwork, Communication, Problem Solving, Time Management" /></div>
+                </div>
+
+                <button class="btn-generate-resume" id="generateResumeBtn"><i class="fas fa-file-pdf"></i> Generate PDF Resume</button>
+            </div>
+
+            <div id="resumePreview" style="display:none; margin-top:20px; background:#fff; padding:24px; border-radius:12px; border:1px solid #e2e8f0; box-shadow:0 4px 12px rgba(0,0,0,0.06);">
+                <!-- Resume preview will be shown here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── ALUMNI NETWORK PAGE ──────────────────────────────────── -->
+    <div class="sidebar-page" id="page-alumni">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Alumni</span> Network</h2>
+            <button class="sidebar-page-close" data-page-close="alumni"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3><i class="fas fa-users"></i> Notable Graduates</h3>
+            <p style="font-size:13px; color:#64748b; margin-bottom:12px;">Connect with successful graduates from Northern Technical College.</p>
+
+            <div class="alumni-grid" id="alumniGrid">
+                <!-- Dynamically populated -->
+            </div>
+
+            <h3 style="margin-top:24px;"><i class="fas fa-handshake"></i> Alumni Mentorship Program</h3>
+            <p>Interested in being mentored by an alumnus? Submit your interest and we'll match you with a mentor in your field.</p>
+            <button class="btn-form-submit" onclick="alert('Mentorship request submitted!\n(Simulated)')"><i class="fas fa-paper-plane"></i> Request Mentor</button>
+        </div>
+    </div>
+
+    <!-- ─── STUDY PLANNER PAGE ────────────────────────────────────── -->
     <div class="sidebar-page" id="page-studyplanner">
         <div class="sidebar-page-header">
             <img src="logo.png" class="page-logo" alt="NORTEC" />
@@ -3864,6 +4690,38 @@
                 <div style="background:#f8fafc; padding:8px 12px; border-radius:8px; border-left:4px solid #f59e0b;"><strong>15th July</strong> – SUP Exam: Programming & Database Tech (Lab 3)</div>
                 <div style="background:#f8fafc; padding:8px 12px; border-radius:8px; border-left:4px solid #3b82f6;"><strong>30th June</strong> – Appeal resolution expected</div>
             </div>
+        </div>
+    </div>
+
+    <!-- ─── SETTINGS PAGE ────────────────────────────────────────── -->
+    <div class="sidebar-page" id="page-settings">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Settings</span></h2>
+            <button class="sidebar-page-close" data-page-close="settings"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3><i class="fas fa-palette"></i> Appearance</h3>
+            <div class="settings-item">
+                <div class="settings-label"><i class="fas fa-moon"></i> Dark Theme</div>
+                <button class="theme-toggle-switch" id="themeToggleBtn">
+                    <span class="toggle-knob"></span>
+                </button>
+            </div>
+
+            <h3 style="margin-top:24px;"><i class="fas fa-bell"></i> Notifications</h3>
+            <div class="settings-item">
+                <div class="settings-label"><i class="fas fa-bell"></i> Push Notifications</div>
+                <label class="checkbox-wrap"><input type="checkbox" checked /> Enable</label>
+            </div>
+            <div class="settings-item">
+                <div class="settings-label"><i class="fas fa-envelope"></i> Email Notifications</div>
+                <label class="checkbox-wrap"><input type="checkbox" checked /> Enable</label>
+            </div>
+
+            <h3 style="margin-top:24px;"><i class="fas fa-info-circle"></i> About</h3>
+            <p style="font-size:13px; color:#64748b;">NORTEC Student Dashboard v2.0<br />© 2026 Northern Technical College</p>
+            <button class="btn-form-submit" onclick="alert('App version: 2.0.0\nBuilt with ❤️ for NORTEC students.')" style="margin-top:8px;"><i class="fas fa-info"></i> Version Info</button>
         </div>
     </div>
 
@@ -4900,7 +5758,7 @@
                 location.reload();
             });
 
-            // ─── NEW FEATURE: ASSIGNMENTS ──────────────────────────
+            // ─── ASSIGNMENTS ──────────────────────────────────────
             const assignmentData = [
                 { title: 'Digital Electronics II - Assignment 1', due: '10th June 2026', status: 'pending' },
                 { title: 'Operating Systems - Assignment 1', due: '12th June 2026', status: 'submitted' },
@@ -4935,12 +5793,10 @@
                         statusSpan.style.cssText =
                             'display:block; font-size:10px; color:#10b981; margin-top:4px;';
                         statusSpan.textContent = '✅ Uploaded: ' + fileName;
-                        // Remove any existing status
                         const existing = this.parentElement.querySelector('.upload-status');
                         if (existing) existing.remove();
                         statusSpan.className = 'upload-status';
                         this.parentElement.appendChild(statusSpan);
-                        // Update the assignment list status (simulated)
                         const title = this.dataset.assign;
                         assignmentData.forEach(a => {
                             if (a.title === title) {
@@ -4952,7 +5808,7 @@
                 });
             });
 
-            // ─── NEW FEATURE: GRADE BREAKDOWN & WHAT-IF ──────────
+            // ─── GRADE BREAKDOWN & WHAT-IF ──────────────────────
             const gradeComponents = {
                 '41.1': { name: 'Digital Electronics II', weights: [25, 25, 25, 25] },
                 '41.2': { name: 'Entrepreneurship', weights: [20, 20, 30, 30] },
@@ -5008,7 +5864,7 @@
                 resultSpan.textContent = 'Final CA: ' + total.toFixed(1) + '%';
             });
 
-            // ─── NEW FEATURE: STUDY PLANNER ──────────────────────
+            // ─── STUDY PLANNER ──────────────────────────────────────
             const plannerEvents = JSON.parse(localStorage.getItem('plannerEvents')) || [];
 
             function renderPlanner() {
@@ -5017,7 +5873,6 @@
                 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
                 const times = ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00'];
 
-                // Header
                 days.forEach(day => {
                     const header = document.createElement('div');
                     header.className = 'day-header';
@@ -5025,13 +5880,11 @@
                     grid.appendChild(header);
                 });
 
-                // Time slots
                 times.forEach(time => {
                     days.forEach(day => {
                         const slot = document.createElement('div');
                         slot.className = 'time-slot';
                         slot.innerHTML = `<div class="slot-label">${time}</div>`;
-                        // Check for events
                         const events = plannerEvents.filter(e => e.day === day && e.time === time);
                         events.forEach(ev => {
                             const evDiv = document.createElement('div');
@@ -5058,6 +5911,517 @@
                 document.getElementById('plannerTimeInput').value = '';
                 document.getElementById('plannerEventInput').value = '';
             });
+
+            // ─── LIBRARY PORTAL ────────────────────────────────────
+            const libraryBooks = [
+                { id: 1, title: 'Computer Networks: A Systems Approach', author: 'Larry L. Peterson', isbn: '978-0128182000',
+                    available: true, borrowedBy: null, dueDate: null },
+                { id: 2, title: 'Operating Systems: Three Easy Pieces', author: 'Remzi H. Arpaci-Dusseau',
+                    isbn: '978-1596931237', available: false, borrowedBy: 'Jubel Mobela', dueDate: '2026-07-15' },
+                { id: 3, title: 'Digital Electronics: Principles and Applications', author: 'Roger Tokheim',
+                    isbn: '978-0073373775', available: true, borrowedBy: null, dueDate: null },
+                { id: 4, title: 'Database System Concepts', author: 'Abraham Silberschatz', isbn: '978-0078022159',
+                    available: false, borrowedBy: 'Jane Mwansa', dueDate: '2026-06-28' },
+                { id: 5, title: 'Computer Architecture: A Quantitative Approach', author: 'John L. Hennessy',
+                    isbn: '978-0128119051', available: true, borrowedBy: null, dueDate: null },
+                { id: 6, title: 'Introduction to Algorithms', author: 'Thomas H. Cormen', isbn: '978-0262033848',
+                    available: true, borrowedBy: null, dueDate: null },
+                { id: 7, title: 'The Linux Programming Interface', author: 'Michael Kerrisk', isbn: '978-1593272203',
+                    available: false, borrowedBy: 'Peter Zulu', dueDate: '2026-07-01' },
+                { id: 8, title: 'Computer Hardware Maintenance and Repair', author: 'Mike Meyers', isbn: '978-1260441172',
+                    available: true, borrowedBy: null, dueDate: null }
+            ];
+
+            let borrowedBooks = [
+                { id: 2, title: 'Operating Systems: Three Easy Pieces', author: 'Remzi H. Arpaci-Dusseau',
+                    dueDate: '2026-07-15' }
+            ];
+
+            function renderLibrary(searchTerm = '', filter = 'all') {
+                const container = document.getElementById('libraryResults');
+                let results = libraryBooks;
+
+                if (searchTerm) {
+                    const term = searchTerm.toLowerCase();
+                    results = results.filter(b =>
+                        b.title.toLowerCase().includes(term) ||
+                        b.author.toLowerCase().includes(term)
+                    );
+                }
+
+                if (filter === 'available') {
+                    results = results.filter(b => b.available);
+                } else if (filter === 'borrowed') {
+                    results = results.filter(b => !b.available);
+                }
+
+                container.innerHTML = '';
+                if (results.length === 0) {
+                    container.innerHTML =
+                        '<p style="color:#64748b; text-align:center; padding:20px;">No books found matching your criteria.</p>';
+                    return;
+                }
+
+                results.forEach(book => {
+                    const card = document.createElement('div');
+                    card.className = 'book-card';
+                    const availClass = book.available ? 'in-library' : 'borrowed';
+                    const availText = book.available ? 'In Library' : 'Borrowed';
+                    const isReserved = borrowedBooks.some(b => b.id === book.id);
+                    card.innerHTML = `
+                        <div class="book-title">${book.title}</div>
+                        <div class="book-author">${book.author}</div>
+                        <div class="book-meta">
+                            <span>ISBN: ${book.isbn}</span>
+                            <span class="availability ${availClass}">${availText}</span>
+                        </div>
+                        <div class="book-actions">
+                            <button class="btn-reserve" data-book-id="${book.id}" ${!book.available || isReserved ? 'disabled' : ''}>
+                                ${isReserved ? '✓ Reserved' : book.available ? 'Reserve' : 'Unavailable'}
+                            </button>
+                        </div>
+                    `;
+                    container.appendChild(card);
+
+                    const reserveBtn = card.querySelector('.btn-reserve');
+                    reserveBtn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.bookId);
+                        const book = libraryBooks.find(b => b.id === id);
+                        if (book && book.available) {
+                            book.available = false;
+                            book.borrowedBy = 'Jubel Mobela';
+                            const today = new Date();
+                            const due = new Date(today);
+                            due.setDate(due.getDate() + 14);
+                            book.dueDate = due.toISOString().split('T')[0];
+                            borrowedBooks.push({
+                                id: book.id,
+                                title: book.title,
+                                author: book.author,
+                                dueDate: book.dueDate
+                            });
+                            renderLibrary(document.getElementById('librarySearchInput').value, document.getElementById(
+                                'libraryFilter').value);
+                            renderBorrowedBooks();
+                            saveLibraryData();
+                            showNotification('📚 Book Reserved: ' + book.title, 'success');
+                        }
+                    });
+                });
+            }
+
+            function renderBorrowedBooks() {
+                const container = document.getElementById('borrowedBooksList');
+                container.innerHTML = '';
+                if (borrowedBooks.length === 0) {
+                    container.innerHTML =
+                        '<p style="color:#64748b; text-align:center; padding:12px;">No books currently borrowed.</p>';
+                    return;
+                }
+                const today = new Date().toISOString().split('T')[0];
+                borrowedBooks.forEach(book => {
+                    const div = document.createElement('div');
+                    div.className = 'borrowed-item';
+                    const isOverdue = book.dueDate && book.dueDate < today;
+                    div.innerHTML = `
+                        <div class="book-info"><strong>${book.title}</strong><br>${book.author}</div>
+                        <div class="due-date ${isOverdue ? 'overdue' : ''}">${isOverdue ? '⚠️ OVERDUE: ' : 'Due: '}${book.dueDate || 'N/A'}</div>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+
+            function saveLibraryData() {
+                localStorage.setItem('libraryBooks', JSON.stringify(libraryBooks));
+                localStorage.setItem('borrowedBooks', JSON.stringify(borrowedBooks));
+            }
+
+            function loadLibraryData() {
+                const saved = localStorage.getItem('libraryBooks');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    // Merge saved data with existing
+                    libraryBooks.forEach((b, i) => {
+                        if (parsed[i]) {
+                            b.available = parsed[i].available;
+                            b.borrowedBy = parsed[i].borrowedBy;
+                            b.dueDate = parsed[i].dueDate;
+                        }
+                    });
+                }
+                const savedBorrowed = localStorage.getItem('borrowedBooks');
+                if (savedBorrowed) {
+                    borrowedBooks = JSON.parse(savedBorrowed);
+                }
+            }
+
+            // Library search and filter
+            document.getElementById('librarySearchInput').addEventListener('input', function() {
+                renderLibrary(this.value, document.getElementById('libraryFilter').value);
+            });
+            document.getElementById('libraryFilter').addEventListener('change', function() {
+                renderLibrary(document.getElementById('librarySearchInput').value, this.value);
+            });
+
+            // ─── CAREERS / JOB BOARD ───────────────────────────────
+            const jobData = [
+                { id: 1, title: 'Junior IT Support Technician', company: 'ZANACO Bank', location: 'Lusaka, Zambia',
+                    type: 'Full-time', description: 'Provide IT support for bank systems, troubleshoot hardware and software issues.',
+                    applied: false, saved: false },
+                { id: 2, title: 'Network Administrator Intern', company: 'ZESCO', location: 'Lusaka, Zambia',
+                    type: 'Internship', description: 'Assist in network maintenance, configuration, and monitoring for power distribution systems.',
+                    applied: false, saved: false },
+                { id: 3, title: 'Computer Hardware Technician', company: 'Mining Technology Solutions', location: 'Kitwe, Zambia',
+                    type: 'Full-time', description: 'Repair and maintain computer hardware and industrial control systems.',
+                    applied: false, saved: false },
+                { id: 4, title: 'Software Developer (Graduate)', company: 'CodeZambia', location: 'Remote',
+                    type: 'Graduate Program', description: 'Build web and mobile applications using modern frameworks. Mentorship provided.',
+                    applied: false, saved: false },
+                { id: 5, title: 'Database Administrator Trainee', company: 'National Pension Scheme', location: 'Lusaka, Zambia',
+                    type: 'Internship', description: 'Learn database management, SQL optimization, and data security.',
+                    applied: false, saved: false }
+            ];
+
+            let savedJobs = [];
+
+            function renderJobs() {
+                const container = document.getElementById('jobList');
+                container.innerHTML = '';
+                jobData.forEach(job => {
+                    const card = document.createElement('div');
+                    card.className = 'job-card';
+                    const appliedClass = job.applied ? 'applied' : '';
+                    const savedClass = job.saved ? 'saved' : '';
+                    card.innerHTML = `
+                        <div class="job-title">${job.title}</div>
+                        <div class="job-company">${job.company} · ${job.location}</div>
+                        <div class="job-meta">
+                            <span><i class="fas fa-briefcase"></i> ${job.type}</span>
+                        </div>
+                        <div class="job-description">${job.description}</div>
+                        <div class="job-actions">
+                            <button class="btn-apply-job ${appliedClass}" data-job-id="${job.id}">${job.applied ? '✓ Applied' : 'Apply'}</button>
+                            <button class="btn-save-job ${savedClass}" data-job-id="${job.id}">${job.saved ? '♥ Saved' : '♡ Save'}</button>
+                        </div>
+                    `;
+                    container.appendChild(card);
+
+                    const applyBtn = card.querySelector('.btn-apply-job');
+                    applyBtn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.jobId);
+                        const job = jobData.find(j => j.id === id);
+                        if (job && !job.applied) {
+                            job.applied = true;
+                            renderJobs();
+                            saveJobsData();
+                            showNotification('✅ Application submitted for: ' + job.title, 'success');
+                        }
+                    });
+
+                    const saveBtn = card.querySelector('.btn-save-job');
+                    saveBtn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.jobId);
+                        const job = jobData.find(j => j.id === id);
+                        if (job) {
+                            job.saved = !job.saved;
+                            if (job.saved) {
+                                if (!savedJobs.includes(job.id)) savedJobs.push(job.id);
+                            } else {
+                                savedJobs = savedJobs.filter(j => j !== job.id);
+                            }
+                            renderJobs();
+                            renderSavedJobs();
+                            saveJobsData();
+                            showNotification(job.saved ? '♥ Job saved!' : '♡ Job unsaved.', 'info');
+                        }
+                    });
+                });
+            }
+
+            function renderSavedJobs() {
+                const container = document.getElementById('savedJobsList');
+                container.innerHTML = '';
+                const saved = jobData.filter(j => savedJobs.includes(j.id));
+                if (saved.length === 0) {
+                    container.innerHTML =
+                        '<p style="color:#64748b; text-align:center; padding:12px;">No saved jobs yet.</p>';
+                    return;
+                }
+                saved.forEach(job => {
+                    const div = document.createElement('div');
+                    div.style.cssText =
+                        'background:#f8fafc; border-radius:8px; padding:12px 16px; border:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center;';
+                    div.innerHTML =
+                        `<div><strong>${job.title}</strong><br><span style="font-size:12px; color:#64748b;">${job.company}</span></div>
+                                <button class="btn-apply-job" data-job-id="${job.id}" style="padding:4px 14px; border:none; border-radius:16px; background:#3b82f6; color:#fff; font-size:12px; font-weight:600; cursor:pointer;">${job.applied ? '✓' : 'Apply'}</button>`;
+                    container.appendChild(div);
+                    const btn = div.querySelector('.btn-apply-job');
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.jobId);
+                        const job = jobData.find(j => j.id === id);
+                        if (job && !job.applied) {
+                            job.applied = true;
+                            renderJobs();
+                            renderSavedJobs();
+                            saveJobsData();
+                            showNotification('✅ Applied to: ' + job.title, 'success');
+                        }
+                    });
+                });
+            }
+
+            function saveJobsData() {
+                localStorage.setItem('jobData', JSON.stringify(jobData));
+                localStorage.setItem('savedJobs', JSON.stringify(savedJobs));
+            }
+
+            function loadJobsData() {
+                const saved = localStorage.getItem('jobData');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    jobData.forEach((j, i) => {
+                        if (parsed[i]) {
+                            j.applied = parsed[i].applied;
+                            j.saved = parsed[i].saved;
+                        }
+                    });
+                }
+                const savedIds = localStorage.getItem('savedJobs');
+                if (savedIds) {
+                    savedJobs = JSON.parse(savedIds);
+                }
+            }
+
+            // ─── RESUME BUILDER ─────────────────────────────────────
+            document.getElementById('generateResumeBtn').addEventListener('click', function() {
+                const name = document.getElementById('resumeName').value || 'Jubel Mobela';
+                const phone = document.getElementById('resumePhone').value || '+260 97 123 4567';
+                const email = document.getElementById('resumeEmail').value || 'jubel.mobela@northerntech.edu.zm';
+                const location = document.getElementById('resumeLocation').value || 'Lusaka, Zambia';
+                const eduInst = document.getElementById('resumeEduInst').value || 'Northern Technical College';
+                const eduDegree = document.getElementById('resumeEduDegree').value ||
+                    'Diploma in Computer Systems Engineering';
+                const eduYears = document.getElementById('resumeEduYears').value || '2022 – 2026';
+                const eduGPA = document.getElementById('resumeEduGPA').value || '3.2 / 4.0';
+                const work1 = document.getElementById('resumeWork1').value || 'IT Intern, ZANACO Bank (2024)';
+                const workDesc1 = document.getElementById('resumeWorkDesc1').value ||
+                    'Assisted in network maintenance, troubleshooting, and user support.';
+                const work2 = document.getElementById('resumeWork2').value || '';
+                const skills = document.getElementById('resumeSkills').value ||
+                    'Python, JavaScript, Networking, Database Management, Linux, Hardware Repair';
+                const softSkills = document.getElementById('resumeSoftSkills').value ||
+                    'Teamwork, Communication, Problem Solving, Time Management';
+
+                // Build resume HTML
+                const resumeHTML = `
+                    <div style="font-family: 'Inter', sans-serif; max-width: 700px; margin:0 auto; background:#fff; padding:24px; border:1px solid #e2e8f0; border-radius:12px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:3px solid #3b82f6; padding-bottom:12px;">
+                            <div>
+                                <h1 style="font-size:24px; font-weight:800; color:#0f172a; margin:0;">${name}</h1>
+                                <p style="color:#64748b; margin:4px 0;">${location}</p>
+                            </div>
+                            <div style="text-align:right; font-size:13px; color:#64748b;">
+                                <div>${email}</div>
+                                <div>${phone}</div>
+                            </div>
+                        </div>
+
+                        <h3 style="font-size:16px; font-weight:700; color:#0f172a; margin:16px 0 8px; border-bottom:1px solid #e2e8f0; padding-bottom:4px;">Education</h3>
+                        <div style="margin-bottom:8px;">
+                            <div style="font-weight:600; color:#0f172a;">${eduDegree}</div>
+                            <div style="color:#64748b; font-size:13px;">${eduInst} · ${eduYears}</div>
+                            <div style="color:#64748b; font-size:13px;">GPA: ${eduGPA}</div>
+                        </div>
+
+                        <h3 style="font-size:16px; font-weight:700; color:#0f172a; margin:16px 0 8px; border-bottom:1px solid #e2e8f0; padding-bottom:4px;">Experience</h3>
+                        <div style="margin-bottom:8px;">
+                            <div style="font-weight:600; color:#0f172a;">${work1}</div>
+                            <div style="color:#64748b; font-size:13px;">${workDesc1}</div>
+                        </div>
+                        ${work2 ? `<div style="margin-bottom:8px;"><div style="font-weight:600; color:#0f172a;">${work2}</div></div>` : ''}
+
+                        <h3 style="font-size:16px; font-weight:700; color:#0f172a; margin:16px 0 8px; border-bottom:1px solid #e2e8f0; padding-bottom:4px;">Skills</h3>
+                        <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                            ${skills.split(',').map(s => `<span style="background:#eff6ff; color:#3b82f6; padding:2px 12px; border-radius:12px; font-size:12px; font-weight:600;">${s.trim()}</span>`).join('')}
+                        </div>
+                        <div style="margin-top:6px; display:flex; flex-wrap:wrap; gap:6px;">
+                            ${softSkills.split(',').map(s => `<span style="background:#f1f5f9; color:#64748b; padding:2px 12px; border-radius:12px; font-size:12px; font-weight:500;">${s.trim()}</span>`).join('')}
+                        </div>
+
+                        <div style="margin-top:16px; padding-top:12px; border-top:1px solid #e2e8f0; font-size:11px; color:#94a3b8; text-align:center;">
+                            Generated by NORTEC Resume Builder · ${new Date().toLocaleDateString()}
+                        </div>
+                    </div>
+                `;
+
+                // Show preview
+                const preview = document.getElementById('resumePreview');
+                preview.style.display = 'block';
+                preview.innerHTML = resumeHTML;
+
+                // Generate PDF using html2pdf
+                const element = preview;
+                const opt = {
+                    margin: 10,
+                    filename: 'Resume_' + name.replace(/\s/g, '_') + '.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2, useCORS: true },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                };
+                html2pdf().set(opt).from(element).save();
+            });
+
+            // ─── ALUMNI NETWORK ─────────────────────────────────────
+            const alumniData = [
+                { name: 'Chisomo Banda', graduation: '2024', program: 'Diploma in Computer Systems Engineering',
+                    company: 'ZANACO Bank', position: 'IT Officer' },
+                { name: 'Mwansa Phiri', graduation: '2023', program: 'Diploma in Electrical Engineering',
+                    company: 'ZESCO', position: 'Electrical Engineer' },
+                { name: 'Patricia Mwape', graduation: '2022', program: 'Diploma in Science Laboratory Technology',
+                    company: 'University Teaching Hospital', position: 'Lab Technologist' },
+                { name: 'John Zulu', graduation: '2024', program: 'Advanced Certificate in Heavy Equipment Repair',
+                    company: 'Mining Tech Solutions', position: 'Heavy Equipment Technician' },
+                { name: 'Sarah Tembo', graduation: '2023', program: 'Diploma in Automotive Engineering',
+                    company: 'Toyota Zambia', position: 'Service Advisor' },
+                { name: 'David Mwansa', graduation: '2022', program: 'Diploma in Production & Operation Management',
+                    company: 'Zambia Sugar', position: 'Production Supervisor' }
+            ];
+
+            function renderAlumni() {
+                const container = document.getElementById('alumniGrid');
+                container.innerHTML = '';
+                alumniData.forEach(a => {
+                    const card = document.createElement('div');
+                    card.className = 'alumni-card';
+                    const initial = a.name.charAt(0);
+                    card.innerHTML = `
+                        <div class="alumni-avatar">${initial}</div>
+                        <div class="alumni-name">${a.name}</div>
+                        <div class="alumni-detail">${a.program} (${a.graduation})</div>
+                        <div class="alumni-company">${a.company} · ${a.position}</div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+
+            // ─── NOTIFICATIONS ──────────────────────────────────────
+            const notifications = [
+                { id: 1, icon: 'fa-calendar-check', text: 'Exam schedule for Term 2 is now available.',
+                time: '2 hours ago', read: false },
+                { id: 2, icon: 'fa-coins', text: 'Fee payment deadline: 30th June 2026. Please clear your balance.',
+                    time: '5 hours ago', read: false },
+                { id: 3, icon: 'fa-graduation-cap', text: 'Graduation ceremony rescheduled to 15th July 2026.',
+                    time: '1 day ago', read: false },
+                { id: 4, icon: 'fa-book', text: 'Library catalog updated with new resources.', time: '2 days ago',
+                    read: true },
+                { id: 5, icon: 'fa-briefcase', text: 'New internship opportunities posted on the Careers board.',
+                    time: '3 days ago', read: true }
+            ];
+
+            let unreadCount = notifications.filter(n => !n.read).length;
+
+            function renderNotifications() {
+                const container = document.getElementById('notifList');
+                container.innerHTML = '';
+                const unread = notifications.filter(n => !n.read);
+                const read = notifications.filter(n => n.read);
+
+                if (notifications.length === 0) {
+                    container.innerHTML = '<div class="notif-empty">No notifications</div>';
+                    return;
+                }
+
+                const allNotifs = [...unread, ...read];
+                allNotifs.forEach(n => {
+                    const div = document.createElement('div');
+                    div.className = 'notif-item';
+                    div.style.opacity = n.read ? '0.7' : '1';
+                    div.innerHTML = `
+                        <div class="notif-icon"><i class="fas ${n.icon}"></i></div>
+                        <div>
+                            <div class="notif-text">${n.text}</div>
+                            <div class="notif-time">${n.time}</div>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
+                document.getElementById('notifBadge').textContent = unreadCount;
+                document.getElementById('notifBadge').style.display = unreadCount > 0 ? 'flex' : 'none';
+            }
+
+            document.getElementById('notificationBtn').addEventListener('click', function() {
+                const dropdown = document.getElementById('notificationDropdown');
+                dropdown.classList.toggle('open');
+            });
+
+            document.getElementById('clearNotifBtn').addEventListener('click', function() {
+                notifications.forEach(n => n.read = true);
+                unreadCount = 0;
+                renderNotifications();
+                document.getElementById('notificationDropdown').classList.remove('open');
+                showNotification('✅ All notifications marked as read.', 'info');
+            });
+
+            function showNotification(message, type = 'info') {
+                // Create a temporary notification popup
+                const popup = document.createElement('div');
+                popup.style.cssText = `
+                    position: fixed; bottom: 20px; right: 20px; z-index: 99999;
+                    background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+                    color: #fff; padding: 14px 24px; border-radius: 12px;
+                    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+                    font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500;
+                    max-width: 380px; animation: fadeInOverlay 0.3s ease;
+                    display: flex; align-items: center; gap: 10px;
+                `;
+                popup.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i> ${message}`;
+                document.body.appendChild(popup);
+                setTimeout(() => {
+                    popup.style.opacity = '0';
+                    popup.style.transition = 'opacity 0.3s ease';
+                    setTimeout(() => popup.remove(), 300);
+                }, 3500);
+            }
+
+            // ─── THEME TOGGLE ──────────────────────────────────────
+            const themeBtn = document.getElementById('themeToggleBtn');
+            let currentTheme = localStorage.getItem('theme') || 'dark';
+
+            function applyTheme(theme) {
+                if (theme === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    themeBtn.classList.add('active');
+                } else {
+                    document.documentElement.removeAttribute('data-theme');
+                    themeBtn.classList.remove('active');
+                }
+                localStorage.setItem('theme', theme);
+                currentTheme = theme;
+            }
+
+            themeBtn.addEventListener('click', function() {
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+                showNotification(newTheme === 'light' ? '☀️ Light theme enabled' : '🌙 Dark theme enabled', 'info');
+            });
+
+            // Apply saved theme
+            applyTheme(currentTheme);
+
+            // ─── DIGITAL STUDENT ID (QR Code) ──────────────────
+            function generateQR() {
+                const qrContainer = document.getElementById('qrcode');
+                qrContainer.innerHTML = '';
+                const data = 'NORTEC|2201001157|JUBEL MOBELA|DIPLOMA IN COMPUTER SYSTEMS ENGINEERING|2026';
+                new QRCode(qrContainer, {
+                    text: data,
+                    width: 120,
+                    height: 120,
+                    colorDark: '#1e40af',
+                    colorLight: '#ffffff',
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            }
 
             // ─── EVENT BINDINGS ──────────────────────────────────
             enrollBtn.addEventListener('click', (e) => { e.preventDefault();
@@ -5125,7 +6489,6 @@
                 }
             });
 
-            // Logout from sidebar
             sidebarLogout.addEventListener('click', function() {
                 if (confirm('Are you sure you want to logout?')) {
                     toggleSidebar(false);
@@ -5193,7 +6556,17 @@
             showMain();
             renderAssignments();
             renderPlanner();
-            console.log('✅ Northern Technical College – added Assignments, Interactive Gradebook, Study Planner.');
+            loadLibraryData();
+            renderLibrary();
+            renderBorrowedBooks();
+            loadJobsData();
+            renderJobs();
+            renderSavedJobs();
+            renderAlumni();
+            renderNotifications();
+            generateQR();
+
+            console.log('✅ Northern Technical College – full dashboard with all requested features.');
         })();
     </script>
 </body>
