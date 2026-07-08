@@ -2422,6 +2422,182 @@
             background: #3b82f6;
             border-radius: 10px;
         }
+
+        /* ─── NEW FEATURE: ASSIGNMENT UPLOAD BOX ──────────────── */
+        .assign-upload-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 8px 0;
+        }
+        .assign-upload-box {
+            background: #f8fafc;
+            border: 2px dashed #d1d5db;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            position: relative;
+        }
+        .assign-upload-box:hover {
+            border-color: #3b82f6;
+        }
+        .assign-upload-box i {
+            font-size: 24px;
+            color: #94a3b8;
+        }
+        .assign-upload-box .assign-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #475569;
+            margin-top: 4px;
+        }
+        .assign-upload-box input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .assign-status-badge {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .assign-status-badge.pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .assign-status-badge.submitted {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .assign-status-badge.graded {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        /* ─── NEW FEATURE: GRADE BREAKDOWN & WHAT-IF ───────────── */
+        .grade-breakdown-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 12px;
+        }
+        .grade-breakdown-box .component-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 13px;
+        }
+        .grade-breakdown-box .component-row:last-child {
+            border-bottom: none;
+        }
+        .grade-breakdown-box .component-row .weight {
+            font-weight: 600;
+            color: #3b82f6;
+        }
+        .what-if-calculator {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 12px;
+        }
+        .what-if-calculator .input-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+        .what-if-calculator .input-group input {
+            width: 60px;
+            padding: 6px 8px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+        }
+        .what-if-calculator .result {
+            font-weight: 700;
+            font-size: 16px;
+            margin-top: 8px;
+            color: #0f172a;
+        }
+
+        /* ─── NEW FEATURE: STUDY PLANNER ───────────────────────── */
+        .planner-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-top: 12px;
+        }
+        .planner-grid .day-header {
+            background: #eff6ff;
+            padding: 8px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 12px;
+            color: #1d4ed8;
+            border-radius: 6px;
+        }
+        .planner-grid .time-slot {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 6px;
+            min-height: 60px;
+            font-size: 11px;
+            position: relative;
+        }
+        .planner-grid .time-slot .slot-label {
+            font-weight: 600;
+            color: #64748b;
+            font-size: 10px;
+        }
+        .planner-grid .time-slot .slot-event {
+            background: #dbeafe;
+            border-radius: 4px;
+            padding: 2px 6px;
+            margin-top: 2px;
+            font-size: 10px;
+            color: #1e40af;
+            font-weight: 500;
+        }
+        .planner-add-form {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 12px 0;
+            align-items: center;
+        }
+        .planner-add-form select,
+        .planner-add-form input {
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+        }
+        .planner-add-form .btn-add-event {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 20px;
+            background: #3b82f6;
+            color: #fff;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .planner-add-form .btn-add-event:hover {
+            background: #2563eb;
+        }
     </style>
 </head>
 <body>
@@ -2593,6 +2769,7 @@
         <button class="sidebar-menu-item" data-page="application"><i class="fas fa-file-alt"></i> Application</button>
         <button class="sidebar-menu-item" data-page="classes"><i class="fas fa-chalkboard"></i> Classes</button>
         <button class="sidebar-menu-item" data-page="ca"><i class="fas fa-chart-bar"></i> CA</button>
+        <button class="sidebar-menu-item" data-page="assignments"><i class="fas fa-tasks"></i> Assignments</button>
         <button class="sidebar-menu-item" data-page="profile"><i class="fas fa-user-circle"></i> Profile</button>
         <button class="sidebar-menu-item" data-page="notice"><i class="fas fa-bullhorn"></i> Notice</button>
         <button class="sidebar-menu-item" data-page="exams"><i class="fas fa-calendar-check"></i> Exams</button>
@@ -2607,6 +2784,7 @@
         <button class="sidebar-menu-item" data-page="attendance"><i class="fas fa-clipboard-list"></i> Attendance</button>
         <button class="sidebar-menu-item" data-page="courses"><i class="fas fa-book"></i> Courses</button>
         <button class="sidebar-menu-item" data-page="timetable"><i class="fas fa-clock"></i> Time Table</button>
+        <button class="sidebar-menu-item" data-page="studyplanner"><i class="fas fa-calendar-plus"></i> Study Planner</button>
         <button class="sidebar-menu-item logout-item" id="sidebarLogout"><i class="fas fa-sign-out-alt"></i> Logout</button>
     </div>
 
@@ -2697,7 +2875,7 @@
         </div>
     </div>
 
-    <!-- CA Page -->
+    <!-- CA Page (Enhanced with Grade Breakdown & What-If) -->
     <div class="sidebar-page" id="page-ca">
         <div class="sidebar-page-header">
             <img src="logo.png" class="page-logo" alt="NORTEC" />
@@ -2747,6 +2925,86 @@
                 </table>
             </div>
             <div style="margin-top:8px; font-size:11px; color:#64748b; text-align:center;">* CA Meter shows percentage of CA score out of 40%</div>
+
+            <!-- ─── INTERACTIVE GRADE BREAKDOWN & WHAT-IF ─── -->
+            <h3 style="margin-top:24px;"><i class="fas fa-chart-pie"></i> Grade Breakdown & What-If Calculator</h3>
+            <div class="grade-breakdown-box" id="gradeBreakdownBox">
+                <p style="font-weight:600; margin-bottom:8px;">Select a subject to view its component weights:</p>
+                <select id="gradeSubjectSelect" style="width:100%; padding:8px; border-radius:8px; border:1px solid #d1d5db; font-family:'Inter',sans-serif; margin-bottom:12px;">
+                    <option value="">— Choose a subject —</option>
+                    <option value="41.1">Digital Electronics II (41.1)</option>
+                    <option value="41.2">Entrepreneurship (41.2)</option>
+                    <option value="41.3">Operating Systems (41.3)</option>
+                    <option value="41.4">Programming & Database Tech (41.4)</option>
+                    <option value="41.5">Networks & Communications (41.5)</option>
+                    <option value="41.6">Computer Hardware Maintenance (41.6)</option>
+                    <option value="41.7">Management Information Systems (41.7)</option>
+                </select>
+                <div id="componentWeightsDisplay" style="font-size:13px; color:#334155;">
+                    <p>Select a subject to see its component weights.</p>
+                </div>
+            </div>
+
+            <div class="what-if-calculator" id="whatIfCalculator">
+                <h4 style="font-size:14px; font-weight:700; margin-bottom:8px;">🎯 What-If Grade Calculator</h4>
+                <p style="font-size:12px; color:#64748b; margin-bottom:8px;">Enter hypothetical scores for each component (0–100) to see your final CA %.</p>
+                <div class="input-group" id="whatIfInputs">
+                    <div style="display:flex; flex-wrap:wrap; gap:6px; width:100%;">
+                        <label style="font-size:12px; font-weight:600; color:#475569;">Component 1:</label>
+                        <input type="number" id="wiComp1" min="0" max="100" placeholder="0" value="" />
+                        <label style="font-size:12px; font-weight:600; color:#475569;">Component 2:</label>
+                        <input type="number" id="wiComp2" min="0" max="100" placeholder="0" value="" />
+                        <label style="font-size:12px; font-weight:600; color:#475569;">Component 3:</label>
+                        <input type="number" id="wiComp3" min="0" max="100" placeholder="0" value="" />
+                        <label style="font-size:12px; font-weight:600; color:#475569;">Component 4:</label>
+                        <input type="number" id="wiComp4" min="0" max="100" placeholder="0" value="" />
+                    </div>
+                </div>
+                <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:8px;">
+                    <button id="calcWhatIfBtn" style="padding:8px 20px; border:none; border-radius:20px; background:#3b82f6; color:#fff; font-weight:600; font-size:13px; cursor:pointer;">Calculate</button>
+                    <span id="whatIfResult" class="result" style="font-size:15px;">Final CA: —</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── NEW ASSIGNMENTS PAGE ────────────────────────────────── -->
+    <div class="sidebar-page" id="page-assignments">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Assignments</span> & Tracker</h2>
+            <button class="sidebar-page-close" data-page-close="assignments"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3><i class="fas fa-list-check"></i> Assignment List</h3>
+            <div id="assignmentList" style="display:grid; gap:12px; margin-top:8px;">
+                <!-- Dynamically rendered -->
+            </div>
+
+            <h3 style="margin-top:24px;"><i class="fas fa-upload"></i> Upload Assignment</h3>
+            <div class="assign-upload-grid">
+                <div class="assign-upload-box">
+                    <i class="fas fa-file-pdf"></i>
+                    <div class="assign-label">Assignment 1: Digital Electronics</div>
+                    <input type="file" accept=".pdf,.doc,.docx" data-assign="Digital Electronics II - Asst 1" />
+                </div>
+                <div class="assign-upload-box">
+                    <i class="fas fa-file-pdf"></i>
+                    <div class="assign-label">Assignment 2: Operating Systems</div>
+                    <input type="file" accept=".pdf,.doc,.docx" data-assign="Operating Systems - Asst 1" />
+                </div>
+                <div class="assign-upload-box">
+                    <i class="fas fa-file-pdf"></i>
+                    <div class="assign-label">Assignment 3: Programming</div>
+                    <input type="file" accept=".pdf,.doc,.docx" data-assign="Programming & Database Tech - Asst 1" />
+                </div>
+                <div class="assign-upload-box">
+                    <i class="fas fa-file-pdf"></i>
+                    <div class="assign-label">Assignment 4: Networks</div>
+                    <input type="file" accept=".pdf,.doc,.docx" data-assign="Networks & Communications - Asst 1" />
+                </div>
+            </div>
+            <p style="font-size:11px; color:#64748b; margin-top:4px;">Uploaded files are stored locally (simulated).</p>
         </div>
     </div>
 
@@ -3568,6 +3826,47 @@
         </div>
     </div>
 
+    <!-- ─── NEW STUDY PLANNER PAGE ──────────────────────────────── -->
+    <div class="sidebar-page" id="page-studyplanner">
+        <div class="sidebar-page-header">
+            <img src="logo.png" class="page-logo" alt="NORTEC" />
+            <h2><span class="accent">Study Planner</span></h2>
+            <button class="sidebar-page-close" data-page-close="studyplanner"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="sidebar-page-body">
+            <h3><i class="fas fa-calendar-plus"></i> Build Your Study Schedule</h3>
+            <p style="font-size:13px; color:#64748b; margin-bottom:8px;">Add study blocks, exam dates, or deadlines to your weekly plan.</p>
+
+            <div class="planner-add-form">
+                <select id="plannerDaySelect">
+                    <option value="Mon">Monday</option>
+                    <option value="Tue">Tuesday</option>
+                    <option value="Wed">Wednesday</option>
+                    <option value="Thu">Thursday</option>
+                    <option value="Fri">Friday</option>
+                    <option value="Sat">Saturday</option>
+                    <option value="Sun">Sunday</option>
+                </select>
+                <input type="text" id="plannerTimeInput" placeholder="e.g. 14:00" style="width:80px;" />
+                <input type="text" id="plannerEventInput" placeholder="e.g. Study OS" style="flex:1; min-width:120px;" />
+                <button class="btn-add-event" id="addPlannerEvent"><i class="fas fa-plus"></i> Add</button>
+            </div>
+
+            <div class="planner-grid" id="plannerGrid">
+                <!-- dynamically generated -->
+            </div>
+            <p style="font-size:11px; color:#64748b; margin-top:8px;">Events are stored locally (simulated).</p>
+
+            <h3 style="margin-top:24px;"><i class="fas fa-calendar-check"></i> Upcoming Deadlines & Exams</h3>
+            <div id="upcomingDeadlines" style="display:grid; gap:6px; font-size:13px;">
+                <div style="background:#f8fafc; padding:8px 12px; border-radius:8px; border-left:4px solid #ef4444;"><strong>20th June</strong> – Digital Electronics II Exam (Hall A)</div>
+                <div style="background:#f8fafc; padding:8px 12px; border-radius:8px; border-left:4px solid #ef4444;"><strong>21st June</strong> – Operating Systems Exam (Hall B)</div>
+                <div style="background:#f8fafc; padding:8px 12px; border-radius:8px; border-left:4px solid #f59e0b;"><strong>15th July</strong> – SUP Exam: Programming & Database Tech (Lab 3)</div>
+                <div style="background:#f8fafc; padding:8px 12px; border-radius:8px; border-left:4px solid #3b82f6;"><strong>30th June</strong> – Appeal resolution expected</div>
+            </div>
+        </div>
+    </div>
+
     <!-- ─── DETAIL MODAL ─── -->
     <div id="detailModal">
         <div class="modal-fixed-top">
@@ -3774,41 +4073,32 @@
             const installDismissBtn = document.getElementById('installDismissBtn');
             const installDismissX = document.getElementById('installDismissX');
 
-            // Check if the app is already installed
             function isAppInstalled() {
-                // If in standalone mode (PWA installed)
                 if (window.matchMedia('(display-mode: standalone)').matches) return true;
-                // If in fullscreen (iOS PWA)
                 if (window.navigator.standalone === true) return true;
-                // Check localStorage flag
                 if (localStorage.getItem('pwaInstalled') === 'true') return true;
                 return false;
             }
 
-            // Show the install prompt if not installed
             function showInstallPrompt() {
                 if (!isAppInstalled()) {
                     installOverlay.classList.add('active');
                 }
             }
 
-            // Hide the install prompt
             function hideInstallPrompt() {
                 installOverlay.classList.remove('active');
                 localStorage.setItem('pwaInstalled', 'true');
             }
 
-            // Listen for the beforeinstallprompt event
             window.addEventListener('beforeinstallprompt', function(e) {
                 e.preventDefault();
                 deferredPrompt = e;
-                // Show the prompt if not installed
                 if (!isAppInstalled()) {
                     installOverlay.classList.add('active');
                 }
             });
 
-            // Handle install button click
             installBtn.addEventListener('click', function() {
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
@@ -3817,21 +4107,18 @@
                             localStorage.setItem('pwaInstalled', 'true');
                             hideInstallPrompt();
                         } else {
-                            // User dismissed the browser prompt
                             localStorage.setItem('pwaInstalled', 'true');
                             hideInstallPrompt();
                         }
                         deferredPrompt = null;
                     });
                 } else {
-                    // Fallback: just hide the prompt and set flag
                     localStorage.setItem('pwaInstalled', 'true');
                     hideInstallPrompt();
                     alert('To install, look for "Add to Home Screen" in your browser menu.');
                 }
             });
 
-            // Dismiss handlers
             installDismissBtn.addEventListener('click', function() {
                 localStorage.setItem('pwaInstalled', 'true');
                 hideInstallPrompt();
@@ -3842,10 +4129,7 @@
                 hideInstallPrompt();
             });
 
-            // Show prompt on load if not installed and not already dismissed
-            // We check a separate flag for "dismissed" to avoid showing again
             if (!localStorage.getItem('pwaInstalled') && !isAppInstalled()) {
-                // Small delay to let the page render
                 setTimeout(showInstallPrompt, 1200);
             }
 
@@ -4616,6 +4900,165 @@
                 location.reload();
             });
 
+            // ─── NEW FEATURE: ASSIGNMENTS ──────────────────────────
+            const assignmentData = [
+                { title: 'Digital Electronics II - Assignment 1', due: '10th June 2026', status: 'pending' },
+                { title: 'Operating Systems - Assignment 1', due: '12th June 2026', status: 'submitted' },
+                { title: 'Programming & Database Tech - Assignment 1', due: '15th June 2026', status: 'graded' },
+                { title: 'Networks & Communications - Assignment 1', due: '18th June 2026', status: 'pending' }
+            ];
+
+            function renderAssignments() {
+                const container = document.getElementById('assignmentList');
+                container.innerHTML = '';
+                assignmentData.forEach((assign, idx) => {
+                    const div = document.createElement('div');
+                    div.style.cssText =
+                        'background:#f8fafc; border-radius:10px; padding:12px 16px; border:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;';
+                    const statusClass = assign.status === 'pending' ? 'pending' : assign.status === 'submitted' ?
+                        'submitted' : 'graded';
+                    div.innerHTML = `
+                        <div><strong>${assign.title}</strong><br /><span style="font-size:12px; color:#64748b;">Due: ${assign.due}</span></div>
+                        <div><span class="assign-status-badge ${statusClass}">${assign.status.charAt(0).toUpperCase() + assign.status.slice(1)}</span></div>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+
+            // Handle file uploads for assignments
+            document.querySelectorAll('.assign-upload-box input[type="file"]').forEach(input => {
+                input.addEventListener('change', function() {
+                    const fileName = this.files[0] ? this.files[0].name : '';
+                    const label = this.parentElement.querySelector('.assign-label');
+                    if (fileName) {
+                        const statusSpan = document.createElement('span');
+                        statusSpan.style.cssText =
+                            'display:block; font-size:10px; color:#10b981; margin-top:4px;';
+                        statusSpan.textContent = '✅ Uploaded: ' + fileName;
+                        // Remove any existing status
+                        const existing = this.parentElement.querySelector('.upload-status');
+                        if (existing) existing.remove();
+                        statusSpan.className = 'upload-status';
+                        this.parentElement.appendChild(statusSpan);
+                        // Update the assignment list status (simulated)
+                        const title = this.dataset.assign;
+                        assignmentData.forEach(a => {
+                            if (a.title === title) {
+                                a.status = 'submitted';
+                            }
+                        });
+                        renderAssignments();
+                    }
+                });
+            });
+
+            // ─── NEW FEATURE: GRADE BREAKDOWN & WHAT-IF ──────────
+            const gradeComponents = {
+                '41.1': { name: 'Digital Electronics II', weights: [25, 25, 25, 25] },
+                '41.2': { name: 'Entrepreneurship', weights: [20, 20, 30, 30] },
+                '41.3': { name: 'Operating Systems', weights: [25, 25, 25, 25] },
+                '41.4': { name: 'Programming & Database Tech', weights: [20, 20, 30, 30] },
+                '41.5': { name: 'Networks & Communications', weights: [25, 25, 25, 25] },
+                '41.6': { name: 'Computer Hardware Maintenance', weights: [20, 20, 30, 30] },
+                '41.7': { name: 'Management Information Systems', weights: [25, 25, 25, 25] }
+            };
+
+            const gradeSelect = document.getElementById('gradeSubjectSelect');
+            const weightsDisplay = document.getElementById('componentWeightsDisplay');
+            const whatIfInputs = {
+                comp1: document.getElementById('wiComp1'),
+                comp2: document.getElementById('wiComp2'),
+                comp3: document.getElementById('wiComp3'),
+                comp4: document.getElementById('wiComp4')
+            };
+            const calcBtn = document.getElementById('calcWhatIfBtn');
+            const resultSpan = document.getElementById('whatIfResult');
+
+            gradeSelect.addEventListener('change', function() {
+                const code = this.value;
+                if (!code || !gradeComponents[code]) {
+                    weightsDisplay.innerHTML = '<p>Select a subject to see its component weights.</p>';
+                    return;
+                }
+                const comp = gradeComponents[code];
+                let html = `<p style="font-weight:600; margin-bottom:4px;">${comp.name} – Component Weights:</p>`;
+                comp.weights.forEach((w, i) => {
+                    html += `<div class="component-row"><span>Component ${i+1}</span><span class="weight">${w}%</span></div>`;
+                });
+                weightsDisplay.innerHTML = html;
+            });
+
+            calcBtn.addEventListener('click', function() {
+                const code = gradeSelect.value;
+                if (!code || !gradeComponents[code]) {
+                    alert('Please select a subject first.');
+                    return;
+                }
+                const weights = gradeComponents[code].weights;
+                const vals = [
+                    parseFloat(whatIfInputs.comp1.value) || 0,
+                    parseFloat(whatIfInputs.comp2.value) || 0,
+                    parseFloat(whatIfInputs.comp3.value) || 0,
+                    parseFloat(whatIfInputs.comp4.value) || 0
+                ];
+                let total = 0;
+                weights.forEach((w, i) => {
+                    total += (vals[i] * w / 100);
+                });
+                resultSpan.textContent = 'Final CA: ' + total.toFixed(1) + '%';
+            });
+
+            // ─── NEW FEATURE: STUDY PLANNER ──────────────────────
+            const plannerEvents = JSON.parse(localStorage.getItem('plannerEvents')) || [];
+
+            function renderPlanner() {
+                const grid = document.getElementById('plannerGrid');
+                grid.innerHTML = '';
+                const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+                const times = ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00'];
+
+                // Header
+                days.forEach(day => {
+                    const header = document.createElement('div');
+                    header.className = 'day-header';
+                    header.textContent = day;
+                    grid.appendChild(header);
+                });
+
+                // Time slots
+                times.forEach(time => {
+                    days.forEach(day => {
+                        const slot = document.createElement('div');
+                        slot.className = 'time-slot';
+                        slot.innerHTML = `<div class="slot-label">${time}</div>`;
+                        // Check for events
+                        const events = plannerEvents.filter(e => e.day === day && e.time === time);
+                        events.forEach(ev => {
+                            const evDiv = document.createElement('div');
+                            evDiv.className = 'slot-event';
+                            evDiv.textContent = ev.title;
+                            slot.appendChild(evDiv);
+                        });
+                        grid.appendChild(slot);
+                    });
+                });
+            }
+
+            document.getElementById('addPlannerEvent').addEventListener('click', function() {
+                const day = document.getElementById('plannerDaySelect').value;
+                const time = document.getElementById('plannerTimeInput').value.trim();
+                const title = document.getElementById('plannerEventInput').value.trim();
+                if (!time || !title) {
+                    alert('Please enter a time and event description.');
+                    return;
+                }
+                plannerEvents.push({ day, time, title });
+                localStorage.setItem('plannerEvents', JSON.stringify(plannerEvents));
+                renderPlanner();
+                document.getElementById('plannerTimeInput').value = '';
+                document.getElementById('plannerEventInput').value = '';
+            });
+
             // ─── EVENT BINDINGS ──────────────────────────────────
             enrollBtn.addEventListener('click', (e) => { e.preventDefault();
                 showEnroll(); });
@@ -4685,9 +5128,7 @@
             // Logout from sidebar
             sidebarLogout.addEventListener('click', function() {
                 if (confirm('Are you sure you want to logout?')) {
-                    // Close sidebar first
                     toggleSidebar(false);
-                    // Close any open sidebar page
                     sidebarPages.forEach(p => p.classList.remove('active'));
                     document.body.style.overflow = '';
                     showMain();
@@ -4750,7 +5191,9 @@
 
             // ─── INIT ─────────────────────────────────────────────
             showMain();
-            console.log('✅ Northern Technical College – full dashboard with PWA install prompt.');
+            renderAssignments();
+            renderPlanner();
+            console.log('✅ Northern Technical College – added Assignments, Interactive Gradebook, Study Planner.');
         })();
     </script>
 </body>
