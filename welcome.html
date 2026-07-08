@@ -1278,11 +1278,12 @@
             background: #dbeafe;
         }
 
-        /* ─── NOTIFICATION BELL ──────────────────────────────────── */
+        /* ─── NOTIFICATION BELL (Top Right) ──────────────────────── */
         .notification-wrapper {
             position: relative;
             display: flex;
             align-items: center;
+            margin-left: auto;
         }
         .btn-notification {
             background: transparent;
@@ -2923,7 +2924,7 @@
             color: #92400e;
         }
 
-        /* ─── RESUME BUILDER ──────────────────────────────────────── */
+        /* ─── RESUME BUILDER (Enhanced) ──────────────────────────── */
         .resume-builder-form {
             display: grid;
             gap: 16px;
@@ -2993,6 +2994,135 @@
             margin-top: 8px;
         }
         .resume-builder-form .btn-generate-resume:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        /* ─── JOB APPLICATION MODAL ───────────────────────────────── */
+        .job-application-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: var(--modal-overlay);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.35s ease;
+        }
+        .job-application-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .job-application-modal .job-modal-content {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 32px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.25);
+            position: relative;
+        }
+        .job-application-modal .job-modal-content .close-job-modal {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #64748b;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .job-application-modal .job-modal-content .close-job-modal:hover {
+            color: #0f172a;
+        }
+        .job-application-modal .job-modal-content .job-details-summary {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #3b82f6;
+        }
+        .job-application-modal .job-modal-content .job-details-summary h2 {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+        .job-application-modal .job-modal-content .job-details-summary .company {
+            color: #64748b;
+            font-size: 15px;
+        }
+        .job-application-modal .job-modal-content .job-details-summary .meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: #64748b;
+            margin: 4px 0;
+        }
+        .job-application-modal .job-modal-content .job-details-summary .description {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #334155;
+            line-height: 1.6;
+        }
+        .job-application-modal .job-modal-content .job-details-summary .qualifications {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #334155;
+        }
+        .job-application-modal .job-modal-content .job-details-summary .qualifications ul {
+            padding-left: 20px;
+            margin-top: 4px;
+        }
+        .job-application-modal .job-modal-content .apply-form label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 4px;
+        }
+        .job-application-modal .job-modal-content .apply-form input,
+        .job-application-modal .job-modal-content .apply-form textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid #d1d5db;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            transition: border 0.2s;
+        }
+        .job-application-modal .job-modal-content .apply-form input:focus,
+        .job-application-modal .job-modal-content .apply-form textarea:focus {
+            border-color: #3b82f6;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
+        }
+        .job-application-modal .job-modal-content .apply-form .form-group {
+            margin-bottom: 14px;
+        }
+        .job-application-modal .job-modal-content .apply-form .submit-application-btn {
+            padding: 12px 32px;
+            border: none;
+            border-radius: 50px;
+            background: #3b82f6;
+            color: #fff;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        .job-application-modal .job-modal-content .apply-form .submit-application-btn:hover {
             background: #2563eb;
             transform: translateY(-2px);
             box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
@@ -3221,7 +3351,7 @@
             }
             .notification-dropdown {
                 width: 280px;
-                right: -60px;
+                right: 0;
             }
             .digital-id-card {
                 padding: 16px;
@@ -3235,6 +3365,9 @@
                 width: 40px;
                 height: 40px;
                 font-size: 18px;
+            }
+            .job-application-modal .job-modal-content {
+                padding: 24px;
             }
         }
         @media (max-width: 480px) {
@@ -3294,6 +3427,12 @@
                 width: 36px;
                 height: 36px;
                 font-size: 16px;
+            }
+            .job-application-modal .job-modal-content {
+                padding: 16px;
+            }
+            .job-application-modal .job-modal-content .job-details-summary h2 {
+                font-size: 18px;
             }
         }
         @media (min-height: 800px) {
@@ -4002,6 +4141,30 @@
                 <div class="item">
                     <div class="label">Roommate</div>
                     <div class="value">Peter Zulu</div>
+                </div>
+            </div>
+
+            <h3><i class="fas fa-calendar-alt"></i> Term Duration & Dates</h3>
+            <div class="info-grid">
+                <div class="item">
+                    <div class="label">Term 1 (2026)</div>
+                    <div class="value">1st Feb – 1st May (90 days)</div>
+                </div>
+                <div class="item">
+                    <div class="label">Term 2 (2026)</div>
+                    <div class="value">1st May – 1st Aug (90 days)</div>
+                </div>
+                <div class="item">
+                    <div class="label">Term 3 (2026)</div>
+                    <div class="value">1st Sep – 1st Dec (90 days)</div>
+                </div>
+                <div class="item">
+                    <div class="label">Current Term Stay</div>
+                    <div class="value" id="currentTermStay">Loading...</div>
+                </div>
+                <div class="item">
+                    <div class="label">Term 2 End Date</div>
+                    <div class="value" id="term2EndDate">1st August 2026</div>
                 </div>
             </div>
 
@@ -4792,6 +4955,31 @@
                 </div>
 
                 <div class="form-section">
+                    <h4>Projects</h4>
+                    <div><label>Project 1</label><input type="text" id="resumeProject1" value="Student Management System (2025)" /></div>
+                    <div style="margin-top:8px;"><label>Description</label><textarea rows="2" id="resumeProjectDesc1">Developed a web-based system for managing student records, grades, and attendance using Python and Flask.</textarea></div>
+                    <div style="margin-top:8px;"><label>Project 2</label><input type="text" id="resumeProject2" placeholder="e.g. Network Configuration Tool" /></div>
+                </div>
+
+                <div class="form-section">
+                    <h4>Certifications</h4>
+                    <div><label>Certification 1</label><input type="text" id="resumeCert1" value="Cisco Certified Network Associate (CCNA) – In Progress" /></div>
+                    <div style="margin-top:8px;"><label>Certification 2</label><input type="text" id="resumeCert2" placeholder="e.g. Microsoft Azure Fundamentals" /></div>
+                </div>
+
+                <div class="form-section">
+                    <h4>Languages</h4>
+                    <div><label>Language 1</label><input type="text" id="resumeLang1" value="English (Fluent)" /></div>
+                    <div style="margin-top:8px;"><label>Language 2</label><input type="text" id="resumeLang2" value="Bemba (Native)" /></div>
+                </div>
+
+                <div class="form-section">
+                    <h4>References</h4>
+                    <div><label>Reference 1</label><input type="text" id="resumeRef1" value="Dr. Mwansa · Lecturer, NORTEC · +260 96 789 0123" /></div>
+                    <div style="margin-top:8px;"><label>Reference 2</label><input type="text" id="resumeRef2" placeholder="Name, Title, Contact" /></div>
+                </div>
+
+                <div class="form-section">
                     <h4>Skills</h4>
                     <div><label>Technical Skills (comma separated)</label><input type="text" id="resumeSkills" value="Python, JavaScript, Networking, Database Management, Linux, Hardware Repair" /></div>
                     <div style="margin-top:8px;"><label>Soft Skills</label><input type="text" id="resumeSoftSkills" value="Teamwork, Communication, Problem Solving, Time Management" /></div>
@@ -4897,6 +5085,39 @@
             <h3 style="margin-top:24px;"><i class="fas fa-info-circle"></i> About</h3>
             <p style="font-size:13px; color:#64748b;">NORTEC Student Dashboard v2.0<br />© 2026 Northern Technical College</p>
             <button class="btn-form-submit" onclick="alert('App version: 2.0.0\nBuilt with ❤️ for NORTEC students.')" style="margin-top:8px;"><i class="fas fa-info"></i> Version Info</button>
+        </div>
+    </div>
+
+    <!-- ─── JOB APPLICATION MODAL ────────────────────────────────── -->
+    <div class="job-application-modal" id="jobApplicationModal">
+        <div class="job-modal-content">
+            <button class="close-job-modal" id="closeJobModal">&times;</button>
+            <div class="job-details-summary" id="jobDetailsSummary">
+                <!-- Populated by JS -->
+            </div>
+            <form class="apply-form" id="jobApplicationForm">
+                <div class="form-group">
+                    <label for="applicantName">Full Name</label>
+                    <input type="text" id="applicantName" value="Jubel Mobela" required />
+                </div>
+                <div class="form-group">
+                    <label for="applicantEmail">Email</label>
+                    <input type="email" id="applicantEmail" value="jubel.mobela@northerntech.edu.zm" required />
+                </div>
+                <div class="form-group">
+                    <label for="applicantPhone">Phone</label>
+                    <input type="tel" id="applicantPhone" value="+260 97 123 4567" required />
+                </div>
+                <div class="form-group">
+                    <label for="applicantCv">Upload CV (PDF)</label>
+                    <input type="file" id="applicantCv" accept=".pdf" required />
+                </div>
+                <div class="form-group">
+                    <label for="applicantCover">Cover Letter (Optional)</label>
+                    <textarea rows="4" id="applicantCover" placeholder="Write a brief cover letter..."></textarea>
+                </div>
+                <button type="submit" class="submit-application-btn"><i class="fas fa-paper-plane"></i> Submit Application</button>
+            </form>
         </div>
     </div>
 
@@ -5405,6 +5626,7 @@
             const dashboardPage = document.getElementById('dashboardPage');
             const detailModal = document.getElementById('detailModal');
             const loginModal = document.getElementById('loginModal');
+            const jobModal = document.getElementById('jobApplicationModal');
 
             const enrollBtn = document.getElementById('enrollBtn');
             const backFromEnroll = document.getElementById('backFromEnroll');
@@ -6241,19 +6463,29 @@
             const jobData = [
                 { id: 1, title: 'Junior IT Support Technician', company: 'ZANACO Bank', location: 'Lusaka, Zambia',
                     type: 'Full-time', description: 'Provide IT support for bank systems, troubleshoot hardware and software issues.',
-                    applied: false, saved: false },
+                    qualifications: ['Diploma in Computer Systems Engineering or equivalent', 'Basic networking knowledge',
+                        'Good communication skills'
+                    ], applied: false, saved: false },
                 { id: 2, title: 'Network Administrator Intern', company: 'ZESCO', location: 'Lusaka, Zambia',
                     type: 'Internship', description: 'Assist in network maintenance, configuration, and monitoring for power distribution systems.',
-                    applied: false, saved: false },
+                    qualifications: ['Currently enrolled in a diploma/degree program', 'Interest in networking and IT security',
+                        'Willingness to learn'
+                    ], applied: false, saved: false },
                 { id: 3, title: 'Computer Hardware Technician', company: 'Mining Technology Solutions', location: 'Kitwe, Zambia',
                     type: 'Full-time', description: 'Repair and maintain computer hardware and industrial control systems.',
-                    applied: false, saved: false },
+                    qualifications: ['Craft Certificate or Diploma in Computer Hardware/Electronics',
+                        'Experience with hardware repair', 'Ability to work in a team'
+                    ], applied: false, saved: false },
                 { id: 4, title: 'Software Developer (Graduate)', company: 'CodeZambia', location: 'Remote',
                     type: 'Graduate Program', description: 'Build web and mobile applications using modern frameworks. Mentorship provided.',
-                    applied: false, saved: false },
+                    qualifications: ['Graduate in Computer Science or related field', 'Knowledge of JavaScript and Python',
+                        'Portfolio of projects'
+                    ], applied: false, saved: false },
                 { id: 5, title: 'Database Administrator Trainee', company: 'National Pension Scheme', location: 'Lusaka, Zambia',
                     type: 'Internship', description: 'Learn database management, SQL optimization, and data security.',
-                    applied: false, saved: false }
+                    qualifications: ['Diploma in IT or Computer Science', 'Basic understanding of SQL',
+                        'Attention to detail'
+                    ], applied: false, saved: false }
             ];
 
             let savedJobs = [];
@@ -6285,10 +6517,7 @@
                         const id = parseInt(this.dataset.jobId);
                         const job = jobData.find(j => j.id === id);
                         if (job && !job.applied) {
-                            job.applied = true;
-                            renderJobs();
-                            saveJobsData();
-                            showNotification('✅ Application submitted for: ' + job.title, 'success');
+                            openJobApplicationModal(job);
                         }
                     });
 
@@ -6334,11 +6563,7 @@
                         const id = parseInt(this.dataset.jobId);
                         const job = jobData.find(j => j.id === id);
                         if (job && !job.applied) {
-                            job.applied = true;
-                            renderJobs();
-                            renderSavedJobs();
-                            saveJobsData();
-                            showNotification('✅ Applied to: ' + job.title, 'success');
+                            openJobApplicationModal(job);
                         }
                     });
                 });
@@ -6366,6 +6591,49 @@
                 }
             }
 
+            // ─── JOB APPLICATION MODAL ──────────────────────────────
+            let currentJob = null;
+
+            function openJobApplicationModal(job) {
+                currentJob = job;
+                const summary = document.getElementById('jobDetailsSummary');
+                summary.innerHTML = `
+                    <h2>${job.title}</h2>
+                    <div class="company">${job.company} · ${job.location}</div>
+                    <div class="meta"><span><i class="fas fa-briefcase"></i> ${job.type}</span></div>
+                    <div class="description"><strong>Description:</strong><br>${job.description}</div>
+                    <div class="qualifications"><strong>Qualifications:</strong>
+                        <ul>${job.qualifications.map(q => `<li>${q}</li>`).join('')}</ul>
+                    </div>
+                `;
+                jobModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeJobModal() {
+                jobModal.classList.remove('active');
+                document.body.style.overflow = '';
+                currentJob = null;
+                document.getElementById('jobApplicationForm').reset();
+            }
+
+            document.getElementById('closeJobModal').addEventListener('click', closeJobModal);
+            jobModal.addEventListener('click', function(e) {
+                if (e.target === this) closeJobModal();
+            });
+
+            document.getElementById('jobApplicationForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (currentJob) {
+                    currentJob.applied = true;
+                    renderJobs();
+                    renderSavedJobs();
+                    saveJobsData();
+                    closeJobModal();
+                    showNotification('✅ Application submitted for: ' + currentJob.title, 'success');
+                }
+            });
+
             // ─── RESUME BUILDER ─────────────────────────────────────
             document.getElementById('generateResumeBtn').addEventListener('click', function() {
                 const name = document.getElementById('resumeName').value || 'Jubel Mobela';
@@ -6381,6 +6649,18 @@
                 const workDesc1 = document.getElementById('resumeWorkDesc1').value ||
                     'Assisted in network maintenance, troubleshooting, and user support.';
                 const work2 = document.getElementById('resumeWork2').value || '';
+                const project1 = document.getElementById('resumeProject1').value || 'Student Management System (2025)';
+                const projectDesc1 = document.getElementById('resumeProjectDesc1').value ||
+                    'Developed a web-based system for managing student records, grades, and attendance using Python and Flask.';
+                const project2 = document.getElementById('resumeProject2').value || '';
+                const cert1 = document.getElementById('resumeCert1').value ||
+                    'Cisco Certified Network Associate (CCNA) – In Progress';
+                const cert2 = document.getElementById('resumeCert2').value || '';
+                const lang1 = document.getElementById('resumeLang1').value || 'English (Fluent)';
+                const lang2 = document.getElementById('resumeLang2').value || 'Bemba (Native)';
+                const ref1 = document.getElementById('resumeRef1').value ||
+                    'Dr. Mwansa · Lecturer, NORTEC · +260 96 789 0123';
+                const ref2 = document.getElementById('resumeRef2').value || '';
                 const skills = document.getElementById('resumeSkills').value ||
                     'Python, JavaScript, Networking, Database Management, Linux, Hardware Repair';
                 const softSkills = document.getElementById('resumeSoftSkills').value ||
@@ -6412,6 +6692,31 @@
                             <div style="color:#64748b; font-size:13px;">${workDesc1}</div>
                         </div>
                         ${work2 ? `<div style="margin-bottom:8px;"><div style="font-weight:600; color:#0f172a;">${work2}</div></div>` : ''}
+
+                        <h3 style="font-size:16px; font-weight:700; color:#0f172a; margin:16px 0 8px; border-bottom:1px solid #e2e8f0; padding-bottom:4px;">Projects</h3>
+                        <div style="margin-bottom:8px;">
+                            <div style="font-weight:600; color:#0f172a;">${project1}</div>
+                            <div style="color:#64748b; font-size:13px;">${projectDesc1}</div>
+                        </div>
+                        ${project2 ? `<div style="margin-bottom:8px;"><div style="font-weight:600; color:#0f172a;">${project2}</div></div>` : ''}
+
+                        <h3 style="font-size:16px; font-weight:700; color:#0f172a; margin:16px 0 8px; border-bottom:1px solid #e2e8f0; padding-bottom:4px;">Certifications</h3>
+                        <div style="margin-bottom:8px;">
+                            <div style="font-weight:600; color:#0f172a;">${cert1}</div>
+                            ${cert2 ? `<div style="font-weight:600; color:#0f172a;">${cert2}</div>` : ''}
+                        </div>
+
+                        <h3 style="font-size:16px; font-weight:700; color:#0f172a; margin:16px 0 8px; border-bottom:1px solid #e2e8f0; padding-bottom:4px;">Languages</h3>
+                        <div style="margin-bottom:8px;">
+                            <div style="font-weight:600; color:#0f172a;">${lang1}</div>
+                            ${lang2 ? `<div style="font-weight:600; color:#0f172a;">${lang2}</div>` : ''}
+                        </div>
+
+                        <h3 style="font-size:16px; font-weight:700; color:#0f172a; margin:16px 0 8px; border-bottom:1px solid #e2e8f0; padding-bottom:4px;">References</h3>
+                        <div style="margin-bottom:8px;">
+                            <div style="font-weight:600; color:#0f172a;">${ref1}</div>
+                            ${ref2 ? `<div style="font-weight:600; color:#0f172a;">${ref2}</div>` : ''}
+                        </div>
 
                         <h3 style="font-size:16px; font-weight:700; color:#0f172a; margin:16px 0 8px; border-bottom:1px solid #e2e8f0; padding-bottom:4px;">Skills</h3>
                         <div style="display:flex; flex-wrap:wrap; gap:6px;">
@@ -6592,6 +6897,39 @@
                 });
             }
 
+            // ─── ACCOMMODATION CALCULATIONS ──────────────────────
+            function calculateAccommodationDates() {
+                const termStarts = [
+                    new Date(2026, 1, 1), // 1st Feb 2026
+                    new Date(2026, 4, 1), // 1st May 2026
+                    new Date(2026, 8, 1) // 1st Sep 2026
+                ];
+                const now = new Date();
+                let currentTermStart = termStarts[0];
+                let currentTermEnd = new Date(currentTermStart);
+                currentTermEnd.setDate(currentTermEnd.getDate() + 90);
+
+                for (let i = 0; i < termStarts.length; i++) {
+                    const end = new Date(termStarts[i]);
+                    end.setDate(end.getDate() + 90);
+                    if (now >= termStarts[i] && now < end) {
+                        currentTermStart = termStarts[i];
+                        currentTermEnd = end;
+                        break;
+                    }
+                }
+
+                const daysStayed = Math.floor((now - currentTermStart) / (1000 * 60 * 60 * 24));
+                const endDateStr = currentTermEnd.toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                });
+
+                document.getElementById('currentTermStay').textContent = daysStayed + ' days';
+                document.getElementById('term2EndDate').textContent = endDateStr;
+            }
+
             // ─── EVENT BINDINGS ──────────────────────────────────
             enrollBtn.addEventListener('click', (e) => { e.preventDefault();
                 showEnroll(); });
@@ -6681,6 +7019,7 @@
                     else if (loginModal.classList.contains('active')) { loginModal.classList.remove('active');
                         document.body.style.overflow = ''; } else if (sidebarMenu.classList.contains('open'))
                         toggleSidebar(false);
+                    else if (jobModal.classList.contains('active')) closeJobModal();
                     else {
                         sidebarPages.forEach(p => {
                             if (p.classList.contains('active')) {
@@ -6738,6 +7077,7 @@
             renderAlumni();
             renderNotifications();
             generateQR();
+            calculateAccommodationDates();
 
             console.log('✅ Northern Technical College – full dashboard with all requested features.');
         })();
