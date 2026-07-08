@@ -1444,7 +1444,7 @@
             border-radius: 10px;
         }
 
-        /* HOME DASHBOARD - No nav buttons, just home content */
+        /* HOME DASHBOARD - Enhanced with more info */
         .home-dashboard {
             background: var(--bg-card);
             border-radius: 16px;
@@ -2924,7 +2924,7 @@
             color: #92400e;
         }
 
-        /* ─── RESUME BUILDER (Enhanced) ──────────────────────────── */
+        /* ─── RESUME BUILDER ───────────────────────────────────────── */
         .resume-builder-form {
             display: grid;
             gap: 16px;
@@ -3131,7 +3131,7 @@
         /* ─── ALUMNI NETWORK ──────────────────────────────────────── */
         .alumni-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 16px;
             margin-top: 12px;
         }
@@ -3174,6 +3174,133 @@
             color: #3b82f6;
             font-weight: 600;
             margin-top: 4px;
+        }
+        .alumni-card .alumni-actions {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+        .alumni-card .alumni-actions .btn-apply-mentor {
+            padding: 6px 18px;
+            border: none;
+            border-radius: 20px;
+            background: #3b82f6;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .alumni-card .alumni-actions .btn-apply-mentor:hover {
+            background: #2563eb;
+            transform: scale(1.02);
+        }
+        .alumni-card .alumni-actions .btn-apply-mentor.applied {
+            background: #10b981;
+        }
+
+        /* ─── MENTOR APPLICATION MODAL ────────────────────────────── */
+        .mentor-application-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1001;
+            background: var(--modal-overlay);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.35s ease;
+        }
+        .mentor-application-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .mentor-application-modal .mentor-modal-content {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 32px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.25);
+            position: relative;
+        }
+        .mentor-application-modal .mentor-modal-content .close-mentor-modal {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #64748b;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .mentor-application-modal .mentor-modal-content .close-mentor-modal:hover {
+            color: #0f172a;
+        }
+        .mentor-application-modal .mentor-modal-content h3 {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        .mentor-application-modal .mentor-modal-content .mentor-name {
+            color: #64748b;
+            font-size: 15px;
+            margin-bottom: 16px;
+        }
+        .mentor-application-modal .mentor-modal-content .mentor-form label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 4px;
+        }
+        .mentor-application-modal .mentor-modal-content .mentor-form input,
+        .mentor-application-modal .mentor-modal-content .mentor-form textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid #d1d5db;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            transition: border 0.2s;
+        }
+        .mentor-application-modal .mentor-modal-content .mentor-form input:focus,
+        .mentor-application-modal .mentor-modal-content .mentor-form textarea:focus {
+            border-color: #3b82f6;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.10);
+        }
+        .mentor-application-modal .mentor-modal-content .mentor-form .form-group {
+            margin-bottom: 14px;
+        }
+        .mentor-application-modal .mentor-modal-content .mentor-form .submit-mentor-btn {
+            padding: 12px 32px;
+            border: none;
+            border-radius: 50px;
+            background: #3b82f6;
+            color: #fff;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        .mentor-application-modal .mentor-modal-content .mentor-form .submit-mentor-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
         }
 
         /* ─── SETTINGS / THEME TOGGLE ────────────────────────────── */
@@ -3369,6 +3496,9 @@
             .job-application-modal .job-modal-content {
                 padding: 24px;
             }
+            .mentor-application-modal .mentor-modal-content {
+                padding: 24px;
+            }
         }
         @media (max-width: 480px) {
             .dashboard-header {
@@ -3433,6 +3563,9 @@
             }
             .job-application-modal .job-modal-content .job-details-summary h2 {
                 font-size: 18px;
+            }
+            .mentor-application-modal .mentor-modal-content {
+                padding: 16px;
             }
         }
         @media (min-height: 800px) {
@@ -3596,7 +3729,6 @@
                 </div>
                 <div class="header-title">JUBEL MOBELA <span class="accent">DASHBOARD</span></div>
                 <div class="header-actions-left" style="justify-content:flex-end; flex:1;">
-                    <!-- Logout button removed from header, now in sidebar -->
                 </div>
             </div>
 
@@ -3608,36 +3740,82 @@
                 <span class="info-item"><i class="fas fa-graduation-cap"></i> <span class="label">Program:</span> DIPLOMA IN COMPUTER SYSTEMS ENGINEERING</span>
             </div>
 
-            <!-- HOME DASHBOARD CONTENT - Directly displayed -->
+            <!-- HOME DASHBOARD CONTENT -->
             <div class="dashboard-content">
+                <!-- Welcome banner -->
+                <div style="background:linear-gradient(135deg, #1e40af, #3b82f6); border-radius:16px; padding:20px 24px; color:#fff; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; box-shadow:0 4px 20px rgba(59,130,246,0.25);">
+                    <div>
+                        <div style="font-size:14px; opacity:0.8; font-weight:500;">Welcome back,</div>
+                        <div style="font-size:24px; font-weight:800;">Jubel Mobela</div>
+                        <div style="font-size:13px; opacity:0.8; margin-top:2px;">Term 2 · 2026 · 8 weeks completed</div>
+                    </div>
+                    <div style="text-align:right;">
+                        <div style="font-size:12px; opacity:0.7;">Current GPA</div>
+                        <div style="font-size:28px; font-weight:800;">3.2</div>
+                        <div style="font-size:12px; opacity:0.7;">/ 4.0</div>
+                    </div>
+                </div>
+
                 <div class="home-dashboard" id="homeDashboard">
                     <h2><span class="accent">📊</span> Dashboard Overview</h2>
-                    <p style="color:#64748b; font-size:14px; margin-bottom:12px;">Welcome back, <strong style="color:#3b82f6;">Jubel Mobela</strong>! Here's your current academic overview.</p>
+                    <p style="color:#64748b; font-size:14px; margin-bottom:12px;">Here's your current academic overview.</p>
 
                     <div class="dashboard-grid">
                         <div class="card">
                             <div class="card-icon">📚</div>
                             <div class="card-title">Current Term</div>
                             <div class="card-value">Term 2 • 2026</div>
-                            <div class="card-sub">8 weeks completed</div>
+                            <div class="card-sub">8 weeks completed · 6 weeks remaining</div>
                         </div>
                         <div class="card">
                             <div class="card-icon">📊</div>
                             <div class="card-title">CA Average</div>
                             <div class="card-value">32%</div>
-                            <div class="card-sub">17 Subjects • 7 completed</div>
+                            <div class="card-sub">17 Subjects · 7 completed</div>
                         </div>
                         <div class="card">
                             <div class="card-icon">✅</div>
                             <div class="card-title">Attendance</div>
                             <div class="card-value">90.5%</div>
-                            <div class="card-sub">Satisfactory</div>
+                            <div class="card-sub">Satisfactory · Grade B+</div>
                         </div>
                         <div class="card">
                             <div class="card-icon">⚠️</div>
                             <div class="card-title">Clearance Status</div>
                             <div class="card-value" style="color:#ef4444;">Not Cleared</div>
                             <div class="card-sub">6 departments pending</div>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">📖</div>
+                            <div class="card-title">Library</div>
+                            <div class="card-value">1 book borrowed</div>
+                            <div class="card-sub">Due: 15th July 2026</div>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">💼</div>
+                            <div class="card-title">Careers</div>
+                            <div class="card-value">5 job postings</div>
+                            <div class="card-sub">1 saved · 0 applied</div>
+                        </div>
+                    </div>
+
+                    <!-- Quick stats row -->
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:12px; margin-top:16px; padding-top:16px; border-top:1px solid var(--border-color);">
+                        <div style="text-align:center; padding:8px; background:var(--bg-secondary); border-radius:8px; border:1px solid var(--border-color);">
+                            <div style="font-size:12px; color:#64748b;">Total Credits</div>
+                            <div style="font-size:20px; font-weight:700; color:var(--text-primary);">104</div>
+                        </div>
+                        <div style="text-align:center; padding:8px; background:var(--bg-secondary); border-radius:8px; border:1px solid var(--border-color);">
+                            <div style="font-size:12px; color:#64748b;">Subjects</div>
+                            <div style="font-size:20px; font-weight:700; color:var(--text-primary);">17</div>
+                        </div>
+                        <div style="text-align:center; padding:8px; background:var(--bg-secondary); border-radius:8px; border:1px solid var(--border-color);">
+                            <div style="font-size:12px; color:#64748b;">Days in Term</div>
+                            <div style="font-size:20px; font-weight:700; color:var(--text-primary);">56</div>
+                        </div>
+                        <div style="text-align:center; padding:8px; background:var(--bg-secondary); border-radius:8px; border:1px solid var(--border-color);">
+                            <div style="font-size:12px; color:#64748b;">Balance</div>
+                            <div style="font-size:20px; font-weight:700; color:#f59e0b;">K1,800</div>
                         </div>
                     </div>
 
@@ -5011,7 +5189,6 @@
 
             <h3 style="margin-top:24px;"><i class="fas fa-handshake"></i> Alumni Mentorship Program</h3>
             <p>Interested in being mentored by an alumnus? Submit your interest and we'll match you with a mentor in your field.</p>
-            <button class="btn-form-submit" onclick="alert('Mentorship request submitted!')"><i class="fas fa-paper-plane"></i> Request Mentor</button>
         </div>
     </div>
 
@@ -5085,6 +5262,34 @@
             <h3 style="margin-top:24px;"><i class="fas fa-info-circle"></i> About</h3>
             <p style="font-size:13px; color:#64748b;">NORTEC Student Dashboard v2.0<br />© 2026 Northern Technical College</p>
             <button class="btn-form-submit" onclick="alert('App version: 2.0.0\nBuilt with ❤️ for NORTEC students.')" style="margin-top:8px;"><i class="fas fa-info"></i> Version Info</button>
+        </div>
+    </div>
+
+    <!-- ─── MENTOR APPLICATION MODAL ────────────────────────────── -->
+    <div class="mentor-application-modal" id="mentorApplicationModal">
+        <div class="mentor-modal-content">
+            <button class="close-mentor-modal" id="closeMentorModal">&times;</button>
+            <h3>Apply for Mentorship</h3>
+            <div class="mentor-name" id="mentorNameDisplay">—</div>
+            <form class="mentor-form" id="mentorApplicationForm">
+                <div class="form-group">
+                    <label for="menteeName">Your Full Name</label>
+                    <input type="text" id="menteeName" value="Jubel Mobela" required />
+                </div>
+                <div class="form-group">
+                    <label for="menteeEmail">Your Email</label>
+                    <input type="email" id="menteeEmail" value="jubel.mobela@northerntech.edu.zm" required />
+                </div>
+                <div class="form-group">
+                    <label for="menteePhone">Your Phone</label>
+                    <input type="tel" id="menteePhone" value="+260 97 123 4567" required />
+                </div>
+                <div class="form-group">
+                    <label for="mentorshipGoal">What do you hope to gain from this mentorship?</label>
+                    <textarea rows="3" id="mentorshipGoal" placeholder="Describe your goals and expectations..." required></textarea>
+                </div>
+                <button type="submit" class="submit-mentor-btn"><i class="fas fa-paper-plane"></i> Submit Mentorship Request</button>
+            </form>
         </div>
     </div>
 
@@ -5627,6 +5832,7 @@
             const detailModal = document.getElementById('detailModal');
             const loginModal = document.getElementById('loginModal');
             const jobModal = document.getElementById('jobApplicationModal');
+            const mentorModal = document.getElementById('mentorApplicationModal');
 
             const enrollBtn = document.getElementById('enrollBtn');
             const backFromEnroll = document.getElementById('backFromEnroll');
@@ -6763,6 +6969,8 @@
                     company: 'Zambia Sugar', position: 'Production Supervisor' }
             ];
 
+            let mentorApplications = JSON.parse(localStorage.getItem('mentorApplications')) || [];
+
             function renderAlumni() {
                 const container = document.getElementById('alumniGrid');
                 container.innerHTML = '';
@@ -6770,15 +6978,75 @@
                     const card = document.createElement('div');
                     card.className = 'alumni-card';
                     const initial = a.name.charAt(0);
+                    const alreadyApplied = mentorApplications.some(app => app.mentor === a.name);
                     card.innerHTML = `
                         <div class="alumni-avatar">${initial}</div>
                         <div class="alumni-name">${a.name}</div>
                         <div class="alumni-detail">${a.program} (${a.graduation})</div>
                         <div class="alumni-company">${a.company} · ${a.position}</div>
+                        <div class="alumni-actions">
+                            <button class="btn-apply-mentor ${alreadyApplied ? 'applied' : ''}" data-mentor="${a.name}">${alreadyApplied ? '✓ Applied' : 'Apply for Mentorship'}</button>
+                        </div>
                     `;
                     container.appendChild(card);
+
+                    const mentorBtn = card.querySelector('.btn-apply-mentor');
+                    mentorBtn.addEventListener('click', function() {
+                        const mentorName = this.dataset.mentor;
+                        if (!this.classList.contains('applied')) {
+                            openMentorApplicationModal(mentorName);
+                        } else {
+                            showNotification('You have already applied for mentorship with ' + mentorName, 'info');
+                        }
+                    });
                 });
             }
+
+            // ─── MENTOR APPLICATION MODAL ──────────────────────────
+            let currentMentor = null;
+
+            function openMentorApplicationModal(mentorName) {
+                currentMentor = mentorName;
+                document.getElementById('mentorNameDisplay').textContent = 'Mentor: ' + mentorName;
+                mentorModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMentorModal() {
+                mentorModal.classList.remove('active');
+                document.body.style.overflow = '';
+                currentMentor = null;
+                document.getElementById('mentorApplicationForm').reset();
+            }
+
+            document.getElementById('closeMentorModal').addEventListener('click', closeMentorModal);
+            mentorModal.addEventListener('click', function(e) {
+                if (e.target === this) closeMentorModal();
+            });
+
+            document.getElementById('mentorApplicationForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (currentMentor) {
+                    const name = document.getElementById('menteeName').value;
+                    const email = document.getElementById('menteeEmail').value;
+                    const phone = document.getElementById('menteePhone').value;
+                    const goal = document.getElementById('mentorshipGoal').value;
+
+                    mentorApplications.push({
+                        mentor: currentMentor,
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        goal: goal,
+                        date: new Date().toISOString()
+                    });
+                    localStorage.setItem('mentorApplications', JSON.stringify(mentorApplications));
+
+                    closeMentorModal();
+                    renderAlumni();
+                    showNotification('✅ Mentorship request sent to ' + currentMentor, 'success');
+                }
+            });
 
             // ─── NOTIFICATIONS ──────────────────────────────────────
             const notifications = [
@@ -7020,6 +7288,7 @@
                         document.body.style.overflow = ''; } else if (sidebarMenu.classList.contains('open'))
                         toggleSidebar(false);
                     else if (jobModal.classList.contains('active')) closeJobModal();
+                    else if (mentorModal.classList.contains('active')) closeMentorModal();
                     else {
                         sidebarPages.forEach(p => {
                             if (p.classList.contains('active')) {
