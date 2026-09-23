@@ -34,12 +34,10 @@
     --red:#ef4444; --amber:#f59e0b; --green:#10b981;
     --shadow:0 8px 32px rgba(0,0,0,.08); --shadow-lg:0 20px 60px rgba(0,0,0,.15);
     --shadow-blue:0 10px 34px rgba(37,99,235,.35);
-    --radius:14px;
   }
   html,body{width:100%;min-height:100%;background:var(--bg);color:var(--text);overflow-x:hidden}
   body{font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
 
-  /* ══════ ANIMATED BACKGROUND ══════ */
   .bg-layer{position:fixed;inset:0;background-image:url('home.webp');background-size:cover;background-position:center;z-index:0;animation:zoomLoop 22s ease-in-out infinite alternate}
   .bg-layer::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,7,18,.45) 0%,rgba(3,7,18,.72) 55%,rgba(3,7,18,.94) 100%);backdrop-filter:blur(3px)}
   @keyframes zoomLoop{0%{transform:scale(1)}100%{transform:scale(1.15)}}
@@ -55,7 +53,6 @@
   .screen.active{display:flex}
   .screen::-webkit-scrollbar{width:0}
 
-  /* ══════ LOADER ══════ */
   #appLoader{position:fixed;inset:0;background:radial-gradient(circle at 50% 35%,#132043,#070b14 70%);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .45s}
   #appLoader.hidden{opacity:0;pointer-events:none}
   .loader-logo{width:82px;height:82px;border-radius:22px;background:rgba(255,255,255,.95);padding:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 20px 60px rgba(37,99,235,.45);animation:pop .6s cubic-bezier(.34,1.56,.64,1)}
@@ -64,7 +61,6 @@
   @keyframes spin{to{transform:rotate(360deg)}}
   .loader-text{color:#94a3b8;font-weight:600;font-size:12.5px;letter-spacing:1.4px;text-transform:uppercase}
 
-  /* ══════ LANDING ══════ */
   #landing{align-items:center;justify-content:center;padding:28px 20px;text-align:center;background:transparent}
   .landing-card{
     position:relative;z-index:2;width:100%;max-width:410px;
@@ -94,7 +90,6 @@
   .btn-group{width:100%;display:flex;flex-direction:column;gap:12px}
   .footer-note{margin-top:24px;font-size:10.5px;color:rgba(255,255,255,.3);letter-spacing:.5px}
 
-  /* ══════ BUTTONS ══════ */
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;padding:16px 24px;border:none;border-radius:60px;font-family:inherit;font-size:16px;font-weight:700;color:#fff;cursor:pointer;transition:transform .22s cubic-bezier(.22,1,.36,1),box-shadow .25s,background .25s;box-shadow:0 8px 32px rgba(0,0,0,.25);position:relative;overflow:hidden;user-select:none}
   .btn::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.16) 0%,transparent 55%);pointer-events:none}
   .btn::before{content:'';position:absolute;top:0;left:-130%;width:55%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.38),transparent);transform:skewX(-20deg);transition:left .75s cubic-bezier(.22,1,.36,1);pointer-events:none;z-index:2}
@@ -102,7 +97,6 @@
   .btn:active{transform:scale(.965)}
   .btn:hover{transform:translateY(-2px)}
   .btn i{font-size:17px;position:relative;z-index:1}
-  .btn span,.btn{position:relative}
   .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.45);transform:scale(0);animation:rippleAnim .65s ease-out;pointer-events:none;z-index:3}
   .btn-ghost .ripple{background:rgba(37,99,235,.22)}
   @keyframes rippleAnim{to{transform:scale(2.4);opacity:0}}
@@ -118,7 +112,6 @@
   .btn-install:hover{background:rgba(255,255,255,.28)}
   .btn:disabled{opacity:.55;cursor:not-allowed;transform:none!important}
 
-  /* ══════ PAGE HEADER ══════ */
   .pg-header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,#1e3a8a,#2563eb 55%,#3b82f6);color:#fff;padding:18px 22px 16px;box-shadow:0 6px 26px rgba(37,99,235,.32)}
   .pg-header::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 85% -30%,rgba(255,255,255,.28),transparent 60%);pointer-events:none}
   .pg-header-inner{max-width:840px;margin:0 auto;display:flex;align-items:center;gap:14px;position:relative;z-index:1}
@@ -133,7 +126,6 @@
   .pg-progress{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.18)}
   .pg-progress span{display:block;height:100%;width:0%;border-radius:0 3px 3px 0;background:linear-gradient(90deg,#93c5fd,#67e8f9);box-shadow:0 0 12px rgba(103,232,249,.8);transition:width .45s cubic-bezier(.22,1,.36,1)}
 
-  /* ══════ STEP LAYOUT ══════ */
   .step-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:104px}
   .step-scroll::-webkit-scrollbar{width:0}
   .step-panel{display:none;width:100%;max-width:840px;margin:0 auto;padding:20px 22px}
@@ -148,7 +140,6 @@
   .step-head h3{font-size:17px;font-weight:800;color:var(--text)}
   .step-head p{font-size:12.5px;color:var(--muted);margin-top:1px}
 
-  /* ══════ FORMS ══════ */
   .form-group{margin-bottom:14px}
   .form-group label{display:block;font-size:11.5px;font-weight:800;color:#334155;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
   .form-group label .req{color:var(--red)}
@@ -163,7 +154,6 @@
   .pw-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;padding:8px;font-size:15px;border-radius:50%;transition:.2s}
   .pw-toggle:hover{background:#e2e8f0;color:var(--text)}
 
-  /* ══════ STEPPER ══════ */
   .stepper{display:flex;justify-content:space-between;gap:4px;margin-bottom:16px;padding:15px 10px;background:#fff;border-radius:18px;border:1px solid var(--border);box-shadow:0 10px 30px rgba(15,23,42,.07)}
   .stepper .step{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;min-width:0;position:relative;cursor:pointer}
   .stepper .step:not(:last-child)::after{content:'';position:absolute;top:14px;left:calc(50% + 17px);right:calc(-50% + 17px);height:3px;background:#e2e8f0;border-radius:3px;z-index:0;transition:background .35s}
@@ -176,7 +166,6 @@
   .stepper .step .lbl{font-size:9.5px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:.3px;text-align:center;line-height:1.15;transition:color .3s}
   .stepper .step.active .lbl,.stepper .step.done .lbl{color:var(--blue-dark)}
 
-  /* ══════ UPLOADS ══════ */
   .upload-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
   @media(max-width:560px){.upload-grid{grid-template-columns:repeat(2,1fr)}}
   .upload-box{position:relative;aspect-ratio:1/1;background:linear-gradient(160deg,#f8fafc,#f1f5f9);border:2px dashed #cbd5e1;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px;cursor:pointer;transition:all .25s cubic-bezier(.22,1,.36,1);overflow:hidden}
@@ -204,7 +193,6 @@
   .upload-box .spinner{display:none;position:absolute;inset:0;background:rgba(255,255,255,.9);z-index:6;align-items:center;justify-content:center;font-size:26px;color:var(--blue)}
   .upload-box.uploading .spinner{display:flex}
 
-  /* ══════ SUBJECTS ══════ */
   .subjects-wrap{background:linear-gradient(160deg,#f8fafc,#f1f5f9);border:1.5px solid var(--border);border-radius:16px;padding:14px}
   .subject-row{display:grid;grid-template-columns:2fr 1fr auto;gap:8px;margin-bottom:10px;align-items:center;animation:rowIn .28s cubic-bezier(.22,1,.36,1)}
   @keyframes rowIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
@@ -216,7 +204,6 @@
   .add-subject-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;border:2px dashed #94a3b8;border-radius:12px;background:transparent;color:var(--blue-dark);font-weight:800;font-size:13.5px;cursor:pointer;font-family:inherit;transition:.22s;margin-top:6px}
   .add-subject-btn:hover{border-color:var(--blue);background:var(--blue-light);transform:translateY(-1px)}
 
-  /* ══════ COURSE DESCRIPTION ══════ */
   .course-desc{background:linear-gradient(140deg,#eff6ff,#ffffff 70%);border:1.5px solid #bfdbfe;border-radius:16px;padding:16px;margin-top:8px;animation:rowIn .35s cubic-bezier(.22,1,.36,1);box-shadow:0 10px 28px rgba(37,99,235,.09)}
   .course-desc .cd-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed #bfdbfe}
   .course-desc .cd-head .cd-icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#3b82f6,#1e40af);color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;box-shadow:0 6px 16px rgba(37,99,235,.32)}
@@ -229,7 +216,6 @@
   .course-desc .cd-section{margin-top:12px}
   .course-desc .cd-section .cd-label{font-size:11.5px;font-weight:800;color:var(--blue-dark);letter-spacing:.5px;margin-bottom:4px}
 
-  /* ══════ DECLARATION / NOTICE ══════ */
   .declare-row{display:flex;align-items:flex-start;gap:12px;padding:16px;background:linear-gradient(160deg,#f8fafc,#f1f5f9);border-radius:16px;border:1.5px solid var(--border);margin-bottom:16px;cursor:pointer;transition:.2s}
   .declare-row:hover{border-color:#cbd5e1}
   .declare-row input[type="checkbox"]{width:20px;height:20px;accent-color:var(--blue);margin-top:2px;flex-shrink:0;cursor:pointer}
@@ -239,14 +225,12 @@
   .notice-box strong{color:var(--blue-dark)}
   .notice-box .badge-pending{display:inline-block;background:#fef3c7;color:#92400e;font-weight:800;font-size:11px;padding:3px 10px;border-radius:20px;letter-spacing:.5px}
 
-  /* ══════ BOTTOM NAV ══════ */
   .bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-top:1px solid var(--border);padding:12px 22px;display:flex;box-shadow:0 -6px 26px rgba(15,23,42,.07)}
   .bottom-nav-inner{width:100%;max-width:840px;margin:0 auto;display:flex;gap:10px}
   .bottom-nav .btn{min-height:50px;font-size:14.5px}
   .bottom-nav .btn-ghost{flex:0 0 auto;width:auto;padding:14px 24px}
   .bottom-nav .btn-primary{flex:1}
 
-  /* ══════ LOGIN ══════ */
   #loginScreen{background:linear-gradient(160deg,#eef2f9,#f8fafc 60%);align-items:center;justify-content:center;padding:22px}
   .login-card{position:relative;background:#fff;border-radius:24px;padding:34px 26px 28px;max-width:420px;width:100%;box-shadow:0 26px 70px rgba(15,23,42,.16);border:1px solid rgba(226,232,240,.9);overflow:hidden;animation:cardIn .55s cubic-bezier(.22,1,.36,1)}
   .login-card::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#2563eb,#22d3ee,#2563eb)}
@@ -257,7 +241,6 @@
   #loginBack{position:absolute;top:20px;left:20px;background:rgba(15,23,42,.05);border:1px solid var(--border);color:var(--text);border-radius:40px;font-size:12.5px;font-weight:700;padding:9px 16px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-family:inherit;transition:.2s;z-index:5}
   #loginBack:hover{background:rgba(15,23,42,.1)}
 
-  /* ══════ STATUS ══════ */
   #statusScreen{background:linear-gradient(160deg,#eef2f9,#f8fafc 60%);padding:22px;align-items:center;justify-content:center}
   .status-card{position:relative;background:#fff;border-radius:24px;padding:34px 26px;max-width:620px;width:100%;box-shadow:0 26px 70px rgba(15,23,42,.16);text-align:center;margin:auto;overflow:hidden;animation:cardIn .55s cubic-bezier(.22,1,.36,1)}
   .status-icon{width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:42px;margin:0 auto 20px;position:relative}
@@ -280,7 +263,6 @@
   .info-list .row-i .k{color:var(--muted);font-weight:500;flex-shrink:0}
   .info-list .row-i .v{font-weight:700;text-align:right;word-break:break-word}
 
-  /* ══════ TOAST ══════ */
   #toast{position:fixed;top:20px;right:20px;z-index:99999;display:flex;flex-direction:column;gap:10px;max-width:340px}
   @media(max-width:520px){#toast{left:14px;right:14px;max-width:none;top:14px}}
   .toast{position:relative;overflow:hidden;padding:14px 18px 16px;border-radius:16px;font-size:13.5px;font-weight:600;color:#fff;box-shadow:0 14px 40px rgba(0,0,0,.3);display:flex;align-items:center;gap:10px;animation:toastIn .32s cubic-bezier(.22,1,.36,1)}
@@ -291,7 +273,6 @@
   .toast.err{background:linear-gradient(135deg,#ef4444,#b91c1c)}
   .toast.info{background:linear-gradient(135deg,#3b82f6,#1e40af)}
 
-  /* ══════ MISC ══════ */
   .link-row{text-align:center;font-size:13.5px;color:var(--muted);margin-top:18px}
   .link-row a{color:var(--blue-dark);font-weight:700;text-decoration:none;cursor:pointer}
   .link-row a:hover{text-decoration:underline}
@@ -315,40 +296,31 @@
 <div class="bg-layer"></div>
 <div id="toast"></div>
 
-<!-- ══════════════ LOADER ══════════════ -->
 <div id="appLoader">
   <div class="loader-logo"><img src="logo.png" alt="NORTEC" onerror="this.style.display='none'"/></div>
   <div class="loader-spinner"></div>
   <p class="loader-text">Loading NORTEC…</p>
 </div>
 
-<!-- ══════════════ LANDING ══════════════ -->
 <section class="screen active" id="landing">
   <div class="aurora"><i></i><i></i><i></i></div>
-
   <div class="landing-card">
     <div class="logo-wrap">
       <img src="logo.png" alt="NORTEC Logo" onerror="this.src='https://via.placeholder.com/100/2563eb/ffffff?text=NTC'" />
     </div>
-
     <div class="brand-badge"><i class="fas fa-shield-halved"></i> Official Student Portal</div>
-
     <h1>WELCOME TO<br/><span>NORTHERN</span> TECHNICAL COLLEGE</h1>
     <div class="sub">Excellence in Technical Education</div>
-
     <div class="btn-group">
       <button class="btn btn-enroll" id="btnEnroll"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
       <button class="btn btn-login" id="btnLogin"><i class="fas fa-lock"></i> Login</button>
       <button class="btn btn-install install-btn" id="installBtn"><i class="fas fa-download"></i> Install App</button>
     </div>
-
     <div class="footer-note">© 2026 Northern Technical College · Lusaka, Zambia</div>
   </div>
 </section>
 
-<!-- ══════════════ ENROLL ══════════════ -->
 <section class="screen" id="enroll">
-
   <div class="pg-header">
     <div class="pg-header-inner">
       <button class="back-btn" id="enrollBack"><i class="fas fa-arrow-left"></i> Back</button>
@@ -372,7 +344,6 @@
             <div class="num">1</div>
             <div><h3>Personal Details</h3><p>Tell us about yourself</p></div>
           </div>
-
           <div class="form-group">
             <label>Profile Picture <span class="req">*</span></label>
             <div class="upload-grid" style="grid-template-columns:1fr;max-width:220px">
@@ -386,7 +357,6 @@
               </div>
             </div>
           </div>
-
           <div class="form-group"><label>Full Name <span class="req">*</span></label><input type="text" name="fullName" required placeholder="e.g. Jubel Mobela"/></div>
           <div class="row">
             <div class="form-group"><label>Date of Birth <span class="req">*</span></label><input type="date" name="dob" required/></div>
@@ -413,7 +383,6 @@
             <div class="num">2</div>
             <div><h3>Academic Background</h3><p>Your education & documents</p></div>
           </div>
-
           <div class="row">
             <div class="form-group"><label>Previous School / College</label><input type="text" name="previousSchool" placeholder="Optional"/></div>
             <div class="form-group"><label>Grade 12 School <span class="req">*</span></label><input type="text" name="grade12School" required/></div>
@@ -422,7 +391,6 @@
             <div class="form-group"><label>Year of Completion <span class="req">*</span></label><input type="number" name="yearCompleted" required min="1990" max="2030" placeholder="2024"/></div>
             <div class="form-group"><label>Examination Number <span class="req">*</span></label><input type="text" name="examNumber" required/></div>
           </div>
-
           <div class="form-group">
             <label>Subjects &amp; Grades <span class="req">*</span></label>
             <div class="subjects-wrap">
@@ -432,7 +400,6 @@
               </button>
             </div>
           </div>
-
           <div class="form-group">
             <label>Supporting Documents</label>
             <div class="upload-grid">
@@ -487,19 +454,15 @@
             <div class="num">3</div>
             <div><h3>Programme Selection</h3><p>Choose your intake & course</p></div>
           </div>
-
           <div class="form-group">
             <label>Intake / Month <span class="req">*</span></label>
             <select name="intake" id="enrollIntake" required></select>
           </div>
-
           <div class="form-group">
             <label>Programme <span class="req">*</span></label>
             <select name="programme" id="enrollProgramme" required><option value="">Choose intake first…</option></select>
           </div>
-
           <div id="courseDescBox"></div>
-
           <div class="row" style="margin-top:16px">
             <div class="form-group"><label>Mode of Study <span class="req">*</span></label>
               <select name="mode" required><option>Full-time</option><option>Part-time</option><option>Distance</option></select>
@@ -517,18 +480,15 @@
             <div class="num">4</div>
             <div><h3>Sponsor &amp; Login</h3><p>Who's funding you & your account</p></div>
           </div>
-
           <div class="row">
             <div class="form-group"><label>Sponsor Details <span class="req">*</span></label><input type="text" name="sponsor" required placeholder="Self / Parent / Organisation"/></div>
             <div class="form-group"><label>Sponsor Contact</label><input type="text" name="sponsorContact" placeholder="Phone or email"/></div>
           </div>
           <div class="form-group"><label>Scholarship Information (if any)</label><input type="text" name="scholarship" placeholder="Optional"/></div>
-
           <div class="notice-box" style="margin:8px 0 20px">
             <strong><i class="fas fa-lock"></i> Login Credentials</strong><br/>
             You'll use this email and password to sign in and check your application status.
           </div>
-
           <div class="form-group"><label>Password <span class="req">*</span></label>
             <div class="pw-wrap">
               <input type="password" name="password" id="enrollPassword" required minlength="6" placeholder="At least 6 characters" autocomplete="new-password"/>
@@ -550,17 +510,14 @@
             <div class="num">5</div>
             <div><h3>Declaration &amp; Submit</h3><p>Review and confirm</p></div>
           </div>
-
           <div class="declare-row">
             <input type="checkbox" id="declareChk" required/>
             <label for="declareChk">I <strong>declare</strong> that all information provided in this application is <strong>true, complete and correct</strong>. I understand that any false statement may lead to disqualification or withdrawal of admission.</label>
           </div>
-
           <div class="notice-box">
             <strong><i class="fas fa-info-circle"></i> What happens next?</strong><br/><br/>
             Your application will be marked <span class="badge-pending">PENDING</span>. When an administrator reviews and approves it, a student number will be generated automatically in the format <strong>2601-0001</strong>. You'll be redirected to the student dashboard.
           </div>
-
           <div id="submitMsg" class="msg-box" style="margin-top:14px"></div>
         </div>
       </div>
@@ -577,7 +534,6 @@
   </div>
 </section>
 
-<!-- ══════════════ LOGIN ══════════════ -->
 <section class="screen" id="loginScreen">
   <button class="back-btn" id="loginBack"><i class="fas fa-arrow-left"></i> Back</button>
   <div class="login-card">
@@ -586,9 +542,7 @@
       <h2>Sign In</h2>
       <p>Access your NORTEC student portal</p>
     </div>
-
     <div id="loginMsg" class="msg-box"></div>
-
     <form id="loginForm" novalidate>
       <div class="form-group"><label>Email Address <span class="req">*</span></label>
         <input type="email" name="email" required placeholder="you@example.com" autocomplete="email"/>
@@ -599,14 +553,11 @@
           <button type="button" class="pw-toggle" data-target="loginPassword"><i class="fas fa-eye"></i></button>
         </div>
       </div>
-
       <label class="checkbox-row">
         <input type="checkbox" id="rememberMe"/> Remember me on this device
       </label>
-
       <button type="submit" class="btn btn-primary" id="loginSubmitBtn"><i class="fas fa-sign-in-alt"></i> Sign In</button>
     </form>
-
     <div class="link-row">
       Don't have an account? <a id="linkToEnroll">Enroll now</a>
     </div>
@@ -616,7 +567,6 @@
   </div>
 </section>
 
-<!-- ══════════════ STATUS ══════════════ -->
 <section class="screen" id="statusScreen">
   <div class="status-card" id="statusCard"></div>
 </section>
@@ -645,7 +595,17 @@ const ROOT = "nortec";
 const STUDENT_REDIRECT_URL = "student.html";
 
 /* ═══════════════════════════════════════════════════════════════
-   2 · INTAKES & PROGRAMMES
+   2 · REDIRECT GUARD (fixes the looping issue)
+   ═══════════════════════════════════════════════════════════════ */
+let isRedirecting = false;   // per-page-load guard
+let hasRedirectedThisSession = false;
+
+try {
+  hasRedirectedThisSession = sessionStorage.getItem('nortec_redirected') === '1';
+} catch(e){}
+
+/* ═══════════════════════════════════════════════════════════════
+   3 · INTAKES & PROGRAMMES
    ═══════════════════════════════════════════════════════════════ */
 const INTAKES = [
   { key:'january',   label:'January',           code:'01' },
@@ -660,68 +620,68 @@ const PROGRAMMES = [
     courses:'Workshop Practice, Workshop Processes, Engineering Drawing, Applied Mechanics, Materials and Metallurgy, Applied Thermodynamics, Fluid Mechanics, Instrumentation and Control, Design Project, Management and Organization, Communication Skills.',
     employment:'Mining industry, Electricity Production and Distribution Companies, City Councils, Zambia Sugar, Government, Railway Systems of Zambia.' },
   { code:'1.2', title:'Craft Certificate in Refrigeration and Air-Conditioning', intake:'january', category:'Craft', duration:'2 years',
-    description:'The Electrical Department offers training such as Electrical Instrumentation, Digital Electronics and Refrigerant Management. NORTEC is the only centre accredited by the Environmental Council of Zambia for Refrigerant Management.',
-    courses:'Electrical Technology, Refrigeration Technology, Air-conditioning Technology, Electronics, Refrigeration and Air-conditioning controls, Engineering Science, Engineering Mathematics, Management, Workshop Technology, Engineering Materials.',
-    employment:'Mining companies, General hospitals, Hospitality industry, Refrigeration contractors and control systems.' },
+    description:'The Electrical Department offers training such as Electrical Instrumentation, Digital Electronics and Refrigerant Management.',
+    courses:'Electrical Technology, Refrigeration Technology, Air-conditioning Technology, Electronics, Refrigeration and Air-conditioning controls, Engineering Science, Engineering Mathematics, Management.',
+    employment:'Mining companies, General hospitals, Hospitality industry, Refrigeration contractors.' },
   { code:'1.3', title:'Craft Certificate in Auto-Electrical and Electronics', intake:'january', category:'Craft', duration:'2 years',
-    description:'The department offers training programmes in Automotive and Heavy Equipment Repair at technician levels, with dedicated sections for small/light vehicles and earthmoving machinery.',
-    courses:'Automotive Advanced Technology, Machine Design, Engineering Science, Statistics Calculus, Motor Industry Management, Legal Aspects, Financial and Commercial Aspects, Workshop Organization and Administration.',
+    description:'The department offers training programmes in Automotive and Heavy Equipment Repair at technician levels.',
+    courses:'Automotive Advanced Technology, Machine Design, Engineering Science, Motor Industry Management, Workshop Organization and Administration.',
     employment:'Workshop supervisors or Managers in automotive and equipment repair companies.' },
   { code:'1.4', title:'Diploma in Computer Systems Engineering (Direct Entry)', intake:'january', category:'Diploma', duration:'2 years',
-    description:'The department offers various courses in computer studies and Information Technology. We train students in Microsoft Office productivity software and provide free internet access.',
+    description:'The department offers various courses in computer studies and Information Technology.',
     courses:'Information Technology & Application Packages, Computer Hardware Maintenance & Repair, Computer Networks & Communication, Digital Electronics, Management Information Systems, Operating Systems, Programming & Database Technology.',
     employment:'IT departments, networking, software development, and technical support across all industries.' },
   { code:'1.5', title:'Advanced Certificate in Metal Fabrication', intake:'january', category:'Advanced', duration:'2 years',
     description:'Metal Fabrication Technician programme with highly practical training in welding and fabrication.',
-    courses:'Mathematics, Drawing, Welding Processes and Technology, Template Loft, Physics, Theory and Design of Structures, Fabrication Practice and Technology, Communication Skills, Workshop Practice, Workshop Process and Management, Soil Mechanics.',
+    courses:'Mathematics, Drawing, Welding Processes and Technology, Template Loft, Physics, Fabrication Practice, Workshop Practice, Workshop Process and Management.',
     employment:'Mining industry, Construction Companies, and manufacturers of metal structures.' },
   { code:'1.6', title:'Advanced Certificate in Mechanical Engineering', intake:'january', category:'Advanced', duration:'2 years',
     description:'The Mechanical Engineering Department offers exciting practical programmes preparing graduates to enter industry immediately.',
-    courses:'Workshop Practice, Workshop Processes, Engineering Drawing, Applied Mechanics, Materials and Metallurgy, Applied Thermodynamics, Fluid Mechanics, Instrumentation and Control, Design Project, Management.',
-    employment:'Mining industry, Electricity Production and Distribution Companies, City Councils, Zambia Sugar, Government, Railway Systems of Zambia.' },
+    courses:'Workshop Practice, Workshop Processes, Engineering Drawing, Applied Mechanics, Materials and Metallurgy, Applied Thermodynamics, Fluid Mechanics.',
+    employment:'Mining industry, Electricity Production and Distribution Companies, City Councils.' },
   { code:'1.7', title:'Advanced Certificate in Heavy Equipment Repair', intake:'january', category:'Advanced', duration:'2 years',
-    description:'Heavy Equipment Repair Technician programme. The department has qualified lecturers and well-equipped workshops.',
-    courses:'Earth Moving Equipment Technology, Engineering Science, Engineering Mathematics, Engineering Drawing, Communication Skills, Workshop Practice, Workshop Process and Management.',
-    employment:'Mining industry, Electricity Production and Distribution Companies, City Councils, Zambia Sugar, Government, Railway Systems of Zambia.' },
+    description:'Heavy Equipment Repair Technician programme with qualified lecturers and well-equipped workshops.',
+    courses:'Earth Moving Equipment Technology, Engineering Science, Engineering Mathematics, Engineering Drawing, Workshop Practice.',
+    employment:'Mining industry, Electricity Production and Distribution Companies.' },
   { code:'1.8', title:'Advanced Certificate in Electrical Engineering', intake:'january', category:'Advanced', duration:'2 years',
     description:'The Electrical Department offers training in Electrical Instrumentation, Digital Electronics and Refrigerant Management.',
-    courses:'Workshop Practice, Electrical Machines, Engineering Drawing, Engineering Materials, Electrical Fundamentals, Instrumentation, Control and Protection, Electronics, Supply and Distribution, Project Management and Organisation, Fiber Optics, Robotics, Digital Electronics.',
-    employment:'Mining Industry, Electricity Production and Distribution Companies, City Councils, Food Industry, Government, Utility companies.' },
+    courses:'Workshop Practice, Electrical Machines, Engineering Drawing, Electrical Fundamentals, Instrumentation, Control and Protection, Electronics, Supply and Distribution, Fiber Optics, Robotics.',
+    employment:'Mining Industry, Electricity Production and Distribution Companies, Utility companies.' },
   { code:'1.9', title:'Diploma in Science Laboratory Technology', intake:'january', category:'Diploma', duration:'3 years',
     description:'This programme prepares students for laboratory work in various industries including healthcare, research, food processing and mining.',
     courses:'Chemistry, Biology, Physics, Laboratory Techniques, Quality Control, Instrumentation, Safety, Management.',
     employment:'Hospitals, research labs, food industry, mining, and environmental agencies.' },
   { code:'1.10', title:'Diploma in Electrical Engineering (Direct Entry)', intake:'january', category:'Diploma', duration:'3 years',
-    description:'The Electrical Diploma programme covers a wide range of electrical engineering topics including power systems, control, and modern technologies like Fiber Optics and Robotics.',
-    courses:'Workshop Practice, Electrical Machines, Engineering Drawing, Electrical Fundamentals, Instrumentation, Control and Protection, Electronics, Supply and Distribution, Fiber Optics, Robotics, Digital Electronics.',
-    employment:'Mining Industry, Electricity Production and Distribution Companies, City Councils, Food Industry, Government, Utility companies.' },
+    description:'The Electrical Diploma programme covers a wide range of electrical engineering topics including power systems, control, and modern technologies.',
+    courses:'Workshop Practice, Electrical Machines, Engineering Drawing, Electrical Fundamentals, Instrumentation, Fiber Optics, Robotics, Digital Electronics.',
+    employment:'Mining Industry, Electricity Production and Distribution Companies, Utility companies.' },
   { code:'1.11', title:'Diploma in Production & Operation Management', intake:'january', category:'Diploma', duration:'3 years',
     description:'Production and Operations Management diploma focusing on efficient production planning, inventory control, quality and operations research.',
     courses:'Production Planning, Inventory Management, Quality Control, Supply Chain, Operations Research, Management, Entrepreneurship.',
     employment:'Manufacturing, logistics, supply chain, and operations management.' },
   { code:'1.12', title:'Diploma in Heavy Equipment Engineering (Direct Entry)', intake:'january', category:'Diploma', duration:'3 years',
     description:'This diploma prepares students for careers in mining, construction, and heavy machinery industries.',
-    courses:'Earth Moving Equipment Technology, Engineering Science, Engineering Mathematics, Engineering Drawing, Communication Skills, Workshop Practice, Workshop Process and Management.',
-    employment:'Mining industry, Electricity Production and Distribution Companies, City Councils, Zambia Sugar, Government, Railway Systems of Zambia.' },
+    courses:'Earth Moving Equipment Technology, Engineering Science, Engineering Mathematics, Engineering Drawing, Workshop Practice.',
+    employment:'Mining industry, Electricity Production and Distribution Companies.' },
   { code:'1.13', title:'Diploma in Automotive Engineering (Direct Entry)', intake:'january', category:'Diploma', duration:'3 years',
     description:'Automotive Engineering diploma tailored to expose students to current technological trends in the automotive industry.',
-    courses:'Motor Vehicle Technology, Engineering Science, Engineering Mathematics, Engineering Drawing, Communication Skills, Workshop Practice, Workshop Process and Management.',
+    courses:'Motor Vehicle Technology, Engineering Science, Engineering Mathematics, Engineering Drawing, Workshop Practice.',
     employment:'Workshop supervisors, managers, or automotive industry roles.' },
   { code:'2.1', title:'Advanced Certificate in Mechanical Engineering', intake:'may', category:'Advanced', duration:'2 years',
     description:'Advanced Mechanical Engineering programme with strong practical and theoretical foundation.',
-    courses:'Workshop Practice, Engineering Drawing, Applied Mechanics, Materials and Metallurgy, Thermodynamics, Fluid Mechanics, Instrumentation and Control, Design Project, Strength of Materials.',
+    courses:'Workshop Practice, Engineering Drawing, Applied Mechanics, Materials and Metallurgy, Thermodynamics, Fluid Mechanics, Design Project.',
     employment:'Mining, manufacturing, energy, and government sectors.' },
   { code:'2.2', title:'Advanced Certificate in Heavy Equipment Repair', intake:'may', category:'Advanced', duration:'2 years',
     description:'Heavy equipment repair advanced programme focusing on earth-moving machinery and large fleet maintenance.',
-    courses:'Earth Moving Equipment Technology, Engineering Science, Mathematics, Engineering Drawing, Workshop Practice, Workshop Process and Management.',
+    courses:'Earth Moving Equipment Technology, Engineering Science, Mathematics, Engineering Drawing, Workshop Practice.',
     employment:'Mining, construction, transport and heavy equipment industries.' },
   { code:'2.3', title:'Diploma in Automotive Engineering (Direct Entry)', intake:'may', category:'Diploma', duration:'3 years',
     description:'Automotive Engineering diploma with modern technology focus and industrial attachment opportunities.',
-    courses:'Motor Vehicle Technology, Engineering Science, Mathematics, Engineering Drawing, Communication Skills, Workshop Practice, Management.',
+    courses:'Motor Vehicle Technology, Engineering Science, Mathematics, Engineering Drawing, Workshop Practice, Management.',
     employment:'Automotive industry, workshops, and fleet management.' },
   { code:'2.4', title:'Diploma in Electrical Engineering (Direct Entry)', intake:'may', category:'Diploma', duration:'3 years',
     description:'Diploma in Electrical Engineering covering power systems, controls, electronics, and modern technologies.',
-    courses:'Electrical Machines, Engineering Drawing, Electrical Fundamentals, Instrumentation, Control and Protection, Electronics, Supply and Distribution, Fiber Optics, Robotics.',
+    courses:'Electrical Machines, Engineering Drawing, Electrical Fundamentals, Instrumentation, Fiber Optics, Robotics.',
     employment:'Power utilities, mining, manufacturing, and government.' },
   { code:'2.5', title:'Diploma in Science Laboratory Technology', intake:'may', category:'Diploma', duration:'3 years',
     description:'Programme prepares students for scientific laboratory work across healthcare, research and industry.',
@@ -773,7 +733,7 @@ const PROGRAMMES = [
     employment:'Construction, mining, manufacturing.' },
   { code:'3.1', title:'Diploma in Biomedical Engineering Technology', intake:'september', category:'Diploma', duration:'3 years 3 months',
     description:'Biomedical Engineering programme trains students for healthcare technology and medical equipment management.',
-    courses:'Biomedical Instrumentation, Medical Electronics, Hospital Equipment Maintenance, Anatomy, Physiology, Engineering Mathematics, Communication Skills.',
+    courses:'Biomedical Instrumentation, Medical Electronics, Hospital Equipment Maintenance, Anatomy, Physiology, Engineering Mathematics.',
     employment:'General Hospitals, Hospitality Industry, and medical equipment companies.' },
   { code:'4.1', title:'Diploma in Automotive Engineering (Mature Entry)', intake:'august', category:'Diploma (Distance)', duration:'2 years 8 months',
     description:'Distance learning programme for mature students. Flexible and designed for working professionals.',
@@ -793,12 +753,12 @@ const PROGRAMMES = [
     employment:'Mining, manufacturing, and engineering consulting.' },
   { code:'4.5', title:'Diploma in Instrumentation (Mature Entry)', intake:'august', category:'Diploma (Distance)', duration:'2 years 8 months',
     description:'Distance learning for mature students in instrumentation engineering.',
-    courses:'Principles of Instrumentation, Electronics, Physics, Engineering Mathematics, Air Supplies & Accessories, Management, Machine Control.',
+    courses:'Principles of Instrumentation, Electronics, Physics, Engineering Mathematics, Air Supplies & Accessories, Management.',
     employment:'Power generation, process control systems, and medical laboratories.' }
 ];
 
 /* ═══════════════════════════════════════════════════════════════
-   3 · HELPERS
+   4 · HELPERS
    ═══════════════════════════════════════════════════════════════ */
 function $(sel, root=document){ return root.querySelector(sel); }
 function $$(sel, root=document){ return [...root.querySelectorAll(sel)]; }
@@ -821,41 +781,98 @@ function showMsg(id, text, type){
 function hideMsg(id){ document.getElementById(id).className = 'msg-box'; }
 
 /* ═══════════════════════════════════════════════════════════════
-   4 · REDIRECT LOGIC (student.html only when approved)
+   5 · REDIRECT TO STUDENT PORTAL  (FIXED)
    ═══════════════════════════════════════════════════════════════ */
-function redirectToStudent(){
+
+/* Verify student.html exists before redirecting — avoids the loop
+   caused by the SW falling back to index.html for missing pages. */
+async function studentPortalExists(){
+  try {
+    const res = await fetch(STUDENT_REDIRECT_URL, {
+      method: 'GET',
+      cache: 'no-store',
+      headers: { 'Accept': 'text/html' },
+      redirect: 'follow'
+    });
+    if (!res.ok) return false;
+
+    // GitHub Pages returns a 404 page as text/html with status 404 — already caught.
+    // But some setups return 200 for a custom 404 — check the body briefly.
+    const text = await res.text();
+    // Very rough heuristic: real student.html should be substantial
+    if (text.length < 300) return false;
+    // GitHub 404 pages usually contain this
+    if (/404[\s\S]{0,40}Not Found/i.test(text) && text.length < 2000) return false;
+    return true;
+  } catch(e){
+    console.warn('[NORTEC] student.html check failed (offline?)', e);
+    // On network failure, allow the redirect attempt (SW may serve it)
+    return true;
+  }
+}
+
+async function redirectToStudent(uid){
+  // ── Guard 1: already redirecting on this page load ──
+  if (isRedirecting){
+    console.log('[NORTEC] Already redirecting — ignoring duplicate call');
+    return;
+  }
+
+  // ── Guard 2: already redirected this browser tab session ──
+  if (hasRedirectedThisSession){
+    console.log('[NORTEC] Already redirected this session — showing approved screen instead');
+    showApprovedScreen(uid, false);
+    return;
+  }
+
+  isRedirecting = true;
+  console.log('[NORTEC] Redirecting to student portal…');
+
+  // ── Verify student.html is reachable BEFORE we navigate ──
+  const exists = await studentPortalExists();
+  if (!exists){
+    isRedirecting = false;
+    console.error('[NORTEC] student.html not found — breaking loop');
+    toast('You are approved! The student portal is still being set up.', 'info');
+    showApprovedScreen(uid, true);  // true = portal missing
+    return;
+  }
+
+  // ── Mark session so we never loop back into a redirect ──
+  try { sessionStorage.setItem('nortec_redirected', '1'); } catch(e){}
+  hasRedirectedThisSession = true;
+
   toast('✅ Approved! Redirecting to student portal…', 'ok');
   setTimeout(() => {
     window.location.replace(STUDENT_REDIRECT_URL);
-  }, 600);
+  }, 500);
 }
 
-/**
- * Central routing after fetching the application record.
- * - approved  → redirect to student.html
- * - pending   → show pending status screen
- * - rejected  → show rejected status screen
- */
+/* ═══════════════════════════════════════════════════════════════
+   6 · ROUTING BASED ON APPLICATION STATUS
+   ═══════════════════════════════════════════════════════════════ */
 async function routeByApplicationStatus(appData){
   const status = (appData.status || 'pending').toLowerCase();
+  console.log('[NORTEC] Application status:', status);
 
   if (status === 'approved'){
     if (!appData.studentNumber){
       try {
         await generateStudentNumber(appData.uid, appData);
       } catch (e) {
-        console.warn('Could not generate student number:', e);
+        console.warn('[NORTEC] Could not generate student number:', e);
       }
     }
-    redirectToStudent();
+    await redirectToStudent(appData.uid);
     return;
   }
 
+  // Pending or rejected → show status screen
   showStatusScreen(appData);
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   5 · SCREEN NAVIGATION + DEVICE BACK BUTTON
+   7 · SCREEN NAVIGATION + DEVICE BACK BUTTON
    ═══════════════════════════════════════════════════════════════ */
 let navState = { screen: 'landing', step: 1 };
 
@@ -896,7 +913,7 @@ window.addEventListener('popstate', (e) => {
 });
 
 /* ═══════════════════════════════════════════════════════════════
-   6 · CLOUDINARY UPLOAD
+   8 · CLOUDINARY UPLOAD
    ═══════════════════════════════════════════════════════════════ */
 function openCloudinaryUpload({ formats=['jpg','jpeg','png','pdf','heic','doc','docx'], maxSize=5000000 } = {}){
   return new Promise((resolve) => {
@@ -930,7 +947,6 @@ function openCloudinaryUpload({ formats=['jpg','jpeg','png','pdf','heic','doc','
   });
 }
 
-/** Direct unsigned upload (used for drag & drop on desktop) */
 async function directCloudinaryUpload(file){
   const fd = new FormData();
   fd.append('file', file);
@@ -951,7 +967,7 @@ async function directCloudinaryUpload(file){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   7 · UPLOAD BOXES
+   9 · UPLOAD BOXES
    ═══════════════════════════════════════════════════════════════ */
 const uploads = {};
 const IMAGE_FORMATS = ['jpg','jpeg','png','webp','gif','heic','heif','avif'];
@@ -995,7 +1011,6 @@ function bindUploadBoxes(){
     const key = box.dataset.upload;
     const kind = box.dataset.kind || 'doc';
 
-    // inject spinner once
     if (!box.querySelector('.spinner')){
       const sp = document.createElement('div');
       sp.className = 'spinner';
@@ -1012,7 +1027,6 @@ function bindUploadBoxes(){
       });
     }
 
-    // ── drag & drop (desktop) ──
     box.addEventListener('dragover', (e) => { e.preventDefault(); box.classList.add('dragover'); });
     box.addEventListener('dragleave', () => box.classList.remove('dragover'));
     box.addEventListener('drop', async (e) => {
@@ -1033,7 +1047,6 @@ function bindUploadBoxes(){
       }
     });
 
-    // ── click → Cloudinary widget (camera-friendly on mobile) ──
     box.addEventListener('click', async (e) => {
       if (e.target.closest('.remove-up')) return;
       try {
@@ -1053,7 +1066,7 @@ function bindUploadBoxes(){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   8 · SUBJECTS & GRADES
+   10 · SUBJECTS & GRADES
    ═══════════════════════════════════════════════════════════════ */
 function addSubjectRow(subject='', grade=''){
   const list = $('#subjectsList');
@@ -1092,7 +1105,7 @@ function collectSubjects(){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   9 · COURSE DESCRIPTION
+   11 · COURSE DESCRIPTION
    ═══════════════════════════════════════════════════════════════ */
 function renderCourseDescription(code){
   const box = $('#courseDescBox');
@@ -1121,7 +1134,7 @@ function renderCourseDescription(code){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   10 · WIZARD
+   12 · WIZARD
    ═══════════════════════════════════════════════════════════════ */
 let currentStep = 1;
 const TOTAL_STEPS = 5;
@@ -1268,7 +1281,7 @@ function goToStep(n, skipValidation=false, isBack=false){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   11 · SUBMIT APPLICATION
+   13 · SUBMIT APPLICATION
    ═══════════════════════════════════════════════════════════════ */
 async function submitApplication(e){
   if (e) e.preventDefault();
@@ -1407,7 +1420,7 @@ async function submitApplication(e){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   12 · LOGIN
+   14 · LOGIN
    ═══════════════════════════════════════════════════════════════ */
 async function handleLogin(e){
   e.preventDefault();
@@ -1443,8 +1456,6 @@ async function handleLogin(e){
     }
 
     const appData = { uid, ...snap.val() };
-
-    // ═══ Route based on status ═══
     await routeByApplicationStatus(appData);
 
   } catch (err){
@@ -1461,7 +1472,7 @@ async function handleLogin(e){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   13 · AUTO STUDENT NUMBER
+   15 · AUTO STUDENT NUMBER
    ═══════════════════════════════════════════════════════════════ */
 async function generateStudentNumber(uid, appData){
   const year = new Date().getFullYear();
@@ -1481,14 +1492,15 @@ async function generateStudentNumber(uid, appData){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   14 · STATUS SCREEN (pending + rejected)
+   16 · STATUS SCREEN (pending / rejected / approved-but-no-portal)
    ═══════════════════════════════════════════════════════════════ */
 function showStatusScreen(appData){
   const card = $('#statusCard');
   const status = (appData.status || 'pending').toLowerCase();
 
+  // Safety: approved but called here → redirect path failed
   if (status === 'approved'){
-    redirectToStudent();
+    showApprovedScreen(appData.uid, true);
     return;
   }
 
@@ -1523,7 +1535,7 @@ function showStatusScreen(appData){
         <div class="row-i"><span class="k">Application ID</span><span class="v">${esc(appData.applicationId || '—')}</span></div>
         <div class="row-i"><span class="k">Programme</span><span class="v">${esc(appData.programme?.title || '—')}</span></div>
       </div>
-      <p style="font-size:12.5px;color:#64748b;margin-bottom:14px">Contact admissions for more information: <strong>admissions@northerntech.edu.zm</strong></p>
+      <p style="font-size:12.5px;color:#64748b;margin-bottom:14px">Contact admissions: <strong>admissions@northerntech.edu.zm</strong></p>
       <button class="btn btn-danger" id="logoutBtn1"><i class="fas fa-sign-out-alt"></i> Log Out</button>
     `;
   }
@@ -1543,6 +1555,57 @@ function showStatusScreen(appData){
   if (logoutBtn1) logoutBtn1.addEventListener('click', doLogout);
 }
 
+/* Approved but student.html is missing (or session already redirected) */
+function showApprovedScreen(uid, portalMissing){
+  const card = $('#statusCard');
+  card.innerHTML = `
+    <div class="status-icon approved"><i class="fas fa-check"></i></div>
+    <span class="status-pill approved">approved</span>
+    <h2>Congratulations!</h2>
+    <p class="sub-t">Your application has been approved. You are now an official NORTEC student.</p>
+
+    ${portalMissing ? `
+      <div style="background:#fff7ed;border-radius:14px;padding:14px;font-size:12.5px;color:#92400e;text-align:left;line-height:1.6;margin-bottom:14px">
+        <strong><i class="fas fa-exclamation-triangle"></i> Student portal not found</strong><br/>
+        The page <code>student.html</code> has not been uploaded to the server yet. Please contact the administrator.
+      </div>
+    ` : `
+      <div style="background:#eff6ff;border-radius:14px;padding:14px;font-size:12.5px;color:#1e40af;text-align:left;line-height:1.6;margin-bottom:14px">
+        <strong><i class="fas fa-info-circle"></i> Already redirected</strong><br/>
+        Your session has already been redirected to the student portal.
+      </div>
+    `}
+
+    <button class="btn btn-primary" id="goPortalBtn" style="margin-bottom:10px">
+      <i class="fas fa-arrow-right"></i> Go to Student Portal
+    </button>
+    <button class="btn btn-ghost" id="refreshApprovedBtn" style="margin-bottom:10px">
+      <i class="fas fa-sync-alt"></i> Refresh
+    </button>
+    <button class="btn btn-danger" id="logoutBtn1">
+      <i class="fas fa-sign-out-alt"></i> Log Out
+    </button>
+  `;
+  showScreen('statusScreen', true);
+
+  document.getElementById('goPortalBtn').addEventListener('click', () => {
+    // Force a fresh redirect attempt
+    isRedirecting = false;
+    try { sessionStorage.removeItem('nortec_redirected'); } catch(e){}
+    hasRedirectedThisSession = false;
+    window.location.href = STUDENT_REDIRECT_URL;
+  });
+
+  document.getElementById('refreshApprovedBtn').addEventListener('click', () => {
+    isRedirecting = false;
+    try { sessionStorage.removeItem('nortec_redirected'); } catch(e){}
+    hasRedirectedThisSession = false;
+    refreshStatus(uid);
+  });
+
+  document.getElementById('logoutBtn1').addEventListener('click', doLogout);
+}
+
 async function refreshStatus(uid){
   if (!uid) return;
   try {
@@ -1555,7 +1618,7 @@ async function refreshStatus(uid){
       if (!appData.studentNumber){
         try { await generateStudentNumber(uid, appData); } catch(e){ console.warn(e); }
       }
-      redirectToStudent();
+      await redirectToStudent(uid);
       return;
     }
 
@@ -1565,6 +1628,11 @@ async function refreshStatus(uid){
 }
 
 function doLogout(){
+  // Clear session flags so a fresh login can redirect cleanly
+  try { sessionStorage.removeItem('nortec_redirected'); } catch(e){}
+  hasRedirectedThisSession = false;
+  isRedirecting = false;
+
   auth.signOut().then(() => {
     toast('Logged out', 'info');
     showScreen('landing', true);
@@ -1572,7 +1640,7 @@ function doLogout(){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   15 · DROPDOWNS
+   17 · DROPDOWNS
    ═══════════════════════════════════════════════════════════════ */
 function buildIntakeSelect(){
   const sel = $('#enrollIntake');
@@ -1605,7 +1673,7 @@ function buildProgrammeSelect(){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   16 · MICRO-INTERACTIONS (ripple)
+   18 · MICRO-INTERACTIONS (ripple)
    ═══════════════════════════════════════════════════════════════ */
 document.addEventListener('pointerdown', (e) => {
   const btn = e.target.closest('.btn');
@@ -1622,7 +1690,7 @@ document.addEventListener('pointerdown', (e) => {
 }, { passive: true });
 
 /* ═══════════════════════════════════════════════════════════════
-   17 · PWA — install prompt + service worker
+   19 · PWA — install prompt + service worker
    ═══════════════════════════════════════════════════════════════ */
 let deferredPrompt = null;
 
@@ -1648,7 +1716,7 @@ window.addEventListener('appinstalled', () => {
 async function triggerInstall(){
   if (isStandalone()){ toast('NORTEC is already installed', 'info'); return; }
   if (!deferredPrompt){
-    toast('Open your browser menu and choose “Add to Home screen”', 'info');
+    toast('Open your browser menu and choose "Add to Home screen"', 'info');
     return;
   }
   deferredPrompt.prompt();
@@ -1670,7 +1738,7 @@ if ('serviceWorker' in navigator){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   18 · EVENT BINDINGS
+   20 · EVENT BINDINGS
    ═══════════════════════════════════════════════════════════════ */
 function bindEvents(){
   $('#btnEnroll').addEventListener('click', () => {
@@ -1698,21 +1766,16 @@ function bindEvents(){
     }
   });
 
-  $('#loginBack').addEventListener('click', () => {
-    showScreen('landing', true);
-  });
+  $('#loginBack').addEventListener('click', () => showScreen('landing', true));
 
   $('#prevBtn').addEventListener('click', () => {
-    if (currentStep > 1) {
-      goToStep(currentStep - 1, true, true);
-    }
+    if (currentStep > 1) goToStep(currentStep - 1, true, true);
   });
   $('#nextBtn').addEventListener('click', () => goToStep(currentStep + 1));
   $('#submitBtn').addEventListener('click', submitApplication);
   $('#enrollForm').addEventListener('submit', (e) => e.preventDefault());
 
   $('#enrollIntake').addEventListener('change', buildProgrammeSelect);
-
   $('#enrollProgramme').addEventListener('change', function(){
     renderCourseDescription(this.value);
   });
@@ -1742,7 +1805,7 @@ function bindEvents(){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   19 · BOOT
+   21 · BOOT
    ═══════════════════════════════════════════════════════════════ */
 window.addEventListener('DOMContentLoaded', () => {
   bindEvents();
@@ -1756,13 +1819,22 @@ window.addEventListener('DOMContentLoaded', () => {
 
   setTimeout(() => $('#appLoader').classList.add('hidden'), 650);
 
-  /* ═══ AUTH STATE — main redirect gate ═══ */
+  // ═══ AUTH STATE — main redirect gate ═══
   auth.onAuthStateChanged(async (user) => {
-    if (!user) return;  // stay on landing
+    if (!user) {
+      console.log('[NORTEC] No user signed in');
+      return;
+    }
+    if (isRedirecting){
+      console.log('[NORTEC] Auth state changed but already redirecting');
+      return;
+    }
     try {
+      console.log('[NORTEC] User detected:', user.uid);
       const snap = await db.ref(`${ROOT}/applications/${user.uid}`).get();
 
       if (!snap.exists()){
+        console.log('[NORTEC] No application for this user — signing out');
         await auth.signOut();
         return;
       }
