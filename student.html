@@ -149,7 +149,6 @@
   .hero-chip i{color:#fff;opacity:.9}
   .hero-chip:hover{background:rgba(255,255,255,.28);transform:translateY(-1px)}
 
-  /* ═══════════ ENHANCED TEXT BELOW SECTIONS ═══════════ */
   .page-desc,
   .section-desc{
     font-size:13px;
@@ -166,7 +165,6 @@
   .page-desc i,
   .section-desc i{color:var(--blue);margin-right:4px}
 
-  /* Small footer note text that appears below pages */
   .page-footer-note{
     font-size:11.5px;
     color:var(--text-muted);
@@ -268,7 +266,6 @@
   .empty-glass i{font-size:34px;display:block;margin-bottom:10px;color:var(--blue);opacity:.5}
   .empty-glass .e-ttl{font-weight:800;font-size:14px;color:var(--text-primary);margin-bottom:4px}
 
-  /* ═══ GRADE BADGES ═══ */
   .grade-badge{
     display:inline-flex;align-items:center;justify-content:center;
     min-width:38px;height:38px;border-radius:50%;
@@ -283,7 +280,6 @@
   .grade-badge.P{background:linear-gradient(135deg,#f59e0b,#b45309)}
   .grade-badge.F{background:linear-gradient(135deg,#ef4444,#991b1b)}
 
-  /* ═══ CA HOME BOX ═══ */
   .ca-home-card{
     background:var(--glass-bg);
     backdrop-filter:var(--glass-blur);
@@ -416,7 +412,6 @@
   .ca-home-docs .doc-chip:hover{background:rgba(139,92,246,.20);transform:translateY(-1px)}
   .ca-home-docs .doc-chip i{color:#8b5cf6}
 
-  /* ═══ CLASS CARD (home + courses) ═══ */
   .class-banner{
     background:linear-gradient(135deg,#0f172a 0%,#1e293b 60%,#334155 100%);
     color:#fff;
@@ -458,7 +453,6 @@
   .class-banner .cb-stat .v{font-size:16px;font-weight:900}
   .class-banner .cb-stat .k{font-size:9.5px;color:#94a3b8;font-weight:800;text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
 
-  /* ═══ ENROLLED COURSES LIST ═══ */
   .enrolled-list{display:grid;gap:10px}
   .enrolled-card{
     background:var(--glass-bg);
@@ -502,7 +496,6 @@
   .enrolled-card .ec-tag.grey{background:#f1f5f9;color:#475569;border-color:#e2e8f0}
   .enrolled-card .ec-tag.purple{background:#ede9fe;color:#5b21b6;border-color:#ddd6fe}
 
-  /* ═══ TIMETABLE GRID (comprehensive) ═══ */
   .tt-toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
   .tt-toolbar .tt-chip{
     padding:7px 14px;border-radius:20px;background:#fff;
@@ -570,7 +563,6 @@
   .tt-legend span{display:inline-flex;align-items:center;gap:6px}
   .tt-legend i{color:var(--blue)}
 
-  /* ═══ CLASSMATES LIST ═══ */
   .classmates-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
   .classmate-card{
     background:#fff;border:1px solid var(--border-color);border-radius:14px;
@@ -593,8 +585,6 @@
   .classmate-card.me{border-color:var(--blue);background:linear-gradient(135deg,#eff6ff,#dbeafe);box-shadow:0 8px 20px -12px rgba(37,99,235,.35)}
   .classmate-card.me .cm-name{color:var(--blue-dark)}
 
-  /* General cards / tiles */
-  .welcome-banner{display:none}
   .section-title{font-size:15px;font-weight:800;color:var(--text-primary);margin:18px 0 12px;display:flex;align-items:center;gap:8px}
   .section-title i{color:var(--blue)}
   .section-title .count{margin-left:auto;font-size:11px;background:var(--blue-light);color:var(--blue-dark);padding:3px 12px;border-radius:30px;font-weight:700}
@@ -737,9 +727,6 @@
   .tl-item .tl-ttl{font-weight:700;font-size:13.5px;color:var(--text-primary)}
   .tl-item .tl-desc{font-size:12px;color:var(--text-muted);margin-top:2px;line-height:1.5}
 
-  /* ═══════════════════════════════════════════════════════════
-     ENHANCED TOAST — always visible, always clickable
-     ═══════════════════════════════════════════════════════════ */
   #toast{
     position:fixed;
     top:76px;
@@ -930,7 +917,41 @@
   .stat-mini.rejected .v{color:var(--red)}
   .stat-mini.total .v{color:var(--blue)}
 
-  /* ═══ TEVETA FORM ═══ */
+  .clearance-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+  .clearance-card{background:#fff;border:1px solid var(--border-color);border-radius:14px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;transition:.25s;box-shadow:0 6px 18px -14px rgba(37,99,235,.20)}
+  .clearance-card:hover{transform:translateY(-2px);box-shadow:var(--float-shadow);border-color:var(--blue)}
+  .clearance-card.cleared{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-color:#a7f3d0}
+  .clearance-card.cleared .clr-icon{background:linear-gradient(135deg,#10b981,#059669);color:#fff;box-shadow:0 8px 20px rgba(16,185,129,.35)}
+  .clearance-card.pending .clr-icon{background:#f1f5f9;color:#94a3b8}
+  .clearance-card .clr-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;transition:.25s}
+  .clearance-card .clr-body{flex:1;min-width:0}
+  .clearance-card .clr-name{font-weight:800;font-size:14px;color:var(--text-primary);line-height:1.2}
+  .clearance-card .clr-status{font-size:11.5px;font-weight:700;margin-top:4px}
+  .clearance-card .clr-status.cleared{color:#059669}
+  .clearance-card .clr-status.pending{color:#d97706}
+  .clearance-card .clr-meta{font-size:11px;color:var(--text-muted);margin-top:6px;line-height:1.45}
+  .clearance-card .clr-meta strong{color:var(--text-secondary);font-weight:700}
+
+  @media (max-width:560px){.teveta-form-container{padding:18px 14px}.teveta-form-container .form-field .field-label{min-width:auto;flex:1 1 100%}.teveta-form-container .form-field .field-number{min-width:22px}.teveta-form-container .box-input{width:30px;padding:4px 2px;font-size:12px}}
+  @media (max-width:480px){
+    .header-center .name{font-size:14px}
+    .hero-card{padding:20px 18px}
+    .hero-photo{width:78px;height:78px;font-size:30px}
+    .hero-info .nm{font-size:20px}
+    .grid-cards{grid-template-columns:1fr 1fr}
+    .quick-grid{grid-template-columns:repeat(3,1fr)}
+    .course-grid{grid-template-columns:1fr}
+    .sidebar{width:280px}
+    .ca-home-overall .gb-big{min-width:54px;height:54px;font-size:22px}
+    .ca-home-overall-text .pct{font-size:22px}
+    .ca-home-course-item .code{min-width:44px;padding:3px 8px;font-size:11px}
+    .ca-home-course-item .pct{font-size:14px;min-width:44px}
+    .class-banner .cb-icon{width:46px;height:46px;font-size:20px}
+    .class-banner .cb-name{font-size:17px}
+  }
+  @supports(padding:env(safe-area-inset-top)){.top-bar{padding-top:calc(12px + env(safe-area-inset-top))}}
+
+  /* TEVETA form (kept for reference / consistency) */
   .teveta-form-container{font-family:'Inter',sans-serif;background:#fff;padding:26px 24px;border:1px solid var(--border-color);border-radius:16px;box-shadow:0 12px 32px -20px rgba(37,99,235,.28)}
   .teveta-form-container .form-header{text-align:center;margin-bottom:22px;padding-bottom:14px;border-bottom:2px solid #0f172a}
   .teveta-form-container .form-header h2{font-size:19px;font-weight:900;color:var(--text-primary);text-transform:uppercase;letter-spacing:.5px;margin-top:8px}
@@ -957,13 +978,11 @@
   .teveta-form-container .subjects-list{flex:1;min-width:260px;display:flex;flex-direction:column;gap:6px;margin-top:2px}
   .teveta-form-container .subject-row{display:flex;align-items:center;gap:10px;font-size:13px;padding:3px 0}
   .teveta-form-container .subject-row input[type="checkbox"]{width:16px;height:16px;accent-color:var(--blue);cursor:pointer;flex-shrink:0}
-  .teveta-form-container .subject-row input[type="checkbox"]:disabled{cursor:not-allowed;accent-color:#94a3b8}
   .teveta-form-container .subject-row .subject-text{color:var(--text-primary);flex:1;line-height:1.4}
   .teveta-form-container .subject-row .subject-line{flex:1;border-bottom:1.5px dotted var(--text-primary);height:1px;margin-left:6px;min-width:60px}
   .teveta-form-container .subject-row .subject-line.readonly{border-bottom-color:#94a3b8}
   .teveta-form-container .btn-submit-teveta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:22px;padding:14px 32px;background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff;border:none;border-radius:50px;font-size:15px;font-weight:700;cursor:pointer;transition:.25s;font-family:'Inter',sans-serif;box-shadow:0 8px 26px rgba(37,99,235,.35)}
-  .teveta-form-container .btn-submit-teveta:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(37,99,235,.45)}
-  .teveta-form-container .btn-submit-teveta:active{transform:scale(.97)}
+  .teveta-form-container .btn-submit-teveta:hover{transform:translateY(-2px)}
   .teveta-form-container .btn-submit-teveta:disabled{opacity:.6;cursor:not-allowed;transform:none!important}
   .teveta-signature-block{margin-top:24px;padding-top:18px;border-top:2px dashed var(--border-color)}
   .teveta-signature-block .sig-row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:12px}
@@ -971,32 +990,6 @@
   .teveta-signature-block .sig-col .sig-line{border-bottom:1.5px solid var(--text-primary);padding:22px 0 4px;margin-bottom:6px}
   .teveta-signature-block .sig-col .sig-label{font-size:11px;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
   .teveta-status-banner{background:#f0fdf4;border-left:4px solid #10b981;padding:12px 14px;border-radius:10px;margin-bottom:18px;font-size:13px;color:#065f46}
-
-  .ca-doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:10px}
-  .ca-doc-tile{position:relative;border-radius:12px;overflow:hidden;background:var(--soft);border:1.5px solid var(--border-color);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.25s}
-  .ca-doc-tile:hover{border-color:var(--blue);box-shadow:0 6px 20px rgba(37,99,235,.18);transform:translateY(-3px)}
-  .ca-doc-tile img{width:100%;height:100%;object-fit:cover;display:block}
-  .ca-doc-tile .doc-icon{font-size:36px;color:var(--blue);opacity:.55}
-  .ca-doc-tile .doc-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(0,0,0,.75) 0%,transparent 100%);color:#fff;font-size:10.5px;font-weight:700;padding:16px 8px 6px;text-align:center;line-height:1.25;pointer-events:none}
-
-  @media (max-width:560px){.teveta-form-container{padding:18px 14px}.teveta-form-container .form-field .field-label{min-width:auto;flex:1 1 100%}.teveta-form-container .form-field .field-number{min-width:22px}.teveta-form-container .box-input{width:30px;padding:4px 2px;font-size:12px}}
-  @media (max-width:480px){
-    .header-center .name{font-size:14px}
-    .hero-card{padding:20px 18px}
-    .hero-photo{width:78px;height:78px;font-size:30px}
-    .hero-info .nm{font-size:20px}
-    .grid-cards{grid-template-columns:1fr 1fr}
-    .quick-grid{grid-template-columns:repeat(3,1fr)}
-    .course-grid{grid-template-columns:1fr}
-    .sidebar{width:280px}
-    .ca-home-overall .gb-big{min-width:54px;height:54px;font-size:22px}
-    .ca-home-overall-text .pct{font-size:22px}
-    .ca-home-course-item .code{min-width:44px;padding:3px 8px;font-size:11px}
-    .ca-home-course-item .pct{font-size:14px;min-width:44px}
-    .class-banner .cb-icon{width:46px;height:46px;font-size:20px}
-    .class-banner .cb-name{font-size:17px}
-  }
-  @supports(padding:env(safe-area-inset-top)){.top-bar{padding-top:calc(12px + env(safe-area-inset-top))}}
 </style>
 </head>
 <body>
@@ -1170,8 +1163,6 @@ let notifications = [];
 let userRegisterIds = new Set();
 let liveClassData = null;
 let liveClassId = null;
-let liveListeners = [];
-let liveListenersAttached = false;
 
 let dbNotices = [];
 let dbComplaints = [];
@@ -1183,9 +1174,10 @@ let dbSup = {};
 let dbSupRequests = {};
 let dbTeveta = {};
 let dbTimetable = [];
-let dbAttendance = [];
-let dbExams = [];
-let dbClearance = [];
+let dbAttendance = [];       /* Now stores per-day records for this student */
+let dbExams = [];            /* Now global exams list */
+let dbClearance = {};        /* Not used directly - we read appData.clearance */
+let dbClearanceMeta = {};    /* Clearance audit info */
 let dbFinanceTransactions = [];
 let dbLibraryBooks = [];
 let dbBorrowedBooks = [];
@@ -1203,6 +1195,18 @@ let appFilter = 'all';
 let dbClasses = [];
 let myClass = null;
 let myTimetableSlots = [];
+
+/* All departments defined in the system - must match admin code */
+const DEPARTMENTS = [
+  { id:'accounts',      name:'Accounts',       icon:'fa-coins' },
+  { id:'library',       name:'Library',        icon:'fa-book-open' },
+  { id:'sports',        name:'Sports',         icon:'fa-futbol' },
+  { id:'hod',           name:'HOD',            icon:'fa-user-tie' },
+  { id:'lab',           name:'Lab Attendant',  icon:'fa-flask' },
+  { id:'admissions',    name:'Admissions',     icon:'fa-user-check' },
+  { id:'accommodation', name:'Accommodation',  icon:'fa-bed' },
+  { id:'exams',         name:'Examinations',   icon:'fa-file-signature' }
+];
 
 const TT_DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
 const TT_SLOTS = [
@@ -1263,17 +1267,12 @@ function fmtDateTime(ts){ if(!ts) return '—'; const d=new Date(ts); return d.t
 function toArray(obj){ return obj ? Object.entries(obj).map(([id,v]) => ({id, ...v})) : []; }
 
 /* ═══════════════════════════════════════════════════════════════
-   ENHANCED TOAST — always visible, click-to-dismiss
+   ENHANCED TOAST
    ═══════════════════════════════════════════════════════════════ */
 function toast(msg, type='info'){
   try {
     const container = document.getElementById('toast');
-    if (!container) {
-      console.log('[TOAST FALLBACK]', type, msg);
-      return;
-    }
-
-    /* Force top of everything */
+    if (!container) { console.log('[TOAST]', type, msg); return; }
     container.style.zIndex = '2147483647';
     container.style.display = 'flex';
 
@@ -1284,9 +1283,7 @@ function toast(msg, type='info'){
               : type==='warn' ? 'fa-triangle-exclamation'
               : 'fa-circle-info';
     el.innerHTML = `<i class="fas ${ico}"></i><span>${esc(msg)}</span>`;
-
     container.appendChild(el);
-    console.log('[TOAST]', type, msg);
 
     const timer = setTimeout(() => {
       el.style.opacity = '0';
@@ -1295,7 +1292,6 @@ function toast(msg, type='info'){
       setTimeout(() => { try { el.remove(); } catch(e){} }, 320);
     }, 3800);
 
-    /* Tap to dismiss */
     el.addEventListener('click', () => {
       clearTimeout(timer);
       el.style.opacity = '0';
@@ -1304,18 +1300,13 @@ function toast(msg, type='info'){
       setTimeout(() => { try { el.remove(); } catch(e){} }, 320);
     });
 
-    /* Cap at 4 visible */
     const toasts = container.querySelectorAll('.toast');
     if (toasts.length > 4) toasts[0].remove();
-
-  } catch(err){
-    console.error('[TOAST ERROR]', err, msg);
-  }
+  } catch(err){ console.error('[TOAST ERROR]', err, msg); }
 }
 
 function getInitials(name){ if(!name) return 'ST'; const p = name.trim().split(/\s+/); return ((p[0]?.[0]||'')+(p[1]?.[0]||'')).toUpperCase() || 'ST'; }
 function getFirstName(name){ return name ? name.trim().split(/\s+/)[0] : 'Student'; }
-function skeleton(n=3){ return '<div class="loading-skeleton"></div>'.repeat(n); }
 function emptyState(msg, icon='fa-inbox'){ return `<div class="empty"><i class="fas ${icon}"></i>${esc(msg)}</div>`; }
 
 function statusPill(status){
@@ -1586,9 +1577,7 @@ function buildAllApplications(){
       subtitle: 'Supplementary exam extension',
       status: sr.status || 'pending',
       date: sr.createdAt,
-      details: [
-        ['Reason', sr.reason]
-      ].filter(([_,v]) => v),
+      details: [ ['Reason', sr.reason] ].filter(([_,v]) => v),
       actions: [{ label: 'View', icon: 'fa-eye', action: `showPage('sup')` }]
     });
   }
@@ -1674,7 +1663,7 @@ function buildAllApplications(){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   RENDER: MY APPLICATIONS
+   MY APPLICATIONS
    ═══════════════════════════════════════════════════════════════ */
 function renderPending(){
   const all = buildAllApplications();
@@ -1775,7 +1764,7 @@ function updatePendingBadge(){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   HOME — Hero + Notice Board + CA Box
+   HOME
    ═══════════════════════════════════════════════════════════════ */
 function renderHome(){
   const name = appData.fullName || userData.fullName || 'Student';
@@ -1814,6 +1803,19 @@ function renderHome(){
 
   const caBox = renderHomeCABox();
 
+  /* Live class banner if any */
+  let liveBanner = '';
+  if(liveClassData){
+    liveBanner = `
+      <div style="background:linear-gradient(135deg,#ef4444,#b91c1c);color:#fff;border-radius:16px;padding:14px 18px;margin-bottom:14px;display:flex;align-items:center;gap:12px;box-shadow:0 12px 30px -10px rgba(239,68,68,.55)">
+        <i class="fas fa-broadcast-tower" style="font-size:22px"></i>
+        <div style="flex:1">
+          <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.85">Live now</div>
+          <div style="font-weight:800;font-size:14.5px">${esc(liveClassData.title || 'Live class in progress')}</div>
+        </div>
+      </div>`;
+  }
+
   $('#homeContent').innerHTML = `
     <div class="hero-card">
       <div class="hero-inner">
@@ -1831,6 +1833,8 @@ function renderHome(){
         </div>
       </div>
     </div>
+
+    ${liveBanner}
 
     <div class="notice-section-title">
       <div class="ttl-icon"><i class="fas fa-bullhorn"></i></div>
@@ -1947,18 +1951,9 @@ function renderHomeCABox(){
         </div>
       </div>
       <div class="ca-home-stats">
-        <div class="ca-home-stat">
-          <div class="v">${courseEntries.length}</div>
-          <div class="k">Courses</div>
-        </div>
-        <div class="ca-home-stat">
-          <div class="v">${courseEntries.filter(c => c.grade && c.grade !== 'F').length}</div>
-          <div class="k">Passed</div>
-        </div>
-        <div class="ca-home-stat">
-          <div class="v">${courseEntries.filter(c => c.grade === 'F').length}</div>
-          <div class="k">Fails</div>
-        </div>
+        <div class="ca-home-stat"><div class="v">${courseEntries.length}</div><div class="k">Courses</div></div>
+        <div class="ca-home-stat"><div class="v">${courseEntries.filter(c => c.grade && c.grade !== 'F').length}</div><div class="k">Passed</div></div>
+        <div class="ca-home-stat"><div class="v">${courseEntries.filter(c => c.grade === 'F').length}</div><div class="k">Fails</div></div>
       </div>
     `
     : `
@@ -1975,12 +1970,8 @@ function renderHomeCABox(){
   return `
     ${sectionTitle}
     <div class="ca-home-card">
-      <div class="ca-home-head">
-        ${overallBlock}
-      </div>
-      <div class="ca-home-course-list">
-        ${courseListHtml}
-      </div>
+      <div class="ca-home-head">${overallBlock}</div>
+      <div class="ca-home-course-list">${courseListHtml}</div>
       ${docsHtml}
       <div class="ca-home-foot">
         <div class="legend">
@@ -1990,9 +1981,7 @@ function renderHomeCABox(){
           <span><span class="gb-mini P">P</span> Pass</span>
           <span><span class="gb-mini F">F</span> Fail</span>
         </div>
-        <button class="btn-link" type="button">
-          <i class="fas fa-chart-line"></i> Full Report
-        </button>
+        <button class="btn-link" type="button"><i class="fas fa-chart-line"></i> Full Report</button>
       </div>
     </div>
   `;
@@ -2065,7 +2054,7 @@ function renderClasses(){
     const meAsApp = { id: currentUser?.uid, fullName: appData.fullName, studentNumber: appData.studentNumber, email: appData.email, personal: appData.personal };
     const all = [meAsApp, ...classmates];
     html += `<div class="classmates-grid">
-      ${all.map((m, i) => {
+      ${all.map((m) => {
         const isMe = m.id === currentUser?.uid;
         const photo = m.personal?.profilePhoto || '';
         return `
@@ -2433,11 +2422,11 @@ function renderCA(){
 
   if(caDocs.length){
     html += `<h3><i class="fas fa-paperclip"></i> CA Documents (${caDocs.length})</h3>
-      <div class="ca-doc-grid">
+      <div class="ca-doc-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px">
         ${caDocs.map(d => `
-          <div class="ca-doc-tile" onclick="window.open('${esc(d.dataUrl || '')}','_blank')">
-            ${d.type && d.type.startsWith('image') ? `<img src="${esc(d.dataUrl)}"/>` : `<i class="fas fa-file-pdf doc-icon"></i>`}
-            <div class="doc-label">${esc(d.name || 'CA doc')}</div>
+          <div style="position:relative;border-radius:12px;overflow:hidden;background:#f8fafc;border:1.5px solid var(--border-color);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;cursor:pointer" onclick="window.open('${esc(d.dataUrl || '')}','_blank')">
+            ${d.type && d.type.startsWith('image') ? `<img src="${esc(d.dataUrl)}" style="width:100%;height:100%;object-fit:cover"/>` : `<i class="fas fa-file-pdf" style="font-size:36px;color:var(--blue);opacity:.55"></i>`}
+            <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(0,0,0,.75) 0%,transparent 100%);color:#fff;font-size:10.5px;font-weight:700;padding:16px 8px 6px;text-align:center;line-height:1.25">${esc(d.name || 'CA doc')}</div>
           </div>
         `).join('')}
       </div>
@@ -2451,62 +2440,155 @@ function renderCA(){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   ATTENDANCE
+   ATTENDANCE  —  aggregated from admin's date-keyed records
+   Admin writes to: nortec/attendance/{YYYY-MM-DD}/{uid}
    ═══════════════════════════════════════════════════════════════ */
 function renderAttendance(){
-  const rows = dbAttendance;
-  const totalAttended = rows.reduce((s,r) => s + (r.attended || 0), 0);
-  const totalClasses = rows.reduce((s,r) => s + (r.total || 0), 0);
+  const rows = dbAttendance || [];  /* each: {date, present, markedAt} */
+
+  /* Group by month */
+  const groups = {};
+  rows.forEach(r => {
+    const d = new Date(r.date);
+    if(isNaN(d)) return;
+    const key = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0');
+    if(!groups[key]){
+      groups[key] = {
+        key,
+        month: d.toLocaleDateString('en-GB',{month:'long', year:'numeric'}),
+        term: d.getMonth() >= 8 ? 'Term 3' : d.getMonth() >= 4 ? 'Term 2' : 'Term 1',
+        attended: 0,
+        total: 0
+      };
+    }
+    groups[key].total++;
+    if(r.present) groups[key].attended++;
+  });
+
+  const aggregated = Object.values(groups).map(g => ({
+    ...g,
+    pct: g.total ? Math.round((g.attended / g.total) * 100) : 0
+  })).sort((a,b) => b.key.localeCompare(a.key));
+
+  const totalAttended = rows.filter(r => r.present).length;
+  const totalClasses = rows.length;
   const overall = totalClasses ? Math.round((totalAttended / totalClasses) * 100) : 0;
-  const grade = overall >= 90 ? 'A' : overall >= 80 ? 'B' : overall >= 70 ? 'C' : 'D';
+  const grade = overall >= 90 ? 'A' : overall >= 80 ? 'B' : overall >= 70 ? 'C' : overall >= 60 ? 'D' : 'F';
 
   let html = `
+    <h3><i class="fas fa-clipboard-list"></i> Attendance</h3>
+    <p class="page-desc">
+      <i class="fas fa-info-circle"></i>
+      Your attendance is marked daily by your lecturers. Aim for at least 80% attendance to remain exam-eligible.
+    </p>
     <div class="info-grid">
-      <div class="info-item"><div class="lbl">Overall</div><div class="val" style="color:var(--blue)">${overall}%</div></div>
+      <div class="info-item"><div class="lbl">Overall</div><div class="val" style="color:${overall>=80?'var(--green)':overall>=70?'var(--amber)':'var(--red)'}">${overall}%</div></div>
       <div class="info-item"><div class="lbl">Grade</div><div class="val">${grade}</div></div>
       <div class="info-item"><div class="lbl">Sessions</div><div class="val">${totalAttended} / ${totalClasses}</div></div>
-      <div class="info-item"><div class="lbl">Status</div><div class="val"><span class="badge ${overall >= 80 ? 'green':'red'}">${overall >= 80 ? 'Satisfactory':'Low'}</span></div></div>
+      <div class="info-item"><div class="lbl">Status</div><div class="val"><span class="badge ${overall >= 80 ? 'green': overall >= 70 ? 'amber':'red'}">${overall >= 80 ? 'Satisfactory': overall >= 70 ? 'Watchlist':'Low'}</span></div></div>
     </div>
   `;
+
   html += `<h3><i class="fas fa-table"></i> Monthly Breakdown</h3>`;
-  if(!rows.length){ html += emptyState('No attendance records yet','fa-clipboard-list'); }
-  else {
+  if(!aggregated.length){
+    html += emptyState('No attendance records yet','fa-clipboard-list');
+  } else {
     html += `<div class="tbl-wrap"><table>
       <thead><tr><th>Term</th><th>Month</th><th>%</th><th>Attended</th><th>Total</th></tr></thead>
       <tbody>
-        ${rows.map(r => `
+        ${aggregated.map(r => `
           <tr>
-            <td>${esc(r.term||'—')}</td>
-            <td>${esc(r.month||'—')}</td>
-            <td><strong style="color:${r.pct>=85?'var(--green)':r.pct>=75?'var(--amber)':'var(--red)'}">${r.pct||0}%</strong></td>
-            <td>${r.attended||0}</td>
-            <td>${r.total||0}</td>
+            <td>${esc(r.term)}</td>
+            <td>${esc(r.month)}</td>
+            <td><strong style="color:${r.pct>=85?'var(--green)':r.pct>=75?'var(--amber)':'var(--red)'}">${r.pct}%</strong></td>
+            <td>${r.attended}</td>
+            <td>${r.total}</td>
           </tr>
         `).join('')}
       </tbody>
     </table></div>`;
   }
+
+  if(rows.length){
+    html += `<h3><i class="fas fa-list"></i> Recent Records</h3>
+      <div class="enrolled-list">
+        ${rows.slice().sort((a,b) => String(b.date).localeCompare(String(a.date))).slice(0, 20).map(r => `
+          <div class="enrolled-card" style="border-left-color:${r.present?'var(--green)':'var(--red)'}">
+            <div class="ec-code" style="background:linear-gradient(135deg,${r.present?'#10b981,#059669':'#ef4444,#b91c1c'})">
+              <i class="fas ${r.present?'fa-check':'fa-times'}" style="font-size:18px"></i>
+            </div>
+            <div class="ec-body">
+              <div class="ec-name">${esc(r.date)}</div>
+              <div class="ec-meta">
+                <span><i class="fas fa-clock"></i> Marked ${r.markedAt ? fmtDateTime(r.markedAt) : ''}</span>
+              </div>
+              <div class="ec-tags">
+                <span class="ec-tag ${r.present?'green':'amber'}">${r.present ? 'Present' : 'Absent'}</span>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>`;
+  }
+
   html += `<h3><i class="fas fa-gavel"></i> Policy</h3>
-    <ul>
+    <ul style="font-size:13px;line-height:1.85;color:var(--text-secondary);padding-left:20px">
       <li>Minimum attendance: <strong>80%</strong> per term.</li>
-      <li>Medical leave reported within 3 days.</li>
+      <li>Medical leave must be reported within 3 days.</li>
       <li>Students below 80% may be barred from exams.</li>
     </ul>`;
+
   $('#attendanceContent').innerHTML = html;
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   EXAMS
+   EXAMS  —  reads global exams list from admin
    ═══════════════════════════════════════════════════════════════ */
 function renderExams(){
-  const rows = dbExams;
-  let html = `<h3><i class="fas fa-calendar-alt"></i> Exam Timetable</h3>`;
-  if(!rows.length){ html += emptyState('No exams scheduled','fa-calendar-check'); }
-  else {
+  const rows = dbExams || [];
+
+  /* Filter exams relevant to this student: match subject code/name against enrolled courses */
+  const myCourseCodes = new Set(getMyProgrammeCourses().map(c => String(c.code||'').toLowerCase()));
+  const myCourseNames = new Set(getMyProgrammeCourses().map(c => String(c.name||'').toLowerCase()));
+
+  let relevant = rows;
+  if(myCourseCodes.size || myCourseNames.size){
+    const matched = rows.filter(e => {
+      const subj = String(e.subject||'').toLowerCase();
+      if(!subj) return true;
+      for(const code of myCourseCodes) if(code && subj.includes(code)) return true;
+      for(const name of myCourseNames) if(name && subj.includes(name)) return true;
+      return false;
+    });
+    if(matched.length) relevant = matched;
+  }
+
+  const upcoming = relevant.filter(e => {
+    if(!e.date) return false;
+    const d = new Date(e.date);
+    return !isNaN(d) && d.getTime() >= Date.now() - 86400000;
+  });
+
+  let html = `
+    <h3><i class="fas fa-calendar-alt"></i> Exam Timetable</h3>
+    <p class="page-desc">
+      <i class="fas fa-info-circle"></i>
+      Exams are published by the examinations office. Arrive at least 30 minutes early with your student ID.
+    </p>
+    <div class="stat-mini-row">
+      <div class="stat-mini total"><div class="v">${relevant.length}</div><div class="k">Total</div></div>
+      <div class="stat-mini approved"><div class="v">${upcoming.length}</div><div class="k">Upcoming</div></div>
+      <div class="stat-mini pending"><div class="v">${Math.max(0, relevant.length - upcoming.length)}</div><div class="k">Past</div></div>
+    </div>
+  `;
+
+  if(!rows.length){
+    html += emptyState('No exams scheduled yet','fa-calendar-check');
+  } else {
     html += `<div class="tbl-wrap"><table>
       <thead><tr><th>Date</th><th>Time</th><th>Subject</th><th>Venue</th></tr></thead>
       <tbody>
-        ${rows.map(e => `
+        ${relevant.map(e => `
           <tr>
             <td><strong>${esc(e.date||'—')}</strong></td>
             <td>${esc(e.time||'—')}</td>
@@ -2517,49 +2599,93 @@ function renderExams(){
       </tbody>
     </table></div>`;
   }
+
   html += `<h3><i class="fas fa-clipboard-list"></i> Guidelines</h3>
-    <ul>
-      <li>Arrive 30 minutes before the exam.</li>
+    <ul style="font-size:13px;line-height:1.85;color:var(--text-secondary);padding-left:20px">
+      <li>Arrive at least 30 minutes before the exam.</li>
       <li>Bring your student ID card for verification.</li>
-      <li>No electronic devices.</li>
-      <li>Closed book unless stated.</li>
+      <li>No electronic devices allowed in the exam room.</li>
+      <li>Closed book unless stated otherwise.</li>
       <li>Use black or blue ink only.</li>
     </ul>`;
+
   $('#examsContent').innerHTML = html;
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   CLEARANCE
+   CLEARANCE  —  reads from applications/{uid}/clearance + clearanceMeta
    ═══════════════════════════════════════════════════════════════ */
+function isDeptCleared(dept){
+  const c = appData?.clearance || {};
+  const v = c[dept.id];
+  if(v === 'cleared') return true;
+  if(v && typeof v === 'object' && v.status === 'cleared') return true;
+  /* Fallback: some admins store by department name */
+  const v2 = c[dept.name];
+  if(v2 === 'cleared') return true;
+  if(v2 && typeof v2 === 'object' && v2.status === 'cleared') return true;
+  return false;
+}
+
+function getClearanceMeta(deptId){
+  const meta = appData?.clearanceMeta || {};
+  return meta[deptId] || null;
+}
+
 function renderClearance(){
-  const rows = dbClearance;
-  const cleared = rows.filter(r => r.status === 'cleared').length;
-  const pending = rows.length - cleared;
+  const clearedCount = DEPARTMENTS.filter(d => isDeptCleared(d)).length;
+  const pendingCount = DEPARTMENTS.length - clearedCount;
+  const overall = DEPARTMENTS.length ? Math.round((clearedCount / DEPARTMENTS.length) * 100) : 0;
+  const fullyCleared = clearedCount === DEPARTMENTS.length;
+
   let html = `
+    <h3><i class="fas fa-check-circle"></i> Departmental Clearance</h3>
+    <p class="page-desc">
+      <i class="fas fa-info-circle"></i>
+      Your clearance status from each department. All departments must clear you before you can collect your diploma or final transcript.
+    </p>
+
     <div class="info-grid">
-      <div class="info-item"><div class="lbl">Cleared</div><div class="val" style="color:var(--green)">${cleared}</div></div>
-      <div class="info-item"><div class="lbl">Pending</div><div class="val" style="color:var(--red)">${pending}</div></div>
-      <div class="info-item"><div class="lbl">Total</div><div class="val">${rows.length}</div></div>
-      <div class="info-item"><div class="lbl">Status</div><div class="val"><span class="badge ${pending === 0 ? 'green':'red'}">${pending === 0 ? 'Cleared':'Not Cleared'}</span></div></div>
+      <div class="info-item"><div class="lbl">Cleared</div><div class="val" style="color:var(--green)">${clearedCount}</div></div>
+      <div class="info-item"><div class="lbl">Pending</div><div class="val" style="color:var(--amber)">${pendingCount}</div></div>
+      <div class="info-item"><div class="lbl">Progress</div><div class="val">${overall}%</div></div>
+      <div class="info-item"><div class="lbl">Status</div><div class="val"><span class="badge ${fullyCleared ? 'green':'amber'}">${fullyCleared ? 'Fully Cleared':'In Progress'}</span></div></div>
+    </div>
+
+    <div class="prog ${fullyCleared?'green':'amber'}" style="margin-bottom:16px"><div style="width:${overall}%"></div></div>
+
+    <h3><i class="fas fa-list-check"></i> Departments (${DEPARTMENTS.length})</h3>
+    <div class="clearance-grid">
+      ${DEPARTMENTS.map(d => {
+        const cleared = isDeptCleared(d);
+        const meta = getClearanceMeta(d.id);
+        const metaLine = meta && meta.clearedAt
+          ? `<div class="clr-meta"><strong>Cleared by:</strong> ${esc(meta.clearedByName || meta.clearedBy || 'Administration')}<br/><strong>On:</strong> ${fmtDateTime(meta.clearedAt)}</div>`
+          : (cleared
+              ? `<div class="clr-meta">Marked cleared by administration</div>`
+              : `<div class="clr-meta">Awaiting clearance from this department</div>`);
+        return `
+          <div class="clearance-card ${cleared ? 'cleared' : 'pending'}">
+            <div class="clr-icon"><i class="fas ${d.icon}"></i></div>
+            <div class="clr-body">
+              <div class="clr-name">${esc(d.name)}</div>
+              <div class="clr-status ${cleared ? 'cleared' : 'pending'}">
+                <i class="fas ${cleared ? 'fa-circle-check' : 'fa-clock'}"></i>
+                ${cleared ? 'Cleared' : 'Pending'}
+              </div>
+              ${metaLine}
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+
+    <div class="page-footer-note">
+      <i class="fas fa-info-circle"></i>
+      If a department has cleared you but it's still showing as pending, contact that department directly.
     </div>
   `;
-  html += `<h3><i class="fas fa-list-check"></i> Departments</h3>`;
-  if(!rows.length){ html += emptyState('No clearance records','fa-check-circle'); }
-  else {
-    html += `<div class="tbl-wrap"><table>
-      <thead><tr><th>Department</th><th>Status</th><th>Reason</th><th>Action</th></tr></thead>
-      <tbody>
-        ${rows.map(c => `
-          <tr>
-            <td><strong>${esc(c.dept||'—')}</strong></td>
-            <td><span class="badge ${c.status==='cleared'?'green':'red'}">${c.status==='cleared'?'Cleared':'Not Cleared'}</span></td>
-            <td>${esc(c.reason||'—')}</td>
-            <td>${esc(c.remark||'—')}</td>
-          </tr>
-        `).join('')}
-      </tbody>
-    </table></div>`;
-  }
+
   $('#clearanceContent').innerHTML = html;
 }
 
@@ -2569,11 +2695,12 @@ function renderClearance(){
 function renderFinance(){
   const rows = dbFinanceTransactions.length ? dbFinanceTransactions : allUserTransactions;
   const balanceTx = dbFinanceTransactions.find(t => t.isBalance);
-  const balance = balanceTx?.balance || 0;
+  const balance = balanceTx?.balance || appData.balance || 0;
 
   let html = `
+    <h3><i class="fas fa-coins"></i> Finance</h3>
     <div class="info-grid">
-      <div class="info-item"><div class="lbl">Current Balance</div><div class="val" style="color:var(--amber);font-size:18px">K${Number(balance).toLocaleString()}</div></div>
+      <div class="info-item"><div class="lbl">Current Balance</div><div class="val" style="color:${Number(balance)>0?'var(--red)':'var(--green)'};font-size:18px">K${Number(balance).toLocaleString()}</div></div>
       <div class="info-item"><div class="lbl">Transactions</div><div class="val">${rows.length}</div></div>
       <div class="info-item"><div class="lbl">Approved</div><div class="val">${rows.filter(r=>r.status==='approved').length}</div></div>
       <div class="info-item"><div class="lbl">Pending</div><div class="val">${rows.filter(r=>r.status==='pending').length}</div></div>
@@ -2585,28 +2712,31 @@ function renderFinance(){
     html += `<div class="tbl-wrap"><table>
       <thead><tr><th>Date</th><th>Description</th><th>Type</th><th>Amount</th><th>Status</th></tr></thead>
       <tbody>
-        ${rows.sort((a,b)=>(b.timestamp||0)-(a.timestamp||0)).map(t => `
+        ${rows.slice().sort((a,b)=>(b.timestamp||b.createdAt||0)-(a.timestamp||a.createdAt||0)).map(t => `
           <tr>
-            <td>${fmtDate(t.timestamp || t.date)}</td>
+            <td>${fmtDate(t.timestamp || t.createdAt || t.date)}</td>
             <td>${esc(t.desc || t.itemTitle || '—')}</td>
             <td><span class="badge grey">${esc(t.type || t.itemType || 'tx')}</span></td>
-            <td><strong>ZMW ${t.amount || 0}</strong></td>
+            <td><strong>ZMW ${Math.abs(Number(t.amount||0)).toLocaleString()}</strong></td>
             <td><span class="badge ${t.status === 'approved' ? 'green': t.status === 'pending' ? 'amber':'red'}">${esc(t.status || '—')}</span></td>
           </tr>
         `).join('')}
       </tbody>
     </table></div>`;
   }
+
   html += `<h3><i class="fas fa-upload"></i> Upload Payment Receipt</h3>
-    <div class="form-group"><label>Receipt</label><input type="file" id="receiptUpload" accept=".pdf,.jpg,.png" /></div>
+    <div class="form-group"><label>Receipt</label><input type="file" id="receiptUpload" accept=".pdf,.jpg,.png"/></div>
     <button class="btn-full primary" id="uploadReceiptBtn"><i class="fas fa-upload"></i> Upload Receipt</button>`;
+
   html += `<h3><i class="fas fa-info-circle"></i> Payment Instructions</h3>
-    <ul>
+    <ul style="font-size:13px;line-height:1.85;color:var(--text-secondary);padding-left:20px">
       <li>Bank: <strong>ZANACO</strong></li>
       <li>Account Name: <strong>Northern Technical College</strong></li>
       <li>Account Number: <strong>1234567890</strong></li>
       <li>Reference: <strong>${esc(appData.studentNumber || '—')}</strong></li>
     </ul>`;
+
   $('#financeContent').innerHTML = html;
 
   $('#uploadReceiptBtn')?.addEventListener('click', async () => {
@@ -2621,6 +2751,7 @@ function renderFinance(){
         timestamp: Date.now(), userId: currentUser.uid
       });
       toast('Receipt uploaded successfully', 'ok');
+      input.value = '';
     }catch(e){ toast('Upload failed: '+e.message, 'err'); }
   });
 }
@@ -2632,6 +2763,7 @@ function renderLibrary(){
   const books = dbLibraryBooks;
   const borrowed = dbBorrowedBooks;
   let html = `
+    <h3><i class="fas fa-book-open"></i> Library</h3>
     <div class="info-grid">
       <div class="info-item"><div class="lbl">Catalog</div><div class="val">${books.length}</div></div>
       <div class="info-item"><div class="lbl">Available</div><div class="val">${books.filter(b=>b.available!==false).length}</div></div>
@@ -2639,7 +2771,7 @@ function renderLibrary(){
       <div class="info-item"><div class="lbl">Overdue</div><div class="val" style="color:var(--red)">0</div></div>
     </div>
     <h3><i class="fas fa-search"></i> Search Catalog</h3>
-    <div class="form-group"><input type="text" id="libSearch" placeholder="Search by title or author…" /></div>
+    <div class="form-group"><input type="text" id="libSearch" placeholder="Search by title or author…"/></div>
     <h3><i class="fas fa-book"></i> Available Books</h3>
     <div id="libBooks">${renderBookList(books)}</div>
     <h3><i class="fas fa-bookmark"></i> My Borrowed Books</h3>
@@ -2665,7 +2797,7 @@ function renderBookList(books){
   if(!books.length) return emptyState('No books found', 'fa-search');
   return books.map(b => `
     <div class="book-card">
-      <div class="bk-icon"><i class="fas fa-book${b.available===false?'':' -open'}"></i></div>
+      <div class="bk-icon"><i class="fas fa-book"></i></div>
       <div class="bk-body">
         <h4>${esc(b.title||'—')}</h4>
         <div class="au">${esc(b.author||'')}</div>
@@ -2685,6 +2817,7 @@ function renderCareers(){
   const jobs = dbJobs;
   const alumni = dbAlumni;
   let html = `
+    <h3><i class="fas fa-briefcase"></i> Careers</h3>
     <div class="info-grid">
       <div class="info-item"><div class="lbl">Open Positions</div><div class="val">${jobs.length}</div></div>
       <div class="info-item"><div class="lbl">Applied</div><div class="val">${dbJobApplications.length}</div></div>
@@ -2769,7 +2902,7 @@ function renderProfile(){
   $('#profileContent').innerHTML = `
     <div style="text-align:center;margin-bottom:20px">
       <div style="width:110px;height:110px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(135deg,var(--blue),var(--blue-bright));display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:900;color:#fff;border:4px solid #fff;box-shadow:0 12px 36px rgba(37,99,235,.35);overflow:hidden">
-        ${photo ? `<img src="${esc(photo)}" alt="Profile" style="width:100%;height:100%;object-fit:cover" />` : esc(getInitials(appData.fullName))}
+        ${photo ? `<img src="${esc(photo)}" alt="Profile" style="width:100%;height:100%;object-fit:cover"/>` : esc(getInitials(appData.fullName))}
       </div>
       <h2 style="font-size:20px;font-weight:900;color:var(--text-primary)">${esc(appData.fullName||'—')}</h2>
       <div style="font-size:13px;color:var(--text-muted);margin-top:4px">${esc(appData.email||'—')}</div>
@@ -2828,7 +2961,7 @@ function renderStudentId(){
   $('#studentIdContent').innerHTML = `
     <div class="id-card" id="idCard">
       <div class="id-hd"><img src="logo.png" alt="NORTEC" onerror="this.style.display='none'"/><div class="ttl">NORTEC<small>STUDENT ID</small></div></div>
-      <div class="id-photo">${photo ? `<img src="${esc(photo)}" />` : `<i class="fas fa-user"></i>`}</div>
+      <div class="id-photo">${photo ? `<img src="${esc(photo)}"/>` : `<i class="fas fa-user"></i>`}</div>
       <div class="id-name">${esc(name.toUpperCase())}</div>
       <div class="id-num">${esc(studentNumber)}</div>
       <div class="id-details">
@@ -2845,7 +2978,7 @@ function renderStudentId(){
     </div>
 
     <h3 style="margin-top:24px"><i class="fas fa-info-circle"></i> ID Details</h3>
-    <ul>
+    <ul style="font-size:13px;line-height:1.85;color:var(--text-secondary);padding-left:20px">
       <li><strong>Student No.:</strong> ${esc(studentNumber)}</li>
       <li><strong>Issue Date:</strong> ${fmtDate(appData.approvedAt || Date.now())}</li>
       <li><strong>Expiry:</strong> 31 December 2026</li>
@@ -2923,31 +3056,49 @@ function renderNotices(){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   COMPLAINTS
+   COMPLAINTS — improved status badge + response display
    ═══════════════════════════════════════════════════════════════ */
+function complaintStatusBadge(status){
+  const s = String(status||'pending').toLowerCase();
+  const cls = s === 'resolved' ? 'green' : s === 'in-review' || s === 'in_review' ? 'purple' : s === 'rejected' ? 'red' : 'amber';
+  return `<span class="badge ${cls}">${esc(s.replace(/_/g,' '))}</span>`;
+}
+
 function renderComplaints(){
-  const rows = dbComplaints;
+  const rows = dbComplaints.slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
   let html = `<h3><i class="fas fa-comment-dots"></i> My Complaints (${rows.length})</h3>`;
   if(!rows.length){ html += emptyState('You have not submitted any complaints','fa-comment-dots'); }
   else {
-    html += rows.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).map(c => `
-      <div class="list-card">
+    html += rows.map(c => `
+      <div class="list-card" style="border-left:3px solid ${c.status === 'resolved' ? 'var(--green)': c.status === 'in-review' || c.status === 'in_review' ? 'var(--purple)': c.status === 'rejected' ? 'var(--red)':'var(--amber)'}">
         <div class="lc-h">
           <div class="ttl">${esc(c.subject||'Complaint')}</div>
-          <span class="badge ${c.status === 'resolved' ? 'green': c.status === 'in-review' ? 'amber':'blue'}">${esc(c.status||'pending')}</span>
+          ${complaintStatusBadge(c.status)}
         </div>
         <div class="lc-meta">
           <span><i class="fas fa-tag"></i> ${esc(c.category||'General')}</span>
           <span><i class="fas fa-clock"></i> ${fmtDateTime(c.createdAt)}</span>
         </div>
         <div class="lc-body">${esc(c.body||'')}</div>
-        ${c.response ? `<div style="margin-top:8px;padding:10px 12px;background:var(--blue-light);border-radius:10px;border-left:3px solid var(--blue);font-size:12.5px;color:var(--blue-dark)"><strong>Admin Response:</strong> ${esc(c.response)}</div>` : ''}
+        ${c.response ? `
+          <div style="margin-top:10px;padding:12px 14px;background:linear-gradient(135deg,#eff6ff,#dbeafe);border-radius:10px;border-left:3px solid var(--blue)">
+            <div style="font-size:11px;font-weight:800;color:var(--blue-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">
+              <i class="fas fa-reply"></i> Administration Response
+            </div>
+            <div style="font-size:12.5px;color:var(--blue-dark);line-height:1.55">${esc(c.response)}</div>
+            ${c.respondedAt ? `<div style="font-size:10.5px;color:var(--text-muted);margin-top:6px"><i class="fas fa-clock"></i> ${fmtDateTime(c.respondedAt)}</div>` : ''}
+          </div>
+        ` : `
+          <div style="margin-top:10px;padding:10px 12px;background:#fef3c7;border-radius:10px;border-left:3px solid var(--amber);font-size:12px;color:#92400e">
+            <i class="fas fa-clock"></i> Awaiting response from administration
+          </div>
+        `}
       </div>
     `).join('');
   }
   html += `
     <h3><i class="fas fa-plus-circle"></i> Submit New Complaint</h3>
-    <div class="form-group"><label>Subject</label><input type="text" id="cmpSubject" placeholder="Brief title of your complaint" /></div>
+    <div class="form-group"><label>Subject</label><input type="text" id="cmpSubject" placeholder="Brief title of your complaint"/></div>
     <div class="form-group"><label>Category</label>
       <select id="cmpCategory">
         <option>Academic</option><option>Fees / Finance</option><option>Accommodation</option>
@@ -2964,25 +3115,34 @@ function renderComplaints(){
     const category = $('#cmpCategory').value;
     const body = $('#cmpBody').value.trim();
     if(!subject || !body){ toast('Please fill in subject and details','err'); return; }
+
+    const btn = $('#submitComplaintBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting…';
+
     try{
+      /* IMPORTANT: use the SAME timestamp for both writes so the admin's
+         timestamp-matching sync actually works. */
+      const now = Date.now();
       const ref = db.ref(`${ROOT}/complaints/${currentUser.uid}`).push();
-      await ref.set({
+      const payload = {
         subject, category, body, status: 'pending',
-        createdAt: Date.now(),
+        createdAt: now,
         studentName: appData.fullName || '',
         studentNumber: appData.studentNumber || '',
         userId: currentUser.uid, email: currentUser.email || ''
-      });
-      await db.ref(`${ROOT}/allComplaints/${ref.key}`).set({
-        subject, category, body, status:'pending',
-        createdAt: Date.now(),
-        studentName: appData.fullName || '',
-        studentNumber: appData.studentNumber || '',
-        userId: currentUser.uid, email: currentUser.email || ''
-      });
+      };
+      await ref.set(payload);
+      await db.ref(`${ROOT}/allComplaints/${ref.key}`).set(payload);
+
       toast('Complaint submitted successfully','ok');
       $('#cmpSubject').value = ''; $('#cmpBody').value = '';
-    }catch(e){ toast('Failed: '+e.message, 'err'); }
+    }catch(e){
+      toast('Failed: '+e.message, 'err');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Complaint';
+    }
   });
 }
 
@@ -3011,9 +3171,6 @@ function renderAccommodation(){
         <div class="row"><span class="k">Preferred Block</span><span class="v">${esc(req.preferredBlock||'—')}</span></div>
         <div class="row"><span class="k">Room Type</span><span class="v">${esc(req.roomType||'—')}</span></div>
         ${req.notes ? `<div class="row"><span class="k">Notes</span><span class="v">${esc(req.notes)}</span></div>` : ''}
-        <div class="app-actions">
-          <button class="btn-sm ghost" onclick="showPage('pending')"><i class="fas fa-file-alt"></i> View in Applications</button>
-        </div>
       </div>
     `;
   }
@@ -3064,19 +3221,19 @@ function renderAccommodation(){
       <div class="info-item"><div class="lbl">Allocated</div><div class="val">${fmtDate(a.allocatedAt)}</div></div>
     </div>
     <h3><i class="fas fa-home"></i> Room Features</h3>
-    <ul>
+    <ul style="font-size:13px;line-height:1.85;color:var(--text-secondary);padding-left:20px">
       <li>2 beds with mattresses</li><li>Built-in wardrobe</li><li>Study desk and chair</li>
       <li>Shared bathroom facilities</li><li>Common kitchen area</li><li>24/7 security · Wi-Fi available</li>
     </ul>
     <h3><i class="fas fa-gavel"></i> Hostel Rules</h3>
-    <ul>
+    <ul style="font-size:13px;line-height:1.85;color:var(--text-secondary);padding-left:20px">
       <li>No visitors after 22:00 hours</li><li>No loud music after 23:00 hours</li>
       <li>Keep the room clean and tidy</li><li>Report maintenance issues to warden</li>
       <li>Alcohol prohibited in hostel rooms</li>
     </ul>
     <h3><i class="fas fa-phone"></i> Contact</h3>
-    <p>Hostel Warden: +260 97 123 4567</p>
-    <p>Maintenance: +260 96 789 0123</p>
+    <p style="font-size:13px">Hostel Warden: +260 97 123 4567</p>
+    <p style="font-size:13px">Maintenance: +260 96 789 0123</p>
   `;
   $('#accommodationContent').innerHTML = html;
 }
@@ -3097,7 +3254,12 @@ function renderAppeal(){
         <div class="info-item"><div class="lbl">Submitted</div><div class="val">${fmtDate(a.createdAt)}</div></div>
       </div>
       ${a.body ? `<div class="list-card"><div class="ttl" style="font-weight:800;margin-bottom:6px">Appeal Details</div><div class="lc-body">${esc(a.body)}</div></div>`:''}
-      ${a.response ? `<div class="list-card" style="border-left:3px solid var(--blue)"><div class="ttl" style="font-weight:800;margin-bottom:6px">Admin Response</div><div class="lc-body">${esc(a.response)}</div></div>`:''}
+      ${a.response ? `
+        <div class="list-card" style="border-left:3px solid var(--blue);background:linear-gradient(135deg,#eff6ff,#dbeafe)">
+          <div class="ttl" style="font-weight:800;margin-bottom:6px;color:var(--blue-dark)"><i class="fas fa-reply"></i> Admin Response</div>
+          <div class="lc-body" style="color:var(--blue-dark)">${esc(a.response)}</div>
+          ${a.respondedAt ? `<div style="font-size:10.5px;color:var(--text-muted);margin-top:6px"><i class="fas fa-clock"></i> ${fmtDateTime(a.respondedAt)}</div>` : ''}
+        </div>`:''}
     `;
   } else {
     html = `
@@ -3124,9 +3286,9 @@ function renderAppeal(){
         const id = 'APP-' + Date.now().toString().slice(-6);
         await db.ref(`${ROOT}/appeals/${currentUser.uid}`).set({
           appealId: id, category:cat, body, status:'pending', createdAt: Date.now(),
+          userId: currentUser.uid,
           studentName: appData.fullName || '',
-          studentNumber: appData.studentNumber || '',
-          userId: currentUser.uid
+          studentNumber: appData.studentNumber || ''
         });
         toast('Appeal submitted','ok');
       }catch(e){ toast('Failed: '+e.message,'err'); }
@@ -3150,7 +3312,7 @@ function renderDiploma(){
       <div class="info-item"><div class="lbl">Collected</div><div class="val">${d.collected ? 'Yes' : 'No'}</div></div>
     </div>
     <h3><i class="fas fa-list-ol"></i> Collection Procedure</h3>
-    <ol>
+    <ol style="font-size:13px;line-height:1.85;color:var(--text-secondary);padding-left:20px">
       <li>Check your student portal for a notification when ready.</li>
       <li>Visit the examinations office with your student ID.</li>
       <li>Ensure all fees are cleared with finance.</li>
@@ -3158,7 +3320,7 @@ function renderDiploma(){
       <li>Receive your diploma certificate.</li>
     </ol>
     <h3><i class="fas fa-info-circle"></i> Additional Information</h3>
-    <ul>
+    <ul style="font-size:13px;line-height:1.85;color:var(--text-secondary);padding-left:20px">
       <li><strong>Transcript:</strong> Issued alongside the diploma.</li>
       <li><strong>Graduation:</strong> Attend the graduation ceremony on 15 July 2026.</li>
       <li><strong>Certification:</strong> Certified by TEVETA and Ministry of Education.</li>
@@ -3188,7 +3350,7 @@ function renderSup(){
 
   if(sr && Object.keys(sr).length){
     html += `
-      <h3><i class="fas fa-clock"></i> Pending Extension Request</h3>
+      <h3><i class="fas fa-clock"></i> Extension Request</h3>
       <div class="app-item pending">
         <div class="ah">
           <div class="lft">
@@ -3200,7 +3362,7 @@ function renderSup(){
           </div>
           ${statusPill(sr.status || 'pending')}
         </div>
-        <div class="row"><span class="k">Reason</span><span class="v">${esc(sr.reason)}</span></div>
+        <div class="row"><span class="k">Reason</span><span class="v">${esc(sr.reason||'—')}</span></div>
       </div>
     `;
   } else {
@@ -3217,6 +3379,7 @@ function renderSup(){
     try{
       await db.ref(`${ROOT}/supRequests/${currentUser.uid}`).set({
         reason, status:'pending', createdAt: Date.now(),
+        userId: currentUser.uid,
         studentName: appData.fullName || '',
         studentNumber: appData.studentNumber || ''
       });
@@ -3246,6 +3409,12 @@ function renderTeveta(){
     { code:'41.7', label:'Management Information Systems' },
     { code:'41.8', label:'Project' }
   ];
+
+  /* Prefer programme courses for subject list */
+  const progCourses = getMyProgrammeCourses().filter(c => c.showOnTeveta !== false);
+  const subjectList = progCourses.length
+    ? progCourses.map(c => ({ code: c.code || '', label: c.name || '' }))
+    : defaultSubjects;
 
   const exSeriesParts = (t.examSeries || '').split('/');
   const exSeriesM = (exSeriesParts[0]||'').slice(0,1) || '';
@@ -3279,13 +3448,13 @@ function renderTeveta(){
     <div class="teveta-form-container" id="tevetaFormContainer">
       <div class="form-header">
         <div class="logo-section">
-          <img src="teveta.png" alt="TEVETA Logo" onerror="this.style.display='none'" />
+          <img src="teveta.png" alt="TEVETA Logo" onerror="this.style.display='none'"/>
           <div class="address-text">
-            <strong>Post 4751, Heritage Walk, Lusaka</strong><br />
-            P.O. Box 50163, Lusaka, Zambia<br />
-            <strong>Tel:</strong> +260-211-255513 / 255519 / 255438<br />
-            <strong>Fax:</strong> +260-1-253852<br />
-            <strong>Email:</strong> teveta@teveta.org.zm<br />
+            <strong>Post 4751, Heritage Walk, Lusaka</strong><br/>
+            P.O. Box 50163, Lusaka, Zambia<br/>
+            <strong>Tel:</strong> +260-211-255513 / 255519 / 255438<br/>
+            <strong>Fax:</strong> +260-1-253852<br/>
+            <strong>Email:</strong> teveta@teveta.org.zm<br/>
             <strong>Website:</strong> www.teveta.org.zm
           </div>
         </div>
@@ -3294,56 +3463,56 @@ function renderTeveta(){
 
       <form id="tevetaForm">
         <div class="form-field"><span class="field-number">1.</span><span class="field-label">COURSE:</span>
-          <input type="text" class="field-input" value="${esc(courseValue)}" readonly />
+          <input type="text" class="field-input" value="${esc(courseValue)}" readonly/>
         </div>
         <div class="form-field"><span class="field-number">2.</span><span class="field-label">EXAMINATION SERIES:</span>
           <div class="box-group">
-            <input type="text" class="box-input" id="exSeriesM" maxlength="1" value="${esc(exSeriesM)}" ${isSubmitted?'disabled':''} placeholder="M" />
-            <input type="text" class="box-input" id="exSeriesA" maxlength="1" value="${esc(exSeriesA)}" ${isSubmitted?'disabled':''} placeholder="A" />
-            <input type="text" class="box-input" id="exSeriesY1" maxlength="2" value="${esc(exSeriesY1)}" ${isSubmitted?'disabled':''} placeholder="Y" />
+            <input type="text" class="box-input" id="exSeriesM" maxlength="1" value="${esc(exSeriesM)}" ${isSubmitted?'disabled':''} placeholder="M"/>
+            <input type="text" class="box-input" id="exSeriesA" maxlength="1" value="${esc(exSeriesA)}" ${isSubmitted?'disabled':''} placeholder="A"/>
+            <input type="text" class="box-input" id="exSeriesY1" maxlength="2" value="${esc(exSeriesY1)}" ${isSubmitted?'disabled':''} placeholder="Y"/>
             <span class="box-sep">/</span>
-            <input type="text" class="box-input" id="exSeriesY2" maxlength="2" value="${esc(exSeriesY2)}" ${isSubmitted?'disabled':''} placeholder="Y" />
+            <input type="text" class="box-input" id="exSeriesY2" maxlength="2" value="${esc(exSeriesY2)}" ${isSubmitted?'disabled':''} placeholder="Y"/>
           </div>
         </div>
         <div class="form-field"><span class="field-number">3.</span><span class="field-label">TEVETA EXAM NO:</span>
           <div class="box-group">
-            ${[1,2,3,4,5,6,7,8,9,10].map(i => `<input type="text" class="box-input" id="tevetaNo${i}" maxlength="1" value="${esc((tevetaNoDigits[i-1]||'').trim())}" ${isSubmitted?'disabled':''} />`).join('')}
+            ${[1,2,3,4,5,6,7,8,9,10].map(i => `<input type="text" class="box-input" id="tevetaNo${i}" maxlength="1" value="${esc((tevetaNoDigits[i-1]||'').trim())}" ${isSubmitted?'disabled':''}/>`).join('')}
           </div>
         </div>
         <div class="form-field"><span class="field-number">4.</span><span class="field-label">EXAMINATION CENTER NAME:</span>
-          <input type="text" class="field-input" value="NORTHERN TECHNICAL COLLEGE" readonly />
+          <input type="text" class="field-input" value="NORTHERN TECHNICAL COLLEGE" readonly/>
         </div>
         <div class="form-field"><span class="field-number">5.</span><span class="field-label">SURNAME:</span>
-          <input type="text" class="field-input" id="tvSurname" value="${esc(t.surname || defaultSurname.toUpperCase())}" ${isSubmitted?'readonly':''} />
+          <input type="text" class="field-input" id="tvSurname" value="${esc(t.surname || defaultSurname.toUpperCase())}" ${isSubmitted?'readonly':''}/>
         </div>
         <div class="form-field"><span class="field-number">6.</span><span class="field-label">FORENAMES:</span>
-          <input type="text" class="field-input" id="tvForenames" value="${esc(t.forenames || defaultForenames.toUpperCase())}" ${isSubmitted?'readonly':''} />
+          <input type="text" class="field-input" id="tvForenames" value="${esc(t.forenames || defaultForenames.toUpperCase())}" ${isSubmitted?'readonly':''}/>
         </div>
         <div class="form-field"><span class="field-number">7.</span><span class="field-label">INSTITUTION OF STUDY:</span>
-          <input type="text" class="field-input" value="NORTHERN TECHNICAL COLLEGE" readonly />
+          <input type="text" class="field-input" value="NORTHERN TECHNICAL COLLEGE" readonly/>
         </div>
         <div class="form-field"><span class="field-number">8.</span><span class="field-label">YEAR OF ENROLMENT:</span>
           <div class="box-group">
-            <input type="text" class="box-input" id="enrolY1" maxlength="2" value="${esc(enrolY1)}" ${isSubmitted?'disabled':''} placeholder="Y" />
-            <input type="text" class="box-input" id="enrolY2" maxlength="2" value="${esc(enrolY2)}" ${isSubmitted?'disabled':''} placeholder="Y" />
+            <input type="text" class="box-input" id="enrolY1" maxlength="2" value="${esc(enrolY1)}" ${isSubmitted?'disabled':''} placeholder="Y"/>
+            <input type="text" class="box-input" id="enrolY2" maxlength="2" value="${esc(enrolY2)}" ${isSubmitted?'disabled':''} placeholder="Y"/>
             <span class="box-sep">/</span>
-            <input type="text" class="box-input" id="enrolY3" maxlength="2" value="${esc(enrolY3)}" ${isSubmitted?'disabled':''} placeholder="Y" />
-            <input type="text" class="box-input" id="enrolY4" maxlength="2" value="${esc(enrolY4)}" ${isSubmitted?'disabled':''} placeholder="Y" />
+            <input type="text" class="box-input" id="enrolY3" maxlength="2" value="${esc(enrolY3)}" ${isSubmitted?'disabled':''} placeholder="Y"/>
+            <input type="text" class="box-input" id="enrolY4" maxlength="2" value="${esc(enrolY4)}" ${isSubmitted?'disabled':''} placeholder="Y"/>
           </div>
         </div>
         <div class="form-field"><span class="field-number">9.</span><span class="field-label">Mode of Study:</span>
           <div class="radio-group">
-            <label class="radio-opt"><input type="radio" name="tvMode" value="Full-time" checked disabled /><span>Full-time</span></label>
-            <label class="radio-opt"><input type="radio" name="tvMode" value="Distance" disabled /><span>Distance</span></label>
-            <label class="radio-opt"><input type="radio" name="tvMode" value="Workplace" disabled /><span>Workplace</span></label>
-            <label class="radio-opt"><input type="radio" name="tvMode" value="Part-time" disabled /><span>Part-time</span></label>
+            <label class="radio-opt"><input type="radio" name="tvMode" value="Full-time" checked disabled/><span>Full-time</span></label>
+            <label class="radio-opt"><input type="radio" name="tvMode" value="Distance" disabled/><span>Distance</span></label>
+            <label class="radio-opt"><input type="radio" name="tvMode" value="Workplace" disabled/><span>Workplace</span></label>
+            <label class="radio-opt"><input type="radio" name="tvMode" value="Part-time" disabled/><span>Part-time</span></label>
           </div>
         </div>
         <div class="form-field"><span class="field-number">10.</span><span class="field-label">YEAR OF STUDY</span>
           <div class="radio-group">
             ${['First','Second','Third','Fourth'].map(y => {
               const checked = yearStudy === y ? 'checked' : '';
-              return `<label class="radio-opt"><input type="radio" name="tvYearStudy" value="${y}" ${checked} ${isSubmitted?'disabled':''} /><span>${y}</span></label>`;
+              return `<label class="radio-opt"><input type="radio" name="tvYearStudy" value="${y}" ${checked} ${isSubmitted?'disabled':''}/><span>${y}</span></label>`;
             }).join('')}
           </div>
         </div>
@@ -3351,15 +3520,15 @@ function renderTeveta(){
           <span class="field-number">11.</span>
           <span class="field-label" style="flex:1;min-width:100%">SUBJECTS TO BE TAKEN (Indicate whether practical or written paper)</span>
           <div class="subjects-list">
-            ${defaultSubjects.map((s,i) => `
+            ${subjectList.map((s,i) => `
               <div class="subject-row">
-                <input type="checkbox" checked disabled />
+                <input type="checkbox" checked disabled/>
                 <span class="subject-text">(${String.fromCharCode(105+i)}) ${esc(s.code)} ${esc(s.label)}</span>
                 <span class="subject-line"></span>
               </div>
             `).join('')}
-            <div class="subject-row"><input type="checkbox" disabled /><span class="subject-text">(ix)</span><span class="subject-line readonly"></span></div>
-            <div class="subject-row"><input type="checkbox" disabled /><span class="subject-text">(x)</span><span class="subject-line readonly"></span></div>
+            <div class="subject-row"><input type="checkbox" disabled/><span class="subject-text">(ix)</span><span class="subject-line readonly"></span></div>
+            <div class="subject-row"><input type="checkbox" disabled/><span class="subject-text">(x)</span><span class="subject-line readonly"></span></div>
           </div>
         </div>
         ${!isSubmitted ? `<button type="submit" class="btn-submit-teveta" id="tvSubmitBtn"><i class="fas fa-paper-plane"></i> Submit TEVETA Application</button>` : `
@@ -3493,14 +3662,14 @@ function renderResume(){
       <i class="fas fa-info-circle"></i>
       Fill in details and generate a professional PDF.
     </p>
-    <div class="form-group"><label>Full Name</label><input id="rvName" value="${esc(appData.fullName||'')}" /></div>
-    <div class="form-group"><label>Phone</label><input id="rvPhone" value="${esc(appData.personal?.phone||'')}" /></div>
-    <div class="form-group"><label>Email</label><input id="rvEmail" value="${esc(currentUser?.email||'')}" /></div>
-    <div class="form-group"><label>Location</label><input id="rvLocation" value="Lusaka, Zambia" /></div>
-    <div class="form-group"><label>Education</label><input id="rvEdu" value="${esc(appData.programme?.title||'')}" /></div>
-    <div class="form-group"><label>Institution</label><input id="rvInst" value="Northern Technical College" /></div>
+    <div class="form-group"><label>Full Name</label><input id="rvName" value="${esc(appData.fullName||'')}"/></div>
+    <div class="form-group"><label>Phone</label><input id="rvPhone" value="${esc(appData.personal?.phone||'')}"/></div>
+    <div class="form-group"><label>Email</label><input id="rvEmail" value="${esc(currentUser?.email||'')}"/></div>
+    <div class="form-group"><label>Location</label><input id="rvLocation" value="Lusaka, Zambia"/></div>
+    <div class="form-group"><label>Education</label><input id="rvEdu" value="${esc(appData.programme?.title||'')}"/></div>
+    <div class="form-group"><label>Institution</label><input id="rvInst" value="Northern Technical College"/></div>
     <div class="form-group"><label>Work Experience</label><textarea id="rvWork" rows="3" placeholder="Company, position, responsibilities"></textarea></div>
-    <div class="form-group"><label>Skills (comma-separated)</label><input id="rvSkills" placeholder="Python, Networking, …" /></div>
+    <div class="form-group"><label>Skills (comma-separated)</label><input id="rvSkills" placeholder="Python, Networking, …"/></div>
     <button class="btn-full primary" id="genResumeBtn"><i class="fas fa-file-pdf"></i> Generate PDF Resume</button>
   `;
   $('#genResumeBtn')?.addEventListener('click', () => {
@@ -3583,8 +3752,8 @@ function renderPlanner(){
       <select id="plDay" style="flex:1;padding:10px;border-radius:10px;border:1.5px solid var(--border-color);font-family:inherit">
         ${days.map(d => `<option>${d}</option>`).join('')}
       </select>
-      <input id="plTime" placeholder="14:00" style="width:90px;padding:10px;border-radius:10px;border:1.5px solid var(--border-color);font-family:inherit" />
-      <input id="plTitle" placeholder="Event" style="flex:2;min-width:140px;padding:10px;border-radius:10px;border:1.5px solid var(--border-color);font-family:inherit" />
+      <input id="plTime" placeholder="14:00" style="width:90px;padding:10px;border-radius:10px;border:1.5px solid var(--border-color);font-family:inherit"/>
+      <input id="plTitle" placeholder="Event" style="flex:2;min-width:140px;padding:10px;border-radius:10px;border:1.5px solid var(--border-color);font-family:inherit"/>
       <button class="btn-sm primary" id="plAdd"><i class="fas fa-plus"></i> Add</button>
     </div>
     ${grid}
@@ -3609,56 +3778,72 @@ function renderSettings(){
     <div class="info-item" style="display:flex;justify-content:space-between;align-items:center">
       <div><div class="lbl"><i class="fas fa-moon"></i> Dark Theme</div></div>
       <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer">
-        <input type="checkbox" id="darkToggle" ${s.darkMode?'checked':''} style="width:18px;height:18px;accent-color:var(--blue)" />
+        <input type="checkbox" id="darkToggle" ${s.darkMode?'checked':''} style="width:18px;height:18px;accent-color:var(--blue)"/>
       </label>
     </div>
     <h3><i class="fas fa-bell"></i> Notifications</h3>
     <div class="info-item" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
       <div class="lbl">Push Notifications</div>
-      <input type="checkbox" id="pushToggle" ${s.pushNotifs!==false?'checked':''} style="width:18px;height:18px;accent-color:var(--blue)" />
+      <input type="checkbox" id="pushToggle" ${s.pushNotifs!==false?'checked':''} style="width:18px;height:18px;accent-color:var(--blue)"/>
     </div>
     <div class="info-item" style="display:flex;justify-content:space-between;align-items:center">
       <div class="lbl">Email Notifications</div>
-      <input type="checkbox" id="emailToggle" ${s.emailNotifs!==false?'checked':''} style="width:18px;height:18px;accent-color:var(--blue)" />
+      <input type="checkbox" id="emailToggle" ${s.emailNotifs!==false?'checked':''} style="width:18px;height:18px;accent-color:var(--blue)"/>
     </div>
     <h3><i class="fas fa-info-circle"></i> About</h3>
-    <p>NORTEC Student Dashboard v3.0<br/>© 2026 Northern Technical College</p>
+    <p style="font-size:13px">NORTEC Student Dashboard v3.0<br/>© 2026 Northern Technical College</p>
     <button class="btn-full ghost" onclick="toast('App version 3.0.0','info')"><i class="fas fa-info"></i> Version Info</button>
   `;
   $('#darkToggle')?.addEventListener('change', async function(){
     document.body.style.filter = this.checked ? 'invert(0.92) hue-rotate(180deg)' : '';
-    await db.ref(`${ROOT}/userSettings/${currentUser.uid}`).update({ darkMode: this.checked });
+    try{ await db.ref(`${ROOT}/userSettings/${currentUser.uid}`).update({ darkMode: this.checked }); }catch(e){}
     toast(this.checked?'Dark mode on':'Dark mode off','info');
   });
   $('#pushToggle')?.addEventListener('change', async function(){
-    await db.ref(`${ROOT}/userSettings/${currentUser.uid}`).update({ pushNotifs: this.checked });
+    try{ await db.ref(`${ROOT}/userSettings/${currentUser.uid}`).update({ pushNotifs: this.checked }); }catch(e){}
   });
   $('#emailToggle')?.addEventListener('change', async function(){
-    await db.ref(`${ROOT}/userSettings/${currentUser.uid}`).update({ emailNotifs: this.checked });
+    try{ await db.ref(`${ROOT}/userSettings/${currentUser.uid}`).update({ emailNotifs: this.checked }); }catch(e){}
   });
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   NOTIFICATIONS DROPDOWN
+   NOTIFICATIONS DROPDOWN  (FIXED)
    ═══════════════════════════════════════════════════════════════ */
 function renderNotifDropdown(){
   const list = notifications.length
     ? notifications.map(n => `
       <div class="notif-it">
         <i class="fas ${n.icon||'fa-bell'}"></i>
-        <div><div>${esc(n.text||n.message||'')}</div><div class="notif-time">${esc(n.time||fmtDateTime(n.timestamp))}</div></div>
+        <div style="flex:1;min-width:0">
+          <div>${esc(n.text||n.message||'')}</div>
+          <div class="notif-time">${esc(n.time||fmtDateTime(n.timestamp))}</div>
+        </div>
+        ${!n.read ? `<span style="width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0;align-self:center"></span>` : ''}
       </div>`).join('')
-    : '<div class="notif-empty">No notifications</div>';
+    : '<div class="notif-empty"><i class="fas fa-bell-slash" style="font-size:26px;color:#cbd5e1;display:block;margin-bottom:8px"></i>No notifications</div>';
   $('#notifList').innerHTML = list;
+
   const unread = notifications.filter(n => !n.read).length;
   const badge = $('#notifBadge');
-  badge.textContent = unread;
-  badge.dataset.count = unread;
+  if(badge){
+    badge.textContent = unread;
+    badge.dataset.count = unread;
+  }
 }
+
+/* FIX: use multi-path update correctly so notification content is preserved */
 window.markAllNotifsRead = async function(){
-  notifications.forEach(n => n.read = true);
-  try{ await db.ref(`${ROOT}/userNotifications/${currentUser.uid}`).update(Object.fromEntries(notifications.map(n => [n.id, { read: true }]))); }catch(e){}
-  renderNotifDropdown();
+  try{
+    const updates = {};
+    notifications.forEach(n => {
+      if(!n.read) updates[`${n.id}/read`] = true;
+    });
+    if(Object.keys(updates).length){
+      await db.ref(`${ROOT}/userNotifications/${currentUser.uid}`).update(updates);
+    }
+  }catch(e){ console.warn('markAllNotifsRead failed', e); }
+  /* Local state will update via the realtime listener */
 };
 
 /* ═══════════════════════════════════════════════════════════════
@@ -3668,7 +3853,7 @@ function openSidebar(){ $('#sidebar').classList.add('open'); $('#sidebarOverlay'
 function closeSidebar(){ $('#sidebar').classList.remove('open'); $('#sidebarOverlay').classList.remove('active'); }
 
 /* ═══════════════════════════════════════════════════════════════
-   FIREBASE LISTENERS — all real-time
+   FIREBASE REALTIME LISTENERS
    ═══════════════════════════════════════════════════════════════ */
 let lastAppStatus = null;
 
@@ -3684,7 +3869,11 @@ function bindRealtime(){
 
     appData = newData;
 
-    /* Realtime notification when status changes */
+    /* Clearance lives inside appData now */
+    dbClearance = newData.clearance || {};
+    dbClearanceMeta = newData.clearanceMeta || {};
+
+    /* Realtime status notification */
     if(lastAppStatus !== null && oldStatus !== newStatus){
       if(newStatus === 'approved'){
         toast('Congratulations! Your application has been APPROVED.', 'ok');
@@ -3708,12 +3897,14 @@ function bindRealtime(){
     resolveMyClass();
     myTimetableSlots = filterMyTimetableSlots();
 
+    /* Re-render the current page so data stays fresh */
     if($('#homePage').classList.contains('active-page')) renderHome();
     if($('#pendingPage').classList.contains('active-page')) renderPending();
     if($('#caPage').classList.contains('active-page')) renderCA();
     if($('#classesPage').classList.contains('active-page')) renderClasses();
     if($('#coursesPage').classList.contains('active-page')) renderCourses();
     if($('#timetablePage').classList.contains('active-page')) renderTimetable();
+    if($('#clearancePage').classList.contains('active-page')) renderClearance();
     if($('#profilePage').classList.contains('active-page')) renderProfile();
     if($('#studentIdPage').classList.contains('active-page')) renderStudentId();
     updatePendingBadge();
@@ -3848,16 +4039,34 @@ function bindRealtime(){
     updatePendingBadge();
   });
 
-  db.ref(`${ROOT}/attendance/${uid}`).on('value', s => {
-    dbAttendance = toArray(s.val());
+  /* ATTENDANCE — read the full date-keyed tree and pick out our own records */
+  db.ref(`${ROOT}/attendance`).on('value', s => {
+    const data = s.val() || {};
+    const mine = [];
+    Object.keys(data).forEach(dateKey => {
+      const dayData = data[dateKey];
+      if(dayData && typeof dayData === 'object' && dayData[uid]){
+        const rec = dayData[uid];
+        mine.push({ date: dateKey, present: !!rec.present, markedAt: rec.markedAt, markedBy: rec.markedBy });
+      }
+    });
+    dbAttendance = mine;
     if($('#attendancePage').classList.contains('active-page')) renderAttendance();
   });
 
-  db.ref(`${ROOT}/exams/${uid}`).on('value', s => { dbExams = toArray(s.val()); if($('#examsPage').classList.contains('active-page')) renderExams(); });
+  /* EXAMS — global list */
+  db.ref(`${ROOT}/exams`).on('value', s => {
+    dbExams = toArray(s.val());
+    if($('#examsPage').classList.contains('active-page')) renderExams();
+  });
 
   db.ref(`${ROOT}/clearance/${uid}`).on('value', s => {
-    dbClearance = toArray(s.val());
-    if($('#clearancePage').classList.contains('active-page')) renderClearance();
+    /* Legacy path — merge if present */
+    const legacy = s.val() || {};
+    if(legacy && Object.keys(legacy).length){
+      dbClearance = legacy;
+      if($('#clearancePage').classList.contains('active-page')) renderClearance();
+    }
   });
 
   db.ref(`${ROOT}/finance/${uid}`).on('value', s => {
@@ -3912,11 +4121,12 @@ function bindRealtime(){
     }
     liveClassData = found;
     liveClassId = found?.id || null;
+    if($('#homePage').classList.contains('active-page')) renderHome();
   });
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   INIT
+   EVENT BINDINGS
    ═══════════════════════════════════════════════════════════════ */
 function bindEvents(){
   $('#menuBtn').addEventListener('click', openSidebar);
@@ -3933,7 +4143,9 @@ function bindEvents(){
   $('#notifBtn').addEventListener('click', (e) => {
     e.stopPropagation();
     $('#notifDrop').classList.toggle('open');
-    setTimeout(markAllNotifsRead, 400);
+    if($('#notifDrop').classList.contains('open')){
+      setTimeout(markAllNotifsRead, 400);
+    }
   });
   document.addEventListener('click', (e) => {
     if(!$('#notifDrop').contains(e.target) && !$('#notifBtn').contains(e.target)){ $('#notifDrop').classList.remove('open'); }
@@ -3959,6 +4171,9 @@ function bindEvents(){
   });
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════════════════════════ */
 async function init(user){
   currentUser = user;
   try{
