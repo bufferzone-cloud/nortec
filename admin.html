@@ -119,6 +119,7 @@
   .btn.ghost{background:#f1f5f9;color:var(--text);border:1.5px solid var(--border)}
   .btn.ghost:hover{background:#e2e8f0}
   .btn.sm{padding:7px 14px;font-size:12px}
+  .btn.xs{padding:5px 10px;font-size:11px}
   .btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
 
   .form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:12px}
@@ -190,7 +191,57 @@
   .feed-item .fttl{font-size:13px;font-weight:700;color:var(--text);line-height:1.3}
   .feed-item .fmeta{font-size:11.5px;color:var(--muted);margin-top:3px}
 
-  /* ═══ TEVETA FORM — IDENTICAL TO STUDENT PORTAL ═══ */
+  /* ═══ STUDENT AVATAR CELL ═══ */
+  .student-av{
+    display:inline-flex;align-items:center;justify-content:center;
+    border-radius:50%;overflow:hidden;color:#fff;
+    font-weight:800;font-size:12px;flex-shrink:0;
+    border:2px solid #fff;
+    box-shadow:0 3px 10px rgba(37,99,235,.20);
+    background:linear-gradient(135deg,#3b82f6,#2563eb);
+    vertical-align:middle;letter-spacing:.2px;
+  }
+  .student-av img{width:100%;height:100%;object-fit:cover;display:block}
+  .student-cell{display:flex;align-items:center;gap:10px;min-width:0}
+  .student-cell .info{min-width:0;flex:1}
+  .student-cell .info .nm{font-weight:700;font-size:12.5px;color:var(--text);line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .student-cell .info .sub{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  /* ═══ TABS ═══ */
+  .tab-row{display:flex;gap:6px;border-bottom:2px solid var(--soft);margin-bottom:16px;overflow-x:auto;padding-bottom:0}
+  .tab-btn{background:none;border:none;padding:10px 16px;font-weight:700;font-size:13px;color:var(--muted);cursor:pointer;font-family:inherit;border-bottom:3px solid transparent;transition:.2s;white-space:nowrap;margin-bottom:-2px}
+  .tab-btn:hover{color:var(--blue)}
+  .tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
+
+  /* ═══ TIMETABLE GRID ═══ */
+  .tt-toolbar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;align-items:flex-end}
+  .tt-toolbar .form-group{margin-bottom:0;min-width:220px}
+  .tt-grid-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border);background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.04)}
+  .tt-grid{width:100%;border-collapse:separate;border-spacing:0;min-width:960px;font-size:12px}
+  .tt-grid th,.tt-grid td{border-right:1px solid var(--border);border-bottom:1px solid var(--border);padding:8px;vertical-align:top}
+  .tt-grid th{background:var(--soft);font-weight:800;font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:#334155;text-align:center;position:sticky;top:0;z-index:2}
+  .tt-grid th:last-child,.tt-grid td:last-child{border-right:none}
+  .tt-grid th:first-child{text-align:left;width:110px}
+  .tt-grid td:first-child{background:linear-gradient(180deg,#eff6ff,#dbeafe);font-weight:800;color:var(--blue-dark);font-size:11.5px;text-align:center;width:110px;vertical-align:middle}
+  .tt-grid tbody tr:last-child td{border-bottom:none}
+  .tt-cell{
+    background:#f8fafc;border-radius:10px;padding:8px 10px;
+    display:flex;flex-direction:column;gap:3px;transition:.2s;
+    border-left:3px solid var(--blue);margin-bottom:4px;
+  }
+  .tt-cell:hover{background:#eff6ff;transform:translateX(2px);box-shadow:0 4px 12px rgba(37,99,235,.10)}
+  .tt-cell .tt-course{font-weight:800;font-size:11.5px;color:var(--text);line-height:1.25}
+  .tt-cell .tt-meta{font-size:10.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px}
+  .tt-cell .tt-meta i{color:var(--blue)}
+  .tt-cell .tt-actions{margin-top:4px;display:flex;gap:4px}
+  .tt-cell .tt-actions button{background:#fef2f2;color:#991b1b;border:none;border-radius:6px;padding:3px 6px;font-size:10px;cursor:pointer;font-family:inherit;font-weight:700}
+  .tt-cell .tt-actions button:hover{background:#fee2e2}
+  .tt-empty{text-align:center;color:#cbd5e1;font-size:18px;padding:14px 0}
+  .tt-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:11.5px;color:var(--muted)}
+  .tt-legend span{display:inline-flex;align-items:center;gap:6px}
+  .tt-legend i{color:var(--blue)}
+
+  /* ═══ TEVETA FORM ═══ */
   .teveta-form-container{font-family:'Inter',sans-serif;background:#fff;padding:26px 24px;border:1px solid var(--border);border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
   .teveta-form-container .form-header{text-align:center;margin-bottom:22px;padding-bottom:14px;border-bottom:2px solid #0f172a}
   .teveta-form-container .form-header h2{font-size:19px;font-weight:900;color:var(--text);text-transform:uppercase;letter-spacing:.5px;margin-top:8px}
@@ -439,6 +490,7 @@ const NAV_GROUPS = [
     { id:'schools',     label:'Schools & Depts', icon:'fa-building' },
     { id:'programmes',  label:'Programmes',      icon:'fa-graduation-cap' },
     { id:'courses',     label:'Courses',         icon:'fa-book' },
+    { id:'classes',     label:'Classes',         icon:'fa-users-rectangle' },
     { id:'ca',          label:'Continuous Assessment', icon:'fa-chart-bar' },
     { id:'attendance',  label:'Attendance',      icon:'fa-user-check' },
     { id:'exams',       label:'Examinations',    icon:'fa-file-signature' },
@@ -491,13 +543,14 @@ const PAGE_META = {
   admissions:{ title:'Admissions', sub:'Pending admission decisions', icon:'fa-user-check' },
   registration:{ title:'Registration', sub:'Register students', icon:'fa-clipboard-list' },
   schools:{ title:'Schools & Departments', sub:'Faculties & depts', icon:'fa-building' },
-  programmes:{ title:'Programmes', sub:'Academic programmes', icon:'fa-graduation-cap' },
+  programmes:{ title:'Programmes', sub:'Academic programmes & their courses', icon:'fa-graduation-cap' },
   courses:{ title:'Courses', sub:'Course catalogue', icon:'fa-book' },
+  classes:{ title:'Classes & Streams', sub:'Class groups under programmes', icon:'fa-users-rectangle' },
   ca:{ title:'Continuous Assessment', sub:'CA marks', icon:'fa-chart-bar' },
   attendance:{ title:'Attendance', sub:'Attendance records', icon:'fa-user-check' },
   exams:{ title:'Examinations', sub:'Exam scheduling', icon:'fa-file-signature' },
   progression:{ title:'Progression', sub:'Promote or repeat', icon:'fa-level-up-alt' },
-  timetable:{ title:'Timetable', sub:'Class schedules', icon:'fa-clock' },
+  timetable:{ title:'Comprehensive Timetable', sub:'All programmes, classes & courses', icon:'fa-clock' },
   assignments:{ title:'Assignments', sub:'Assessment tracking', icon:'fa-tasks' },
   resources:{ title:'Learning Resources', sub:'Videos & docs', icon:'fa-photo-video' },
   finance:{ title:'Student Finance', sub:'Fees & balances', icon:'fa-coins' },
@@ -533,10 +586,24 @@ let currentUser   = null;
 let currentStaff  = {};
 let currentRole   = {};
 let activePage    = 'dashboard';
-let state         = { settings:{} };
+let state         = { settings:{}, classes:[], courses:[], programmes:[], timetables:[] };
 let activeClearanceTab = null;
 let activeTevetaFilter = 'all';
 let dashboardChart = null;
+
+/* Timetable active filters */
+let activeTTProgramme = '';
+let activeTTClass = '';
+
+/* Timetable constants */
+const TT_DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+const TT_SLOTS = [
+  { start:'08:00', end:'10:00', label:'08:00 – 10:00' },
+  { start:'10:00', end:'12:00', label:'10:00 – 12:00' },
+  { start:'12:00', end:'14:00', label:'12:00 – 14:00' },
+  { start:'14:00', end:'16:00', label:'14:00 – 16:00' },
+  { start:'16:00', end:'18:00', label:'16:00 – 18:00' }
+];
 
 /* ═══════════════════════════════════════════════════════════════
    HELPERS
@@ -552,6 +619,41 @@ function getInitials(name){ if(!name) return '?'; const p = String(name).trim().
 function emptyState(msg, icon='fa-inbox'){ return `<div class="empty"><i class="fas ${icon}"></i>${esc(msg)}</div>`; }
 function emailKey(email){ return String(email||'').toLowerCase().replace(/[.@]/g,'_'); }
 function pad(s, n){ s = String(s == null ? '' : s); return s.length >= n ? s.slice(0,n) : s + ' '.repeat(n - s.length); }
+
+/* Student avatar helpers */
+function studentAvatar(s, size = 38){
+  const photo = (s && s.personal && s.personal.profilePhoto) || (s && s.profilePhoto) || '';
+  const name  = (s && (s.fullName || s.name)) || '';
+  const initials = getInitials(name);
+  const bgStyle = photo ? '#e2e8f0' : 'linear-gradient(135deg,#3b82f6,#2563eb)';
+  return `<div class="student-av" style="width:${size}px;height:${size}px;background:${bgStyle}">
+    ${photo ? `<img src="${esc(photo)}" alt="${esc(name)}" onerror="this.remove()"/>` : `<span>${esc(initials)}</span>`}
+  </div>`;
+}
+
+function studentCell(s, size = 38){
+  const name = (s && (s.fullName || s.name)) || '—';
+  const sub  = (s && (s.email || s.studentNumber)) || '';
+  return `<div class="student-cell">
+    ${studentAvatar(s, size)}
+    <div class="info">
+      <div class="nm">${esc(name)}</div>
+      ${sub ? `<div class="sub">${esc(sub)}</div>` : ''}
+    </div>
+  </div>`;
+}
+
+function studentCellWithNumber(s, size = 38){
+  const name = (s && (s.fullName || s.name)) || '—';
+  const sub  = (s && (s.studentNumber || s.email)) || '';
+  return `<div class="student-cell">
+    ${studentAvatar(s, size)}
+    <div class="info">
+      <div class="nm">${esc(name)}</div>
+      ${sub ? `<div class="sub">${esc(sub)}</div>` : ''}
+    </div>
+  </div>`;
+}
 
 function toast(msg, type='info'){
   const el = document.createElement('div');
@@ -831,6 +933,7 @@ function bindRealtime(){
   listen('applications',        'applications');
   listen('users',               'users');
   listen('courses',             'courses');
+  listen('classes',             'classes');
   listen('subfolders',          'subfolders');
   listen('videos',              'videos');
   listen('docs',                'docs');
@@ -1026,10 +1129,7 @@ function renderDepartmentPanel(deptIds){
           <div style="max-height:280px;overflow-y:auto">
             ${pending.map(a => `
               <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 12px;background:var(--soft);border-radius:9px;margin-bottom:6px;flex-wrap:wrap">
-                <div style="min-width:0">
-                  <div style="font-weight:700;font-size:13px">${esc(a.fullName||'—')}</div>
-                  <div style="font-size:11.5px;color:var(--muted)">${esc(a.studentNumber||'')} · ${esc(a.programme?.title||'')}</div>
-                </div>
+                <div style="min-width:0;flex:1">${studentCell(a, 34)}</div>
                 <button class="btn green sm" onclick="clearStudentDept('${a.id}','${d.id}')">
                   <i class="fas fa-check"></i> Clear
                 </button>
@@ -1143,12 +1243,12 @@ PAGE_RENDERERS.students = function(){
       ${list.length ? `
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Student No.</th><th>Name</th><th>Programme</th><th>Balance</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Student</th><th>Student No.</th><th>Programme</th><th>Balance</th><th>Actions</th></tr></thead>
             <tbody>
               ${list.map(s => `
                 <tr>
+                  <td>${studentCell(s)}</td>
                   <td><strong>${esc(s.studentNumber||'—')}</strong></td>
-                  <td>${esc(s.fullName||'—')}<br><span style="color:var(--muted);font-size:11px">${esc(s.email||'')}</span></td>
                   <td>${esc(s.programme?.title||'—')}</td>
                   <td>K${Number(s.balance||0).toLocaleString()}</td>
                   <td style="white-space:nowrap">
@@ -1177,10 +1277,8 @@ window.viewStudent = function(uid){
   openModal({
     title: s.fullName || 'Student', icon:'fa-user-graduate', size:'720px',
     body: `
-      <div style="display:grid;grid-template-columns:80px 1fr;gap:16px;margin-bottom:16px;align-items:center">
-        <div style="width:80px;height:80px;border-radius:50%;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:var(--blue);overflow:hidden">
-          ${p.profilePhoto ? `<img src="${esc(p.profilePhoto)}" style="width:100%;height:100%;object-fit:cover"/>` : esc(getInitials(s.fullName))}
-        </div>
+      <div style="display:grid;grid-template-columns:96px 1fr;gap:16px;margin-bottom:16px;align-items:center">
+        <div>${studentAvatar(s, 96)}</div>
         <div>
           <div style="font-size:18px;font-weight:900">${esc(s.fullName||'')}</div>
           <div style="color:var(--muted);font-size:13px;margin-top:4px">${esc(s.studentNumber||'')} · ${esc(s.email||'')}</div>
@@ -1246,12 +1344,12 @@ PAGE_RENDERERS.applications = function(){
       ${list.length ? `
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>App ID</th><th>Name</th><th>Programme</th><th>Submitted</th><th>Status</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Applicant</th><th>App ID</th><th>Programme</th><th>Submitted</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody>
               ${list.map(a => `
                 <tr>
+                  <td>${studentCell(a)}</td>
                   <td><span style="font-family:monospace;font-size:11.5px">${esc(a.applicationId||a.id)}</span></td>
-                  <td><strong>${esc(a.fullName||'—')}</strong></td>
                   <td>${esc(a.programme?.title||'—')}</td>
                   <td>${fmtDate(a.submittedAt)}</td>
                   <td>${statusBadge(a.status||'pending')}</td>
@@ -1328,11 +1426,11 @@ PAGE_RENDERERS.admissions = function(){
       ${pending.length ? `
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Name</th><th>Programme</th><th>Submitted</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Applicant</th><th>Programme</th><th>Submitted</th><th>Actions</th></tr></thead>
             <tbody>
               ${pending.map(a => `
                 <tr>
-                  <td><strong>${esc(a.fullName||'')}</strong></td>
+                  <td>${studentCell(a)}</td>
                   <td>${esc(a.programme?.title||'')}</td>
                   <td>${fmtDate(a.submittedAt)}</td>
                   <td style="white-space:nowrap">
@@ -1353,16 +1451,16 @@ PAGE_RENDERERS.registration = function(){
   const students = (state.applications||[]).filter(a => (a.status||'').toLowerCase()==='approved');
   $('#mainContent').innerHTML = `
     <div class="card">
-      <h3><i class="fas fa-clipboard-list"></i> Register Students</h3>
+      <h3><i class="fas fa-clipboard-list"></i> Register Students <span class="right">${students.length}</span></h3>
       ${students.length ? `
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Student No.</th><th>Name</th><th>Programme</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Student</th><th>Student No.</th><th>Programme</th><th>Actions</th></tr></thead>
             <tbody>
               ${students.map(s => `
                 <tr>
+                  <td>${studentCell(s)}</td>
                   <td><strong>${esc(s.studentNumber||'')}</strong></td>
-                  <td>${esc(s.fullName||'')}</td>
                   <td>${esc(s.programme?.title||'')}</td>
                   <td><button class="btn sm primary" onclick="registerStudent('${s.id}')"><i class="fas fa-plus"></i> Register</button></td>
                 </tr>`).join('')}
@@ -1457,26 +1555,39 @@ window.updateItem = async function(path, id, data){
   catch(e){ toast('Failed','err'); }
 };
 
-/* ───── PROGRAMMES ───── */
+/* ═══════════════════════════════════════════════════════════════
+   PROGRAMMES — with courses and classes tabs
+   ═══════════════════════════════════════════════════════════════ */
 PAGE_RENDERERS.programmes = function(){
   const list = state.programmes||[];
   $('#mainContent').innerHTML = `
     <div class="card">
       <h3><i class="fas fa-graduation-cap"></i> Programmes <span class="right">${list.length}</span>
-        <button class="btn primary sm" style="margin-left:auto" onclick="addProgramme()"><i class="fas fa-plus"></i> Add</button>
+        <button class="btn primary sm" style="margin-left:auto" onclick="addProgramme()"><i class="fas fa-plus"></i> Add Programme</button>
       </h3>
       ${list.length ? `
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Code</th><th>Title</th><th>Category</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Code</th><th>Title</th><th>Category</th><th>Courses</th><th>Classes</th><th>Students</th><th>Actions</th></tr></thead>
             <tbody>
-              ${list.map(p => `
-                <tr>
-                  <td><strong>${esc(p.code||'')}</strong></td>
-                  <td>${esc(p.title||'')}</td>
-                  <td>${esc(p.category||'')}</td>
-                  <td><button class="btn sm red" onclick="deleteItem('programmes','${p.id}')"><i class="fas fa-trash"></i></button></td>
-                </tr>`).join('')}
+              ${list.map(p => {
+                const courses = (state.courses||[]).filter(c => c.programmeId === p.id);
+                const classes = (state.classes||[]).filter(c => c.programmeId === p.id);
+                const students = (state.applications||[]).filter(a => (a.status||'').toLowerCase()==='approved' && (a.programme?.code === p.code || a.programme?.title === p.title));
+                return `
+                  <tr>
+                    <td><strong>${esc(p.code||'')}</strong></td>
+                    <td>${esc(p.title||'')}</td>
+                    <td>${esc(p.category||'')}</td>
+                    <td><span class="badge blue">${courses.length}</span></td>
+                    <td><span class="badge purple">${classes.length}</span></td>
+                    <td><span class="badge green">${students.length}</span></td>
+                    <td style="white-space:nowrap">
+                      <button class="btn sm primary" onclick="manageProgramme('${p.id}')"><i class="fas fa-cog"></i> Manage</button>
+                      <button class="btn sm red" onclick="deleteItem('programmes','${p.id}')"><i class="fas fa-trash"></i></button>
+                    </td>
+                  </tr>`;
+              }).join('')}
             </tbody>
           </table>
         </div>`
@@ -1488,44 +1599,289 @@ window.addProgramme = function(){
   openModal({
     title:'Add Programme', icon:'fa-graduation-cap',
     body:`<div class="form-row">
-        <div class="form-group"><label>Code</label><input id="prgCode"/></div>
-        <div class="form-group"><label>Category</label><input id="prgCat"/></div>
+        <div class="form-group"><label>Code</label><input id="prgCode" placeholder="e.g. 41"/></div>
+        <div class="form-group"><label>Category</label><input id="prgCat" placeholder="e.g. Engineering"/></div>
       </div>
-      <div class="form-group"><label>Title</label><input id="prgTitle"/></div>`,
+      <div class="form-group"><label>Title</label><input id="prgTitle" placeholder="e.g. Diploma in Computer Systems Engineering"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Duration</label><input id="prgDuration" placeholder="e.g. 3 years"/></div>
+        <div class="form-group"><label>Mode</label>
+          <select id="prgMode"><option>Full-time</option><option>Part-time</option><option>Distance</option></select>
+        </div>
+      </div>
+      <div class="form-group"><label>Description</label><textarea id="prgDesc" rows="3"></textarea></div>`,
     foot:`<button class="btn ghost" onclick="closeModal()">Cancel</button>
-      <button class="btn primary" onclick="saveItem('programmes', {code:$('#prgCode').value, category:$('#prgCat').value, title:$('#prgTitle').value})">Save</button>`
+      <button class="btn primary" onclick="saveProgramme()">Save</button>`
   });
+};
+
+window.saveProgramme = async function(){
+  const code = ($('#prgCode').value||'').trim();
+  const title = ($('#prgTitle').value||'').trim();
+  if(!code || !title) return toast('Code and title are required','err');
+  try{
+    await db.ref(`${ROOT}/programmes`).push({
+      code, title,
+      category: ($('#prgCat').value||'').trim(),
+      duration: ($('#prgDuration').value||'').trim(),
+      mode: $('#prgMode').value,
+      description: ($('#prgDesc').value||'').trim(),
+      createdAt: Date.now(), createdBy: currentUser.email
+    });
+    toast('Programme added','ok'); closeModal();
+  }catch(e){ toast('Failed','err'); }
+};
+
+window.manageProgramme = function(id){
+  const p = (state.programmes||[]).find(x => x.id === id);
+  if(!p) return;
+  const courses = (state.courses||[]).filter(c => c.programmeId === id);
+  const classes = (state.classes||[]).filter(c => c.programmeId === id);
+  const students = (state.applications||[]).filter(a => (a.status||'').toLowerCase()==='approved' && (a.programme?.code === p.code || a.programme?.title === p.title));
+
+  openModal({
+    title: p.title || 'Programme',
+    icon: 'fa-graduation-cap',
+    size: '900px',
+    body: `
+      <div class="tab-row">
+        <button class="tab-btn active" data-tab="courses"><i class="fas fa-book"></i> Courses (${courses.length})</button>
+        <button class="tab-btn" data-tab="classes"><i class="fas fa-users-rectangle"></i> Classes (${classes.length})</button>
+        <button class="tab-btn" data-tab="students"><i class="fas fa-user-graduate"></i> Students (${students.length})</button>
+        <button class="tab-btn" data-tab="info"><i class="fas fa-info-circle"></i> Info</button>
+      </div>
+      <div id="progTabContent"></div>
+    `,
+    foot: `<button class="btn ghost" onclick="closeModal()">Close</button>`
+  });
+
+  function renderTab(tab){
+    const content = $('#progTabContent');
+    if(!content) return;
+    if(tab === 'courses'){
+      content.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+          <div style="font-weight:800;font-size:14px">Courses under this programme</div>
+          <button class="btn primary sm" onclick="addCourseToProgramme('${id}')"><i class="fas fa-plus"></i> Add Course</button>
+        </div>
+        ${courses.length ? `<div class="tbl-wrap"><table>
+          <thead><tr><th>Code</th><th>Name</th><th>Year</th><th>Instructor</th><th>TEVETA</th><th></th></tr></thead>
+          <tbody>
+            ${courses.map(c => `<tr>
+              <td><strong>${esc(c.code||'')}</strong></td>
+              <td>${esc(c.name||'')}</td>
+              <td>${esc(c.yearStudy||'—')}</td>
+              <td>${esc(c.instructor||'')}</td>
+              <td>${c.showOnTeveta === false ? '<span class="badge grey">Off</span>' : '<span class="badge green">On</span>'}</td>
+              <td><button class="btn sm red" onclick="deleteItem('courses','${c.id}');setTimeout(()=>manageProgramme('${id}'),250)"><i class="fas fa-trash"></i></button></td>
+            </tr>`).join('')}
+          </tbody>
+        </table></div>` : emptyState('No courses yet — add the first course','fa-book')}
+        <div style="margin-top:14px;font-size:12px;color:var(--muted)">
+          <i class="fas fa-info-circle" style="color:var(--blue)"></i>
+          Courses marked <b>TEVETA On</b> appear on the TEVETA Examination Entry Form for students in this programme.
+        </div>
+      `;
+    } else if(tab === 'classes'){
+      content.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+          <div style="font-weight:800;font-size:14px">Classes / Streams under this programme</div>
+          <button class="btn primary sm" onclick="addClassToProgramme('${id}')"><i class="fas fa-plus"></i> Add Class</button>
+        </div>
+        ${classes.length ? `<div class="tbl-wrap"><table>
+          <thead><tr><th>Name</th><th>Year</th><th>Capacity</th><th>Enrolled</th><th></th></tr></thead>
+          <tbody>
+            ${classes.map(cl => {
+              const cnt = (state.applications||[]).filter(a => a.classId === cl.id).length;
+              return `<tr>
+                <td><strong>${esc(cl.name||'')}</strong></td>
+                <td>${esc(cl.yearStudy||'—')}</td>
+                <td>${cl.capacity||'—'}</td>
+                <td><span class="badge blue">${cnt}</span></td>
+                <td><button class="btn sm red" onclick="deleteItem('classes','${cl.id}');setTimeout(()=>manageProgramme('${id}'),250)"><i class="fas fa-trash"></i></button></td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table></div>` : emptyState('No classes yet — add the first class','fa-users-rectangle')}
+      `;
+    } else if(tab === 'students'){
+      content.innerHTML = students.length ? `<div class="tbl-wrap"><table>
+        <thead><tr><th>Student</th><th>Student No.</th><th>Year</th></tr></thead>
+        <tbody>
+          ${students.map(s => `<tr>
+            <td>${studentCell(s)}</td>
+            <td><strong>${esc(s.studentNumber||'')}</strong></td>
+            <td>${esc(s.programme?.yearStudy||'—')}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table></div>` : emptyState('No students enrolled in this programme','fa-user-graduate');
+    } else {
+      content.innerHTML = `
+        <table style="font-size:13px">
+          <tr><td style="width:160px;color:var(--muted);font-weight:600">Code</td><td>${esc(p.code||'—')}</td></tr>
+          <tr><td style="color:var(--muted);font-weight:600">Title</td><td>${esc(p.title||'—')}</td></tr>
+          <tr><td style="color:var(--muted);font-weight:600">Category</td><td>${esc(p.category||'—')}</td></tr>
+          <tr><td style="color:var(--muted);font-weight:600">Duration</td><td>${esc(p.duration||'—')}</td></tr>
+          <tr><td style="color:var(--muted);font-weight:600">Mode</td><td>${esc(p.mode||'—')}</td></tr>
+          <tr><td style="color:var(--muted);font-weight:600">Description</td><td>${esc(p.description||'—')}</td></tr>
+        </table>
+        <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn ghost" onclick="deleteItem('programmes','${id}');closeModal();"><i class="fas fa-trash"></i> Delete Programme</button>
+        </div>
+      `;
+    }
+  }
+
+  renderTab('courses');
+  $$('#modalBody .tab-btn').forEach(b => b.addEventListener('click', function(){
+    $$('#modalBody .tab-btn').forEach(x => x.classList.remove('active'));
+    this.classList.add('active');
+    renderTab(this.dataset.tab);
+  }));
+};
+
+window.addCourseToProgramme = function(programmeId){
+  const p = (state.programmes||[]).find(x => x.id === programmeId) || {};
+  openModal({
+    title: 'Add Course to ' + (p.title||'Programme'),
+    icon: 'fa-book',
+    body: `
+      <div class="form-row">
+        <div class="form-group"><label>Course Code</label><input id="crsCode" placeholder="e.g. 41.1"/></div>
+        <div class="form-group"><label>Year of Study</label>
+          <select id="crsYear"><option>First</option><option selected>Second</option><option>Third</option><option>Fourth</option></select>
+        </div>
+      </div>
+      <div class="form-group"><label>Course Name</label><input id="crsName" placeholder="e.g. Digital Electronics"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Instructor</label><input id="crsInstr"/></div>
+        <div class="form-group"><label>Price (ZMW)</label><input id="crsPrice" type="number" value="0"/></div>
+      </div>
+      <div class="form-group">
+        <label style="display:flex;align-items:center;gap:8px;text-transform:none;font-size:13px">
+          <input type="checkbox" id="crsTeveta" checked style="width:auto"/> Show on TEVETA form
+        </label>
+      </div>
+    `,
+    foot: `<button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="saveCourseToProgramme('${programmeId}')">Save Course</button>`
+  });
+};
+
+window.saveCourseToProgramme = async function(programmeId){
+  const p = (state.programmes||[]).find(x => x.id === programmeId) || {};
+  const code = ($('#crsCode').value||'').trim();
+  const name = ($('#crsName').value||'').trim();
+  if(!code || !name) return toast('Course code and name required','err');
+  try{
+    await db.ref(`${ROOT}/courses`).push({
+      code, name,
+      yearStudy: $('#crsYear').value,
+      instructor: ($('#crsInstr').value||'').trim(),
+      price: Number($('#crsPrice').value||0),
+      programmeId,
+      programmeCode: p.code || '',
+      programmeTitle: p.title || '',
+      showOnTeveta: $('#crsTeveta').checked,
+      createdAt: Date.now(),
+      createdBy: currentUser.email
+    });
+    toast('Course added','ok');
+    closeModal();
+    setTimeout(() => manageProgramme(programmeId), 300);
+  }catch(e){ toast('Failed','err'); }
+};
+
+window.addClassToProgramme = function(programmeId){
+  const p = (state.programmes||[]).find(x => x.id === programmeId) || {};
+  openModal({
+    title: 'Add Class to ' + (p.title||'Programme'),
+    icon: 'fa-users-rectangle',
+    body: `
+      <div class="form-group"><label>Class Name</label><input id="clsName" placeholder="e.g. CS Year 1 Group A"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Year of Study</label>
+          <select id="clsYear"><option>First</option><option>Second</option><option>Third</option><option>Fourth</option></select>
+        </div>
+        <div class="form-group"><label>Capacity</label><input id="clsCap" type="number" value="40"/></div>
+      </div>
+    `,
+    foot: `<button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="saveClassToProgramme('${programmeId}')">Save Class</button>`
+  });
+};
+
+window.saveClassToProgramme = async function(programmeId){
+  const p = (state.programmes||[]).find(x => x.id === programmeId) || {};
+  const name = ($('#clsName').value||'').trim();
+  if(!name) return toast('Class name required','err');
+  try{
+    await db.ref(`${ROOT}/classes`).push({
+      name,
+      yearStudy: $('#clsYear').value,
+      capacity: Number($('#clsCap').value||40),
+      programmeId,
+      programmeCode: p.code || '',
+      programmeTitle: p.title || '',
+      createdAt: Date.now(),
+      createdBy: currentUser.email
+    });
+    toast('Class added','ok');
+    closeModal();
+    setTimeout(() => manageProgramme(programmeId), 300);
+  }catch(e){ toast('Failed','err'); }
 };
 
 /* ───── COURSES ───── */
 PAGE_RENDERERS.courses = function(){
   const list = state.courses||[];
+  const programmes = state.programmes||[];
+  const filterProg = ($('#courseProgFilter')?.value || 'all');
+  let filtered = list;
+  if(filterProg !== 'all') filtered = list.filter(c => c.programmeId === filterProg);
+
   $('#mainContent').innerHTML = `
     <div class="card">
-      <h3><i class="fas fa-book"></i> Courses <span class="right">${list.length}</span>
-        <button class="btn primary sm" style="margin-left:auto" onclick="addCourse()"><i class="fas fa-plus"></i> Add</button>
+      <h3><i class="fas fa-book"></i> All Courses <span class="right">${filtered.length}</span>
+        <button class="btn primary sm" style="margin-left:auto" onclick="addCourse()"><i class="fas fa-plus"></i> Add Course</button>
       </h3>
-      ${list.length ? `
+      <div class="toolbar">
+        <select id="courseProgFilter">
+          <option value="all">All Programmes</option>
+          ${programmes.map(p => `<option value="${p.id}" ${filterProg===p.id?'selected':''}>${esc(p.title||p.code||'Untitled')}</option>`).join('')}
+        </select>
+        <div class="spacer"></div>
+        <span style="font-size:12px;color:var(--muted)"><i class="fas fa-info-circle"></i> Manage courses under Programmes page</span>
+      </div>
+      ${filtered.length ? `
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Code</th><th>Name</th><th>Instructor</th><th>Price</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Code</th><th>Name</th><th>Programme</th><th>Year</th><th>Instructor</th><th>Price</th><th>TEVETA</th><th></th></tr></thead>
             <tbody>
-              ${list.map(c => `
-                <tr>
-                  <td><strong>${esc(c.code||'')}</strong></td>
-                  <td>${esc(c.name||'')}</td>
-                  <td>${esc(c.instructor||'')}</td>
-                  <td>${c.price ? 'ZMW '+c.price : '<span class="badge green">Free</span>'}</td>
-                  <td><button class="btn sm red" onclick="deleteItem('courses','${c.id}')"><i class="fas fa-trash"></i></button></td>
-                </tr>`).join('')}
+              ${filtered.map(c => {
+                const prog = programmes.find(p => p.id === c.programmeId);
+                return `
+                  <tr>
+                    <td><strong>${esc(c.code||'')}</strong></td>
+                    <td>${esc(c.name||'')}</td>
+                    <td>${prog ? esc(prog.title||prog.code||'') : (c.programmeTitle ? esc(c.programmeTitle) : '<span style="color:var(--muted)">—</span>')}</td>
+                    <td>${esc(c.yearStudy||'—')}</td>
+                    <td>${esc(c.instructor||'')}</td>
+                    <td>${c.price ? 'ZMW '+c.price : '<span class="badge green">Free</span>'}</td>
+                    <td>${c.showOnTeveta === false ? '<span class="badge grey">Off</span>' : '<span class="badge green">On</span>'}</td>
+                    <td><button class="btn sm red" onclick="deleteItem('courses','${c.id}')"><i class="fas fa-trash"></i></button></td>
+                  </tr>`;
+              }).join('')}
             </tbody>
           </table>
         </div>`
       : emptyState('No courses','fa-book')}
     </div>`;
+  $('#courseProgFilter')?.addEventListener('change', () => renderActive());
 };
 
 window.addCourse = function(){
+  const programmes = state.programmes||[];
   openModal({
     title:'Add Course', icon:'fa-book',
     body:`<div class="form-row">
@@ -1533,12 +1889,343 @@ window.addCourse = function(){
         <div class="form-group"><label>Name</label><input id="crsName"/></div>
       </div>
       <div class="form-row">
+        <div class="form-group"><label>Programme</label>
+          <select id="crsProgramme">
+            <option value="">— None —</option>
+            ${programmes.map(p => `<option value="${p.id}">${esc(p.title||p.code||'')}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group"><label>Year of Study</label>
+          <select id="crsYear"><option>First</option><option selected>Second</option><option>Third</option><option>Fourth</option></select>
+        </div>
+      </div>
+      <div class="form-row">
         <div class="form-group"><label>Instructor</label><input id="crsInstr"/></div>
         <div class="form-group"><label>Price</label><input id="crsPrice" type="number" value="0"/></div>
+      </div>
+      <div class="form-group">
+        <label style="display:flex;align-items:center;gap:8px;text-transform:none;font-size:13px">
+          <input type="checkbox" id="crsTeveta" checked style="width:auto"/> Show on TEVETA form
+        </label>
       </div>`,
     foot:`<button class="btn ghost" onclick="closeModal()">Cancel</button>
-      <button class="btn primary" onclick="saveItem('courses', {code:$('#crsCode').value, name:$('#crsName').value, instructor:$('#crsInstr').value, price:Number($('#crsPrice').value||0)})">Save</button>`
+      <button class="btn primary" onclick="saveNewCourse()">Save</button>`
   });
+};
+
+window.saveNewCourse = async function(){
+  const code = ($('#crsCode').value||'').trim();
+  const name = ($('#crsName').value||'').trim();
+  if(!code || !name) return toast('Code and name are required','err');
+  const progId = $('#crsProgramme').value;
+  const prog = (state.programmes||[]).find(p => p.id === progId) || {};
+  try{
+    await db.ref(`${ROOT}/courses`).push({
+      code, name,
+      yearStudy: $('#crsYear').value,
+      instructor: ($('#crsInstr').value||'').trim(),
+      price: Number($('#crsPrice').value||0),
+      programmeId: progId,
+      programmeCode: prog.code || '',
+      programmeTitle: prog.title || '',
+      showOnTeveta: $('#crsTeveta').checked,
+      createdAt: Date.now(),
+      createdBy: currentUser.email
+    });
+    toast('Course saved','ok'); closeModal();
+  }catch(e){ toast('Failed','err'); }
+};
+
+/* ───── CLASSES ───── */
+PAGE_RENDERERS.classes = function(){
+  const list = state.classes||[];
+  const programmes = state.programmes||[];
+  const filterProg = ($('#clsProgFilter')?.value || 'all');
+  let filtered = list;
+  if(filterProg !== 'all') filtered = list.filter(c => c.programmeId === filterProg);
+
+  $('#mainContent').innerHTML = `
+    <div class="card">
+      <h3><i class="fas fa-users-rectangle"></i> Classes & Streams <span class="right">${filtered.length}</span>
+        <button class="btn primary sm" style="margin-left:auto" onclick="addClassGeneral()"><i class="fas fa-plus"></i> Add Class</button>
+      </h3>
+      <div class="toolbar">
+        <select id="clsProgFilter">
+          <option value="all">All Programmes</option>
+          ${programmes.map(p => `<option value="${p.id}" ${filterProg===p.id?'selected':''}>${esc(p.title||p.code||'Untitled')}</option>`).join('')}
+        </select>
+        <div class="spacer"></div>
+        <span style="font-size:12px;color:var(--muted)"><i class="fas fa-info-circle"></i> Classes group students for timetable scheduling</span>
+      </div>
+      ${filtered.length ? `
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>Name</th><th>Programme</th><th>Year</th><th>Capacity</th><th>Students</th><th></th></tr></thead>
+            <tbody>
+              ${filtered.map(cl => {
+                const prog = programmes.find(p => p.id === cl.programmeId);
+                const cnt = (state.applications||[]).filter(a => a.classId === cl.id).length;
+                return `
+                  <tr>
+                    <td><strong>${esc(cl.name||'')}</strong></td>
+                    <td>${prog ? esc(prog.title||prog.code||'') : (cl.programmeTitle ? esc(cl.programmeTitle) : '—')}</td>
+                    <td>${esc(cl.yearStudy||'—')}</td>
+                    <td>${cl.capacity||'—'}</td>
+                    <td><span class="badge blue">${cnt}</span></td>
+                    <td><button class="btn sm red" onclick="deleteItem('classes','${cl.id}')"><i class="fas fa-trash"></i></button></td>
+                  </tr>`;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>`
+      : emptyState('No classes yet','fa-users-rectangle')}
+    </div>`;
+  $('#clsProgFilter')?.addEventListener('change', () => renderActive());
+};
+
+window.addClassGeneral = function(){
+  const programmes = state.programmes||[];
+  if(!programmes.length) return toast('Create a programme first','err');
+  openModal({
+    title:'Add Class', icon:'fa-users-rectangle',
+    body:`<div class="form-group"><label>Class Name</label><input id="clsName" placeholder="e.g. CS Year 1 Group A"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Programme</label>
+          <select id="clsProgramme">
+            ${programmes.map(p => `<option value="${p.id}">${esc(p.title||p.code||'')}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group"><label>Year of Study</label>
+          <select id="clsYear"><option>First</option><option>Second</option><option>Third</option><option>Fourth</option></select>
+        </div>
+      </div>
+      <div class="form-group"><label>Capacity</label><input id="clsCap" type="number" value="40"/></div>`,
+    foot:`<button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="saveClassGeneral()">Save</button>`
+  });
+};
+
+window.saveClassGeneral = async function(){
+  const name = ($('#clsName').value||'').trim();
+  if(!name) return toast('Class name required','err');
+  const progId = $('#clsProgramme').value;
+  const prog = (state.programmes||[]).find(p => p.id === progId) || {};
+  try{
+    await db.ref(`${ROOT}/classes`).push({
+      name,
+      yearStudy: $('#clsYear').value,
+      capacity: Number($('#clsCap').value||40),
+      programmeId: progId,
+      programmeCode: prog.code || '',
+      programmeTitle: prog.title || '',
+      createdAt: Date.now(),
+      createdBy: currentUser.email
+    });
+    toast('Class added','ok'); closeModal();
+  }catch(e){ toast('Failed','err'); }
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   TIMETABLE — comprehensive redesign
+   ═══════════════════════════════════════════════════════════════ */
+PAGE_RENDERERS.timetable = function(){
+  const programmes = state.programmes || [];
+  if(!activeTTProgramme && programmes.length) activeTTProgramme = programmes[0].id;
+
+  const progClasses = (state.classes||[]).filter(c => c.programmeId === activeTTProgramme);
+  if(!activeTTClass && progClasses.length) activeTTClass = progClasses[0].id;
+
+  const slots = (state.timetables||[]).filter(t =>
+    t.programmeId === activeTTProgramme &&
+    (!activeTTClass || t.classId === activeTTClass)
+  );
+
+  const activeProg = programmes.find(p => p.id === activeTTProgramme);
+  const activeClass = progClasses.find(c => c.id === activeTTClass);
+
+  /* Build grid */
+  let grid = '<table class="tt-grid"><thead><tr><th>Time</th>';
+  TT_DAYS.forEach(d => grid += `<th>${d}</th>`);
+  grid += '</tr></thead><tbody>';
+
+  TT_SLOTS.forEach(slot => {
+    grid += `<tr><td>${slot.label}</td>`;
+    TT_DAYS.forEach(day => {
+      const cellSlots = slots.filter(s => s.day === day && s.startTime === slot.start);
+      grid += '<td>';
+      if(cellSlots.length){
+        cellSlots.forEach(s => {
+          grid += `<div class="tt-cell">
+            <div class="tt-course">${esc(s.courseCode||'')} ${esc(s.courseName||'Course')}</div>
+            <div class="tt-meta">
+              ${s.venue ? `<span><i class="fas fa-map-marker-alt"></i> ${esc(s.venue)}</span>` : ''}
+              ${s.lecturer ? `<span><i class="fas fa-user-tie"></i> ${esc(s.lecturer)}</span>` : ''}
+            </div>
+            <div class="tt-actions">
+              <button onclick="deleteItem('timetables','${s.id}')"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>`;
+        });
+      } else {
+        grid += '<div class="tt-empty">—</div>';
+      }
+      grid += '</td>';
+    });
+    grid += '</tr>';
+  });
+  grid += '</tbody></table>';
+
+  const totalSlots = (state.timetables||[]).filter(t => t.programmeId === activeTTProgramme).length;
+
+  $('#mainContent').innerHTML = `
+    <div class="card">
+      <h3><i class="fas fa-clock"></i> Comprehensive Timetable
+        <span class="right">${slots.length} slot${slots.length!==1?'s':''} shown</span>
+        <button class="btn primary sm" style="margin-left:auto" onclick="addTTSlot()"><i class="fas fa-plus"></i> Add Slot</button>
+      </h3>
+
+      <div class="tt-toolbar">
+        <div class="form-group">
+          <label>Programme</label>
+          <select id="ttProgrammeSel">
+            ${programmes.length
+              ? programmes.map(p => `<option value="${p.id}" ${activeTTProgramme===p.id?'selected':''}>${esc(p.title||p.code||'Untitled')}</option>`).join('')
+              : '<option value="">No programmes</option>'}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Class</label>
+          <select id="ttClassSel">
+            <option value="">All classes (${totalSlots} total slots)</option>
+            ${progClasses.map(c => `<option value="${c.id}" ${activeTTClass===c.id?'selected':''}>${esc(c.name||'')} · ${esc(c.yearStudy||'')} year</option>`).join('')}
+          </select>
+        </div>
+      </div>
+
+      ${programmes.length
+        ? (activeProg ? `
+            <div style="font-size:12.5px;color:var(--muted);margin-bottom:10px">
+              <i class="fas fa-info-circle" style="color:var(--blue)"></i>
+              Showing timetable for <strong>${esc(activeProg.title||'')}</strong>
+              ${activeClass ? ` · <strong>${esc(activeClass.name||'')}</strong>` : ''}
+              ${progClasses.length ? '' : ' · <em>No classes defined yet</em>'}
+            </div>
+            <div class="tt-grid-wrap">${grid}</div>
+            <div class="tt-legend">
+              <span><i class="fas fa-book"></i> ${(state.courses||[]).filter(c => c.programmeId === activeTTProgramme).length} courses in programme</span>
+              <span><i class="fas fa-users-rectangle"></i> ${progClasses.length} classes</span>
+              <span><i class="fas fa-clock"></i> ${TT_SLOTS.length} time slots per day</span>
+              <span><i class="fas fa-calendar-week"></i> ${TT_DAYS.length} working days</span>
+            </div>
+          ` : emptyState('Select a programme','fa-graduation-cap'))
+        : emptyState('Create a programme first to start scheduling','fa-graduation-cap')}
+    </div>
+  `;
+
+  $('#ttProgrammeSel')?.addEventListener('change', function(){
+    activeTTProgramme = this.value;
+    activeTTClass = '';
+    renderActive();
+  });
+  $('#ttClassSel')?.addEventListener('change', function(){
+    activeTTClass = this.value;
+    renderActive();
+  });
+};
+
+window.addTTSlot = function(){
+  const programmes = state.programmes || [];
+  if(!programmes.length) return toast('Create a programme first','err');
+  const progClasses = (state.classes||[]).filter(c => c.programmeId === activeTTProgramme);
+  const progCourses = (state.courses||[]).filter(c => c.programmeId === activeTTProgramme);
+
+  openModal({
+    title: 'Add Timetable Slot',
+    icon: 'fa-clock',
+    size: '700px',
+    body: `
+      <div class="form-row">
+        <div class="form-group"><label>Programme</label>
+          <select id="ttProgramme" onchange="onTTProgrammeChange()">
+            ${programmes.map(p => `<option value="${p.id}" ${activeTTProgramme===p.id?'selected':''}>${esc(p.title||p.code||'')}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group"><label>Class</label>
+          <select id="ttClass">
+            ${progClasses.length
+              ? progClasses.map(c => `<option value="${c.id}" ${activeTTClass===c.id?'selected':''}>${esc(c.name||'')}</option>`).join('')
+              : '<option value="">— No classes — add one first —</option>'}
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Day</label>
+          <select id="ttDay">${TT_DAYS.map(d => `<option>${d}</option>`).join('')}</select>
+        </div>
+        <div class="form-group"><label>Time Slot</label>
+          <select id="ttSlot">
+            ${TT_SLOTS.map(s => `<option value="${s.start}|${s.end}">${s.label}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>Course</label>
+        <select id="ttCourse">
+          ${progCourses.length
+            ? progCourses.map(c => `<option value="${c.id}" data-code="${esc(c.code||'')}" data-name="${esc(c.name||'')}">${esc(c.code||'')} — ${esc(c.name||'')}</option>`).join('')
+            : '<option value="">No courses — add courses to this programme first</option>'}
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Venue</label><input id="ttVenue" placeholder="e.g. Room 12 / Lab 3"/></div>
+        <div class="form-group"><label>Lecturer</label><input id="ttLecturer" placeholder="e.g. Mr. Phiri"/></div>
+      </div>
+    `,
+    foot: `<button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="saveTTSlot()">Save Slot</button>`
+  });
+};
+
+window.onTTProgrammeChange = function(){
+  const pid = $('#ttProgramme').value;
+  const cls = (state.classes||[]).filter(c => c.programmeId === pid);
+  const courses = (state.courses||[]).filter(c => c.programmeId === pid);
+  $('#ttClass').innerHTML = cls.length
+    ? cls.map(c => `<option value="${c.id}">${esc(c.name||'')}</option>`).join('')
+    : '<option value="">— No classes —</option>';
+  $('#ttCourse').innerHTML = courses.length
+    ? courses.map(c => `<option value="${c.id}" data-code="${esc(c.code||'')}" data-name="${esc(c.name||'')}">${esc(c.code||'')} — ${esc(c.name||'')}</option>`).join('')
+    : '<option value="">No courses</option>';
+};
+
+window.saveTTSlot = async function(){
+  const programmeId = $('#ttProgramme').value;
+  const classId = $('#ttClass').value;
+  const day = $('#ttDay').value;
+  const slotVal = $('#ttSlot').value.split('|');
+  const courseSel = $('#ttCourse');
+  const courseId = courseSel.value;
+  const courseOpt = courseSel.options[courseSel.selectedIndex];
+  const courseCode = courseOpt?.dataset.code || '';
+  const courseName = courseOpt?.dataset.name || '';
+
+  if(!programmeId) return toast('Select a programme','err');
+  if(!courseId) return toast('Select a course','err');
+
+  try{
+    await db.ref(`${ROOT}/timetables`).push({
+      programmeId, classId,
+      day, startTime: slotVal[0], endTime: slotVal[1],
+      courseId, courseCode, courseName,
+      venue: ($('#ttVenue').value||'').trim(),
+      lecturer: ($('#ttLecturer').value||'').trim(),
+      createdAt: Date.now(),
+      createdBy: currentUser.email
+    });
+    toast('Timetable slot added','ok');
+    activeTTProgramme = programmeId;
+    activeTTClass = classId;
+    closeModal();
+  }catch(e){ toast('Failed','err'); }
 };
 
 /* ───── CA ───── */
@@ -1550,14 +2237,14 @@ PAGE_RENDERERS.ca = function(){
       ${students.length ? `
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Student No.</th><th>Name</th><th>Current CA</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Student</th><th>Student No.</th><th>Current CA</th><th>Actions</th></tr></thead>
             <tbody>
               ${students.map(s => {
                 const ca = s.ca || {};
                 return `
                   <tr>
+                    <td>${studentCell(s)}</td>
                     <td><strong>${esc(s.studentNumber||'')}</strong></td>
-                    <td>${esc(s.fullName||'')}</td>
                     <td>${ca.total||0}%</td>
                     <td><button class="btn sm primary" onclick="enterCA('${s.id}')"><i class="fas fa-pen"></i> Enter CA</button></td>
                   </tr>`;
@@ -1610,14 +2297,14 @@ PAGE_RENDERERS.attendance = function(){
       ${students.length ? `
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Student No.</th><th>Name</th><th>Attendance %</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Student</th><th>Student No.</th><th>Attendance %</th><th>Actions</th></tr></thead>
             <tbody>
               ${students.map(s => `
                 <tr>
+                  <td>${studentCell(s)}</td>
                   <td><strong>${esc(s.studentNumber||'')}</strong></td>
-                  <td>${esc(s.fullName||'')}</td>
                   <td>${s.attendancePct||0}%</td>
-                  <td>
+                  <td style="white-space:nowrap">
                     <button class="btn sm green" onclick="markAttendance('${s.id}', true)"><i class="fas fa-check"></i> Present</button>
                     <button class="btn sm red" onclick="markAttendance('${s.id}', false)"><i class="fas fa-times"></i> Absent</button>
                   </td>
@@ -1688,7 +2375,7 @@ PAGE_RENDERERS.progression = function(){
   const students = (state.applications||[]).filter(a => (a.status||'').toLowerCase()==='approved');
   $('#mainContent').innerHTML = `
     <div class="card">
-      <h3><i class="fas fa-level-up-alt"></i> Academic Progression</h3>
+      <h3><i class="fas fa-level-up-alt"></i> Academic Progression <span class="right">${students.length}</span></h3>
       ${students.length ? `
         <div class="tbl-wrap">
           <table>
@@ -1696,7 +2383,7 @@ PAGE_RENDERERS.progression = function(){
             <tbody>
               ${students.map(s => `
                 <tr>
-                  <td>${esc(s.fullName||'')}</td>
+                  <td>${studentCell(s)}</td>
                   <td>${esc(s.programme?.yearStudy||'First')}</td>
                   <td>
                     <button class="btn sm green" onclick="promoteStudent('${s.id}')">Promote</button>
@@ -1723,51 +2410,6 @@ window.promoteStudent = async function(uid){
 window.repeatStudent = async function(uid){
   try{ await db.ref(`${ROOT}/applications/${uid}`).update({ repeat:true }); toast('Marked','ok'); }
   catch(e){ toast('Failed','err'); }
-};
-
-/* ───── TIMETABLE ───── */
-PAGE_RENDERERS.timetable = function(){
-  const list = state.timetables||[];
-  $('#mainContent').innerHTML = `
-    <div class="card">
-      <h3><i class="fas fa-clock"></i> Timetable <span class="right">${list.length}</span>
-        <button class="btn primary sm" style="margin-left:auto" onclick="addSlot()"><i class="fas fa-plus"></i> Add Slot</button>
-      </h3>
-      ${list.length ? `
-        <div class="tbl-wrap">
-          <table>
-            <thead><tr><th>Day</th><th>Time</th><th>Subject</th><th>Venue</th><th>Actions</th></tr></thead>
-            <tbody>
-              ${list.map(s => `
-                <tr>
-                  <td><strong>${esc(s.day||'')}</strong></td>
-                  <td>${esc(s.time||'')}</td>
-                  <td>${esc(s.subject||'')}</td>
-                  <td>${esc(s.venue||'')}</td>
-                  <td><button class="btn sm red" onclick="deleteItem('timetables','${s.id}')"><i class="fas fa-trash"></i></button></td>
-                </tr>`).join('')}
-            </tbody>
-          </table>
-        </div>`
-      : emptyState('No timetable slots','fa-clock')}
-    </div>`;
-};
-
-window.addSlot = function(){
-  openModal({
-    title:'Add Slot', icon:'fa-clock',
-    body:`<div class="form-row">
-        <div class="form-group"><label>Day</label>
-          <select id="ttDay"><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option></select></div>
-        <div class="form-group"><label>Time</label><input id="ttTime"/></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label>Subject</label><input id="ttSubject"/></div>
-        <div class="form-group"><label>Venue</label><input id="ttVenue"/></div>
-      </div>`,
-    foot:`<button class="btn ghost" onclick="closeModal()">Cancel</button>
-      <button class="btn primary" onclick="saveItem('timetables', {day:$('#ttDay').value, time:$('#ttTime').value, subject:$('#ttSubject').value, venue:$('#ttVenue').value})">Save</button>`
-  });
 };
 
 /* ───── ASSIGNMENTS ───── */
@@ -1832,12 +2474,12 @@ PAGE_RENDERERS.finance = function(){
       ${students.length ? `
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Student No.</th><th>Name</th><th>Balance</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Student</th><th>Student No.</th><th>Balance</th><th>Actions</th></tr></thead>
             <tbody>
               ${students.map(s => `
                 <tr>
+                  <td>${studentCell(s)}</td>
                   <td><strong>${esc(s.studentNumber||'')}</strong></td>
-                  <td>${esc(s.fullName||'')}</td>
                   <td>K${Number(s.balance||0).toLocaleString()}</td>
                   <td style="white-space:nowrap">
                     <button class="btn sm primary" onclick="addInvoice('${s.id}')"><i class="fas fa-plus"></i> Invoice</button>
@@ -1900,9 +2542,11 @@ PAGE_RENDERERS.payments = function(){
           <table>
             <thead><tr><th>Student</th><th>Item</th><th>Amount</th><th>Submitted</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody>
-              ${list.map(t => `
+              ${list.map(t => {
+                const student = (state.applications||[]).find(a => a.id === t.userId);
+                return `
                 <tr>
-                  <td>${esc(t.userName||t.userEmail||'')}</td>
+                  <td>${student ? studentCell(student) : `<div style="font-weight:700;font-size:12.5px">${esc(t.userName||t.userEmail||'')}</div>`}</td>
                   <td>${esc(t.itemTitle||'')}</td>
                   <td>ZMW ${t.amount||0}</td>
                   <td>${fmtDate(t.timestamp)}</td>
@@ -1913,7 +2557,8 @@ PAGE_RENDERERS.payments = function(){
                       <button class="btn sm green" onclick="approvePayment('${t.id}')"><i class="fas fa-check"></i></button>
                       <button class="btn sm red" onclick="rejectPayment('${t.id}')"><i class="fas fa-times"></i></button>` : ''}
                   </td>
-                </tr>`).join('')}
+                </tr>`;
+              }).join('')}
             </tbody>
           </table>
         </div>`
@@ -1996,14 +2641,14 @@ PAGE_RENDERERS.clearance = function(){
     html += `
       <div class="tbl-wrap">
         <table>
-          <thead><tr><th>Student No.</th><th>Name</th><th>Programme</th><th>Status</th><th>Actions</th></tr></thead>
+          <thead><tr><th>Student</th><th>Student No.</th><th>Programme</th><th>Status</th><th>Actions</th></tr></thead>
           <tbody>
             ${students.length ? students.map(s => {
               const cleared = isClearedFor(s, activeDept.id);
               return `
                 <tr>
+                  <td>${studentCell(s)}</td>
                   <td><strong>${esc(s.studentNumber||'')}</strong></td>
-                  <td>${esc(s.fullName||'')}</td>
                   <td>${esc(s.programme?.title||'')}</td>
                   <td>${cleared ? '<span class="badge green">Cleared</span>' : '<span class="badge amber">Pending</span>'}</td>
                   <td>
@@ -2073,22 +2718,26 @@ PAGE_RENDERERS.complaints = function(){
   $('#mainContent').innerHTML = `
     <div class="card">
       <h3><i class="fas fa-comment-dots"></i> Complaints <span class="right">${list.length}</span></h3>
-      ${list.length ? list.map(c => `
+      ${list.length ? list.map(c => {
+        const student = (state.applications||[]).find(a => a.id === c.userId);
+        return `
         <div class="card" style="border-left:4px solid ${['resolved'].includes((c.status||'').toLowerCase()) ? '#10b981' : ['in-review','in_review'].includes((c.status||'').toLowerCase()) ? '#8b5cf6' : '#f59e0b'}">
           <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px">
-            <div>
-              <div style="font-size:14px;font-weight:800">${esc(c.subject||'Complaint')}</div>
-              <div style="font-size:12px;color:var(--muted)">${esc(c.studentName||'')} · ${esc(c.studentNumber||'')} · ${fmtDateTime(c.createdAt)}</div>
+            <div style="flex:1;min-width:200px">
+              ${student ? studentCell(student, 34) : `<div style="font-size:14px;font-weight:800">${esc(c.studentName||'')}</div><div style="font-size:11.5px;color:var(--muted)">${esc(c.studentNumber||'')}</div>`}
+              <div style="font-size:12px;color:var(--muted);margin-top:4px"><i class="fas fa-clock"></i> ${fmtDateTime(c.createdAt)}</div>
             </div>
             <div>${statusBadge(c.status||'pending')} <span class="badge blue">${esc(c.category||'')}</span></div>
           </div>
+          <div style="font-size:14px;font-weight:800;margin-bottom:6px">${esc(c.subject||'Complaint')}</div>
           <div style="font-size:13px;padding:10px;background:var(--soft);border-radius:10px">${esc(c.body||'')}</div>
           ${c.response ? `<div style="margin-top:8px;padding:10px;background:var(--blue-light);border-radius:10px;font-size:12.5px;color:var(--blue-dark)"><strong>Reply:</strong> ${esc(c.response)}</div>` : ''}
           <div style="display:flex;gap:8px;margin-top:10px">
             ${(c.status||'pending').toLowerCase() !== 'resolved'
               ? `<button class="btn primary sm" onclick="respondComplaint('${c.id}')"><i class="fas fa-reply"></i> Respond</button>` : ''}
           </div>
-        </div>`).join('') : emptyState('No complaints','fa-comment-dots')}
+        </div>`;
+      }).join('') : emptyState('No complaints','fa-comment-dots')}
     </div>`;
 };
 
@@ -2139,21 +2788,25 @@ PAGE_RENDERERS.appeals = function(){
   $('#mainContent').innerHTML = `
     <div class="card">
       <h3><i class="fas fa-gavel"></i> Appeals <span class="right">${list.length}</span></h3>
-      ${list.length ? list.map(a => `
+      ${list.length ? list.map(a => {
+        const student = (state.applications||[]).find(x => x.id === (a.userId||a.id));
+        return `
         <div class="card" style="border-left:4px solid ${(a.status||'')==='resolved' ? '#10b981' : (a.status||'')==='rejected' ? '#ef4444' : '#f59e0b'}">
           <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px">
-            <div>
-              <div style="font-size:14px;font-weight:800">${esc(a.category||'Appeal')}</div>
-              <div style="font-size:12px;color:var(--muted)">${esc(a.studentName||'')} · ${fmtDateTime(a.createdAt)}</div>
+            <div style="flex:1;min-width:200px">
+              ${student ? studentCell(student, 34) : `<div style="font-size:14px;font-weight:800">${esc(a.studentName||'')}</div>`}
+              <div style="font-size:12px;color:var(--muted);margin-top:4px"><i class="fas fa-clock"></i> ${fmtDateTime(a.createdAt)}</div>
             </div>
             ${statusBadge(a.status||'pending')}
           </div>
+          <div style="font-size:14px;font-weight:800;margin-bottom:6px">${esc(a.category||'Appeal')}</div>
           <div style="font-size:13px;padding:10px;background:var(--soft);border-radius:10px">${esc(a.body||'')}</div>
           ${a.response ? `<div style="margin-top:8px;padding:10px;background:var(--blue-light);border-radius:10px;font-size:12.5px"><strong>Reply:</strong> ${esc(a.response)}</div>` : ''}
           <div style="margin-top:10px">
             <button class="btn primary sm" onclick="respondAppeal('${a.userId||a.id}')"><i class="fas fa-reply"></i> Respond</button>
           </div>
-        </div>`).join('') : emptyState('No appeals','fa-gavel')}
+        </div>`;
+      }).join('') : emptyState('No appeals','fa-gavel')}
     </div>`;
 };
 
@@ -2191,9 +2844,11 @@ PAGE_RENDERERS.sup = function(){
           <table>
             <thead><tr><th>Student</th><th>Reason</th><th>Submitted</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody>
-              ${list.map(r => `
+              ${list.map(r => {
+                const student = (state.applications||[]).find(a => a.id === r.userId) || { fullName: r.studentName, studentNumber: r.studentNumber };
+                return `
                 <tr>
-                  <td>${esc(r.studentName||'')}<br><span style="color:var(--muted);font-size:11px">${esc(r.studentNumber||'')}</span></td>
+                  <td>${studentCell(student)}</td>
                   <td>${esc((r.reason||'').slice(0,80))}</td>
                   <td>${fmtDate(r.createdAt)}</td>
                   <td>${statusBadge(r.status||'pending')}</td>
@@ -2201,7 +2856,8 @@ PAGE_RENDERERS.sup = function(){
                     <button class="btn sm green" onclick="updateItem('supRequests','${r.id}',{status:'approved'})"><i class="fas fa-check"></i></button>
                     <button class="btn sm red" onclick="updateItem('supRequests','${r.id}',{status:'rejected'})"><i class="fas fa-times"></i></button>
                   </td>
-                </tr>`).join('')}
+                </tr>`;
+              }).join('')}
             </tbody>
           </table>
         </div>`
@@ -2214,16 +2870,16 @@ PAGE_RENDERERS.diplomas = function(){
   const students = (state.applications||[]).filter(a => (a.status||'').toLowerCase()==='approved');
   $('#mainContent').innerHTML = `
     <div class="card">
-      <h3><i class="fas fa-certificate"></i> Diplomas & Certificates</h3>
+      <h3><i class="fas fa-certificate"></i> Diplomas & Certificates <span class="right">${students.length}</span></h3>
       ${students.length ? `
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Student No.</th><th>Name</th><th>Programme</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Student</th><th>Student No.</th><th>Programme</th><th>Actions</th></tr></thead>
             <tbody>
               ${students.map(s => `
                 <tr>
+                  <td>${studentCell(s)}</td>
                   <td><strong>${esc(s.studentNumber||'')}</strong></td>
-                  <td>${esc(s.fullName||'')}</td>
                   <td>${esc(s.programme?.title||'')}</td>
                   <td><button class="btn sm primary" onclick="updateDiploma('${s.id}')"><i class="fas fa-cog"></i> Update</button></td>
                 </tr>`).join('')}
@@ -2258,14 +2914,11 @@ PAGE_RENDERERS.transcripts = function(){
   const students = (state.applications||[]).filter(a => (a.status||'').toLowerCase()==='approved');
   $('#mainContent').innerHTML = `
     <div class="card">
-      <h3><i class="fas fa-scroll"></i> Transcripts & CRA</h3>
+      <h3><i class="fas fa-scroll"></i> Transcripts & CRA <span class="right">${students.length}</span></h3>
       ${students.length ? students.map(s => `
         <div class="feed-item">
           <div class="dot green"></div>
-          <div class="fbody">
-            <div class="fttl">${esc(s.fullName||'')} — ${esc(s.studentNumber||'')}</div>
-            <div class="fmeta">${esc(s.programme?.title||'')}</div>
-          </div>
+          <div class="fbody">${studentCell(s)}</div>
           <button class="btn sm primary" onclick="generateTranscript('${s.id}')">Generate</button>
         </div>`).join('') : emptyState('No students','fa-user')}
     </div>`;
@@ -2277,9 +2930,9 @@ window.generateTranscript = async function(uid){
 };
 
 /* ═══════════════════════════════════════════════════════════════
-   TEVETA — EXACT MATCH WITH STUDENT PORTAL
+   TEVETA
    ═══════════════════════════════════════════════════════════════ */
-const TEVETA_SUBJECTS = [
+const TEVETA_SUBJECTS_FALLBACK = [
   { code:'41.1', label:'Digital Electronics' },
   { code:'41.2', label:'Entrepreneurship' },
   { code:'41.3', label:'Operating Systems' },
@@ -2289,6 +2942,23 @@ const TEVETA_SUBJECTS = [
   { code:'41.7', label:'Management Information Systems' },
   { code:'41.8', label:'Project' }
 ];
+
+/* Look up programme courses for TEVETA */
+function getProgrammeCoursesForTeveta(studentUid){
+  const student = (state.applications||[]).find(a => a.id === studentUid);
+  if(!student) return null;
+  const progCode = String(student.programme?.code || '').trim();
+  const progTitle = String(student.programme?.title || '').trim();
+  const all = state.courses || [];
+  const courses = all.filter(c => {
+    if(c.showOnTeveta === false) return false;
+    if(c.programmeId && student.programme?.id && c.programmeId === student.programme.id) return true;
+    if(c.programmeCode && progCode && c.programmeCode === progCode) return true;
+    if(c.programmeTitle && progTitle && c.programmeTitle === progTitle) return true;
+    return false;
+  });
+  return courses.length ? courses : null;
+}
 
 const TEVETA_STUDENT_CSS = `
   *{box-sizing:border-box}
@@ -2347,7 +3017,12 @@ function renderTevetaFormHTML(t){
 
   const isApproved  = (t.status||'').toLowerCase() === 'approved';
   const isRejected  = (t.status||'').toLowerCase() === 'rejected';
-  const isSubmitted = (t.status||'submitted').toLowerCase() === 'submitted';
+
+  /* Subjects: prefer admin-defined programme courses, fall back to fixed list */
+  const customCourses = getProgrammeCoursesForTeveta(t.id);
+  const subjectList = (customCourses && customCourses.length)
+    ? customCourses.map(c => ({ code: c.code || '', label: c.name || '' }))
+    : TEVETA_SUBJECTS_FALLBACK;
 
   const banner = isApproved
     ? `<div class="teveta-status-banner"><i class="fas fa-check-circle"></i> <strong>Approved</strong> on ${fmtDateTime(t.approvedAt)} by ${esc(t.approvedBy||'')}</div>`
@@ -2461,7 +3136,7 @@ function renderTevetaFormHTML(t){
         <span class="field-number">11.</span>
         <span class="field-label" style="flex:1;min-width:100%">SUBJECTS TO BE TAKEN (Indicate whether practical or written paper)</span>
         <div class="subjects-list">
-          ${TEVETA_SUBJECTS.map((s, i) => `
+          ${subjectList.map((s, i) => `
             <div class="subject-row">
               <input type="checkbox" checked disabled />
               <span class="subject-text">(${String.fromCharCode(105 + i)}) ${esc(s.code)} ${esc(s.label)}</span>
@@ -2515,12 +3190,13 @@ PAGE_RENDERERS.teveta = function(){
       ${list.length ? `
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Surname</th><th>Forenames</th><th>TEVETA No.</th><th>Series</th><th>Year</th><th>Status</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Student</th><th>TEVETA No.</th><th>Series</th><th>Year</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody>
-              ${list.map(t => `
+              ${list.map(t => {
+                const student = (state.applications||[]).find(a => a.id === t.id) || { fullName: `${t.surname||''} ${t.forenames||''}`, studentNumber: t.studentNumber, email: t.email };
+                return `
                 <tr>
-                  <td><strong>${esc(t.surname||'')}</strong></td>
-                  <td>${esc(t.forenames||'')}</td>
+                  <td>${studentCell(student)}</td>
                   <td>${esc(t.tevetaExamNo||'')}</td>
                   <td>${esc(t.examSeries||'')}</td>
                   <td>${esc(t.yearEnrolment||'')}</td>
@@ -2531,7 +3207,8 @@ PAGE_RENDERERS.teveta = function(){
                       <button class="btn sm green" onclick="approveTeveta('${t.id}')"><i class="fas fa-check"></i></button>
                       <button class="btn sm red" onclick="rejectTeveta('${t.id}')"><i class="fas fa-times"></i></button>` : ''}
                   </td>
-                </tr>`).join('')}
+                </tr>`;
+              }).join('')}
             </tbody>
           </table>
         </div>`
@@ -2616,7 +3293,7 @@ PAGE_RENDERERS.eligibility = function(){
                 const eligible = att >= minAtt && bal === 0;
                 return `
                   <tr>
-                    <td>${esc(s.fullName||'')}<br><span style="color:var(--muted);font-size:11px">${esc(s.studentNumber||'')}</span></td>
+                    <td>${studentCell(s)}</td>
                     <td>${att}%</td>
                     <td>K${Number(bal).toLocaleString()}</td>
                     <td>${eligible ? '<span class="badge green">Eligible</span>' : '<span class="badge red">Not Eligible</span>'}</td>
@@ -2638,12 +3315,12 @@ PAGE_RENDERERS.graduation = function(){
       ${candidates.length ? `
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Student No.</th><th>Name</th><th>Programme</th><th>Status</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Student</th><th>Student No.</th><th>Programme</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody>
               ${candidates.map(s => `
                 <tr>
+                  <td>${studentCell(s)}</td>
                   <td><strong>${esc(s.studentNumber||'')}</strong></td>
-                  <td>${esc(s.fullName||'')}</td>
                   <td>${esc(s.programme?.title||'')}</td>
                   <td>${s.graduating ? '<span class="badge green">Graduating</span>' : '<span class="badge grey">Not marked</span>'}</td>
                   <td><button class="btn sm green" onclick="updateItem('applications','${s.id}',{graduating:true})">Mark Graduating</button></td>
@@ -2708,9 +3385,11 @@ PAGE_RENDERERS.accommodation = function(){
           <table>
             <thead><tr><th>Student</th><th>Block</th><th>Room Type</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody>
-              ${requests.map(r => `
+              ${requests.map(r => {
+                const student = (state.applications||[]).find(a => a.id === (r.userId||r.id)) || { fullName: r.studentName, studentNumber: r.studentNumber };
+                return `
                 <tr>
-                  <td>${esc(r.studentName||'')}<br><span style="color:var(--muted);font-size:11px">${esc(r.studentNumber||'')}</span></td>
+                  <td>${studentCell(student)}</td>
                   <td>${esc(r.preferredBlock||'')}</td>
                   <td>${esc(r.roomType||'')}</td>
                   <td>${statusBadge(r.status||'pending')}</td>
@@ -2719,7 +3398,8 @@ PAGE_RENDERERS.accommodation = function(){
                       <button class="btn sm green" onclick="allocateRoom('${r.userId||r.id}')"><i class="fas fa-check"></i> Allocate</button>
                       <button class="btn sm red" onclick="updateItem('accommodationRequests','${r.userId||r.id}',{status:'rejected'})"><i class="fas fa-times"></i></button>` : ''}
                   </td>
-                </tr>`).join('')}
+                </tr>`;
+              }).join('')}
             </tbody>
           </table>
         </div>`
@@ -2733,14 +3413,17 @@ PAGE_RENDERERS.accommodation = function(){
           <table>
             <thead><tr><th>Student</th><th>Building</th><th>Room</th><th>Roommate</th><th>Allocated</th></tr></thead>
             <tbody>
-              ${allocated.map(a => `
+              ${allocated.map(a => {
+                const student = (state.applications||[]).find(x => x.id === a.id) || { fullName: a.studentName, studentNumber: a.studentNumber };
+                return `
                 <tr>
-                  <td>${esc(a.studentName||'')}</td>
+                  <td>${studentCell(student)}</td>
                   <td>${esc(a.building||'')}</td>
                   <td>${esc(a.room||'')}</td>
                   <td>${esc(a.roommate||'')}</td>
                   <td>${fmtDate(a.allocatedAt)}</td>
-                </tr>`).join('')}
+                </tr>`;
+              }).join('')}
             </tbody>
           </table>
         </div>`
@@ -2789,12 +3472,12 @@ PAGE_RENDERERS.studentid = function(){
       ${students.length ? `
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Student No.</th><th>Name</th><th>Status</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Student</th><th>Student No.</th><th>Status</th><th>Actions</th></tr></thead>
             <tbody>
               ${students.map(s => `
                 <tr>
+                  <td>${studentCell(s)}</td>
                   <td><strong>${esc(s.studentNumber||'')}</strong></td>
-                  <td>${esc(s.fullName||'')}</td>
                   <td>${statusBadge(s.idIssued ? 'issued' : 'pending')}</td>
                   <td><button class="btn sm green" onclick="updateItem('applications','${s.id}',{idIssued:${s.idIssued?'false':'true'}})">${s.idIssued?'Re-issue':'Issue'}</button></td>
                 </tr>`).join('')}
@@ -3013,7 +3696,7 @@ PAGE_RENDERERS.documents = function(){
             <tbody>
               ${pending.map(p => `
                 <tr>
-                  <td>${esc(p.student.fullName||'')}<br><span style="color:var(--muted);font-size:11px">${esc(p.student.email||'')}</span></td>
+                  <td>${studentCell(p.student)}</td>
                   <td>${p.missing.map(m => `<span class="badge amber">${m[1]}</span>`).join(' ')}</td>
                   <td><button class="btn sm ghost" onclick="viewStudent('${p.student.id}')"><i class="fas fa-eye"></i></button></td>
                 </tr>`).join('')}
