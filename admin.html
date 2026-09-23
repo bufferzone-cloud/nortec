@@ -46,7 +46,6 @@
 
   .app-root{display:flex;height:100dvh;width:100%;overflow:hidden;position:relative;background:#f1f5f9}
 
-  /* ═══ SIDEBAR ═══ */
   .sidebar{width:var(--sidebar-w);height:100dvh;background:#0f172a;color:#cbd5e1;display:flex;flex-direction:column;overflow:hidden;flex-shrink:0;transition:width .3s cubic-bezier(.22,1,.36,1),transform .3s;border-right:1px solid #1e293b;z-index:300;position:relative}
   .sidebar.collapsed{width:var(--sidebar-w-collapsed)}
   .sidebar.collapsed .hide-collapsed{display:none}
@@ -98,7 +97,6 @@
   .sb-logout{width:100%;padding:10px;border-radius:9px;border:none;background:#1e293b;color:#ef4444;font-weight:700;font-size:12px;cursor:pointer;font-family:inherit;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px}
   .sb-logout:hover{background:#7f1d1d;color:#fff}
 
-  /* ═══ MAIN AREA ═══ */
   .main-area{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
   .top-bar{background:#fff;border-bottom:1px solid var(--border);padding:12px 22px;display:flex;align-items:center;gap:14px;flex-shrink:0;min-height:64px;box-shadow:0 2px 8px rgba(0,0,0,.02)}
   .menu-toggle{display:none;background:none;border:none;font-size:22px;color:var(--text);cursor:pointer;padding:6px;border-radius:8px;transition:.2s}
@@ -217,29 +215,18 @@
   .feed-item .fttl{font-size:13px;font-weight:700;color:var(--text);line-height:1.3}
   .feed-item .fmeta{font-size:11.5px;color:var(--muted);margin-top:3px}
 
-  /* ═══ STUDENT AVATAR CELL ═══ */
-  .student-av{
-    display:inline-flex;align-items:center;justify-content:center;
-    border-radius:50%;overflow:hidden;color:#fff;
-    font-weight:800;font-size:11px;flex-shrink:0;
-    border:2px solid #fff;
-    box-shadow:0 3px 10px rgba(37,99,235,.20);
-    background:linear-gradient(135deg,#3b82f6,#2563eb);
-    vertical-align:middle;letter-spacing:.2px;
-  }
+  .student-av{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;overflow:hidden;color:#fff;font-weight:800;font-size:11px;flex-shrink:0;border:2px solid #fff;box-shadow:0 3px 10px rgba(37,99,235,.20);background:linear-gradient(135deg,#3b82f6,#2563eb);vertical-align:middle;letter-spacing:.2px}
   .student-av img{width:100%;height:100%;object-fit:cover;display:block}
   .student-cell{display:flex;align-items:center;gap:10px;min-width:0}
   .student-cell .info{min-width:0;flex:1}
   .student-cell .info .nm{font-weight:700;font-size:12.5px;color:var(--text);line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .student-cell .info .sub{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-  /* ═══ TABS ═══ */
   .tab-row{display:flex;gap:6px;border-bottom:2px solid var(--soft);margin-bottom:16px;overflow-x:auto;padding-bottom:0}
   .tab-btn{background:none;border:none;padding:10px 16px;font-weight:700;font-size:13px;color:var(--muted);cursor:pointer;font-family:inherit;border-bottom:3px solid transparent;transition:.2s;white-space:nowrap;margin-bottom:-2px}
   .tab-btn:hover{color:var(--blue)}
   .tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
 
-  /* ═══ TIMETABLE GRID ═══ */
   .tt-toolbar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;align-items:flex-end}
   .tt-toolbar .form-group{margin-bottom:0;min-width:220px}
   .tt-grid-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border);background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.04)}
@@ -263,7 +250,6 @@
   .tt-legend span{display:inline-flex;align-items:center;gap:6px}
   .tt-legend i{color:var(--blue)}
 
-  /* ═══ GRADE BADGES ═══ */
   .grade-badge{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;border-radius:50%;font-weight:900;font-size:14px;color:#fff;padding:0 4px;letter-spacing:.3px}
   .grade-badge.D{background:linear-gradient(135deg,#7c3aed,#5b21b6)}
   .grade-badge.M{background:linear-gradient(135deg,#0ea5e9,#0369a1)}
@@ -271,52 +257,51 @@
   .grade-badge.P{background:linear-gradient(135deg,#f59e0b,#b45309)}
   .grade-badge.F{background:linear-gradient(135deg,#ef4444,#991b1b)}
 
-  /* ═══ TEVETA FORM ═══ */
-  .teveta-form-container{font-family:'Inter',sans-serif;background:#fff;padding:26px 24px;border:1px solid var(--border);border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
-  .teveta-form-container .form-header{text-align:center;margin-bottom:22px;padding-bottom:14px;border-bottom:2px solid #0f172a}
-  .teveta-form-container .form-header h2{font-size:19px;font-weight:900;color:var(--text);text-transform:uppercase;letter-spacing:.5px;margin-top:8px}
-  .teveta-form-container .form-header .logo-section{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:10px}
-  .teveta-form-container .form-header .logo-section img{height:60px;object-fit:contain}
-  .teveta-form-container .form-header .logo-section .address-text{font-size:10px;color:#475569;text-align:right;line-height:1.45;flex:1;min-width:200px}
-  .teveta-form-container .form-header .logo-section .address-text strong{color:var(--text)}
-  .teveta-form-container .form-field{margin-bottom:11px;display:flex;align-items:flex-start;gap:6px;flex-wrap:wrap}
-  .teveta-form-container .form-field .field-number{font-weight:800;color:var(--text);min-width:26px;font-size:13.5px;flex-shrink:0}
-  .teveta-form-container .form-field .field-label{font-weight:700;color:var(--text);font-size:13px;min-width:160px;flex-shrink:0}
-  .teveta-form-container .form-field .field-input{flex:1;min-width:180px;border:none;border-bottom:1.5px solid var(--text);padding:2px 6px;font-size:13.5px;font-family:'Inter',sans-serif;background:transparent;outline:none;color:var(--text);transition:.2s}
-  .teveta-form-container .form-field .field-input:focus{border-bottom:2px solid var(--blue);background:#f8fafc}
-  .teveta-form-container .form-field .field-input[readonly]{border-bottom:1.5px solid #94a3b8;color:#475569}
-  .teveta-form-container .box-group{display:flex;gap:5px;align-items:center;flex-wrap:wrap;flex:1}
-  .teveta-form-container .box-input{border:1.5px solid var(--text);padding:5px 4px;font-size:13px;font-family:'Inter',sans-serif;background:#fff;outline:none;width:34px;text-align:center;color:var(--text);font-weight:700;border-radius:4px;transition:.2s}
-  .teveta-form-container .box-input:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(37,99,235,.15)}
-  .teveta-form-container .box-input:disabled,.teveta-form-container .box-input.readonly{background:#f1f5f9;color:#64748b;border-color:#94a3b8}
-  .teveta-form-container .box-sep{font-size:14px;color:#64748b;font-weight:700;margin:0 2px}
-  .teveta-form-container .radio-group{display:flex;align-items:center;gap:16px;flex-wrap:wrap;flex:1}
-  .teveta-form-container .radio-opt{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--text);font-weight:500;cursor:pointer}
-  .teveta-form-container .radio-opt input[type="radio"]{accent-color:var(--blue);width:15px;height:15px;cursor:pointer}
-  .teveta-form-container .radio-opt input[type="radio"]:disabled{cursor:not-allowed}
-  .teveta-form-container .radio-opt input[type="radio"]:disabled+span{color:#94a3b8}
-  .teveta-form-container .subjects-list{flex:1;min-width:260px;display:flex;flex-direction:column;gap:6px;margin-top:2px}
-  .teveta-form-container .subject-row{display:flex;align-items:center;gap:10px;font-size:13px;padding:3px 0}
-  .teveta-form-container .subject-row input[type="checkbox"]{width:16px;height:16px;accent-color:var(--blue);cursor:pointer;flex-shrink:0}
-  .teveta-form-container .subject-row input[type="checkbox"]:disabled{cursor:not-allowed;accent-color:#94a3b8}
-  .teveta-form-container .subject-row .subject-text{color:var(--text);flex:1;line-height:1.4}
-  .teveta-form-container .subject-row .subject-line{flex:1;border-bottom:1.5px dotted var(--text);height:1px;margin-left:6px;min-width:60px}
-  .teveta-form-container .subject-row .subject-line.readonly{border-bottom-color:#94a3b8}
-  .teveta-form-container .btn-submit-teveta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:22px;padding:14px 32px;background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff;border:none;border-radius:50px;font-size:15px;font-weight:700;cursor:pointer;transition:.2s;font-family:'Inter',sans-serif;box-shadow:0 8px 26px rgba(37,99,235,.35)}
-  .teveta-form-container .btn-submit-teveta:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(37,99,235,.45)}
-  .teveta-form-container .btn-submit-teveta:disabled{opacity:.6;cursor:not-allowed;transform:none!important}
-  .teveta-signature-block{margin-top:24px;padding-top:18px;border-top:2px dashed var(--border)}
-  .teveta-signature-block .sig-row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:12px}
-  .teveta-signature-block .sig-col{flex:1;min-width:180px}
-  .teveta-signature-block .sig-col .sig-line{border-bottom:1.5px solid var(--text);padding:22px 0 4px;margin-bottom:6px}
-  .teveta-signature-block .sig-col .sig-label{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
-  .teveta-status-banner{background:#f0fdf4;border-left:4px solid #10b981;padding:12px 14px;border-radius:10px;margin-bottom:18px;font-size:13px;color:#065f46}
+  /* ═══ CA DOCUMENT GALLERY ═══ */
+  .ca-doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+  .ca-doc-tile{position:relative;border-radius:12px;overflow:hidden;background:var(--soft);border:1.5px solid var(--border);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.25s}
+  .ca-doc-tile:hover{border-color:var(--blue);box-shadow:0 6px 20px rgba(37,99,235,.18);transform:translateY(-3px)}
+  .ca-doc-tile img{width:100%;height:100%;object-fit:cover;display:block}
+  .ca-doc-tile .doc-icon{font-size:36px;color:var(--blue);opacity:.55}
+  .ca-doc-tile .doc-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(0,0,0,.75) 0%,transparent 100%);color:#fff;font-size:10.5px;font-weight:700;padding:16px 8px 6px;text-align:center;line-height:1.25;pointer-events:none}
+  .ca-doc-tile .doc-actions{position:absolute;top:6px;right:6px;display:flex;gap:4px;opacity:0;transition:.2s}
+  .ca-doc-tile:hover .doc-actions{opacity:1}
+  .ca-doc-tile .doc-actions button{background:rgba(255,255,255,.95);border:none;border-radius:6px;width:24px;height:24px;font-size:11px;color:#334155;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;transition:.2s}
+  .ca-doc-tile .doc-actions button:hover{background:#fff;color:var(--blue)}
 
-  /* ═══ MOBILE SIDEBAR OVERLAY ═══ */
+  /* ═══ FILTER CHIPS DISPLAY ═══ */
+  .active-filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+  .active-filter{display:inline-flex;align-items:center;gap:6px;background:var(--blue-light);color:var(--blue-dark);border:1px solid var(--blue-soft);border-radius:20px;padding:4px 10px 4px 12px;font-size:11.5px;font-weight:700}
+  .active-filter button{background:none;border:none;color:var(--blue-dark);cursor:pointer;font-size:11px;padding:0 2px;font-family:inherit;line-height:1}
+  .active-filter button:hover{color:var(--red)}
+
+  /* ═══ VENUE CARD ═══ */
+  .venue-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  .venue-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px;transition:.25s;cursor:pointer;position:relative}
+  .venue-card:hover{border-color:var(--blue);box-shadow:0 6px 22px rgba(37,99,235,.14);transform:translateY(-3px)}
+  .venue-card .vc-hd{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:10px}
+  .venue-card .vc-name{font-weight:800;font-size:14px;color:var(--text);line-height:1.25}
+  .venue-card .vc-type{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;padding:3px 9px;border-radius:20px;background:var(--blue-light);color:var(--blue-dark)}
+  .venue-card .vc-meta{font-size:11.5px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+  .venue-card .vc-meta span{display:flex;align-items:center;gap:6px}
+  .venue-card .vc-meta i{color:var(--blue);width:14px}
+
+  /* ═══ LECTURER / HOD CARD ═══ */
+  .staff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+  .staff-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px;transition:.25s;position:relative;display:flex;gap:12px;align-items:flex-start}
+  .staff-card:hover{border-color:var(--blue);box-shadow:0 6px 22px rgba(37,99,235,.14)}
+  .staff-card .sc-av{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;flex-shrink:0;overflow:hidden;border:2px solid #fff;box-shadow:0 4px 12px rgba(37,99,235,.25)}
+  .staff-card .sc-av img{width:100%;height:100%;object-fit:cover}
+  .staff-card .sc-body{flex:1;min-width:0}
+  .staff-card .sc-name{font-weight:800;font-size:13.5px;color:var(--text);line-height:1.2}
+  .staff-card .sc-role{font-size:11px;color:var(--blue);font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
+  .staff-card .sc-meta{font-size:11.5px;color:var(--muted);margin-top:6px;display:flex;flex-direction:column;gap:3px}
+  .staff-card .sc-meta span{display:flex;align-items:center;gap:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .staff-card .sc-meta i{color:var(--blue);width:12px;flex-shrink:0}
+
   .sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);z-index:299;opacity:0;visibility:hidden;transition:all .3s}
   .sidebar-overlay.active{opacity:1;visibility:visible}
 
-  /* ═══ RESPONSIVE ═══ */
   @media (max-width:1024px){
     .sidebar{position:fixed;left:0;top:0;transform:translateX(-100%);width:280px;z-index:300}
     .sidebar.open{transform:translateX(0)}
@@ -360,12 +345,8 @@
     .toast{max-width:calc(100vw - 32px)}
     #toast{right:16px;left:16px;max-width:none}
     .tt-toolbar .form-group{min-width:100%}
-  }
-  @media (max-width:560px){
-    .teveta-form-container{padding:18px 14px}
-    .teveta-form-container .form-field .field-label{min-width:auto;flex:1 1 100%}
-    .teveta-form-container .form-field .field-number{min-width:22px}
-    .teveta-form-container .box-input{width:30px;padding:4px 2px;font-size:12px}
+    .venue-grid,.staff-grid{grid-template-columns:1fr}
+    .ca-doc-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
   }
 </style>
 </head>
@@ -486,17 +467,19 @@ const DEPARTMENTS = [
 ];
 const DEPT_BY_ID = Object.fromEntries(DEPARTMENTS.map(d => [d.id, d]));
 
+const VENUE_TYPES = ['Lecture Room','Laboratory','Workshop','Computer Lab','Library','Hall','Studio','Sports Field','Other'];
+
 const ROLES = {
   'Super Admin':        { icon:'fa-crown', color:'purple', departments: DEPARTMENTS.map(d => d.id), modules: ['*'] },
   'Admissions Officer': { icon:'fa-user-check', color:'blue', departments:['admissions'], modules:['dashboard','activity','students','applications','admissions','registration','documents','notices','notifications','reports','clearance'] },
-  'Registrar':          { icon:'fa-clipboard-list', color:'blue', departments:[], modules:['dashboard','activity','students','applications','registration','courses','programmes','classes','schools','exams','progression','timetable','transcripts','diplomas','graduation','notices','notifications','reports','clearance'] },
+  'Registrar':          { icon:'fa-clipboard-list', color:'blue', departments:[], modules:['dashboard','activity','students','applications','registration','courses','programmes','classes','schools','exams','progression','timetable','transcripts','diplomas','graduation','notices','notifications','reports','clearance','venues','lecturers','hods'] },
   'Finance Officer':    { icon:'fa-coins', color:'green', departments:['accounts'], modules:['dashboard','activity','students','finance','payments','clearance','reports','notices','notifications'] },
-  'Exams Officer':      { icon:'fa-file-signature', color:'purple', departments:['exams'], modules:['dashboard','activity','students','exams','eligibility','teveta','sup','diplomas','transcripts','graduation','notices','notifications','reports','clearance'] },
-  'HOD':                { icon:'fa-user-tie', color:'pink', departments:['hod'], modules:['dashboard','activity','students','ca','attendance','assignments','exams','clearance','notices','notifications','reports','resources','timetable'] },
-  'Lecturer':           { icon:'fa-chalkboard-teacher', color:'teal', departments:[], modules:['dashboard','activity','students','courses','ca','attendance','assignments','resources','timetable','notices','notifications'] },
+  'Exams Officer':      { icon:'fa-file-signature', color:'purple', departments:['exams'], modules:['dashboard','activity','students','exams','eligibility','teveta','sup','diplomas','transcripts','graduation','notices','notifications','reports','clearance','venues'] },
+  'HOD':                { icon:'fa-user-tie', color:'pink', departments:['hod'], modules:['dashboard','activity','students','ca','attendance','assignments','exams','clearance','notices','notifications','reports','resources','timetable','lecturers','venues'] },
+  'Lecturer':           { icon:'fa-chalkboard-teacher', color:'teal', departments:[], modules:['dashboard','activity','students','courses','ca','attendance','assignments','resources','timetable','notices','notifications','venues'] },
   'Librarian':          { icon:'fa-book-open', color:'amber', departments:['library'], modules:['dashboard','activity','students','library','clearance','notices','notifications'] },
-  'Sports Officer':     { icon:'fa-futbol', color:'green', departments:['sports'], modules:['dashboard','activity','students','clearance','notices','notifications'] },
-  'Lab Attendant':      { icon:'fa-flask', color:'teal', departments:['lab'], modules:['dashboard','activity','students','clearance','notices','notifications'] },
+  'Sports Officer':     { icon:'fa-futbol', color:'green', departments:['sports'], modules:['dashboard','activity','students','clearance','notices','notifications','venues'] },
+  'Lab Attendant':      { icon:'fa-flask', color:'teal', departments:['lab'], modules:['dashboard','activity','students','clearance','notices','notifications','venues'] },
   'Accommodation Officer': { icon:'fa-bed', color:'amber', departments:['accommodation'], modules:['dashboard','activity','students','accommodation','clearance','notices','notifications'] },
   'Support Staff':      { icon:'fa-headset', color:'blue', departments:[], modules:['dashboard','activity','students','complaints','notices','notifications'] }
 };
@@ -517,6 +500,9 @@ const NAV_GROUPS = [
     { id:'programmes',  label:'Programmes',      icon:'fa-graduation-cap' },
     { id:'courses',     label:'Courses',         icon:'fa-book' },
     { id:'classes',     label:'Classes',         icon:'fa-users-rectangle' },
+    { id:'lecturers',   label:'Lecturers',       icon:'fa-chalkboard-teacher' },
+    { id:'hods',        label:'HODs',            icon:'fa-user-tie' },
+    { id:'venues',      label:'Venues & Rooms',  icon:'fa-map-location-dot' },
     { id:'ca',          label:'Continuous Assessment', icon:'fa-chart-bar' },
     { id:'attendance',  label:'Attendance',      icon:'fa-user-check' },
     { id:'exams',       label:'Examinations',    icon:'fa-file-signature' },
@@ -572,6 +558,9 @@ const PAGE_META = {
   programmes:{ title:'Programmes', sub:'Academic programmes & their courses', icon:'fa-graduation-cap' },
   courses:{ title:'Courses', sub:'Course catalogue', icon:'fa-book' },
   classes:{ title:'Classes & Streams', sub:'Class groups under programmes', icon:'fa-users-rectangle' },
+  lecturers:{ title:'Lecturers', sub:'Teaching staff directory', icon:'fa-chalkboard-teacher' },
+  hods:{ title:'Heads of Department', sub:'Department leadership', icon:'fa-user-tie' },
+  venues:{ title:'Venues & Rooms', sub:'Buildings, rooms, labs & halls', icon:'fa-map-location-dot' },
   ca:{ title:'Continuous Assessment', sub:'CA marks & uploads', icon:'fa-chart-bar' },
   attendance:{ title:'Attendance', sub:'Attendance records', icon:'fa-user-check' },
   exams:{ title:'Examinations', sub:'Exam scheduling', icon:'fa-file-signature' },
@@ -606,11 +595,11 @@ const PAGE_META = {
 };
 
 const GRADE_SYSTEM = {
-  D: { label: 'Distinction', color: 'D', range: '75–100', points: 4 },
-  M: { label: 'Merit',       color: 'M', range: '65–74',  points: 3 },
-  C: { label: 'Credit',      color: 'C', range: '55–64',  points: 2 },
-  P: { label: 'Pass',        color: 'P', range: '40–54',  points: 1 },
-  F: { label: 'Fail',        color: 'F', range: '0–39',   points: 0 }
+  D: { label: 'Distinction', range: '75–100' },
+  M: { label: 'Merit',       range: '65–74'  },
+  C: { label: 'Credit',      range: '55–64'  },
+  P: { label: 'Pass',        range: '40–54'  },
+  F: { label: 'Fail',        range: '0–39'   }
 };
 const GRADE_KEYS = ['D','M','C','P','F'];
 function gradeFromPct(pct){
@@ -638,7 +627,7 @@ let currentUser   = null;
 let currentStaff  = {};
 let currentRole   = {};
 let activePage    = 'dashboard';
-let state         = { settings:{}, classes:[], courses:[], programmes:[], timetables:[] };
+let state         = { settings:{}, classes:[], courses:[], programmes:[], timetables:[], venues:[], lecturers:[], hods:[] };
 let activeClearanceTab = null;
 let activeTevetaFilter = 'all';
 let activeTTProgramme = '';
@@ -646,7 +635,10 @@ let activeTTClass = '';
 let dashboardChart = null;
 
 /* Student filters */
-let studentFilter = { q:'', year:'all', programme:'all', course:'all' };
+let studentFilter = {
+  q:'', year:'all', programme:'all', classId:'all', course:'all',
+  yearEnrolled:'all', balance:'all', clearance:'all'
+};
 
 /* ═══════════════════════════════════════════════════════════════
    HELPERS
@@ -673,11 +665,6 @@ function studentAvatar(s, size = 34){
   </div>`;
 }
 function studentCell(s, size = 34){
-  const name = (s && (s.fullName || s.name)) || '—';
-  const sub  = (s && (s.studentNumber || s.email)) || '';
-  return `<div class="student-cell">${studentAvatar(s, size)}<div class="info"><div class="nm">${esc(name)}</div>${sub ? `<div class="sub">${esc(sub)}</div>` : ''}</div></div>`;
-}
-function studentCellNo(s, size = 34){
   const name = (s && (s.fullName || s.name)) || '—';
   const sub  = (s && (s.studentNumber || s.email)) || '';
   return `<div class="student-cell">${studentAvatar(s, size)}<div class="info"><div class="nm">${esc(name)}</div>${sub ? `<div class="sub">${esc(sub)}</div>` : ''}</div></div>`;
@@ -730,7 +717,10 @@ function isClearedFor(app, deptId){
   return false;
 }
 
-/* Filter students on Students page */
+/* Student filters */
+function getStudentYearEnrolled(s){
+  return String(s.yearEnrolled || s.programme?.yearEnrolled || s.programme?.intakeYear || (s.submittedAt ? new Date(s.submittedAt).getFullYear() : '') || '').trim();
+}
 function filterStudents(list){
   return list.filter(s => {
     const q = studentFilter.q.toLowerCase();
@@ -740,23 +730,47 @@ function filterStudents(list){
     }
     if(studentFilter.year !== 'all' && String(s.programme?.yearStudy||'') !== studentFilter.year) return false;
     if(studentFilter.programme !== 'all'){
-      const progId = studentFilter.programme;
-      const p = (state.programmes||[]).find(x => x.id === progId);
+      const p = (state.programmes||[]).find(x => x.id === studentFilter.programme);
       if(p){
         if(String(s.programme?.code||'') !== String(p.code||'') && String(s.programme?.title||'') !== String(p.title||'')) return false;
       }
     }
+    if(studentFilter.classId !== 'all'){
+      if(String(s.classId||'') !== String(studentFilter.classId)) return false;
+    }
     if(studentFilter.course !== 'all'){
-      const courseId = studentFilter.course;
-      const c = (state.courses||[]).find(x => x.id === courseId);
-      if(c){
-        const clr = (s.clearance) || {};
-        // match by course code (or programme related) - simple heuristic
-        if(!String(c.code||'').startsWith('') ) {}
-      }
+      const c = (state.courses||[]).find(x => x.id === studentFilter.course);
+      if(c && String(c.programmeCode||'') !== String(s.programme?.code||'')) return false;
+    }
+    if(studentFilter.yearEnrolled !== 'all'){
+      if(getStudentYearEnrolled(s) !== studentFilter.yearEnrolled) return false;
+    }
+    if(studentFilter.balance === 'owing'){
+      if(Number(s.balance||0) <= 0) return false;
+    } else if(studentFilter.balance === 'cleared'){
+      if(Number(s.balance||0) > 0) return false;
+    }
+    if(studentFilter.clearance === 'all-cleared'){
+      const notAllCleared = DEPARTMENTS.some(d => !isClearedFor(s, d.id));
+      if(notAllCleared) return false;
+    } else if(studentFilter.clearance === 'some-pending'){
+      const anyPending = DEPARTMENTS.some(d => !isClearedFor(s, d.id));
+      if(!anyPending) return false;
     }
     return true;
   });
+}
+function activeFilterCount(){
+  let c = 0;
+  if(studentFilter.q) c++;
+  if(studentFilter.year !== 'all') c++;
+  if(studentFilter.programme !== 'all') c++;
+  if(studentFilter.classId !== 'all') c++;
+  if(studentFilter.course !== 'all') c++;
+  if(studentFilter.yearEnrolled !== 'all') c++;
+  if(studentFilter.balance !== 'all') c++;
+  if(studentFilter.clearance !== 'all') c++;
+  return c;
 }
 
 async function logAudit(action, detail, target=''){
@@ -771,7 +785,6 @@ async function logAudit(action, detail, target=''){
   }catch(e){}
 }
 
-/* PDF generation helper */
 function downloadPDF(html, filename){
   const container = document.createElement('div');
   container.style.cssText = 'font-family:Inter,Arial,sans-serif;padding:32px;background:#fff;color:#0f172a;max-width:900px;margin:0 auto;line-height:1.5';
@@ -954,8 +967,6 @@ function bindUI(){
   $('#modalClose').addEventListener('click', closeModal);
   $('#modalOverlay').addEventListener('click', e => { if(e.target === $('#modalOverlay')) closeModal(); });
   document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
-
-  /* restore collapsed state */
   try{
     if(localStorage.getItem('nortec_sidebar_collapsed') === '1' && window.innerWidth > 1024){
       $('#sidebar').classList.add('collapsed');
@@ -1037,6 +1048,9 @@ function bindRealtime(){
   listen('schools', 'schools');
   listen('programmes', 'programmes');
   listen('finance', 'finance');
+  listen('venues', 'venues');
+  listen('lecturers', 'lecturers');
+  listen('hods', 'hods');
   db.ref(`${ROOT}/settings`).on('value', s => {
     state.settings = s.val() || {};
     if(activePage === 'settings') renderActive();
@@ -1126,6 +1140,12 @@ PAGE_RENDERERS.dashboard = function(){
   }
   if(can('library')){
     cards += card('amber','fa-book-open','Library Books', (state.libraryBooks||[]).length, 'In catalogue', 'library');
+  }
+  if(can('venues')){
+    cards += card('blue','fa-map-location-dot','Venues', (state.venues||[]).length, 'Rooms & labs', 'venues');
+  }
+  if(can('lecturers')){
+    cards += card('teal','fa-chalkboard-teacher','Lecturers', (state.lecturers||[]).length, 'Teaching staff', 'lecturers');
   }
   if(can('accommodation')){
     const req = (state.accommodationReq||[]).filter(r => (r.status||'pending').toLowerCase()==='pending').length;
@@ -1281,41 +1301,50 @@ PAGE_RENDERERS.activity = function(){
     </div>`;
 };
 
-/* ───── STUDENTS — filters + small avatar circles ───── */
+/* ───── STUDENTS — comprehensive single-button filter ───── */
 PAGE_RENDERERS.students = function(){
   const all = (state.applications||[]).filter(a => (a.status||'').toLowerCase()==='approved');
   const list = filterStudents(all);
+  const filterCount = activeFilterCount();
   const programmes = state.programmes || [];
-  const courses = state.courses || [];
-  const years = ['First','Second','Third','Fourth'];
+
+  /* Build active filters display */
+  let activeChips = '';
+  const chip = (label, key) => `<span class="active-filter">${esc(label)} <button onclick="removeStudentFilter('${key}')" title="Remove"><i class="fas fa-times"></i></button></span>`;
+  if(studentFilter.q) activeChips += chip('Search: "'+studentFilter.q+'"', 'q');
+  if(studentFilter.year !== 'all') activeChips += chip('Year: '+studentFilter.year, 'year');
+  if(studentFilter.programme !== 'all'){
+    const p = programmes.find(x => x.id === studentFilter.programme);
+    if(p) activeChips += chip('Programme: '+(p.code||p.title||''), 'programme');
+  }
+  if(studentFilter.classId !== 'all'){
+    const cl = (state.classes||[]).find(x => x.id === studentFilter.classId);
+    if(cl) activeChips += chip('Class: '+cl.name, 'classId');
+  }
+  if(studentFilter.yearEnrolled !== 'all') activeChips += chip('Enrolled: '+studentFilter.yearEnrolled, 'yearEnrolled');
+  if(studentFilter.balance !== 'all') activeChips += chip('Balance: '+studentFilter.balance, 'balance');
+  if(studentFilter.clearance !== 'all') activeChips += chip('Clearance: '+studentFilter.clearance, 'clearance');
 
   $('#mainContent').innerHTML = `
     <div class="card">
       <h3><i class="fas fa-user-graduate"></i> Registered Students <span class="right">${list.length} / ${all.length}</span></h3>
 
       <div class="toolbar">
-        <input id="studentSearch" placeholder="🔍 Search name, number, email, programme…" value="${esc(studentFilter.q)}" style="min-width:240px"/>
-        <select id="studentYear">
-          <option value="all">All years</option>
-          ${years.map(y => `<option value="${y}" ${studentFilter.year===y?'selected':''}>${y} year</option>`).join('')}
-        </select>
-        <select id="studentProgramme">
-          <option value="all">All programmes</option>
-          ${programmes.map(p => `<option value="${p.id}" ${studentFilter.programme===p.id?'selected':''}>${esc(p.title||p.code||'')}</option>`).join('')}
-        </select>
-        <select id="studentCourse">
-          <option value="all">Any course</option>
-          ${courses.map(c => `<option value="${c.id}" ${studentFilter.course===c.id?'selected':''}>${esc(c.code||'')} · ${esc(c.name||'')}</option>`).join('')}
-        </select>
+        <input id="studentSearch" placeholder="🔍 Quick search name, number, email…" value="${esc(studentFilter.q)}" style="min-width:240px"/>
+        <button class="btn primary sm" onclick="openStudentFilters()">
+          <i class="fas fa-filter"></i> Filters ${filterCount > 0 ? `<span class="badge" style="background:rgba(255,255,255,.25);margin-left:4px;padding:1px 7px;border-radius:20px">${filterCount}</span>` : ''}
+        </button>
+        ${filterCount > 0 ? `<button class="btn ghost sm" onclick="clearStudentFilters()"><i class="fas fa-times"></i> Clear</button>` : ''}
         <div class="spacer"></div>
-        <button class="btn ghost sm" onclick="clearStudentFilters()"><i class="fas fa-times"></i> Clear</button>
         <button class="btn primary sm" onclick="exportCSV('students')"><i class="fas fa-download"></i> Export</button>
       </div>
+
+      ${activeChips ? `<div class="active-filters">${activeChips}</div>` : ''}
 
       ${list.length ? `
         <div class="tbl-wrap">
           <table>
-            <thead><tr><th>Student</th><th>Student No.</th><th>Programme</th><th>Year</th><th>Balance</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Student</th><th>Student No.</th><th>Programme</th><th>Year</th><th>Enrolled</th><th>Balance</th><th>Actions</th></tr></thead>
             <tbody>
               ${list.map(s => `
                 <tr>
@@ -1323,14 +1352,12 @@ PAGE_RENDERERS.students = function(){
                   <td><strong>${esc(s.studentNumber||'—')}</strong></td>
                   <td>${esc(s.programme?.title||'—')}</td>
                   <td>${esc(s.programme?.yearStudy||'—')}</td>
+                  <td>${esc(getStudentYearEnrolled(s)||'—')}</td>
                   <td>K${Number(s.balance||0).toLocaleString()}</td>
                   <td style="white-space:nowrap">
-                    <button class="btn sm ghost" onclick="viewStudent('${s.id}')"><i class="fas fa-eye"></i></button>
-                    ${can('clearance') ? myDepartments().map(d => DEPT_BY_ID[d] ? (
-                      isClearedFor(s, d)
-                        ? `<button class="btn sm green" title="Cleared for ${esc(DEPT_BY_ID[d].name)}" onclick="unclearStudentDept('${s.id}','${d}')"><i class="fas fa-check"></i></button>`
-                        : `<button class="btn sm ghost" title="Clear for ${esc(DEPT_BY_ID[d].name)}" onclick="clearStudentDept('${s.id}','${d}')"><i class="fas fa-check-circle"></i></button>`
-                    ) : '').join('') : ''}
+                    <button class="btn sm ghost" onclick="viewStudent('${s.id}')" title="View"><i class="fas fa-eye"></i></button>
+                    <button class="btn sm ghost" onclick="editStudent('${s.id}')" title="Edit"><i class="fas fa-pen"></i></button>
+                    <button class="btn sm ghost" onclick="editClearanceStatus('${s.id}')" title="Edit clearance"><i class="fas fa-check-circle"></i></button>
                   </td>
                 </tr>`).join('')}
             </tbody>
@@ -1344,16 +1371,116 @@ PAGE_RENDERERS.students = function(){
     clearTimeout(window.__sft);
     window.__sft = setTimeout(renderActive, 250);
   });
-  $('#studentYear').addEventListener('change', function(){ studentFilter.year = this.value; renderActive(); });
-  $('#studentProgramme').addEventListener('change', function(){ studentFilter.programme = this.value; renderActive(); });
-  $('#studentCourse').addEventListener('change', function(){ studentFilter.course = this.value; renderActive(); });
 };
 
-window.clearStudentFilters = function(){
-  studentFilter = { q:'', year:'all', programme:'all', course:'all' };
+window.openStudentFilters = function(){
+  const programmes = state.programmes || [];
+  const classes = state.classes || [];
+  const years = ['First','Second','Third','Fourth'];
+  const enrolmentYears = [...new Set((state.applications||[]).map(getStudentYearEnrolled).filter(Boolean))].sort().reverse();
+
+  openModal({
+    title: 'Student Filters',
+    icon: 'fa-filter',
+    size: '620px',
+    body: `
+      <div class="form-group">
+        <label>Search (name, student no., email, programme)</label>
+        <input id="fltQ" value="${esc(studentFilter.q)}" placeholder="Type to search…"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Programme</label>
+          <select id="fltProgramme">
+            <option value="all">All programmes</option>
+            ${programmes.map(p => `<option value="${p.id}" ${studentFilter.programme===p.id?'selected':''}>${esc(p.title||p.code||'')}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Year of Study</label>
+          <select id="fltYear">
+            <option value="all">All years</option>
+            ${years.map(y => `<option value="${y}" ${studentFilter.year===y?'selected':''}>${y}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Class</label>
+          <select id="fltClass">
+            <option value="all">Any class</option>
+            ${classes.map(c => `<option value="${c.id}" ${studentFilter.classId===c.id?'selected':''}>${esc(c.name||'')}${c.programmeTitle?' · '+esc(c.programmeTitle):''}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Year Enrolled</label>
+          <select id="fltYearEnrolled">
+            <option value="all">Any year enrolled</option>
+            ${enrolmentYears.map(y => `<option value="${y}" ${studentFilter.yearEnrolled===y?'selected':''}>${esc(y)}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Balance Status</label>
+          <select id="fltBalance">
+            <option value="all" ${studentFilter.balance==='all'?'selected':''}>All</option>
+            <option value="owing" ${studentFilter.balance==='owing'?'selected':''}>Owing</option>
+            <option value="cleared" ${studentFilter.balance==='cleared'?'selected':''}>Fully paid</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Clearance Status</label>
+          <select id="fltClearance">
+            <option value="all" ${studentFilter.clearance==='all'?'selected':''}>All</option>
+            <option value="all-cleared" ${studentFilter.clearance==='all-cleared'?'selected':''}>Fully cleared</option>
+            <option value="some-pending" ${studentFilter.clearance==='some-pending'?'selected':''}>Some pending</option>
+          </select>
+        </div>
+      </div>
+    `,
+    foot: `
+      <button class="btn ghost" onclick="resetStudentFiltersPanel()">Reset</button>
+      <button class="btn primary" onclick="applyStudentFilters()"><i class="fas fa-check"></i> Apply Filters</button>
+    `
+  });
+};
+
+window.applyStudentFilters = function(){
+  studentFilter.q = ($('#fltQ').value||'').trim();
+  studentFilter.programme = $('#fltProgramme').value;
+  studentFilter.year = $('#fltYear').value;
+  studentFilter.classId = $('#fltClass').value;
+  studentFilter.yearEnrolled = $('#fltYearEnrolled').value;
+  studentFilter.balance = $('#fltBalance').value;
+  studentFilter.clearance = $('#fltClearance').value;
+  closeModal();
   renderActive();
 };
 
+window.resetStudentFiltersPanel = function(){
+  studentFilter = { q:'', year:'all', programme:'all', classId:'all', course:'all', yearEnrolled:'all', balance:'all', clearance:'all' };
+  closeModal();
+  renderActive();
+};
+
+window.removeStudentFilter = function(key){
+  if(key === 'q') studentFilter.q = '';
+  else if(key === 'year') studentFilter.year = 'all';
+  else if(key === 'programme') studentFilter.programme = 'all';
+  else if(key === 'classId') studentFilter.classId = 'all';
+  else if(key === 'yearEnrolled') studentFilter.yearEnrolled = 'all';
+  else if(key === 'balance') studentFilter.balance = 'all';
+  else if(key === 'clearance') studentFilter.clearance = 'all';
+  renderActive();
+};
+
+window.clearStudentFilters = function(){
+  studentFilter = { q:'', year:'all', programme:'all', classId:'all', course:'all', yearEnrolled:'all', balance:'all', clearance:'all' };
+  renderActive();
+};
+
+/* ───── VIEW STUDENT ───── */
 window.viewStudent = function(uid){
   const s = (state.applications||[]).find(x => x.id === uid);
   if(!s) return;
@@ -1362,22 +1489,30 @@ window.viewStudent = function(uid){
   const docs = a.documents || {};
   const ca = s.ca || {};
   const caGrade = ca.grade || (ca.total != null ? gradeFromPct(ca.total) : null);
+  const caDocs = s.caDocuments ? Object.entries(s.caDocuments).map(([id, v]) => ({id, ...v})) : [];
+
   openModal({
-    title: s.fullName || 'Student', icon:'fa-user-graduate', size:'820px',
+    title: s.fullName || 'Student', icon:'fa-user-graduate', size:'900px',
     body: `
       <div style="display:grid;grid-template-columns:100px 1fr;gap:16px;margin-bottom:16px;align-items:center">
         <div>${studentAvatar(s, 100)}</div>
         <div>
           <div style="font-size:18px;font-weight:900">${esc(s.fullName||'')}</div>
           <div style="color:var(--muted);font-size:13px;margin-top:4px">${esc(s.studentNumber||'')} · ${esc(s.email||'')}</div>
-          <div style="margin-top:8px">${statusBadge(s.status)}</div>
+          <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px">
+            ${statusBadge(s.status)}
+            ${s.idIssued ? '<span class="badge green">ID Issued</span>' : '<span class="badge grey">ID Pending</span>'}
+            ${s.graduating ? '<span class="badge purple">Graduating</span>' : ''}
+          </div>
         </div>
       </div>
 
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
-        <button class="btn primary sm" onclick="downloadStudentStatement('${uid}')"><i class="fas fa-file-invoice-dollar"></i> Financial Statement</button>
+        <button class="btn primary sm" onclick="editStudent('${uid}')"><i class="fas fa-pen"></i> Edit Student</button>
+        <button class="btn primary sm" onclick="downloadStudentStatement('${uid}')"><i class="fas fa-file-invoice-dollar"></i> Statement</button>
         <button class="btn primary sm" onclick="downloadStudentTranscript('${uid}')"><i class="fas fa-scroll"></i> Transcript</button>
         <button class="btn primary sm" onclick="downloadStudentCA('${uid}')"><i class="fas fa-chart-bar"></i> CA Report</button>
+        <button class="btn ghost sm" onclick="editClearanceStatus('${uid}')"><i class="fas fa-check-circle"></i> Edit Clearance</button>
       </div>
 
       <h4 style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px">Personal</h4>
@@ -1395,18 +1530,31 @@ window.viewStudent = function(uid){
         <tr><td style="width:140px;color:var(--muted);font-weight:600">Programme</td><td>${esc(s.programme?.title||'—')}</td></tr>
         <tr><td style="color:var(--muted);font-weight:600">Intake</td><td>${esc(s.programme?.intakeLabel||'—')}</td></tr>
         <tr><td style="color:var(--muted);font-weight:600">Year</td><td>${esc(s.programme?.yearStudy||'—')}</td></tr>
+        <tr><td style="color:var(--muted);font-weight:600">Year Enrolled</td><td>${esc(getStudentYearEnrolled(s)||'—')}</td></tr>
         <tr><td style="color:var(--muted);font-weight:600">Balance</td><td>K${Number(s.balance||0).toLocaleString()}</td></tr>
         <tr><td style="color:var(--muted);font-weight:600">CA Grade</td><td>${caGrade ? `<span class="grade-badge ${caGrade}">${caGrade}</span> <span style="font-size:11.5px;color:var(--muted);margin-left:6px">${GRADE_SYSTEM[caGrade].label}</span>` : '—'}</td></tr>
       </table>
 
-      <h4 style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px">Documents</h4>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;font-size:12px">
-        ${[['nrcDoc','NRC'],['grade12Doc','Grade 12'],['diplomaDoc','Diploma'],['cvDoc','CV'],['recommendationDoc','Recommendation']].map(([k,l]) => `
-          <div style="background:var(--soft);padding:10px;border-radius:10px">
-            <div style="font-weight:700;color:#475569">${l}</div>
-            ${docs[k] ? `<a href="${esc(docs[k])}" target="_blank" style="color:var(--blue);font-weight:600;font-size:11.5px">View</a>` : `<span style="color:var(--muted);font-size:11.5px">Not provided</span>`}
-          </div>`).join('')}
+      <h4 style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px">Application Documents</h4>
+      <div class="ca-doc-grid" style="margin-bottom:8px">
+        ${[['nrcDoc','NRC'],['grade12Doc','Grade 12'],['diplomaDoc','Diploma'],['cvDoc','CV'],['recommendationDoc','Recommendation']].map(([k,l]) => {
+          const url = docs[k];
+          return `<div class="ca-doc-tile" onclick="${url ? `window.open('${esc(url)}','_blank')` : `toast('No document','info')`}">
+            ${url ? `<img src="${esc(url)}" onerror="this.style.display='none';this.parentNode.querySelector('.doc-icon').style.display='block'"/><i class="fas fa-file-pdf doc-icon" style="display:none"></i>` : `<i class="fas fa-file doc-icon"></i>`}
+            <div class="doc-label">${esc(l)}</div>
+          </div>`;
+        }).join('')}
       </div>
+
+      <h4 style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px">CA Uploaded Documents (${caDocs.length})</h4>
+      ${caDocs.length ? `<div class="ca-doc-grid">${caDocs.map(d => `
+        <div class="ca-doc-tile" onclick="window.open('${esc(d.dataUrl||'')}','_blank')">
+          ${d.type && d.type.startsWith('image') ? `<img src="${esc(d.dataUrl)}"/>` : `<i class="fas fa-file-pdf doc-icon"></i>`}
+          <div class="doc-actions">
+            <button onclick="event.stopPropagation();deleteCADoc('${uid}','${d.id}')" title="Delete"><i class="fas fa-trash"></i></button>
+          </div>
+          <div class="doc-label">${esc(d.name||'CA doc')}</div>
+        </div>`).join('')}</div>` : `<div class="empty-glass" style="background:var(--soft);border-radius:12px;padding:18px;text-align:center;color:var(--muted);font-size:12.5px"><i class="fas fa-upload" style="display:block;font-size:22px;color:var(--blue);opacity:.5;margin-bottom:6px"></i>No CA documents uploaded yet</div>`}
 
       <h4 style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px">Clearance</h4>
       <div style="display:flex;flex-wrap:wrap;gap:8px">
@@ -1414,9 +1562,172 @@ window.viewStudent = function(uid){
           <span class="badge ${isClearedFor(s,d.id)?'green':'grey'}">
             <i class="fas ${d.icon}"></i> ${esc(d.name)} — ${isClearedFor(s,d.id)?'Cleared':'Pending'}
           </span>`).join('')}
-      </div>`,
+      </div>
+    `,
     foot: `<button class="btn ghost" onclick="closeModal()">Close</button>`
   });
+};
+
+window.deleteCADoc = async function(uid, docId){
+  if(!confirm('Delete this CA document?')) return;
+  try{
+    await db.ref(`${ROOT}/applications/${uid}/caDocuments/${docId}`).remove();
+    toast('Deleted','ok');
+    logAudit('delete-ca-doc', 'Deleted CA doc', uid);
+    closeModal();
+    setTimeout(() => viewStudent(uid), 300);
+  }catch(e){ toast('Failed','err'); }
+};
+
+/* ───── EDIT STUDENT ───── */
+window.editStudent = function(uid){
+  const s = (state.applications||[]).find(x => x.id === uid);
+  if(!s) return;
+  const p = s.personal || {};
+  openModal({
+    title: 'Edit Student · ' + (s.fullName||''),
+    icon: 'fa-user-pen',
+    size: '700px',
+    body: `
+      <div class="form-group"><label>Full Name</label><input id="esName" value="${esc(s.fullName||'')}"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Student Number</label><input id="esNumber" value="${esc(s.studentNumber||'')}"/></div>
+        <div class="form-group"><label>Email</label><input id="esEmail" value="${esc(s.email||'')}"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Phone</label><input id="esPhone" value="${esc(p.phone||s.phone||'')}"/></div>
+        <div class="form-group"><label>Year Enrolled</label><input id="esYearEnrolled" value="${esc(getStudentYearEnrolled(s))}"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Programme Title</label><input id="esProgTitle" value="${esc(s.programme?.title||'')}"/></div>
+        <div class="form-group"><label>Programme Code</label><input id="esProgCode" value="${esc(s.programme?.code||'')}"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Year of Study</label>
+          <select id="esYearStudy">
+            ${['First','Second','Third','Fourth'].map(y => `<option ${s.programme?.yearStudy===y?'selected':''}>${y}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group"><label>Intake</label><input id="esIntake" value="${esc(s.programme?.intakeLabel||'')}"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Balance (ZMW)</label><input id="esBalance" type="number" value="${Number(s.balance||0)}"/></div>
+        <div class="form-group"><label>Status</label>
+          <select id="esStatus">
+            ${['pending','approved','rejected'].map(x => `<option value="${x}" ${(s.status||'pending')===x?'selected':''}>${x}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label style="display:flex;align-items:center;gap:8px;text-transform:none;font-size:13px">
+            <input type="checkbox" id="esIdIssued" ${s.idIssued?'checked':''} style="width:auto"/> Student ID issued
+          </label>
+        </div>
+        <div class="form-group">
+          <label style="display:flex;align-items:center;gap:8px;text-transform:none;font-size:13px">
+            <input type="checkbox" id="esGraduating" ${s.graduating?'checked':''} style="width:auto"/> Graduating
+          </label>
+        </div>
+      </div>
+    `,
+    foot: `
+      <button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="saveStudentEdit('${uid}')"><i class="fas fa-save"></i> Save Changes</button>
+    `
+  });
+};
+
+window.saveStudentEdit = async function(uid){
+  try{
+    const s = (state.applications||[]).find(x => x.id === uid) || {};
+    const updates = {
+      fullName: ($('#esName').value||'').trim(),
+      studentNumber: ($('#esNumber').value||'').trim(),
+      email: ($('#esEmail').value||'').trim(),
+      phone: ($('#esPhone').value||'').trim(),
+      yearEnrolled: ($('#esYearEnrolled').value||'').trim(),
+      balance: Number($('#esBalance').value||0),
+      status: $('#esStatus').value,
+      idIssued: $('#esIdIssued').checked,
+      graduating: $('#esGraduating').checked,
+      'personal.phone': ($('#esPhone').value||'').trim(),
+      'programme.title': ($('#esProgTitle').value||'').trim(),
+      'programme.code': ($('#esProgCode').value||'').trim(),
+      'programme.yearStudy': $('#esYearStudy').value,
+      'programme.intakeLabel': ($('#esIntake').value||'').trim(),
+      updatedAt: Date.now(),
+      updatedBy: currentUser.email
+    };
+    await db.ref(`${ROOT}/applications/${uid}`).update(updates);
+    toast('Student updated','ok');
+    logAudit('edit-student', 'Updated student record', uid);
+    closeModal();
+  }catch(e){ toast('Failed: '+e.message,'err'); }
+};
+
+/* ───── EDIT CLEARANCE (manual edit for mistakes) ───── */
+window.editClearanceStatus = function(uid){
+  const s = (state.applications||[]).find(x => x.id === uid);
+  if(!s) return;
+  const rows = DEPARTMENTS.map(d => {
+    const cleared = isClearedFor(s, d.id);
+    return `<tr>
+      <td style="padding:10px;border-bottom:1px solid var(--border)"><i class="fas ${d.icon}" style="color:var(--blue);margin-right:8px"></i><b>${esc(d.name)}</b></td>
+      <td style="padding:10px;border-bottom:1px solid var(--border)">
+        <select data-dept="${d.id}" style="padding:6px 8px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:12.5px">
+          <option value="pending" ${!cleared?'selected':''}>Pending</option>
+          <option value="cleared" ${cleared?'selected':''}>Cleared</option>
+        </select>
+      </td>
+    </tr>`;
+  }).join('');
+  openModal({
+    title: 'Edit Clearance · ' + (s.fullName||''),
+    icon: 'fa-check-circle',
+    size: '560px',
+    body: `
+      <p style="color:var(--muted);font-size:13px;margin-bottom:12px">
+        <i class="fas fa-info-circle" style="color:var(--blue)"></i>
+        Use this to manually correct clearance mistakes. Changes take effect immediately.
+      </p>
+      <table style="width:100%;border-collapse:collapse">
+        <thead><tr style="background:var(--soft)"><th style="padding:8px;text-align:left;font-size:11px">Department</th><th style="padding:8px;text-align:left;font-size:11px">Status</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `,
+    foot: `
+      <button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="saveClearanceEdits('${uid}')"><i class="fas fa-save"></i> Save Clearance</button>
+    `
+  });
+};
+
+window.saveClearanceEdits = async function(uid){
+  try{
+    const updates = {};
+    $$('#modalBody select[data-dept]').forEach(sel => {
+      const deptId = sel.dataset.dept;
+      const dept = DEPT_BY_ID[deptId];
+      if(!dept) return;
+      if(sel.value === 'cleared'){
+        updates[`clearance/${deptId}`] = 'cleared';
+        updates[`clearanceMeta/${deptId}`] = {
+          deptId, deptName: dept.name,
+          clearedBy: currentUser.email, clearedByName: currentStaff.name || '',
+          clearedAt: Date.now(), manualEdit: true
+        };
+      } else {
+        updates[`clearance/${deptId}`] = null;
+        updates[`clearance/${dept.name}`] = null;
+        updates[`clearanceMeta/${deptId}`] = null;
+      }
+    });
+    await db.ref(`${ROOT}/applications/${uid}`).update(updates);
+    toast('Clearance updated','ok');
+    logAudit('edit-clearance', 'Manual clearance edit', uid);
+    closeModal();
+  }catch(e){ toast('Failed: '+e.message,'err'); }
 };
 
 /* ───── Student DOWNLOADS ───── */
@@ -1483,7 +1794,6 @@ window.downloadStudentTranscript = function(uid){
       <td style="padding:8px 10px;border:1px solid #e2e8f0;text-align:center">${grade ? `<b>${grade}</b> (${GRADE_SYSTEM[grade].label})` : '—'}</td>
     </tr>`;
   }).join('');
-
   const html = `
     <div style="text-align:center;border-bottom:3px solid #1e40af;padding-bottom:12px;margin-bottom:20px">
       <h1 style="font-size:22px;font-weight:900;letter-spacing:1px">NORTHERN TECHNICAL COLLEGE</h1>
@@ -1511,9 +1821,6 @@ window.downloadStudentTranscript = function(uid){
     <div style="margin-top:24px;font-size:11px;color:#64748b">
       <b>Grading scale:</b> D = Distinction (75–100) • M = Merit (65–74) • C = Credit (55–64) • P = Pass (40–54) • F = Fail (0–39)
     </div>
-    <p style="font-size:11px;color:#64748b;margin-top:20px;text-align:center">
-      Official transcript issued by Northern Technical College. For verification contact the Examinations Office.
-    </p>
   `;
   downloadPDF(html, `NORTEC_Transcript_${s.studentNumber||s.id}.pdf`);
 };
@@ -1534,10 +1841,8 @@ window.downloadStudentCA = function(uid){
       <td style="padding:8px 10px;border:1px solid #e2e8f0;text-align:center">${grade ? `<b>${grade}</b> (${GRADE_SYSTEM[grade].label})` : '—'}</td>
     </tr>`;
   }).join('');
-
   const overall = ca.total != null ? ca.total : null;
   const overallGrade = overall != null ? gradeFromPct(overall) : null;
-
   const html = `
     <div style="text-align:center;border-bottom:3px solid #1e40af;padding-bottom:12px;margin-bottom:20px">
       <h1 style="font-size:22px;font-weight:900;letter-spacing:1px">NORTHERN TECHNICAL COLLEGE</h1>
@@ -1604,6 +1909,7 @@ PAGE_RENDERERS.applications = function(){
                       <button class="btn sm green" onclick="approveApp('${a.id}')"><i class="fas fa-check"></i></button>
                       <button class="btn sm red" onclick="rejectApp('${a.id}')"><i class="fas fa-times"></i></button>` : ''}
                     <button class="btn sm ghost" onclick="viewStudent('${a.id}')"><i class="fas fa-eye"></i></button>
+                    <button class="btn sm ghost" onclick="editStudent('${a.id}')"><i class="fas fa-pen"></i></button>
                   </td>
                 </tr>`).join('')}
             </tbody>
@@ -1757,7 +2063,10 @@ PAGE_RENDERERS.schools = function(){
           <td><strong>${esc(s.name||'')}</strong></td>
           <td>${esc(s.code||'')}</td>
           <td>${esc(s.hod||'')}</td>
-          <td><button class="btn sm red" onclick="deleteItem('schools','${s.id}')"><i class="fas fa-trash"></i></button></td>
+          <td style="white-space:nowrap">
+            <button class="btn sm ghost" onclick="editSchool('${s.id}')"><i class="fas fa-pen"></i></button>
+            <button class="btn sm red" onclick="deleteItem('schools','${s.id}')"><i class="fas fa-trash"></i></button>
+          </td>
         </tr>`).join('')}</tbody>
       </table></div>` : emptyState('No schools','fa-building')}
     </div>`;
@@ -1773,6 +2082,21 @@ window.addSchool = function(){
     <div class="form-group"><label>HOD</label><input id="schHod"/></div>`,
     foot:`<button class="btn ghost" onclick="closeModal()">Cancel</button>
       <button class="btn primary" onclick="saveItem('schools', {name:$('#schName').value, code:$('#schCode').value, hod:$('#schHod').value})">Save</button>`
+  });
+};
+
+window.editSchool = function(id){
+  const s = (state.schools||[]).find(x => x.id === id);
+  if(!s) return;
+  openModal({
+    title:'Edit School', icon:'fa-pen',
+    body:`<div class="form-row">
+      <div class="form-group"><label>Name</label><input id="schName" value="${esc(s.name||'')}"/></div>
+      <div class="form-group"><label>Code</label><input id="schCode" value="${esc(s.code||'')}"/></div>
+    </div>
+    <div class="form-group"><label>HOD</label><input id="schHod" value="${esc(s.hod||'')}"/></div>`,
+    foot:`<button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="updateItem('schools','${id}',{name:$('#schName').value, code:$('#schCode').value, hod:$('#schHod').value});closeModal();">Save</button>`
   });
 };
 
@@ -1793,7 +2117,7 @@ window.updateItem = async function(path, id, data){
 };
 
 /* ═══════════════════════════════════════════════════════════════
-   PROGRAMMES — with courses & classes tabs
+   PROGRAMMES
    ═══════════════════════════════════════════════════════════════ */
 PAGE_RENDERERS.programmes = function(){
   const list = state.programmes||[];
@@ -1818,6 +2142,7 @@ PAGE_RENDERERS.programmes = function(){
               <td><span class="badge green">${students.length}</span></td>
               <td style="white-space:nowrap">
                 <button class="btn sm primary" onclick="manageProgramme('${p.id}')"><i class="fas fa-cog"></i> Manage</button>
+                <button class="btn sm ghost" onclick="editProgramme('${p.id}')"><i class="fas fa-pen"></i></button>
                 <button class="btn sm red" onclick="deleteItem('programmes','${p.id}')"><i class="fas fa-trash"></i></button>
               </td>
             </tr>`;
@@ -1844,6 +2169,30 @@ window.addProgramme = function(){
       <div class="form-group"><label>Description</label><textarea id="prgDesc" rows="3"></textarea></div>`,
     foot:`<button class="btn ghost" onclick="closeModal()">Cancel</button>
       <button class="btn primary" onclick="saveProgramme()">Save</button>`
+  });
+};
+
+window.editProgramme = function(id){
+  const p = (state.programmes||[]).find(x => x.id === id);
+  if(!p) return;
+  openModal({
+    title:'Edit Programme', icon:'fa-pen',
+    body:`<div class="form-row">
+        <div class="form-group"><label>Code</label><input id="prgCode" value="${esc(p.code||'')}"/></div>
+        <div class="form-group"><label>Category</label><input id="prgCat" value="${esc(p.category||'')}"/></div>
+      </div>
+      <div class="form-group"><label>Title</label><input id="prgTitle" value="${esc(p.title||'')}"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Duration</label><input id="prgDuration" value="${esc(p.duration||'')}"/></div>
+        <div class="form-group"><label>Mode</label>
+          <select id="prgMode">
+            ${['Full-time','Part-time','Distance'].map(m => `<option ${p.mode===m?'selected':''}>${m}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>Description</label><textarea id="prgDesc" rows="3">${esc(p.description||'')}</textarea></div>`,
+    foot:`<button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="updateItem('programmes','${id}',{code:$('#prgCode').value, title:$('#prgTitle').value, category:$('#prgCat').value, duration:$('#prgDuration').value, mode:$('#prgMode').value, description:$('#prgDesc').value});closeModal();">Save</button>`
   });
 };
 
@@ -1904,16 +2253,16 @@ window.manageProgramme = function(id){
             <td>${esc(c.yearStudy||'—')}</td>
             <td>${esc(c.instructor||'')}</td>
             <td>${c.showOnTeveta === false ? '<span class="badge grey">Off</span>' : '<span class="badge green">On</span>'}</td>
-            <td><button class="btn sm red" onclick="deleteItem('courses','${c.id}');setTimeout(()=>manageProgramme('${id}'),250)"><i class="fas fa-trash"></i></button></td>
+            <td style="white-space:nowrap">
+              <button class="btn sm ghost" onclick="editCourse('${c.id}', '${id}')"><i class="fas fa-pen"></i></button>
+              <button class="btn sm red" onclick="deleteItem('courses','${c.id}');setTimeout(()=>manageProgramme('${id}'),250)"><i class="fas fa-trash"></i></button>
+            </td>
           </tr>`).join('')}</tbody>
-        </table></div>` : emptyState('No courses yet','fa-book')}
-        <div style="margin-top:14px;font-size:12px;color:var(--muted)">
-          <i class="fas fa-info-circle" style="color:var(--blue)"></i> Courses marked <b>TEVETA On</b> appear on the TEVETA Examination Entry Form for students in this programme.
-        </div>`;
+        </table></div>` : emptyState('No courses yet','fa-book')}`;
     } else if(tab === 'classes'){
       content.innerHTML = `
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
-          <div style="font-weight:800;font-size:14px">Classes / Streams under this programme</div>
+          <div style="font-weight:800;font-size:14px">Classes / Streams</div>
           <button class="btn primary sm" onclick="addClassToProgramme('${id}')"><i class="fas fa-plus"></i> Add Class</button>
         </div>
         ${classes.length ? `<div class="tbl-wrap"><table>
@@ -1925,19 +2274,25 @@ window.manageProgramme = function(id){
               <td>${esc(cl.yearStudy||'—')}</td>
               <td>${cl.capacity||'—'}</td>
               <td><span class="badge blue">${cnt}</span></td>
-              <td><button class="btn sm red" onclick="deleteItem('classes','${cl.id}');setTimeout(()=>manageProgramme('${id}'),250)"><i class="fas fa-trash"></i></button></td>
+              <td style="white-space:nowrap">
+                <button class="btn sm ghost" onclick="editClass('${cl.id}')"><i class="fas fa-pen"></i></button>
+                <button class="btn sm red" onclick="deleteItem('classes','${cl.id}');setTimeout(()=>manageProgramme('${id}'),250)"><i class="fas fa-trash"></i></button>
+              </td>
             </tr>`;
           }).join('')}</tbody>
-        </table></div>` : emptyState('No classes yet','fa-users-rectangle')}
-      `;
+        </table></div>` : emptyState('No classes yet','fa-users-rectangle')}`;
     } else if(tab === 'students'){
       content.innerHTML = students.length ? `<div class="tbl-wrap"><table>
-        <thead><tr><th>Student</th><th>Student No.</th><th>Year</th></tr></thead>
-        <tbody>${students.map(s => `<tr>
-          <td>${studentCell(s)}</td>
-          <td><strong>${esc(s.studentNumber||'')}</strong></td>
-          <td>${esc(s.programme?.yearStudy||'—')}</td>
-        </tr>`).join('')}</tbody>
+        <thead><tr><th>Student</th><th>Student No.</th><th>Year</th><th>Class</th></tr></thead>
+        <tbody>${students.map(s => {
+          const cl = (state.classes||[]).find(x => x.id === s.classId);
+          return `<tr>
+            <td>${studentCell(s)}</td>
+            <td><strong>${esc(s.studentNumber||'')}</strong></td>
+            <td>${esc(s.programme?.yearStudy||'—')}</td>
+            <td>${cl ? esc(cl.name) : '—'}</td>
+          </tr>`;
+        }).join('')}</tbody>
       </table></div>` : emptyState('No students enrolled','fa-user-graduate');
     } else {
       content.innerHTML = `
@@ -1948,10 +2303,7 @@ window.manageProgramme = function(id){
           <tr><td style="color:var(--muted);font-weight:600">Duration</td><td>${esc(p.duration||'—')}</td></tr>
           <tr><td style="color:var(--muted);font-weight:600">Mode</td><td>${esc(p.mode||'—')}</td></tr>
           <tr><td style="color:var(--muted);font-weight:600">Description</td><td>${esc(p.description||'—')}</td></tr>
-        </table>
-        <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn ghost" onclick="deleteItem('programmes','${id}');closeModal();"><i class="fas fa-trash"></i> Delete Programme</button>
-        </div>`;
+        </table>`;
     }
   }
 
@@ -1988,6 +2340,37 @@ window.addCourseToProgramme = function(programmeId){
     `,
     foot: `<button class="btn ghost" onclick="closeModal()">Cancel</button>
       <button class="btn primary" onclick="saveCourseToProgramme('${programmeId}')">Save Course</button>`
+  });
+};
+
+window.editCourse = function(courseId, programmeId){
+  const c = (state.courses||[]).find(x => x.id === courseId);
+  if(!c) return;
+  openModal({
+    title: 'Edit Course',
+    icon: 'fa-pen',
+    body: `
+      <div class="form-row">
+        <div class="form-group"><label>Course Code</label><input id="crsCode" value="${esc(c.code||'')}"/></div>
+        <div class="form-group"><label>Year of Study</label>
+          <select id="crsYear">
+            ${['First','Second','Third','Fourth'].map(y => `<option ${c.yearStudy===y?'selected':''}>${y}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>Course Name</label><input id="crsName" value="${esc(c.name||'')}"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Instructor</label><input id="crsInstr" value="${esc(c.instructor||'')}"/></div>
+        <div class="form-group"><label>Price (ZMW)</label><input id="crsPrice" type="number" value="${Number(c.price||0)}"/></div>
+      </div>
+      <div class="form-group">
+        <label style="display:flex;align-items:center;gap:8px;text-transform:none;font-size:13px">
+          <input type="checkbox" id="crsTeveta" ${c.showOnTeveta === false ? '' : 'checked'} style="width:auto"/> Show on TEVETA form
+        </label>
+      </div>
+    `,
+    foot: `<button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="updateItem('courses','${courseId}',{code:$('#crsCode').value, name:$('#crsName').value, yearStudy:$('#crsYear').value, instructor:$('#crsInstr').value, price:Number($('#crsPrice').value||0), showOnTeveta:$('#crsTeveta').checked});closeModal();setTimeout(()=>manageProgramme('${programmeId}'),300);">Save</button>`
   });
 };
 
@@ -2034,6 +2417,28 @@ window.addClassToProgramme = function(programmeId){
   });
 };
 
+window.editClass = function(classId){
+  const cl = (state.classes||[]).find(x => x.id === classId);
+  if(!cl) return;
+  openModal({
+    title: 'Edit Class',
+    icon: 'fa-pen',
+    body: `
+      <div class="form-group"><label>Class Name</label><input id="clsName" value="${esc(cl.name||'')}"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Year of Study</label>
+          <select id="clsYear">
+            ${['First','Second','Third','Fourth'].map(y => `<option ${cl.yearStudy===y?'selected':''}>${y}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group"><label>Capacity</label><input id="clsCap" type="number" value="${cl.capacity||40}"/></div>
+      </div>
+    `,
+    foot: `<button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="updateItem('classes','${classId}',{name:$('#clsName').value, yearStudy:$('#clsYear').value, capacity:Number($('#clsCap').value||40)});closeModal();">Save</button>`
+  });
+};
+
 window.saveClassToProgramme = async function(programmeId){
   const p = (state.programmes||[]).find(x => x.id === programmeId) || {};
   const name = ($('#clsName').value||'').trim();
@@ -2072,8 +2477,6 @@ PAGE_RENDERERS.courses = function(){
           <option value="all">All Programmes</option>
           ${programmes.map(p => `<option value="${p.id}" ${filterProg===p.id?'selected':''}>${esc(p.title||p.code||'Untitled')}</option>`).join('')}
         </select>
-        <div class="spacer"></div>
-        <span style="font-size:12px;color:var(--muted)"><i class="fas fa-info-circle"></i> Manage courses under Programmes page</span>
       </div>
       ${filtered.length ? `<div class="tbl-wrap"><table>
         <thead><tr><th>Code</th><th>Name</th><th>Programme</th><th>Year</th><th>Instructor</th><th>Price</th><th>TEVETA</th><th></th></tr></thead>
@@ -2082,17 +2485,46 @@ PAGE_RENDERERS.courses = function(){
           return `<tr>
             <td><strong>${esc(c.code||'')}</strong></td>
             <td>${esc(c.name||'')}</td>
-            <td>${prog ? esc(prog.title||prog.code||'') : (c.programmeTitle ? esc(c.programmeTitle) : '<span style="color:var(--muted)">—</span>')}</td>
+            <td>${prog ? esc(prog.title||prog.code||'') : (c.programmeTitle ? esc(c.programmeTitle) : '—')}</td>
             <td>${esc(c.yearStudy||'—')}</td>
             <td>${esc(c.instructor||'')}</td>
             <td>${c.price ? 'ZMW '+c.price : '<span class="badge green">Free</span>'}</td>
             <td>${c.showOnTeveta === false ? '<span class="badge grey">Off</span>' : '<span class="badge green">On</span>'}</td>
-            <td><button class="btn sm red" onclick="deleteItem('courses','${c.id}')"><i class="fas fa-trash"></i></button></td>
+            <td style="white-space:nowrap">
+              <button class="btn sm ghost" onclick="editCourseGlobal('${c.id}')"><i class="fas fa-pen"></i></button>
+              <button class="btn sm red" onclick="deleteItem('courses','${c.id}')"><i class="fas fa-trash"></i></button>
+            </td>
           </tr>`;
         }).join('')}</tbody>
       </table></div>` : emptyState('No courses','fa-book')}
     </div>`;
   $('#courseProgFilter')?.addEventListener('change', () => renderActive());
+};
+
+window.editCourseGlobal = function(courseId){
+  const c = (state.courses||[]).find(x => x.id === courseId);
+  if(!c) return;
+  openModal({
+    title: 'Edit Course',
+    icon: 'fa-pen',
+    body: `
+      <div class="form-row">
+        <div class="form-group"><label>Code</label><input id="crsCode" value="${esc(c.code||'')}"/></div>
+        <div class="form-group"><label>Name</label><input id="crsName" value="${esc(c.name||'')}"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Instructor</label><input id="crsInstr" value="${esc(c.instructor||'')}"/></div>
+        <div class="form-group"><label>Price</label><input id="crsPrice" type="number" value="${Number(c.price||0)}"/></div>
+      </div>
+      <div class="form-group">
+        <label style="display:flex;align-items:center;gap:8px;text-transform:none;font-size:13px">
+          <input type="checkbox" id="crsTeveta" ${c.showOnTeveta === false ? '' : 'checked'} style="width:auto"/> Show on TEVETA form
+        </label>
+      </div>
+    `,
+    foot: `<button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="updateItem('courses','${courseId}',{code:$('#crsCode').value, name:$('#crsName').value, instructor:$('#crsInstr').value, price:Number($('#crsPrice').value||0), showOnTeveta:$('#crsTeveta').checked});closeModal();">Save</button>`
+  });
 };
 
 window.addCourse = function(){
@@ -2117,11 +2549,6 @@ window.addCourse = function(){
       <div class="form-row">
         <div class="form-group"><label>Instructor</label><input id="crsInstr"/></div>
         <div class="form-group"><label>Price</label><input id="crsPrice" type="number" value="0"/></div>
-      </div>
-      <div class="form-group">
-        <label style="display:flex;align-items:center;gap:8px;text-transform:none;font-size:13px">
-          <input type="checkbox" id="crsTeveta" checked style="width:auto"/> Show on TEVETA form
-        </label>
       </div>`,
     foot:`<button class="btn ghost" onclick="closeModal()">Cancel</button>
       <button class="btn primary" onclick="saveNewCourse()">Save</button>`
@@ -2143,7 +2570,7 @@ window.saveNewCourse = async function(){
       programmeId: progId,
       programmeCode: prog.code || '',
       programmeTitle: prog.title || '',
-      showOnTeveta: $('#crsTeveta').checked,
+      showOnTeveta: true,
       createdAt: Date.now(),
       createdBy: currentUser.email
     });
@@ -2168,8 +2595,6 @@ PAGE_RENDERERS.classes = function(){
           <option value="all">All Programmes</option>
           ${programmes.map(p => `<option value="${p.id}" ${filterProg===p.id?'selected':''}>${esc(p.title||p.code||'Untitled')}</option>`).join('')}
         </select>
-        <div class="spacer"></div>
-        <span style="font-size:12px;color:var(--muted)"><i class="fas fa-info-circle"></i> Classes group students for timetable scheduling</span>
       </div>
       ${filtered.length ? `<div class="tbl-wrap"><table>
         <thead><tr><th>Name</th><th>Programme</th><th>Year</th><th>Capacity</th><th>Students</th><th></th></tr></thead>
@@ -2182,7 +2607,10 @@ PAGE_RENDERERS.classes = function(){
             <td>${esc(cl.yearStudy||'—')}</td>
             <td>${cl.capacity||'—'}</td>
             <td><span class="badge blue">${cnt}</span></td>
-            <td><button class="btn sm red" onclick="deleteItem('classes','${cl.id}')"><i class="fas fa-trash"></i></button></td>
+            <td style="white-space:nowrap">
+              <button class="btn sm ghost" onclick="editClass('${cl.id}')"><i class="fas fa-pen"></i></button>
+              <button class="btn sm red" onclick="deleteItem('classes','${cl.id}')"><i class="fas fa-trash"></i></button>
+            </td>
           </tr>`;
         }).join('')}</tbody>
       </table></div>` : emptyState('No classes yet','fa-users-rectangle')}
@@ -2233,6 +2661,375 @@ window.saveClassGeneral = async function(){
 };
 
 /* ═══════════════════════════════════════════════════════════════
+   LECTURERS
+   ═══════════════════════════════════════════════════════════════ */
+PAGE_RENDERERS.lecturers = function(){
+  const list = state.lecturers||[];
+  $('#mainContent').innerHTML = `
+    <div class="card">
+      <h3><i class="fas fa-chalkboard-teacher"></i> Lecturers <span class="right">${list.length}</span>
+        <button class="btn primary sm" style="margin-left:auto" onclick="addLecturer()"><i class="fas fa-plus"></i> Add Lecturer</button>
+      </h3>
+      ${list.length ? `<div class="staff-grid">
+        ${list.map(l => `
+          <div class="staff-card">
+            <div class="sc-av">${l.photo ? `<img src="${esc(l.photo)}" onerror="this.remove()"/>` : esc(getInitials(l.name))}</div>
+            <div class="sc-body">
+              <div class="sc-name">${esc(l.name||'—')}</div>
+              <div class="sc-role">${esc(l.specialization||'Lecturer')}</div>
+              <div class="sc-meta">
+                ${l.email ? `<span><i class="fas fa-envelope"></i> ${esc(l.email)}</span>` : ''}
+                ${l.phone ? `<span><i class="fas fa-phone"></i> ${esc(l.phone)}</span>` : ''}
+                ${l.department ? `<span><i class="fas fa-building"></i> ${esc(l.department)}</span>` : ''}
+              </div>
+              <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
+                <button class="btn xs ghost" onclick="editLecturer('${l.id}')"><i class="fas fa-pen"></i></button>
+                <button class="btn xs red" onclick="deleteItem('lecturers','${l.id}')"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          </div>`).join('')}
+      </div>` : emptyState('No lecturers yet','fa-chalkboard-teacher')}
+    </div>`;
+};
+
+window.addLecturer = function(){
+  openModal({
+    title:'Add Lecturer', icon:'fa-chalkboard-teacher',
+    body:`<div class="form-group"><label>Full Name</label><input id="lecName"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Email</label><input id="lecEmail" type="email"/></div>
+        <div class="form-group"><label>Phone</label><input id="lecPhone"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Department</label><input id="lecDept"/></div>
+        <div class="form-group"><label>Specialization</label><input id="lecSpec"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Qualification</label><input id="lecQual"/></div>
+        <div class="form-group"><label>Photo URL</label><input id="lecPhoto"/></div>
+      </div>`,
+    foot:`<button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="saveLecturer()">Save</button>`
+  });
+};
+
+window.editLecturer = function(id){
+  const l = (state.lecturers||[]).find(x => x.id === id);
+  if(!l) return;
+  openModal({
+    title:'Edit Lecturer', icon:'fa-pen',
+    body:`<div class="form-group"><label>Full Name</label><input id="lecName" value="${esc(l.name||'')}"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Email</label><input id="lecEmail" value="${esc(l.email||'')}" type="email"/></div>
+        <div class="form-group"><label>Phone</label><input id="lecPhone" value="${esc(l.phone||'')}"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Department</label><input id="lecDept" value="${esc(l.department||'')}"/></div>
+        <div class="form-group"><label>Specialization</label><input id="lecSpec" value="${esc(l.specialization||'')}"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Qualification</label><input id="lecQual" value="${esc(l.qualification||'')}"/></div>
+        <div class="form-group"><label>Photo URL</label><input id="lecPhoto" value="${esc(l.photo||'')}"/></div>
+      </div>`,
+    foot:`<button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="updateLecturer('${id}')">Save</button>`
+  });
+};
+
+window.saveLecturer = async function(){
+  const name = ($('#lecName').value||'').trim();
+  if(!name) return toast('Name required','err');
+  try{
+    await db.ref(`${ROOT}/lecturers`).push({
+      name,
+      email: ($('#lecEmail').value||'').trim(),
+      phone: ($('#lecPhone').value||'').trim(),
+      department: ($('#lecDept').value||'').trim(),
+      specialization: ($('#lecSpec').value||'').trim(),
+      qualification: ($('#lecQual').value||'').trim(),
+      photo: ($('#lecPhoto').value||'').trim(),
+      createdAt: Date.now(),
+      createdBy: currentUser.email
+    });
+    toast('Lecturer added','ok'); closeModal();
+  }catch(e){ toast('Failed','err'); }
+};
+
+window.updateLecturer = async function(id){
+  try{
+    await db.ref(`${ROOT}/lecturers/${id}`).update({
+      name: ($('#lecName').value||'').trim(),
+      email: ($('#lecEmail').value||'').trim(),
+      phone: ($('#lecPhone').value||'').trim(),
+      department: ($('#lecDept').value||'').trim(),
+      specialization: ($('#lecSpec').value||'').trim(),
+      qualification: ($('#lecQual').value||'').trim(),
+      photo: ($('#lecPhoto').value||'').trim(),
+      updatedAt: Date.now()
+    });
+    toast('Lecturer updated','ok'); closeModal();
+  }catch(e){ toast('Failed','err'); }
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   HODs
+   ═══════════════════════════════════════════════════════════════ */
+PAGE_RENDERERS.hods = function(){
+  const list = state.hods||[];
+  $('#mainContent').innerHTML = `
+    <div class="card">
+      <h3><i class="fas fa-user-tie"></i> Heads of Department <span class="right">${list.length}</span>
+        <button class="btn primary sm" style="margin-left:auto" onclick="addHod()"><i class="fas fa-plus"></i> Add HOD</button>
+      </h3>
+      ${list.length ? `<div class="staff-grid">
+        ${list.map(h => `
+          <div class="staff-card">
+            <div class="sc-av">${h.photo ? `<img src="${esc(h.photo)}" onerror="this.remove()"/>` : esc(getInitials(h.name))}</div>
+            <div class="sc-body">
+              <div class="sc-name">${esc(h.name||'—')}</div>
+              <div class="sc-role">${esc(h.department||'HOD')}</div>
+              <div class="sc-meta">
+                ${h.email ? `<span><i class="fas fa-envelope"></i> ${esc(h.email)}</span>` : ''}
+                ${h.phone ? `<span><i class="fas fa-phone"></i> ${esc(h.phone)}</span>` : ''}
+                ${h.appointedAt ? `<span><i class="fas fa-calendar"></i> Appointed ${fmtDate(h.appointedAt)}</span>` : ''}
+              </div>
+              <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
+                <button class="btn xs ghost" onclick="editHod('${h.id}')"><i class="fas fa-pen"></i></button>
+                <button class="btn xs red" onclick="deleteItem('hods','${h.id}')"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          </div>`).join('')}
+      </div>` : emptyState('No HODs yet','fa-user-tie')}
+    </div>`;
+};
+
+window.addHod = function(){
+  openModal({
+    title:'Add HOD', icon:'fa-user-tie',
+    body:`<div class="form-group"><label>Full Name</label><input id="hodName"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Email</label><input id="hodEmail" type="email"/></div>
+        <div class="form-group"><label>Phone</label><input id="hodPhone"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Department</label><input id="hodDept"/></div>
+        <div class="form-group"><label>Qualification</label><input id="hodQual"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Appointed Date</label><input id="hodAppointed" type="date"/></div>
+        <div class="form-group"><label>Photo URL</label><input id="hodPhoto"/></div>
+      </div>`,
+    foot:`<button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="saveHod()">Save</button>`
+  });
+};
+
+window.editHod = function(id){
+  const h = (state.hods||[]).find(x => x.id === id);
+  if(!h) return;
+  openModal({
+    title:'Edit HOD', icon:'fa-pen',
+    body:`<div class="form-group"><label>Full Name</label><input id="hodName" value="${esc(h.name||'')}"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Email</label><input id="hodEmail" value="${esc(h.email||'')}" type="email"/></div>
+        <div class="form-group"><label>Phone</label><input id="hodPhone" value="${esc(h.phone||'')}"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Department</label><input id="hodDept" value="${esc(h.department||'')}"/></div>
+        <div class="form-group"><label>Qualification</label><input id="hodQual" value="${esc(h.qualification||'')}"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Appointed Date</label><input id="hodAppointed" type="date" value="${h.appointedAt ? new Date(h.appointedAt).toISOString().slice(0,10) : ''}"/></div>
+        <div class="form-group"><label>Photo URL</label><input id="hodPhoto" value="${esc(h.photo||'')}"/></div>
+      </div>`,
+    foot:`<button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="updateHod('${id}')">Save</button>`
+  });
+};
+
+window.saveHod = async function(){
+  const name = ($('#hodName').value||'').trim();
+  if(!name) return toast('Name required','err');
+  const appointed = $('#hodAppointed').value;
+  try{
+    await db.ref(`${ROOT}/hods`).push({
+      name,
+      email: ($('#hodEmail').value||'').trim(),
+      phone: ($('#hodPhone').value||'').trim(),
+      department: ($('#hodDept').value||'').trim(),
+      qualification: ($('#hodQual').value||'').trim(),
+      appointedAt: appointed ? new Date(appointed).getTime() : Date.now(),
+      photo: ($('#hodPhoto').value||'').trim(),
+      createdAt: Date.now(),
+      createdBy: currentUser.email
+    });
+    toast('HOD added','ok'); closeModal();
+  }catch(e){ toast('Failed','err'); }
+};
+
+window.updateHod = async function(id){
+  const appointed = $('#hodAppointed').value;
+  try{
+    await db.ref(`${ROOT}/hods/${id}`).update({
+      name: ($('#hodName').value||'').trim(),
+      email: ($('#hodEmail').value||'').trim(),
+      phone: ($('#hodPhone').value||'').trim(),
+      department: ($('#hodDept').value||'').trim(),
+      qualification: ($('#hodQual').value||'').trim(),
+      appointedAt: appointed ? new Date(appointed).getTime() : Date.now(),
+      photo: ($('#hodPhoto').value||'').trim(),
+      updatedAt: Date.now()
+    });
+    toast('HOD updated','ok'); closeModal();
+  }catch(e){ toast('Failed','err'); }
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   VENUES
+   ═══════════════════════════════════════════════════════════════ */
+PAGE_RENDERERS.venues = function(){
+  const list = state.venues||[];
+  const filterType = ($('#venueTypeFilter')?.value || 'all');
+  let filtered = list;
+  if(filterType !== 'all') filtered = list.filter(v => v.type === filterType);
+
+  $('#mainContent').innerHTML = `
+    <div class="card">
+      <h3><i class="fas fa-map-location-dot"></i> Venues & Rooms <span class="right">${filtered.length}</span>
+        <button class="btn primary sm" style="margin-left:auto" onclick="addVenue()"><i class="fas fa-plus"></i> Add Venue</button>
+      </h3>
+
+      <div class="stats-grid">
+        <div class="stat-card blue"><div class="ico"><i class="fas fa-door-open"></i></div><div class="lbl">Total Venues</div><div class="val">${list.length}</div></div>
+        <div class="stat-card green"><div class="ico"><i class="fas fa-check-circle"></i></div><div class="lbl">Available</div><div class="val">${list.filter(v => v.status !== 'unavailable').length}</div></div>
+        <div class="stat-card red"><div class="ico"><i class="fas fa-tools"></i></div><div class="lbl">Unavailable</div><div class="val">${list.filter(v => v.status === 'unavailable').length}</div></div>
+        <div class="stat-card purple"><div class="ico"><i class="fas fa-user-friends"></i></div><div class="lbl">Total Capacity</div><div class="val">${list.reduce((s,v) => s + Number(v.capacity||0), 0)}</div></div>
+      </div>
+
+      <div class="toolbar">
+        <select id="venueTypeFilter">
+          <option value="all">All types</option>
+          ${VENUE_TYPES.map(t => `<option value="${t}" ${filterType===t?'selected':''}>${t}</option>`).join('')}
+        </select>
+      </div>
+
+      ${filtered.length ? `<div class="venue-grid">
+        ${filtered.map(v => `
+          <div class="venue-card">
+            <div class="vc-hd">
+              <div class="vc-name">${esc(v.name||'—')}</div>
+              <div class="vc-type">${esc(v.type||'Room')}</div>
+            </div>
+            <div class="vc-meta">
+              ${v.building ? `<span><i class="fas fa-building"></i> ${esc(v.building)}</span>` : ''}
+              ${v.capacity ? `<span><i class="fas fa-users"></i> Capacity: ${v.capacity}</span>` : ''}
+              ${v.floor ? `<span><i class="fas fa-layer-group"></i> ${esc(v.floor)}</span>` : ''}
+              ${v.facilities ? `<span><i class="fas fa-tools"></i> ${esc(v.facilities)}</span>` : ''}
+            </div>
+            <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+              ${v.status === 'unavailable' ? '<span class="badge red">Unavailable</span>' : '<span class="badge green">Available</span>'}
+              <div style="margin-left:auto;display:flex;gap:6px">
+                <button class="btn xs ghost" onclick="editVenue('${v.id}')"><i class="fas fa-pen"></i></button>
+                <button class="btn xs red" onclick="deleteItem('venues','${v.id}')"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          </div>`).join('')}
+      </div>` : emptyState('No venues yet','fa-map-location-dot')}
+    </div>`;
+  $('#venueTypeFilter')?.addEventListener('change', () => renderActive());
+};
+
+window.addVenue = function(){
+  openModal({
+    title: 'Add Venue', icon: 'fa-map-location-dot',
+    body: `
+      <div class="form-group"><label>Venue Name</label><input id="venName" placeholder="e.g. Computer Lab A"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Type</label>
+          <select id="venType">${VENUE_TYPES.map(t => `<option>${t}</option>`).join('')}</select>
+        </div>
+        <div class="form-group"><label>Building</label><input id="venBuilding" placeholder="e.g. Main Block"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Floor</label><input id="venFloor" placeholder="e.g. Ground Floor"/></div>
+        <div class="form-group"><label>Capacity</label><input id="venCapacity" type="number" value="30"/></div>
+      </div>
+      <div class="form-group"><label>Facilities</label><input id="venFacilities" placeholder="e.g. Projector, AC, Whiteboard"/></div>
+      <div class="form-group"><label>Status</label>
+        <select id="venStatus"><option value="available">Available</option><option value="unavailable">Unavailable</option></select>
+      </div>
+    `,
+    foot: `<button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="saveVenue()">Save Venue</button>`
+  });
+};
+
+window.editVenue = function(id){
+  const v = (state.venues||[]).find(x => x.id === id);
+  if(!v) return;
+  openModal({
+    title: 'Edit Venue', icon: 'fa-pen',
+    body: `
+      <div class="form-group"><label>Venue Name</label><input id="venName" value="${esc(v.name||'')}"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Type</label>
+          <select id="venType">${VENUE_TYPES.map(t => `<option ${v.type===t?'selected':''}>${t}</option>`).join('')}</select>
+        </div>
+        <div class="form-group"><label>Building</label><input id="venBuilding" value="${esc(v.building||'')}"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Floor</label><input id="venFloor" value="${esc(v.floor||'')}"/></div>
+        <div class="form-group"><label>Capacity</label><input id="venCapacity" type="number" value="${Number(v.capacity||30)}"/></div>
+      </div>
+      <div class="form-group"><label>Facilities</label><input id="venFacilities" value="${esc(v.facilities||'')}"/></div>
+      <div class="form-group"><label>Status</label>
+        <select id="venStatus">
+          <option value="available" ${v.status !== 'unavailable' ? 'selected' : ''}>Available</option>
+          <option value="unavailable" ${v.status === 'unavailable' ? 'selected' : ''}>Unavailable</option>
+        </select>
+      </div>
+    `,
+    foot: `<button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="updateVenue('${id}')">Save</button>`
+  });
+};
+
+window.saveVenue = async function(){
+  const name = ($('#venName').value||'').trim();
+  if(!name) return toast('Venue name required','err');
+  try{
+    await db.ref(`${ROOT}/venues`).push({
+      name,
+      type: $('#venType').value,
+      building: ($('#venBuilding').value||'').trim(),
+      floor: ($('#venFloor').value||'').trim(),
+      capacity: Number($('#venCapacity').value||0),
+      facilities: ($('#venFacilities').value||'').trim(),
+      status: $('#venStatus').value,
+      createdAt: Date.now(),
+      createdBy: currentUser.email
+    });
+    toast('Venue added','ok'); closeModal();
+  }catch(e){ toast('Failed','err'); }
+};
+
+window.updateVenue = async function(id){
+  try{
+    await db.ref(`${ROOT}/venues/${id}`).update({
+      name: ($('#venName').value||'').trim(),
+      type: $('#venType').value,
+      building: ($('#venBuilding').value||'').trim(),
+      floor: ($('#venFloor').value||'').trim(),
+      capacity: Number($('#venCapacity').value||0),
+      facilities: ($('#venFacilities').value||'').trim(),
+      status: $('#venStatus').value,
+      updatedAt: Date.now()
+    });
+    toast('Venue updated','ok'); closeModal();
+  }catch(e){ toast('Failed','err'); }
+};
+
+/* ═══════════════════════════════════════════════════════════════
    TIMETABLE
    ═══════════════════════════════════════════════════════════════ */
 PAGE_RENDERERS.timetable = function(){
@@ -2267,6 +3064,7 @@ PAGE_RENDERERS.timetable = function(){
               ${s.lecturer ? `<span><i class="fas fa-user-tie"></i> ${esc(s.lecturer)}</span>` : ''}
             </div>
             <div class="tt-actions">
+              <button onclick="editTTSlot('${s.id}')"><i class="fas fa-pen"></i></button>
               <button onclick="deleteItem('timetables','${s.id}')"><i class="fas fa-trash"></i></button>
             </div>
           </div>`;
@@ -2342,6 +3140,8 @@ window.addTTSlot = function(){
   if(!programmes.length) return toast('Create a programme first','err');
   const progClasses = (state.classes||[]).filter(c => c.programmeId === activeTTProgramme);
   const progCourses = (state.courses||[]).filter(c => c.programmeId === activeTTProgramme);
+  const venues = state.venues || [];
+  const lecturers = state.lecturers || [];
 
   openModal({
     title: 'Add Timetable Slot',
@@ -2380,13 +3180,85 @@ window.addTTSlot = function(){
         </select>
       </div>
       <div class="form-row">
-        <div class="form-group"><label>Venue</label><input id="ttVenue" placeholder="e.g. Room 12"/></div>
-        <div class="form-group"><label>Lecturer</label><input id="ttLecturer"/></div>
+        <div class="form-group"><label>Venue</label>
+          <select id="ttVenue">
+            <option value="">— Select venue —</option>
+            ${venues.map(v => `<option value="${esc(v.name||'')}" ${v.status === 'unavailable' ? 'disabled' : ''}>${esc(v.name||'')}${v.building ? ' · '+esc(v.building) : ''}${v.status === 'unavailable' ? ' (Unavailable)' : ''}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group"><label>Lecturer</label>
+          <select id="ttLecturer">
+            <option value="">— Select lecturer —</option>
+            ${lecturers.map(l => `<option value="${esc(l.name||'')}">${esc(l.name||'')}${l.specialization ? ' · '+esc(l.specialization) : ''}</option>`).join('')}
+          </select>
+        </div>
       </div>
     `,
     foot: `<button class="btn ghost" onclick="closeModal()">Cancel</button>
       <button class="btn primary" onclick="saveTTSlot()">Save Slot</button>`
   });
+};
+
+window.editTTSlot = function(id){
+  const s = (state.timetables||[]).find(x => x.id === id);
+  if(!s) return;
+  const venues = state.venues || [];
+  const lecturers = state.lecturers || [];
+  openModal({
+    title: 'Edit Timetable Slot',
+    icon: 'fa-pen',
+    size: '700px',
+    body: `
+      <div class="form-row">
+        <div class="form-group"><label>Day</label>
+          <select id="ttDay">${TT_DAYS.map(d => `<option ${s.day===d?'selected':''}>${d}</option>`).join('')}</select>
+        </div>
+        <div class="form-group"><label>Time Slot</label>
+          <select id="ttSlot">
+            ${TT_SLOTS.map(sl => `<option value="${sl.start}|${sl.end}" ${s.startTime===sl.start?'selected':''}>${sl.label}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Course Code</label><input id="ttCode" value="${esc(s.courseCode||'')}"/></div>
+        <div class="form-group"><label>Course Name</label><input id="ttName" value="${esc(s.courseName||'')}"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Venue</label>
+          <select id="ttVenue">
+            <option value="">— Select venue —</option>
+            ${venues.map(v => `<option value="${esc(v.name||'')}" ${s.venue===v.name?'selected':''}>${esc(v.name||'')}</option>`).join('')}
+            ${s.venue && !venues.find(v => v.name === s.venue) ? `<option selected>${esc(s.venue)}</option>` : ''}
+          </select>
+        </div>
+        <div class="form-group"><label>Lecturer</label>
+          <select id="ttLecturer">
+            <option value="">— Select lecturer —</option>
+            ${lecturers.map(l => `<option value="${esc(l.name||'')}" ${s.lecturer===l.name?'selected':''}>${esc(l.name||'')}</option>`).join('')}
+            ${s.lecturer && !lecturers.find(l => l.name === s.lecturer) ? `<option selected>${esc(s.lecturer)}</option>` : ''}
+          </select>
+        </div>
+      </div>
+    `,
+    foot: `<button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="updateTTSlot('${id}')">Save</button>`
+  });
+};
+
+window.updateTTSlot = async function(id){
+  const slotVal = $('#ttSlot').value.split('|');
+  try{
+    await db.ref(`${ROOT}/timetables/${id}`).update({
+      day: $('#ttDay').value,
+      startTime: slotVal[0], endTime: slotVal[1],
+      courseCode: ($('#ttCode').value||'').trim(),
+      courseName: ($('#ttName').value||'').trim(),
+      venue: $('#ttVenue').value,
+      lecturer: $('#ttLecturer').value,
+      updatedAt: Date.now()
+    });
+    toast('Slot updated','ok'); closeModal();
+  }catch(e){ toast('Failed','err'); }
 };
 
 window.onTTProgrammeChange = function(){
@@ -2418,8 +3290,8 @@ window.saveTTSlot = async function(){
       programmeId, classId,
       day, startTime: slotVal[0], endTime: slotVal[1],
       courseId, courseCode, courseName,
-      venue: ($('#ttVenue').value||'').trim(),
-      lecturer: ($('#ttLecturer').value||'').trim(),
+      venue: $('#ttVenue').value,
+      lecturer: $('#ttLecturer').value,
       createdAt: Date.now(),
       createdBy: currentUser.email
     });
@@ -2431,7 +3303,7 @@ window.saveTTSlot = async function(){
 };
 
 /* ═══════════════════════════════════════════════════════════════
-   CA — with grade system (D/P/C/M/F) and uploads
+   CA
    ═══════════════════════════════════════════════════════════════ */
 PAGE_RENDERERS.ca = function(){
   const students = (state.applications||[]).filter(a => (a.status||'').toLowerCase()==='approved');
@@ -2486,6 +3358,7 @@ PAGE_RENDERERS.ca = function(){
             const ca = s.ca || {};
             const overall = ca.total != null ? ca.total : null;
             const grade = overall != null ? (ca.grade || gradeFromPct(overall)) : null;
+            const docCount = s.caDocuments ? Object.keys(s.caDocuments).length : 0;
             return `<tr>
               <td>${studentCell(s)}</td>
               <td><strong>${esc(s.studentNumber||'')}</strong></td>
@@ -2495,7 +3368,8 @@ PAGE_RENDERERS.ca = function(){
               <td style="white-space:nowrap">
                 <button class="btn sm primary" onclick="enterCA('${s.id}')"><i class="fas fa-pen"></i> Enter</button>
                 <button class="btn sm ghost" onclick="downloadStudentCA('${s.id}')"><i class="fas fa-download"></i></button>
-                <button class="btn sm ghost" onclick="uploadCA('${s.id}')"><i class="fas fa-upload"></i></button>
+                <button class="btn sm ghost" onclick="uploadCA('${s.id}')" title="Upload CA"><i class="fas fa-upload"></i>${docCount > 0 ? ` <span style="background:var(--blue);color:#fff;font-size:10px;padding:1px 5px;border-radius:10px">${docCount}</span>` : ''}</button>
+                ${docCount > 0 ? `<button class="btn sm ghost" onclick="viewStudent('${s.id}')" title="View docs"><i class="fas fa-images"></i></button>` : ''}
               </td>
             </tr>`;
           }).join('')}
@@ -2514,7 +3388,7 @@ window.enterCA = function(uid){
   );
   const courses = progCourses.length ? progCourses : [{ code:'—', name:'No courses on file', id:'__none' }];
 
-  const rows = courses.map((c, i) => {
+  const rows = courses.map((c) => {
     const rec = ca[c.id] || {};
     const pct = rec.pct ?? '';
     const g = rec.grade || (pct !== '' && pct != null ? gradeFromPct(pct) : '');
@@ -2599,16 +3473,32 @@ window.saveCA = async function(uid){
 
 window.uploadCA = function(uid){
   const s = (state.applications||[]).find(x => x.id === uid) || {};
+  const existing = s.caDocuments ? Object.entries(s.caDocuments).map(([id, v]) => ({id, ...v})) : [];
   openModal({
-    title:'Upload CA Document · ' + (s.fullName||''), icon:'fa-upload', size:'520px',
+    title:'Upload CA Document · ' + (s.fullName||''), icon:'fa-upload', size:'640px',
     body:`
       <p style="color:var(--muted);font-size:13px;margin-bottom:14px">
-        Attach a scanned CA sheet or marks document (PDF or image). The file will be linked to the student's record.
+        Attach scanned CA sheets, mark sheets or academic documents. They will be visible in the student profile.
       </p>
+      ${existing.length ? `
+        <div style="margin-bottom:16px">
+          <div style="font-weight:800;font-size:12.5px;margin-bottom:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px">Existing documents (${existing.length})</div>
+          <div class="ca-doc-grid">
+            ${existing.map(d => `
+              <div class="ca-doc-tile" onclick="window.open('${esc(d.dataUrl||'')}','_blank')">
+                ${d.type && d.type.startsWith('image') ? `<img src="${esc(d.dataUrl)}"/>` : `<i class="fas fa-file-pdf doc-icon"></i>`}
+                <div class="doc-actions">
+                  <button onclick="event.stopPropagation();deleteCADocInline('${uid}','${d.id}')" title="Delete"><i class="fas fa-trash"></i></button>
+                </div>
+                <div class="doc-label">${esc(d.name||'CA doc')}</div>
+              </div>`).join('')}
+          </div>
+        </div>
+      ` : ''}
       <div class="form-group">
-        <label>CA Document</label>
-        <input type="file" id="caFileInput" accept=".pdf,.jpg,.jpeg,.png,.heic"/>
-        <div class="hint">Max 5MB. PDF, JPG or PNG.</div>
+        <label>Add New CA Document</label>
+        <input type="file" id="caFileInput" accept=".pdf,.jpg,.jpeg,.png,.heic" multiple/>
+        <div class="hint">You can select multiple files. Max 5MB each. PDF, JPG, PNG or HEIC.</div>
       </div>
       <div class="form-group">
         <label>Notes (optional)</label>
@@ -2620,29 +3510,55 @@ window.uploadCA = function(uid){
   });
 };
 
+window.deleteCADocInline = async function(uid, docId){
+  if(!confirm('Delete this document?')) return;
+  try{
+    await db.ref(`${ROOT}/applications/${uid}/caDocuments/${docId}`).remove();
+    toast('Deleted','ok');
+    closeModal();
+    setTimeout(() => uploadCA(uid), 300);
+  }catch(e){ toast('Failed','err'); }
+};
+
 window.doUploadCA = async function(uid){
   const input = $('#caFileInput');
-  const file = input.files[0];
-  if(!file) return toast('Choose a file','err');
-  if(file.size > 5 * 1024 * 1024) return toast('File too large (max 5MB)','err');
-  try{
-    const reader = new FileReader();
-    reader.onload = async () => {
-      try{
-        await db.ref(`${ROOT}/applications/${uid}/caDocuments`).push({
-          name: file.name, size: file.size, type: file.type,
-          dataUrl: reader.result,
-          notes: $('#caFileNotes').value,
-          uploadedAt: Date.now(),
-          uploadedBy: currentUser.email
-        });
-        toast('CA document uploaded','ok');
-        logAudit('upload-ca','CA doc for '+uid, uid);
-        closeModal();
-      }catch(e){ toast('Save failed: '+e.message,'err'); }
-    };
-    reader.readAsDataURL(file);
-  }catch(e){ toast('Upload failed: '+e.message,'err'); }
+  const files = input.files;
+  if(!files.length) return toast('Choose at least one file','err');
+  const notes = $('#caFileNotes').value;
+  let uploaded = 0;
+  const btn = $('#modalFoot .btn.primary');
+  if(btn){ btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading…'; }
+
+  for(let i = 0; i < files.length; i++){
+    const file = files[i];
+    if(file.size > 5 * 1024 * 1024){ toast(file.name+' too large (max 5MB)','err'); continue; }
+    try{
+      await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = async () => {
+          try{
+            await db.ref(`${ROOT}/applications/${uid}/caDocuments`).push({
+              name: file.name, size: file.size, type: file.type,
+              dataUrl: reader.result,
+              notes,
+              uploadedAt: Date.now(),
+              uploadedBy: currentUser.email
+            });
+            uploaded++;
+            resolve();
+          }catch(e){ reject(e); }
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }catch(e){ toast('Failed: '+file.name,'err'); }
+  }
+
+  if(uploaded > 0){
+    toast(uploaded + ' document' + (uploaded!==1?'s':'') + ' uploaded','ok');
+    logAudit('upload-ca', uploaded + ' docs for '+uid, uid);
+    closeModal();
+  }
 };
 
 window.downloadAllCA = function(){
@@ -2665,7 +3581,6 @@ window.downloadAllCA = function(){
       <h1 style="font-size:22px;font-weight:900">NORTHERN TECHNICAL COLLEGE</h1>
       <p style="font-size:12px;color:#64748b;margin-top:4px">Bulk CA Report</p>
       <h2 style="font-size:15px;font-weight:800;margin-top:14px;color:#1e40af">CONTINUOUS ASSESSMENT — ALL STUDENTS</h2>
-      <p style="font-size:11px;color:#64748b;margin-top:4px">Generated ${new Date().toLocaleString('en-GB')}</p>
     </div>
     <table style="width:100%;border-collapse:collapse;font-size:11px">
       <thead><tr style="background:#eff6ff">
@@ -2676,11 +3591,8 @@ window.downloadAllCA = function(){
         <th style="padding:8px;text-align:center;border:1px solid #dbeafe">%</th>
         <th style="padding:8px;text-align:center;border:1px solid #dbeafe">Grade</th>
       </tr></thead>
-      <tbody>${rows || `<tr><td colspan="6" style="padding:20px;text-align:center">No students</td></tr>`}</tbody>
+      <tbody>${rows}</tbody>
     </table>
-    <p style="font-size:11px;color:#64748b;margin-top:20px">
-      <b>Grade scale:</b> D = Distinction (75–100) · M = Merit (65–74) · C = Credit (55–64) · P = Pass (40–54) · F = Fail (0–39)
-    </p>
   `;
   downloadPDF(html, `NORTEC_Bulk_CA_${Date.now()}.pdf`);
 };
@@ -2734,13 +3646,17 @@ PAGE_RENDERERS.exams = function(){
           <td>${esc(e.time||'')}</td>
           <td>${esc(e.subject||'')}</td>
           <td>${esc(e.venue||'')}</td>
-          <td><button class="btn sm red" onclick="deleteItem('exams','${e.id}')"><i class="fas fa-trash"></i></button></td>
+          <td style="white-space:nowrap">
+            <button class="btn sm ghost" onclick="editExam('${e.id}')"><i class="fas fa-pen"></i></button>
+            <button class="btn sm red" onclick="deleteItem('exams','${e.id}')"><i class="fas fa-trash"></i></button>
+          </td>
         </tr>`).join('')}</tbody>
       </table></div>` : emptyState('No exams','fa-file-signature')}
     </div>`;
 };
 
 window.addExam = function(){
+  const venues = state.venues || [];
   openModal({
     title:'Add Exam', icon:'fa-file-signature',
     body:`<div class="form-row">
@@ -2749,10 +3665,40 @@ window.addExam = function(){
       </div>
       <div class="form-row">
         <div class="form-group"><label>Time</label><input id="exTime"/></div>
-        <div class="form-group"><label>Venue</label><input id="exVenue"/></div>
+        <div class="form-group"><label>Venue</label>
+          <select id="exVenue">
+            <option value="">— Select venue —</option>
+            ${venues.map(v => `<option>${esc(v.name||'')}</option>`).join('')}
+          </select>
+        </div>
       </div>`,
     foot:`<button class="btn ghost" onclick="closeModal()">Cancel</button>
       <button class="btn primary" onclick="saveItem('exams', {subject:$('#exSubject').value, date:$('#exDate').value, time:$('#exTime').value, venue:$('#exVenue').value})">Save</button>`
+  });
+};
+
+window.editExam = function(id){
+  const e = (state.exams||[]).find(x => x.id === id);
+  if(!e) return;
+  const venues = state.venues || [];
+  openModal({
+    title:'Edit Exam', icon:'fa-pen',
+    body:`<div class="form-row">
+        <div class="form-group"><label>Subject</label><input id="exSubject" value="${esc(e.subject||'')}"/></div>
+        <div class="form-group"><label>Date</label><input id="exDate" type="date" value="${esc(e.date||'')}"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Time</label><input id="exTime" value="${esc(e.time||'')}"/></div>
+        <div class="form-group"><label>Venue</label>
+          <select id="exVenue">
+            <option value="">— Select venue —</option>
+            ${venues.map(v => `<option ${e.venue===v.name?'selected':''}>${esc(v.name||'')}</option>`).join('')}
+            ${e.venue && !venues.find(v => v.name === e.venue) ? `<option selected>${esc(e.venue)}</option>` : ''}
+          </select>
+        </div>
+      </div>`,
+    foot:`<button class="btn ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" onclick="updateItem('exams','${id}',{subject:$('#exSubject').value, date:$('#exDate').value, time:$('#exTime').value, venue:$('#exVenue').value});closeModal();">Save</button>`
   });
 };
 
@@ -3055,9 +4001,11 @@ PAGE_RENDERERS.clearance = function(){
             <td><strong>${esc(s.studentNumber||'')}</strong></td>
             <td>${esc(s.programme?.title||'')}</td>
             <td>${cleared ? '<span class="badge green">Cleared</span>' : '<span class="badge amber">Pending</span>'}</td>
-            <td>${!cleared
+            <td style="white-space:nowrap">${!cleared
               ? `<button class="btn green sm" onclick="clearStudentDept('${s.id}','${activeDept.id}')"><i class="fas fa-check"></i> Clear</button>`
-              : `<button class="btn ghost sm" onclick="unclearStudentDept('${s.id}','${activeDept.id}')"><i class="fas fa-undo"></i> Undo</button>`}</td>
+              : `<button class="btn ghost sm" onclick="unclearStudentDept('${s.id}','${activeDept.id}')"><i class="fas fa-undo"></i> Undo</button>`}
+              <button class="btn ghost sm" onclick="editClearanceStatus('${s.id}')" title="Edit clearance"><i class="fas fa-pen"></i></button>
+            </td>
           </tr>`;
         }).join('') : `<tr><td colspan="5">${emptyState('No active students','fa-user-graduate')}</td></tr>`}
       </tbody>
@@ -3314,7 +4262,7 @@ window.downloadAllTranscripts = function(){
   next();
 };
 
-/* ───── TEVETA — exact student portal match ───── */
+/* ───── TEVETA ───── */
 const TEVETA_SUBJECTS_FALLBACK = [
   { code:'41.1', label:'Digital Electronics' },
   { code:'41.2', label:'Entrepreneurship' },
@@ -3395,18 +4343,15 @@ function renderTevetaFormHTML(t){
   const year = t.yearStudy || 'Second';
   const isApproved = (t.status||'').toLowerCase() === 'approved';
   const isRejected = (t.status||'').toLowerCase() === 'rejected';
-
   const customCourses = getProgrammeCoursesForTeveta(t.id);
   const subjectList = (customCourses && customCourses.length)
     ? customCourses.map(c => ({ code: c.code || '', label: c.name || '' }))
     : TEVETA_SUBJECTS_FALLBACK;
-
   const banner = isApproved
     ? `<div class="teveta-status-banner"><i class="fas fa-check-circle"></i> <strong>Approved</strong> on ${fmtDateTime(t.approvedAt)} by ${esc(t.approvedBy||'')}</div>`
     : isRejected
       ? `<div style="background:#fef2f2;border-left:4px solid #ef4444;padding:12px 14px;border-radius:10px;margin-bottom:18px;font-size:13px;color:#991b1b"><i class="fas fa-times-circle"></i> <strong>Rejected</strong> on ${fmtDateTime(t.rejectedAt)}</div>`
       : `<div style="background:#fef3c7;border-left:4px solid #f59e0b;padding:12px 14px;border-radius:10px;margin-bottom:18px;font-size:13px;color:#92400e"><i class="fas fa-clock"></i> <strong>Awaiting Review</strong> — submitted ${fmtDateTime(t.submittedAt)}</div>`;
-
   return `
     ${banner}
     <div class="teveta-form-container">
@@ -3424,13 +4369,11 @@ function renderTevetaFormHTML(t){
         </div>
         <h2>TEVETA EXAMINATION ENTRY FORM</h2>
       </div>
-
       <div class="form-field">
         <span class="field-number">1.</span>
         <span class="field-label">COURSE:</span>
         <input type="text" class="field-input" value="${esc(t.course||'')}" readonly />
       </div>
-
       <div class="form-field">
         <span class="field-number">2.</span>
         <span class="field-label">EXAMINATION SERIES:</span>
@@ -3442,7 +4385,6 @@ function renderTevetaFormHTML(t){
           <input type="text" class="box-input" maxlength="2" value="${esc(exSeriesY2)}" disabled />
         </div>
       </div>
-
       <div class="form-field">
         <span class="field-number">3.</span>
         <span class="field-label">TEVETA EXAM NO:</span>
@@ -3450,31 +4392,26 @@ function renderTevetaFormHTML(t){
           ${noDigits.map(d => `<input type="text" class="box-input" maxlength="1" value="${esc(d.trim())}" disabled />`).join('')}
         </div>
       </div>
-
       <div class="form-field">
         <span class="field-number">4.</span>
         <span class="field-label">EXAMINATION CENTER NAME:</span>
         <input type="text" class="field-input" value="NORTHERN TECHNICAL COLLEGE" readonly />
       </div>
-
       <div class="form-field">
         <span class="field-number">5.</span>
         <span class="field-label">SURNAME:</span>
         <input type="text" class="field-input" value="${esc(t.surname||'')}" readonly />
       </div>
-
       <div class="form-field">
         <span class="field-number">6.</span>
         <span class="field-label">FORENAMES:</span>
         <input type="text" class="field-input" value="${esc(t.forenames||'')}" readonly />
       </div>
-
       <div class="form-field">
         <span class="field-number">7.</span>
         <span class="field-label">INSTITUTION OF STUDY:</span>
         <input type="text" class="field-input" value="NORTHERN TECHNICAL COLLEGE" readonly />
       </div>
-
       <div class="form-field">
         <span class="field-number">8.</span>
         <span class="field-label">YEAR OF ENROLMENT:</span>
@@ -3486,7 +4423,6 @@ function renderTevetaFormHTML(t){
           <input type="text" class="box-input" maxlength="2" value="${esc(e4)}" disabled />
         </div>
       </div>
-
       <div class="form-field">
         <span class="field-number">9.</span>
         <span class="field-label">Mode of Study:</span>
@@ -3497,7 +4433,6 @@ function renderTevetaFormHTML(t){
             </label>`).join('')}
         </div>
       </div>
-
       <div class="form-field">
         <span class="field-number">10.</span>
         <span class="field-label">YEAR OF STUDY</span>
@@ -3508,7 +4443,6 @@ function renderTevetaFormHTML(t){
             </label>`).join('')}
         </div>
       </div>
-
       <div class="form-field" style="align-items:flex-start">
         <span class="field-number">11.</span>
         <span class="field-label" style="flex:1;min-width:100%">SUBJECTS TO BE TAKEN (Indicate whether practical or written paper)</span>
@@ -3523,7 +4457,6 @@ function renderTevetaFormHTML(t){
           <div class="subject-row"><input type="checkbox" disabled /><span class="subject-text">(x)</span><span class="subject-line readonly"></span></div>
         </div>
       </div>
-
       <div class="teveta-signature-block">
         <div style="font-size:12px;color:#64748b;margin-bottom:6px">
           <i class="fas fa-lock"></i> This form has been submitted and cannot be edited.
@@ -3542,11 +4475,9 @@ PAGE_RENDERERS.teveta = function(){
   if(activeTevetaFilter === 'submitted') list = all.filter(t => (t.status||'submitted').toLowerCase()==='submitted');
   else if(activeTevetaFilter === 'approved') list = all.filter(t => (t.status||'').toLowerCase()==='approved');
   else if(activeTevetaFilter === 'rejected') list = all.filter(t => (t.status||'').toLowerCase()==='rejected');
-
   const pendingCount  = all.filter(t => (t.status||'submitted').toLowerCase()==='submitted').length;
   const approvedCount = all.filter(t => (t.status||'').toLowerCase()==='approved').length;
   const rejectedCount = all.filter(t => (t.status||'').toLowerCase()==='rejected').length;
-
   $('#mainContent').innerHTML = `
     <div class="stats-grid">
       <div class="stat-card blue"><div class="ico"><i class="fas fa-check-double"></i></div><div class="lbl">Total Entries</div><div class="val">${all.length}</div></div>
@@ -3554,7 +4485,6 @@ PAGE_RENDERERS.teveta = function(){
       <div class="stat-card green"><div class="ico"><i class="fas fa-check-circle"></i></div><div class="lbl">Approved</div><div class="val">${approvedCount}</div></div>
       <div class="stat-card red"><div class="ico"><i class="fas fa-times-circle"></i></div><div class="lbl">Rejected</div><div class="val">${rejectedCount}</div></div>
     </div>
-
     <div class="card">
       <h3><i class="fas fa-check-double"></i> TEVETA Exam Entries <span class="right">${list.length} shown</span></h3>
       <div class="chip-row">
@@ -3589,7 +4519,6 @@ window.viewTevetaForm = function(id){
   const t = (state.teveta||[]).find(x => x.id === id);
   if(!t) return;
   const isSubmitted = (t.status||'submitted').toLowerCase() === 'submitted';
-
   openModal({
     title:'TEVETA Examination Entry Form',
     icon:'fa-check-double',
@@ -3753,7 +4682,6 @@ PAGE_RENDERERS.accommodation = function(){
         }).join('')}</tbody>
       </table></div>` : emptyState('No requests','fa-bed')}
     </div>
-
     <div class="card">
       <h3><i class="fas fa-home"></i> Current Allocations <span class="right">${allocated.length}</span></h3>
       ${allocated.length ? `<div class="tbl-wrap"><table>
@@ -4051,18 +4979,7 @@ PAGE_RENDERERS.staff = function(){
           </tr>`;
         }).join('')}</tbody>
       </table></div>` : emptyState('No staff records','fa-users-cog')}
-    </div>
-
-    ${isSuper ? `<div class="card">
-      <h3><i class="fas fa-circle-info"></i> How staff logins work</h3>
-      <p style="color:var(--muted);font-size:13px;line-height:1.8">
-        1. Click <b>Create Staff Login</b>, enter a <b>unique email</b>, temporary password, role and department(s).<br>
-        2. A Firebase Authentication account is created immediately using a secondary app instance.<br>
-        3. The staff record is stored under <code>nortec/staff/{uid}</code> and indexed by email.<br>
-        4. The staff member signs in and lands on <b>their own dashboard</b> showing only the modules their role allows.<br>
-        5. Change role or departments anytime using the edit button.
-      </p>
-    </div>` : ''}`;
+    </div>`;
 };
 
 window.addStaff = function(){
@@ -4388,7 +5305,6 @@ window.saveSettings = async function(){
    ═══════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => { $('#appLoader').classList.add('hidden'); }, 400);
-  /* close mobile sidebar on resize */
   window.addEventListener('resize', () => {
     if(window.innerWidth > 1024){
       $('#sidebar').classList.remove('open');
