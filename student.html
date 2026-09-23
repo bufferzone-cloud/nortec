@@ -118,13 +118,14 @@
   .sidebar-close{background:rgba(255,255,255,.7);border:1px solid var(--border-color);width:36px;height:36px;border-radius:50%;font-size:16px;color:var(--text-primary);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
   .sidebar-close:hover{background:var(--blue-soft);transform:scale(1.05)}
   .sidebar-nav{padding:8px 0;flex:1}
-  .nav-item{display:flex;align-items:center;gap:14px;padding:13px 22px;background:none;border:none;width:100%;text-align:left;font-size:14.5px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:.2s;font-family:inherit;border-left:4px solid transparent}
+  .nav-item{display:flex;align-items:center;gap:14px;padding:13px 22px;background:none;border:none;width:100%;text-align:left;font-size:14.5px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:.2s;font-family:inherit;border-left:4px solid transparent;position:relative}
   .nav-item:hover{background:var(--blue-light);color:var(--blue-dark);padding-left:26px}
   .nav-item.active{background:var(--blue-light);color:var(--blue-dark);border-left-color:var(--blue);font-weight:700}
   .nav-item i{width:24px;text-align:center;color:var(--blue);font-size:17px;flex-shrink:0}
   .nav-item.logout{color:var(--red);border-top:1px solid var(--border-color);margin-top:8px}
   .nav-item.logout i{color:var(--red)}
   .nav-item.logout:hover{background:#fef2f2;color:#991b1b}
+  .nav-item .nav-badge{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:var(--red);color:#fff;font-size:10px;font-weight:800;border-radius:20px;min-width:20px;height:20px;display:flex;align-items:center;justify-content:center;padding:0 6px}
 
   .sub-page{display:none;position:fixed;inset:0;z-index:100;background:var(--bg-secondary);overflow-y:auto;animation:slideIn .35s ease}
   @keyframes slideIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
@@ -229,6 +230,7 @@
   .bn-item i{font-size:19px}
   .bn-item.active{color:var(--blue);background:var(--blue-light)}
   .bn-item:hover{color:var(--blue)}
+  .bn-item .bn-badge{position:absolute;top:0;right:12px;background:var(--red);color:#fff;font-size:9px;font-weight:800;border-radius:20px;min-width:16px;height:16px;display:flex;align-items:center;justify-content:center;padding:0 4px;border:2px solid #fff}
 
   .notif-drop{position:fixed;top:64px;right:14px;width:340px;max-width:calc(100vw - 28px);max-height:440px;overflow-y:auto;background:#fff;border-radius:16px;box-shadow:var(--mac-shadow-hover);border:1px solid var(--border-color);z-index:200;display:none;padding:8px 0}
   .notif-drop.open{display:block;animation:toastIn .25s ease}
@@ -314,55 +316,76 @@
   .notice-card .nc-hd .sub{font-size:11px;color:var(--text-muted);letter-spacing:1px;margin-top:2px}
   .notice-card p{font-size:13px;color:#334155;line-height:1.65;margin-bottom:8px}
 
-  .loading-skeleton{background:linear-gradient(90deg,#f1f5f9 25%,#e2e8f0 50%,#f1f5f9 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:12px;height:80px;margin-bottom:10px}
-  @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+  /* ═══════════════════════════════════════════════════════════════
+     PENDING APPLICATION CARD
+     ═══════════════════════════════════════════════════════════════ */
+  .app-item{background:#fff;border:1px solid var(--border-color);border-radius:14px;padding:16px;margin-bottom:12px;border-left:5px solid var(--blue);position:relative;transition:.2s}
+  .app-item:hover{box-shadow:0 6px 22px rgba(37,99,235,.1);transform:translateY(-2px)}
+  .app-item.pending{border-left-color:var(--amber)}
+  .app-item.approved{border-left-color:var(--green)}
+  .app-item.rejected{border-left-color:var(--red)}
+  .app-item.resolved{border-left-color:var(--green)}
+  .app-item.in-review{border-left-color:var(--purple)}
+  .app-item.submitted{border-left-color:var(--blue)}
+
+  .app-item .ah{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  .app-item .ah .lft{display:flex;gap:12px;align-items:flex-start;flex:1;min-width:0}
+  .app-item .ah .app-icon{width:44px;height:44px;border-radius:12px;background:var(--blue-light);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+  .app-item .ah .app-icon.green{background:#d1fae5;color:#065f46}
+  .app-item .ah .app-icon.amber{background:#fef3c7;color:#92400e}
+  .app-item .ah .app-icon.red{background:#fee2e2;color:#991b1b}
+  .app-item .ah .app-icon.purple{background:#ede9fe;color:#5b21b6}
+  .app-item .ah .meta{flex:1;min-width:0}
+  .app-item .ah .meta .ttl{font-weight:800;font-size:14px;color:var(--text-primary);line-height:1.25;margin-bottom:2px}
+  .app-item .ah .meta .sub{font-size:11.5px;color:var(--text-muted);line-height:1.4}
+  .app-item .row{display:flex;justify-content:space-between;gap:10px;font-size:12px;padding:6px 0;border-bottom:1px solid #f1f5f9}
+  .app-item .row:last-child{border-bottom:none}
+  .app-item .row .k{color:var(--text-muted);font-weight:600;flex-shrink:0}
+  .app-item .row .v{font-weight:600;color:var(--text-primary);text-align:right;word-break:break-word}
+  .app-item .app-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px dashed var(--border-color)}
+
+  .app-filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .app-filter{background:#fff;border:1.5px solid var(--border-color);border-radius:30px;padding:8px 16px;font-size:12px;font-weight:700;color:var(--text-secondary);cursor:pointer;transition:.2s;font-family:inherit}
+  .app-filter:hover{border-color:var(--blue);color:var(--blue-dark)}
+  .app-filter.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .app-filter .cnt{background:rgba(255,255,255,.2);color:inherit;padding:1px 8px;border-radius:20px;margin-left:6px;font-size:10.5px}
+  .app-filter:not(.active) .cnt{background:var(--blue-light);color:var(--blue-dark)}
+
+  .stat-mini-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:14px}
+  .stat-mini{background:#fff;border:1px solid var(--border-color);border-radius:12px;padding:12px 10px;text-align:center}
+  .stat-mini .v{font-size:18px;font-weight:900;color:var(--text-primary)}
+  .stat-mini .k{font-size:10px;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin-top:2px}
+  .stat-mini.pending .v{color:var(--amber)}
+  .stat-mini.approved .v{color:var(--green)}
+  .stat-mini.rejected .v{color:var(--red)}
+  .stat-mini.total .v{color:var(--blue)}
 
   /* ═══════════════════════════════════════════════════════════════
-     TEVETA FORM — pixel-accurate reproduction of original TEVETA form
+     TEVETA FORM — pixel-accurate
      ═══════════════════════════════════════════════════════════════ */
-  .teveta-form-container{
-    font-family:'Inter',sans-serif;
-    background:#fff;
-    padding:26px 24px;
-    border:1px solid var(--border-color);
-    border-radius:16px;
-    box-shadow:0 4px 16px rgba(0,0,0,.04);
-  }
+  .teveta-form-container{font-family:'Inter',sans-serif;background:#fff;padding:26px 24px;border:1px solid var(--border-color);border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
   .teveta-form-container .form-header{text-align:center;margin-bottom:22px;padding-bottom:14px;border-bottom:2px solid #0f172a}
   .teveta-form-container .form-header h2{font-size:19px;font-weight:900;color:var(--text-primary);text-transform:uppercase;letter-spacing:.5px;margin-top:8px}
   .teveta-form-container .form-header .logo-section{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:10px}
   .teveta-form-container .form-header .logo-section img{height:60px;object-fit:contain}
   .teveta-form-container .form-header .logo-section .address-text{font-size:10px;color:#475569;text-align:right;line-height:1.45;flex:1;min-width:200px}
   .teveta-form-container .form-header .logo-section .address-text strong{color:var(--text-primary)}
-
   .teveta-form-container .form-field{margin-bottom:11px;display:flex;align-items:flex-start;gap:6px;flex-wrap:wrap}
   .teveta-form-container .form-field .field-number{font-weight:800;color:var(--text-primary);min-width:26px;font-size:13.5px;flex-shrink:0}
   .teveta-form-container .form-field .field-label{font-weight:700;color:var(--text-primary);font-size:13px;min-width:160px;flex-shrink:0}
-  .teveta-form-container .form-field .field-input{
-    flex:1;min-width:180px;border:none;border-bottom:1.5px solid var(--text-primary);
-    padding:2px 6px;font-size:13.5px;font-family:'Inter',sans-serif;
-    background:transparent;outline:none;color:var(--text-primary);transition:.2s;
-  }
+  .teveta-form-container .form-field .field-input{flex:1;min-width:180px;border:none;border-bottom:1.5px solid var(--text-primary);padding:2px 6px;font-size:13.5px;font-family:'Inter',sans-serif;background:transparent;outline:none;color:var(--text-primary);transition:.2s}
   .teveta-form-container .form-field .field-input:focus{border-bottom:2px solid var(--blue);background:#f8fafc}
   .teveta-form-container .form-field .field-input[readonly]{border-bottom:1.5px solid #94a3b8;color:#475569}
-
   .teveta-form-container .box-group{display:flex;gap:5px;align-items:center;flex-wrap:wrap;flex:1}
-  .teveta-form-container .box-input{
-    border:1.5px solid var(--text-primary);padding:5px 4px;font-size:13px;
-    font-family:'Inter',sans-serif;background:#fff;outline:none;
-    width:34px;text-align:center;color:var(--text-primary);font-weight:700;
-    border-radius:4px;transition:.2s;
-  }
+  .teveta-form-container .box-input{border:1.5px solid var(--text-primary);padding:5px 4px;font-size:13px;font-family:'Inter',sans-serif;background:#fff;outline:none;width:34px;text-align:center;color:var(--text-primary);font-weight:700;border-radius:4px;transition:.2s}
   .teveta-form-container .box-input:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(37,99,235,.15)}
   .teveta-form-container .box-input:disabled,.teveta-form-container .box-input.readonly{background:#f1f5f9;color:#64748b;border-color:#94a3b8}
   .teveta-form-container .box-sep{font-size:14px;color:#64748b;font-weight:700;margin:0 2px}
-
   .teveta-form-container .radio-group{display:flex;align-items:center;gap:16px;flex-wrap:wrap;flex:1}
   .teveta-form-container .radio-opt{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--text-primary);font-weight:500;cursor:pointer}
   .teveta-form-container .radio-opt input[type="radio"]{accent-color:var(--blue);width:15px;height:15px;cursor:pointer}
   .teveta-form-container .radio-opt input[type="radio"]:disabled{cursor:not-allowed}
   .teveta-form-container .radio-opt input[type="radio"]:disabled+span{color:#94a3b8}
-
   .teveta-form-container .subjects-list{flex:1;min-width:260px;display:flex;flex-direction:column;gap:6px;margin-top:2px}
   .teveta-form-container .subject-row{display:flex;align-items:center;gap:10px;font-size:13px;padding:3px 0}
   .teveta-form-container .subject-row input[type="checkbox"]{width:16px;height:16px;accent-color:var(--blue);cursor:pointer;flex-shrink:0}
@@ -370,45 +393,20 @@
   .teveta-form-container .subject-row .subject-text{color:var(--text-primary);flex:1;line-height:1.4}
   .teveta-form-container .subject-row .subject-line{flex:1;border-bottom:1.5px dotted var(--text-primary);height:1px;margin-left:6px;min-width:60px}
   .teveta-form-container .subject-row .subject-line.readonly{border-bottom-color:#94a3b8}
-
-  .teveta-form-container .btn-submit-teveta{
-    display:flex;align-items:center;justify-content:center;gap:10px;
-    width:100%;margin-top:22px;padding:14px 32px;
-    background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff;
-    border:none;border-radius:50px;font-size:15px;font-weight:700;
-    cursor:pointer;transition:.2s;font-family:'Inter',sans-serif;
-    box-shadow:0 8px 26px rgba(37,99,235,.35);
-  }
+  .teveta-form-container .btn-submit-teveta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:22px;padding:14px 32px;background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff;border:none;border-radius:50px;font-size:15px;font-weight:700;cursor:pointer;transition:.2s;font-family:'Inter',sans-serif;box-shadow:0 8px 26px rgba(37,99,235,.35)}
   .teveta-form-container .btn-submit-teveta:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(37,99,235,.45)}
   .teveta-form-container .btn-submit-teveta:active{transform:scale(.97)}
   .teveta-form-container .btn-submit-teveta:disabled{opacity:.6;cursor:not-allowed;transform:none!important}
-
   .teveta-signature-block{margin-top:24px;padding-top:18px;border-top:2px dashed var(--border-color)}
   .teveta-signature-block .sig-row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:12px}
   .teveta-signature-block .sig-col{flex:1;min-width:180px}
   .teveta-signature-block .sig-col .sig-line{border-bottom:1.5px solid var(--text-primary);padding:22px 0 4px;margin-bottom:6px}
   .teveta-signature-block .sig-col .sig-label{font-size:11px;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
-
   .teveta-status-banner{background:#f0fdf4;border-left:4px solid #10b981;padding:12px 14px;border-radius:10px;margin-bottom:18px;font-size:13px;color:#065f46}
 
-  @media (max-width:560px){
-    .teveta-form-container{padding:18px 14px}
-    .teveta-form-container .form-field .field-label{min-width:auto;flex:1 1 100%}
-    .teveta-form-container .form-field .field-number{min-width:22px}
-    .teveta-form-container .box-input{width:30px;padding:4px 2px;font-size:12px}
-  }
-
-  @media (max-width:480px){
-    .header-center .name{font-size:14px}
-    .welcome-banner{padding:18px}
-    .grid-cards{grid-template-columns:1fr 1fr}
-    .quick-grid{grid-template-columns:repeat(3,1fr)}
-    .course-grid{grid-template-columns:1fr}
-    .sidebar{width:280px}
-  }
-  @supports(padding:env(safe-area-inset-top)){
-    .top-bar{padding-top:calc(12px + env(safe-area-inset-top))}
-  }
+  @media (max-width:560px){.teveta-form-container{padding:18px 14px}.teveta-form-container .form-field .field-label{min-width:auto;flex:1 1 100%}.teveta-form-container .form-field .field-number{min-width:22px}.teveta-form-container .box-input{width:30px;padding:4px 2px;font-size:12px}}
+  @media (max-width:480px){.header-center .name{font-size:14px}.welcome-banner{padding:18px}.grid-cards{grid-template-columns:1fr 1fr}.quick-grid{grid-template-columns:repeat(3,1fr)}.course-grid{grid-template-columns:1fr}.sidebar{width:280px}}
+  @supports(padding:env(safe-area-inset-top)){.top-bar{padding-top:calc(12px + env(safe-area-inset-top))}}
 </style>
 </head>
 <body>
@@ -452,6 +450,7 @@
   <main class="app-content" id="appContent">
 
     <section class="page-container active-page full-page" id="homePage"><div id="homeContent"></div></section>
+    <section class="page-container full-page" id="pendingPage"><div id="pendingContent"></div></section>
     <section class="page-container full-page" id="coursesPage"><div id="coursesContent"></div></section>
     <section class="page-container full-page" id="caPage"><div id="caContent"></div></section>
     <section class="page-container full-page" id="attendancePage"><div id="attendanceContent"></div></section>
@@ -480,9 +479,9 @@
 
   <nav class="bottom-nav">
     <button class="bn-item active" data-nav="home"><i class="fas fa-home"></i> Home</button>
+    <button class="bn-item" data-nav="pending"><i class="fas fa-file-alt"></i> Applications<span class="bn-badge" id="bnPendingBadge" style="display:none">0</span></button>
     <button class="bn-item" data-nav="courses"><i class="fas fa-book"></i> Courses</button>
     <button class="bn-item" data-nav="ca"><i class="fas fa-chart-bar"></i> CA</button>
-    <button class="bn-item" data-nav="finance"><i class="fas fa-coins"></i> Finance</button>
     <button class="bn-item" data-nav="profile"><i class="fas fa-user"></i> Profile</button>
   </nav>
 
@@ -494,6 +493,7 @@
     </div>
     <nav class="sidebar-nav">
       <button class="nav-item" data-page="home"><i class="fas fa-home"></i> Dashboard</button>
+      <button class="nav-item" data-page="pending"><i class="fas fa-file-alt"></i> My Applications <span class="nav-badge" id="navPendingBadge" style="display:none">0</span></button>
       <button class="nav-item" data-page="courses"><i class="fas fa-book"></i> Courses</button>
       <button class="nav-item" data-page="ca"><i class="fas fa-chart-bar"></i> Continuous Assessment</button>
       <button class="nav-item" data-page="assignments"><i class="fas fa-tasks"></i> Assignments</button>
@@ -542,7 +542,7 @@ const firebaseConfig = {
   authDomain: "nortec-21d55.firebaseapp.com",
   databaseURL: "https://nortec-21d55-default-rtdb.firebaseio.com",
   projectId: "nortec-21d55",
-  storageBucket: "nortec-21d55.firebasestorage.app",
+  storageBucket: "nortec-21d55.storage.app",
   messagingSenderId: "790129508749",
   appId: "1:790129508749:web:38d8b14d6f5512a350fdc4",
   measurementId: "G-559623YP4D"
@@ -584,9 +584,11 @@ let liveListenersAttached = false;
 let dbNotices = [];
 let dbComplaints = [];
 let dbAccommodation = {};
+let dbAccommodationRequests = {};
 let dbAppeal = {};
 let dbDiploma = {};
 let dbSup = {};
+let dbSupRequests = {};
 let dbTeveta = {};
 let dbTimetable = [];
 let dbAttendance = [];
@@ -604,6 +606,7 @@ let dbPlannerEvents = [];
 let dbUserSettings = {};
 let dbLiveNotifs = {};
 let dbPromos = [];
+let appFilter = 'all';
 
 /* ═══════════════════════════════════════════════════════════════
    HELPERS
@@ -622,14 +625,22 @@ function toast(msg, type='info'){
   $('#toast').appendChild(el);
   setTimeout(()=>{el.style.opacity='0';el.style.transition='opacity .3s';setTimeout(()=>el.remove(),300);},3500);
 }
-function getInitials(name){
-  if(!name) return 'ST';
-  const p = name.trim().split(/\s+/);
-  return ((p[0]?.[0]||'')+(p[1]?.[0]||'')).toUpperCase() || 'ST';
-}
+function getInitials(name){ if(!name) return 'ST'; const p = name.trim().split(/\s+/); return ((p[0]?.[0]||'')+(p[1]?.[0]||'')).toUpperCase() || 'ST'; }
 function getFirstName(name){ return name ? name.trim().split(/\s+/)[0] : 'Student'; }
 function skeleton(n=3){ return '<div class="loading-skeleton"></div>'.repeat(n); }
 function emptyState(msg, icon='fa-inbox'){ return `<div class="empty"><i class="fas ${icon}"></i>${esc(msg)}</div>`; }
+
+function statusPill(status){
+  const s = String(status||'pending').toLowerCase();
+  const cls = s === 'approved' || s === 'resolved' || s === 'issued' || s === 'completed' || s === 'ready' || s === 'allocated'
+    ? 'green'
+    : s === 'rejected' || s === 'cancelled' || s === 'failed'
+    ? 'red'
+    : s === 'pending' || s === 'awaiting' || s === 'submitted-to-admin'
+    ? 'amber'
+    : 'blue';
+  return `<span class="badge ${cls}">${esc(s)}</span>`;
+}
 
 async function openCloudinaryUpload({ formats=['jpg','jpeg','png','pdf','heic','doc','docx'], maxSize=5000000 } = {}){
   return new Promise((resolve) => {
@@ -656,6 +667,7 @@ async function openCloudinaryUpload({ formats=['jpg','jpeg','png','pdf','heic','
    ═══════════════════════════════════════════════════════════════ */
 const PAGE_RENDERERS = {
   home: renderHome,
+  pending: renderPending,
   courses: renderCourses,
   ca: renderCA,
   attendance: renderAttendance,
@@ -697,6 +709,339 @@ function showPage(pageId){
 window.showPage = showPage;
 
 /* ═══════════════════════════════════════════════════════════════
+   BUILD THE MASTER APPLICATIONS LIST FROM ALL FIREBASE NODES
+   ═══════════════════════════════════════════════════════════════ */
+function buildAllApplications(){
+  const list = [];
+
+  // 1. Enrollment application
+  if(appData && appData.applicationId){
+    list.push({
+      kind: 'enrollment',
+      icon: 'fa-user-graduate',
+      color: appData.status === 'approved' ? 'green' : appData.status === 'rejected' ? 'red' : 'amber',
+      title: 'Enrollment Application',
+      subtitle: appData.programme?.title || 'Programme application',
+      status: appData.status || 'pending',
+      date: appData.submittedAt || appData.submittedDate,
+      details: [
+        ['Application ID', appData.applicationId],
+        ['Programme', appData.programme?.title],
+        ['Intake', appData.programme?.intakeLabel],
+        ['Student No.', appData.studentNumber || 'Not assigned yet'],
+        appData.rejectionReason ? ['Rejection Reason', appData.rejectionReason] : null
+      ].filter(Boolean),
+      actions: []
+    });
+  }
+
+  // 2. TEVETA application
+  if(dbTeveta && Object.keys(dbTeveta).length){
+    list.push({
+      kind: 'teveta',
+      icon: 'fa-check-double',
+      color: dbTeveta.status === 'approved' ? 'green' : 'blue',
+      title: 'TEVETA Exam Entry',
+      subtitle: 'TEVETA Examination Registration',
+      status: dbTeveta.status || 'submitted',
+      date: dbTeveta.submittedAt,
+      details: [
+        ['Course', dbTeveta.course],
+        ['Surname', dbTeveta.surname],
+        ['Forenames', dbTeveta.forenames],
+        ['TEVETA Exam No.', dbTeveta.tevetaExamNo],
+        ['Exam Series', dbTeveta.examSeries],
+        ['Year of Enrolment', dbTeveta.yearEnrolment],
+        ['Year of Study', dbTeveta.yearStudy]
+      ].filter(([_,v]) => v),
+      actions: [{ label: 'View Form', icon: 'fa-eye', action: `showPage('teveta')` }]
+    });
+  }
+
+  // 3. Accommodation request
+  if(dbAccommodationRequests && Object.keys(dbAccommodationRequests).length){
+    const ar = dbAccommodationRequests;
+    list.push({
+      kind: 'accommodation-request',
+      icon: 'fa-bed',
+      color: ar.status === 'approved' || ar.status === 'allocated' ? 'green' : ar.status === 'rejected' ? 'red' : 'amber',
+      title: 'Accommodation Request',
+      subtitle: 'Hostel room application',
+      status: ar.status || 'pending',
+      date: ar.requestedAt,
+      details: [
+        ['Preferred Block', ar.preferredBlock],
+        ['Room Type', ar.roomType],
+        ar.notes ? ['Notes', ar.notes] : null
+      ].filter(Boolean),
+      actions: [{ label: 'View', icon: 'fa-eye', action: `showPage('accommodation')` }]
+    });
+  }
+
+  // 4. Accommodation allocation (approved)
+  if(dbAccommodation && Object.keys(dbAccommodation).length){
+    list.push({
+      kind: 'accommodation-alloc',
+      icon: 'fa-home',
+      color: 'green',
+      title: 'Hostel Allocation Confirmed',
+      subtitle: `${dbAccommodation.building || ''} · ${dbAccommodation.room || ''}`,
+      status: 'allocated',
+      date: dbAccommodation.allocatedAt,
+      details: [
+        ['Building', dbAccommodation.building],
+        ['Floor', dbAccommodation.floor],
+        ['Room', dbAccommodation.room],
+        ['Type', dbAccommodation.roomType],
+        ['Roommate', dbAccommodation.roommate]
+      ].filter(([_,v]) => v),
+      actions: [{ label: 'View Details', icon: 'fa-eye', action: `showPage('accommodation')` }]
+    });
+  }
+
+  // 5. Appeal
+  if(dbAppeal && Object.keys(dbAppeal).length){
+    list.push({
+      kind: 'appeal',
+      icon: 'fa-gavel',
+      color: dbAppeal.status === 'resolved' ? 'green' : dbAppeal.status === 'rejected' ? 'red' : 'amber',
+      title: 'Appeal',
+      subtitle: dbAppeal.category || 'General appeal',
+      status: dbAppeal.status || 'pending',
+      date: dbAppeal.createdAt,
+      details: [
+        ['Appeal ID', dbAppeal.appealId || dbAppeal.id],
+        ['Category', dbAppeal.category],
+        ['Description', (dbAppeal.body || '').slice(0, 200)],
+        dbAppeal.response ? ['Admin Response', dbAppeal.response] : null
+      ].filter(Boolean),
+      actions: [{ label: 'View', icon: 'fa-eye', action: `showPage('appeal')` }]
+    });
+  }
+
+  // 6. SUP extension request
+  if(dbSupRequests && Object.keys(dbSupRequests).length){
+    const sr = dbSupRequests;
+    list.push({
+      kind: 'sup-request',
+      icon: 'fa-sync-alt',
+      color: sr.status === 'approved' ? 'green' : sr.status === 'rejected' ? 'red' : 'amber',
+      title: 'SUP Extension Request',
+      subtitle: 'Supplementary exam extension',
+      status: sr.status || 'pending',
+      date: sr.createdAt,
+      details: [
+        ['Reason', sr.reason]
+      ].filter(([_,v]) => v),
+      actions: [{ label: 'View', icon: 'fa-eye', action: `showPage('sup')` }]
+    });
+  }
+
+  // 7. Complaints (many)
+  dbComplaints.forEach(c => {
+    list.push({
+      kind: 'complaint',
+      icon: 'fa-comment-dots',
+      color: c.status === 'resolved' ? 'green' : c.status === 'in-review' ? 'purple' : 'amber',
+      title: c.subject || 'Complaint',
+      subtitle: c.category || 'General',
+      status: c.status || 'pending',
+      date: c.createdAt,
+      details: [
+        ['Category', c.category],
+        ['Details', (c.body || '').slice(0, 200)],
+        c.response ? ['Admin Response', c.response] : null
+      ].filter(Boolean),
+      actions: [{ label: 'View', icon: 'fa-eye', action: `showPage('complaints')` }]
+    });
+  });
+
+  // 8. Mentor applications
+  dbMentorApplications.forEach(m => {
+    list.push({
+      kind: 'mentor',
+      icon: 'fa-user-tie',
+      color: m.status === 'approved' ? 'green' : m.status === 'rejected' ? 'red' : 'amber',
+      title: `Mentorship · ${m.mentor || 'Alumni'}`,
+      subtitle: 'Alumni mentorship request',
+      status: m.status || 'pending',
+      date: m.appliedAt,
+      details: [
+        ['Mentor', m.mentor],
+        ['Your Name', m.name],
+        ['Email', m.email],
+        ['Phone', m.phone],
+        m.goal ? ['Goal', (m.goal || '').slice(0,200)] : null
+      ].filter(Boolean),
+      actions: [{ label: 'View Alumni', icon: 'fa-eye', action: `showPage('alumni')` }]
+    });
+  });
+
+  // 9. Job applications
+  dbJobApplications.forEach(j => {
+    list.push({
+      kind: 'job',
+      icon: 'fa-briefcase',
+      color: j.status === 'approved' || j.status === 'accepted' ? 'green' : j.status === 'rejected' ? 'red' : 'amber',
+      title: `Job · ${j.jobTitle || 'Position'}`,
+      subtitle: j.company || 'Employer',
+      status: j.status || 'pending',
+      date: j.appliedAt,
+      details: [
+        ['Position', j.jobTitle],
+        ['Company', j.company]
+      ].filter(([_,v]) => v),
+      actions: [{ label: 'View Careers', icon: 'fa-eye', action: `showPage('careers')` }]
+    });
+  });
+
+  // 10. Pending purchase / payment submissions
+  allUserTransactions.forEach(t => {
+    list.push({
+      kind: 'payment',
+      icon: 'fa-receipt',
+      color: t.status === 'approved' ? 'green' : t.status === 'rejected' ? 'red' : 'amber',
+      title: t.itemType === 'receipt' ? 'Payment Receipt' : `Purchase · ${t.itemTitle || 'Item'}`,
+      subtitle: t.itemType === 'receipt' ? 'Receipt uploaded for verification' : (t.itemType || 'Course / item'),
+      status: t.status || 'pending',
+      date: t.timestamp,
+      details: [
+        ['Item', t.itemTitle],
+        ['Type', t.itemType],
+        ['Amount', t.amount ? 'ZMW ' + t.amount : null],
+        t.screenshot ? ['Screenshot', 'Attached'] : ['Screenshot', 'Not attached']
+      ].filter(([_,v]) => v),
+      actions: t.screenshot
+        ? [{ label: 'View Screenshot', icon: 'fa-image', action: `window.open('${esc(t.screenshot)}','_blank')` }]
+        : []
+    });
+  });
+
+  // Sort newest first
+  list.sort((a,b) => (b.date || 0) - (a.date || 0));
+  return list;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER: MY APPLICATIONS (PENDING)
+   ═══════════════════════════════════════════════════════════════ */
+function renderPending(){
+  const all = buildAllApplications();
+  const pending = all.filter(a => ['pending','awaiting','submitted','in-review','in_review'].includes(String(a.status||'').toLowerCase()));
+  const approved = all.filter(a => ['approved','resolved','allocated','completed','issued','ready','accepted'].includes(String(a.status||'').toLowerCase()));
+  const rejected = all.filter(a => ['rejected','cancelled','failed'].includes(String(a.status||'').toLowerCase()));
+
+  let filtered = all;
+  if(appFilter === 'pending') filtered = pending;
+  else if(appFilter === 'approved') filtered = approved;
+  else if(appFilter === 'rejected') filtered = rejected;
+
+  const html = `
+    <h2 class="section-title" style="margin-top:0"><i class="fas fa-file-alt"></i> My Applications</h2>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px">
+      Every application, request, or submission you've made — with its current status.
+    </p>
+
+    <div class="stat-mini-row">
+      <div class="stat-mini total">
+        <div class="v">${all.length}</div>
+        <div class="k">Total</div>
+      </div>
+      <div class="stat-mini pending">
+        <div class="v">${pending.length}</div>
+        <div class="k">Pending</div>
+      </div>
+      <div class="stat-mini approved">
+        <div class="v">${approved.length}</div>
+        <div class="k">Approved</div>
+      </div>
+      <div class="stat-mini rejected">
+        <div class="v">${rejected.length}</div>
+        <div class="k">Rejected</div>
+      </div>
+    </div>
+
+    <div class="app-filter-row">
+      <button class="app-filter ${appFilter==='all'?'active':''}" data-filter="all">All <span class="cnt">${all.length}</span></button>
+      <button class="app-filter ${appFilter==='pending'?'active':''}" data-filter="pending">Pending <span class="cnt">${pending.length}</span></button>
+      <button class="app-filter ${appFilter==='approved'?'active':''}" data-filter="approved">Approved <span class="cnt">${approved.length}</span></button>
+      <button class="app-filter ${appFilter==='rejected'?'active':''}" data-filter="rejected">Rejected <span class="cnt">${rejected.length}</span></button>
+    </div>
+
+    <div id="applicationsList">
+      ${renderApplicationsList(filtered)}
+    </div>
+  `;
+  $('#pendingContent').innerHTML = html;
+
+  // Wire filter buttons
+  $$('#pendingContent .app-filter').forEach(btn => {
+    btn.addEventListener('click', function(){
+      appFilter = this.dataset.filter;
+      renderPending();
+    });
+  });
+}
+
+function renderApplicationsList(items){
+  if(!items.length){
+    return `<div class="empty" style="padding:44px 20px">
+      <i class="fas fa-inbox"></i>
+      <div style="font-weight:700;font-size:14px;color:var(--text-primary);margin-bottom:6px">No applications ${appFilter!=='all' ? '('+appFilter+')' : ''}</div>
+      <div>${appFilter==='all' ? 'You have not submitted anything yet.' : 'Nothing matches this filter.'}</div>
+    </div>`;
+  }
+
+  return items.map(app => {
+    const statusCls = String(app.status||'pending').toLowerCase().replace(/[^a-z]/g,'-');
+    const detailsHtml = (app.details || []).map(([k,v]) => `
+      <div class="row"><span class="k">${esc(k)}</span><span class="v">${esc(v)}</span></div>
+    `).join('');
+
+    const actionsHtml = (app.actions || []).length
+      ? `<div class="app-actions">
+          ${app.actions.map(a => `<button class="btn-sm primary" onclick="${a.action}"><i class="fas ${a.icon}"></i> ${esc(a.label)}</button>`).join('')}
+        </div>`
+      : '';
+
+    return `
+      <div class="app-item ${statusCls}">
+        <div class="ah">
+          <div class="lft">
+            <div class="app-icon ${app.color || ''}"><i class="fas ${app.icon || 'fa-file'}"></i></div>
+            <div class="meta">
+              <div class="ttl">${esc(app.title)}</div>
+              <div class="sub">${esc(app.subtitle || '')}</div>
+            </div>
+          </div>
+          ${statusPill(app.status)}
+        </div>
+        ${detailsHtml ? `<div style="margin-top:10px">${detailsHtml}</div>` : ''}
+        <div style="font-size:11px;color:var(--text-muted);margin-top:8px">
+          <i class="fas fa-clock"></i> ${app.date ? fmtDateTime(app.date) : 'Date not recorded'}
+        </div>
+        ${actionsHtml}
+      </div>
+    `;
+  }).join('');
+}
+
+function updatePendingBadge(){
+  const all = buildAllApplications();
+  const pend = all.filter(a => ['pending','awaiting','submitted','in-review','in_review'].includes(String(a.status||'').toLowerCase())).length;
+  const navBadge = $('#navPendingBadge');
+  const bnBadge = $('#bnPendingBadge');
+  if(navBadge){
+    navBadge.textContent = pend;
+    navBadge.style.display = pend > 0 ? 'flex' : 'none';
+  }
+  if(bnBadge){
+    bnBadge.textContent = pend;
+    bnBadge.style.display = pend > 0 ? 'flex' : 'none';
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
    HOME
    ═══════════════════════════════════════════════════════════════ */
 function renderHome(){
@@ -710,6 +1055,8 @@ function renderHome(){
   const caAvg = allCourses.length ? Math.round(allCourses.reduce((s,c)=>s+(c.ca||0),0)/allCourses.length) : 0;
   const attendancePct = dbAttendance.length ? Math.round(dbAttendance.reduce((s,a)=>s+(a.pct||0),0)/dbAttendance.length) : 0;
   const clearedCount = dbClearance.filter(c => c.status === 'cleared').length;
+  const allApps = buildAllApplications();
+  const pendingAppsCount = allApps.filter(a => ['pending','awaiting','submitted','in-review','in_review'].includes(String(a.status||'').toLowerCase())).length;
 
   $('#headerName').innerHTML = `${esc(firstName)} <span class="accent">Dashboard</span>`;
 
@@ -762,30 +1109,30 @@ function renderHome(){
         <div class="val">K${Number(balance).toLocaleString()}</div>
         <div class="sub">Outstanding fees</div>
       </div>
-      <div class="card-tile blue" onclick="showPage('library')">
-        <span class="icon">📖</span>
-        <div class="ttl">Library</div>
-        <div class="val">${dbBorrowedBooks.length} borrowed</div>
-        <div class="sub">${dbLibraryBooks.length} in catalog</div>
+      <div class="card-tile blue" onclick="showPage('pending')">
+        <span class="icon">📝</span>
+        <div class="ttl">Applications</div>
+        <div class="val">${allApps.length}</div>
+        <div class="sub">${pendingAppsCount} pending</div>
       </div>
     </div>
 
     <h2 class="section-title"><i class="fas fa-bolt"></i> Quick Actions</h2>
     <div class="quick-grid">
+      <button class="quick-btn" onclick="showPage('pending')"><i class="fas fa-file-alt"></i> My Apps</button>
       <button class="quick-btn" onclick="showPage('notices')"><i class="fas fa-bullhorn"></i> Notices</button>
       <button class="quick-btn" onclick="showPage('complaints')"><i class="fas fa-comment-dots"></i> Complaints</button>
       <button class="quick-btn" onclick="showPage('accommodation')"><i class="fas fa-bed"></i> Hostel</button>
       <button class="quick-btn" onclick="showPage('exams')"><i class="fas fa-calendar-check"></i> Exams</button>
       <button class="quick-btn" onclick="showPage('timetable')"><i class="fas fa-clock"></i> Timetable</button>
       <button class="quick-btn" onclick="showPage('studentId')"><i class="fas fa-id-badge"></i> ID Card</button>
-      <button class="quick-btn" onclick="showPage('careers')"><i class="fas fa-briefcase"></i> Careers</button>
       <button class="quick-btn" onclick="showPage('teveta')"><i class="fas fa-check-double"></i> TEVETA</button>
     </div>
 
     <h2 class="section-title"><i class="fas fa-chart-line"></i> Quick Stats</h2>
     <div class="stat-row">
-      <div class="stat-box"><div class="lbl">Credits</div><div class="val">${userData.creditsEarned || appData.creditsEarned || 0}</div></div>
-      <div class="stat-box"><div class="lbl">Subjects</div><div class="val">${allCourses.length}</div></div>
+      <div class="stat-box"><div class="lbl">Applications</div><div class="val">${allApps.length}</div></div>
+      <div class="stat-box"><div class="lbl">Pending</div><div class="val" style="color:var(--amber)">${pendingAppsCount}</div></div>
       <div class="stat-box"><div class="lbl">Notices</div><div class="val">${dbNotices.length}</div></div>
       <div class="stat-box"><div class="lbl">Jobs</div><div class="val">${dbJobs.length}</div></div>
     </div>
@@ -796,31 +1143,20 @@ function renderHome(){
 }
 
 function renderRecentActivity(){
-  const items = [];
-  allAssessmentResponses
-    .filter(r => r.userId === currentUser?.uid && r.submittedAt)
-    .sort((a,b) => (b.submittedAt||0) - (a.submittedAt||0))
-    .slice(0, 3)
-    .forEach(r => {
-      const a = allAssessments.find(x => x.id === r.assessmentId);
-      if(a) items.push({ type:'done', ttl:`${a.name} — submitted`, desc: fmtDateTime(r.submittedAt) });
-    });
-  allUserTransactions
-    .sort((a,b) => (b.timestamp||0) - (a.timestamp||0))
-    .slice(0, 2)
-    .forEach(t => {
-      items.push({ type: t.status === 'approved' ? 'done':'pending', ttl: `Payment: ${t.itemTitle || 'Item'}`, desc: `ZMW ${t.amount || 0} · ${fmtDate(t.timestamp)}` });
-    });
-  dbNotices.slice(0, 2).forEach(n => {
-    items.push({ type:'pending', ttl: n.title || 'Notice', desc: n.body ? n.body.slice(0,80) + (n.body.length>80?'…':'') : '' });
-  });
-  if(!items.length) return emptyState('No recent activity yet', 'fa-clock');
-  return items.map(i => `
-    <div class="tl-item ${i.type||''}">
-      <div class="tl-ttl">${esc(i.ttl)}</div>
-      <div class="tl-desc">${esc(i.desc)}</div>
-    </div>
-  `).join('');
+  const allApps = buildAllApplications().slice(0, 4);
+  if(!allApps.length) return emptyState('No recent activity yet', 'fa-clock');
+  return allApps.map(a => {
+    const statusLc = String(a.status||'').toLowerCase();
+    const type = statusLc === 'approved' || statusLc === 'resolved' || statusLc === 'allocated' ? 'done'
+               : statusLc === 'rejected' || statusLc === 'cancelled' ? 'rejected'
+               : 'pending';
+    return `
+      <div class="tl-item ${type}">
+        <div class="tl-ttl">${esc(a.title)}</div>
+        <div class="tl-desc">${esc(a.status)} · ${a.date ? fmtDateTime(a.date) : ''}</div>
+      </div>
+    `;
+  }).join('');
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -837,18 +1173,14 @@ function renderCourses(){
     </div>
   `;
   html += `<h3><i class="fas fa-book"></i> My Courses (${courses.length})</h3>`;
-  if(!courses.length){
-    html += emptyState('No courses enrolled yet', 'fa-book');
-  } else {
+  if(!courses.length){ html += emptyState('No courses enrolled yet', 'fa-book'); }
+  else {
     html += '<div class="course-grid">';
     courses.forEach(c => {
       const subCount = allSubfolders.filter(sf => sf.courseId === c.id).length;
       html += `
         <div class="course-card">
-          <div class="cc-hd">
-            <span>${esc((c.name||'C').charAt(0))}</span>
-            <span class="code">${esc(c.code || '')}</span>
-          </div>
+          <div class="cc-hd"><span>${esc((c.name||'C').charAt(0))}</span><span class="code">${esc(c.code || '')}</span></div>
           <div class="cc-bd">
             <h4>${esc(c.name || 'Course')}</h4>
             <div class="meta">
@@ -880,9 +1212,8 @@ function renderCA(){
     </div>
   `;
   html += `<h3><i class="fas fa-table"></i> CA Breakdown</h3>`;
-  if(!coursesWithCA.length){
-    html += emptyState('No CA records available yet', 'fa-chart-bar');
-  } else {
+  if(!coursesWithCA.length){ html += emptyState('No CA records available yet', 'fa-chart-bar'); }
+  else {
     html += `<div class="tbl-wrap"><table>
       <thead><tr><th>Code</th><th>Subject</th><th>CA %</th><th>Final</th><th>Status</th></tr></thead>
       <tbody>
@@ -1059,14 +1390,9 @@ function renderFinance(){
       </tbody>
     </table></div>`;
   }
-
   html += `<h3><i class="fas fa-upload"></i> Upload Payment Receipt</h3>
-    <div class="form-group">
-      <label>Receipt</label>
-      <input type="file" id="receiptUpload" accept=".pdf,.jpg,.png" />
-    </div>
+    <div class="form-group"><label>Receipt</label><input type="file" id="receiptUpload" accept=".pdf,.jpg,.png" /></div>
     <button class="btn-full primary" id="uploadReceiptBtn"><i class="fas fa-upload"></i> Upload Receipt</button>`;
-
   html += `<h3><i class="fas fa-info-circle"></i> Payment Instructions</h3>
     <ul>
       <li>Bank: <strong>ZANACO</strong></li>
@@ -1083,14 +1409,9 @@ function renderFinance(){
       const res = await openCloudinaryUpload({ formats:['pdf','jpg','jpeg','png','heic'] });
       if(!res || !res.url) return;
       await db.ref(`${ROOT}/pendingPurchases/${currentUser.uid}`).push({
-        itemId: 'receipt-upload',
-        itemTitle: 'Receipt upload',
-        itemType: 'receipt',
-        amount: 0,
-        screenshot: res.url,
-        status: 'pending',
-        timestamp: Date.now(),
-        userId: currentUser.uid
+        itemId: 'receipt-upload', itemTitle: 'Receipt upload', itemType: 'receipt',
+        amount: 0, screenshot: res.url, status: 'pending',
+        timestamp: Date.now(), userId: currentUser.uid
       });
       toast('Receipt uploaded successfully', 'ok');
     }catch(e){ toast('Upload failed: '+e.message, 'err'); }
@@ -1173,15 +1494,10 @@ function renderCareers(){
       return `
         <div class="job-card">
           <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap">
-            <div>
-              <h4>${esc(j.title||'—')}</h4>
-              <div class="co">${esc(j.company||'')}</div>
-            </div>
+            <div><h4>${esc(j.title||'—')}</h4><div class="co">${esc(j.company||'')}</div></div>
             ${j.type ? `<span class="badge blue">${esc(j.type)}</span>` : ''}
           </div>
-          <div class="job-meta">
-            ${j.location ? `<span><i class="fas fa-map-marker-alt"></i> ${esc(j.location)}</span>` : ''}
-          </div>
+          <div class="job-meta">${j.location ? `<span><i class="fas fa-map-marker-alt"></i> ${esc(j.location)}</span>` : ''}</div>
           ${j.description ? `<div class="job-desc">${esc(j.description)}</div>` : ''}
           <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
             <button class="btn-sm ${applied?'ghost':'primary'}" ${applied?'disabled':''} onclick="applyJob('${j.id}')">
@@ -1222,6 +1538,7 @@ window.applyJob = async function(jobId){
     });
     toast('Application submitted!', 'ok');
     renderCareers();
+    updatePendingBadge();
   }catch(e){ toast('Failed to apply: '+e.message, 'err'); }
 };
 window.toggleSaveJob = async function(jobId, currentlySaved){
@@ -1281,12 +1598,9 @@ function renderProfile(){
     <button class="btn-full primary" id="shareAppBtn"><i class="fas fa-share-alt"></i> Share App</button>
     <button class="btn-full danger" id="profileLogoutBtn"><i class="fas fa-sign-out-alt"></i> Log Out</button>
   `;
-
   $('#changePasswordBtn')?.addEventListener('click', async () => {
-    try{
-      await auth.sendPasswordResetEmail(currentUser.email);
-      toast('Password reset email sent', 'ok');
-    }catch(e){ toast(e.message, 'err'); }
+    try{ await auth.sendPasswordResetEmail(currentUser.email); toast('Password reset email sent', 'ok'); }
+    catch(e){ toast(e.message, 'err'); }
   });
   $('#shareAppBtn')?.addEventListener('click', shareApp);
   $('#profileLogoutBtn')?.addEventListener('click', () => $('#logoutBtn').click());
@@ -1301,13 +1615,9 @@ function renderStudentId(){
   const studentNumber = appData.studentNumber || '—';
   const name = appData.fullName || 'Student';
   const prog = appData.programme?.title || '—';
-
   $('#studentIdContent').innerHTML = `
     <div class="id-card" id="idCard">
-      <div class="id-hd">
-        <img src="logo.png" alt="NORTEC" onerror="this.style.display='none'"/>
-        <div class="ttl">NORTEC<small>STUDENT ID</small></div>
-      </div>
+      <div class="id-hd"><img src="logo.png" alt="NORTEC" onerror="this.style.display='none'"/><div class="ttl">NORTEC<small>STUDENT ID</small></div></div>
       <div class="id-photo">${photo ? `<img src="${esc(photo)}" />` : `<i class="fas fa-user"></i>`}</div>
       <div class="id-name">${esc(name.toUpperCase())}</div>
       <div class="id-num">${esc(studentNumber)}</div>
@@ -1316,10 +1626,7 @@ function renderStudentId(){
         <div style="margin-top:6px"><strong>Valid Until:</strong> December 2026</div>
       </div>
       <div class="id-qr"><div id="qrcode"></div></div>
-      <div class="id-ft">
-        <span>Issued: ${fmtDate(appData.approvedAt || Date.now())}</span>
-        <span>NORTEC · Zambia</span>
-      </div>
+      <div class="id-ft"><span>Issued: ${fmtDate(appData.approvedAt || Date.now())}</span><span>NORTEC · Zambia</span></div>
     </div>
 
     <div style="display:flex;gap:8px;justify-content:center;margin:18px auto 0;max-width:400px;flex-wrap:wrap">
@@ -1335,15 +1642,13 @@ function renderStudentId(){
       <li><strong>Status:</strong> <span class="badge green">Active</span></li>
     </ul>
   `;
-
   const qrEl = $('#qrcode');
   if(qrEl){
     qrEl.innerHTML = '';
     try{
       new QRCode(qrEl, {
         text: `NORTEC|${studentNumber}|${name}|${prog}|2026`,
-        width:120, height:120,
-        colorDark:'#1e40af', colorLight:'#ffffff',
+        width:120, height:120, colorDark:'#1e40af', colorLight:'#ffffff',
         correctLevel: QRCode.CorrectLevel.H
       });
     }catch(e){}
@@ -1404,9 +1709,7 @@ function renderNotices(){
    ═══════════════════════════════════════════════════════════════ */
 function renderComplaints(){
   const rows = dbComplaints;
-  let html = `
-    <h3><i class="fas fa-comment-dots"></i> My Complaints (${rows.length})</h3>
-  `;
+  let html = `<h3><i class="fas fa-comment-dots"></i> My Complaints (${rows.length})</h3>`;
   if(!rows.length){ html += emptyState('You have not submitted any complaints','fa-comment-dots'); }
   else {
     html += rows.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).map(c => `
@@ -1424,29 +1727,16 @@ function renderComplaints(){
       </div>
     `).join('');
   }
-
   html += `
     <h3><i class="fas fa-plus-circle"></i> Submit New Complaint</h3>
-    <div class="form-group">
-      <label>Subject</label>
-      <input type="text" id="cmpSubject" placeholder="Brief title of your complaint" />
-    </div>
-    <div class="form-group">
-      <label>Category</label>
+    <div class="form-group"><label>Subject</label><input type="text" id="cmpSubject" placeholder="Brief title of your complaint" /></div>
+    <div class="form-group"><label>Category</label>
       <select id="cmpCategory">
-        <option>Academic</option>
-        <option>Fees / Finance</option>
-        <option>Accommodation</option>
-        <option>Library</option>
-        <option>Lecturer</option>
-        <option>Facilities</option>
-        <option>Other</option>
+        <option>Academic</option><option>Fees / Finance</option><option>Accommodation</option>
+        <option>Library</option><option>Lecturer</option><option>Facilities</option><option>Other</option>
       </select>
     </div>
-    <div class="form-group">
-      <label>Details</label>
-      <textarea id="cmpBody" rows="5" placeholder="Describe your complaint in detail..."></textarea>
-    </div>
+    <div class="form-group"><label>Details</label><textarea id="cmpBody" rows="5" placeholder="Describe your complaint in detail..."></textarea></div>
     <button class="btn-full primary" id="submitComplaintBtn"><i class="fas fa-paper-plane"></i> Submit Complaint</button>
   `;
   $('#complaintsContent').innerHTML = html;
@@ -1459,25 +1749,21 @@ function renderComplaints(){
     try{
       const ref = db.ref(`${ROOT}/complaints/${currentUser.uid}`).push();
       await ref.set({
-        subject, category, body,
-        status: 'pending',
+        subject, category, body, status: 'pending',
         createdAt: Date.now(),
         studentName: appData.fullName || '',
         studentNumber: appData.studentNumber || '',
-        userId: currentUser.uid,
-        email: currentUser.email || ''
+        userId: currentUser.uid, email: currentUser.email || ''
       });
       await db.ref(`${ROOT}/allComplaints/${ref.key}`).set({
         subject, category, body, status:'pending',
         createdAt: Date.now(),
         studentName: appData.fullName || '',
         studentNumber: appData.studentNumber || '',
-        userId: currentUser.uid,
-        email: currentUser.email || ''
+        userId: currentUser.uid, email: currentUser.email || ''
       });
       toast('Complaint submitted successfully','ok');
-      $('#cmpSubject').value = '';
-      $('#cmpBody').value = '';
+      $('#cmpSubject').value = ''; $('#cmpBody').value = '';
     }catch(e){ toast('Failed: '+e.message, 'err'); }
   });
 }
@@ -1487,10 +1773,38 @@ function renderComplaints(){
    ═══════════════════════════════════════════════════════════════ */
 function renderAccommodation(){
   const a = dbAccommodation || {};
+  const req = dbAccommodationRequests || {};
   let html = '';
+
+  // Show any pending request first
+  if(req && Object.keys(req).length && (!a || Object.keys(a).length === 0)){
+    html += `
+      <h3><i class="fas fa-clock"></i> Pending Accommodation Request</h3>
+      <div class="app-item pending">
+        <div class="ah">
+          <div class="lft">
+            <div class="app-icon amber"><i class="fas fa-bed"></i></div>
+            <div class="meta">
+              <div class="ttl">Hostel Application</div>
+              <div class="sub">Submitted ${fmtDateTime(req.requestedAt)}</div>
+            </div>
+          </div>
+          ${statusPill(req.status || 'pending')}
+        </div>
+        <div class="row"><span class="k">Preferred Block</span><span class="v">${esc(req.preferredBlock||'—')}</span></div>
+        <div class="row"><span class="k">Room Type</span><span class="v">${esc(req.roomType||'—')}</span></div>
+        ${req.notes ? `<div class="row"><span class="k">Notes</span><span class="v">${esc(req.notes)}</span></div>` : ''}
+        <div class="app-actions">
+          <button class="btn-sm ghost" onclick="showPage('pending')"><i class="fas fa-file-alt"></i> View in Applications</button>
+        </div>
+      </div>
+    `;
+  }
+
   if(!a || Object.keys(a).length === 0){
-    html = `
-      <h3><i class="fas fa-bed"></i> Hostel Application</h3>
+    // No allocation yet — show application form (unless already requested)
+    html += `
+      <h3 style="margin-top:${html ? '18px' : '0'}"><i class="fas fa-bed"></i> ${req && Object.keys(req).length ? 'Apply Again (New Request)' : 'Hostel Application'}</h3>
       <p style="font-size:13px;color:var(--text-muted)">You don't have an accommodation allocation yet. Apply below to request a room.</p>
       <div class="form-group"><label>Preferred Block</label>
         <select id="accBlock"><option>Kwacha Block</option><option>Zambezi Block</option><option>Kafue Block</option><option>Luangwa Block</option></select>
@@ -1498,9 +1812,7 @@ function renderAccommodation(){
       <div class="form-group"><label>Room Type</label>
         <select id="accRoomType"><option>Shared (2 occupants)</option><option>Single</option><option>4-person</option></select>
       </div>
-      <div class="form-group"><label>Reason / Notes</label>
-        <textarea id="accNotes" rows="3" placeholder="Any special requirements..."></textarea>
-      </div>
+      <div class="form-group"><label>Reason / Notes</label><textarea id="accNotes" rows="3" placeholder="Any special requirements..."></textarea></div>
       <button class="btn-full primary" id="applyAccBtn"><i class="fas fa-paper-plane"></i> Apply for Accommodation</button>
     `;
     $('#accommodationContent').innerHTML = html;
@@ -1519,39 +1831,36 @@ function renderAccommodation(){
         toast('Accommodation request submitted','ok');
       }catch(e){ toast('Failed: '+e.message, 'err'); }
     });
-  } else {
-    html = `
-      <div class="info-grid">
-        <div class="info-item"><div class="lbl">Building</div><div class="val">${esc(a.building||'—')}</div></div>
-        <div class="info-item"><div class="lbl">Floor</div><div class="val">${esc(a.floor||'—')}</div></div>
-        <div class="info-item"><div class="lbl">Room</div><div class="val">${esc(a.room||'—')}</div></div>
-        <div class="info-item"><div class="lbl">Type</div><div class="val">${esc(a.roomType||'—')}</div></div>
-        <div class="info-item"><div class="lbl">Roommate</div><div class="val">${esc(a.roommate||'—')}</div></div>
-        <div class="info-item"><div class="lbl">Allocated</div><div class="val">${fmtDate(a.allocatedAt)}</div></div>
-      </div>
-      <h3><i class="fas fa-home"></i> Room Features</h3>
-      <ul>
-        <li>2 beds with mattresses</li>
-        <li>Built-in wardrobe</li>
-        <li>Study desk and chair</li>
-        <li>Shared bathroom facilities</li>
-        <li>Common kitchen area</li>
-        <li>24/7 security · Wi-Fi available</li>
-      </ul>
-      <h3><i class="fas fa-gavel"></i> Hostel Rules</h3>
-      <ul>
-        <li>No visitors after 22:00 hours</li>
-        <li>No loud music after 23:00 hours</li>
-        <li>Keep the room clean and tidy</li>
-        <li>Report maintenance issues to warden</li>
-        <li>Alcohol prohibited in hostel rooms</li>
-      </ul>
-      <h3><i class="fas fa-phone"></i> Contact</h3>
-      <p>Hostel Warden: +260 97 123 4567</p>
-      <p>Maintenance: +260 96 789 0123</p>
-    `;
-    $('#accommodationContent').innerHTML = html;
+    return;
   }
+
+  // Has allocation — show details
+  html += `
+    <h3 style="margin-top:${html ? '18px' : '0'}"><i class="fas fa-home"></i> My Room</h3>
+    <div class="info-grid">
+      <div class="info-item"><div class="lbl">Building</div><div class="val">${esc(a.building||'—')}</div></div>
+      <div class="info-item"><div class="lbl">Floor</div><div class="val">${esc(a.floor||'—')}</div></div>
+      <div class="info-item"><div class="lbl">Room</div><div class="val">${esc(a.room||'—')}</div></div>
+      <div class="info-item"><div class="lbl">Type</div><div class="val">${esc(a.roomType||'—')}</div></div>
+      <div class="info-item"><div class="lbl">Roommate</div><div class="val">${esc(a.roommate||'—')}</div></div>
+      <div class="info-item"><div class="lbl">Allocated</div><div class="val">${fmtDate(a.allocatedAt)}</div></div>
+    </div>
+    <h3><i class="fas fa-home"></i> Room Features</h3>
+    <ul>
+      <li>2 beds with mattresses</li><li>Built-in wardrobe</li><li>Study desk and chair</li>
+      <li>Shared bathroom facilities</li><li>Common kitchen area</li><li>24/7 security · Wi-Fi available</li>
+    </ul>
+    <h3><i class="fas fa-gavel"></i> Hostel Rules</h3>
+    <ul>
+      <li>No visitors after 22:00 hours</li><li>No loud music after 23:00 hours</li>
+      <li>Keep the room clean and tidy</li><li>Report maintenance issues to warden</li>
+      <li>Alcohol prohibited in hostel rooms</li>
+    </ul>
+    <h3><i class="fas fa-phone"></i> Contact</h3>
+    <p>Hostel Warden: +260 97 123 4567</p>
+    <p>Maintenance: +260 96 789 0123</p>
+  `;
+  $('#accommodationContent').innerHTML = html;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1565,7 +1874,7 @@ function renderAppeal(){
       <h3><i class="fas fa-gavel"></i> Existing Appeal</h3>
       <div class="info-grid">
         <div class="info-item"><div class="lbl">Appeal ID</div><div class="val">${esc(a.appealId || a.id || '—')}</div></div>
-        <div class="info-item"><div class="lbl">Status</div><div class="val"><span class="badge ${a.status==='resolved'?'green':a.status==='pending'?'amber':'blue'}">${esc(a.status||'—')}</span></div></div>
+        <div class="info-item"><div class="lbl">Status</div><div class="val">${statusPill(a.status)}</div></div>
         <div class="info-item"><div class="lbl">Category</div><div class="val">${esc(a.category||'—')}</div></div>
         <div class="info-item"><div class="lbl">Submitted</div><div class="val">${fmtDate(a.createdAt)}</div></div>
       </div>
@@ -1578,16 +1887,11 @@ function renderAppeal(){
       <p style="font-size:13px;color:var(--text-muted)">You have no active appeals. Submit one below.</p>
       <div class="form-group"><label>Category</label>
         <select id="appealCategory">
-          <option>Fees Clearance</option>
-          <option>Exam Results</option>
-          <option>Accommodation</option>
-          <option>Disciplinary</option>
-          <option>Other</option>
+          <option>Fees Clearance</option><option>Exam Results</option>
+          <option>Accommodation</option><option>Disciplinary</option><option>Other</option>
         </select>
       </div>
-      <div class="form-group"><label>Description</label>
-        <textarea id="appealBody" rows="5" placeholder="Describe your appeal in detail..."></textarea>
-      </div>
+      <div class="form-group"><label>Description</label><textarea id="appealBody" rows="5" placeholder="Describe your appeal in detail..."></textarea></div>
       <button class="btn-full primary" id="submitAppealBtn"><i class="fas fa-paper-plane"></i> Submit Appeal</button>
     `;
     $('#appealContent').innerHTML = html;
@@ -1598,8 +1902,7 @@ function renderAppeal(){
       try{
         const id = 'APP-' + Date.now().toString().slice(-6);
         await db.ref(`${ROOT}/appeals/${currentUser.uid}`).set({
-          appealId: id, category:cat, body,
-          status:'pending', createdAt: Date.now(),
+          appealId: id, category:cat, body, status:'pending', createdAt: Date.now(),
           studentName: appData.fullName || '',
           studentNumber: appData.studentNumber || '',
           userId: currentUser.uid
@@ -1621,7 +1924,7 @@ function renderDiploma(){
     <h3><i class="fas fa-certificate"></i> Diploma / Certificate Status</h3>
     <div class="info-grid">
       <div class="info-item"><div class="lbl">Certificate Type</div><div class="val">${esc(d.type || appData.programme?.category || 'Diploma')}</div></div>
-      <div class="info-item"><div class="lbl">Status</div><div class="val"><span class="badge ${d.status==='issued'?'green':d.status==='processing'?'amber':'blue'}">${esc(d.status||'Processing')}</span></div></div>
+      <div class="info-item"><div class="lbl">Status</div><div class="val">${statusPill(d.status || 'processing')}</div></div>
       <div class="info-item"><div class="lbl">Expected Release</div><div class="val">${esc(d.releaseDate || 'December 2026')}</div></div>
       <div class="info-item"><div class="lbl">Collected</div><div class="val">${d.collected ? 'Yes' : 'No'}</div></div>
     </div>
@@ -1647,6 +1950,7 @@ function renderDiploma(){
    ═══════════════════════════════════════════════════════════════ */
 function renderSup(){
   const s = dbSup || {};
+  const sr = dbSupRequests || {};
   let html = `<h3><i class="fas fa-sync-alt"></i> Supplementary Exam</h3>`;
   if(!s || !Object.keys(s).length){
     html += emptyState('No supplementary exams scheduled','fa-sync-alt');
@@ -1660,13 +1964,31 @@ function renderSup(){
       </div>
     `;
   }
-  html += `
-    <h3><i class="fas fa-pen"></i> Apply for SUP Extension</h3>
-    <div class="form-group"><label>Reason</label>
-      <textarea id="supReason" rows="3" placeholder="Provide reasons for extension..."></textarea>
-    </div>
-    <button class="btn-full primary" id="supApplyBtn"><i class="fas fa-paper-plane"></i> Request Extension</button>
-  `;
+
+  if(sr && Object.keys(sr).length){
+    html += `
+      <h3><i class="fas fa-clock"></i> Pending Extension Request</h3>
+      <div class="app-item pending">
+        <div class="ah">
+          <div class="lft">
+            <div class="app-icon amber"><i class="fas fa-sync-alt"></i></div>
+            <div class="meta">
+              <div class="ttl">SUP Extension Request</div>
+              <div class="sub">Submitted ${fmtDateTime(sr.createdAt)}</div>
+            </div>
+          </div>
+          ${statusPill(sr.status || 'pending')}
+        </div>
+        <div class="row"><span class="k">Reason</span><span class="v">${esc(sr.reason)}</span></div>
+      </div>
+    `;
+  } else {
+    html += `
+      <h3><i class="fas fa-pen"></i> Apply for SUP Extension</h3>
+      <div class="form-group"><label>Reason</label><textarea id="supReason" rows="3" placeholder="Provide reasons for extension..."></textarea></div>
+      <button class="btn-full primary" id="supApplyBtn"><i class="fas fa-paper-plane"></i> Request Extension</button>
+    `;
+  }
   $('#supContent').innerHTML = html;
   $('#supApplyBtn')?.addEventListener('click', async () => {
     const reason = $('#supReason').value.trim();
@@ -1683,18 +2005,16 @@ function renderSup(){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   TEVETA — Pixel-accurate TEVETA Examination Entry Form
+   TEVETA
    ═══════════════════════════════════════════════════════════════ */
 function renderTeveta(){
   const t = dbTeveta || {};
   const isSubmitted = t && Object.keys(t).length > 0;
 
-  // Split name from application
   const nameParts = (appData.fullName || '').trim().split(/\s+/);
   const defaultSurname = nameParts.length > 1 ? nameParts[nameParts.length-1] : (nameParts[0] || '');
   const defaultForenames = nameParts.length > 1 ? nameParts.slice(0,-1).join(' ') : '';
 
-  // Subject defaults (diploma CS)
   const defaultSubjects = [
     { code:'41.1', label:'Digital Electronics' },
     { code:'41.2', label:'Entrepreneurship' },
@@ -1706,7 +2026,6 @@ function renderTeveta(){
     { code:'41.8', label:'Project' }
   ];
 
-  // Parse existing values
   const exSeriesParts = (t.examSeries || '').split('/');
   const exSeriesM = (exSeriesParts[0]||'').slice(0,1) || '';
   const exSeriesA = (exSeriesParts[0]||'').slice(1,2) || '';
@@ -1731,7 +2050,7 @@ function renderTeveta(){
       </div>
     ` : `
       <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px">
-        Complete the TEVETA Examination Entry Form below to register for your TEVETA examinations. Please ensure all details are accurate.
+        Complete the TEVETA Examination Entry Form below to register for your TEVETA examinations.
       </p>
     `}
 
@@ -1752,16 +2071,10 @@ function renderTeveta(){
       </div>
 
       <form id="tevetaForm">
-
-        <div class="form-field">
-          <span class="field-number">1.</span>
-          <span class="field-label">COURSE:</span>
+        <div class="form-field"><span class="field-number">1.</span><span class="field-label">COURSE:</span>
           <input type="text" class="field-input" value="${esc(courseValue)}" readonly />
         </div>
-
-        <div class="form-field">
-          <span class="field-number">2.</span>
-          <span class="field-label">EXAMINATION SERIES:</span>
+        <div class="form-field"><span class="field-number">2.</span><span class="field-label">EXAMINATION SERIES:</span>
           <div class="box-group">
             <input type="text" class="box-input" id="exSeriesM" maxlength="1" value="${esc(exSeriesM)}" ${isSubmitted?'disabled':''} placeholder="M" />
             <input type="text" class="box-input" id="exSeriesA" maxlength="1" value="${esc(exSeriesA)}" ${isSubmitted?'disabled':''} placeholder="A" />
@@ -1770,44 +2083,24 @@ function renderTeveta(){
             <input type="text" class="box-input" id="exSeriesY2" maxlength="2" value="${esc(exSeriesY2)}" ${isSubmitted?'disabled':''} placeholder="Y" />
           </div>
         </div>
-
-        <div class="form-field">
-          <span class="field-number">3.</span>
-          <span class="field-label">TEVETA EXAM NO:</span>
+        <div class="form-field"><span class="field-number">3.</span><span class="field-label">TEVETA EXAM NO:</span>
           <div class="box-group">
-            ${[1,2,3,4,5,6,7,8,9,10].map(i => `
-              <input type="text" class="box-input" id="tevetaNo${i}" maxlength="1" value="${esc((tevetaNoDigits[i-1]||'').trim())}" ${isSubmitted?'disabled':''} />
-            `).join('')}
+            ${[1,2,3,4,5,6,7,8,9,10].map(i => `<input type="text" class="box-input" id="tevetaNo${i}" maxlength="1" value="${esc((tevetaNoDigits[i-1]||'').trim())}" ${isSubmitted?'disabled':''} />`).join('')}
           </div>
         </div>
-
-        <div class="form-field">
-          <span class="field-number">4.</span>
-          <span class="field-label">EXAMINATION CENTER NAME:</span>
+        <div class="form-field"><span class="field-number">4.</span><span class="field-label">EXAMINATION CENTER NAME:</span>
           <input type="text" class="field-input" value="NORTHERN TECHNICAL COLLEGE" readonly />
         </div>
-
-        <div class="form-field">
-          <span class="field-number">5.</span>
-          <span class="field-label">SURNAME:</span>
+        <div class="form-field"><span class="field-number">5.</span><span class="field-label">SURNAME:</span>
           <input type="text" class="field-input" id="tvSurname" value="${esc(t.surname || defaultSurname.toUpperCase())}" ${isSubmitted?'readonly':''} />
         </div>
-
-        <div class="form-field">
-          <span class="field-number">6.</span>
-          <span class="field-label">FORENAMES:</span>
+        <div class="form-field"><span class="field-number">6.</span><span class="field-label">FORENAMES:</span>
           <input type="text" class="field-input" id="tvForenames" value="${esc(t.forenames || defaultForenames.toUpperCase())}" ${isSubmitted?'readonly':''} />
         </div>
-
-        <div class="form-field">
-          <span class="field-number">7.</span>
-          <span class="field-label">INSTITUTION OF STUDY:</span>
+        <div class="form-field"><span class="field-number">7.</span><span class="field-label">INSTITUTION OF STUDY:</span>
           <input type="text" class="field-input" value="NORTHERN TECHNICAL COLLEGE" readonly />
         </div>
-
-        <div class="form-field">
-          <span class="field-number">8.</span>
-          <span class="field-label">YEAR OF ENROLMENT:</span>
+        <div class="form-field"><span class="field-number">8.</span><span class="field-label">YEAR OF ENROLMENT:</span>
           <div class="box-group">
             <input type="text" class="box-input" id="enrolY1" maxlength="2" value="${esc(enrolY1)}" ${isSubmitted?'disabled':''} placeholder="Y" />
             <input type="text" class="box-input" id="enrolY2" maxlength="2" value="${esc(enrolY2)}" ${isSubmitted?'disabled':''} placeholder="Y" />
@@ -1816,10 +2109,7 @@ function renderTeveta(){
             <input type="text" class="box-input" id="enrolY4" maxlength="2" value="${esc(enrolY4)}" ${isSubmitted?'disabled':''} placeholder="Y" />
           </div>
         </div>
-
-        <div class="form-field">
-          <span class="field-number">9.</span>
-          <span class="field-label">Mode of Study:</span>
+        <div class="form-field"><span class="field-number">9.</span><span class="field-label">Mode of Study:</span>
           <div class="radio-group">
             <label class="radio-opt"><input type="radio" name="tvMode" value="Full-time" checked disabled /><span>Full-time</span></label>
             <label class="radio-opt"><input type="radio" name="tvMode" value="Distance" disabled /><span>Distance</span></label>
@@ -1827,10 +2117,7 @@ function renderTeveta(){
             <label class="radio-opt"><input type="radio" name="tvMode" value="Part-time" disabled /><span>Part-time</span></label>
           </div>
         </div>
-
-        <div class="form-field">
-          <span class="field-number">10.</span>
-          <span class="field-label">YEAR OF STUDY</span>
+        <div class="form-field"><span class="field-number">10.</span><span class="field-label">YEAR OF STUDY</span>
           <div class="radio-group">
             ${['First','Second','Third','Fourth'].map(y => {
               const checked = yearStudy === y ? 'checked' : '';
@@ -1838,7 +2125,6 @@ function renderTeveta(){
             }).join('')}
           </div>
         </div>
-
         <div class="form-field" style="align-items:flex-start">
           <span class="field-number">11.</span>
           <span class="field-label" style="flex:1;min-width:100%">SUBJECTS TO BE TAKEN (Indicate whether practical or written paper)</span>
@@ -1850,74 +2136,42 @@ function renderTeveta(){
                 <span class="subject-line"></span>
               </div>
             `).join('')}
-            <div class="subject-row">
-              <input type="checkbox" disabled />
-              <span class="subject-text">(ix)</span>
-              <span class="subject-line readonly"></span>
-            </div>
-            <div class="subject-row">
-              <input type="checkbox" disabled />
-              <span class="subject-text">(x)</span>
-              <span class="subject-line readonly"></span>
-            </div>
+            <div class="subject-row"><input type="checkbox" disabled /><span class="subject-text">(ix)</span><span class="subject-line readonly"></span></div>
+            <div class="subject-row"><input type="checkbox" disabled /><span class="subject-text">(x)</span><span class="subject-line readonly"></span></div>
           </div>
         </div>
-
-        ${!isSubmitted ? `
-          <button type="submit" class="btn-submit-teveta" id="tvSubmitBtn">
-            <i class="fas fa-paper-plane"></i> Submit TEVETA Application
-          </button>
-        ` : `
+        ${!isSubmitted ? `<button type="submit" class="btn-submit-teveta" id="tvSubmitBtn"><i class="fas fa-paper-plane"></i> Submit TEVETA Application</button>` : `
           <div class="teveta-signature-block">
-            <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px"><i class="fas fa-lock"></i> This form has been submitted and cannot be edited. Contact the exams office for changes.</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px"><i class="fas fa-lock"></i> This form has been submitted and cannot be edited.</div>
             <div class="sig-row">
-              <div class="sig-col">
-                <div class="sig-line"></div>
-                <div class="sig-label">Examination Officer Signature</div>
-              </div>
-              <div class="sig-col">
-                <div class="sig-line"></div>
-                <div class="sig-label">Date</div>
-              </div>
+              <div class="sig-col"><div class="sig-line"></div><div class="sig-label">Examination Officer Signature</div></div>
+              <div class="sig-col"><div class="sig-line"></div><div class="sig-label">Date</div></div>
             </div>
           </div>
         `}
-
       </form>
     </div>
   `;
-
   $('#tevetaContent').innerHTML = html;
 
   if(!isSubmitted){
     $('#tevetaForm').addEventListener('submit', submitTevetaForm);
-
-    // Auto-advance box inputs
     ['exSeriesM','exSeriesA','exSeriesY1','exSeriesY2'].forEach((id, i, arr) => {
       const el = document.getElementById(id);
       if(el) el.addEventListener('input', () => {
-        if(el.value.length >= el.maxLength && i < arr.length - 1){
-          const next = document.getElementById(arr[i+1]);
-          if(next) next.focus();
-        }
+        if(el.value.length >= el.maxLength && i < arr.length - 1){ const next = document.getElementById(arr[i+1]); if(next) next.focus(); }
       });
     });
     for(let i=1; i<=10; i++){
       const el = document.getElementById('tevetaNo'+i);
       if(el) el.addEventListener('input', () => {
-        if(el.value.length >= 1 && i < 10){
-          const next = document.getElementById('tevetaNo'+(i+1));
-          if(next) next.focus();
-        }
+        if(el.value.length >= 1 && i < 10){ const next = document.getElementById('tevetaNo'+(i+1)); if(next) next.focus(); }
       });
     }
     for(let i=1; i<=4; i++){
       const el = document.getElementById('enrolY'+i);
       if(el) el.addEventListener('input', () => {
-        if(el.value.length >= 2 && i < 4){
-          const next = document.getElementById('enrolY'+(i+1));
-          if(next) next.focus();
-        }
+        if(el.value.length >= 2 && i < 4){ const next = document.getElementById('enrolY'+(i+1)); if(next) next.focus(); }
       });
     }
   }
@@ -1956,20 +2210,11 @@ async function submitTevetaForm(e){
       : 'DIPLOMA IN COMPUTER SYSTEMS ENGINEERING – Code 41';
 
     const record = {
-      course: courseValue,
-      examSeries: seriesParts,
-      tevetaExamNo,
-      center: 'NORTHERN TECHNICAL COLLEGE',
-      institution: 'NORTHERN TECHNICAL COLLEGE',
-      surname, forenames,
-      yearEnrolment,
-      mode: 'Full-time',
-      yearStudy,
-      status: 'submitted',
-      submittedAt: Date.now(),
-      userId: uid,
-      studentNumber: appData.studentNumber || '',
-      email: currentUser.email || ''
+      course: courseValue, examSeries: seriesParts, tevetaExamNo,
+      center: 'NORTHERN TECHNICAL COLLEGE', institution: 'NORTHERN TECHNICAL COLLEGE',
+      surname, forenames, yearEnrolment, mode: 'Full-time', yearStudy,
+      status: 'submitted', submittedAt: Date.now(),
+      userId: uid, studentNumber: appData.studentNumber || '', email: currentUser.email || ''
     };
     await db.ref(`${ROOT}/teveta/${uid}`).set(record);
     dbTeveta = { id: uid, ...record };
@@ -1993,16 +2238,7 @@ function renderTimetable(){
   else {
     html += `<div class="tbl-wrap"><table>
       <thead><tr><th>Day</th><th>Time</th><th>Subject</th><th>Venue</th></tr></thead>
-      <tbody>
-        ${rows.map(r => `
-          <tr>
-            <td>${esc(r.day||'—')}</td>
-            <td>${esc(r.time||'—')}</td>
-            <td>${esc(r.subject||'—')}</td>
-            <td>${esc(r.venue||'—')}</td>
-          </tr>
-        `).join('')}
-      </tbody>
+      <tbody>${rows.map(r => `<tr><td>${esc(r.day||'—')}</td><td>${esc(r.time||'—')}</td><td>${esc(r.subject||'—')}</td><td>${esc(r.venue||'—')}</td></tr>`).join('')}</tbody>
     </table></div>`;
   }
   $('#timetableContent').innerHTML = html;
@@ -2064,12 +2300,9 @@ function renderResume(){
     container.innerHTML = `
       <h1 style="border-bottom:3px solid #2563eb;padding-bottom:10px;margin-bottom:14px">${esc($('#rvName').value)}</h1>
       <p style="color:#64748b;margin-bottom:14px">${esc($('#rvEmail').value)} · ${esc($('#rvPhone').value)} · ${esc($('#rvLocation').value)}</p>
-      <h2 style="font-size:16px;margin:16px 0 6px">Education</h2>
-      <p>${esc($('#rvEdu').value)} — ${esc($('#rvInst').value)}</p>
-      <h2 style="font-size:16px;margin:16px 0 6px">Experience</h2>
-      <p>${esc($('#rvWork').value || 'N/A')}</p>
-      <h2 style="font-size:16px;margin:16px 0 6px">Skills</h2>
-      <p>${esc($('#rvSkills').value)}</p>
+      <h2 style="font-size:16px;margin:16px 0 6px">Education</h2><p>${esc($('#rvEdu').value)} — ${esc($('#rvInst').value)}</p>
+      <h2 style="font-size:16px;margin:16px 0 6px">Experience</h2><p>${esc($('#rvWork').value || 'N/A')}</p>
+      <h2 style="font-size:16px;margin:16px 0 6px">Skills</h2><p>${esc($('#rvSkills').value)}</p>
     `;
     html2pdf().set({ margin:10, filename: 'Resume_'+($('#rvName').value||'student')+'.pdf', html2canvas:{ scale:2, useCORS:true }, jsPDF:{ unit:'mm', format:'a4' } }).from(container).save();
     toast('Generating resume…','info');
@@ -2107,16 +2340,12 @@ function renderAlumni(){
 window.applyMentor = async function(mentorName){
   try{
     await db.ref(`${ROOT}/mentorApplications/${currentUser.uid}`).push({
-      mentor: mentorName,
-      name: appData.fullName || '',
-      email: currentUser.email || '',
-      phone: appData.personal?.phone || '',
-      appliedAt: Date.now(),
-      status: 'pending',
-      userId: currentUser.uid
+      mentor: mentorName, name: appData.fullName || '', email: currentUser.email || '',
+      phone: appData.personal?.phone || '', appliedAt: Date.now(), status: 'pending', userId: currentUser.uid
     });
     toast('Mentorship request sent','ok');
     renderAlumni();
+    updatePendingBadge();
   }catch(e){ toast('Failed: '+e.message,'err'); }
 };
 
@@ -2139,7 +2368,6 @@ function renderPlanner(){
     });
   });
   grid += '</div>';
-
   $('#plannerContent').innerHTML = `
     <h3><i class="fas fa-calendar-plus"></i> Study Planner</h3>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
@@ -2175,7 +2403,6 @@ function renderSettings(){
         <input type="checkbox" id="darkToggle" ${s.darkMode?'checked':''} style="width:18px;height:18px;accent-color:var(--blue)" />
       </label>
     </div>
-
     <h3><i class="fas fa-bell"></i> Notifications</h3>
     <div class="info-item" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
       <div class="lbl">Push Notifications</div>
@@ -2185,7 +2412,6 @@ function renderSettings(){
       <div class="lbl">Email Notifications</div>
       <input type="checkbox" id="emailToggle" ${s.emailNotifs!==false?'checked':''} style="width:18px;height:18px;accent-color:var(--blue)" />
     </div>
-
     <h3><i class="fas fa-info-circle"></i> About</h3>
     <p>NORTEC Student Dashboard v3.0<br/>© 2026 Northern Technical College</p>
     <button class="btn-full ghost" onclick="toast('App version 3.0.0','info')"><i class="fas fa-info"></i> Version Info</button>
@@ -2222,11 +2448,7 @@ function renderNotifDropdown(){
 }
 window.markAllNotifsRead = async function(){
   notifications.forEach(n => n.read = true);
-  try{
-    await db.ref(`${ROOT}/userNotifications/${currentUser.uid}`).update(
-      Object.fromEntries(notifications.map(n => [n.id, { read: true }]))
-    );
-  }catch(e){}
+  try{ await db.ref(`${ROOT}/userNotifications/${currentUser.uid}`).update(Object.fromEntries(notifications.map(n => [n.id, { read: true }]))); }catch(e){}
   renderNotifDropdown();
 };
 
@@ -2254,9 +2476,11 @@ function bindRealtime(){
     const name = appData.fullName || userData.fullName || 'Student';
     $('#headerName').innerHTML = `${esc(getFirstName(name))} <span class="accent">Dashboard</span>`;
     if($('#homePage').classList.contains('active-page')) renderHome();
+    if($('#pendingPage').classList.contains('active-page')) renderPending();
+    updatePendingBadge();
   });
 
-  db.ref(`${ROOT}/courses`).on('value', s => { allCourses = toArray(s.val()); if($('#coursesPage').classList.contains('active-page')) renderCourses(); if($('#homePage').classList.contains('active-page')) renderHome(); });
+  db.ref(`${ROOT}/courses`).on('value', s => { allCourses = toArray(s.val()); if($('#coursesPage').classList.contains('active-page')) renderCourses(); });
   db.ref(`${ROOT}/subfolders`).on('value', s => { allSubfolders = toArray(s.val()); });
   db.ref(`${ROOT}/videos`).on('value', s => { allVideos = toArray(s.val()); });
   db.ref(`${ROOT}/docs`).on('value', s => { allDocs = toArray(s.val()); });
@@ -2266,8 +2490,7 @@ function bindRealtime(){
     approvedSubfolders.clear(); approvedSubfoldersData = {};
     const data = s.val() || {};
     Object.keys(data).forEach(id => {
-      const d = data[id];
-      const itemType = d.itemType || 'course';
+      const d = data[id]; const itemType = d.itemType || 'course';
       const rec = { expiresAt: d.expiresAt||null, durationType: d.durationType||'lifetime', durationValue: d.durationValue||0, amount: d.amount||0, title: d.itemTitle||'', itemType };
       if(itemType === 'subfolder'){ approvedSubfolders.add(id); approvedSubfoldersData[id] = rec; }
       else { approvedCourses.add(id); approvedCoursesData[id] = rec; }
@@ -2285,6 +2508,8 @@ function bindRealtime(){
       }
     });
     if($('#financePage').classList.contains('active-page')) renderFinance();
+    if($('#pendingPage').classList.contains('active-page')) renderPending();
+    updatePendingBadge();
   });
 
   db.ref(`${ROOT}/registers`).on('value', s => {
@@ -2305,38 +2530,50 @@ function bindRealtime(){
   db.ref(`${ROOT}/complaints/${uid}`).on('value', s => {
     dbComplaints = toArray(s.val());
     if($('#complaintsPage').classList.contains('active-page')) renderComplaints();
+    if($('#pendingPage').classList.contains('active-page')) renderPending();
+    updatePendingBadge();
   });
 
   db.ref(`${ROOT}/accommodations/${uid}`).on('value', s => {
     dbAccommodation = s.val() || {};
     if($('#accommodationPage').classList.contains('active-page')) renderAccommodation();
+    if($('#pendingPage').classList.contains('active-page')) renderPending();
+    updatePendingBadge();
+  });
+
+  db.ref(`${ROOT}/accommodationRequests/${uid}`).on('value', s => {
+    dbAccommodationRequests = s.val() || {};
+    if($('#accommodationPage').classList.contains('active-page')) renderAccommodation();
+    if($('#pendingPage').classList.contains('active-page')) renderPending();
+    updatePendingBadge();
   });
 
   db.ref(`${ROOT}/appeals/${uid}`).on('value', s => {
     dbAppeal = s.val() || {};
     if($('#appealPage').classList.contains('active-page')) renderAppeal();
+    if($('#pendingPage').classList.contains('active-page')) renderPending();
+    updatePendingBadge();
   });
 
-  db.ref(`${ROOT}/diplomas/${uid}`).on('value', s => {
-    dbDiploma = s.val() || {};
-    if($('#diplomaPage').classList.contains('active-page')) renderDiploma();
-  });
+  db.ref(`${ROOT}/diplomas/${uid}`).on('value', s => { dbDiploma = s.val() || {}; if($('#diplomaPage').classList.contains('active-page')) renderDiploma(); });
 
-  db.ref(`${ROOT}/sup/${uid}`).on('value', s => {
-    dbSup = s.val() || {};
+  db.ref(`${ROOT}/sup/${uid}`).on('value', s => { dbSup = s.val() || {}; if($('#supPage').classList.contains('active-page')) renderSup(); });
+
+  db.ref(`${ROOT}/supRequests/${uid}`).on('value', s => {
+    dbSupRequests = s.val() || {};
     if($('#supPage').classList.contains('active-page')) renderSup();
+    if($('#pendingPage').classList.contains('active-page')) renderPending();
+    updatePendingBadge();
   });
 
-  // TEVETA listener — refresh on data change
   db.ref(`${ROOT}/teveta/${uid}`).on('value', s => {
     dbTeveta = s.val() || {};
     if($('#tevetaPage').classList.contains('active-page')) renderTeveta();
+    if($('#pendingPage').classList.contains('active-page')) renderPending();
+    updatePendingBadge();
   });
 
-  db.ref(`${ROOT}/timetables/${uid}`).on('value', s => {
-    dbTimetable = toArray(s.val());
-    if($('#timetablePage').classList.contains('active-page')) renderTimetable();
-  });
+  db.ref(`${ROOT}/timetables/${uid}`).on('value', s => { dbTimetable = toArray(s.val()); if($('#timetablePage').classList.contains('active-page')) renderTimetable(); });
 
   db.ref(`${ROOT}/attendance/${uid}`).on('value', s => {
     dbAttendance = toArray(s.val());
@@ -2344,10 +2581,7 @@ function bindRealtime(){
     if($('#homePage').classList.contains('active-page')) renderHome();
   });
 
-  db.ref(`${ROOT}/exams/${uid}`).on('value', s => {
-    dbExams = toArray(s.val());
-    if($('#examsPage').classList.contains('active-page')) renderExams();
-  });
+  db.ref(`${ROOT}/exams/${uid}`).on('value', s => { dbExams = toArray(s.val()); if($('#examsPage').classList.contains('active-page')) renderExams(); });
 
   db.ref(`${ROOT}/clearance/${uid}`).on('value', s => {
     dbClearance = toArray(s.val());
@@ -2361,38 +2595,28 @@ function bindRealtime(){
     if($('#homePage').classList.contains('active-page')) renderHome();
   });
 
-  db.ref(`${ROOT}/library/books`).on('value', s => {
-    dbLibraryBooks = toArray(s.val());
-    if($('#libraryPage').classList.contains('active-page')) renderLibrary();
-    if($('#homePage').classList.contains('active-page')) renderHome();
-  });
-  db.ref(`${ROOT}/library/borrowed/${uid}`).on('value', s => {
-    dbBorrowedBooks = toArray(s.val());
-    if($('#libraryPage').classList.contains('active-page')) renderLibrary();
-  });
+  db.ref(`${ROOT}/library/books`).on('value', s => { dbLibraryBooks = toArray(s.val()); if($('#libraryPage').classList.contains('active-page')) renderLibrary(); });
+  db.ref(`${ROOT}/library/borrowed/${uid}`).on('value', s => { dbBorrowedBooks = toArray(s.val()); if($('#libraryPage').classList.contains('active-page')) renderLibrary(); });
 
-  db.ref(`${ROOT}/jobs`).on('value', s => {
-    dbJobs = toArray(s.val());
-    if($('#careersPage').classList.contains('active-page')) renderCareers();
-  });
+  db.ref(`${ROOT}/jobs`).on('value', s => { dbJobs = toArray(s.val()); if($('#careersPage').classList.contains('active-page')) renderCareers(); });
   db.ref(`${ROOT}/savedJobs/${uid}`).on('value', s => { dbSavedJobs = toArray(s.val()); });
-  db.ref(`${ROOT}/jobApplications/${uid}`).on('value', s => { dbJobApplications = toArray(s.val()); });
-
-  db.ref(`${ROOT}/alumni`).on('value', s => {
-    dbAlumni = toArray(s.val());
-    if($('#alumniPage').classList.contains('active-page')) renderAlumni();
+  db.ref(`${ROOT}/jobApplications/${uid}`).on('value', s => {
+    dbJobApplications = toArray(s.val());
     if($('#careersPage').classList.contains('active-page')) renderCareers();
-  });
-  db.ref(`${ROOT}/mentorApplications/${uid}`).on('value', s => { dbMentorApplications = toArray(s.val()); });
-
-  db.ref(`${ROOT}/planner/${uid}`).on('value', s => {
-    dbPlannerEvents = toArray(s.val());
-    if($('#plannerPage').classList.contains('active-page')) renderPlanner();
+    if($('#pendingPage').classList.contains('active-page')) renderPending();
+    updatePendingBadge();
   });
 
-  db.ref(`${ROOT}/userSettings/${uid}`).on('value', s => {
-    dbUserSettings = s.val() || {};
+  db.ref(`${ROOT}/alumni`).on('value', s => { dbAlumni = toArray(s.val()); if($('#alumniPage').classList.contains('active-page')) renderAlumni(); });
+  db.ref(`${ROOT}/mentorApplications/${uid}`).on('value', s => {
+    dbMentorApplications = toArray(s.val());
+    if($('#pendingPage').classList.contains('active-page')) renderPending();
+    updatePendingBadge();
   });
+
+  db.ref(`${ROOT}/planner/${uid}`).on('value', s => { dbPlannerEvents = toArray(s.val()); if($('#plannerPage').classList.contains('active-page')) renderPlanner(); });
+
+  db.ref(`${ROOT}/userSettings/${uid}`).on('value', s => { dbUserSettings = s.val() || {}; });
 
   db.ref(`${ROOT}/userNotifications/${uid}`).on('value', s => {
     const data = s.val() || {};
@@ -2402,7 +2626,6 @@ function bindRealtime(){
   });
 
   db.ref(`${ROOT}/inAppNotifications`).on('value', s => { dbLiveNotifs = s.val() || {}; });
-
   db.ref(`${ROOT}/promos`).on('value', s => { dbPromos = toArray(s.val()); });
 
   db.ref(`${ROOT}/liveClasses`).on('value', s => {
@@ -2441,9 +2664,7 @@ function bindEvents(){
     setTimeout(markAllNotifsRead, 400);
   });
   document.addEventListener('click', (e) => {
-    if(!$('#notifDrop').contains(e.target) && !$('#notifBtn').contains(e.target)){
-      $('#notifDrop').classList.remove('open');
-    }
+    if(!$('#notifDrop').contains(e.target) && !$('#notifBtn').contains(e.target)){ $('#notifDrop').classList.remove('open'); }
   });
   $('#clearNotifs').addEventListener('click', markAllNotifsRead);
 
@@ -2488,6 +2709,7 @@ async function init(user){
     bindRealtime();
     renderHome();
     renderNotifDropdown();
+    updatePendingBadge();
     showPage('home');
   }catch(e){
     console.error(e);
