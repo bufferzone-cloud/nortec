@@ -257,7 +257,6 @@
   .grade-badge.P{background:linear-gradient(135deg,#f59e0b,#b45309)}
   .grade-badge.F{background:linear-gradient(135deg,#ef4444,#991b1b)}
 
-  /* ═══ CA DOCUMENT GALLERY ═══ */
   .ca-doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
   .ca-doc-tile{position:relative;border-radius:12px;overflow:hidden;background:var(--soft);border:1.5px solid var(--border);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.25s}
   .ca-doc-tile:hover{border-color:var(--blue);box-shadow:0 6px 20px rgba(37,99,235,.18);transform:translateY(-3px)}
@@ -269,13 +268,11 @@
   .ca-doc-tile .doc-actions button{background:rgba(255,255,255,.95);border:none;border-radius:6px;width:24px;height:24px;font-size:11px;color:#334155;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;transition:.2s}
   .ca-doc-tile .doc-actions button:hover{background:#fff;color:var(--blue)}
 
-  /* ═══ FILTER CHIPS DISPLAY ═══ */
   .active-filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
   .active-filter{display:inline-flex;align-items:center;gap:6px;background:var(--blue-light);color:var(--blue-dark);border:1px solid var(--blue-soft);border-radius:20px;padding:4px 10px 4px 12px;font-size:11.5px;font-weight:700}
   .active-filter button{background:none;border:none;color:var(--blue-dark);cursor:pointer;font-size:11px;padding:0 2px;font-family:inherit;line-height:1}
   .active-filter button:hover{color:var(--red)}
 
-  /* ═══ VENUE CARD ═══ */
   .venue-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
   .venue-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px;transition:.25s;cursor:pointer;position:relative}
   .venue-card:hover{border-color:var(--blue);box-shadow:0 6px 22px rgba(37,99,235,.14);transform:translateY(-3px)}
@@ -286,7 +283,6 @@
   .venue-card .vc-meta span{display:flex;align-items:center;gap:6px}
   .venue-card .vc-meta i{color:var(--blue);width:14px}
 
-  /* ═══ LECTURER / HOD CARD ═══ */
   .staff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
   .staff-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px;transition:.25s;position:relative;display:flex;gap:12px;align-items:flex-start}
   .staff-card:hover{border-color:var(--blue);box-shadow:0 6px 22px rgba(37,99,235,.14)}
@@ -301,6 +297,57 @@
 
   .sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);z-index:299;opacity:0;visibility:hidden;transition:all .3s}
   .sidebar-overlay.active{opacity:1;visibility:visible}
+
+  /* ═══════════════════════════════════════════════════════════════
+     TEVETA FORM — IDENTICAL TO STUDENT PORTAL
+     ═══════════════════════════════════════════════════════════════ */
+  .teveta-form-container{font-family:'Inter',sans-serif;background:#fff;padding:26px 24px;border:1px solid var(--border);border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
+  .teveta-form-container .form-header{text-align:center;margin-bottom:22px;padding-bottom:14px;border-bottom:2px solid #0f172a}
+  .teveta-form-container .form-header h2{font-size:19px;font-weight:900;color:var(--text);text-transform:uppercase;letter-spacing:.5px;margin-top:8px}
+  .teveta-form-container .form-header .logo-section{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:10px}
+  .teveta-form-container .form-header .logo-section img{height:60px;object-fit:contain}
+  .teveta-form-container .form-header .logo-section .address-text{font-size:10px;color:#475569;text-align:right;line-height:1.45;flex:1;min-width:200px}
+  .teveta-form-container .form-header .logo-section .address-text strong{color:var(--text)}
+  .teveta-form-container .form-field{margin-bottom:11px;display:flex;align-items:flex-start;gap:6px;flex-wrap:wrap}
+  .teveta-form-container .form-field .field-number{font-weight:800;color:var(--text);min-width:26px;font-size:13.5px;flex-shrink:0}
+  .teveta-form-container .form-field .field-label{font-weight:700;color:var(--text);font-size:13px;min-width:160px;flex-shrink:0}
+  .teveta-form-container .form-field .field-input{flex:1;min-width:180px;border:none;border-bottom:1.5px solid var(--text);padding:2px 6px;font-size:13.5px;font-family:'Inter',sans-serif;background:transparent;outline:none;color:var(--text);transition:.2s}
+  .teveta-form-container .form-field .field-input:focus{border-bottom:2px solid var(--blue);background:#f8fafc}
+  .teveta-form-container .form-field .field-input[readonly]{border-bottom:1.5px solid #94a3b8;color:#475569}
+  .teveta-form-container .box-group{display:flex;gap:5px;align-items:center;flex-wrap:wrap;flex:1}
+  .teveta-form-container .box-input{border:1.5px solid var(--text);padding:5px 4px;font-size:13px;font-family:'Inter',sans-serif;background:#fff;outline:none;width:34px;text-align:center;color:var(--text);font-weight:700;border-radius:4px;transition:.2s}
+  .teveta-form-container .box-input:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(37,99,235,.15)}
+  .teveta-form-container .box-input:disabled,.teveta-form-container .box-input.readonly{background:#f1f5f9;color:#64748b;border-color:#94a3b8}
+  .teveta-form-container .box-sep{font-size:14px;color:#64748b;font-weight:700;margin:0 2px}
+  .teveta-form-container .radio-group{display:flex;align-items:center;gap:16px;flex-wrap:wrap;flex:1}
+  .teveta-form-container .radio-opt{display:flex;align-items:center;gap:5px;font-size:13px;color:var(--text);font-weight:500;cursor:pointer}
+  .teveta-form-container .radio-opt input[type="radio"]{accent-color:var(--blue);width:15px;height:15px;cursor:pointer}
+  .teveta-form-container .radio-opt input[type="radio"]:disabled{cursor:not-allowed}
+  .teveta-form-container .radio-opt input[type="radio"]:disabled+span{color:#94a3b8}
+  .teveta-form-container .subjects-list{flex:1;min-width:260px;display:flex;flex-direction:column;gap:6px;margin-top:2px}
+  .teveta-form-container .subject-row{display:flex;align-items:center;gap:10px;font-size:13px;padding:3px 0}
+  .teveta-form-container .subject-row input[type="checkbox"]{width:16px;height:16px;accent-color:var(--blue);cursor:pointer;flex-shrink:0}
+  .teveta-form-container .subject-row input[type="checkbox"]:disabled{cursor:not-allowed;accent-color:#94a3b8}
+  .teveta-form-container .subject-row .subject-text{color:var(--text);flex:1;line-height:1.4}
+  .teveta-form-container .subject-row .subject-line{flex:1;border-bottom:1.5px dotted var(--text);height:1px;margin-left:6px;min-width:60px}
+  .teveta-form-container .subject-row .subject-line.readonly{border-bottom-color:#94a3b8}
+  .teveta-form-container .btn-submit-teveta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:22px;padding:14px 32px;background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff;border:none;border-radius:50px;font-size:15px;font-weight:700;cursor:pointer;transition:.2s;font-family:'Inter',sans-serif;box-shadow:0 8px 26px rgba(37,99,235,.35)}
+  .teveta-form-container .btn-submit-teveta:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(37,99,235,.45)}
+  .teveta-form-container .btn-submit-teveta:active{transform:scale(.97)}
+  .teveta-form-container .btn-submit-teveta:disabled{opacity:.6;cursor:not-allowed;transform:none!important}
+  .teveta-signature-block{margin-top:24px;padding-top:18px;border-top:2px dashed var(--border)}
+  .teveta-signature-block .sig-row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:12px}
+  .teveta-signature-block .sig-col{flex:1;min-width:180px}
+  .teveta-signature-block .sig-col .sig-line{border-bottom:1.5px solid var(--text);padding:22px 0 4px;margin-bottom:6px}
+  .teveta-signature-block .sig-col .sig-label{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+  .teveta-status-banner{background:#f0fdf4;border-left:4px solid #10b981;padding:12px 14px;border-radius:10px;margin-bottom:18px;font-size:13px;color:#065f46}
+
+  @media (max-width:560px){
+    .teveta-form-container{padding:18px 14px}
+    .teveta-form-container .form-field .field-label{min-width:auto;flex:1 1 100%}
+    .teveta-form-container .form-field .field-number{min-width:22px}
+    .teveta-form-container .box-input{width:30px;padding:4px 2px;font-size:12px}
+  }
 
   @media (max-width:1024px){
     .sidebar{position:fixed;left:0;top:0;transform:translateX(-100%);width:280px;z-index:300}
@@ -634,7 +681,6 @@ let activeTTProgramme = '';
 let activeTTClass = '';
 let dashboardChart = null;
 
-/* Student filters */
 let studentFilter = {
   q:'', year:'all', programme:'all', classId:'all', course:'all',
   yearEnrolled:'all', balance:'all', clearance:'all'
@@ -653,6 +699,10 @@ function capitalize(s){ s = String(s||''); return s.charAt(0).toUpperCase()+s.sl
 function getInitials(name){ if(!name) return '?'; const p = String(name).trim().split(/\s+/); return ((p[0]?.[0]||'')+(p[1]?.[0]||'')).toUpperCase() || '?'; }
 function emptyState(msg, icon='fa-inbox'){ return `<div class="empty"><i class="fas ${icon}"></i>${esc(msg)}</div>`; }
 function emailKey(email){ return String(email||'').toLowerCase().replace(/[.@]/g,'_'); }
+
+/* Pad string to the LEFT with spaces (like String.padStart) — used for TEVETA box rendering */
+function padLeft(s, n){ s = String(s == null ? '' : s); return s.length >= n ? s.slice(-n) : ' '.repeat(n - s.length) + s; }
+/* Pad string to the RIGHT with spaces — kept for other usages */
 function pad(s, n){ s = String(s == null ? '' : s); return s.length >= n ? s.slice(0,n) : s + ' '.repeat(n - s.length); }
 
 function studentAvatar(s, size = 34){
@@ -717,7 +767,6 @@ function isClearedFor(app, deptId){
   return false;
 }
 
-/* Student filters */
 function getStudentYearEnrolled(s){
   return String(s.yearEnrolled || s.programme?.yearEnrolled || s.programme?.intakeYear || (s.submittedAt ? new Date(s.submittedAt).getFullYear() : '') || '').trim();
 }
@@ -1301,14 +1350,13 @@ PAGE_RENDERERS.activity = function(){
     </div>`;
 };
 
-/* ───── STUDENTS — comprehensive single-button filter ───── */
+/* ───── STUDENTS ───── */
 PAGE_RENDERERS.students = function(){
   const all = (state.applications||[]).filter(a => (a.status||'').toLowerCase()==='approved');
   const list = filterStudents(all);
   const filterCount = activeFilterCount();
   const programmes = state.programmes || [];
 
-  /* Build active filters display */
   let activeChips = '';
   const chip = (label, key) => `<span class="active-filter">${esc(label)} <button onclick="removeStudentFilter('${key}')" title="Remove"><i class="fas fa-times"></i></button></span>`;
   if(studentFilter.q) activeChips += chip('Search: "'+studentFilter.q+'"', 'q');
@@ -1554,7 +1602,7 @@ window.viewStudent = function(uid){
             <button onclick="event.stopPropagation();deleteCADoc('${uid}','${d.id}')" title="Delete"><i class="fas fa-trash"></i></button>
           </div>
           <div class="doc-label">${esc(d.name||'CA doc')}</div>
-        </div>`).join('')}</div>` : `<div class="empty-glass" style="background:var(--soft);border-radius:12px;padding:18px;text-align:center;color:var(--muted);font-size:12.5px"><i class="fas fa-upload" style="display:block;font-size:22px;color:var(--blue);opacity:.5;margin-bottom:6px"></i>No CA documents uploaded yet</div>`}
+        </div>`).join('')}</div>` : `<div style="background:var(--soft);border-radius:12px;padding:18px;text-align:center;color:var(--muted);font-size:12.5px"><i class="fas fa-upload" style="display:block;font-size:22px;color:var(--blue);opacity:.5;margin-bottom:6px"></i>No CA documents uploaded yet</div>`}
 
       <h4 style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:16px 0 8px">Clearance</h4>
       <div style="display:flex;flex-wrap:wrap;gap:8px">
@@ -1640,7 +1688,6 @@ window.editStudent = function(uid){
 
 window.saveStudentEdit = async function(uid){
   try{
-    const s = (state.applications||[]).find(x => x.id === uid) || {};
     const updates = {
       fullName: ($('#esName').value||'').trim(),
       studentNumber: ($('#esNumber').value||'').trim(),
@@ -1666,7 +1713,7 @@ window.saveStudentEdit = async function(uid){
   }catch(e){ toast('Failed: '+e.message,'err'); }
 };
 
-/* ───── EDIT CLEARANCE (manual edit for mistakes) ───── */
+/* ───── EDIT CLEARANCE ───── */
 window.editClearanceStatus = function(uid){
   const s = (state.applications||[]).find(x => x.id === uid);
   if(!s) return;
@@ -1794,6 +1841,7 @@ window.downloadStudentTranscript = function(uid){
       <td style="padding:8px 10px;border:1px solid #e2e8f0;text-align:center">${grade ? `<b>${grade}</b> (${GRADE_SYSTEM[grade].label})` : '—'}</td>
     </tr>`;
   }).join('');
+
   const html = `
     <div style="text-align:center;border-bottom:3px solid #1e40af;padding-bottom:12px;margin-bottom:20px">
       <h1 style="font-size:22px;font-weight:900;letter-spacing:1px">NORTHERN TECHNICAL COLLEGE</h1>
@@ -1841,8 +1889,10 @@ window.downloadStudentCA = function(uid){
       <td style="padding:8px 10px;border:1px solid #e2e8f0;text-align:center">${grade ? `<b>${grade}</b> (${GRADE_SYSTEM[grade].label})` : '—'}</td>
     </tr>`;
   }).join('');
+
   const overall = ca.total != null ? ca.total : null;
   const overallGrade = overall != null ? gradeFromPct(overall) : null;
+
   const html = `
     <div style="text-align:center;border-bottom:3px solid #1e40af;padding-bottom:12px;margin-bottom:20px">
       <h1 style="font-size:22px;font-weight:900;letter-spacing:1px">NORTHERN TECHNICAL COLLEGE</h1>
@@ -2116,9 +2166,7 @@ window.updateItem = async function(path, id, data){
   catch(e){ toast('Failed','err'); }
 };
 
-/* ═══════════════════════════════════════════════════════════════
-   PROGRAMMES
-   ═══════════════════════════════════════════════════════════════ */
+/* ───── PROGRAMMES ───── */
 PAGE_RENDERERS.programmes = function(){
   const list = state.programmes||[];
   $('#mainContent').innerHTML = `
@@ -4262,7 +4310,9 @@ window.downloadAllTranscripts = function(){
   next();
 };
 
-/* ───── TEVETA ───── */
+/* ═══════════════════════════════════════════════════════════════
+   TEVETA — MATCHES STUDENT PORTAL EXACTLY
+   ═══════════════════════════════════════════════════════════════ */
 const TEVETA_SUBJECTS_FALLBACK = [
   { code:'41.1', label:'Digital Electronics' },
   { code:'41.2', label:'Entrepreneurship' },
@@ -4290,6 +4340,8 @@ function getProgrammeCoursesForTeveta(studentUid){
   return courses.length ? courses : null;
 }
 
+/* Shared CSS used when rendering in the modal, and also for print/PDF views.
+   It matches the student portal TEVETA form pixel-for-pixel. */
 const TEVETA_STUDENT_CSS = `
   *{box-sizing:border-box}
   body{font-family:'Inter',Arial,sans-serif;background:#fff;color:#0f172a;padding:24px;margin:0}
@@ -4328,30 +4380,42 @@ const TEVETA_STUDENT_CSS = `
   @media (max-width:560px){.field-label{min-width:auto;flex:1 1 100%}.box-input{width:30px;padding:4px 2px;font-size:12px}}
 `;
 
+/* Renders the TEVETA form HTML — identical structure to the student portal */
 function renderTevetaFormHTML(t){
+  /* Parse exam series "MA2026/2026" or "MA/2026" */
   const exRaw   = String(t.examSeries || '').replace(/\s/g,'');
   const exParts = exRaw.split('/');
-  const left    = pad(exParts[0] || '', 4);
+  const left    = padLeft(exParts[0] || '', 4);
   const exSeriesM  = left[0] || '';
   const exSeriesA  = left[1] || '';
   const exSeriesY1 = left.slice(2,4);
   const exSeriesY2 = exParts[1] || '';
-  const noDigits = pad(t.tevetaExamNo || '', 10).split('');
+
+  /* TEVETA Exam No — 10 boxes, left-padded */
+  const noDigits = padLeft(t.tevetaExamNo || '', 10).split('');
+
+  /* Year of Enrolment — 4 boxes split as YY / YY */
   const enrolRaw = String(t.yearEnrolment || '').replace(/\D/g,'');
   const e1 = enrolRaw.slice(0,2), e2 = enrolRaw.slice(2,4), e3 = enrolRaw.slice(4,6), e4 = enrolRaw.slice(6,8);
+
   const mode = t.mode || t.modeOfStudy || 'Full-time';
   const year = t.yearStudy || 'Second';
+
   const isApproved = (t.status||'').toLowerCase() === 'approved';
   const isRejected = (t.status||'').toLowerCase() === 'rejected';
+
+  /* Subject list — prefer programme courses, fall back to fixed list */
   const customCourses = getProgrammeCoursesForTeveta(t.id);
   const subjectList = (customCourses && customCourses.length)
     ? customCourses.map(c => ({ code: c.code || '', label: c.name || '' }))
     : TEVETA_SUBJECTS_FALLBACK;
+
   const banner = isApproved
     ? `<div class="teveta-status-banner"><i class="fas fa-check-circle"></i> <strong>Approved</strong> on ${fmtDateTime(t.approvedAt)} by ${esc(t.approvedBy||'')}</div>`
     : isRejected
       ? `<div style="background:#fef2f2;border-left:4px solid #ef4444;padding:12px 14px;border-radius:10px;margin-bottom:18px;font-size:13px;color:#991b1b"><i class="fas fa-times-circle"></i> <strong>Rejected</strong> on ${fmtDateTime(t.rejectedAt)}</div>`
       : `<div style="background:#fef3c7;border-left:4px solid #f59e0b;padding:12px 14px;border-radius:10px;margin-bottom:18px;font-size:13px;color:#92400e"><i class="fas fa-clock"></i> <strong>Awaiting Review</strong> — submitted ${fmtDateTime(t.submittedAt)}</div>`;
+
   return `
     ${banner}
     <div class="teveta-form-container">
@@ -4369,11 +4433,13 @@ function renderTevetaFormHTML(t){
         </div>
         <h2>TEVETA EXAMINATION ENTRY FORM</h2>
       </div>
+
       <div class="form-field">
         <span class="field-number">1.</span>
         <span class="field-label">COURSE:</span>
         <input type="text" class="field-input" value="${esc(t.course||'')}" readonly />
       </div>
+
       <div class="form-field">
         <span class="field-number">2.</span>
         <span class="field-label">EXAMINATION SERIES:</span>
@@ -4385,6 +4451,7 @@ function renderTevetaFormHTML(t){
           <input type="text" class="box-input" maxlength="2" value="${esc(exSeriesY2)}" disabled />
         </div>
       </div>
+
       <div class="form-field">
         <span class="field-number">3.</span>
         <span class="field-label">TEVETA EXAM NO:</span>
@@ -4392,26 +4459,31 @@ function renderTevetaFormHTML(t){
           ${noDigits.map(d => `<input type="text" class="box-input" maxlength="1" value="${esc(d.trim())}" disabled />`).join('')}
         </div>
       </div>
+
       <div class="form-field">
         <span class="field-number">4.</span>
         <span class="field-label">EXAMINATION CENTER NAME:</span>
         <input type="text" class="field-input" value="NORTHERN TECHNICAL COLLEGE" readonly />
       </div>
+
       <div class="form-field">
         <span class="field-number">5.</span>
         <span class="field-label">SURNAME:</span>
         <input type="text" class="field-input" value="${esc(t.surname||'')}" readonly />
       </div>
+
       <div class="form-field">
         <span class="field-number">6.</span>
         <span class="field-label">FORENAMES:</span>
         <input type="text" class="field-input" value="${esc(t.forenames||'')}" readonly />
       </div>
+
       <div class="form-field">
         <span class="field-number">7.</span>
         <span class="field-label">INSTITUTION OF STUDY:</span>
         <input type="text" class="field-input" value="NORTHERN TECHNICAL COLLEGE" readonly />
       </div>
+
       <div class="form-field">
         <span class="field-number">8.</span>
         <span class="field-label">YEAR OF ENROLMENT:</span>
@@ -4423,6 +4495,7 @@ function renderTevetaFormHTML(t){
           <input type="text" class="box-input" maxlength="2" value="${esc(e4)}" disabled />
         </div>
       </div>
+
       <div class="form-field">
         <span class="field-number">9.</span>
         <span class="field-label">Mode of Study:</span>
@@ -4433,6 +4506,7 @@ function renderTevetaFormHTML(t){
             </label>`).join('')}
         </div>
       </div>
+
       <div class="form-field">
         <span class="field-number">10.</span>
         <span class="field-label">YEAR OF STUDY</span>
@@ -4443,6 +4517,7 @@ function renderTevetaFormHTML(t){
             </label>`).join('')}
         </div>
       </div>
+
       <div class="form-field" style="align-items:flex-start">
         <span class="field-number">11.</span>
         <span class="field-label" style="flex:1;min-width:100%">SUBJECTS TO BE TAKEN (Indicate whether practical or written paper)</span>
@@ -4457,6 +4532,7 @@ function renderTevetaFormHTML(t){
           <div class="subject-row"><input type="checkbox" disabled /><span class="subject-text">(x)</span><span class="subject-line readonly"></span></div>
         </div>
       </div>
+
       <div class="teveta-signature-block">
         <div style="font-size:12px;color:#64748b;margin-bottom:6px">
           <i class="fas fa-lock"></i> This form has been submitted and cannot be edited.
@@ -4469,6 +4545,7 @@ function renderTevetaFormHTML(t){
     </div>`;
 }
 
+/* ───── TEVETA PAGE ───── */
 PAGE_RENDERERS.teveta = function(){
   const all = (state.teveta||[]).slice().sort((a,b) => (b.submittedAt||0)-(a.submittedAt||0));
   let list = all;
@@ -4478,6 +4555,7 @@ PAGE_RENDERERS.teveta = function(){
   const pendingCount  = all.filter(t => (t.status||'submitted').toLowerCase()==='submitted').length;
   const approvedCount = all.filter(t => (t.status||'').toLowerCase()==='approved').length;
   const rejectedCount = all.filter(t => (t.status||'').toLowerCase()==='rejected').length;
+
   $('#mainContent').innerHTML = `
     <div class="stats-grid">
       <div class="stat-card blue"><div class="ico"><i class="fas fa-check-double"></i></div><div class="lbl">Total Entries</div><div class="val">${all.length}</div></div>
