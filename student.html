@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<title>NORTEC · Student Dashboard</title>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="NORTEC Student" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="theme-color" content="#1e40af" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-tap-highlight-color:transparent}
+  :root{
+    --blue:#2563eb; --blue-dark:#1e40af; --blue-light:#eff6ff; --blue-soft:#dbeafe;
+    --blue-bright:#3b82f6;
+    --green:#10b981; --red:#ef4444; --amber:#f59e0b; --purple:#8b5cf6;
+    --bg-primary:#0a0e17;
+    --bg-secondary:#f8fafc;
+    --bg-card:#ffffff;
+    --text-primary:#0f172a;
+    --text-secondary:#1e293b;
+    --text-muted:#64748b;
+    --border-color:#e2e8f0;
+    --header-bg:rgba(255,255,255,.82);
+    --sidebar-bg:rgba(255,255,255,.96);
+    --input-bg:#f8fafc;
+    --glass-blur:blur(20px);
+    --mac-shadow:0 12px 48px rgba(0,0,0,.12),0 4px 16px rgba(0,0,0,.04);
+    --mac-shadow-hover:0 20px 60px rgba(0,0,0,.16),0 8px 24px rgba(0,0,0,.06);
+    --radius:14px;
+  }
+  html,body{width:100%;height:100%;background:var(--bg-secondary);color:var(--text-primary);overflow:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  /* ═══ LOADER ═══ */
+  #appLoader{position:fixed;inset:0;background:var(--bg-primary);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .4s}
+  #appLoader.hidden{opacity:0;pointer-events:none}
+  .loader-spinner{width:52px;height:52px;border:4px solid rgba(255,255,255,.15);border-top-color:var(--blue-bright);border-radius:50%;animation:spin .9s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* ═══ APP ROOT ═══ */
+  .app-root{display:flex;flex-direction:column;height:100dvh;width:100%;overflow:hidden;position:relative;background:var(--bg-secondary)}
+
+  /* ═══ HEADER ═══ */
+  .top-bar{background:var(--header-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border-bottom:1px solid rgba(37,99,235,.15);padding:12px 18px;display:flex;align-items:center;gap:10px;flex-shrink:0;position:relative;z-index:40;min-height:64px;box-shadow:0 2px 20px rgba(37,99,235,.06)}
+  .header-left{display:flex;align-items:center;gap:10px}
+  .header-logo{width:44px;height:44px;object-fit:contain;border-radius:10px;background:var(--blue-light);padding:4px;cursor:pointer;transition:transform .2s;border:1px solid var(--blue-soft)}
+  .header-logo:hover{transform:scale(1.05)}
+  .header-center{flex:1;text-align:center;min-width:0}
+  .header-center .greeting{font-size:10px;font-weight:700;color:var(--text-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:2px}
+  .header-center .name{font-size:16px;font-weight:800;color:var(--text-primary);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .header-center .name .accent{color:var(--blue)}
+  .header-right{display:flex;align-items:center;gap:8px}
+  .btn-icon{background:rgba(255,255,255,.7);backdrop-filter:blur(8px);border:1px solid rgba(37,99,235,.15);color:var(--blue);width:42px;height:42px;border-radius:12px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;position:relative;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+  .btn-icon:hover{background:var(--blue-soft);transform:scale(1.04)}
+  .btn-icon .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:10px;font-weight:800;border-radius:30px;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center;padding:0 5px;border:2px solid #fff}
+  .btn-icon .badge:empty,.btn-icon .badge[data-count="0"]{display:none}
+
+  /* ═══ CONTENT ═══ */
+  .app-content{flex:1;overflow-y:auto;overflow-x:hidden;min-height:0;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;position:relative;padding-bottom:90px}
+  .app-content::-webkit-scrollbar{width:5px}
+  .app-content::-webkit-scrollbar-thumb{background:rgba(37,99,235,.3);border-radius:20px}
+
+  /* ═══ PAGES ═══ */
+  .page-container{display:none;width:100%;opacity:0;transform:translateX(24px) scale(.98);transition:opacity .35s cubic-bezier(.22,1,.36,1),transform .35s cubic-bezier(.22,1,.36,1);pointer-events:none;position:absolute;top:0;left:0;min-height:100%}
+  .page-container.active-page{display:block;opacity:1;transform:none;pointer-events:auto;position:relative;animation:pageIn .4s cubic-bezier(.22,1,.36,1)}
+  @keyframes pageIn{from{opacity:0;transform:translateX(24px) scale(.98)}to{opacity:1;transform:none}}
+  .page-container.page-leaving{display:block!important;opacity:0!important;transform:translateX(-24px) scale(.98)!important;pointer-events:none;transition:opacity .35s cubic-bezier(.22,1,.36,1),transform .35s cubic-bezier(.22,1,.36,1)}
+  .full-page{padding:16px 18px 30px}
+
+  /* ═══ WELCOME BANNER ═══ */
+  .welcome-banner{background:linear-gradient(135deg,#1e40af,#2563eb);border-radius:20px;padding:22px 24px;color:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;box-shadow:0 8px 32px rgba(37,99,235,.30);position:relative;overflow:hidden;margin-bottom:16px}
+  .welcome-banner::before{content:'';position:absolute;top:-40%;right:-15%;width:220px;height:220px;background:rgba(255,255,255,.08);border-radius:50%;pointer-events:none}
+  .welcome-banner .wb-left{position:relative;z-index:1}
+  .welcome-banner .wb-left .hi{font-size:13px;opacity:.85;font-weight:500}
+  .welcome-banner .wb-left .nm{font-size:22px;font-weight:900;margin-top:2px}
+  .welcome-banner .wb-left .meta{font-size:12px;opacity:.8;margin-top:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .welcome-banner .wb-left .meta .chip{background:rgba(255,255,255,.18);padding:3px 10px;border-radius:30px;font-size:11px;font-weight:700}
+  .welcome-banner .wb-right{text-align:right;position:relative;z-index:1}
+  .welcome-banner .wb-right .lbl{font-size:11px;opacity:.75;text-transform:uppercase;letter-spacing:1px;font-weight:600}
+  .welcome-banner .wb-right .val{font-size:26px;font-weight:900;line-height:1.1}
+  .welcome-banner .wb-right .sub{font-size:11px;opacity:.75}
+
+  /* ═══ CARDS ═══ */
+  .section-title{font-size:15px;font-weight:800;color:var(--text-primary);margin:18px 0 12px;display:flex;align-items:center;gap:8px}
+  .section-title i{color:var(--blue)}
+  .section-title .count{margin-left:auto;font-size:11px;background:var(--blue-light);color:var(--blue-dark);padding:3px 12px;border-radius:30px;font-weight:700}
+
+  .grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .card-tile{background:#fff;border-radius:16px;padding:16px 14px;border:1px solid rgba(226,232,240,.5);box-shadow:0 4px 16px rgba(0,0,0,.04);transition:all .25s;cursor:pointer;position:relative;overflow:hidden}
+  .card-tile:hover{transform:translateY(-3px);box-shadow:var(--mac-shadow);border-color:rgba(37,99,235,.2)}
+  .card-tile .icon{font-size:24px;margin-bottom:8px;display:block}
+  .card-tile .ttl{font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px}
+  .card-tile .val{font-size:20px;font-weight:900;color:var(--text-primary);margin-top:2px;line-height:1.15}
+  .card-tile .sub{font-size:11px;color:var(--text-muted);margin-top:2px}
+  .card-tile.blue{background:linear-gradient(135deg,#eff6ff,#ffffff);border-color:#bfdbfe}
+  .card-tile.green{background:linear-gradient(135deg,#f0fdf4,#ffffff);border-color:#bbf7d0}
+  .card-tile.amber{background:linear-gradient(135deg,#fffbeb,#ffffff);border-color:#fcd34d}
+  .card-tile.red{background:linear-gradient(135deg,#fef2f2,#ffffff);border-color:#fecaca}
+  .card-tile.purple{background:linear-gradient(135deg,#f5f3ff,#ffffff);border-color:#ddd6fe}
+
+  /* ═══ QUICK ACTIONS ═══ */
+  .quick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:6px}
+  .quick-btn{background:#fff;border:1.5px solid var(--border-color);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:all .2s;font-family:inherit;color:var(--text-primary);font-size:11.5px;font-weight:700;text-align:center;line-height:1.2}
+  .quick-btn:hover{background:var(--blue-light);border-color:var(--blue);color:var(--blue-dark);transform:translateY(-2px)}
+  .quick-btn i{font-size:20px;color:var(--blue)}
+
+  /* ═══ STAT ROW ═══ */
+  .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:12px}
+  .stat-box{background:#fff;border:1px solid var(--border-color);border-radius:14px;padding:14px;text-align:center}
+  .stat-box .lbl{font-size:10.5px;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+  .stat-box .val{font-size:20px;font-weight:900;color:var(--text-primary);margin-top:4px}
+
+  /* ═══ SIDEBAR ═══ */
+  .sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);backdrop-filter:blur(4px);z-index:600;opacity:0;visibility:hidden;transition:all .35s}
+  .sidebar-overlay.active{opacity:1;visibility:visible}
+  .sidebar{position:fixed;top:0;right:-340px;width:300px;height:100dvh;background:var(--sidebar-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);z-index:700;transition:right .4s cubic-bezier(.22,1,.36,1);box-shadow:-10px 0 40px rgba(37,99,235,.12);display:flex;flex-direction:column;overflow-y:auto;border-left:1px solid rgba(255,255,255,.4)}
+  .sidebar.open{right:0}
+  .sidebar-head{padding:20px 22px 16px;border-bottom:2px solid rgba(37,99,235,.15);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:var(--sidebar-bg);backdrop-filter:blur(20px);z-index:5}
+  .sidebar-head h2{font-size:18px;font-weight:900;color:var(--text-primary)}
+  .sidebar-head h2 .accent{color:var(--blue)}
+  .sidebar-close{background:rgba(255,255,255,.7);border:1px solid var(--border-color);width:36px;height:36px;border-radius:50%;font-size:16px;color:var(--text-primary);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
+  .sidebar-close:hover{background:var(--blue-soft);transform:scale(1.05)}
+  .sidebar-nav{padding:8px 0;flex:1}
+  .nav-item{display:flex;align-items:center;gap:14px;padding:13px 22px;background:none;border:none;width:100%;text-align:left;font-size:14.5px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:.2s;font-family:inherit;border-left:4px solid transparent}
+  .nav-item:hover{background:var(--blue-light);color:var(--blue-dark);padding-left:26px}
+  .nav-item.active{background:var(--blue-light);color:var(--blue-dark);border-left-color:var(--blue);font-weight:700}
+  .nav-item i{width:24px;text-align:center;color:var(--blue);font-size:17px;flex-shrink:0}
+  .nav-item.logout{color:var(--red);border-top:1px solid var(--border-color);margin-top:8px}
+  .nav-item.logout i{color:var(--red)}
+  .nav-item.logout:hover{background:#fef2f2;color:#991b1b}
+
+  /* ═══ SIDEBAR PAGES (sub screens) ═══ */
+  .sub-page{display:none;position:fixed;inset:0;z-index:100;background:var(--bg-secondary);overflow-y:auto;animation:slideIn .35s ease}
+  @keyframes slideIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+  .sub-page.active{display:block}
+  .sub-head{background:var(--header-bg);backdrop-filter:var(--glass-blur);padding:14px 18px;border-bottom:1px solid rgba(37,99,235,.12);display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:5;box-shadow:0 2px 12px rgba(37,99,235,.04)}
+  .sub-head img{width:40px;height:40px;object-fit:contain;border-radius:8px;background:var(--blue-light);padding:4px;border:1px solid var(--blue-soft)}
+  .sub-head h2{font-size:17px;font-weight:800;color:var(--text-primary);flex:1;line-height:1.2}
+  .sub-head h2 .accent{color:var(--blue)}
+  .sub-close{background:rgba(255,255,255,.7);border:1px solid var(--border-color);width:36px;height:36px;border-radius:50%;font-size:16px;color:var(--text-primary);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
+  .sub-close:hover{background:var(--blue-soft);transform:scale(1.05)}
+  .sub-body{padding:20px 18px 40px;max-width:900px;margin:0 auto}
+  .sub-body h3{font-size:15px;font-weight:800;color:var(--text-primary);margin:20px 0 12px;display:flex;align-items:center;gap:8px;padding-bottom:8px;border-bottom:2px solid rgba(37,99,235,.15)}
+  .sub-body h3:first-child{margin-top:0}
+  .sub-body h3 i{color:var(--blue)}
+  .sub-body p{line-height:1.7;color:#334155;margin-bottom:8px;font-size:14px}
+  .sub-body ul,.sub-body ol{padding-left:20px;margin:8px 0 12px;color:#334155;line-height:1.75;font-size:13.5px}
+  .sub-body ul li,.sub-body ol li{margin-bottom:4px}
+
+  /* ═══ TABLES ═══ */
+  .tbl-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border-color);margin:12px 0;background:#fff}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:520px}
+  th{background:var(--blue-light);text-align:left;padding:11px 12px;font-weight:800;color:var(--blue-dark);text-transform:uppercase;font-size:10.5px;letter-spacing:.5px;white-space:nowrap;border-bottom:2px solid var(--blue)}
+  td{padding:10px 12px;border-bottom:1px solid var(--border-color);color:#334155;vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:var(--blue-light)}
+
+  /* ═══ BADGES ═══ */
+  .badge{display:inline-block;padding:3px 12px;border-radius:30px;font-size:10.5px;font-weight:800;letter-spacing:.3px;text-transform:uppercase}
+  .badge.green{background:#d1fae5;color:#065f46}
+  .badge.red{background:#fee2e2;color:#991b1b}
+  .badge.amber{background:#fef3c7;color:#92400e}
+  .badge.blue{background:var(--blue-soft);color:var(--blue-dark)}
+  .badge.purple{background:#ede9fe;color:#5b21b6}
+  .badge.grey{background:#f1f5f9;color:#475569}
+
+  /* ═══ INFO GRID ═══ */
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:12px 0}
+  .info-item{background:#fff;border:1px solid var(--border-color);border-radius:12px;padding:12px 14px}
+  .info-item .lbl{font-size:11px;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+  .info-item .val{font-size:14px;font-weight:700;color:var(--text-primary);margin-top:4px;word-break:break-word}
+
+  /* ═══ DIGITAL ID CARD ═══ */
+  .id-card{max-width:400px;margin:0 auto;background:linear-gradient(135deg,#1e40af,#3b82f6);border-radius:22px;padding:24px;color:#fff;box-shadow:0 20px 60px rgba(37,99,235,.35);position:relative;overflow:hidden}
+  .id-card::before{content:'';position:absolute;top:-50%;right:-30%;width:220px;height:220px;background:rgba(255,255,255,.06);border-radius:50%}
+  .id-card::after{content:'';position:absolute;bottom:-40%;left:-20%;width:180px;height:180px;background:rgba(255,255,255,.04);border-radius:50%}
+  .id-card .id-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;position:relative;z-index:1}
+  .id-card .id-hd img{width:48px;height:48px;object-fit:contain;border-radius:10px;background:rgba(255,255,255,.18);padding:4px}
+  .id-card .id-hd .ttl{font-weight:900;font-size:14px;letter-spacing:.5px;text-align:right}
+  .id-card .id-hd .ttl small{display:block;font-size:9px;opacity:.75;font-weight:500;margin-top:2px;letter-spacing:1.2px}
+  .id-card .id-photo{width:88px;height:88px;border-radius:50%;background:rgba(255,255,255,.18);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:36px;border:3px solid rgba(255,255,255,.35);overflow:hidden;position:relative;z-index:1}
+  .id-card .id-photo img{width:100%;height:100%;object-fit:cover}
+  .id-card .id-name{text-align:center;font-size:20px;font-weight:900;margin-bottom:4px;position:relative;z-index:1}
+  .id-card .id-num{text-align:center;font-size:12px;opacity:.9;letter-spacing:2px;font-weight:700;margin-bottom:12px;position:relative;z-index:1}
+  .id-card .id-details{text-align:center;font-size:12px;opacity:.9;line-height:1.7;position:relative;z-index:1}
+  .id-card .id-details strong{opacity:1;font-weight:700}
+  .id-card .id-qr{display:flex;justify-content:center;margin-top:16px;position:relative;z-index:1}
+  .id-card .id-qr #qrcode{background:#fff;padding:10px;border-radius:12px}
+  .id-card .id-ft{display:flex;justify-content:space-between;margin-top:14px;font-size:10px;opacity:.75;border-top:1px solid rgba(255,255,255,.2);padding-top:10px;position:relative;z-index:1}
+  .id-card-actions{display:flex;gap:8px;justify-content:center;margin:18px auto 0;max-width:400px;flex-wrap:wrap}
+  .btn-sm{padding:10px 20px;border-radius:50px;border:none;font-weight:700;font-size:12.5px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px;transition:.2s}
+  .btn-sm.primary{background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;box-shadow:0 4px 16px rgba(37,99,235,.25)}
+  .btn-sm.primary:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(37,99,235,.35)}
+  .btn-sm.ghost{background:#f1f5f9;color:var(--text-primary)}
+  .btn-sm.ghost:hover{background:#e2e8f0}
+
+  /* ═══ FULL BUTTONS ═══ */
+  .btn-full{width:100%;padding:14px;border-radius:50px;border:none;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.2s;margin-top:10px}
+  .btn-full.primary{background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;box-shadow:0 4px 16px rgba(37,99,235,.25)}
+  .btn-full.primary:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(37,99,235,.35)}
+  .btn-full.ghost{background:#f1f5f9;color:var(--text-primary);border:1.5px solid var(--border-color)}
+  .btn-full.ghost:hover{background:#e2e8f0}
+
+  /* ═══ FORMS ═══ */
+  .form-group{margin-bottom:14px}
+  .form-group label{display:block;font-size:12px;font-weight:700;color:#334155;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
+  .form-group input,.form-group select,.form-group textarea{width:100%;padding:12px 14px;border:1.5px solid var(--border-color);border-radius:12px;font-family:inherit;font-size:14px;background:var(--input-bg);color:var(--text-primary);transition:.2s;outline:none}
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+  .form-group textarea{resize:vertical;min-height:80px;line-height:1.5}
+
+  /* ═══ EMPTY STATE ═══ */
+  .empty{padding:36px 20px;text-align:center;color:var(--text-muted);font-size:13px;background:#fff;border-radius:14px;border:1px dashed var(--border-color)}
+  .empty i{font-size:32px;display:block;margin-bottom:10px;opacity:.35}
+
+  /* ═══ PROGRESS BAR ═══ */
+  .prog{height:8px;background:#e2e8f0;border-radius:20px;overflow:hidden;margin-top:6px}
+  .prog>div{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--blue),var(--blue-bright));transition:width .5s ease}
+  .prog.green>div{background:linear-gradient(90deg,#10b981,#059669)}
+  .prog.amber>div{background:linear-gradient(90deg,#f59e0b,#d97706)}
+  .prog.red>div{background:linear-gradient(90deg,#ef4444,#b91c1c)}
+
+  /* ═══ TIMELINE ═══ */
+  .timeline{position:relative;padding-left:24px;margin:12px 0}
+  .timeline::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--border-color);border-radius:2px}
+  .tl-item{position:relative;padding-bottom:14px}
+  .tl-item::before{content:'';position:absolute;left:-20px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--blue);border:3px solid #fff;box-shadow:0 0 0 2px var(--blue)}
+  .tl-item.done::before{background:var(--green);box-shadow:0 0 0 2px var(--green)}
+  .tl-item.pending::before{background:var(--amber);box-shadow:0 0 0 2px var(--amber)}
+  .tl-item .tl-ttl{font-weight:700;font-size:13.5px;color:var(--text-primary)}
+  .tl-item .tl-desc{font-size:12px;color:var(--text-muted);margin-top:2px;line-height:1.5}
+
+  /* ═══ TOAST ═══ */
+  #toast{position:fixed;top:76px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:10px;max-width:340px}
+  .toast{padding:13px 18px;border-radius:14px;font-size:13px;font-weight:600;color:#fff;box-shadow:0 12px 34px rgba(0,0,0,.25);display:flex;align-items:center;gap:10px;animation:toastIn .3s ease}
+  @keyframes toastIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+  .toast.ok{background:linear-gradient(135deg,#10b981,#059669)}
+  .toast.err{background:linear-gradient(135deg,#ef4444,#b91c1c)}
+  .toast.info{background:linear-gradient(135deg,#3b82f6,#2563eb)}
+
+  /* ═══ BOTTOM NAV ═══ */
+  .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;align-items:center;padding:8px 6px calc(8px + env(safe-area-inset-bottom));z-index:60;box-shadow:0 -4px 20px rgba(0,0,0,.05)}
+  .bn-item{background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:6px 12px;border-radius:12px;font-family:inherit;color:var(--text-muted);font-size:10.5px;font-weight:700;transition:.2s;min-width:56px}
+  .bn-item i{font-size:19px}
+  .bn-item.active{color:var(--blue);background:var(--blue-light)}
+  .bn-item:hover{color:var(--blue)}
+  .bn-item .bn-badge{position:absolute;top:2px;right:14px;background:var(--red);color:#fff;font-size:9px;font-weight:800;border-radius:20px;min-width:16px;height:16px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+
+  /* ═══ NOTIF DROPDOWN ═══ */
+  .notif-drop{position:fixed;top:64px;right:14px;width:340px;max-width:calc(100vw - 28px);max-height:440px;overflow-y:auto;background:#fff;border-radius:16px;box-shadow:var(--mac-shadow-hover);border:1px solid var(--border-color);z-index:200;display:none;padding:8px 0}
+  .notif-drop.open{display:block;animation:toastIn .25s ease}
+  .notif-hd{padding:12px 16px;border-bottom:1px solid var(--border-color);font-weight:800;font-size:13.5px;color:var(--text-primary);display:flex;justify-content:space-between;align-items:center}
+  .notif-hd button{background:none;border:none;color:var(--blue);font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit}
+  .notif-it{padding:12px 16px;border-bottom:1px solid #f1f5f9;display:flex;gap:10px;font-size:12.5px;line-height:1.45;color:var(--text-secondary)}
+  .notif-it:last-child{border-bottom:none}
+  .notif-it i{color:var(--blue);font-size:15px;flex-shrink:0;margin-top:1px}
+  .notif-it .notif-time{font-size:10.5px;color:var(--text-muted);margin-top:3px}
+  .notif-empty{padding:24px;text-align:center;color:var(--text-muted);font-size:13px}
+
+  /* ═══ QR SHARE MODAL ═══ */
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);z-index:999;display:none;align-items:center;justify-content:center;padding:20px}
+  .modal-overlay.open{display:flex;animation:toastIn .3s ease}
+  .modal-box{background:#fff;border-radius:22px;padding:24px;max-width:400px;width:100%;box-shadow:var(--mac-shadow-hover);position:relative;text-align:center}
+  .modal-box h3{font-size:17px;font-weight:800;margin-bottom:6px}
+  .modal-box p{font-size:13px;color:var(--text-muted);margin-bottom:14px}
+  .modal-close{position:absolute;top:12px;right:14px;background:none;border:none;font-size:22px;color:var(--text-muted);cursor:pointer;padding:4px}
+  .modal-close:hover{color:var(--text-primary)}
+
+  /* ═══ ASSESSMENT CARD ═══ */
+  .assess-card{background:#fff;border:1px solid var(--border-color);border-radius:14px;padding:14px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;transition:.2s}
+  .assess-card:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(37,99,235,.1)}
+  .assess-card .info{flex:1;min-width:0}
+  .assess-card .ttl{font-weight:800;font-size:13.5px;color:var(--text-primary);margin-bottom:4px}
+  .assess-card .meta{font-size:11.5px;color:var(--text-muted);display:flex;gap:10px;flex-wrap:wrap}
+  .assess-card .meta span{display:inline-flex;align-items:center;gap:4px}
+  .assess-card .actions{display:flex;gap:8px;flex-wrap:wrap}
+
+  /* ═══ COURSE CARD ═══ */
+  .course-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+  .course-card{background:#fff;border:1px solid var(--border-color);border-radius:16px;overflow:hidden;transition:.25s;cursor:pointer}
+  .course-card:hover{transform:translateY(-3px);box-shadow:var(--mac-shadow);border-color:rgba(37,99,235,.2)}
+  .course-card .cc-hd{height:100px;background:linear-gradient(135deg,#1e40af,#3b82f6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:32px;font-weight:900;position:relative}
+  .course-card .cc-hd .code{position:absolute;top:8px;right:10px;background:rgba(255,255,255,.2);padding:2px 10px;border-radius:20px;font-size:10px;font-weight:800;backdrop-filter:blur(4px)}
+  .course-card .cc-bd{padding:12px 14px}
+  .course-card .cc-bd h4{font-size:13.5px;font-weight:800;color:var(--text-primary);line-height:1.3;margin-bottom:4px}
+  .course-card .cc-bd .meta{font-size:11px;color:var(--text-muted);display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .course-card .cc-bd .meta span{display:inline-flex;align-items:center;gap:3px}
+
+  /* ═══ BOOK CARD ═══ */
+  .book-card{background:#fff;border:1px solid var(--border-color);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start;transition:.2s}
+  .book-card:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(37,99,235,.1)}
+  .book-card .bk-icon{width:48px;height:56px;background:var(--blue-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--blue);flex-shrink:0}
+  .book-card .bk-body{flex:1;min-width:0}
+  .book-card .bk-body h4{font-size:13.5px;font-weight:800;color:var(--text-primary);line-height:1.3;margin-bottom:2px}
+  .book-card .bk-body .au{font-size:11.5px;color:var(--text-muted)}
+  .book-card .bk-body .meta{font-size:11px;color:var(--text-muted);margin-top:4px;display:flex;gap:10px;flex-wrap:wrap}
+
+  /* ═══ JOB CARD ═══ */
+  .job-card{background:#fff;border:1px solid var(--border-color);border-radius:12px;padding:14px 16px;margin-bottom:10px;transition:.2s}
+  .job-card:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(37,99,235,.1)}
+  .job-card .jh{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap}
+  .job-card h4{font-size:14px;font-weight:800;color:var(--text-primary);line-height:1.3}
+  .job-card .co{font-size:12px;color:var(--text-muted);margin-top:2px}
+  .job-card .job-meta{display:flex;gap:10px;flex-wrap:wrap;font-size:11.5px;color:var(--text-muted);margin:6px 0}
+  .job-card .job-desc{font-size:12.5px;color:#334155;line-height:1.5;margin:6px 0}
+  .job-card .job-act{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+
+  /* ═══ ALUMNI CARD ═══ */
+  .alumni-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+  .alumni-card{background:#fff;border:1px solid var(--border-color);border-radius:14px;padding:16px;text-align:center;transition:.2s}
+  .alumni-card:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 6px 22px rgba(37,99,235,.12)}
+  .alumni-card .av{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue-bright));margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;font-weight:900}
+  .alumni-card .nm{font-weight:800;font-size:13.5px;color:var(--text-primary);line-height:1.2}
+  .alumni-card .dt{font-size:11.5px;color:var(--text-muted);margin-top:3px;line-height:1.4}
+  .alumni-card .cmp{font-size:11.5px;color:var(--blue);font-weight:700;margin-top:6px}
+
+  /* ═══ COUNTDOWN BADGE ═══ */
+  .countdown-badge{display:inline-flex;align-items:center;gap:4px;background:var(--blue-light);color:var(--blue-dark);padding:3px 10px;border-radius:20px;font-size:10.5px;font-weight:800}
+  .countdown-badge.warning{background:#fef3c7;color:#92400e}
+  .countdown-badge.danger{background:#fee2e2;color:#991b1b}
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width:480px){
+    .header-center .name{font-size:14px}
+    .welcome-banner{padding:18px}
+    .welcome-banner .wb-left .nm{font-size:18px}
+    .welcome-banner .wb-right .val{font-size:22px}
+    .grid-cards{grid-template-columns:1fr 1fr}
+    .quick-grid{grid-template-columns:repeat(3,1fr)}
+    .course-grid{grid-template-columns:1fr}
+    .sidebar{width:280px}
+  }
+  @supports(padding:env(safe-area-inset-top)){
+    .top-bar{padding-top:calc(12px + env(safe-area-inset-top))}
+  }
+</style>
+</head>
+<body>
+
+<div id="toast"></div>
+
+<!-- LOADER -->
+<div id="appLoader">
+  <div class="loader-spinner"></div>
+  <p style="color:#94a3b8;font-weight:600;font-size:13px">Loading your dashboard…</p>
+</div>
+
+<!-- ═══ APP ROOT ═══ -->
+<div class="app-root" id="appRoot" style="display:none">
+
+  <!-- ═══ TOP BAR ═══ -->
+  <header class="top-bar">
+    <div class="header-left">
+      <img src="logo.png" class="header-logo" id="headerLogo" alt="NORTEC" onerror="this.style.display='none'"/>
+    </div>
+    <div class="header-center">
+      <div class="greeting">Welcome back</div>
+      <div class="name" id="headerName">Student <span class="accent">Dashboard</span></div>
+    </div>
+    <div class="header-right">
+      <button class="btn-icon" id="notifBtn" aria-label="Notifications">
+        <i class="fas fa-bell"></i>
+        <span class="badge" id="notifBadge" data-count="0">0</span>
+      </button>
+      <button class="btn-icon" id="menuBtn" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══ NOTIFICATION DROPDOWN ═══ -->
+  <div class="notif-drop" id="notifDrop">
+    <div class="notif-hd">
+      <span>Notifications</span>
+      <button id="clearNotifs">Mark all read</button>
+    </div>
+    <div id="notifList"></div>
+  </div>
+
+  <!-- ═══ MAIN CONTENT ═══ -->
+  <main class="app-content" id="appContent">
+
+    <div class="topbar-spacer" style="height:0"></div>
+
+    <!-- HOME -->
+    <section class="page-container active-page full-page" id="homePage">
+      <div id="homeContent"></div>
+    </section>
+
+    <!-- COURSES -->
+    <section class="page-container full-page" id="coursesPage">
+      <h2 class="section-title"><i class="fas fa-book"></i> My Courses</h2>
+      <div id="coursesContent"></div>
+    </section>
+
+    <!-- CA / GRADES -->
+    <section class="page-container full-page" id="caPage">
+      <h2 class="section-title"><i class="fas fa-chart-bar"></i> Continuous Assessment</h2>
+      <div id="caContent"></div>
+    </section>
+
+    <!-- ATTENDANCE -->
+    <section class="page-container full-page" id="attendancePage">
+      <h2 class="section-title"><i class="fas fa-clipboard-list"></i> Attendance</h2>
+      <div id="attendanceContent"></div>
+    </section>
+
+    <!-- EXAMS -->
+    <section class="page-container full-page" id="examsPage">
+      <h2 class="section-title"><i class="fas fa-calendar-check"></i> Exams</h2>
+      <div id="examsContent"></div>
+    </section>
+
+    <!-- CLEARANCE -->
+    <section class="page-container full-page" id="clearancePage">
+      <h2 class="section-title"><i class="fas fa-check-circle"></i> Clearance</h2>
+      <div id="clearanceContent"></div>
+    </section>
+
+    <!-- FINANCE -->
+    <section class="page-container full-page" id="financePage">
+      <h2 class="section-title"><i class="fas fa-coins"></i> Finance</h2>
+      <div id="financeContent"></div>
+    </section>
+
+    <!-- LIBRARY -->
+    <section class="page-container full-page" id="libraryPage">
+      <h2 class="section-title"><i class="fas fa-book-open"></i> Library</h2>
+      <div id="libraryContent"></div>
+    </section>
+
+    <!-- CAREERS -->
+    <section class="page-container full-page" id="careersPage">
+      <h2 class="section-title"><i class="fas fa-briefcase"></i> Careers & Internships</h2>
+      <div id="careersContent"></div>
+    </section>
+
+    <!-- PROFILE -->
+    <section class="page-container full-page" id="profilePage">
+      <h2 class="section-title"><i class="fas fa-user-circle"></i> My Profile</h2>
+      <div id="profileContent"></div>
+    </section>
+
+    <!-- STUDENT ID -->
+    <section class="page-container full-page" id="studentIdPage">
+      <h2 class="section-title"><i class="fas fa-id-badge"></i> Digital Student ID</h2>
+      <div id="studentIdContent"></div>
+    </section>
+
+  </main>
+
+  <!-- ═══ BOTTOM NAV ═══ -->
+  <nav class="bottom-nav">
+    <button class="bn-item active" data-nav="home"><i class="fas fa-home"></i> Home</button>
+    <button class="bn-item" data-nav="courses"><i class="fas fa-book"></i> Courses</button>
+    <button class="bn-item" data-nav="ca"><i class="fas fa-chart-bar"></i> CA</button>
+    <button class="bn-item" data-nav="library"><i class="fas fa-book-open"></i> Library</button>
+    <button class="bn-item" data-nav="profile"><i class="fas fa-user"></i> Profile</button>
+  </nav>
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <h2><span class="accent">NORTEC</span> Menu</h2>
+      <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-item" data-page="home"><i class="fas fa-home"></i> Dashboard</button>
+      <button class="nav-item" data-page="courses"><i class="fas fa-book"></i> Courses</button>
+      <button class="nav-item" data-page="ca"><i class="fas fa-chart-bar"></i> Continuous Assessment</button>
+      <button class="nav-item" data-page="attendance"><i class="fas fa-clipboard-list"></i> Attendance</button>
+      <button class="nav-item" data-page="exams"><i class="fas fa-calendar-check"></i> Exams</button>
+      <button class="nav-item" data-page="clearance"><i class="fas fa-check-circle"></i> Clearance</button>
+      <button class="nav-item" data-page="finance"><i class="fas fa-coins"></i> Finance</button>
+      <button class="nav-item" data-page="library"><i class="fas fa-book-open"></i> Library</button>
+      <button class="nav-item" data-page="careers"><i class="fas fa-briefcase"></i> Careers</button>
+      <button class="nav-item" data-page="studentId"><i class="fas fa-id-badge"></i> Student ID</button>
+      <button class="nav-item" data-page="profile"><i class="fas fa-user-circle"></i> Profile</button>
+      <button class="nav-item logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </nav>
+  </aside>
+
+</div>
+
+<!-- ═══ SHARE MODAL ═══ -->
+<div class="modal-overlay" id="shareModal">
+  <div class="modal-box">
+    <button class="modal-close" id="shareClose">&times;</button>
+    <h3><i class="fas fa-share-alt" style="color:var(--blue)"></i> Share ID</h3>
+    <p>Share your digital student ID</p>
+    <div style="display:flex;justify-content:center;margin:14px 0;"><div id="shareQrcode"></div></div>
+    <button class="btn-full primary" id="shareDownloadBtn" style="margin-top:8px;"><i class="fas fa-download"></i> Download ID Card</button>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   FIREBASE
+   ═══════════════════════════════════════════════════════════════ */
+const firebaseConfig = {
+  apiKey: "AIzaSyD_WV6fY-4pmA2UQnkaq-VgTHwbAMeSfKc",
+  authDomain: "nortec-21d55.firebaseapp.com",
+  databaseURL: "https://nortec-21d55-default-rtdb.firebaseio.com",
+  projectId: "nortec-21d55",
+  storageBucket: "nortec-21d55.storage.app",
+  messagingSenderId: "790129508749",
+  appId: "1:790129508749:web:38d8b14d6f5512a350fdc4",
+  measurementId: "G-559623YP4D"
+};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+const ROOT = 'nortec';
+
+/* ═══════════════════════════════════════════════════════════════
+   STATE
+   ═══════════════════════════════════════════════════════════════ */
+let currentUser = null;
+let appData = {};
+let notifications = [];
+let unreadCount = 0;
+
+/* Demo academic data (would come from Firebase in production) */
+const demoData = {
+  gpa: 3.2,
+  creditsTotal: 104,
+  creditsEarned: 96,
+  currentTerm: 'Term 2 · 2026',
+  weeksCompleted: 8,
+  weeksRemaining: 6,
+  attendance: 90.5,
+  attendanceGrade: 'B+',
+  balance: 1800,
+  clearanceCleared: 0,
+  clearanceTotal: 6,
+  courses: [
+    { code: '41.1', name: 'Digital Electronics II',        lecturer: 'Mr. Banda',  credits: 4, status: 'completed', ca: 33, final: 82 },
+    { code: '41.2', name: 'Entrepreneurship',              lecturer: 'Ms. Phiri',  credits: 3, status: 'completed', ca: 33, final: 79 },
+    { code: '41.3', name: 'Operating Systems',             lecturer: 'Dr. Mwansa', credits: 4, status: 'completed', ca: 30, final: 74 },
+    { code: '41.4', name: 'Programming & Database Tech',   lecturer: 'Mr. Tembo',  credits: 4, status: 'inprogress', ca: 29, final: 68 },
+    { code: '41.5', name: 'Networks & Communications',     lecturer: 'Ms. Phiri',  credits: 4, status: 'completed', ca: 33, final: 84 },
+    { code: '41.6', name: 'Computer Hardware Maintenance', lecturer: 'Mr. Zulu',   credits: 4, status: 'completed', ca: 30, final: 76 },
+    { code: '41.7', name: 'Management Information Systems',lecturer: 'Dr. Mulenga',credits: 3, status: 'completed', ca: 32, final: 81 }
+  ],
+  attendanceRows: [
+    { term: 'Term 1', month: 'January',  pct: 92, attended: 23, total: 25 },
+    { term: 'Term 1', month: 'February', pct: 88, attended: 22, total: 25 },
+    { term: 'Term 1', month: 'March',    pct: 95, attended: 19, total: 20 },
+    { term: 'Term 2', month: 'April',    pct: 90, attended: 18, total: 20 },
+    { term: 'Term 2', month: 'May',      pct: 85, attended: 17, total: 20 },
+    { term: 'Term 2', month: 'June',     pct: 93, attended: 14, total: 15 }
+  ],
+  exams: [
+    { date: 'Monday, 20th June',    time: '09:00 - 11:00', subject: 'Digital Electronics II (41.1)',         venue: 'Hall A', duration: '2 hours' },
+    { date: 'Tuesday, 21st June',   time: '10:00 - 12:00', subject: 'Operating Systems (41.3)',              venue: 'Hall B', duration: '2 hours' },
+    { date: 'Wednesday, 22nd June', time: '14:00 - 16:00', subject: 'Programming & Database Tech (41.4)',    venue: 'Lab 2',  duration: '2 hours' },
+    { date: 'Thursday, 23rd June',  time: '09:00 - 11:00', subject: 'Networks & Communications (41.5)',      venue: 'Hall A', duration: '2 hours' },
+    { date: 'Friday, 24th June',    time: '11:00 - 13:00', subject: 'Computer Hardware Maintenance (41.6)',  venue: 'Lab 3',  duration: '2 hours' }
+  ],
+  clearance: [
+    { dept: 'Accounts',     status: 'notcleared', reason: 'Balance: K1,800',          remark: 'Settle outstanding fees' },
+    { dept: 'Library',      status: 'notcleared', reason: '2 Books Overdue',          remark: 'Return books' },
+    { dept: 'Sports',       status: 'notcleared', reason: 'Sports Equipment Pending', remark: 'Return borrowed equipment' },
+    { dept: 'HOD',          status: 'notcleared', reason: 'Project Report Pending',   remark: 'Submit project report' },
+    { dept: 'Lab Attendant',status: 'notcleared', reason: 'Lab Equipment Missing',    remark: 'Return lab equipment' },
+    { dept: 'Admissions',   status: 'notcleared', reason: 'Document Verification',    remark: 'Submit documents' }
+  ],
+  transactions: [
+    { date: '2023-01-06', desc: 'MoTS-TERM 1 2023',      type: 'JV',       debit: '',    credit: '3,000', bal: '-3,050' },
+    { date: '2023-02-16', desc: 'ZANACO Deposit',        type: 'Bank',     debit: '',    credit: '250',   bal: '-3,300' },
+    { date: '2023-02-20', desc: 'CSEDIFT-FT-2021-1',     type: 'Invoice',  debit: '4,400', credit: '',     bal: '1,100' },
+    { date: '2023-05-06', desc: 'MoTS-TERM 2 2023',      type: 'JV',       debit: '',    credit: '3,000', bal: '-1,900' },
+    { date: '2023-05-22', desc: 'CSEDIFT-FT-2021-2',     type: 'Invoice',  debit: '3,250', credit: '',     bal: '1,350' },
+    { date: '2023-05-22', desc: 'ZANACO Deposit',        type: 'Bank',     debit: '',    credit: '800',   bal: '550' },
+    { date: '2023-09-07', desc: 'ZANACO Deposit',        type: 'Bank',     debit: '',    credit: '350',   bal: '200' },
+    { date: '2023-09-11', desc: 'MoTS-TERM 3 2023',      type: 'JV',       debit: '',    credit: '3,950', bal: '-3,750' },
+    { date: '2023-09-15', desc: 'Exam Fees',             type: 'JV',       debit: '950', credit: '',     bal: '1,200' },
+    { date: '2025-09-08', desc: 'ZANACO Deposit',        type: 'Bank',     debit: '',    credit: '1,000', bal: '200' },
+    { date: '2025-09-10', desc: 'Hire of Gown',          type: 'Invoice',  debit: '1,000', credit: '',     bal: '1,200' },
+    { date: '2025-09-25', desc: 'Hire of Gown',          type: 'Invoice',  debit: '600', credit: '',     bal: '1,800' }
+  ],
+  books: [
+    { id: 1, title: 'Computer Networks: A Systems Approach',           author: 'Larry L. Peterson',       isbn: '978-0128182000', available: true },
+    { id: 2, title: 'Operating Systems: Three Easy Pieces',            author: 'Remzi H. Arpaci-Dusseau', isbn: '978-1596931237', available: false, due: '2026-07-15' },
+    { id: 3, title: 'Digital Electronics: Principles and Applications',author: 'Roger Tokheim',           isbn: '978-0073373775', available: true },
+    { id: 4, title: 'Database System Concepts',                        author: 'Abraham Silberschatz',    isbn: '978-0078022159', available: false, due: '2026-06-28' },
+    { id: 5, title: 'Computer Architecture: A Quantitative Approach',  author: 'John L. Hennessy',        isbn: '978-0128119051', available: true },
+    { id: 6, title: 'Introduction to Algorithms',                      author: 'Thomas H. Cormen',        isbn: '978-0262033848', available: true },
+    { id: 7, title: 'The Linux Programming Interface',                 author: 'Michael Kerrisk',         isbn: '978-1593272203', available: false, due: '2026-07-01' },
+    { id: 8, title: 'Computer Hardware Maintenance and Repair',        author: 'Mike Meyers',             isbn: '978-1260441172', available: true }
+  ],
+  borrowed: [
+    { id: 2, title: 'Operating Systems: Three Easy Pieces', author: 'Remzi H. Arpaci-Dusseau', due: '2026-07-15' }
+  ],
+  jobs: [
+    { title: 'Junior IT Support Technician',  company: 'ZANACO Bank',              location: 'Lusaka, Zambia', type: 'Full-time',      desc: 'Provide IT support for bank systems, troubleshoot hardware and software.' },
+    { title: 'Network Administrator Intern',  company: 'ZESCO',                   location: 'Lusaka, Zambia', type: 'Internship',     desc: 'Assist in network maintenance, configuration, and monitoring.' },
+    { title: 'Computer Hardware Technician',  company: 'Mining Technology Solutions', location: 'Kitwe, Zambia', type: 'Full-time',   desc: 'Repair and maintain computer hardware and industrial control systems.' },
+    { title: 'Software Developer (Graduate)', company: 'CodeZambia',              location: 'Remote',         type: 'Graduate',       desc: 'Build web and mobile applications. Mentorship provided.' },
+    { title: 'Database Administrator Trainee',company: 'National Pension Scheme', location: 'Lusaka, Zambia', type: 'Internship',     desc: 'Learn database management, SQL optimization, and data security.' }
+  ],
+  alumni: [
+    { name: 'Chisomo Banda',  grad: '2024', program: 'Dip. Computer Systems Engineering', company: 'ZANACO Bank',              position: 'IT Officer' },
+    { name: 'Mwansa Phiri',   grad: '2023', program: 'Dip. Electrical Engineering',       company: 'ZESCO',                    position: 'Electrical Engineer' },
+    { name: 'Patricia Mwape', grad: '2022', program: 'Dip. Science Lab Technology',       company: 'University Teaching Hospital', position: 'Lab Technologist' },
+    { name: 'John Zulu',      grad: '2024', program: 'Adv. Cert. Heavy Equipment',        company: 'Mining Tech Solutions',    position: 'Heavy Equip. Tech' },
+    { name: 'Sarah Tembo',    grad: '2023', program: 'Dip. Automotive Engineering',       company: 'Toyota Zambia',            position: 'Service Advisor' },
+    { name: 'David Mwansa',   grad: '2022', program: 'Dip. Production & Ops',             company: 'Zambia Sugar',             position: 'Production Supervisor' }
+  ]
+};
+
+/* ═══════════════════════════════════════════════════════════════
+   HELPERS
+   ═══════════════════════════════════════════════════════════════ */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function fmtDate(ts){ if(!ts) return '—'; return new Date(ts).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}); }
+function toast(msg, type='info'){
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  const ico = type==='ok'?'fa-circle-check':type==='err'?'fa-circle-exclamation':'fa-circle-info';
+  el.innerHTML = `<i class="fas ${ico}"></i><span>${msg}</span>`;
+  $('#toast').appendChild(el);
+  setTimeout(()=>{el.style.opacity='0';el.style.transition='opacity .3s';setTimeout(()=>el.remove(),300);},3500);
+}
+function getInitials(name){
+  if(!name) return 'ST';
+  const parts = name.trim().split(/\s+/);
+  return ((parts[0]?.[0]||'') + (parts[1]?.[0]||'')).toUpperCase() || 'ST';
+}
+function getFirstName(name){
+  if(!name) return 'Student';
+  return name.trim().split(/\s+/)[0];
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════════════════════════ */
+function showPage(pageId){
+  $$('.page-container').forEach(p => p.classList.remove('active-page','page-leaving'));
+  const target = $('#' + pageId + 'Page');
+  if(!target) return;
+  target.classList.add('active-page');
+  $('#appContent').scrollTop = 0;
+
+  // Bottom nav active state
+  $$('.bn-item').forEach(b => b.classList.toggle('active', b.dataset.nav === pageId));
+  $$('.sidebar .nav-item').forEach(b => b.classList.toggle('active', b.dataset.page === pageId));
+
+  // Lazy render on open
+  if(pageId === 'ca') renderCA();
+  if(pageId === 'attendance') renderAttendance();
+  if(pageId === 'exams') renderExams();
+  if(pageId === 'clearance') renderClearance();
+  if(pageId === 'finance') renderFinance();
+  if(pageId === 'library') renderLibrary();
+  if(pageId === 'careers') renderCareers();
+  if(pageId === 'profile') renderProfile();
+  if(pageId === 'studentId') renderStudentId();
+  if(pageId === 'courses') renderCourses();
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER: HOME
+   ═══════════════════════════════════════════════════════════════ */
+function renderHome(){
+  const name = appData.fullName || 'Student';
+  const firstName = getFirstName(name);
+  const programme = appData.programme?.title || 'Programme';
+  const studentNumber = appData.studentNumber || '—';
+  const intake = appData.programme?.intakeLabel || '—';
+  const balance = demoData.balance;
+  const attendance = demoData.attendance;
+  const gpa = demoData.gpa;
+
+  $('#headerName').innerHTML = `${esc(firstName)} <span class="accent">Dashboard</span>`;
+
+  $('#homeContent').innerHTML = `
+    <div class="welcome-banner">
+      <div class="wb-left">
+        <div class="hi">👋 Welcome back,</div>
+        <div class="nm">${esc(name)}</div>
+        <div class="meta">
+          <span class="chip"><i class="fas fa-id-card"></i> ${esc(studentNumber)}</span>
+          <span class="chip"><i class="fas fa-calendar"></i> ${esc(intake)}</span>
+        </div>
+      </div>
+      <div class="wb-right">
+        <div class="lbl">GPA</div>
+        <div class="val">${gpa}</div>
+        <div class="sub">/ 4.0</div>
+      </div>
+    </div>
+
+    <h2 class="section-title"><i class="fas fa-th-large"></i> Overview</h2>
+    <div class="grid-cards">
+      <div class="card-tile blue" onclick="showPage('courses')">
+        <span class="icon">📚</span>
+        <div class="ttl">Programme</div>
+        <div class="val" style="font-size:14px;line-height:1.3">${esc(programme)}</div>
+        <div class="sub">${esc(appData.programme?.category || '')}</div>
+      </div>
+      <div class="card-tile green" onclick="showPage('ca')">
+        <span class="icon">📊</span>
+        <div class="ttl">Current Term</div>
+        <div class="val">${demoData.currentTerm.split('·')[1].trim()}</div>
+        <div class="sub">${demoData.weeksCompleted} wks done · ${demoData.weeksRemaining} left</div>
+      </div>
+      <div class="card-tile purple" onclick="showPage('ca')">
+        <span class="icon">📈</span>
+        <div class="ttl">CA Average</div>
+        <div class="val">${Math.round(demoData.courses.reduce((s,c)=>s+c.ca,0)/demoData.courses.length)}%</div>
+        <div class="sub">${demoData.courses.length} subjects</div>
+      </div>
+      <div class="card-tile green" onclick="showPage('attendance')">
+        <span class="icon">✅</span>
+        <div class="ttl">Attendance</div>
+        <div class="val">${attendance}%</div>
+        <div class="sub">Grade ${demoData.attendanceGrade}</div>
+      </div>
+      <div class="card-tile red" onclick="showPage('clearance')">
+        <span class="icon">⚠️</span>
+        <div class="ttl">Clearance</div>
+        <div class="val" style="font-size:15px;color:#ef4444">Not Cleared</div>
+        <div class="sub">${demoData.clearanceCleared}/${demoData.clearanceTotal} cleared</div>
+      </div>
+      <div class="card-tile amber" onclick="showPage('finance')">
+        <span class="icon">💰</span>
+        <div class="ttl">Balance</div>
+        <div class="val">K${balance.toLocaleString()}</div>
+        <div class="sub">Outstanding fees</div>
+      </div>
+    </div>
+
+    <h2 class="section-title"><i class="fas fa-bolt"></i> Quick Actions</h2>
+    <div class="quick-grid">
+      <button class="quick-btn" onclick="showPage('ca')"><i class="fas fa-chart-bar"></i> View Grades</button>
+      <button class="quick-btn" onclick="showPage('exams')"><i class="fas fa-calendar-check"></i> Exam Timetable</button>
+      <button class="quick-btn" onclick="showPage('library')"><i class="fas fa-book-open"></i> Library</button>
+      <button class="quick-btn" onclick="showPage('studentId')"><i class="fas fa-id-badge"></i> Student ID</button>
+      <button class="quick-btn" onclick="showPage('finance')"><i class="fas fa-coins"></i> Statement</button>
+      <button class="quick-btn" onclick="showPage('careers')"><i class="fas fa-briefcase"></i> Careers</button>
+    </div>
+
+    <h2 class="section-title"><i class="fas fa-chart-line"></i> Quick Stats</h2>
+    <div class="stat-row">
+      <div class="stat-box"><div class="lbl">Credits Earned</div><div class="val">${demoData.creditsEarned}</div></div>
+      <div class="stat-box"><div class="lbl">Credits Total</div><div class="val">${demoData.creditsTotal}</div></div>
+      <div class="stat-box"><div class="lbl">Subjects</div><div class="val">${demoData.courses.length}</div></div>
+      <div class="stat-box"><div class="lbl">Days in Term</div><div class="val">56</div></div>
+    </div>
+
+    <h2 class="section-title"><i class="fas fa-clock"></i> Recent Activity</h2>
+    <div class="timeline">
+      <div class="tl-item done">
+        <div class="tl-ttl">Digital Electronics II — Assignment 1 submitted</div>
+        <div class="tl-desc">Graded: 82% · 2 days ago</div>
+      </div>
+      <div class="tl-item done">
+        <div class="tl-ttl">Fee payment received — K1,000</div>
+        <div class="tl-desc">Balance now K1,800 · 5 days ago</div>
+      </div>
+      <div class="tl-item pending">
+        <div class="tl-ttl">Networks & Communications — Assignment due</div>
+        <div class="tl-desc">18th June 2026 · 3 days remaining</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-ttl">End of Term 2 Exams begin</div>
+        <div class="tl-desc">Monday 20th June 2026 · Hall A</div>
+      </div>
+    </div>
+  `;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER: COURSES
+   ═══════════════════════════════════════════════════════════════ */
+function renderCourses(){
+  $('#coursesContent').innerHTML = `
+    <div class="info-grid">
+      <div class="info-item"><div class="lbl">Programme</div><div class="val">${esc(appData.programme?.title || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Category</div><div class="val">${esc(appData.programme?.category || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Mode</div><div class="val">${esc(appData.programme?.mode || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Year of Study</div><div class="val">${esc(appData.programme?.yearStudy || '—')}</div></div>
+    </div>
+
+    <h3><i class="fas fa-book"></i> Enrolled Courses (${demoData.courses.length})</h3>
+    <div class="course-grid">
+      ${demoData.courses.map(c => `
+        <div class="course-card">
+          <div class="cc-hd">
+            <span>${esc(c.name.charAt(0))}</span>
+            <span class="code">${esc(c.code)}</span>
+          </div>
+          <div class="cc-bd">
+            <h4>${esc(c.name)}</h4>
+            <div class="meta">
+              <span><i class="fas fa-user-tie"></i> ${esc(c.lecturer)}</span>
+              <span><i class="fas fa-award"></i> ${c.credits} credits</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span class="badge ${c.status === 'completed' ? 'green' : 'amber'}">${c.status === 'completed' ? '✓ Completed' : 'In Progress'}</span>
+              <strong style="color:var(--blue);font-size:13px">${c.ca}%</strong>
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+
+    <h3><i class="fas fa-info-circle"></i> Course Description</h3>
+    <p>${esc(appData.programme?.description || 'This programme provides students with comprehensive knowledge and skills in the field.')}</p>
+
+    <h3><i class="fas fa-briefcase"></i> Career Prospects</h3>
+    <ul>
+      <li>IT Support Specialist</li>
+      <li>Network Administrator</li>
+      <li>Systems Analyst</li>
+      <li>Software Developer</li>
+      <li>Database Administrator</li>
+    </ul>
+  `;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER: CA
+   ═══════════════════════════════════════════════════════════════ */
+function renderCA(){
+  $('#caContent').innerHTML = `
+    <div class="info-grid">
+      <div class="info-item"><div class="lbl">CA Average</div><div class="val">${Math.round(demoData.courses.reduce((s,c)=>s+c.ca,0)/demoData.courses.length)}%</div></div>
+      <div class="info-item"><div class="lbl">Subjects</div><div class="val">${demoData.courses.length}</div></div>
+      <div class="info-item"><div class="lbl">Completed</div><div class="val">${demoData.courses.filter(c=>c.status==='completed').length}</div></div>
+      <div class="info-item"><div class="lbl">In Progress</div><div class="val">${demoData.courses.filter(c=>c.status!=='completed').length}</div></div>
+    </div>
+
+    <h3><i class="fas fa-table"></i> CA Marks Breakdown</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Code</th><th>Subject</th><th>CA %</th><th>Final Mark</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          ${demoData.courses.map(c => `
+            <tr>
+              <td><strong>${esc(c.code)}</strong></td>
+              <td>${esc(c.name)}</td>
+              <td><strong style="color:var(--blue)">${c.ca}%</strong></td>
+              <td>${c.final}%</td>
+              <td><span class="badge ${c.final >= 50 ? 'green' : 'red'}">${c.final >= 50 ? 'Pass' : 'Fail'}</span></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+
+    <h3><i class="fas fa-chart-pie"></i> CA Progress</h3>
+    <div style="background:#fff;border:1px solid var(--border-color);border-radius:12px;padding:16px">
+      ${demoData.courses.map(c => `
+        <div style="margin-bottom:12px">
+          <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:4px">
+            <span>${esc(c.name)}</span>
+            <span style="color:var(--blue)">${c.ca}%</span>
+          </div>
+          <div class="prog ${c.ca >= 32 ? 'green' : c.ca >= 25 ? 'amber' : 'red'}"><div style="width:${(c.ca/40)*100}%"></div></div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER: ATTENDANCE
+   ═══════════════════════════════════════════════════════════════ */
+function renderAttendance(){
+  $('#attendanceContent').innerHTML = `
+    <div class="info-grid">
+      <div class="info-item"><div class="lbl">Overall</div><div class="val" style="color:var(--blue)">${demoData.attendance}%</div></div>
+      <div class="info-item"><div class="lbl">Grade</div><div class="val">${demoData.attendanceGrade}</div></div>
+      <div class="info-item"><div class="lbl">Status</div><div class="val"><span class="badge green">Satisfactory</span></div></div>
+      <div class="info-item"><div class="lbl">Sessions</div><div class="val">113 / 125</div></div>
+    </div>
+
+    <h3><i class="fas fa-table"></i> Monthly Breakdown</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Term</th><th>Month</th><th>Attendance</th><th>Attended</th><th>Total</th></tr></thead>
+        <tbody>
+          ${demoData.attendanceRows.map(r => `
+            <tr>
+              <td>${esc(r.term)}</td>
+              <td>${esc(r.month)}</td>
+              <td><strong style="color:${r.pct>=85?'var(--green)':r.pct>=75?'var(--amber)':'var(--red)'}">${r.pct}%</strong></td>
+              <td>${r.attended}</td>
+              <td>${r.total}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+
+    <h3><i class="fas fa-gavel"></i> Attendance Policy</h3>
+    <ul>
+      <li>Minimum attendance requirement: <strong>80%</strong> per term.</li>
+      <li>Medical leave must be reported within 3 days.</li>
+      <li>Students below 80% may be barred from exams.</li>
+      <li>Attendance is tracked through the student portal.</li>
+    </ul>
+  `;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER: EXAMS
+   ═══════════════════════════════════════════════════════════════ */
+function renderExams(){
+  $('#examsContent').innerHTML = `
+    <div style="background:#fff7ed;border-radius:12px;padding:14px;border-left:4px solid var(--amber);font-size:13px;color:#92400e;margin-bottom:14px">
+      <strong><i class="fas fa-clock"></i> Upcoming Exams</strong><br/>
+      End of Term 2 Exams begin <strong>Monday 20th June 2026</strong>. Arrive 30 minutes early with your student ID.
+    </div>
+
+    <h3><i class="fas fa-calendar-alt"></i> Exam Timetable</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Date</th><th>Time</th><th>Subject</th><th>Venue</th><th>Duration</th></tr></thead>
+        <tbody>
+          ${demoData.exams.map(e => `
+            <tr>
+              <td><strong>${esc(e.date)}</strong></td>
+              <td>${esc(e.time)}</td>
+              <td>${esc(e.subject)}</td>
+              <td><span class="badge blue">${esc(e.venue)}</span></td>
+              <td>${esc(e.duration)}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+
+    <h3><i class="fas fa-clipboard-list"></i> Exam Guidelines</h3>
+    <ul>
+      <li>Arrive at least 30 minutes before the exam start time.</li>
+      <li>Bring your student ID card for verification.</li>
+      <li>No electronic devices are allowed during exams.</li>
+      <li>All exams are closed book unless stated otherwise.</li>
+      <li>Use only black or blue ink pens.</li>
+      <li>Mobile phones must be switched off and kept in bags.</li>
+    </ul>
+
+    <h3><i class="fas fa-gavel"></i> Exam Policies</h3>
+    <ul>
+      <li>No leave of absence during exam week.</li>
+      <li>Medical emergencies must be reported with a doctor's note.</li>
+      <li>Any form of cheating will result in disciplinary action.</li>
+    </ul>
+  `;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER: CLEARANCE
+   ═══════════════════════════════════════════════════════════════ */
+function renderClearance(){
+  $('#clearanceContent').innerHTML = `
+    <div style="background:#fef2f2;border-radius:12px;padding:14px;border-left:4px solid var(--red);font-size:13px;color:#991b1b;margin-bottom:14px">
+      <strong><i class="fas fa-exclamation-triangle"></i> Not Cleared</strong><br/>
+      You have ${demoData.clearanceTotal - demoData.clearanceCleared} outstanding departments. Clearance deadline: <strong>30th June 2026</strong>
+    </div>
+
+    <h3><i class="fas fa-list-check"></i> Department Status</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Department</th><th>Status</th><th>Reason</th><th>Action</th></tr></thead>
+        <tbody>
+          ${demoData.clearance.map(c => `
+            <tr>
+              <td><strong>${esc(c.dept)}</strong></td>
+              <td><span class="badge ${c.status==='cleared'?'green':'red'}">${c.status==='cleared'?'Cleared':'Not Cleared'}</span></td>
+              <td>${esc(c.reason)}</td>
+              <td>${esc(c.remark)}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+
+    <h3><i class="fas fa-arrow-right"></i> Next Steps</h3>
+    <ol>
+      <li>Settle outstanding fees with Accounts.</li>
+      <li>Return overdue library books.</li>
+      <li>Return borrowed sports equipment.</li>
+      <li>Submit final project report to HOD.</li>
+      <li>Return all lab equipment to Lab Attendant.</li>
+      <li>Submit missing documents to Admissions.</li>
+    </ol>
+  `;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER: FINANCE
+   ═══════════════════════════════════════════════════════════════ */
+function renderFinance(){
+  $('#financeContent').innerHTML = `
+    <div class="info-grid">
+      <div class="info-item"><div class="lbl">Current Balance</div><div class="val" style="color:var(--amber);font-size:18px">K${demoData.balance.toLocaleString()}</div></div>
+      <div class="info-item"><div class="lbl">Last Payment</div><div class="val">K1,000</div></div>
+      <div class="info-item"><div class="lbl">Statement Period</div><div class="val">2023 – 2026</div></div>
+      <div class="info-item"><div class="lbl">Status</div><div class="val"><span class="badge amber">Outstanding</span></div></div>
+    </div>
+
+    <h3><i class="fas fa-coins"></i> Transaction History</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Date</th><th>Description</th><th>Type</th><th>Debit</th><th>Credit</th><th>Balance</th></tr></thead>
+        <tbody>
+          ${demoData.transactions.map(t => `
+            <tr>
+              <td>${esc(t.date)}</td>
+              <td>${esc(t.desc)}</td>
+              <td><span class="badge grey">${esc(t.type)}</span></td>
+              <td>${t.debit ? '<span style="color:#ef4444">' + t.debit + '</span>' : '—'}</td>
+              <td>${t.credit ? '<span style="color:#10b981">' + t.credit + '</span>' : '—'}</td>
+              <td><strong>${esc(t.bal)}</strong></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+
+    <h3><i class="fas fa-upload"></i> Upload Payment Receipt</h3>
+    <div class="form-group">
+      <label>Select Receipt</label>
+      <input type="file" accept=".pdf,.jpg,.png" id="receiptUpload" />
+    </div>
+    <button class="btn-full primary" id="uploadReceiptBtn"><i class="fas fa-upload"></i> Upload Receipt</button>
+
+    <h3><i class="fas fa-info-circle"></i> Payment Instructions</h3>
+    <ul>
+      <li>Bank: <strong>ZANACO Bank</strong></li>
+      <li>Account Name: <strong>Northern Technical College</strong></li>
+      <li>Account Number: <strong>1234567890</strong></li>
+      <li>Reference: <strong>Your Student Number ${esc(appData.studentNumber || '—')}</strong></li>
+    </ul>
+  `;
+  $('#uploadReceiptBtn')?.addEventListener('click', () => {
+    toast('Receipt uploaded successfully!', 'ok');
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER: LIBRARY
+   ═══════════════════════════════════════════════════════════════ */
+function renderLibrary(){
+  const borrowed = demoData.borrowed;
+  $('#libraryContent').innerHTML = `
+    <div class="info-grid">
+      <div class="info-item"><div class="lbl">Total Books</div><div class="val">${demoData.books.length}</div></div>
+      <div class="info-item"><div class="lbl">Available</div><div class="val">${demoData.books.filter(b=>b.available).length}</div></div>
+      <div class="info-item"><div class="lbl">My Borrowed</div><div class="val">${borrowed.length}</div></div>
+      <div class="info-item"><div class="lbl">Overdue</div><div class="val" style="color:var(--red)">0</div></div>
+    </div>
+
+    <h3><i class="fas fa-search"></i> Search Catalog</h3>
+    <div class="form-group">
+      <input type="text" id="libSearch" placeholder="Search by title or author…" />
+    </div>
+
+    <h3><i class="fas fa-book"></i> Available Books</h3>
+    <div id="libBooks">${renderBookList(demoData.books)}</div>
+
+    <h3><i class="fas fa-bookmark"></i> My Borrowed Books</h3>
+    <div id="libBorrowed">${borrowed.length ? borrowed.map(b => `
+      <div class="book-card">
+        <div class="bk-icon"><i class="fas fa-book"></i></div>
+        <div class="bk-body">
+          <h4>${esc(b.title)}</h4>
+          <div class="au">${esc(b.author)}</div>
+          <div class="meta"><span><i class="fas fa-clock"></i> Due: ${esc(b.due)}</span></div>
+        </div>
+      </div>
+    `).join('') : '<div class="empty"><i class="fas fa-inbox"></i>No books borrowed</div>'}</div>
+  `;
+  $('#libSearch')?.addEventListener('input', function(){
+    const q = this.value.toLowerCase();
+    const filtered = demoData.books.filter(b =>
+      b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q));
+    $('#libBooks').innerHTML = renderBookList(filtered);
+  });
+}
+function renderBookList(books){
+  if(!books.length) return '<div class="empty"><i class="fas fa-search"></i>No books found</div>';
+  return books.map(b => `
+    <div class="book-card">
+      <div class="bk-icon"><i class="fas fa-book${b.available ? '' : '-open'}"></i></div>
+      <div class="bk-body">
+        <h4>${esc(b.title)}</h4>
+        <div class="au">${esc(b.author)}</div>
+        <div class="meta">
+          <span><i class="fas fa-barcode"></i> ${esc(b.isbn)}</span>
+          <span class="badge ${b.available ? 'green' : 'red'}">${b.available ? 'In Library' : 'Borrowed'}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER: CAREERS
+   ═══════════════════════════════════════════════════════════════ */
+function renderCareers(){
+  $('#careersContent').innerHTML = `
+    <div class="info-grid">
+      <div class="info-item"><div class="lbl">Open Positions</div><div class="val">${demoData.jobs.length}</div></div>
+      <div class="info-item"><div class="lbl">Applied</div><div class="val">0</div></div>
+      <div class="info-item"><div class="lbl">Saved</div><div class="val">0</div></div>
+    </div>
+
+    <h3><i class="fas fa-briefcase"></i> Job Openings</h3>
+    ${demoData.jobs.map((j, i) => `
+      <div class="job-card">
+        <div class="jh">
+          <div>
+            <h4>${esc(j.title)}</h4>
+            <div class="co">${esc(j.company)}</div>
+          </div>
+          <span class="badge blue">${esc(j.type)}</span>
+        </div>
+        <div class="job-meta">
+          <span><i class="fas fa-map-marker-alt"></i> ${esc(j.location)}</span>
+        </div>
+        <div class="job-desc">${esc(j.desc)}</div>
+        <div class="job-act">
+          <button class="btn-sm primary" onclick="toast('Application submitted!','ok')"><i class="fas fa-paper-plane"></i> Apply</button>
+          <button class="btn-sm ghost" onclick="toast('Job saved','info')"><i class="far fa-heart"></i> Save</button>
+        </div>
+      </div>
+    `).join('')}
+
+    <h3><i class="fas fa-users"></i> Alumni Network</h3>
+    <div class="alumni-grid">
+      ${demoData.alumni.map(a => `
+        <div class="alumni-card">
+          <div class="av">${esc(a.name.split(' ').map(n=>n[0]).join(''))}</div>
+          <div class="nm">${esc(a.name)}</div>
+          <div class="dt">${esc(a.program)} · ${esc(a.grad)}</div>
+          <div class="cmp">${esc(a.company)} · ${esc(a.position)}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER: PROFILE
+   ═══════════════════════════════════════════════════════════════ */
+function renderProfile(){
+  const p = appData.personal || {};
+  const a = appData.academic || {};
+  const photo = p.profilePhoto || '';
+
+  $('#profileContent').innerHTML = `
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="width:110px;height:110px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(135deg,var(--blue),var(--blue-bright));display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:900;color:#fff;border:4px solid #fff;box-shadow:0 8px 32px rgba(37,99,235,.3);overflow:hidden">
+        ${photo ? `<img src="${esc(photo)}" alt="Profile" style="width:100%;height:100%;object-fit:cover" />` : getInitials(appData.fullName)}
+      </div>
+      <h2 style="font-size:20px;font-weight:900;color:var(--text-primary)">${esc(appData.fullName || '—')}</h2>
+      <div style="font-size:13px;color:var(--text-muted);margin-top:4px">${esc(appData.email || '—')}</div>
+      <span class="badge blue" style="margin-top:8px"><i class="fas fa-id-card"></i> ${esc(appData.studentNumber || '—')}</span>
+    </div>
+
+    <h3><i class="fas fa-user"></i> Personal Information</h3>
+    <div class="info-grid">
+      <div class="info-item"><div class="lbl">Full Name</div><div class="val">${esc(appData.fullName || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Date of Birth</div><div class="val">${esc(p.dob || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Gender</div><div class="val">${esc(p.gender || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Nationality</div><div class="val">${esc(p.nationality || '—')}</div></div>
+      <div class="info-item"><div class="lbl">NRC / Passport</div><div class="val">${esc(p.nrc || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Phone</div><div class="val">${esc(p.phone || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Email</div><div class="val">${esc(p.email || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Address</div><div class="val">${esc(p.address || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Next of Kin</div><div class="val">${esc(p.nextOfKin || '—')}</div></div>
+    </div>
+
+    <h3><i class="fas fa-graduation-cap"></i> Academic Information</h3>
+    <div class="info-grid">
+      <div class="info-item"><div class="lbl">Student Number</div><div class="val">${esc(appData.studentNumber || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Programme</div><div class="val">${esc(appData.programme?.title || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Category</div><div class="val">${esc(appData.programme?.category || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Intake</div><div class="val">${esc(appData.programme?.intakeLabel || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Mode of Study</div><div class="val">${esc(appData.programme?.mode || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Year of Study</div><div class="val">${esc(appData.programme?.yearStudy || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Grade 12 School</div><div class="val">${esc(a.grade12School || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Examination Number</div><div class="val">${esc(a.examNumber || '—')}</div></div>
+    </div>
+
+    <h3><i class="fas fa-chart-line"></i> Academic Summary</h3>
+    <div class="info-grid">
+      <div class="info-item"><div class="lbl">Current GPA</div><div class="val">${demoData.gpa} / 4.0</div></div>
+      <div class="info-item"><div class="lbl">Credits Earned</div><div class="val">${demoData.creditsEarned} / ${demoData.creditsTotal}</div></div>
+      <div class="info-item"><div class="lbl">Subjects</div><div class="val">${demoData.courses.length}</div></div>
+      <div class="info-item"><div class="lbl">Attendance</div><div class="val">${demoData.attendance}%</div></div>
+    </div>
+
+    <h3><i class="fas fa-cog"></i> Account Actions</h3>
+    <button class="btn-full ghost" onclick="toast('Password reset email sent','ok')"><i class="fas fa-key"></i> Change Password</button>
+    <button class="btn-full primary" onclick="shareApp()"><i class="fas fa-share-alt"></i> Share App</button>
+    <button class="btn-full ghost" onclick="document.getElementById('logoutBtn').click()" style="color:var(--red);border-color:#fecaca"><i class="fas fa-sign-out-alt"></i> Log Out</button>
+  `;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RENDER: STUDENT ID
+   ═══════════════════════════════════════════════════════════════ */
+function renderStudentId(){
+  const p = appData.personal || {};
+  const photo = p.profilePhoto || '';
+  const studentNumber = appData.studentNumber || '—';
+  const name = appData.fullName || 'Student';
+  const prog = appData.programme?.title || '—';
+
+  $('#studentIdContent').innerHTML = `
+    <div class="id-card" id="idCard">
+      <div class="id-hd">
+        <img src="logo.png" alt="NORTEC" onerror="this.style.display='none'"/>
+        <div class="ttl">NORTEC<small>STUDENT ID</small></div>
+      </div>
+      <div class="id-photo">
+        ${photo ? `<img src="${esc(photo)}" alt="Photo" />` : `<i class="fas fa-user"></i>`}
+      </div>
+      <div class="id-name">${esc(name.toUpperCase())}</div>
+      <div class="id-num">${esc(studentNumber)}</div>
+      <div class="id-details">
+        <div><strong>Programme:</strong><br/>${esc(prog)}</div>
+        <div style="margin-top:6px"><strong>Valid Until:</strong> December 2026</div>
+      </div>
+      <div class="id-qr"><div id="qrcode"></div></div>
+      <div class="id-ft">
+        <span>Issued: ${fmtDate(appData.approvedAt || Date.now())}</span>
+        <span>NORTEC · Zambia</span>
+      </div>
+    </div>
+
+    <div class="id-card-actions">
+      <button class="btn-sm primary" id="downloadIdBtn"><i class="fas fa-download"></i> Download PNG</button>
+      <button class="btn-sm ghost" id="shareIdBtn"><i class="fas fa-share-alt"></i> Share</button>
+    </div>
+
+    <h3 style="margin-top:24px"><i class="fas fa-info-circle"></i> ID Card Details</h3>
+    <ul>
+      <li><strong>Student Number:</strong> ${esc(studentNumber)}</li>
+      <li><strong>Issue Date:</strong> ${fmtDate(appData.approvedAt || Date.now())}</li>
+      <li><strong>Expiry Date:</strong> 31st December 2026</li>
+      <li><strong>Status:</strong> <span class="badge green">Active</span></li>
+    </ul>
+
+    <h3><i class="fas fa-shield-alt"></i> Important Information</h3>
+    <ul>
+      <li>Keep your ID card safe at all times.</li>
+      <li>Present your ID for exams, library, and campus access.</li>
+      <li>Report any loss immediately to the admissions office.</li>
+      <li>Replacement fee: K50 for lost or damaged cards.</li>
+    </ul>
+  `;
+
+  // Generate QR
+  const qrEl = $('#qrcode');
+  if(qrEl){
+    qrEl.innerHTML = '';
+    try{
+      new QRCode(qrEl, {
+        text: `NORTEC|${studentNumber}|${name}|${prog}|2026`,
+        width: 120, height: 120,
+        colorDark: '#1e40af', colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    }catch(e){ console.warn('QR error', e); }
+  }
+
+  // Bind actions
+  $('#downloadIdBtn')?.addEventListener('click', downloadIdCard);
+  $('#shareIdBtn')?.addEventListener('click', openShareModal);
+}
+
+async function downloadIdCard(){
+  const card = $('#idCard');
+  if(!card) return;
+  try{
+    toast('Generating ID card…', 'info');
+    const canvas = await html2canvas(card, { scale: 2, useCORS: true, backgroundColor: null });
+    const link = document.createElement('a');
+    link.download = `NORTEC_ID_${appData.studentNumber || 'card'}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    toast('ID card downloaded!', 'ok');
+  }catch(e){
+    console.error(e);
+    toast('Failed to generate ID card', 'err');
+  }
+}
+
+function openShareModal(){
+  const modal = $('#shareModal');
+  modal.classList.add('open');
+  const qr = $('#shareQrcode');
+  qr.innerHTML = '';
+  try{
+    new QRCode(qr, {
+      text: `${appData.fullName} · ${appData.studentNumber} · ${appData.programme?.title}`,
+      width: 180, height: 180,
+      colorDark: '#1e40af', colorLight: '#ffffff'
+    });
+  }catch(e){}
+}
+function shareApp(){
+  const url = window.location.origin + window.location.pathname;
+  if(navigator.share){
+    navigator.share({ title: 'NORTEC Student Portal', text: 'Join NORTEC!', url }).catch(()=>{});
+  } else {
+    navigator.clipboard.writeText(url).then(()=> toast('Link copied!','ok'));
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NOTIFICATIONS
+   ═══════════════════════════════════════════════════════════════ */
+function loadNotifications(){
+  // Demo notifications — in production these would be pulled from Firebase
+  notifications = [
+    { icon: 'fa-check-circle', text: 'Your application has been approved!', time: 'Just now', read: false },
+    { icon: 'fa-calendar-check', text: 'Exam schedule for Term 2 is now available.', time: '2 hours ago', read: false },
+    { icon: 'fa-coins', text: 'Fee payment deadline: 30th June 2026.', time: '5 hours ago', read: false },
+    { icon: 'fa-graduation-cap', text: 'Graduation ceremony rescheduled to 15th July 2026.', time: '1 day ago', read: true }
+  ];
+  unreadCount = notifications.filter(n => !n.read).length;
+  renderNotifications();
+}
+
+function renderNotifications(){
+  $('#notifList').innerHTML = notifications.length
+    ? notifications.map(n => `
+      <div class="notif-it">
+        <i class="fas ${n.icon}"></i>
+        <div>
+          <div>${esc(n.text)}</div>
+          <div class="notif-time">${esc(n.time)}</div>
+        </div>
+      </div>
+    `).join('')
+    : '<div class="notif-empty">No notifications</div>';
+
+  const badge = $('#notifBadge');
+  badge.textContent = unreadCount;
+  badge.dataset.count = unreadCount;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SIDEBAR
+   ═══════════════════════════════════════════════════════════════ */
+function openSidebar(){ $('#sidebar').classList.add('open'); $('#sidebarOverlay').classList.add('active'); }
+function closeSidebar(){ $('#sidebar').classList.remove('open'); $('#sidebarOverlay').classList.remove('active'); }
+
+/* ═══════════════════════════════════════════════════════════════
+   INIT & AUTH
+   ═══════════════════════════════════════════════════════════════ */
+async function initDashboard(user){
+  currentUser = user;
+  try{
+    const snap = await db.ref(`${ROOT}/applications/${user.uid}`).get();
+    if(!snap.exists()){
+      toast('No application found. Redirecting…', 'err');
+      setTimeout(()=> window.location.replace('index.html'), 1200);
+      return;
+    }
+    appData = { uid: user.uid, ...snap.val() };
+
+    // Only approved students can view the dashboard
+    if((appData.status || '').toLowerCase() !== 'approved'){
+      toast('Your application is not approved yet.', 'err');
+      setTimeout(()=> window.location.replace('index.html'), 1200);
+      return;
+    }
+
+    // Boot UI
+    $('#appLoader').classList.add('hidden');
+    $('#appRoot').style.display = 'flex';
+    renderHome();
+    loadNotifications();
+
+    // Init default page
+    showPage('home');
+  }catch(e){
+    console.error(e);
+    toast('Failed to load dashboard: ' + e.message, 'err');
+    setTimeout(()=> window.location.replace('index.html'), 1500);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   EVENT BINDINGS
+   ═══════════════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  // Sidebar
+  $('#menuBtn').addEventListener('click', openSidebar);
+  $('#sidebarClose').addEventListener('click', closeSidebar);
+  $('#sidebarOverlay').addEventListener('click', closeSidebar);
+
+  // Sidebar nav
+  $$('.sidebar .nav-item').forEach(btn => {
+    btn.addEventListener('click', function(){
+      const page = this.dataset.page;
+      if(page){ closeSidebar(); showPage(page); }
+    });
+  });
+
+  // Bottom nav
+  $$('.bn-item').forEach(btn => {
+    btn.addEventListener('click', function(){
+      showPage(this.dataset.nav);
+    });
+  });
+
+  // Notification dropdown
+  $('#notifBtn').addEventListener('click', (e) => {
+    e.stopPropagation();
+    $('#notifDrop').classList.toggle('open');
+    notifications.forEach(n => n.read = true);
+    unreadCount = 0;
+    setTimeout(renderNotifications, 300);
+  });
+  document.addEventListener('click', (e) => {
+    if(!$('#notifDrop').contains(e.target) && !$('#notifBtn').contains(e.target)){
+      $('#notifDrop').classList.remove('open');
+    }
+  });
+  $('#clearNotifs').addEventListener('click', () => {
+    notifications.forEach(n => n.read = true);
+    unreadCount = 0;
+    renderNotifications();
+    $('#notifDrop').classList.remove('open');
+    toast('All marked as read', 'info');
+  });
+
+  // Share modal
+  $('#shareClose').addEventListener('click', () => $('#shareModal').classList.remove('open'));
+  $('#shareModal').addEventListener('click', (e) => {
+    if(e.target === $('#shareModal')) e.target.classList.remove('open');
+  });
+  $('#shareDownloadBtn').addEventListener('click', () => { downloadIdCard(); $('#shareModal').classList.remove('open'); });
+
+  // Logout
+  $('#logoutBtn').addEventListener('click', async () => {
+    if(!confirm('Log out of your account?')) return;
+    try{ await auth.signOut(); }catch(e){}
+    window.location.replace('index.html');
+  });
+
+  // ESC key closes overlays
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape'){
+      if($('#sidebar').classList.contains('open')) closeSidebar();
+      $('#notifDrop').classList.remove('open');
+      $('#shareModal').classList.remove('open');
+    }
+  });
+});
+
+/* ═══════════════════════════════════════════════════════════════
+   AUTH STATE
+   ═══════════════════════════════════════════════════════════════ */
+auth.onAuthStateChanged((user) => {
+  if(!user){
+    window.location.replace('index.html');
+    return;
+  }
+  initDashboard(user);
+});
+
+/* Expose for inline handlers */
+window.showPage = showPage;
+window.toast = toast;
+window.shareApp = shareApp;
+</script>
+</body>
+</html>
