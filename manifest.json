@@ -1,0 +1,51 @@
+{
+  "name": "NORTEC · Northern Technical College",
+  "short_name": "NORTEC",
+  "description": "Official student portal for Northern Technical College — enroll, track your application, and access your student dashboard.",
+  "start_url": "https://bufferzone-cloud.github.io/nortec/index.html",
+  "scope": "https://bufferzone-cloud.github.io/nortec/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#070b14",
+  "theme_color": "#2563eb",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["education", "productivity"],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Enroll Now",
+      "short_name": "Enroll",
+      "description": "Start a new application",
+      "url": "https://bufferzone-cloud.github.io/nortec/index.html#enroll",
+      "icons": [{ "src": "logo.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Login",
+      "short_name": "Login",
+      "description": "Sign in to your student portal",
+      "url": "https://bufferzone-cloud.github.io/nortec/index.html#loginScreen",
+      "icons": [{ "src": "logo.png", "sizes": "192x192" }]
+    }
+  ]
+}
