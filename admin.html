@@ -29,7 +29,6 @@
   .loader-spinner{width:52px;height:52px;border:4px solid rgba(255,255,255,.15);border-top-color:var(--blue-bright);border-radius:50%;animation:spin .9s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
 
-  /* LOGIN */
   #loginGate{position:fixed;inset:0;z-index:9000;background:linear-gradient(135deg,#0f172a,#1e293b);display:flex;align-items:center;justify-content:center;padding:20px}
   .login-card{background:#fff;border-radius:22px;padding:36px 30px;max-width:440px;width:100%;box-shadow:var(--shadow-lg);text-align:center}
   .login-card img{width:72px;height:72px;object-fit:contain;border-radius:16px;background:var(--blue-light);padding:8px;margin-bottom:14px}
@@ -45,7 +44,6 @@
 
   .app-root{display:flex;height:100dvh;width:100%;overflow:hidden;position:relative;background:#f1f5f9}
 
-  /* SIDEBAR */
   .sidebar{width:var(--sidebar-w);height:100dvh;background:#0f172a;color:#cbd5e1;display:flex;flex-direction:column;overflow:hidden;flex-shrink:0;transition:transform .3s;border-right:1px solid #1e293b;z-index:300}
   .sidebar-head{padding:18px 20px;border-bottom:1px solid #1e293b;display:flex;align-items:center;gap:12px;flex-shrink:0}
   .sidebar-head img{width:38px;height:38px;object-fit:contain;border-radius:9px;background:#1e293b;padding:4px}
@@ -76,7 +74,6 @@
   .sb-logout{width:100%;padding:10px;border-radius:9px;border:none;background:#1e293b;color:#ef4444;font-weight:700;font-size:12px;cursor:pointer;font-family:inherit;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px}
   .sb-logout:hover{background:#7f1d1d;color:#fff}
 
-  /* MAIN */
   .main-area{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
   .top-bar{background:#fff;border-bottom:1px solid var(--border);padding:12px 22px;display:flex;align-items:center;gap:14px;flex-shrink:0;min-height:64px;box-shadow:0 2px 8px rgba(0,0,0,.02)}
   .menu-toggle{display:none;background:none;border:none;font-size:22px;color:var(--text);cursor:pointer}
@@ -92,10 +89,6 @@
   .content{flex:1;overflow-y:auto;padding:22px;background:#f1f5f9}
   .content::-webkit-scrollbar{width:6px}
   .content::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:20px}
-
-  .page{display:none;animation:fadeIn .3s ease}
-  .page.active{display:block}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
   .card{background:#fff;border-radius:14px;padding:20px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.03);margin-bottom:16px}
   .card h3{font-size:15px;font-weight:800;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:8px;padding-bottom:10px;border-bottom:2px solid var(--soft);flex-wrap:wrap}
@@ -142,7 +135,6 @@
   td{padding:10px 12px;border-bottom:1px solid var(--border);color:#334155;vertical-align:middle}
   tr:last-child td{border-bottom:none}
   tbody tr:hover{background:var(--blue-light)}
-  tbody tr.clickable{cursor:pointer}
 
   .badge{display:inline-block;padding:3px 11px;border-radius:20px;font-size:10.5px;font-weight:800;letter-spacing:.3px;text-transform:uppercase;white-space:nowrap}
   .badge.green{background:#d1fae5;color:#065f46}
@@ -198,7 +190,7 @@
   .feed-item .fttl{font-size:13px;font-weight:700;color:var(--text);line-height:1.3}
   .feed-item .fmeta{font-size:11.5px;color:var(--muted);margin-top:3px}
 
-  /* ═══ TEVETA FORM ═══ */
+  /* ═══ TEVETA FORM — IDENTICAL TO STUDENT PORTAL ═══ */
   .teveta-form-container{font-family:'Inter',sans-serif;background:#fff;padding:26px 24px;border:1px solid var(--border);border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
   .teveta-form-container .form-header{text-align:center;margin-bottom:22px;padding-bottom:14px;border-bottom:2px solid #0f172a}
   .teveta-form-container .form-header h2{font-size:19px;font-weight:900;color:var(--text);text-transform:uppercase;letter-spacing:.5px;margin-top:8px}
@@ -230,7 +222,7 @@
   .teveta-form-container .subject-row .subject-line{flex:1;border-bottom:1.5px dotted var(--text);height:1px;margin-left:6px;min-width:60px}
   .teveta-form-container .subject-row .subject-line.readonly{border-bottom-color:#94a3b8}
   .teveta-form-container .btn-submit-teveta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:22px;padding:14px 32px;background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff;border:none;border-radius:50px;font-size:15px;font-weight:700;cursor:pointer;transition:.2s;font-family:'Inter',sans-serif;box-shadow:0 8px 26px rgba(37,99,235,.35)}
-  .teveta-form-container .btn-submit-teveta:hover{transform:translateY(-2px)}
+  .teveta-form-container .btn-submit-teveta:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(37,99,235,.45)}
   .teveta-form-container .btn-submit-teveta:disabled{opacity:.6;cursor:not-allowed;transform:none!important}
   .teveta-signature-block{margin-top:24px;padding-top:18px;border-top:2px dashed var(--border)}
   .teveta-signature-block .sig-row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:12px}
@@ -260,7 +252,6 @@
   <p style="color:#94a3b8;font-weight:600;font-size:13px">Loading Admin Console…</p>
 </div>
 
-<!-- LOGIN -->
 <div id="loginGate" style="display:none">
   <div class="login-card">
     <img src="logo.png" alt="NORTEC" onerror="this.style.display='none'"/>
@@ -273,7 +264,6 @@
   </div>
 </div>
 
-<!-- APP -->
 <div class="app-root" id="appRoot" style="display:none">
   <div class="sidebar-overlay" id="sidebarOverlay" style="position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:299;opacity:0;visibility:hidden;transition:.3s"></div>
 
@@ -317,7 +307,6 @@
   </div>
 </div>
 
-<!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-box" id="modalBox">
     <div class="modal-hd">
@@ -349,8 +338,6 @@ const auth = firebase.auth();
 const db   = firebase.database();
 const ROOT = 'nortec';
 
-/* Secondary app — lets a Super Admin create staff Auth accounts
-   WITHOUT being signed out of their own session. */
 let staffApp;
 try { staffApp = firebase.app('staffCreator'); }
 catch(e){ staffApp = firebase.initializeApp(firebaseConfig, 'staffCreator'); }
@@ -564,6 +551,7 @@ function capitalize(s){ s = String(s||''); return s.charAt(0).toUpperCase()+s.sl
 function getInitials(name){ if(!name) return '?'; const p = String(name).trim().split(/\s+/); return ((p[0]?.[0]||'')+(p[1]?.[0]||'')).toUpperCase() || '?'; }
 function emptyState(msg, icon='fa-inbox'){ return `<div class="empty"><i class="fas ${icon}"></i>${esc(msg)}</div>`; }
 function emailKey(email){ return String(email||'').toLowerCase().replace(/[.@]/g,'_'); }
+function pad(s, n){ s = String(s == null ? '' : s); return s.length >= n ? s.slice(0,n) : s + ' '.repeat(n - s.length); }
 
 function toast(msg, type='info'){
   const el = document.createElement('div');
@@ -589,7 +577,6 @@ function can(module){
   return currentRole.modules.includes(module);
 }
 
-/* Departments this staff member may act on */
 function myDepartments(){
   if(currentStaff.role === 'Super Admin') return DEPARTMENTS.map(d => d.id);
   const out = [];
@@ -601,7 +588,6 @@ function myDepartments(){
   return out;
 }
 
-/* Is a student cleared for a department? Handles both new (id) and legacy (name) keys */
 function isClearedFor(app, deptId){
   const dept = DEPT_BY_ID[deptId];
   const c = (app && app.clearance) || {};
@@ -623,7 +609,7 @@ async function logAudit(action, detail, target=''){
       adminRole:  currentStaff.role || '',
       timestamp:  Date.now()
     });
-  }catch(e){ /* non-fatal */ }
+  }catch(e){}
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -644,10 +630,8 @@ auth.onAuthStateChanged(async user => {
   try{
     const uid = user.uid;
 
-    /* 1 — direct UID record */
     let snap = await db.ref(`${ROOT}/staff/${uid}`).get();
 
-    /* 2 — fall back to the e-mail index (invited-but-never-signed-in staff) */
     if(!snap.exists()){
       const idx = await db.ref(`${ROOT}/staffEmailIndex/${emailKey(user.email)}`).get();
       if(idx.exists()){
@@ -657,7 +641,6 @@ auth.onAuthStateChanged(async user => {
       }
     }
 
-    /* 3 — first-run bootstrap: if NO staff exist at all, first login becomes Super Admin */
     if(!snap.exists()){
       const all = await db.ref(`${ROOT}/staff`).get();
       if(!all.exists() || Object.keys(all.val()||{}).length === 0){
@@ -874,7 +857,6 @@ function bindRealtime(){
   listen('programmes',          'programmes');
   listen('finance',             'finance');
 
-  /* settings is a plain object — do NOT convert to array */
   db.ref(`${ROOT}/settings`).on('value', s => {
     state.settings = s.val() || {};
     if(activePage === 'settings') renderActive();
@@ -904,14 +886,13 @@ function updateBadges(){
    ═══════════════════════════════════════════════════════════════ */
 const PAGE_RENDERERS = {};
 
-/* ───── DASHBOARD (role aware) ───── */
+/* ───── DASHBOARD ───── */
 PAGE_RENDERERS.dashboard = function(){
   const A  = state.applications || [];
   const C  = state.complaints   || [];
   const AP = state.appeals      || [];
   const T  = state.teveta       || [];
   const P  = state.transactions || [];
-
   const depts = myDepartments();
 
   const welcome = `
@@ -932,7 +913,6 @@ PAGE_RENDERERS.dashboard = function(){
       </div>
     </div>`;
 
-  /* Role-specific stat cards */
   let cards = '';
   if(can('students')){
     const students = A.filter(a => (a.status||'').toLowerCase()==='approved').length;
@@ -972,16 +952,13 @@ PAGE_RENDERERS.dashboard = function(){
     cards += card('amber','fa-bed','Room Requests', req, 'Awaiting allocation', 'accommodation');
   }
 
-  /* Department clearance panel — every department gets a CLEAR button */
   let deptPanel = '';
   if(can('clearance') && depts.length){
     deptPanel = renderDepartmentPanel(depts);
   }
 
-  /* Pending work quick list for this role */
   const quick = renderQuickWork();
 
-  /* Recent activity */
   const feed = (state.audit||[]).slice().sort((a,b) => (b.timestamp||0)-(a.timestamp||0)).slice(0,8);
   const activity = `
     <div class="card">
@@ -1025,7 +1002,6 @@ function card(color, icon, label, val, sub, target){
     </div>`;
 }
 
-/* Department clearance panel with a CLEAR button per student per department */
 function renderDepartmentPanel(deptIds){
   const approved = (state.applications||[]).filter(a => (a.status||'').toLowerCase()==='approved');
   const depts = deptIds.map(id => DEPT_BY_ID[id]).filter(Boolean);
@@ -1069,7 +1045,6 @@ function renderDepartmentPanel(deptIds){
   return html;
 }
 
-/* Pending work relevant to this role */
 function renderQuickWork(){
   const items = [];
 
@@ -2046,7 +2021,6 @@ PAGE_RENDERERS.clearance = function(){
   $('#mainContent').innerHTML = html;
 };
 
-/* Clear a student for a department */
 window.clearStudentDept = async function(uid, deptId){
   const dept = DEPT_BY_ID[deptId];
   if(!dept) return toast('Department not found','err');
@@ -2303,7 +2277,7 @@ window.generateTranscript = async function(uid){
 };
 
 /* ═══════════════════════════════════════════════════════════════
-   TEVETA — form identical to the student portal
+   TEVETA — EXACT MATCH WITH STUDENT PORTAL
    ═══════════════════════════════════════════════════════════════ */
 const TEVETA_SUBJECTS = [
   { code:'41.1', label:'Digital Electronics' },
@@ -2333,7 +2307,7 @@ const TEVETA_STUDENT_CSS = `
   .field-input[readonly]{border-bottom:1.5px solid #94a3b8;color:#475569}
   .box-group{display:flex;gap:5px;align-items:center;flex-wrap:wrap;flex:1}
   .box-input{border:1.5px solid #0f172a;padding:5px 4px;font-size:13px;background:#fff;width:34px;text-align:center;font-weight:700;border-radius:4px}
-  .box-input.readonly{background:#f1f5f9;color:#64748b;border-color:#94a3b8}
+  .box-input:disabled,.box-input.readonly{background:#f1f5f9;color:#64748b;border-color:#94a3b8}
   .box-sep{font-size:14px;color:#64748b;font-weight:700;margin:0 2px}
   .radio-group{display:flex;align-items:center;gap:16px;flex-wrap:wrap;flex:1}
   .radio-opt{display:flex;align-items:center;gap:5px;font-size:13px;font-weight:500}
@@ -2354,10 +2328,7 @@ const TEVETA_STUDENT_CSS = `
   @media (max-width:560px){.field-label{min-width:auto;flex:1 1 100%}.box-input{width:30px;padding:4px 2px;font-size:12px}}
 `;
 
-function pad(s, n){ s = String(s == null ? '' : s); return s.length >= n ? s.slice(0,n) : s + ' '.repeat(n - s.length); }
-
 function renderTevetaFormHTML(t){
-  /* Exam series — accepts "MA2026/2026" or similar */
   const exRaw   = String(t.examSeries || '').replace(/\s/g,'');
   const exParts = exRaw.split('/');
   const left    = pad(exParts[0] || '', 4);
@@ -2366,18 +2337,12 @@ function renderTevetaFormHTML(t){
   const exSeriesY1 = left.slice(2,4);
   const exSeriesY2 = exParts[1] || '';
 
-  /* TEVETA exam number — 10 boxes */
   const noDigits = pad(t.tevetaExamNo || '', 10).split('');
 
-  /* Year of enrolment — 4 boxes split as YY / YY */
   const enrolRaw = String(t.yearEnrolment || '').replace(/\D/g,'');
   const e1 = enrolRaw.slice(0,2), e2 = enrolRaw.slice(2,4), e3 = enrolRaw.slice(4,6), e4 = enrolRaw.slice(6,8);
 
-  const selectedSubjects = Array.isArray(t.subjects) ? t.subjects
-    : (t.subjects && typeof t.subjects === 'object') ? Object.keys(t.subjects).filter(k => t.subjects[k])
-    : TEVETA_SUBJECTS.map(s => s.code);
-
-  const mode = t.modeOfStudy || 'Full-time';
+  const mode = t.mode || t.modeOfStudy || 'Full-time';
   const year = t.yearStudy || 'Second';
 
   const isApproved  = (t.status||'').toLowerCase() === 'approved';
@@ -2418,11 +2383,11 @@ function renderTevetaFormHTML(t){
         <span class="field-number">2.</span>
         <span class="field-label">EXAMINATION SERIES:</span>
         <div class="box-group">
-          <input type="text" class="box-input readonly" value="${esc(exSeriesM)}" readonly />
-          <input type="text" class="box-input readonly" value="${esc(exSeriesA)}" readonly />
-          <input type="text" class="box-input readonly" value="${esc(exSeriesY1)}" readonly />
+          <input type="text" class="box-input" maxlength="1" value="${esc(exSeriesM)}" disabled />
+          <input type="text" class="box-input" maxlength="1" value="${esc(exSeriesA)}" disabled />
+          <input type="text" class="box-input" maxlength="2" value="${esc(exSeriesY1)}" disabled />
           <span class="box-sep">/</span>
-          <input type="text" class="box-input readonly" value="${esc(exSeriesY2)}" readonly />
+          <input type="text" class="box-input" maxlength="2" value="${esc(exSeriesY2)}" disabled />
         </div>
       </div>
 
@@ -2430,7 +2395,7 @@ function renderTevetaFormHTML(t){
         <span class="field-number">3.</span>
         <span class="field-label">TEVETA EXAM NO:</span>
         <div class="box-group">
-          ${noDigits.map(d => `<input type="text" class="box-input readonly" value="${esc(d.trim())}" readonly />`).join('')}
+          ${noDigits.map(d => `<input type="text" class="box-input" maxlength="1" value="${esc(d.trim())}" disabled />`).join('')}
         </div>
       </div>
 
@@ -2462,11 +2427,11 @@ function renderTevetaFormHTML(t){
         <span class="field-number">8.</span>
         <span class="field-label">YEAR OF ENROLMENT:</span>
         <div class="box-group">
-          <input type="text" class="box-input readonly" value="${esc(e1)}" readonly />
-          <input type="text" class="box-input readonly" value="${esc(e2)}" readonly />
+          <input type="text" class="box-input" maxlength="2" value="${esc(e1)}" disabled />
+          <input type="text" class="box-input" maxlength="2" value="${esc(e2)}" disabled />
           <span class="box-sep">/</span>
-          <input type="text" class="box-input readonly" value="${esc(e3)}" readonly />
-          <input type="text" class="box-input readonly" value="${esc(e4)}" readonly />
+          <input type="text" class="box-input" maxlength="2" value="${esc(e3)}" disabled />
+          <input type="text" class="box-input" maxlength="2" value="${esc(e4)}" disabled />
         </div>
       </div>
 
@@ -2498,7 +2463,7 @@ function renderTevetaFormHTML(t){
         <div class="subjects-list">
           ${TEVETA_SUBJECTS.map((s, i) => `
             <div class="subject-row">
-              <input type="checkbox" ${selectedSubjects.includes(s.code) ? 'checked' : ''} disabled />
+              <input type="checkbox" checked disabled />
               <span class="subject-text">(${String.fromCharCode(105 + i)}) ${esc(s.code)} ${esc(s.label)}</span>
               <span class="subject-line"></span>
             </div>`).join('')}
@@ -2507,13 +2472,9 @@ function renderTevetaFormHTML(t){
         </div>
       </div>
 
-      ${t.candidateSignatureNote ? `<div style="font-size:12px;color:var(--muted);margin-top:10px">${esc(t.candidateSignatureNote)}</div>` : ''}
-
       <div class="teveta-signature-block">
-        ${isApproved ? `<div style="font-size:12px;color:var(--muted);margin-bottom:6px"><i class="fas fa-check-circle" style="color:#10b981"></i> Approved by ${esc(t.approvedBy||'')} on ${fmtDateTime(t.approvedAt)}</div>` : ''}
-        <div class="sig-row">
-          <div class="sig-col"><div class="sig-line"></div><div class="sig-label">Candidate Signature</div></div>
-          <div class="sig-col"><div class="sig-line"></div><div class="sig-label">Date</div></div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:6px">
+          <i class="fas fa-lock"></i> This form has been submitted and cannot be edited.
         </div>
         <div class="sig-row">
           <div class="sig-col"><div class="sig-line"></div><div class="sig-label">Examination Officer Signature</div></div>
@@ -3064,7 +3025,7 @@ PAGE_RENDERERS.documents = function(){
 };
 
 /* ═══════════════════════════════════════════════════════════════
-   STAFF ACCOUNTS — creates real Firebase Auth users with a unique email
+   STAFF ACCOUNTS
    ═══════════════════════════════════════════════════════════════ */
 PAGE_RENDERERS.staff = function(){
   const list = state.staff||[];
@@ -3188,14 +3149,12 @@ window.createStaffAccount = async function(){
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating…';
 
   try{
-    /* Check for duplicate email in our own index */
     const dup = await db.ref(`${ROOT}/staffEmailIndex/${emailKey(email)}`).get();
     if(dup.exists()){
       btn.disabled = false; btn.innerHTML = '<i class="fas fa-user-plus"></i> Create Login';
       return toast('That email is already used by another staff member','err');
     }
 
-    /* Create the Auth user on the SECONDARY app — admin stays signed in */
     const cred = await staffAuth.createUserWithEmailAndPassword(email, pass);
     const uid  = cred.user.uid;
 
