@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>NORTEC · Login & Enroll</title>
+<link rel="icon" href="logo.png" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.13.1/cloudinary-core.min.js"></script>
+<script src="https://upload-widget.cloudinary.com/global/all.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',-apple-system,sans-serif;-webkit-tap-highlight-color:transparent}
+  :root{
+    --bg:#0a0e17; --bg2:#f1f5f9; --card:#ffffff; --text:#0f172a; --muted:#64748b;
+    --border:#e2e8f0; --green:#00c853; --green-dark:#009e3d; --blue:#2979ff;
+    --blue-dark:#0d47a1; --red:#ef4444; --amber:#f59e0b;
+    --shadow:0 8px 32px rgba(0,0,0,.08); --shadow-lg:0 20px 60px rgba(0,0,0,.15);
+    --radius:18px; --radius-lg:26px;
+  }
+  html,body{width:100%;height:100%;background:var(--bg);color:var(--text);overflow-x:hidden}
+  body{font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+
+  /* ── BG ── */
+  .bg-layer{position:fixed;inset:0;background-image:url('home.webp');background-size:cover;background-position:center;z-index:0;animation:zoomLoop 14s ease-in-out infinite alternate}
+  .bg-layer::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,.55) 60%,rgba(0,0,0,.75) 100%);backdrop-filter:blur(2px)}
+  @keyframes zoomLoop{0%{transform:scale(1)}50%{transform:scale(1.12)}100%{transform:scale(1)}}
+
+  /* ── SCREENS ── */
+  .screen{position:fixed;inset:0;display:none;flex-direction:column;overflow-y:auto;z-index:1;-webkit-overflow-scrolling:touch}
+  .screen.active{display:flex}
+  .screen::-webkit-scrollbar{width:0}
+
+  /* ── LOADER ── */
+  #appLoader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .4s}
+  #appLoader.hidden{opacity:0;pointer-events:none}
+  .loader-spinner{width:52px;height:52px;border:4px solid rgba(255,255,255,.15);border-top-color:var(--green);border-radius:50%;animation:spin .9s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* ── LANDING ── */
+  #landing{align-items:center;justify-content:center;padding:36px 22px;text-align:center;gap:0}
+  .logo-wrap{width:104px;height:104px;border-radius:24px;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);padding:12px;box-shadow:0 20px 60px rgba(0,0,0,.35);margin-bottom:22px;display:flex;align-items:center;justify-content:center;animation:pop .6s cubic-bezier(.34,1.56,.64,1)}
+  .logo-wrap img{width:100%;height:100%;object-fit:contain}
+  @keyframes pop{from{opacity:0;transform:scale(.85) translateY(-12px)}to{opacity:1;transform:none}}
+  #landing h1{font-size:clamp(20px,5vw,28px);font-weight:900;color:#fff;line-height:1.25;text-shadow:0 4px 24px rgba(0,0,0,.5);letter-spacing:.2px;margin-bottom:8px;max-width:520px}
+  #landing h1 span{color:#6cffa0}
+  #landing .sub{font-size:11px;font-weight:500;color:rgba(255,255,255,.6);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:36px}
+  .btn-group{width:100%;max-width:340px;display:flex;flex-direction:column;gap:14px}
+  .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;padding:16px 24px;border:none;border-radius:60px;font-family:inherit;font-size:16px;font-weight:700;color:#fff;cursor:pointer;transition:all .28s cubic-bezier(.22,1,.36,1);box-shadow:0 8px 32px rgba(0,0,0,.25);position:relative;overflow:hidden;user-select:none}
+  .btn::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.15) 0%,transparent 55%);pointer-events:none}
+  .btn:active{transform:scale(.96)}
+  .btn:hover{transform:translateY(-2px)}
+  .btn i{font-size:17px}
+  .btn-enroll{background:linear-gradient(135deg,#00c853,#009e3d);box-shadow:0 10px 34px rgba(0,200,83,.4)}
+  .btn-login{background:linear-gradient(135deg,#2979ff,#0d47a1);box-shadow:0 10px 34px rgba(41,121,255,.4)}
+  .btn-primary{background:linear-gradient(135deg,#00c853,#009e3d);box-shadow:0 8px 26px rgba(0,200,83,.35)}
+  .btn-outline{background:transparent;border:1.5px solid rgba(255,255,255,.25);color:#fff;box-shadow:none}
+  .btn-outline:hover{background:rgba(255,255,255,.08)}
+  .btn-ghost{background:rgba(148,163,184,.15);color:var(--text);box-shadow:none}
+  .btn-ghost:hover{background:rgba(148,163,184,.25)}
+  .btn-danger{background:linear-gradient(135deg,#ef4444,#b91c1c);box-shadow:0 8px 26px rgba(239,68,68,.35)}
+  .btn:disabled{opacity:.55;cursor:not-allowed;transform:none!important}
+  .footer-note{margin-top:26px;font-size:11px;color:rgba(255,255,255,.28);letter-spacing:.5px}
+
+  /* ── CARD ── */
+  .container{width:100%;max-width:640px;margin:auto;padding:28px 22px}
+  .card{background:var(--card);border-radius:var(--radius-lg);padding:26px 22px;box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.4)}
+  .card-head{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+  .card-head img{width:48px;height:48px;border-radius:12px;background:#f8fafc;padding:5px;border:1px solid var(--border)}
+  .card-head h2{font-size:18px;font-weight:800;color:var(--text);line-height:1.2}
+  .card-head p{font-size:12px;color:var(--muted);margin-top:2px}
+
+  .back-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:40px;color:#fff;font-size:13px;font-weight:600;padding:9px 18px;cursor:pointer;margin-bottom:16px;transition:all .2s;font-family:inherit}
+  .back-btn:hover{background:rgba(255,255,255,.2);transform:translateX(-3px)}
+
+  /* ── FORM ── */
+  .form-group{margin-bottom:14px}
+  .form-group label{display:block;font-size:12.5px;font-weight:700;color:#334155;margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+  .form-group label .req{color:var(--red)}
+  .form-group input,.form-group select,.form-group textarea{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:12px;font-family:inherit;font-size:14px;background:#f8fafc;color:var(--text);transition:all .2s;outline:none}
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--green);background:#fff;box-shadow:0 0 0 3px rgba(0,200,83,.1)}
+  .form-group textarea{resize:vertical;min-height:80px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:520px){.row{grid-template-columns:1fr}}
+
+  /* ── PASSWORD ── */
+  .pw-wrap{position:relative}
+  .pw-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;padding:6px;font-size:15px;border-radius:50%;transition:.2s}
+  .pw-toggle:hover{background:#e2e8f0;color:var(--text)}
+
+  /* ── STEP PROGRESS ── */
+  .stepper{display:flex;justify-content:center;gap:4px;margin-bottom:22px;flex-wrap:wrap}
+  .stepper .step{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:#94a3b8;flex:1;min-width:0}
+  .stepper .step:not(:last-child)::after{content:'';flex:1;height:2px;background:#e2e8f0;margin-left:6px;border-radius:2px}
+  .stepper .step .dot{width:26px;height:26px;border-radius:50%;background:#e2e8f0;color:#64748b;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;transition:.3s}
+  .stepper .step.active .dot{background:var(--green);color:#fff;box-shadow:0 0 0 4px rgba(0,200,83,.15)}
+  .stepper .step.done .dot{background:var(--green);color:#fff}
+  .stepper .step.done .dot::after{content:'✓'}
+  .stepper .step.done .dot span{display:none}
+  .stepper .step .label{display:none}
+  @media(min-width:520px){.stepper .step .label{display:inline}}
+  .step-panel{display:none;animation:slideIn .35s ease}
+  .step-panel.active{display:block}
+  @keyframes slideIn{from{opacity:0;transform:translateX(10px)}to{opacity:1;transform:none}}
+  .step-title{font-size:16px;font-weight:800;color:var(--text);margin-bottom:4px}
+  .step-hint{font-size:12.5px;color:var(--muted);margin-bottom:18px;line-height:1.5}
+
+  /* ── UPLOAD BOX ── */
+  .upload-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(min-width:520px){.upload-grid{grid-template-columns:repeat(3,1fr)}}
+  .upload-box{position:relative;aspect-ratio:1/1;background:#f8fafc;border:2px dashed #cbd5e1;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px;cursor:pointer;transition:all .22s;overflow:hidden}
+  .upload-box:hover{border-color:var(--green);background:#f0fdf4}
+  .upload-box.filled{border-style:solid;border-color:var(--green);background:#f0fdf4}
+  .upload-box .icon{font-size:22px;color:#94a3b8;margin-bottom:6px;transition:.2s}
+  .upload-box.filled .icon{color:var(--green)}
+  .upload-box .lbl{font-size:10.5px;font-weight:700;color:#475569;line-height:1.25;word-break:break-word}
+  .upload-box .badge{position:absolute;top:-6px;right:-6px;font-size:8px;font-weight:800;padding:3px 8px;border-radius:20px;color:#fff;background:var(--red);text-transform:uppercase;letter-spacing:.5px}
+  .upload-box .badge.optional{background:#94a3b8}
+  .upload-box img.preview{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;border-radius:12px}
+  .upload-box .check{position:absolute;top:6px;left:6px;width:24px;height:24px;border-radius:50%;background:var(--green);color:#fff;display:none;align-items:center;justify-content:center;font-size:12px;z-index:2}
+  .upload-box.filled .check{display:flex}
+
+  /* ── DECLARATION ── */
+  .declare-row{display:flex;align-items:flex-start;gap:10px;padding:14px;background:#f8fafc;border-radius:12px;border:1px solid var(--border);margin-bottom:14px}
+  .declare-row input[type="checkbox"]{width:18px;height:18px;accent-color:var(--green);margin-top:2px;flex-shrink:0;cursor:pointer}
+  .declare-row label{font-size:13px;color:var(--text);font-weight:500;line-height:1.5;cursor:pointer}
+  .declare-row strong{color:var(--green-dark)}
+
+  /* ── NAV ── */
+  .form-nav{display:flex;justify-content:space-between;gap:12px;margin-top:22px;padding-top:18px;border-top:1px solid var(--border);flex-wrap:wrap}
+  .form-nav .btn{min-height:48px;font-size:14px;flex:1;max-width:180px}
+
+  /* ── STATUS ── */
+  .status-card{text-align:center}
+  .status-icon{width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:38px;margin:0 auto 18px}
+  .status-icon.pending{background:#fff7ed;color:var(--amber)}
+  .status-icon.approved{background:#f0fdf4;color:var(--green)}
+  .status-icon.rejected{background:#fef2f2;color:var(--red)}
+  .status-card h2{font-size:22px;font-weight:800;margin-bottom:8px}
+  .status-card p{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+  .status-pill{display:inline-block;padding:6px 18px;border-radius:30px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;margin-bottom:18px}
+  .status-pill.pending{background:#fef3c7;color:#92400e}
+  .status-pill.approved{background:#d1fae5;color:#065f46}
+  .status-pill.rejected{background:#fee2e2;color:#991b1b}
+  .student-number{background:linear-gradient(135deg,#00c853,#009e3d);color:#fff;padding:20px;border-radius:18px;margin:14px 0;box-shadow:0 10px 34px rgba(0,200,83,.3)}
+  .student-number .lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;opacity:.85}
+  .student-number .val{font-size:26px;font-weight:900;letter-spacing:2px;margin-top:6px;font-variant-numeric:tabular-nums}
+  .info-list{background:#f8fafc;border-radius:14px;padding:16px;text-align:left;margin:14px 0;font-size:13px}
+  .info-list .row-i{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);gap:10px}
+  .info-list .row-i:last-child{border-bottom:none}
+  .info-list .row-i .k{color:var(--muted);font-weight:500;flex-shrink:0}
+  .info-list .row-i .v{font-weight:600;text-align:right;word-break:break-word}
+
+  /* ── TOAST ── */
+  #toast{position:fixed;top:20px;right:20px;z-index:99999;display:flex;flex-direction:column;gap:10px;max-width:340px}
+  .toast{padding:13px 18px;border-radius:14px;font-size:13px;font-weight:600;color:#fff;box-shadow:0 12px 34px rgba(0,0,0,.25);display:flex;align-items:center;gap:10px;animation:toastIn .3s ease}
+  @keyframes toastIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
+  .toast.ok{background:linear-gradient(135deg,#10b981,#059669)}
+  .toast.err{background:linear-gradient(135deg,#ef4444,#b91c1c)}
+  .toast.info{background:linear-gradient(135deg,#3b82f6,#2563eb)}
+
+  .link-row{text-align:center;font-size:13px;color:var(--muted);margin-top:18px}
+  .link-row a{color:var(--green-dark);font-weight:700;text-decoration:none;cursor:pointer}
+  .link-row a:hover{text-decoration:underline}
+
+  .checkbox-row{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin:8px 0 14px;cursor:pointer}
+  .checkbox-row input{width:16px;height:16px;accent-color:var(--green);cursor:pointer}
+
+  .msg-box{padding:12px 14px;border-radius:12px;font-size:13px;line-height:1.5;margin-bottom:14px;display:none}
+  .msg-box.err{background:#fef2f2;color:#991b1b;border-left:3px solid var(--red);display:block}
+  .msg-box.ok{background:#f0fdf4;color:#065f46;border-left:3px solid var(--green);display:block}
+
+  @supports(padding:env(safe-area-inset-top)){
+    .container{padding-top:calc(28px + env(safe-area-inset-top))}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div id="toast"></div>
+
+<!-- LOADER -->
+<div id="appLoader">
+  <div class="loader-spinner"></div>
+  <p style="color:#94a3b8;font-weight:600;font-size:13px">Loading NORTEC…</p>
+</div>
+
+<!-- ══════════════ LANDING ══════════════ -->
+<section class="screen active" id="landing">
+  <div class="logo-wrap"><img src="logo.png" alt="NORTEC Logo" onerror="this.src='https://via.placeholder.com/100/00c853/ffffff?text=NTC'" /></div>
+  <h1>WELCOME TO<br/><span>NORTHERN</span> TECHNICAL COLLEGE</h1>
+  <div class="sub">Excellence in Technical Education</div>
+  <div class="btn-group">
+    <button class="btn btn-enroll" id="btnEnroll"><i class="fas fa-graduation-cap"></i> Enroll Now</button>
+    <button class="btn btn-login" id="btnLogin"><i class="fas fa-lock"></i> Login</button>
+  </div>
+  <div class="footer-note">© 2026 Northern Technical College · Lusaka, Zambia</div>
+</section>
+
+<!-- ══════════════ ENROLL ══════════════ -->
+<section class="screen" id="enroll">
+  <div class="container">
+    <button class="back-btn" id="enrollBack"><i class="fas fa-arrow-left"></i> Back</button>
+    <div class="card">
+      <div class="card-head">
+        <img src="logo.png" alt="NORTEC" onerror="this.style.display='none'"/>
+        <div>
+          <h2>Application Form</h2>
+          <p>Fill in your details to apply</p>
+        </div>
+      </div>
+
+      <div class="stepper" id="stepper"></div>
+
+      <form id="enrollForm" novalidate>
+
+        <!-- STEP 1 -->
+        <div class="step-panel active" data-step="1">
+          <div class="step-title">Personal Details</div>
+          <div class="step-hint">Tell us a bit about yourself. Your profile photo is required.</div>
+
+          <div class="form-group">
+            <label>Profile Picture <span class="req">*</span></label>
+            <div class="upload-grid" style="grid-template-columns:1fr">
+              <div class="upload-box" data-upload="profilePhoto" data-required="true" style="aspect-ratio:auto;padding:14px;min-height:96px">
+                <span class="badge">Required</span>
+                <div class="check"><i class="fas fa-check"></i></div>
+                <i class="fas fa-camera icon"></i>
+                <div class="lbl">Tap to upload profile photo</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group"><label>Full Name <span class="req">*</span></label><input type="text" name="fullName" required placeholder="e.g. Jubel Mobela"/></div>
+          <div class="row">
+            <div class="form-group"><label>Date of Birth <span class="req">*</span></label><input type="date" name="dob" required/></div>
+            <div class="form-group"><label>Gender <span class="req">*</span></label>
+              <select name="gender" required><option value="">Select…</option><option>Male</option><option>Female</option><option>Other</option></select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group"><label>Nationality <span class="req">*</span></label><input type="text" name="nationality" required value="Zambian"/></div>
+            <div class="form-group"><label>NRC / Passport No. <span class="req">*</span></label><input type="text" name="nrc" required placeholder="123456-78-9"/></div>
+          </div>
+          <div class="row">
+            <div class="form-group"><label>Phone Number <span class="req">*</span></label><input type="tel" name="phone" required placeholder="+260 97 123 4567"/></div>
+            <div class="form-group"><label>Email Address <span class="req">*</span></label><input type="email" name="email" required placeholder="you@example.com"/></div>
+          </div>
+          <div class="form-group"><label>Physical Address <span class="req">*</span></label><input type="text" name="address" required placeholder="Street, City"/></div>
+          <div class="form-group"><label>Next of Kin / Emergency Contact <span class="req">*</span></label><input type="text" name="nextOfKin" required placeholder="Name and phone"/></div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="step-panel" data-step="2">
+          <div class="step-title">Academic Background</div>
+          <div class="step-hint">Provide your education history and upload supporting documents.</div>
+
+          <div class="row">
+            <div class="form-group"><label>Previous School / College</label><input type="text" name="previousSchool" placeholder="Optional"/></div>
+            <div class="form-group"><label>Grade 12 School <span class="req">*</span></label><input type="text" name="grade12School" required/></div>
+          </div>
+          <div class="row">
+            <div class="form-group"><label>Year of Completion <span class="req">*</span></label><input type="number" name="yearCompleted" required min="1990" max="2030" placeholder="2024"/></div>
+            <div class="form-group"><label>Examination Number <span class="req">*</span></label><input type="text" name="examNumber" required/></div>
+          </div>
+          <div class="form-group"><label>Subjects & Grades <span class="req">*</span></label>
+            <textarea name="subjects" required placeholder="Mathematics – A&#10;English – B&#10;Physics – A&#10;…"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Supporting Documents</label>
+            <div class="upload-grid">
+              <div class="upload-box" data-upload="nrcDoc" data-required="true">
+                <span class="badge">Required</span>
+                <div class="check"><i class="fas fa-check"></i></div>
+                <i class="fas fa-id-card icon"></i>
+                <div class="lbl">NRC / Passport copy</div>
+              </div>
+              <div class="upload-box" data-upload="grade12Doc" data-required="true">
+                <span class="badge">Required</span>
+                <div class="check"><i class="fas fa-check"></i></div>
+                <i class="fas fa-certificate icon"></i>
+                <div class="lbl">Grade 12 Certificate</div>
+              </div>
+              <div class="upload-box" data-upload="diplomaDoc">
+                <span class="badge optional">Optional</span>
+                <div class="check"><i class="fas fa-check"></i></div>
+                <i class="fas fa-graduation-cap icon"></i>
+                <div class="lbl">Diploma / Degree</div>
+              </div>
+              <div class="upload-box" data-upload="cvDoc">
+                <span class="badge optional">Optional</span>
+                <div class="check"><i class="fas fa-check"></i></div>
+                <i class="fas fa-file-alt icon"></i>
+                <div class="lbl">Curriculum Vitae</div>
+              </div>
+              <div class="upload-box" data-upload="recommendationDoc" data-required="true">
+                <span class="badge">Required</span>
+                <div class="check"><i class="fas fa-check"></i></div>
+                <i class="fas fa-envelope icon"></i>
+                <div class="lbl">Recommendation Letter</div>
+              </div>
+              <div class="upload-box" data-upload="resultsSlipDoc">
+                <span class="badge optional">Optional</span>
+                <div class="check"><i class="fas fa-check"></i></div>
+                <i class="fas fa-file-lines icon"></i>
+                <div class="lbl">Results Slip</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="step-panel" data-step="3">
+          <div class="step-title">Programme Selection</div>
+          <div class="step-hint">Choose your intake and programme of study.</div>
+
+          <div class="form-group"><label>Intake / Month <span class="req">*</span></label>
+            <select name="intake" id="enrollIntake" required></select>
+          </div>
+          <div class="form-group"><label>Programme <span class="req">*</span></label>
+            <select name="programme" id="enrollProgramme" required><option value="">Choose intake first…</option></select>
+          </div>
+          <div class="row">
+            <div class="form-group"><label>Mode of Study <span class="req">*</span></label>
+              <select name="mode" required><option>Full-time</option><option>Part-time</option><option>Distance</option></select>
+            </div>
+            <div class="form-group"><label>Year of Study <span class="req">*</span></label>
+              <select name="yearStudy" required><option>First</option><option selected>Second</option><option>Third</option><option>Fourth</option></select>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="step-panel" data-step="4">
+          <div class="step-title">Sponsor & Account</div>
+          <div class="step-hint">Tell us who's funding your studies and set up your login credentials.</div>
+
+          <div class="row">
+            <div class="form-group"><label>Sponsor Details <span class="req">*</span></label><input type="text" name="sponsor" required placeholder="Self / Parent / Organisation"/></div>
+            <div class="form-group"><label>Sponsor Contact</label><input type="text" name="sponsorContact" placeholder="Phone or email"/></div>
+          </div>
+          <div class="form-group"><label>Scholarship Information (if any)</label><input type="text" name="scholarship" placeholder="Optional"/></div>
+
+          <div style="padding:14px;background:#f0fdf4;border-radius:12px;border-left:3px solid var(--green);margin:14px 0">
+            <div style="font-size:12.5px;color:#065f46;font-weight:600;margin-bottom:6px"><i class="fas fa-lock"></i> Login Credentials</div>
+            <div style="font-size:12px;color:#166534">You'll use this email and password to sign in and check your application status.</div>
+          </div>
+
+          <div class="form-group"><label>Password <span class="req">*</span></label>
+            <div class="pw-wrap">
+              <input type="password" name="password" id="enrollPassword" required minlength="6" placeholder="At least 6 characters"/>
+              <button type="button" class="pw-toggle" data-target="enrollPassword"><i class="fas fa-eye"></i></button>
+            </div>
+          </div>
+          <div class="form-group"><label>Confirm Password <span class="req">*</span></label>
+            <div class="pw-wrap">
+              <input type="password" name="confirmPassword" id="enrollPassword2" required minlength="6" placeholder="Re-enter password"/>
+              <button type="button" class="pw-toggle" data-target="enrollPassword2"><i class="fas fa-eye"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div class="step-panel" data-step="5">
+          <div class="step-title">Declaration & Submit</div>
+          <div class="step-hint">Review and confirm your application before submitting.</div>
+
+          <div class="declare-row">
+            <input type="checkbox" id="declareChk" required/>
+            <label for="declareChk">I <strong>declare</strong> that all information provided in this application is <strong>true, complete and correct</strong>. I understand that any false statement may lead to disqualification or withdrawal of admission.</label>
+          </div>
+
+          <div style="background:#f8fafc;border-radius:12px;padding:14px;font-size:12.5px;color:#475569;line-height:1.6;margin-bottom:14px">
+            <strong style="color:#0f172a"><i class="fas fa-info-circle"></i> What happens next?</strong><br/>
+            Your application will be marked <strong style="color:#92400e">PENDING</strong>. When an administrator reviews and approves it, a student number will be generated automatically in the format <strong>2601-0001</strong>. You'll be able to log in and view it.
+          </div>
+
+          <div id="submitMsg" class="msg-box"></div>
+        </div>
+
+        <!-- NAV -->
+        <div class="form-nav">
+          <button type="button" class="btn btn-ghost" id="prevBtn" style="visibility:hidden"><i class="fas fa-arrow-left"></i> Previous</button>
+          <button type="button" class="btn btn-primary" id="nextBtn">Next <i class="fas fa-arrow-right"></i></button>
+          <button type="submit" class="btn btn-primary" id="submitBtn" style="display:none"><i class="fas fa-paper-plane"></i> Submit Application</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ LOGIN ══════════════ -->
+<section class="screen" id="loginScreen">
+  <div class="container" style="max-width:440px">
+    <button class="back-btn" id="loginBack"><i class="fas fa-arrow-left"></i> Back</button>
+    <div class="card">
+      <div class="card-head" style="justify-content:center;text-align:center;flex-direction:column;gap:8px">
+        <img src="logo.png" alt="NORTEC" style="width:64px;height:64px" onerror="this.style.display='none'"/>
+        <div>
+          <h2 style="font-size:20px">Sign In</h2>
+          <p>Access your NORTEC student portal</p>
+        </div>
+      </div>
+
+      <div id="loginMsg" class="msg-box"></div>
+
+      <form id="loginForm" novalidate>
+        <div class="form-group"><label>Email Address <span class="req">*</span></label>
+          <input type="email" name="email" required placeholder="you@example.com" autocomplete="email"/>
+        </div>
+        <div class="form-group"><label>Password <span class="req">*</span></label>
+          <div class="pw-wrap">
+            <input type="password" name="password" id="loginPassword" required placeholder="••••••••" autocomplete="current-password"/>
+            <button type="button" class="pw-toggle" data-target="loginPassword"><i class="fas fa-eye"></i></button>
+          </div>
+        </div>
+
+        <label class="checkbox-row">
+          <input type="checkbox" id="rememberMe"/> Remember me on this device
+        </label>
+
+        <button type="submit" class="btn btn-primary" id="loginSubmitBtn"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+      </form>
+
+      <div class="link-row">
+        Don't have an account? <a id="linkToEnroll">Enroll now</a>
+      </div>
+      <div class="link-row" style="margin-top:8px">
+        <a id="forgotLink" style="color:#64748b;font-weight:500">Forgot password?</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ STATUS / DASHBOARD ══════════════ -->
+<section class="screen" id="statusScreen">
+  <div class="container">
+    <div class="card status-card" id="statusCard">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</section>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   1 · FIREBASE + CLOUDINARY
+   ═══════════════════════════════════════════════════════════════ */
+const firebaseConfig = {
+  apiKey: "AIzaSyD_WV6fY-4pmA2UQnkaq-VgTHwbAMeSfKc",
+  authDomain: "nortec-21d55.firebaseapp.com",
+  databaseURL: "https://nortec-21d55-default-rtdb.firebaseio.com",
+  projectId: "nortec-21d55",
+  storageBucket: "nortec-21d55.firebasestorage.app",
+  messagingSenderId: "790129508749",
+  appId: "1:790129508749:web:38d8b14d6f5512a350fdc4",
+  measurementId: "G-559623YP4D"
+};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+
+const CLOUD_NAME = "dd3lcymrk";
+const UPLOAD_PRESET = "h3eyhc2o";
+const ROOT = "nortec";
+
+/* ═══════════════════════════════════════════════════════════════
+   2 · INTAKES & PROGRAMMES (from NORTEC catalogue)
+   ═══════════════════════════════════════════════════════════════ */
+const INTAKES = [
+  { key:'january',   label:'January',         code:'01' },
+  { key:'may',       label:'May',             code:'02' },
+  { key:'september', label:'September',       code:'03' },
+  { key:'august',    label:'August (Distance)', code:'04' }
+];
+
+const PROGRAMMES = [
+  { code:'1.1',  title:'Craft Certificate in Mechanical Fitting',                  intake:'january',   category:'Craft' },
+  { code:'1.2',  title:'Craft Certificate in Refrigeration and Air-Conditioning',  intake:'january',   category:'Craft' },
+  { code:'1.3',  title:'Craft Certificate in Auto-Electrical and Electronics',     intake:'january',   category:'Craft' },
+  { code:'1.4',  title:'Diploma in Computer Systems Engineering (Direct Entry)',   intake:'january',   category:'Diploma' },
+  { code:'1.5',  title:'Advanced Certificate in Metal Fabrication',                intake:'january',   category:'Advanced' },
+  { code:'1.6',  title:'Advanced Certificate in Mechanical Engineering',           intake:'january',   category:'Advanced' },
+  { code:'1.7',  title:'Advanced Certificate in Heavy Equipment Repair',           intake:'january',   category:'Advanced' },
+  { code:'1.8',  title:'Advanced Certificate in Electrical Engineering',           intake:'january',   category:'Advanced' },
+  { code:'1.9',  title:'Diploma in Science Laboratory Technology',                 intake:'january',   category:'Diploma' },
+  { code:'1.10', title:'Diploma in Electrical Engineering (Direct Entry)',         intake:'january',   category:'Diploma' },
+  { code:'1.11', title:'Diploma in Production & Operation Management',             intake:'january',   category:'Diploma' },
+  { code:'1.12', title:'Diploma in Heavy Equipment Engineering (Direct Entry)',    intake:'january',   category:'Diploma' },
+  { code:'1.13', title:'Diploma in Automotive Engineering (Direct Entry)',         intake:'january',   category:'Diploma' },
+
+  { code:'2.1',  title:'Advanced Certificate in Mechanical Engineering',           intake:'may',       category:'Advanced' },
+  { code:'2.2',  title:'Advanced Certificate in Heavy Equipment Repair',           intake:'may',       category:'Advanced' },
+  { code:'2.3',  title:'Diploma in Automotive Engineering (Direct Entry)',         intake:'may',       category:'Diploma' },
+  { code:'2.4',  title:'Diploma in Electrical Engineering (Direct Entry)',         intake:'may',       category:'Diploma' },
+  { code:'2.5',  title:'Diploma in Science Laboratory Technology',                 intake:'may',       category:'Diploma' },
+  { code:'2.6',  title:'Craft Certificate in Electrical',                          intake:'may',       category:'Craft' },
+  { code:'2.7',  title:'Craft Certificate in Heavy Equipment Repair',              intake:'may',       category:'Craft' },
+  { code:'2.8',  title:'Diploma in Heavy Equipment Engineering (Direct Entry)',    intake:'may',       category:'Diploma' },
+  { code:'2.9',  title:'Craft Certificate in Auto-Electrical and Electronics',     intake:'may',       category:'Craft' },
+  { code:'2.10', title:'Craft Certificate in Mechanical Fitting',                  intake:'may',       category:'Craft' },
+  { code:'2.11', title:'Craft Certificate in Rigging',                             intake:'may',       category:'Craft' },
+  { code:'2.12', title:'Craft Certificate in Welding and Metal Fabrication',       intake:'may',       category:'Craft' },
+  { code:'2.13', title:'Trade Certificate in Plumbing',                            intake:'may',       category:'Trade' },
+  { code:'2.14', title:'Trade Certificate in Mechanical Fitting',                  intake:'may',       category:'Trade' },
+  { code:'2.15', title:'Trade Certificate in Rigging',                             intake:'may',       category:'Trade' },
+  { code:'2.16', title:'Trade Certificate in Welding',                             intake:'may',       category:'Trade' },
+
+  { code:'3.1',  title:'Diploma in Biomedical Engineering Technology',             intake:'september', category:'Diploma' },
+
+  { code:'4.1',  title:'Diploma in Automotive Engineering (Mature Entry)',         intake:'august',    category:'Diploma (Distance)' },
+  { code:'4.2',  title:'Diploma in Heavy Equipment Engineering (Mature Entry)',    intake:'august',    category:'Diploma (Distance)' },
+  { code:'4.3',  title:'Diploma in Electrical Engineering (Mature Entry)',         intake:'august',    category:'Diploma (Distance)' },
+  { code:'4.4',  title:'Diploma in Mechanical Engineering (Mature Entry)',         intake:'august',    category:'Diploma (Distance)' },
+  { code:'4.5',  title:'Diploma in Instrumentation (Mature Entry)',                intake:'august',    category:'Diploma (Distance)' }
+];
+
+/* ═══════════════════════════════════════════════════════════════
+   3 · HELPERS
+   ═══════════════════════════════════════════════════════════════ */
+function $(sel, root=document){ return root.querySelector(sel); }
+function $$(sel, root=document){ return [...root.querySelectorAll(sel)]; }
+function show(id){ $$('.screen').forEach(s => s.classList.remove('active')); $('#'+id).classList.add('active'); window.scrollTo(0,0); }
+
+function toast(msg, type='info'){
+  const el = document.createElement('div');
+  el.className = 'toast ' + type;
+  const ico = type==='ok'?'fa-circle-check':type==='err'?'fa-circle-exclamation':'fa-circle-info';
+  el.innerHTML = `<i class="fas ${ico}"></i><span>${msg}</span>`;
+  $('#toast').appendChild(el);
+  setTimeout(()=>{el.style.opacity='0';el.style.transition='opacity .3s';setTimeout(()=>el.remove(),300);},3800);
+}
+
+function showMsg(id, text, type){
+  const el = document.getElementById(id);
+  el.textContent = text;
+  el.className = 'msg-box ' + type;
+}
+function hideMsg(id){ document.getElementById(id).className = 'msg-box'; }
+
+function openCloudinaryUpload({ formats=['jpg','jpeg','png','pdf','heic','doc','docx'], maxSize=5000000 } = {}){
+  return new Promise((resolve) => {
+    const widget = cloudinary.createUploadWidget({
+      cloudName: CLOUD_NAME,
+      uploadPreset: UPLOAD_PRESET,
+      sources: ['local','camera'],
+      multiple: false,
+      maxFileSize: maxSize,
+      clientAllowedFormats: formats,
+      folder: 'nortec/applications'
+    }, (error, result) => {
+      if (error) { console.warn('Cloudinary error:', error); return; }
+      if (result && result.event === 'success') {
+        resolve(result.info.secure_url);
+        widget.close();
+      }
+    });
+    widget.open();
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   4 · UPLOADS STATE
+   ═══════════════════════════════════════════════════════════════ */
+const uploads = {};  // { key: url }
+
+function bindUploadBoxes(){
+  $$('.upload-box[data-upload]').forEach(box => {
+    box.addEventListener('click', async () => {
+      const key = box.dataset.upload;
+      const isProfile = key === 'profilePhoto';
+      try {
+        const url = await openCloudinaryUpload({
+          formats: isProfile ? ['jpg','jpeg','png'] : ['jpg','jpeg','png','pdf','heic','doc','docx']
+        });
+        if (!url) return;
+        uploads[key] = url;
+        // Show preview
+        box.classList.add('filled');
+        let img = box.querySelector('img.preview');
+        if (!img) { img = document.createElement('img'); img.className = 'preview'; box.appendChild(img); }
+        if (isProfile) {
+          img.src = url;
+        } else {
+          // For documents, keep icon but tint green
+          box.querySelector('.lbl').innerHTML = '✓ ' + box.querySelector('.lbl').textContent.replace(/^✓ /,'');
+        }
+        toast('Uploaded successfully', 'ok');
+      } catch (e) {
+        toast('Upload failed: ' + e.message, 'err');
+      }
+    });
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   5 · ENROLL WIZARD
+   ═══════════════════════════════════════════════════════════════ */
+let currentStep = 1;
+const TOTAL_STEPS = 5;
+const STEP_LABELS = ['Personal','Academic','Programme','Sponsor','Submit'];
+
+function buildStepper(){
+  const stepper = $('#stepper');
+  stepper.innerHTML = '';
+  for (let i = 1; i <= TOTAL_STEPS; i++){
+    const s = document.createElement('div');
+    s.className = 'step' + (i === currentStep ? ' active' : '') + (i < currentStep ? ' done' : '');
+    s.innerHTML = `<span class="dot"><span>${i}</span></span><span class="label">${STEP_LABELS[i-1]}</span>`;
+    stepper.appendChild(s);
+  }
+}
+
+function goToStep(step){
+  if (step < 1) step = 1;
+  if (step > TOTAL_STEPS) step = TOTAL_STEPS;
+
+  // Validate current before advancing
+  if (step > currentStep){
+    if (!validateStep(currentStep)) return;
+  }
+
+  currentStep = step;
+  $$('.step-panel').forEach(p => p.classList.toggle('active', Number(p.dataset.step) === currentStep));
+  buildStepper();
+
+  $('#prevBtn').style.visibility = currentStep === 1 ? 'hidden' : 'visible';
+  if (currentStep === TOTAL_STEPS){
+    $('#nextBtn').style.display = 'none';
+    $('#submitBtn').style.display = 'flex';
+  } else {
+    $('#nextBtn').style.display = 'flex';
+    $('#submitBtn').style.display = 'none';
+  }
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function validateStep(step){
+  const panel = $(`.step-panel[data-step="${step}"]`);
+  let ok = true;
+  let firstBad = null;
+
+  // Text/select/textarea required
+  $$('input[required], select[required], textarea[required]', panel).forEach(inp => {
+    if (!inp.value || !inp.value.trim()){
+      inp.style.borderColor = '#ef4444';
+      ok = false;
+      if (!firstBad) firstBad = inp;
+    } else {
+      inp.style.borderColor = '';
+    }
+  });
+
+  // Password match on step 4
+  if (step === 4){
+    const p1 = $('#enrollPassword').value;
+    const p2 = $('#enrollPassword2').value;
+    if (p1 !== p2){
+      toast('Passwords do not match', 'err');
+      $('#enrollPassword2').style.borderColor = '#ef4444';
+      ok = false;
+    } else if (p1.length < 6){
+      toast('Password must be at least 6 characters', 'err');
+      ok = false;
+    }
+  }
+
+  // Required uploads per step
+  $$('.upload-box[data-required="true"]', panel).forEach(box => {
+    const key = box.dataset.upload;
+    if (!uploads[key]){
+      box.style.borderColor = '#ef4444';
+      ok = false;
+    } else {
+      box.style.borderColor = '';
+    }
+  });
+
+  if (!ok){
+    toast('Please complete all required fields', 'err');
+    if (firstBad) firstBad.focus();
+  }
+  return ok;
+}
+
+/* Populate intake + programme dropdowns */
+function buildIntakeSelect(){
+  const sel = $('#enrollIntake');
+  sel.innerHTML = '<option value="">— Select intake —</option>';
+  INTAKES.forEach(i => {
+    const o = document.createElement('option');
+    o.value = i.key;
+    o.textContent = `${i.label} Intake`;
+    sel.appendChild(o);
+  });
+}
+function buildProgrammeSelect(){
+  const intake = $('#enrollIntake').value;
+  const sel = $('#enrollProgramme');
+  sel.innerHTML = '';
+  if (!intake){
+    sel.innerHTML = '<option value="">Choose intake first…</option>';
+    return;
+  }
+  sel.innerHTML = '<option value="">— Select programme —</option>';
+  PROGRAMMES.filter(p => p.intake === intake).forEach(p => {
+    const o = document.createElement('option');
+    o.value = p.code;
+    o.textContent = `${p.code} · ${p.title}`;
+    sel.appendChild(o);
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   6 · SUBMIT APPLICATION
+   ═══════════════════════════════════════════════════════════════ */
+async function submitApplication(e){
+  e.preventDefault();
+  hideMsg('submitMsg');
+
+  if (!validateStep(1) || !validateStep(2) || !validateStep(3) || !validateStep(4)){
+    toast('Please complete all required fields across all steps', 'err');
+    // Jump to first incomplete step
+    for (let i = 1; i <= 4; i++){
+      if (!validateStep(i)) { goToStep(i); break; }
+    }
+    return;
+  }
+  if (!$('#declareChk').checked){
+    showMsg('submitMsg', 'You must accept the declaration before submitting.', 'err');
+    toast('Please accept the declaration', 'err');
+    return;
+  }
+
+  const form = new FormData($('#enrollForm'));
+  const data = Object.fromEntries(form.entries());
+  delete data.password;
+  delete data.confirmPassword;
+
+  const email = (data.email || '').trim().toLowerCase();
+  const password = $('#enrollPassword').value;
+
+  const submitBtn = $('#submitBtn');
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting…';
+
+  try {
+    /* 1. Create Auth user */
+    let userCred;
+    try {
+      userCred = await auth.createUserWithEmailAndPassword(email, password);
+    } catch (err){
+      // If email already exists, try signing in instead and overwriting app record
+      if (err.code === 'auth/email-already-in-use'){
+        // Sign in to see if it's the same user re-applying
+        try {
+          userCred = await auth.signInWithEmailAndPassword(email, password);
+          toast('Existing account detected — updating application', 'info');
+        } catch (signInErr){
+          throw new Error('This email is already registered. Try logging in instead.');
+        }
+      } else {
+        throw err;
+      }
+    }
+
+    const uid = userCred.user.uid;
+
+    /* 2. Build application record */
+    const intakeMeta = INTAKES.find(i => i.key === data.intake) || { label: data.intake, code: '00' };
+    const programmeMeta = PROGRAMMES.find(p => p.code === data.programme) || { title: data.programme, category: '' };
+
+    const application = {
+      applicationId: 'APP-' + new Date().getFullYear() + '-' + uid.slice(-6).toUpperCase(),
+      status: 'pending',
+      submittedAt: Date.now(),
+      submittedDate: new Date().toISOString(),
+
+      // Account
+      uid, email,
+      fullName: data.fullName,
+      phone: data.phone,
+
+      // Personal
+      personal: {
+        fullName: data.fullName,
+        dob: data.dob,
+        gender: data.gender,
+        nationality: data.nationality,
+        nrc: data.nrc,
+        phone: data.phone,
+        email,
+        address: data.address,
+        nextOfKin: data.nextOfKin,
+        profilePhoto: uploads.profilePhoto || ''
+      },
+
+      // Academic
+      academic: {
+        previousSchool: data.previousSchool || '',
+        grade12School: data.grade12School,
+        yearCompleted: data.yearCompleted,
+        examNumber: data.examNumber,
+        subjects: data.subjects,
+        documents: {
+          nrcDoc: uploads.nrcDoc || '',
+          grade12Doc: uploads.grade12Doc || '',
+          diplomaDoc: uploads.diplomaDoc || '',
+          cvDoc: uploads.cvDoc || '',
+          recommendationDoc: uploads.recommendationDoc || '',
+          resultsSlipDoc: uploads.resultsSlipDoc || ''
+        }
+      },
+
+      // Programme
+      programme: {
+        intake: data.intake,
+        intakeLabel: intakeMeta.label,
+        intakeCode: intakeMeta.code,
+        code: programmeMeta.code,
+        title: programmeMeta.title,
+        category: programmeMeta.category,
+        mode: data.mode,
+        yearStudy: data.yearStudy
+      },
+
+      // Sponsor
+      sponsor: {
+        details: data.sponsor,
+        contact: data.sponsorContact || '',
+        scholarship: data.scholarship || ''
+      },
+
+      // Auto-assigned later
+      studentNumber: null,
+      approvedAt: null,
+      approvedBy: null,
+      rejectionReason: null
+    };
+
+    /* 3. Save to Realtime DB */
+    await db.ref(`${ROOT}/applications/${uid}`).set(application);
+    await db.ref(`${ROOT}/users/${uid}`).update({
+      email, fullName: data.fullName, phone: data.phone, role: 'student'
+    });
+
+    toast('✅ Application submitted successfully!', 'ok');
+    showMsg('submitMsg', 'Application submitted! Status: PENDING. Redirecting…', 'ok');
+
+    setTimeout(() => {
+      showStatusScreen(application);
+    }, 900);
+
+  } catch (err){
+    console.error(err);
+    let msg = err.message || 'Submission failed';
+    if (err.code === 'auth/weak-password') msg = 'Password is too weak (min 6 characters).';
+    if (err.code === 'auth/invalid-email') msg = 'Please enter a valid email address.';
+    showMsg('submitMsg', msg, 'err');
+    toast(msg, 'err');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Application';
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   7 · LOGIN
+   ═══════════════════════════════════════════════════════════════ */
+async function handleLogin(e){
+  e.preventDefault();
+  hideMsg('loginMsg');
+
+  const email = $('#loginForm [name="email"]').value.trim().toLowerCase();
+  const password = $('#loginPassword').value;
+  const remember = $('#rememberMe').checked;
+
+  if (!email || !password){
+    showMsg('loginMsg', 'Please enter email and password.', 'err');
+    return;
+  }
+
+  const btn = $('#loginSubmitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in…';
+
+  try {
+    if (remember) await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+    else await auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
+
+    const cred = await auth.signInWithEmailAndPassword(email, password);
+    const uid = cred.user.uid;
+
+    /* Load application */
+    const snap = await db.ref(`${ROOT}/applications/${uid}`).get();
+    if (!snap.exists()){
+      showMsg('loginMsg', 'No application found for this account. Please enroll first.', 'err');
+      await auth.signOut();
+      return;
+    }
+
+    const appData = { uid, ...snap.val() };
+
+    /* If admin approved & no student number yet → generate one */
+    if (appData.status === 'approved' && !appData.studentNumber){
+      try {
+        const num = await generateStudentNumber(uid, appData);
+        appData.studentNumber = num;
+        toast('Student number assigned: ' + num, 'ok');
+      } catch (err){
+        console.warn('Could not auto-generate student number:', err);
+      }
+    }
+
+    showStatusScreen(appData);
+
+  } catch (err){
+    console.error(err);
+    let msg = 'Login failed. Check your credentials.';
+    if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password' || err.code === 'auth/invalid-credential')
+      msg = 'Invalid email or password.';
+    if (err.code === 'auth/too-many-requests') msg = 'Too many attempts. Please try again later.';
+    showMsg('loginMsg', msg, 'err');
+    toast(msg, 'err');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   8 · AUTO STUDENT NUMBER GENERATION
+   Format: YY + "01" + "-" + 4-digit-sequence → e.g. 2601-0001
+   ═══════════════════════════════════════════════════════════════ */
+async function generateStudentNumber(uid, appData){
+  const year = new Date().getFullYear();
+  const yy = String(year).slice(-2);   // 2026 → "26"
+
+  // Atomic counter — one sequence per year
+  const counterRef = db.ref(`${ROOT}/counters/studentNumbers/${yy}`);
+  const result = await counterRef.transaction(current => (current || 0) + 1);
+  if (!result.committed) throw new Error('Counter transaction failed');
+
+  const seq = result.snapshot.val(); // e.g. 1
+  const padded = String(seq).padStart(4, '0'); // "0001"
+  const studentNumber = `${yy}01-${padded}`;   // "2601-0001"
+
+  await db.ref(`${ROOT}/applications/${uid}`).update({
+    studentNumber,
+    approvedAt: appData.approvedAt || Date.now(),
+    numberAssignedAt: Date.now()
+  });
+  return studentNumber;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   9 · STATUS SCREEN
+   ═══════════════════════════════════════════════════════════════ */
+function showStatusScreen(appData){
+  const card = $('#statusCard');
+  const status = (appData.status || 'pending').toLowerCase();
+
+  let icon, title, subtitle, pillClass, bodyHtml = '';
+
+  if (status === 'pending'){
+    icon = 'pending';
+    pillClass = 'pending';
+    title = 'Application Pending';
+    subtitle = 'Your application has been received and is awaiting review by the administration.';
+    bodyHtml = `
+      <div class="info-list">
+        <div class="row-i"><span class="k">Application ID</span><span class="v">${esc(appData.applicationId || '—')}</span></div>
+        <div class="row-i"><span class="k">Name</span><span class="v">${esc(appData.fullName || '—')}</span></div>
+        <div class="row-i"><span class="k">Programme</span><span class="v">${esc(appData.programme?.title || '—')}</span></div>
+        <div class="row-i"><span class="k">Intake</span><span class="v">${esc(appData.programme?.intakeLabel || '—')}</span></div>
+        <div class="row-i"><span class="k">Submitted</span><span class="v">${formatDate(appData.submittedAt)}</span></div>
+      </div>
+      <div style="background:#fff7ed;border-radius:12px;padding:14px;font-size:12.5px;color:#92400e;text-align:left;line-height:1.6;margin-bottom:14px">
+        <strong><i class="fas fa-clock"></i> What happens next?</strong><br/>
+        Once an admin approves your application, a student number will be generated automatically in the format <strong>2601-0001</strong>. Log back in to view it.
+      </div>
+      <button class="btn btn-ghost" id="refreshStatusBtn" style="margin-bottom:10px"><i class="fas fa-sync-alt"></i> Refresh Status</button>
+      <button class="btn btn-danger" id="logoutBtn1"><i class="fas fa-sign-out-alt"></i> Log Out</button>
+    `;
+  } else if (status === 'approved'){
+    icon = 'approved';
+    pillClass = 'approved';
+    title = 'Application Approved 🎉';
+    subtitle = 'Welcome to Northern Technical College! Your admission is confirmed.';
+    bodyHtml = `
+      <div class="student-number">
+        <div class="lbl">Your Student Number</div>
+        <div class="val">${esc(appData.studentNumber || 'Generating…')}</div>
+      </div>
+      <div class="info-list">
+        <div class="row-i"><span class="k">Full Name</span><span class="v">${esc(appData.fullName || '—')}</span></div>
+        <div class="row-i"><span class="k">Programme</span><span class="v">${esc(appData.programme?.title || '—')}</span></div>
+        <div class="row-i"><span class="k">Category</span><span class="v">${esc(appData.programme?.category || '—')}</span></div>
+        <div class="row-i"><span class="k">Intake</span><span class="v">${esc(appData.programme?.intakeLabel || '—')}</span></div>
+        <div class="row-i"><span class="k">Mode</span><span class="v">${esc(appData.programme?.mode || '—')}</span></div>
+        <div class="row-i"><span class="k">Year of Study</span><span class="v">${esc(appData.programme?.yearStudy || '—')}</span></div>
+        <div class="row-i"><span class="k">Email</span><span class="v">${esc(appData.email || '—')}</span></div>
+        <div class="row-i"><span class="k">Approved</span><span class="v">${formatDate(appData.approvedAt)}</span></div>
+      </div>
+      <div style="background:#f0fdf4;border-radius:12px;padding:14px;font-size:12.5px;color:#065f46;text-align:left;line-height:1.6;margin-bottom:14px">
+        <strong><i class="fas fa-check-circle"></i> Next steps</strong><br/>
+        Keep your student number safe — you'll need it for registration, exams and campus access.
+      </div>
+      <button class="btn btn-ghost" id="refreshStatusBtn" style="margin-bottom:10px"><i class="fas fa-sync-alt"></i> Refresh</button>
+      <button class="btn btn-danger" id="logoutBtn1"><i class="fas fa-sign-out-alt"></i> Log Out</button>
+    `;
+  } else {
+    icon = 'rejected';
+    pillClass = 'rejected';
+    title = 'Application Not Successful';
+    subtitle = 'Unfortunately, your application was not approved.';
+    bodyHtml = `
+      ${appData.rejectionReason ? `<div style="background:#fef2f2;border-radius:12px;padding:14px;font-size:13px;color:#991b1b;text-align:left;line-height:1.6;margin-bottom:14px"><strong>Reason:</strong><br/>${esc(appData.rejectionReason)}</div>` : ''}
+      <div class="info-list">
+        <div class="row-i"><span class="k">Application ID</span><span class="v">${esc(appData.applicationId || '—')}</span></div>
+        <div class="row-i"><span class="k">Programme</span><span class="v">${esc(appData.programme?.title || '—')}</span></div>
+      </div>
+      <p style="font-size:12.5px;color:#64748b;margin-bottom:14px">Contact admissions for more information: <strong>admissions@northerntech.edu.zm</strong></p>
+      <button class="btn btn-danger" id="logoutBtn1"><i class="fas fa-sign-out-alt"></i> Log Out</button>
+    `;
+  }
+
+  card.innerHTML = `
+    <div class="status-icon ${icon}"><i class="fas fa-${icon==='pending'?'hourglass-half':icon==='approved'?'check-circle':'times-circle'}"></i></div>
+    <span class="status-pill ${pillClass}">${status}</span>
+    <h2>${title}</h2>
+    <p>${subtitle}</p>
+    ${bodyHtml}
+  `;
+  show('statusScreen');
+
+  const refreshBtn = document.getElementById('refreshStatusBtn');
+  if (refreshBtn){
+    refreshBtn.addEventListener('click', () => refreshStatus(appData.uid));
+  }
+  const logoutBtn1 = document.getElementById('logoutBtn1');
+  if (logoutBtn1) logoutBtn1.addEventListener('click', doLogout);
+}
+
+async function refreshStatus(uid){
+  if (!uid) return;
+  try {
+    const snap = await db.ref(`${ROOT}/applications/${uid}`).get();
+    if (!snap.exists()) { toast('Application not found', 'err'); return; }
+    const appData = { uid, ...snap.val() };
+    if (appData.status === 'approved' && !appData.studentNumber){
+      try {
+        const num = await generateStudentNumber(uid, appData);
+        appData.studentNumber = num;
+        toast('Student number assigned: ' + num, 'ok');
+      } catch(e){ console.warn(e); }
+    }
+    showStatusScreen(appData);
+    toast('Status refreshed', 'ok');
+  } catch(e){ toast('Refresh failed', 'err'); }
+}
+
+function doLogout(){
+  auth.signOut().then(() => {
+    toast('Logged out', 'info');
+    show('landing');
+  });
+}
+
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function formatDate(ts){ if (!ts) return '—'; const d = new Date(ts); return d.toLocaleDateString('en-GB', {day:'2-digit',month:'short',year:'numeric'}); }
+
+/* ═══════════════════════════════════════════════════════════════
+   10 · EVENT BINDINGS
+   ═══════════════════════════════════════════════════════════════ */
+function bindEvents(){
+  // Landing
+  $('#btnEnroll').addEventListener('click', () => { show('enroll'); goToStep(1); });
+  $('#btnLogin').addEventListener('click', () => { show('loginScreen'); });
+  $('#linkToEnroll').addEventListener('click', () => { show('enroll'); goToStep(1); });
+
+  // Back buttons
+  $('#enrollBack').addEventListener('click', () => {
+    if (currentStep > 1 && !confirm('Leave application? Your progress will be lost.')) return;
+    show('landing');
+  });
+  $('#loginBack').addEventListener('click', () => show('landing'));
+
+  // Stepper nav
+  $('#prevBtn').addEventListener('click', () => goToStep(currentStep - 1));
+  $('#nextBtn').addEventListener('click', () => goToStep(currentStep + 1));
+  $('#enrollForm').addEventListener('submit', submitApplication);
+
+  // Intake → programme
+  $('#enrollIntake').addEventListener('change', buildProgrammeSelect);
+
+  // Password toggles
+  $$('.pw-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = document.getElementById(btn.dataset.target);
+      const isPw = target.type === 'password';
+      target.type = isPw ? 'text' : 'password';
+      btn.querySelector('i').className = isPw ? 'fas fa-eye-slash' : 'fas fa-eye';
+    });
+  });
+
+  // Login
+  $('#loginForm').addEventListener('submit', handleLogin);
+  $('#forgotLink').addEventListener('click', async () => {
+    const email = $('#loginForm [name="email"]').value.trim().toLowerCase();
+    if (!email){ toast('Enter your email first', 'err'); return; }
+    try {
+      await auth.sendPasswordResetEmail(email);
+      toast('Password reset link sent to ' + email, 'ok');
+    } catch(e){ toast('Could not send reset email: ' + e.message, 'err'); }
+  });
+
+  bindUploadBoxes();
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   11 · BOOT
+   ═══════════════════════════════════════════════════════════════ */
+window.addEventListener('DOMContentLoaded', () => {
+  bindEvents();
+  buildStepper();
+  buildIntakeSelect();
+  buildProgrammeSelect();
+  goToStep(1);
+
+  // Hide loader after a moment
+  setTimeout(() => $('#appLoader').classList.add('hidden'), 600);
+
+  // If already signed in, jump straight to status
+  auth.onAuthStateChanged(async (user) => {
+    if (!user) return;
+    try {
+      const snap = await db.ref(`${ROOT}/applications/${user.uid}`).get();
+      if (snap.exists()){
+        const appData = { uid: user.uid, ...snap.val() };
+        if (appData.status === 'approved' && !appData.studentNumber){
+          try { appData.studentNumber = await generateStudentNumber(user.uid, appData); } catch(e){}
+        }
+        showStatusScreen(appData);
+      }
+    } catch(e){ console.warn(e); }
+  });
+});
+</script>
+</body>
+</html>
