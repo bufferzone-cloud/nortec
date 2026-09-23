@@ -99,7 +99,6 @@
   @keyframes pageIn{from{opacity:0;transform:translateX(24px) scale(.98)}to{opacity:1;transform:none}}
   .full-page{padding:16px 18px 30px}
 
-  /* ═══ HOME — floating glass card ═══ */
   .hero-card{
     background:linear-gradient(135deg, #1e40af 0%, #2563eb 45%, #3b82f6 100%);
     border-radius:26px;
@@ -150,7 +149,6 @@
   .hero-chip i{color:#fff;opacity:.9}
   .hero-chip:hover{background:rgba(255,255,255,.28);transform:translateY(-1px)}
 
-  /* Notice board */
   .notice-section-title{
     display:flex;align-items:center;gap:10px;
     font-size:15px;font-weight:800;color:var(--text-primary);
@@ -163,6 +161,9 @@
     color:#fff;font-size:14px;
     box-shadow:0 8px 20px rgba(37,99,235,.35);
   }
+  .notice-section-title .ttl-icon.purple{background:linear-gradient(135deg,#8b5cf6,#6d28d9);box-shadow:0 8px 20px rgba(139,92,246,.35)}
+  .notice-section-title .ttl-icon.green{background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 8px 20px rgba(16,185,129,.35)}
+  .notice-section-title .ttl-icon.amber{background:linear-gradient(135deg,#f59e0b,#d97706);box-shadow:0 8px 20px rgba(245,158,11,.35)}
   .notice-section-title .cnt{
     margin-left:auto;font-size:11px;font-weight:800;
     background:var(--blue-light);color:var(--blue-dark);
@@ -235,7 +236,332 @@
   .empty-glass i{font-size:34px;display:block;margin-bottom:10px;color:var(--blue);opacity:.5}
   .empty-glass .e-ttl{font-weight:800;font-size:14px;color:var(--text-primary);margin-bottom:4px}
 
-  /* General cards / tiles — glass floating */
+  /* ═══ GRADE BADGES ═══ */
+  .grade-badge{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:38px;height:38px;border-radius:50%;
+    font-weight:900;font-size:15px;color:#fff;
+    letter-spacing:.3px;flex-shrink:0;
+    box-shadow:0 6px 18px rgba(0,0,0,.15);
+  }
+  .grade-badge.small{min-width:30px;height:30px;font-size:12.5px}
+  .grade-badge.D{background:linear-gradient(135deg,#7c3aed,#5b21b6)}
+  .grade-badge.M{background:linear-gradient(135deg,#0ea5e9,#0369a1)}
+  .grade-badge.C{background:linear-gradient(135deg,#10b981,#047857)}
+  .grade-badge.P{background:linear-gradient(135deg,#f59e0b,#b45309)}
+  .grade-badge.F{background:linear-gradient(135deg,#ef4444,#991b1b)}
+
+  /* ═══ CA HOME BOX ═══ */
+  .ca-home-card{
+    background:var(--glass-bg);
+    backdrop-filter:var(--glass-blur);
+    -webkit-backdrop-filter:var(--glass-blur);
+    border:var(--glass-border);
+    border-radius:22px;
+    padding:20px;
+    box-shadow:0 16px 40px -16px rgba(139,92,246,.32), 0 6px 16px rgba(15,23,42,.04);
+    animation:floatIn .5s cubic-bezier(.22,1,.36,1);
+    position:relative;
+    overflow:hidden;
+  }
+  .ca-home-card::before{
+    content:'';position:absolute;left:0;top:0;bottom:0;width:5px;
+    background:linear-gradient(180deg,#8b5cf6,#6d28d9,#4c1d95);
+    border-radius:5px 0 0 5px;
+  }
+  .ca-home-head{
+    display:flex;align-items:center;gap:16px;
+    padding:6px 4px 16px 10px;
+    border-bottom:1px dashed rgba(139,92,246,.22);
+    margin-bottom:14px;
+    flex-wrap:wrap;
+  }
+  .ca-home-overall{display:flex;align-items:center;gap:14px;flex:1;min-width:200px}
+  .ca-home-overall .gb-big{
+    min-width:64px;height:64px;font-size:26px;
+    display:inline-flex;align-items:center;justify-content:center;
+    border-radius:50%;font-weight:900;color:#fff;
+    box-shadow:0 12px 30px rgba(0,0,0,.18);
+    flex-shrink:0;position:relative;
+  }
+  .ca-home-overall .gb-big::after{
+    content:'';position:absolute;inset:-5px;border-radius:50%;
+    border:2px solid currentColor;opacity:.15;
+  }
+  .ca-home-overall .gb-big.D{background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#7c3aed}
+  .ca-home-overall .gb-big.M{background:linear-gradient(135deg,#0ea5e9,#0369a1);color:#0ea5e9}
+  .ca-home-overall .gb-big.C{background:linear-gradient(135deg,#10b981,#047857);color:#10b981}
+  .ca-home-overall .gb-big.P{background:linear-gradient(135deg,#f59e0b,#b45309);color:#f59e0b}
+  .ca-home-overall .gb-big.F{background:linear-gradient(135deg,#ef4444,#991b1b);color:#ef4444}
+  .ca-home-overall .gb-big span{position:relative;z-index:1}
+  .ca-home-overall-text .ttl{font-size:11px;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px}
+  .ca-home-overall-text .pct{font-size:26px;font-weight:900;color:var(--text-primary);line-height:1.05;margin-top:2px}
+  .ca-home-overall-text .desc{font-size:12.5px;color:var(--text-muted);font-weight:600;margin-top:4px}
+  .ca-home-overall-text .desc strong{color:var(--blue-dark)}
+  .ca-home-stats{display:flex;gap:10px;flex-wrap:wrap;margin-left:auto}
+  .ca-home-stat{
+    background:rgba(255,255,255,.6);
+    border:1px solid rgba(139,92,246,.18);
+    border-radius:12px;
+    padding:8px 14px;text-align:center;min-width:80px;
+  }
+  .ca-home-stat .v{font-size:16px;font-weight:900;color:var(--text-primary)}
+  .ca-home-stat .k{font-size:9.5px;color:var(--text-muted);font-weight:800;text-transform:uppercase;letter-spacing:.3px;margin-top:2px}
+
+  .ca-home-course-list{display:grid;gap:8px}
+  .ca-home-course-item{
+    display:flex;align-items:center;gap:12px;
+    background:rgba(255,255,255,.65);
+    border:1px solid rgba(139,92,246,.14);
+    border-radius:14px;
+    padding:12px 14px;
+    transition:all .25s cubic-bezier(.22,1,.36,1);
+  }
+  .ca-home-course-item:hover{
+    background:#fff;
+    border-color:rgba(139,92,246,.35);
+    transform:translateX(3px);
+    box-shadow:0 10px 24px -10px rgba(139,92,246,.30);
+  }
+  .ca-home-course-item .code{
+    font-weight:900;font-size:12.5px;color:var(--purple);
+    background:rgba(139,92,246,.10);
+    padding:4px 10px;border-radius:8px;
+    flex-shrink:0;min-width:54px;text-align:center;
+  }
+  .ca-home-course-item .name{
+    flex:1;min-width:0;font-weight:700;font-size:13px;color:var(--text-primary);
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .ca-home-course-item .name .remark{
+    display:block;font-weight:500;font-size:11px;color:var(--text-muted);
+    margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .ca-home-course-item .pct{
+    font-weight:900;font-size:15px;color:var(--text-primary);
+    flex-shrink:0;min-width:52px;text-align:right;
+  }
+  .ca-home-foot{
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    margin-top:14px;padding-top:14px;border-top:1px dashed rgba(139,92,246,.22);
+    font-size:11.5px;color:var(--text-muted);
+  }
+  .ca-home-foot .legend{display:flex;gap:10px;flex-wrap:wrap}
+  .ca-home-foot .legend span{display:inline-flex;align-items:center;gap:5px}
+  .ca-home-foot .legend .gb-mini{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:18px;height:18px;border-radius:50%;color:#fff;font-size:9.5px;font-weight:900;
+  }
+  .ca-home-foot .gb-mini.D{background:#7c3aed}
+  .ca-home-foot .gb-mini.M{background:#0ea5e9}
+  .ca-home-foot .gb-mini.C{background:#10b981}
+  .ca-home-foot .gb-mini.P{background:#f59e0b}
+  .ca-home-foot .gb-mini.F{background:#ef4444}
+  .ca-home-foot .btn-link{
+    margin-left:auto;
+    background:linear-gradient(135deg,#8b5cf6,#6d28d9);
+    color:#fff;border:none;border-radius:50px;
+    padding:8px 16px;font-weight:700;font-size:12px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:6px;font-family:inherit;
+    box-shadow:0 8px 20px -8px rgba(139,92,246,.55);
+    transition:.25s;
+  }
+  .ca-home-foot .btn-link:hover{transform:translateY(-2px);box-shadow:0 12px 26px -8px rgba(139,92,246,.65)}
+
+  .ca-home-docs{
+    display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;
+    padding-top:12px;border-top:1px dashed rgba(139,92,246,.22);
+  }
+  .ca-home-docs .doc-chip{
+    display:inline-flex;align-items:center;gap:6px;
+    background:rgba(139,92,246,.10);
+    border:1px solid rgba(139,92,246,.25);
+    color:#5b21b6;padding:6px 12px;border-radius:30px;
+    font-size:11.5px;font-weight:700;cursor:pointer;
+    transition:.2s;max-width:200px;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  }
+  .ca-home-docs .doc-chip:hover{background:rgba(139,92,246,.20);transform:translateY(-1px)}
+  .ca-home-docs .doc-chip i{color:#8b5cf6}
+
+  /* ═══ CLASS CARD (home + courses) ═══ */
+  .class-banner{
+    background:linear-gradient(135deg,#0f172a 0%,#1e293b 60%,#334155 100%);
+    color:#fff;
+    border-radius:22px;
+    padding:20px 22px;
+    box-shadow:0 18px 42px -16px rgba(15,23,42,.55);
+    position:relative;
+    overflow:hidden;
+    margin-bottom:14px;
+    border:1px solid rgba(255,255,255,.08);
+    animation:floatIn .5s cubic-bezier(.22,1,.36,1);
+  }
+  .class-banner::before{
+    content:'';position:absolute;top:-40%;right:-10%;width:220px;height:220px;
+    background:radial-gradient(circle, rgba(59,130,246,.35), transparent 65%);
+    border-radius:50%;pointer-events:none;
+  }
+  .class-banner .cb-inner{position:relative;z-index:1;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .class-banner .cb-icon{
+    width:56px;height:56px;border-radius:16px;
+    background:linear-gradient(135deg,#3b82f6,#2563eb);
+    display:flex;align-items:center;justify-content:center;
+    font-size:24px;flex-shrink:0;
+    box-shadow:0 10px 28px rgba(59,130,246,.5);
+  }
+  .class-banner .cb-body{flex:1;min-width:180px}
+  .class-banner .cb-lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:1.3px;font-weight:800;color:#93c5fd}
+  .class-banner .cb-name{font-size:20px;font-weight:900;line-height:1.15;margin-top:2px}
+  .class-banner .cb-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;font-size:11.5px;color:#cbd5e1}
+  .class-banner .cb-meta span{display:inline-flex;align-items:center;gap:5px}
+  .class-banner .cb-meta i{color:#60a5fa}
+  .class-banner .cb-stats{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+  .class-banner .cb-stat{
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:12px;padding:8px 14px;text-align:center;min-width:70px;
+    backdrop-filter:blur(6px);
+  }
+  .class-banner .cb-stat .v{font-size:16px;font-weight:900}
+  .class-banner .cb-stat .k{font-size:9.5px;color:#94a3b8;font-weight:800;text-transform:uppercase;letter-spacing:.4px;margin-top:2px}
+
+  /* ═══ ENROLLED COURSES LIST ═══ */
+  .enrolled-list{display:grid;gap:10px}
+  .enrolled-card{
+    background:var(--glass-bg);
+    backdrop-filter:var(--glass-blur);
+    border:var(--glass-border);
+    border-radius:16px;
+    padding:14px 16px;
+    box-shadow:0 8px 24px -16px rgba(37,99,235,.24);
+    transition:all .28s cubic-bezier(.22,1,.36,1);
+    display:flex;gap:12px;align-items:flex-start;
+    position:relative;
+    overflow:hidden;
+  }
+  .enrolled-card::before{
+    content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
+    background:linear-gradient(180deg,#3b82f6,#2563eb);
+  }
+  .enrolled-card:hover{transform:translateY(-3px);box-shadow:var(--float-shadow);border-color:rgba(37,99,235,.30)}
+  .enrolled-card .ec-code{
+    width:56px;height:56px;border-radius:14px;flex-shrink:0;
+    background:linear-gradient(135deg,#1e40af,#3b82f6);
+    color:#fff;display:flex;align-items:center;justify-content:center;
+    font-weight:900;font-size:12.5px;text-align:center;line-height:1.1;
+    padding:4px;overflow:hidden;word-break:break-word;
+    box-shadow:0 8px 20px -6px rgba(37,99,235,.5);
+  }
+  .enrolled-card .ec-body{flex:1;min-width:0}
+  .enrolled-card .ec-name{font-size:14px;font-weight:800;color:var(--text-primary);line-height:1.25;margin-bottom:4px}
+  .enrolled-card .ec-meta{font-size:11.5px;color:var(--text-muted);display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  .enrolled-card .ec-meta i{color:var(--blue)}
+  .enrolled-card .ec-tags{display:flex;gap:6px;flex-wrap:wrap}
+  .enrolled-card .ec-tag{
+    font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;
+    padding:3px 9px;border-radius:20px;
+    background:var(--blue-light);color:var(--blue-dark);
+    border:1px solid rgba(37,99,235,.15);
+    display:inline-flex;align-items:center;gap:4px;
+  }
+  .enrolled-card .ec-tag.green{background:#d1fae5;color:#065f46;border-color:#a7f3d0}
+  .enrolled-card .ec-tag.amber{background:#fef3c7;color:#92400e;border-color:#fde68a}
+  .enrolled-card .ec-tag.grey{background:#f1f5f9;color:#475569;border-color:#e2e8f0}
+  .enrolled-card .ec-tag.purple{background:#ede9fe;color:#5b21b6;border-color:#ddd6fe}
+
+  /* ═══ TIMETABLE GRID (comprehensive) ═══ */
+  .tt-toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+  .tt-toolbar .tt-chip{
+    padding:7px 14px;border-radius:20px;background:#fff;
+    border:1.5px solid var(--border-color);
+    font-size:12px;font-weight:700;color:var(--text-secondary);
+    cursor:pointer;transition:.2s;font-family:inherit;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .tt-toolbar .tt-chip:hover{border-color:var(--blue);color:var(--blue-dark)}
+  .tt-toolbar .tt-chip.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+  .tt-grid-wrap{
+    overflow-x:auto;
+    border-radius:16px;
+    border:1px solid var(--border-color);
+    background:#fff;
+    box-shadow:0 12px 30px -16px rgba(37,99,235,.25);
+    margin-bottom:14px;
+  }
+  .tt-grid{
+    width:100%;border-collapse:separate;border-spacing:0;
+    min-width:720px;font-size:12px;
+  }
+  .tt-grid th,.tt-grid td{
+    border-right:1px solid var(--border-color);
+    border-bottom:1px solid var(--border-color);
+    padding:10px 8px;vertical-align:top;
+  }
+  .tt-grid th{
+    background:var(--blue-light);
+    font-weight:800;font-size:10.5px;
+    text-transform:uppercase;letter-spacing:.5px;
+    color:var(--blue-dark);text-align:center;
+    position:sticky;top:0;z-index:2;
+    white-space:nowrap;
+  }
+  .tt-grid th:last-child,.tt-grid td:last-child{border-right:none}
+  .tt-grid th:first-child{text-align:left;width:100px}
+  .tt-grid td:first-child{
+    background:linear-gradient(180deg,#eff6ff,#dbeafe);
+    font-weight:800;color:var(--blue-dark);font-size:11px;
+    text-align:center;width:100px;vertical-align:middle;
+    white-space:nowrap;
+  }
+  .tt-grid tbody tr:last-child td{border-bottom:none}
+  .tt-cell{
+    background:#f8fafc;border-radius:10px;
+    padding:8px 10px;display:flex;flex-direction:column;gap:4px;
+    transition:.2s;border-left:3px solid var(--blue);
+    margin-bottom:4px;
+  }
+  .tt-cell:hover{background:#eff6ff;transform:translateX(2px);box-shadow:0 6px 16px -8px rgba(37,99,235,.25)}
+  .tt-cell .tt-course{font-weight:800;font-size:11.5px;color:var(--text-primary);line-height:1.25}
+  .tt-cell .tt-meta{font-size:10.5px;color:var(--text-muted);display:flex;flex-wrap:wrap;gap:6px}
+  .tt-cell .tt-meta i{color:var(--blue)}
+  .tt-cell .tt-tag{
+    display:inline-block;font-size:9px;font-weight:900;
+    text-transform:uppercase;letter-spacing:.4px;
+    padding:2px 7px;border-radius:10px;
+    background:#dbeafe;color:#1e40af;
+    align-self:flex-start;
+  }
+  .tt-empty{text-align:center;color:#cbd5e1;font-size:14px;padding:10px 0}
+  .tt-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--text-muted);margin-top:8px}
+  .tt-legend span{display:inline-flex;align-items:center;gap:6px}
+  .tt-legend i{color:var(--blue)}
+
+  /* ═══ CLASSMATES LIST ═══ */
+  .classmates-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+  .classmate-card{
+    background:#fff;border:1px solid var(--border-color);border-radius:14px;
+    padding:12px;display:flex;gap:10px;align-items:center;
+    transition:.22s;
+  }
+  .classmate-card:hover{border-color:var(--blue);transform:translateY(-2px);box-shadow:0 10px 24px -14px rgba(37,99,235,.30)}
+  .classmate-card .cm-av{
+    width:42px;height:42px;border-radius:50%;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-weight:900;font-size:14px;
+    background:linear-gradient(135deg,#3b82f6,#2563eb);
+    overflow:hidden;border:2px solid #fff;
+    box-shadow:0 4px 12px rgba(37,99,235,.25);
+  }
+  .classmate-card .cm-av img{width:100%;height:100%;object-fit:cover}
+  .classmate-card .cm-body{flex:1;min-width:0}
+  .classmate-card .cm-name{font-weight:800;font-size:12.5px;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .classmate-card .cm-sub{font-size:11px;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .classmate-card.me{border-color:var(--blue);background:linear-gradient(135deg,#eff6ff,#dbeafe);box-shadow:0 8px 20px -12px rgba(37,99,235,.35)}
+  .classmate-card.me .cm-name{color:var(--blue-dark)}
+
+  /* General cards / tiles */
   .welcome-banner{display:none}
   .section-title{font-size:15px;font-weight:800;color:var(--text-primary);margin:18px 0 12px;display:flex;align-items:center;gap:8px}
   .section-title i{color:var(--blue)}
@@ -246,8 +572,7 @@
     background:var(--glass-bg);
     backdrop-filter:var(--glass-blur);
     -webkit-backdrop-filter:var(--glass-blur);
-    border-radius:18px;
-    padding:16px 14px;
+    border-radius:18px;padding:16px 14px;
     border:var(--glass-border);
     box-shadow:0 10px 30px -14px rgba(37,99,235,.24), 0 4px 12px rgba(15,23,42,.04);
     transition:all .35s cubic-bezier(.22,1,.36,1);
@@ -270,11 +595,9 @@
     backdrop-filter:var(--glass-blur);
     -webkit-backdrop-filter:var(--glass-blur);
     border:var(--glass-border);
-    border-radius:16px;
-    padding:14px 8px;
+    border-radius:16px;padding:14px 8px;
     display:flex;flex-direction:column;align-items:center;gap:6px;
-    cursor:pointer;
-    transition:all .3s cubic-bezier(.22,1,.36,1);
+    cursor:pointer;transition:all .3s cubic-bezier(.22,1,.36,1);
     font-family:inherit;color:var(--text-primary);font-size:11.5px;font-weight:700;text-align:center;line-height:1.2;
     box-shadow:0 8px 22px -12px rgba(37,99,235,.22);
   }
@@ -305,22 +628,6 @@
   .nav-item.logout i{color:var(--red)}
   .nav-item.logout:hover{background:#fef2f2;color:#991b1b}
   .nav-item .nav-badge{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:var(--red);color:#fff;font-size:10px;font-weight:800;border-radius:20px;min-width:20px;height:20px;display:flex;align-items:center;justify-content:center;padding:0 6px}
-
-  .sub-page{display:none;position:fixed;inset:0;z-index:100;background:var(--bg-secondary);overflow-y:auto;animation:slideIn .35s ease}
-  @keyframes slideIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
-  .sub-page.active{display:block}
-  .sub-head{background:var(--header-bg);backdrop-filter:var(--glass-blur);padding:14px 18px;border-bottom:1px solid rgba(37,99,235,.12);display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:5;box-shadow:0 2px 12px rgba(37,99,235,.04)}
-  .sub-head img{width:40px;height:40px;object-fit:contain;border-radius:8px;background:var(--blue-light);padding:4px;border:1px solid var(--blue-soft)}
-  .sub-head h2{font-size:17px;font-weight:800;color:var(--text-primary);flex:1;line-height:1.2}
-  .sub-head h2 .accent{color:var(--blue)}
-  .sub-close{background:rgba(255,255,255,.7);border:1px solid var(--border-color);width:36px;height:36px;border-radius:50%;font-size:16px;color:var(--text-primary);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s}
-  .sub-close:hover{background:var(--blue-soft);transform:scale(1.05)}
-  .sub-body{padding:20px 18px 40px;max-width:900px;margin:0 auto}
-  .sub-body h3{font-size:15px;font-weight:800;color:var(--text-primary);margin:20px 0 12px;display:flex;align-items:center;gap:8px;padding-bottom:8px;border-bottom:2px solid rgba(37,99,235,.15)}
-  .sub-body h3:first-child{margin-top:0}
-  .sub-body h3 i{color:var(--blue)}
-  .sub-body p{line-height:1.7;color:#334155;margin-bottom:8px;font-size:14px}
-  .sub-body ul,.sub-body ol{padding-left:20px;margin:8px 0 12px;color:#334155;line-height:1.75;font-size:13.5px}
 
   .tbl-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border-color);margin:12px 0;background:#fff;box-shadow:0 6px 20px -12px rgba(37,99,235,.18)}
   table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:520px}
@@ -387,6 +694,7 @@
   .prog.green>div{background:linear-gradient(90deg,#10b981,#059669)}
   .prog.amber>div{background:linear-gradient(90deg,#f59e0b,#d97706)}
   .prog.red>div{background:linear-gradient(90deg,#ef4444,#b91c1c)}
+  .prog.purple>div{background:linear-gradient(90deg,#8b5cf6,#6d28d9)}
 
   .timeline{position:relative;padding-left:24px;margin:12px 0}
   .timeline::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--border-color);border-radius:2px}
@@ -575,8 +883,30 @@
   .teveta-signature-block .sig-col .sig-label{font-size:11px;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
   .teveta-status-banner{background:#f0fdf4;border-left:4px solid #10b981;padding:12px 14px;border-radius:10px;margin-bottom:18px;font-size:13px;color:#065f46}
 
+  .ca-doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:10px}
+  .ca-doc-tile{position:relative;border-radius:12px;overflow:hidden;background:var(--soft);border:1.5px solid var(--border-color);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.25s}
+  .ca-doc-tile:hover{border-color:var(--blue);box-shadow:0 6px 20px rgba(37,99,235,.18);transform:translateY(-3px)}
+  .ca-doc-tile img{width:100%;height:100%;object-fit:cover;display:block}
+  .ca-doc-tile .doc-icon{font-size:36px;color:var(--blue);opacity:.55}
+  .ca-doc-tile .doc-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,rgba(0,0,0,.75) 0%,transparent 100%);color:#fff;font-size:10.5px;font-weight:700;padding:16px 8px 6px;text-align:center;line-height:1.25;pointer-events:none}
+
   @media (max-width:560px){.teveta-form-container{padding:18px 14px}.teveta-form-container .form-field .field-label{min-width:auto;flex:1 1 100%}.teveta-form-container .form-field .field-number{min-width:22px}.teveta-form-container .box-input{width:30px;padding:4px 2px;font-size:12px}}
-  @media (max-width:480px){.header-center .name{font-size:14px}.hero-card{padding:20px 18px}.hero-photo{width:78px;height:78px;font-size:30px}.hero-info .nm{font-size:20px}.grid-cards{grid-template-columns:1fr 1fr}.quick-grid{grid-template-columns:repeat(3,1fr)}.course-grid{grid-template-columns:1fr}.sidebar{width:280px}}
+  @media (max-width:480px){
+    .header-center .name{font-size:14px}
+    .hero-card{padding:20px 18px}
+    .hero-photo{width:78px;height:78px;font-size:30px}
+    .hero-info .nm{font-size:20px}
+    .grid-cards{grid-template-columns:1fr 1fr}
+    .quick-grid{grid-template-columns:repeat(3,1fr)}
+    .course-grid{grid-template-columns:1fr}
+    .sidebar{width:280px}
+    .ca-home-overall .gb-big{min-width:54px;height:54px;font-size:22px}
+    .ca-home-overall-text .pct{font-size:22px}
+    .ca-home-course-item .code{min-width:44px;padding:3px 8px;font-size:11px}
+    .ca-home-course-item .pct{font-size:14px;min-width:44px}
+    .class-banner .cb-icon{width:46px;height:46px;font-size:20px}
+    .class-banner .cb-name{font-size:17px}
+  }
   @supports(padding:env(safe-area-inset-top)){.top-bar{padding-top:calc(12px + env(safe-area-inset-top))}}
 </style>
 </head>
@@ -623,6 +953,7 @@
     <section class="page-container active-page full-page" id="homePage"><div id="homeContent"></div></section>
     <section class="page-container full-page" id="pendingPage"><div id="pendingContent"></div></section>
     <section class="page-container full-page" id="coursesPage"><div id="coursesContent"></div></section>
+    <section class="page-container full-page" id="classesPage"><div id="classesContent"></div></section>
     <section class="page-container full-page" id="caPage"><div id="caContent"></div></section>
     <section class="page-container full-page" id="attendancePage"><div id="attendanceContent"></div></section>
     <section class="page-container full-page" id="examsPage"><div id="examsContent"></div></section>
@@ -651,9 +982,9 @@
   <nav class="bottom-nav">
     <button class="bn-item active" data-nav="home"><i class="fas fa-home"></i> Home</button>
     <button class="bn-item" data-nav="pending"><i class="fas fa-file-alt"></i> Applications<span class="bn-badge" id="bnPendingBadge" style="display:none">0</span></button>
+    <button class="bn-item" data-nav="classes"><i class="fas fa-users-rectangle"></i> Class</button>
     <button class="bn-item" data-nav="courses"><i class="fas fa-book"></i> Courses</button>
-    <button class="bn-item" data-nav="ca"><i class="fas fa-chart-bar"></i> CA</button>
-    <button class="bn-item" data-nav="profile"><i class="fas fa-user"></i> Profile</button>
+    <button class="bn-item" data-nav="timetable"><i class="fas fa-clock"></i> Timetable</button>
   </nav>
 
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
@@ -665,11 +996,12 @@
     <nav class="sidebar-nav">
       <button class="nav-item" data-page="home"><i class="fas fa-home"></i> Dashboard</button>
       <button class="nav-item" data-page="pending"><i class="fas fa-file-alt"></i> My Applications <span class="nav-badge" id="navPendingBadge" style="display:none">0</span></button>
+      <button class="nav-item" data-page="classes"><i class="fas fa-users-rectangle"></i> My Class</button>
       <button class="nav-item" data-page="courses"><i class="fas fa-book"></i> Courses</button>
+      <button class="nav-item" data-page="timetable"><i class="fas fa-clock"></i> Timetable</button>
       <button class="nav-item" data-page="ca"><i class="fas fa-chart-bar"></i> Continuous Assessment</button>
       <button class="nav-item" data-page="assignments"><i class="fas fa-tasks"></i> Assignments</button>
       <button class="nav-item" data-page="attendance"><i class="fas fa-clipboard-list"></i> Attendance</button>
-      <button class="nav-item" data-page="timetable"><i class="fas fa-clock"></i> Timetable</button>
       <button class="nav-item" data-page="exams"><i class="fas fa-calendar-check"></i> Exams</button>
       <button class="nav-item" data-page="clearance"><i class="fas fa-check-circle"></i> Clearance</button>
       <button class="nav-item" data-page="finance"><i class="fas fa-coins"></i> Finance</button>
@@ -779,6 +1111,63 @@ let dbLiveNotifs = {};
 let dbPromos = [];
 let appFilter = 'all';
 
+/* New: classes & comprehensive timetables */
+let dbClasses = [];      /* global list of class records */
+let myClass = null;      /* resolved class record for this student */
+let myTimetableSlots = []; /* slots filtered to this student */
+
+/* Timetable constants (mirrors admin console) */
+const TT_DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+const TT_SLOTS = [
+  { start:'08:00', end:'10:00', label:'08:00 – 10:00' },
+  { start:'10:00', end:'12:00', label:'10:00 – 12:00' },
+  { start:'12:00', end:'14:00', label:'12:00 – 14:00' },
+  { start:'14:00', end:'16:00', label:'14:00 – 16:00' },
+  { start:'16:00', end:'18:00', label:'16:00 – 18:00' }
+];
+
+/* ═══════════════════════════════════════════════════════════════
+   GRADE SYSTEM (matches admin console)
+   ═══════════════════════════════════════════════════════════════ */
+const GRADE_SYSTEM = {
+  D: { label: 'Distinction', range: '75–100' },
+  M: { label: 'Merit',       range: '65–74'  },
+  C: { label: 'Credit',      range: '55–64'  },
+  P: { label: 'Pass',        range: '40–54'  },
+  F: { label: 'Fail',        range: '0–39'   }
+};
+const GRADE_KEYS = ['D','M','C','P','F'];
+function gradeFromPct(pct){
+  pct = Number(pct) || 0;
+  if(pct >= 75) return 'D';
+  if(pct >= 65) return 'M';
+  if(pct >= 55) return 'C';
+  if(pct >= 40) return 'P';
+  return 'F';
+}
+function getCourseCAEntries(){
+  const ca = (appData && appData.ca) || {};
+  const skip = ['total','grade','updatedAt','updatedBy'];
+  const out = [];
+  Object.keys(ca).forEach(k => {
+    if(skip.includes(k)) return;
+    const v = ca[k];
+    if(!v || typeof v !== 'object') return;
+    out.push({ courseId: k, ...v });
+  });
+  return out;
+}
+function enrichCourseEntry(entry){
+  const course = allCourses.find(c => c.id === entry.courseId) || {};
+  return {
+    ...entry,
+    code: course.code || entry.code || '—',
+    name: course.name || entry.name || 'Course',
+    yearStudy: course.yearStudy || '',
+    instructor: course.instructor || ''
+  };
+}
+
 /* ═══════════════════════════════════════════════════════════════
    HELPERS
    ═══════════════════════════════════════════════════════════════ */
@@ -834,12 +1223,95 @@ async function openCloudinaryUpload({ formats=['jpg','jpeg','png','pdf','heic','
 }
 
 /* ═══════════════════════════════════════════════════════════════
+   CLASS & TIMETABLE HELPERS
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Resolve the student's class record (from applications.classId → dbClasses) */
+function resolveMyClass(){
+  const classId = appData?.classId;
+  if(!classId){ myClass = null; return null; }
+  myClass = dbClasses.find(c => c.id === classId) || null;
+  return myClass;
+}
+
+/* Get the programmeId for this student (prefers appData, falls back to matching programme in list) */
+function getMyProgrammeId(){
+  if(appData?.programme?.id) return appData.programme.id;
+  const code = String(appData?.programme?.code || '').trim();
+  const title = String(appData?.programme?.title || '').trim();
+  const p = (window.__programmesCache || []).find(x =>
+    (code && String(x.code||'').trim() === code) ||
+    (title && String(x.title||'').trim() === title)
+  );
+  return p?.id || '';
+}
+
+/* Courses that belong to this student's programme */
+function getMyProgrammeCourses(){
+  const progId = getMyProgrammeId();
+  const progCode = String(appData?.programme?.code || '').trim();
+  const progTitle = String(appData?.programme?.title || '').trim();
+  return allCourses.filter(c => {
+    if(progId && c.programmeId === progId) return true;
+    if(progCode && c.programmeCode && String(c.programmeCode).trim() === progCode) return true;
+    if(progTitle && c.programmeTitle && String(c.programmeTitle).trim() === progTitle) return true;
+    return false;
+  });
+}
+
+/* Filter timetable slots to this student.
+   1) If student has a classId, prefer slots matching that class
+   2) Otherwise, show all slots for their programme (all classes) */
+function filterMyTimetableSlots(){
+  const progId = getMyProgrammeId();
+  const progCode = String(appData?.programme?.code || '').trim();
+  const progTitle = String(appData?.programme?.title || '').trim();
+  const classId = appData?.classId || '';
+
+  const list = (dbTimetable || []).filter(t => {
+    const progMatch =
+      (progId && t.programmeId === progId) ||
+      (progCode && t.programmeCode && String(t.programmeCode).trim() === progCode) ||
+      (progTitle && t.programmeTitle && String(t.programmeTitle).trim() === progTitle) ||
+      (!progId && !progCode && !progTitle); /* fallback: don't hide everything */
+    return progMatch;
+  });
+
+  /* If we have a classId, prefer the slots for that class, but if none exist, show all programme slots */
+  if(classId){
+    const classSlots = list.filter(t => t.classId === classId);
+    if(classSlots.length) return classSlots;
+  }
+  return list;
+}
+
+/* Count of distinct class members (from applications with the same classId) */
+function getClassmates(){
+  const classId = appData?.classId;
+  if(!classId || !window.__allAppsCache) return [];
+  return window.__allAppsCache.filter(a =>
+    a.classId === classId &&
+    (a.status||'').toLowerCase() === 'approved' &&
+    a.id !== currentUser?.uid
+  );
+}
+function getClassSize(){
+  const classId = appData?.classId;
+  if(!classId || !window.__allAppsCache) return 0;
+  return window.__allAppsCache.filter(a =>
+    a.classId === classId &&
+    (a.status||'').toLowerCase() === 'approved'
+  ).length;
+}
+
+/* ═══════════════════════════════════════════════════════════════
    NAVIGATION
    ═══════════════════════════════════════════════════════════════ */
 const PAGE_RENDERERS = {
   home: renderHome,
   pending: renderPending,
   courses: renderCourses,
+  classes: renderClasses,
   ca: renderCA,
   attendance: renderAttendance,
   exams: renderExams,
@@ -880,7 +1352,7 @@ function showPage(pageId){
 window.showPage = showPage;
 
 /* ═══════════════════════════════════════════════════════════════
-   BUILD THE MASTER APPLICATIONS LIST FROM ALL FIREBASE NODES
+   BUILD THE MASTER APPLICATIONS LIST
    ═══════════════════════════════════════════════════════════════ */
 function buildAllApplications(){
   const list = [];
@@ -1183,7 +1655,7 @@ function updatePendingBadge(){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   HOME — SIMPLIFIED: Name, Course, Picture, Phone, Notice Board
+   HOME — Hero + Notice Board + CA Box
    ═══════════════════════════════════════════════════════════════ */
 function renderHome(){
   const name = appData.fullName || userData.fullName || 'Student';
@@ -1220,6 +1692,8 @@ function renderHome(){
         <div>Notices from management will appear here.</div>
       </div>`;
 
+  const caBox = renderHomeCABox();
+
   $('#homeContent').innerHTML = `
     <div class="hero-card">
       <div class="hero-inner">
@@ -1247,90 +1721,624 @@ function renderHome(){
     <div class="notice-board">
       ${noticesHtml}
     </div>
+
+    ${caBox}
+  `;
+
+  $$('#homeContent .ca-home-foot .btn-link').forEach(btn => {
+    btn.addEventListener('click', () => showPage('ca'));
+  });
+  $$('#homeContent .ca-home-docs .doc-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const url = chip.dataset.url;
+      if(url) window.open(url, '_blank');
+    });
+  });
+}
+
+function renderHomeCABox(){
+  const courseEntriesRaw = getCourseCAEntries();
+  const courseEntries = courseEntriesRaw.map(enrichCourseEntry);
+
+  const ca = (appData && appData.ca) || {};
+  const overallPct = (ca.total != null) ? Number(ca.total) : (courseEntries.length
+    ? Math.round(courseEntries.reduce((s,c) => s + (Number(c.pct)||0), 0) / courseEntries.length)
+    : null);
+  const overallGrade = ca.grade || (overallPct != null ? gradeFromPct(overallPct) : null);
+
+  const caDocs = appData.caDocuments
+    ? Object.entries(appData.caDocuments).map(([id, v]) => ({id, ...v}))
+    : [];
+
+  const sectionTitle = `
+    <div class="notice-section-title">
+      <div class="ttl-icon purple"><i class="fas fa-chart-bar"></i></div>
+      <span>Continuous Assessment</span>
+      <span class="cnt">${courseEntries.length} course${courseEntries.length !== 1 ? 's' : ''}</span>
+    </div>
+  `;
+
+  if(!courseEntries.length && overallPct == null){
+    return `
+      ${sectionTitle}
+      <div class="ca-home-card">
+        <div style="text-align:center;padding:22px 14px">
+          <div style="width:64px;height:64px;margin:0 auto 12px;border-radius:50%;background:linear-gradient(135deg,#ede9fe,#ddd6fe);display:flex;align-items:center;justify-content:center;color:#8b5cf6;font-size:26px">
+            <i class="fas fa-chart-bar"></i>
+          </div>
+          <div style="font-weight:900;font-size:15px;color:var(--text-primary);margin-bottom:4px">No CA marks yet</div>
+          <div style="font-size:12.5px;color:var(--text-muted);line-height:1.5;max-width:340px;margin:0 auto">
+            Your Continuous Assessment results will appear here once the examinations office enters your marks.
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  const courseListHtml = courseEntries.length
+    ? courseEntries.map(c => {
+        const pct = (c.pct != null) ? Number(c.pct) : null;
+        const grade = c.grade || (pct != null ? gradeFromPct(pct) : '');
+        const remark = c.remark ? esc(c.remark) : '';
+        return `
+          <div class="ca-home-course-item">
+            <div class="code">${esc(c.code || '—')}</div>
+            <div class="name">
+              ${esc(c.name || 'Course')}
+              ${remark ? `<span class="remark"><i class="fas fa-comment-dots" style="color:#8b5cf6;margin-right:4px"></i>${remark}</span>` : ''}
+            </div>
+            <div class="pct">${pct != null ? pct + '%' : '—'}</div>
+            ${grade ? `<div class="grade-badge small ${grade}" title="${GRADE_SYSTEM[grade].label}">${grade}</div>` : `<div style="min-width:30px"></div>`}
+          </div>
+        `;
+      }).join('')
+    : `<div style="text-align:center;padding:12px;color:var(--text-muted);font-size:12.5px">No individual course marks recorded yet</div>`;
+
+  const docsHtml = caDocs.length
+    ? `
+      <div class="ca-home-docs">
+        <span style="font-size:11px;color:var(--text-muted);font-weight:700;align-self:center;margin-right:4px">
+          <i class="fas fa-paperclip"></i> CA Documents:
+        </span>
+        ${caDocs.slice(0,4).map(d => `
+          <span class="doc-chip" data-url="${esc(d.dataUrl || '')}" title="${esc(d.name || 'CA document')}">
+            <i class="fas ${d.type && d.type.startsWith('image') ? 'fa-image' : 'fa-file-pdf'}"></i>
+            ${esc(d.name || 'Document')}
+          </span>
+        `).join('')}
+        ${caDocs.length > 4 ? `<span style="font-size:11px;color:var(--text-muted);align-self:center">+${caDocs.length - 4} more</span>` : ''}
+      </div>
+    `
+    : '';
+
+  const overallBlock = overallPct != null
+    ? `
+      <div class="ca-home-overall">
+        <div class="gb-big ${overallGrade}"><span>${overallGrade}</span></div>
+        <div class="ca-home-overall-text">
+          <div class="ttl">Overall CA</div>
+          <div class="pct">${overallPct}%</div>
+          <div class="desc">${GRADE_SYSTEM[overallGrade].label} · <strong>${GRADE_SYSTEM[overallGrade].range}%</strong></div>
+        </div>
+      </div>
+      <div class="ca-home-stats">
+        <div class="ca-home-stat">
+          <div class="v">${courseEntries.length}</div>
+          <div class="k">Courses</div>
+        </div>
+        <div class="ca-home-stat">
+          <div class="v">${courseEntries.filter(c => c.grade && c.grade !== 'F').length}</div>
+          <div class="k">Passed</div>
+        </div>
+        <div class="ca-home-stat">
+          <div class="v">${courseEntries.filter(c => c.grade === 'F').length}</div>
+          <div class="k">Fails</div>
+        </div>
+      </div>
+    `
+    : `
+      <div class="ca-home-overall">
+        <div class="gb-big" style="background:linear-gradient(135deg,#94a3b8,#64748b);color:#94a3b8"><span>?</span></div>
+        <div class="ca-home-overall-text">
+          <div class="ttl">Overall CA</div>
+          <div class="pct">—</div>
+          <div class="desc">Awaiting overall grade</div>
+        </div>
+      </div>
+    `;
+
+  return `
+    ${sectionTitle}
+    <div class="ca-home-card">
+      <div class="ca-home-head">
+        ${overallBlock}
+      </div>
+      <div class="ca-home-course-list">
+        ${courseListHtml}
+      </div>
+      ${docsHtml}
+      <div class="ca-home-foot">
+        <div class="legend">
+          <span><span class="gb-mini D">D</span> Distinction</span>
+          <span><span class="gb-mini M">M</span> Merit</span>
+          <span><span class="gb-mini C">C</span> Credit</span>
+          <span><span class="gb-mini P">P</span> Pass</span>
+          <span><span class="gb-mini F">F</span> Fail</span>
+        </div>
+        <button class="btn-link" type="button">
+          <i class="fas fa-chart-line"></i> Full Report
+        </button>
+      </div>
+    </div>
   `;
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   COURSES
+   MY CLASS PAGE (new)
+   ═══════════════════════════════════════════════════════════════ */
+function renderClasses(){
+  const cl = resolveMyClass();
+  const classmates = getClassmates();
+  const size = getClassSize();
+  const programmeCourses = getMyProgrammeCourses();
+
+  let html = `<h3><i class="fas fa-users-rectangle"></i> My Class</h3>`;
+
+  if(!cl){
+    html += `
+      <div class="empty-glass" style="margin-bottom:14px">
+        <i class="fas fa-users-rectangle"></i>
+        <div class="e-ttl">No class assigned yet</div>
+        <div>Once the examinations office assigns you to a class group, it will appear here together with your classmates and timetable.</div>
+      </div>
+    `;
+    $('#classesContent').innerHTML = html;
+    return;
+  }
+
+  /* Class banner */
+  html += `
+    <div class="class-banner">
+      <div class="cb-inner">
+        <div class="cb-icon"><i class="fas fa-users-rectangle"></i></div>
+        <div class="cb-body">
+          <div class="cb-lbl">Assigned Class</div>
+          <div class="cb-name">${esc(cl.name || '—')}</div>
+          <div class="cb-meta">
+            <span><i class="fas fa-graduation-cap"></i> ${esc(cl.programmeTitle || appData.programme?.title || '—')}</span>
+            ${cl.yearStudy ? `<span><i class="fas fa-layer-group"></i> ${esc(cl.yearStudy)} Year</span>` : ''}
+            ${cl.programmeCode ? `<span><i class="fas fa-hashtag"></i> ${esc(cl.programmeCode)}</span>` : ''}
+          </div>
+        </div>
+        <div class="cb-stats">
+          <div class="cb-stat"><div class="v">${size}</div><div class="k">Classmates</div></div>
+          ${cl.capacity ? `<div class="cb-stat"><div class="v">${cl.capacity}</div><div class="k">Capacity</div></div>` : ''}
+          <div class="cb-stat"><div class="v">${programmeCourses.length}</div><div class="k">Courses</div></div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  /* Class info cards */
+  html += `
+    <div class="info-grid">
+      <div class="info-item"><div class="lbl">Class Name</div><div class="val">${esc(cl.name||'—')}</div></div>
+      <div class="info-item"><div class="lbl">Year</div><div class="val">${esc(cl.yearStudy||'—')}</div></div>
+      <div class="info-item"><div class="lbl">Programme</div><div class="val">${esc(cl.programmeTitle||appData.programme?.title||'—')}</div></div>
+      <div class="info-item"><div class="lbl">Programme Code</div><div class="val">${esc(cl.programmeCode||appData.programme?.code||'—')}</div></div>
+      <div class="info-item"><div class="lbl">Capacity</div><div class="val">${cl.capacity||'—'}</div></div>
+      <div class="info-item"><div class="lbl">Total Students</div><div class="val">${size}</div></div>
+    </div>
+  `;
+
+  /* Classmates */
+  html += `<h3 style="margin-top:18px"><i class="fas fa-user-friends"></i> Classmates (${classmates.length})</h3>`;
+  if(!classmates.length){
+    html += `<div class="empty-glass">
+      <i class="fas fa-user-friends"></i>
+      <div class="e-ttl">You are the first in this class</div>
+      <div>No other approved students have been assigned to your class yet.</div>
+    </div>`;
+  } else {
+    /* Include self */
+    const meAsApp = { id: currentUser?.uid, fullName: appData.fullName, studentNumber: appData.studentNumber, email: appData.email, personal: appData.personal };
+    const all = [meAsApp, ...classmates];
+    html += `<div class="classmates-grid">
+      ${all.map((m, i) => {
+        const isMe = m.id === currentUser?.uid;
+        const photo = m.personal?.profilePhoto || '';
+        return `
+          <div class="classmate-card ${isMe ? 'me' : ''}">
+            <div class="cm-av">
+              ${photo ? `<img src="${esc(photo)}" onerror="this.remove()"/>` : esc(getInitials(m.fullName))}
+            </div>
+            <div class="cm-body">
+              <div class="cm-name">${esc(m.fullName || '—')}${isMe ? ' <span style="font-size:10px;color:var(--blue-dark);font-weight:800">(You)</span>' : ''}</div>
+              <div class="cm-sub">${esc(m.studentNumber||'')}</div>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>`;
+  }
+
+  /* Enrolled courses for this programme (quick view) */
+  html += `<h3 style="margin-top:22px"><i class="fas fa-book"></i> Courses in this Class</h3>`;
+  if(!programmeCourses.length){
+    html += emptyState('No courses listed for this programme yet','fa-book');
+  } else {
+    html += `<div class="enrolled-list">
+      ${programmeCourses.map(c => `
+        <div class="enrolled-card">
+          <div class="ec-code">${esc(c.code || '—')}</div>
+          <div class="ec-body">
+            <div class="ec-name">${esc(c.name || 'Course')}</div>
+            <div class="ec-meta">
+              ${c.yearStudy ? `<span><i class="fas fa-layer-group"></i> ${esc(c.yearStudy)} Year</span>` : ''}
+              ${c.instructor ? `<span><i class="fas fa-user-tie"></i> ${esc(c.instructor)}</span>` : ''}
+            </div>
+            <div class="ec-tags">
+              <span class="ec-tag"><i class="fas fa-hashtag"></i> ${esc(c.code||'')}</span>
+              ${c.showOnTeveta === false ? `<span class="ec-tag grey">TEVETA Off</span>` : `<span class="ec-tag purple">TEVETA</span>`}
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    </div>`;
+  }
+
+  $('#classesContent').innerHTML = html;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   COURSES (enhanced with class + enrollment + instructor)
    ═══════════════════════════════════════════════════════════════ */
 function renderCourses(){
-  const courses = allCourses.filter(c => approvedCourses.has(c.id) || c.price === 0);
-  let html = `
+  const cl = resolveMyClass();
+  const programmeCourses = getMyProgrammeCourses();
+  const yearStudy = String(appData.programme?.yearStudy || '').trim();
+
+  /* Which courses count as "enrolled"?
+     - Courses belonging to the student's programme
+     - Filtered by current year of study if the course has a yearStudy field
+     - Plus any approved purchases (for paid courses) */
+  let enrolled = programmeCourses.filter(c => {
+    if(!c.yearStudy) return true;
+    if(!yearStudy) return true;
+    return String(c.yearStudy).toLowerCase() === yearStudy.toLowerCase();
+  });
+
+  /* If nothing matches by year, fall back to all programme courses */
+  if(!enrolled.length) enrolled = programmeCourses;
+
+  /* Show class banner at top */
+  let html = '';
+
+  if(cl){
+    html += `
+      <div class="class-banner" style="margin-bottom:16px">
+        <div class="cb-inner">
+          <div class="cb-icon"><i class="fas fa-users-rectangle"></i></div>
+          <div class="cb-body">
+            <div class="cb-lbl">My Class</div>
+            <div class="cb-name">${esc(cl.name || '—')}</div>
+            <div class="cb-meta">
+              ${cl.yearStudy ? `<span><i class="fas fa-layer-group"></i> ${esc(cl.yearStudy)} Year</span>` : ''}
+              <span><i class="fas fa-graduation-cap"></i> ${esc(cl.programmeTitle || appData.programme?.title || '—')}</span>
+            </div>
+          </div>
+          <div class="cb-stats">
+            <div class="cb-stat"><div class="v">${enrolled.length}</div><div class="k">Courses</div></div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  /* Programme overview */
+  html += `
     <div class="info-grid">
       <div class="info-item"><div class="lbl">Programme</div><div class="val">${esc(appData.programme?.title || '—')}</div></div>
       <div class="info-item"><div class="lbl">Category</div><div class="val">${esc(appData.programme?.category || '—')}</div></div>
       <div class="info-item"><div class="lbl">Mode</div><div class="val">${esc(appData.programme?.mode || '—')}</div></div>
-      <div class="info-item"><div class="lbl">Year</div><div class="val">${esc(appData.programme?.yearStudy || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Year of Study</div><div class="val">${esc(appData.programme?.yearStudy || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Intake</div><div class="val">${esc(appData.programme?.intakeLabel || '—')}</div></div>
+      <div class="info-item"><div class="lbl">Year Enrolled</div><div class="val">${esc(appData.yearEnrolled || appData.programme?.yearEnrolled || (appData.submittedAt ? new Date(appData.submittedAt).getFullYear() : '—'))}</div></div>
     </div>
   `;
-  html += `<h3><i class="fas fa-book"></i> My Courses (${courses.length})</h3>`;
-  if(!courses.length){ html += emptyState('No courses enrolled yet', 'fa-book'); }
-  else {
-    html += '<div class="course-grid">';
-    courses.forEach(c => {
-      const subCount = allSubfolders.filter(sf => sf.courseId === c.id).length;
-      html += `
-        <div class="course-card">
-          <div class="cc-hd"><span>${esc((c.name||'C').charAt(0))}</span><span class="code">${esc(c.code || '')}</span></div>
-          <div class="cc-bd">
-            <h4>${esc(c.name || 'Course')}</h4>
-            <div class="meta">
-              ${c.instructor ? `<span><i class="fas fa-user-tie"></i> ${esc(c.instructor)}</span>` : ''}
-              <span><i class="fas fa-folder"></i> ${subCount} subfolders</span>
+
+  /* Enrolled courses list */
+  html += `<h3><i class="fas fa-book"></i> Courses I am Enrolled In (${enrolled.length})</h3>`;
+
+  if(!enrolled.length){
+    html += emptyState('No courses found for your programme yet','fa-book');
+  } else {
+    html += `<div class="enrolled-list">
+      ${enrolled.map(c => {
+        const isPaid = Number(c.price||0) > 0;
+        const hasApprovedPurchase = approvedCourses.has(c.id);
+        return `
+          <div class="enrolled-card">
+            <div class="ec-code">${esc(c.code || '—')}</div>
+            <div class="ec-body">
+              <div class="ec-name">${esc(c.name || 'Course')}</div>
+              <div class="ec-meta">
+                ${c.yearStudy ? `<span><i class="fas fa-layer-group"></i> ${esc(c.yearStudy)} Year</span>` : ''}
+                ${c.instructor ? `<span><i class="fas fa-user-tie"></i> ${esc(c.instructor)}</span>` : ''}
+                ${cl ? `<span><i class="fas fa-users-rectangle"></i> ${esc(cl.name)}</span>` : ''}
+              </div>
+              <div class="ec-tags">
+                <span class="ec-tag"><i class="fas fa-hashtag"></i> ${esc(c.code||'')}</span>
+                ${isPaid
+                  ? (hasApprovedPurchase
+                      ? `<span class="ec-tag green"><i class="fas fa-check-circle"></i> Paid</span>`
+                      : `<span class="ec-tag amber"><i class="fas fa-clock"></i> Pending</span>`)
+                  : `<span class="ec-tag green"><i class="fas fa-unlock"></i> Free</span>`}
+                ${c.showOnTeveta === false ? `<span class="ec-tag grey">TEVETA Off</span>` : `<span class="ec-tag purple">TEVETA</span>`}
+              </div>
             </div>
-            <span class="badge blue">${c.price === 0 ? 'Free' : 'Paid'}</span>
+          </div>
+        `;
+      }).join('')}
+    </div>`;
+  }
+
+  /* Courses I'm entitled to via purchases that aren't in my programme (paid extras) */
+  const extraPurchased = (allCourses||[]).filter(c =>
+    approvedCourses.has(c.id) &&
+    !programmeCourses.find(pc => pc.id === c.id)
+  );
+
+  if(extraPurchased.length){
+    html += `<h3 style="margin-top:22px"><i class="fas fa-star"></i> Additional Purchased Courses (${extraPurchased.length})</h3>`;
+    html += `<div class="enrolled-list">
+      ${extraPurchased.map(c => `
+        <div class="enrolled-card">
+          <div class="ec-code" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">${esc(c.code || '—')}</div>
+          <div class="ec-body">
+            <div class="ec-name">${esc(c.name || 'Course')}</div>
+            <div class="ec-meta">
+              ${c.instructor ? `<span><i class="fas fa-user-tie"></i> ${esc(c.instructor)}</span>` : ''}
+            </div>
+            <div class="ec-tags">
+              <span class="ec-tag purple"><i class="fas fa-star"></i> Purchased</span>
+              ${c.price ? `<span class="ec-tag">ZMW ${c.price}</span>` : ''}
+            </div>
           </div>
         </div>
-      `;
-    });
-    html += '</div>';
+      `).join('')}
+    </div>`;
   }
+
   $('#coursesContent').innerHTML = html;
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   CA
+   TIMETABLE (comprehensive grid with days × time slots)
    ═══════════════════════════════════════════════════════════════ */
-function renderCA(){
-  const coursesWithCA = allCourses.filter(c => typeof c.ca === 'number');
-  const caAvg = coursesWithCA.length ? Math.round(coursesWithCA.reduce((s,c)=>s+c.ca,0) / coursesWithCA.length) : 0;
-  let html = `
-    <div class="info-grid">
-      <div class="info-item"><div class="lbl">CA Average</div><div class="val">${caAvg}%</div></div>
-      <div class="info-item"><div class="lbl">Subjects</div><div class="val">${coursesWithCA.length}</div></div>
-      <div class="info-item"><div class="lbl">Completed</div><div class="val">${allCourses.filter(c=>c.status==='completed').length}</div></div>
-      <div class="info-item"><div class="lbl">In Progress</div><div class="val">${allCourses.filter(c=>c.status==='inprogress').length}</div></div>
+function renderTimetable(){
+  const slots = myTimetableSlots;
+  const cl = resolveMyClass();
+
+  /* Overview */
+  const totalSlots = slots.length;
+  const totalCourses = new Set(slots.map(s => s.courseId || s.courseCode)).size;
+  const totalVenues = new Set(slots.map(s => s.venue).filter(Boolean)).size;
+  const totalLecturers = new Set(slots.map(s => s.lecturer).filter(Boolean)).size;
+
+  let html = `<h3><i class="fas fa-clock"></i> My Timetable</h3>`;
+
+  /* Context strip */
+  html += `
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
+      <span class="badge blue" style="text-transform:none;letter-spacing:0;padding:6px 14px">
+        <i class="fas fa-users-rectangle"></i> ${esc(cl ? cl.name : 'All classes')}
+      </span>
+      <span class="badge purple" style="text-transform:none;letter-spacing:0;padding:6px 14px">
+        <i class="fas fa-graduation-cap"></i> ${esc(appData.programme?.title || '—')}
+      </span>
     </div>
   `;
-  html += `<h3><i class="fas fa-table"></i> CA Breakdown</h3>`;
-  if(!coursesWithCA.length){ html += emptyState('No CA records available yet', 'fa-chart-bar'); }
-  else {
-    html += `<div class="tbl-wrap"><table>
-      <thead><tr><th>Code</th><th>Subject</th><th>CA %</th><th>Final</th><th>Status</th></tr></thead>
-      <tbody>
-        ${coursesWithCA.map(c => `
-          <tr>
-            <td><strong>${esc(c.code||'—')}</strong></td>
-            <td>${esc(c.name||'—')}</td>
-            <td><strong style="color:var(--blue)">${c.ca}%</strong></td>
-            <td>${c.final != null ? c.final+'%' : '—'}</td>
-            <td><span class="badge ${c.status === 'completed' ? 'green' : c.status === 'inprogress' ? 'amber':'grey'}">${esc(c.status || 'N/A')}</span></td>
-          </tr>
-        `).join('')}
-      </tbody>
-    </table></div>`;
-    html += `<h3><i class="fas fa-chart-pie"></i> Progress</h3>
-      <div style="background:#fff;border:1px solid var(--border-color);border-radius:14px;padding:16px;box-shadow:0 8px 22px -16px rgba(37,99,235,.22)">
-        ${coursesWithCA.map(c => `
-          <div style="margin-bottom:12px">
-            <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:4px">
-              <span>${esc(c.name||'')}</span><span style="color:var(--blue)">${c.ca}%</span>
+
+  /* Stat tiles */
+  html += `
+    <div class="stat-mini-row">
+      <div class="stat-mini total"><div class="v">${totalSlots}</div><div class="k">Slots</div></div>
+      <div class="stat-mini approved"><div class="v">${totalCourses}</div><div class="k">Courses</div></div>
+      <div class="stat-mini pending"><div class="v">${totalVenues}</div><div class="k">Venues</div></div>
+      <div class="stat-mini rejected"><div class="v">${totalLecturers}</div><div class="k">Lecturers</div></div>
+    </div>
+  `;
+
+  if(!slots.length){
+    html += `
+      <div class="empty-glass">
+        <i class="fas fa-clock"></i>
+        <div class="e-ttl">Timetable not published yet</div>
+        <div>Your class timetable will appear here once the examinations office publishes the weekly schedule.</div>
+      </div>
+    `;
+    $('#timetableContent').innerHTML = html;
+    return;
+  }
+
+  /* Build grid */
+  let grid = `<div class="tt-grid-wrap"><table class="tt-grid"><thead><tr><th>Time</th>`;
+  TT_DAYS.forEach(d => { grid += `<th>${d}</th>`; });
+  grid += `</tr></thead><tbody>`;
+
+  TT_SLOTS.forEach(slot => {
+    grid += `<tr><td>${slot.label}</td>`;
+    TT_DAYS.forEach(day => {
+      const cell = slots.filter(s => s.day === day && s.startTime === slot.start);
+      grid += `<td>`;
+      if(cell.length){
+        cell.forEach(s => {
+          grid += `
+            <div class="tt-cell">
+              <span class="tt-tag">${esc(s.courseCode || '')}</span>
+              <div class="tt-course">${esc(s.courseName || 'Course')}</div>
+              <div class="tt-meta">
+                ${s.venue ? `<span><i class="fas fa-map-marker-alt"></i> ${esc(s.venue)}</span>` : ''}
+                ${s.lecturer ? `<span><i class="fas fa-user-tie"></i> ${esc(s.lecturer)}</span>` : ''}
+              </div>
             </div>
-            <div class="prog ${c.ca >= 32 ? 'green': c.ca >= 25 ? 'amber':'red'}"><div style="width:${Math.min(100, (c.ca/40)*100)}%"></div></div>
+          `;
+        });
+      } else {
+        grid += `<div class="tt-empty">—</div>`;
+      }
+      grid += `</td>`;
+    });
+    grid += `</tr>`;
+  });
+
+  grid += `</tbody></table></div>`;
+  html += grid;
+
+  /* Legend */
+  html += `
+    <div class="tt-legend">
+      <span><i class="fas fa-calendar-week"></i> ${TT_DAYS.length} working days</span>
+      <span><i class="fas fa-clock"></i> ${TT_SLOTS.length} time slots / day</span>
+      <span><i class="fas fa-book"></i> ${totalCourses} distinct courses</span>
+    </div>
+  `;
+
+  /* Detailed list view underneath */
+  html += `<h3 style="margin-top:22px"><i class="fas fa-list"></i> Detailed Schedule (${slots.length})</h3>`;
+
+  /* Sort by day order, then start time */
+  const ordered = slots.slice().sort((a,b) => {
+    const dA = TT_DAYS.indexOf(a.day), dB = TT_DAYS.indexOf(b.day);
+    if(dA !== dB) return dA - dB;
+    return (a.startTime||'').localeCompare(b.startTime||'');
+  });
+
+  html += `<div class="enrolled-list">
+    ${ordered.map(s => `
+      <div class="enrolled-card" style="border-left-color:var(--purple)">
+        <div class="ec-code" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">${esc(s.courseCode || '—')}</div>
+        <div class="ec-body">
+          <div class="ec-name">${esc(s.courseName || 'Course')}</div>
+          <div class="ec-meta">
+            <span><i class="fas fa-calendar-day"></i> ${esc(s.day || '')}</span>
+            <span><i class="fas fa-clock"></i> ${esc(s.startTime || '')} – ${esc(s.endTime || '')}</span>
+            ${s.venue ? `<span><i class="fas fa-map-marker-alt"></i> ${esc(s.venue)}</span>` : ''}
+            ${s.lecturer ? `<span><i class="fas fa-user-tie"></i> ${esc(s.lecturer)}</span>` : ''}
+          </div>
+        </div>
+      </div>
+    `).join('')}
+  </div>`;
+
+  $('#timetableContent').innerHTML = html;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CA — comprehensive page
+   ═══════════════════════════════════════════════════════════════ */
+function renderCA(){
+  const courseEntries = getCourseCAEntries().map(enrichCourseEntry);
+  const ca = (appData && appData.ca) || {};
+  const overallPct = (ca.total != null) ? Number(ca.total) : (courseEntries.length
+    ? Math.round(courseEntries.reduce((s,c) => s + (Number(c.pct)||0), 0) / courseEntries.length)
+    : null);
+  const overallGrade = ca.grade || (overallPct != null ? gradeFromPct(overallPct) : null);
+
+  const passed = courseEntries.filter(c => c.grade && c.grade !== 'F').length;
+  const failed = courseEntries.filter(c => c.grade === 'F').length;
+
+  const caDocs = appData.caDocuments
+    ? Object.entries(appData.caDocuments).map(([id, v]) => ({id, ...v}))
+    : [];
+
+  let html = `
+    <h3><i class="fas fa-chart-bar"></i> Continuous Assessment</h3>
+    <div class="info-grid">
+      <div class="info-item"><div class="lbl">Overall CA</div><div class="val" style="color:${overallGrade? 'var(--purple)':'var(--text-muted)'}">${overallPct != null ? overallPct + '%' : '—'}</div></div>
+      <div class="info-item"><div class="lbl">Grade</div><div class="val">${overallGrade ? `<span class="grade-badge small ${overallGrade}">${overallGrade}</span> <span style="font-size:12px;color:var(--text-muted);margin-left:6px">${GRADE_SYSTEM[overallGrade].label}</span>` : '—'}</div></div>
+      <div class="info-item"><div class="lbl">Courses Graded</div><div class="val">${courseEntries.length}</div></div>
+      <div class="info-item"><div class="lbl">Passed / Failed</div><div class="val">${passed} / ${failed}</div></div>
+    </div>
+  `;
+
+  html += `
+    <div style="background:var(--glass-bg);backdrop-filter:blur(12px);border:var(--glass-border);border-radius:16px;padding:14px 16px;box-shadow:0 8px 22px -16px rgba(139,92,246,.30);margin:12px 0">
+      <div style="font-size:11.5px;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">
+        <i class="fas fa-info-circle" style="color:#8b5cf6"></i> NORTEC Grade Scale
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        ${GRADE_KEYS.map(g => `
+          <div style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--text-secondary)">
+            <span class="grade-badge small ${g}">${g}</span>
+            <span>${GRADE_SYSTEM[g].label} · <b style="color:var(--text-primary)">${GRADE_SYSTEM[g].range}%</b></span>
           </div>
         `).join('')}
+      </div>
+    </div>
+  `;
+
+  html += `<h3><i class="fas fa-table"></i> Course Breakdown</h3>`;
+  if(!courseEntries.length){
+    html += emptyState('No CA marks entered yet', 'fa-chart-bar');
+  } else {
+    html += `<div class="tbl-wrap"><table>
+      <thead><tr><th>Code</th><th>Course</th><th>Year</th><th>%</th><th>Grade</th><th>Remark</th></tr></thead>
+      <tbody>
+        ${courseEntries.map(c => {
+          const pct = c.pct != null ? Number(c.pct) : null;
+          const grade = c.grade || (pct != null ? gradeFromPct(pct) : '');
+          return `
+            <tr>
+              <td><strong>${esc(c.code || '—')}</strong></td>
+              <td>${esc(c.name || '—')}</td>
+              <td>${esc(c.yearStudy || '—')}</td>
+              <td><strong style="color:${pct != null ? 'var(--purple)' : 'var(--text-muted)'}">${pct != null ? pct + '%' : '—'}</strong></td>
+              <td>${grade ? `<span class="grade-badge small ${grade}">${grade}</span>` : '—'}</td>
+              <td>${esc(c.remark || '—')}</td>
+            </tr>
+          `;
+        }).join('')}
+      </tbody>
+    </table></div>`;
+  }
+
+  if(courseEntries.length){
+    html += `<h3><i class="fas fa-chart-line"></i> Progress</h3>
+      <div style="background:#fff;border:1px solid var(--border-color);border-radius:14px;padding:16px;box-shadow:0 8px 22px -16px rgba(139,92,246,.22)">
+        ${courseEntries.map(c => {
+          const pct = c.pct != null ? Number(c.pct) : 0;
+          const grade = c.grade || gradeFromPct(pct);
+          return `
+            <div style="margin-bottom:12px">
+              <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:4px">
+                <span>${esc(c.code || '')} · ${esc(c.name || '')}</span>
+                <span style="color:var(--purple)">${pct}% · ${grade}</span>
+              </div>
+              <div class="prog purple"><div style="width:${Math.min(100, pct)}%"></div></div>
+            </div>
+          `;
+        }).join('')}
       </div>`;
   }
+
+  if(caDocs.length){
+    html += `<h3><i class="fas fa-paperclip"></i> CA Documents (${caDocs.length})</h3>
+      <div class="ca-doc-grid">
+        ${caDocs.map(d => `
+          <div class="ca-doc-tile" onclick="window.open('${esc(d.dataUrl || '')}','_blank')">
+            ${d.type && d.type.startsWith('image') ? `<img src="${esc(d.dataUrl)}"/>` : `<i class="fas fa-file-pdf doc-icon"></i>`}
+            <div class="doc-label">${esc(d.name || 'CA doc')}</div>
+          </div>
+        `).join('')}
+      </div>
+      <p style="font-size:11.5px;color:var(--text-muted);margin-top:10px">
+        <i class="fas fa-info-circle" style="color:var(--blue)"></i>
+        These documents were uploaded by the examinations office.
+      </p>`;
+  }
+
   $('#caContent').innerHTML = html;
 }
 
@@ -1649,6 +2657,7 @@ function renderProfile(){
   const p = appData.personal || {};
   const a = appData.academic || {};
   const photo = p.profilePhoto || '';
+  const cl = resolveMyClass();
   $('#profileContent').innerHTML = `
     <div style="text-align:center;margin-bottom:20px">
       <div style="width:110px;height:110px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(135deg,var(--blue),var(--blue-bright));display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:900;color:#fff;border:4px solid #fff;box-shadow:0 12px 36px rgba(37,99,235,.35);overflow:hidden">
@@ -1680,6 +2689,8 @@ function renderProfile(){
       <div class="info-item"><div class="lbl">Intake</div><div class="val">${esc(appData.programme?.intakeLabel||'—')}</div></div>
       <div class="info-item"><div class="lbl">Mode</div><div class="val">${esc(appData.programme?.mode||'—')}</div></div>
       <div class="info-item"><div class="lbl">Year of Study</div><div class="val">${esc(appData.programme?.yearStudy||'—')}</div></div>
+      <div class="info-item"><div class="lbl">Class</div><div class="val">${cl ? esc(cl.name) : '—'}</div></div>
+      <div class="info-item"><div class="lbl">Year Enrolled</div><div class="val">${esc(appData.yearEnrolled||appData.programme?.yearEnrolled||'—')}</div></div>
       <div class="info-item"><div class="lbl">Grade 12 School</div><div class="val">${esc(a.grade12School||'—')}</div></div>
       <div class="info-item"><div class="lbl">Exam Number</div><div class="val">${esc(a.examNumber||'—')}</div></div>
     </div>
@@ -2325,22 +3336,6 @@ async function submitTevetaForm(e){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   TIMETABLE
-   ═══════════════════════════════════════════════════════════════ */
-function renderTimetable(){
-  const rows = dbTimetable;
-  let html = `<h3><i class="fas fa-clock"></i> Weekly Timetable</h3>`;
-  if(!rows.length){ html += emptyState('No timetable available','fa-clock'); }
-  else {
-    html += `<div class="tbl-wrap"><table>
-      <thead><tr><th>Day</th><th>Time</th><th>Subject</th><th>Venue</th></tr></thead>
-      <tbody>${rows.map(r => `<tr><td>${esc(r.day||'—')}</td><td>${esc(r.time||'—')}</td><td>${esc(r.subject||'—')}</td><td>${esc(r.venue||'—')}</td></tr>`).join('')}</tbody>
-    </table></div>`;
-  }
-  $('#timetableContent').innerHTML = html;
-}
-
-/* ═══════════════════════════════════════════════════════════════
    ASSIGNMENTS
    ═══════════════════════════════════════════════════════════════ */
 function renderAssignments(){
@@ -2571,12 +3566,59 @@ function bindRealtime(){
     }
     const name = appData.fullName || userData.fullName || 'Student';
     $('#headerName').innerHTML = `${esc(getFirstName(name))} <span class="accent">Dashboard</span>`;
+    /* Recompute class and timetable whenever student's classId or programme changes */
+    resolveMyClass();
+    myTimetableSlots = filterMyTimetableSlots();
     if($('#homePage').classList.contains('active-page')) renderHome();
     if($('#pendingPage').classList.contains('active-page')) renderPending();
+    if($('#caPage').classList.contains('active-page')) renderCA();
+    if($('#classesPage').classList.contains('active-page')) renderClasses();
+    if($('#coursesPage').classList.contains('active-page')) renderCourses();
+    if($('#timetablePage').classList.contains('active-page')) renderTimetable();
     updatePendingBadge();
   });
 
-  db.ref(`${ROOT}/courses`).on('value', s => { allCourses = toArray(s.val()); if($('#coursesPage').classList.contains('active-page')) renderCourses(); });
+  /* Cache all applications so we can look up classmates */
+  db.ref(`${ROOT}/applications`).on('value', s => {
+    window.__allAppsCache = toArray(s.val());
+    /* Recompute classmates if on class page */
+    if($('#classesPage').classList.contains('active-page')) renderClasses();
+  });
+
+  db.ref(`${ROOT}/courses`).on('value', s => {
+    allCourses = toArray(s.val());
+    if($('#coursesPage').classList.contains('active-page')) renderCourses();
+    if($('#homePage').classList.contains('active-page')) renderHome();
+    if($('#caPage').classList.contains('active-page')) renderCA();
+    if($('#classesPage').classList.contains('active-page')) renderClasses();
+  });
+
+  /* Programs cache used for resolving programme id */
+  db.ref(`${ROOT}/programmes`).on('value', s => {
+    window.__programmesCache = toArray(s.val());
+    resolveMyClass();
+    myTimetableSlots = filterMyTimetableSlots();
+    if($('#classesPage').classList.contains('active-page')) renderClasses();
+    if($('#coursesPage').classList.contains('active-page')) renderCourses();
+    if($('#timetablePage').classList.contains('active-page')) renderTimetable();
+  });
+
+  /* Global classes list */
+  db.ref(`${ROOT}/classes`).on('value', s => {
+    dbClasses = toArray(s.val());
+    resolveMyClass();
+    if($('#classesPage').classList.contains('active-page')) renderClasses();
+    if($('#coursesPage').classList.contains('active-page')) renderCourses();
+    if($('#timetablePage').classList.contains('active-page')) renderTimetable();
+  });
+
+  /* Global timetables — comprehensive */
+  db.ref(`${ROOT}/timetables`).on('value', s => {
+    dbTimetable = toArray(s.val());
+    myTimetableSlots = filterMyTimetableSlots();
+    if($('#timetablePage').classList.contains('active-page')) renderTimetable();
+  });
+
   db.ref(`${ROOT}/subfolders`).on('value', s => { allSubfolders = toArray(s.val()); });
   db.ref(`${ROOT}/videos`).on('value', s => { allVideos = toArray(s.val()); });
   db.ref(`${ROOT}/docs`).on('value', s => { allDocs = toArray(s.val()); });
@@ -2591,6 +3633,7 @@ function bindRealtime(){
       if(itemType === 'subfolder'){ approvedSubfolders.add(id); approvedSubfoldersData[id] = rec; }
       else { approvedCourses.add(id); approvedCoursesData[id] = rec; }
     });
+    if($('#coursesPage').classList.contains('active-page')) renderCourses();
   });
 
   db.ref(`${ROOT}/pendingPurchases/${uid}`).on('value', s => {
@@ -2668,8 +3711,6 @@ function bindRealtime(){
     if($('#pendingPage').classList.contains('active-page')) renderPending();
     updatePendingBadge();
   });
-
-  db.ref(`${ROOT}/timetables/${uid}`).on('value', s => { dbTimetable = toArray(s.val()); if($('#timetablePage').classList.contains('active-page')) renderTimetable(); });
 
   db.ref(`${ROOT}/attendance/${uid}`).on('value', s => {
     dbAttendance = toArray(s.val());
