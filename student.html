@@ -25,7 +25,7 @@
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-tap-highlight-color:transparent}
   :root{
     --blue:#2563eb; --blue-dark:#1e40af; --blue-light:#eff6ff; --blue-soft:#dbeafe; --blue-bright:#3b82f6;
-    --green:#10b981; --red:#ef4444; --amber:#f59e0b; --purple:#8b5cf6;
+    --green:#10b981; --red:#ef4444; --amber:#f59e0b; --purple:#8b5cf6; --pink:#ec4899;
     --bg-primary:#0a0e17; --bg-secondary:#f8fafc; --bg-card:#ffffff;
     --text-primary:#0f172a; --text-secondary:#1e293b; --text-muted:#64748b;
     --border-color:#e2e8f0;
@@ -35,29 +35,59 @@
     --glass-blur:blur(20px);
     --mac-shadow:0 12px 48px rgba(0,0,0,.12),0 4px 16px rgba(0,0,0,.04);
     --mac-shadow-hover:0 20px 60px rgba(0,0,0,.16),0 8px 24px rgba(0,0,0,.06);
+    --float-shadow:0 20px 50px -12px rgba(37,99,235,.28), 0 8px 20px -6px rgba(37,99,235,.15);
+    --float-shadow-hover:0 30px 70px -12px rgba(37,99,235,.40), 0 14px 30px -8px rgba(37,99,235,.22);
+    --glass-bg:linear-gradient(135deg, rgba(255,255,255,.92) 0%, rgba(239,246,255,.85) 100%);
+    --glass-border:1px solid rgba(255,255,255,.75);
     --radius:14px;
   }
   html,body{width:100%;height:100%;background:var(--bg-secondary);color:var(--text-primary);overflow:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  body{
+    background:
+      radial-gradient(circle at 10% 0%, rgba(37,99,235,.10), transparent 42%),
+      radial-gradient(circle at 100% 20%, rgba(59,130,246,.10), transparent 40%),
+      radial-gradient(circle at 50% 100%, rgba(139,92,246,.08), transparent 45%),
+      var(--bg-secondary);
+  }
 
   #appLoader{position:fixed;inset:0;background:var(--bg-primary);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .4s}
   #appLoader.hidden{opacity:0;pointer-events:none}
   .loader-spinner{width:52px;height:52px;border:4px solid rgba(255,255,255,.15);border-top-color:var(--blue-bright);border-radius:50%;animation:spin .9s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
 
-  .app-root{display:flex;flex-direction:column;height:100dvh;width:100%;overflow:hidden;position:relative;background:var(--bg-secondary)}
+  .app-root{display:flex;flex-direction:column;height:100dvh;width:100%;overflow:hidden;position:relative;background:transparent}
 
-  .top-bar{background:var(--header-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border-bottom:1px solid rgba(37,99,235,.15);padding:12px 18px;display:flex;align-items:center;gap:10px;flex-shrink:0;position:relative;z-index:40;min-height:64px;box-shadow:0 2px 20px rgba(37,99,235,.06)}
+  .top-bar{
+    background:rgba(255,255,255,.72);
+    backdrop-filter:var(--glass-blur);
+    -webkit-backdrop-filter:var(--glass-blur);
+    border-bottom:1px solid rgba(37,99,235,.12);
+    padding:12px 18px;
+    display:flex;align-items:center;gap:10px;
+    flex-shrink:0;position:relative;z-index:40;min-height:64px;
+    box-shadow:0 4px 24px rgba(37,99,235,.08);
+  }
   .header-left{display:flex;align-items:center;gap:10px}
-  .header-logo{width:44px;height:44px;object-fit:contain;border-radius:10px;background:var(--blue-light);padding:4px;cursor:pointer;transition:transform .2s;border:1px solid var(--blue-soft)}
-  .header-logo:hover{transform:scale(1.05)}
+  .header-logo{width:44px;height:44px;object-fit:contain;border-radius:12px;background:var(--blue-light);padding:4px;cursor:pointer;transition:transform .25s cubic-bezier(.22,1,.36,1);border:1px solid var(--blue-soft);box-shadow:0 4px 12px rgba(37,99,235,.15)}
+  .header-logo:hover{transform:scale(1.08) rotate(-2deg)}
   .header-center{flex:1;text-align:center;min-width:0}
   .header-center .greeting{font-size:10px;font-weight:700;color:var(--text-muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:2px}
   .header-center .name{font-size:16px;font-weight:800;color:var(--text-primary);line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .header-center .name .accent{color:var(--blue)}
   .header-right{display:flex;align-items:center;gap:8px}
-  .btn-icon{background:rgba(255,255,255,.7);backdrop-filter:blur(8px);border:1px solid rgba(37,99,235,.15);color:var(--blue);width:42px;height:42px;border-radius:12px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;position:relative;box-shadow:0 2px 8px rgba(0,0,0,.04)}
-  .btn-icon:hover{background:var(--blue-soft);transform:scale(1.04)}
-  .btn-icon .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:10px;font-weight:800;border-radius:30px;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center;padding:0 5px;border:2px solid #fff}
+  .btn-icon{
+    background:rgba(255,255,255,.75);
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(37,99,235,.15);
+    color:var(--blue);
+    width:42px;height:42px;border-radius:12px;font-size:18px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:all .25s cubic-bezier(.22,1,.36,1);position:relative;
+    box-shadow:0 4px 14px rgba(37,99,235,.10);
+  }
+  .btn-icon:hover{background:var(--blue-soft);transform:translateY(-2px) scale(1.04);box-shadow:0 8px 20px rgba(37,99,235,.25)}
+  .btn-icon:active{transform:translateY(0) scale(.98)}
+  .btn-icon .badge{position:absolute;top:-4px;right:-4px;background:var(--red);color:#fff;font-size:10px;font-weight:800;border-radius:30px;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center;padding:0 5px;border:2px solid #fff;box-shadow:0 4px 10px rgba(239,68,68,.4)}
   .btn-icon .badge[data-count="0"]{display:none}
 
   .app-content{flex:1;overflow-y:auto;overflow-x:hidden;min-height:0;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;position:relative;padding-bottom:90px}
@@ -69,42 +99,191 @@
   @keyframes pageIn{from{opacity:0;transform:translateX(24px) scale(.98)}to{opacity:1;transform:none}}
   .full-page{padding:16px 18px 30px}
 
-  .welcome-banner{background:linear-gradient(135deg,#1e40af,#2563eb);border-radius:20px;padding:22px 24px;color:#fff;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;box-shadow:0 8px 32px rgba(37,99,235,.30);position:relative;overflow:hidden;margin-bottom:16px}
-  .welcome-banner::before{content:'';position:absolute;top:-40%;right:-15%;width:220px;height:220px;background:rgba(255,255,255,.08);border-radius:50%;pointer-events:none}
-  .welcome-banner .wb-left{position:relative;z-index:1}
-  .welcome-banner .wb-left .hi{font-size:13px;opacity:.85;font-weight:500}
-  .welcome-banner .wb-left .nm{font-size:22px;font-weight:900;margin-top:2px}
-  .welcome-banner .wb-left .meta{font-size:12px;opacity:.8;margin-top:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-  .welcome-banner .wb-left .meta .chip{background:rgba(255,255,255,.18);padding:3px 10px;border-radius:30px;font-size:11px;font-weight:700}
-  .welcome-banner .wb-right{text-align:right;position:relative;z-index:1}
-  .welcome-banner .wb-right .lbl{font-size:11px;opacity:.75;text-transform:uppercase;letter-spacing:1px;font-weight:600}
-  .welcome-banner .wb-right .val{font-size:26px;font-weight:900;line-height:1.1}
-  .welcome-banner .wb-right .sub{font-size:11px;opacity:.75}
+  /* ═══ HOME — floating glass card ═══ */
+  .hero-card{
+    background:linear-gradient(135deg, #1e40af 0%, #2563eb 45%, #3b82f6 100%);
+    border-radius:26px;
+    padding:26px 24px;
+    color:#fff;
+    position:relative;
+    overflow:hidden;
+    box-shadow:var(--float-shadow);
+    margin-bottom:18px;
+    animation:floatIn .6s cubic-bezier(.22,1,.36,1);
+    border:1px solid rgba(255,255,255,.18);
+  }
+  @keyframes floatIn{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:none}}
+  .hero-card::before{
+    content:'';position:absolute;top:-30%;right:-12%;width:260px;height:260px;
+    background:radial-gradient(circle, rgba(255,255,255,.18), transparent 65%);
+    border-radius:50%;pointer-events:none;
+  }
+  .hero-card::after{
+    content:'';position:absolute;bottom:-40%;left:-10%;width:220px;height:220px;
+    background:radial-gradient(circle, rgba(255,255,255,.10), transparent 65%);
+    border-radius:50%;pointer-events:none;
+  }
+  .hero-inner{position:relative;z-index:1;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .hero-photo{
+    width:96px;height:96px;border-radius:50%;
+    background:rgba(255,255,255,.18);
+    border:3px solid rgba(255,255,255,.55);
+    display:flex;align-items:center;justify-content:center;
+    font-size:36px;font-weight:900;color:#fff;
+    overflow:hidden;flex-shrink:0;
+    box-shadow:0 12px 32px rgba(0,0,0,.22), inset 0 0 0 2px rgba(255,255,255,.15);
+  }
+  .hero-photo img{width:100%;height:100%;object-fit:cover}
+  .hero-info{flex:1;min-width:180px}
+  .hero-info .hi{font-size:12px;opacity:.85;font-weight:600;letter-spacing:.4px;text-transform:uppercase}
+  .hero-info .nm{font-size:24px;font-weight:900;line-height:1.15;margin-top:2px;letter-spacing:-.3px}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .hero-chip{
+    display:inline-flex;align-items:center;gap:6px;
+    background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.22);
+    padding:6px 12px;border-radius:30px;
+    font-size:11.5px;font-weight:700;
+    backdrop-filter:blur(8px);
+    transition:all .22s ease;
+  }
+  .hero-chip i{color:#fff;opacity:.9}
+  .hero-chip:hover{background:rgba(255,255,255,.28);transform:translateY(-1px)}
 
+  /* Notice board */
+  .notice-section-title{
+    display:flex;align-items:center;gap:10px;
+    font-size:15px;font-weight:800;color:var(--text-primary);
+    margin:22px 0 12px;
+  }
+  .notice-section-title .ttl-icon{
+    width:34px;height:34px;border-radius:11px;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#3b82f6,#2563eb);
+    color:#fff;font-size:14px;
+    box-shadow:0 8px 20px rgba(37,99,235,.35);
+  }
+  .notice-section-title .cnt{
+    margin-left:auto;font-size:11px;font-weight:800;
+    background:var(--blue-light);color:var(--blue-dark);
+    padding:4px 12px;border-radius:30px;
+    border:1px solid rgba(37,99,235,.15);
+  }
+
+  .notice-board{display:grid;gap:12px}
+  .notice-tile{
+    position:relative;
+    background:var(--glass-bg);
+    backdrop-filter:var(--glass-blur);
+    -webkit-backdrop-filter:var(--glass-blur);
+    border-radius:20px;
+    padding:18px 18px 18px 20px;
+    border:var(--glass-border);
+    box-shadow:0 12px 32px -12px rgba(37,99,235,.22), 0 4px 12px rgba(15,23,42,.04);
+    transition:all .35s cubic-bezier(.22,1,.36,1);
+    overflow:hidden;
+    animation:floatIn .5s cubic-bezier(.22,1,.36,1) backwards;
+  }
+  .notice-tile:nth-child(1){animation-delay:.05s}
+  .notice-tile:nth-child(2){animation-delay:.10s}
+  .notice-tile:nth-child(3){animation-delay:.15s}
+  .notice-tile:nth-child(4){animation-delay:.20s}
+  .notice-tile:nth-child(5){animation-delay:.25s}
+  .notice-tile::before{
+    content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
+    background:linear-gradient(180deg,#3b82f6,#2563eb,#1e40af);
+    border-radius:4px 0 0 4px;
+  }
+  .notice-tile:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--float-shadow-hover);
+    border-color:rgba(37,99,235,.30);
+  }
+  .notice-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:8px}
+  .notice-icon{
+    width:40px;height:40px;border-radius:12px;flex-shrink:0;
+    background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    color:var(--blue);
+    display:flex;align-items:center;justify-content:center;font-size:17px;
+    border:1px solid rgba(37,99,235,.15);
+    box-shadow:0 4px 10px rgba(37,99,235,.10);
+  }
+  .notice-head-body{flex:1;min-width:0}
+  .notice-title{font-size:14.5px;font-weight:800;color:var(--text-primary);line-height:1.3;margin-bottom:3px}
+  .notice-meta{font-size:11.5px;color:var(--text-muted);display:flex;gap:12px;flex-wrap:wrap}
+  .notice-meta span{display:inline-flex;align-items:center;gap:5px}
+  .notice-meta i{color:var(--blue)}
+  .notice-body{font-size:13px;color:#334155;line-height:1.65;white-space:pre-wrap;margin-top:4px}
+  .notice-issuer{
+    margin-top:10px;padding-top:10px;border-top:1px dashed rgba(37,99,235,.18);
+    font-size:11px;color:var(--text-muted);font-style:italic;
+    display:flex;align-items:center;gap:6px;
+  }
+  .notice-issuer i{color:var(--blue)}
+
+  .empty-glass{
+    background:var(--glass-bg);
+    backdrop-filter:var(--glass-blur);
+    -webkit-backdrop-filter:var(--glass-blur);
+    border:1px dashed rgba(37,99,235,.28);
+    border-radius:20px;
+    padding:36px 22px;
+    text-align:center;
+    color:var(--text-muted);font-size:13px;
+    box-shadow:0 8px 24px -12px rgba(37,99,235,.18);
+  }
+  .empty-glass i{font-size:34px;display:block;margin-bottom:10px;color:var(--blue);opacity:.5}
+  .empty-glass .e-ttl{font-weight:800;font-size:14px;color:var(--text-primary);margin-bottom:4px}
+
+  /* General cards / tiles — glass floating */
+  .welcome-banner{display:none}
   .section-title{font-size:15px;font-weight:800;color:var(--text-primary);margin:18px 0 12px;display:flex;align-items:center;gap:8px}
   .section-title i{color:var(--blue)}
   .section-title .count{margin-left:auto;font-size:11px;background:var(--blue-light);color:var(--blue-dark);padding:3px 12px;border-radius:30px;font-weight:700}
 
   .grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-  .card-tile{background:#fff;border-radius:16px;padding:16px 14px;border:1px solid rgba(226,232,240,.5);box-shadow:0 4px 16px rgba(0,0,0,.04);transition:all .25s;cursor:pointer;position:relative;overflow:hidden}
-  .card-tile:hover{transform:translateY(-3px);box-shadow:var(--mac-shadow);border-color:rgba(37,99,235,.2)}
-  .card-tile .icon{font-size:24px;margin-bottom:8px;display:block}
+  .card-tile{
+    background:var(--glass-bg);
+    backdrop-filter:var(--glass-blur);
+    -webkit-backdrop-filter:var(--glass-blur);
+    border-radius:18px;
+    padding:16px 14px;
+    border:var(--glass-border);
+    box-shadow:0 10px 30px -14px rgba(37,99,235,.24), 0 4px 12px rgba(15,23,42,.04);
+    transition:all .35s cubic-bezier(.22,1,.36,1);
+    cursor:pointer;position:relative;overflow:hidden;
+  }
+  .card-tile:hover{transform:translateY(-5px);box-shadow:var(--float-shadow-hover);border-color:rgba(37,99,235,.30)}
+  .card-tile .icon{font-size:24px;margin-bottom:8px;display:block;color:var(--blue)}
   .card-tile .ttl{font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px}
   .card-tile .val{font-size:20px;font-weight:900;color:var(--text-primary);margin-top:2px;line-height:1.15}
   .card-tile .sub{font-size:11px;color:var(--text-muted);margin-top:2px}
-  .card-tile.blue{background:linear-gradient(135deg,#eff6ff,#ffffff);border-color:#bfdbfe}
-  .card-tile.green{background:linear-gradient(135deg,#f0fdf4,#ffffff);border-color:#bbf7d0}
-  .card-tile.amber{background:linear-gradient(135deg,#fffbeb,#ffffff);border-color:#fcd34d}
-  .card-tile.red{background:linear-gradient(135deg,#fef2f2,#ffffff);border-color:#fecaca}
-  .card-tile.purple{background:linear-gradient(135deg,#f5f3ff,#ffffff);border-color:#ddd6fe}
+  .card-tile.blue .icon{color:#2563eb}
+  .card-tile.green .icon{color:#10b981}
+  .card-tile.amber .icon{color:#f59e0b}
+  .card-tile.red .icon{color:#ef4444}
+  .card-tile.purple .icon{color:#8b5cf6}
 
   .quick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:6px}
-  .quick-btn{background:#fff;border:1.5px solid var(--border-color);border-radius:14px;padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;transition:all .2s;font-family:inherit;color:var(--text-primary);font-size:11.5px;font-weight:700;text-align:center;line-height:1.2}
-  .quick-btn:hover{background:var(--blue-light);border-color:var(--blue);color:var(--blue-dark);transform:translateY(-2px)}
+  .quick-btn{
+    background:var(--glass-bg);
+    backdrop-filter:var(--glass-blur);
+    -webkit-backdrop-filter:var(--glass-blur);
+    border:var(--glass-border);
+    border-radius:16px;
+    padding:14px 8px;
+    display:flex;flex-direction:column;align-items:center;gap:6px;
+    cursor:pointer;
+    transition:all .3s cubic-bezier(.22,1,.36,1);
+    font-family:inherit;color:var(--text-primary);font-size:11.5px;font-weight:700;text-align:center;line-height:1.2;
+    box-shadow:0 8px 22px -12px rgba(37,99,235,.22);
+  }
+  .quick-btn:hover{background:linear-gradient(135deg,#eff6ff,#dbeafe);border-color:rgba(37,99,235,.30);color:var(--blue-dark);transform:translateY(-4px);box-shadow:var(--float-shadow)}
   .quick-btn i{font-size:20px;color:var(--blue)}
 
   .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:12px}
-  .stat-box{background:#fff;border:1px solid var(--border-color);border-radius:14px;padding:14px;text-align:center}
+  .stat-box{background:var(--glass-bg);backdrop-filter:blur(12px);border:var(--glass-border);border-radius:16px;padding:14px;text-align:center;box-shadow:0 8px 24px -14px rgba(37,99,235,.20);transition:.25s}
+  .stat-box:hover{transform:translateY(-2px);box-shadow:var(--float-shadow)}
   .stat-box .lbl{font-size:10.5px;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
   .stat-box .val{font-size:20px;font-weight:900;color:var(--text-primary);margin-top:4px}
 
@@ -143,7 +322,7 @@
   .sub-body p{line-height:1.7;color:#334155;margin-bottom:8px;font-size:14px}
   .sub-body ul,.sub-body ol{padding-left:20px;margin:8px 0 12px;color:#334155;line-height:1.75;font-size:13.5px}
 
-  .tbl-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border-color);margin:12px 0;background:#fff}
+  .tbl-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border-color);margin:12px 0;background:#fff;box-shadow:0 6px 20px -12px rgba(37,99,235,.18)}
   table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:520px}
   th{background:var(--blue-light);text-align:left;padding:11px 12px;font-weight:800;color:var(--blue-dark);text-transform:uppercase;font-size:10.5px;letter-spacing:.5px;white-space:nowrap;border-bottom:2px solid var(--blue)}
   td{padding:10px 12px;border-bottom:1px solid var(--border-color);color:#334155;vertical-align:top}
@@ -159,7 +338,7 @@
   .badge.grey{background:#f1f5f9;color:#475569}
 
   .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:12px 0}
-  .info-item{background:#fff;border:1px solid var(--border-color);border-radius:12px;padding:12px 14px}
+  .info-item{background:#fff;border:1px solid var(--border-color);border-radius:12px;padding:12px 14px;box-shadow:0 4px 14px -10px rgba(37,99,235,.18)}
   .info-item .lbl{font-size:11px;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
   .info-item .val{font-size:14px;font-weight:700;color:var(--text-primary);margin-top:4px;word-break:break-word}
 
@@ -179,17 +358,17 @@
   .id-card .id-qr #qrcode{background:#fff;padding:10px;border-radius:12px}
   .id-card .id-ft{display:flex;justify-content:space-between;margin-top:14px;font-size:10px;opacity:.75;border-top:1px solid rgba(255,255,255,.2);padding-top:10px;position:relative;z-index:1}
 
-  .btn-sm{padding:10px 20px;border-radius:50px;border:none;font-weight:700;font-size:12.5px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px;transition:.2s}
-  .btn-sm.primary{background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;box-shadow:0 4px 16px rgba(37,99,235,.25)}
-  .btn-sm.primary:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(37,99,235,.35)}
+  .btn-sm{padding:10px 20px;border-radius:50px;border:none;font-weight:700;font-size:12.5px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:6px;transition:.25s cubic-bezier(.22,1,.36,1)}
+  .btn-sm.primary{background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;box-shadow:0 8px 20px -8px rgba(37,99,235,.55)}
+  .btn-sm.primary:hover{transform:translateY(-2px);box-shadow:0 12px 26px -8px rgba(37,99,235,.65)}
   .btn-sm.ghost{background:#f1f5f9;color:var(--text-primary)}
   .btn-sm.ghost:hover{background:#e2e8f0}
   .btn-sm.green{background:linear-gradient(135deg,#10b981,#059669);color:#fff}
   .btn-sm.red{background:linear-gradient(135deg,#ef4444,#b91c1c);color:#fff}
 
-  .btn-full{width:100%;padding:14px;border-radius:50px;border:none;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.2s;margin-top:10px}
-  .btn-full.primary{background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;box-shadow:0 4px 16px rgba(37,99,235,.25)}
-  .btn-full.primary:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(37,99,235,.35)}
+  .btn-full{width:100%;padding:14px;border-radius:50px;border:none;font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.25s cubic-bezier(.22,1,.36,1);margin-top:10px}
+  .btn-full.primary{background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;box-shadow:0 8px 22px -8px rgba(37,99,235,.55)}
+  .btn-full.primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px -8px rgba(37,99,235,.65)}
   .btn-full.ghost{background:#f1f5f9;color:var(--text-primary);border:1.5px solid var(--border-color)}
   .btn-full.ghost:hover{background:#e2e8f0}
   .btn-full.danger{background:linear-gradient(135deg,#ef4444,#b91c1c);color:#fff}
@@ -225,7 +404,7 @@
   .toast.err{background:linear-gradient(135deg,#ef4444,#b91c1c)}
   .toast.info{background:linear-gradient(135deg,#3b82f6,#2563eb)}
 
-  .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;align-items:center;padding:8px 6px calc(8px + env(safe-area-inset-bottom));z-index:60;box-shadow:0 -4px 20px rgba(0,0,0,.05)}
+  .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.94);backdrop-filter:blur(20px);border-top:1px solid var(--border-color);display:flex;justify-content:space-around;align-items:center;padding:8px 6px calc(8px + env(safe-area-inset-bottom));z-index:60;box-shadow:0 -4px 20px rgba(37,99,235,.06)}
   .bn-item{background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:6px 12px;border-radius:12px;font-family:inherit;color:var(--text-muted);font-size:10.5px;font-weight:700;transition:.2s;min-width:56px;position:relative}
   .bn-item i{font-size:19px}
   .bn-item.active{color:var(--blue);background:var(--blue-light)}
@@ -250,47 +429,43 @@
   .modal-close{position:absolute;top:12px;right:14px;background:none;border:none;font-size:22px;color:var(--text-muted);cursor:pointer;padding:4px}
   .modal-close:hover{color:var(--text-primary)}
 
-  .assess-card{background:#fff;border:1px solid var(--border-color);border-radius:14px;padding:14px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;transition:.2s}
-  .assess-card:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(37,99,235,.1)}
+  .assess-card{background:#fff;border:1px solid var(--border-color);border-radius:14px;padding:14px 16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;transition:.25s;box-shadow:0 6px 20px -14px rgba(37,99,235,.20)}
+  .assess-card:hover{border-color:var(--blue);box-shadow:var(--float-shadow);transform:translateY(-2px)}
   .assess-card .info{flex:1;min-width:0}
   .assess-card .ttl{font-weight:800;font-size:13.5px;color:var(--text-primary);margin-bottom:4px}
   .assess-card .meta{font-size:11.5px;color:var(--text-muted);display:flex;gap:10px;flex-wrap:wrap}
 
   .course-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
-  .course-card{background:#fff;border:1px solid var(--border-color);border-radius:16px;overflow:hidden;transition:.25s;cursor:pointer}
-  .course-card:hover{transform:translateY(-3px);box-shadow:var(--mac-shadow);border-color:rgba(37,99,235,.2)}
+  .course-card{background:#fff;border:1px solid var(--border-color);border-radius:16px;overflow:hidden;transition:.3s cubic-bezier(.22,1,.36,1);cursor:pointer;box-shadow:0 10px 26px -16px rgba(37,99,235,.22)}
+  .course-card:hover{transform:translateY(-4px);box-shadow:var(--float-shadow);border-color:rgba(37,99,235,.25)}
   .course-card .cc-hd{height:100px;background:linear-gradient(135deg,#1e40af,#3b82f6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:32px;font-weight:900;position:relative}
   .course-card .cc-hd .code{position:absolute;top:8px;right:10px;background:rgba(255,255,255,.2);padding:2px 10px;border-radius:20px;font-size:10px;font-weight:800;backdrop-filter:blur(4px)}
   .course-card .cc-bd{padding:12px 14px}
   .course-card .cc-bd h4{font-size:13.5px;font-weight:800;color:var(--text-primary);line-height:1.3;margin-bottom:4px}
   .course-card .cc-bd .meta{font-size:11px;color:var(--text-muted);display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
 
-  .book-card{background:#fff;border:1px solid var(--border-color);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start;transition:.2s}
-  .book-card:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(37,99,235,.1)}
+  .book-card{background:#fff;border:1px solid var(--border-color);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start;transition:.25s;box-shadow:0 6px 18px -14px rgba(37,99,235,.20)}
+  .book-card:hover{border-color:var(--blue);box-shadow:var(--float-shadow);transform:translateY(-2px)}
   .book-card .bk-icon{width:48px;height:56px;background:var(--blue-light);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--blue);flex-shrink:0}
   .book-card .bk-body{flex:1;min-width:0}
   .book-card .bk-body h4{font-size:13.5px;font-weight:800;color:var(--text-primary);line-height:1.3;margin-bottom:2px}
   .book-card .bk-body .au{font-size:11.5px;color:var(--text-muted)}
   .book-card .bk-body .meta{font-size:11px;color:var(--text-muted);margin-top:4px;display:flex;gap:10px;flex-wrap:wrap}
 
-  .job-card{background:#fff;border:1px solid var(--border-color);border-radius:12px;padding:14px 16px;margin-bottom:10px;transition:.2s}
-  .job-card:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(37,99,235,.1)}
+  .job-card{background:#fff;border:1px solid var(--border-color);border-radius:12px;padding:14px 16px;margin-bottom:10px;transition:.25s;box-shadow:0 6px 18px -14px rgba(37,99,235,.20)}
+  .job-card:hover{border-color:var(--blue);box-shadow:var(--float-shadow);transform:translateY(-2px)}
   .job-card h4{font-size:14px;font-weight:800;color:var(--text-primary);line-height:1.3}
   .job-card .co{font-size:12px;color:var(--text-muted);margin-top:2px}
   .job-card .job-meta{display:flex;gap:10px;flex-wrap:wrap;font-size:11.5px;color:var(--text-muted);margin:6px 0}
   .job-card .job-desc{font-size:12.5px;color:#334155;line-height:1.5;margin:6px 0}
 
   .alumni-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
-  .alumni-card{background:#fff;border:1px solid var(--border-color);border-radius:14px;padding:16px;text-align:center;transition:.2s}
-  .alumni-card:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 6px 22px rgba(37,99,235,.12)}
+  .alumni-card{background:#fff;border:1px solid var(--border-color);border-radius:14px;padding:16px;text-align:center;transition:.3s;box-shadow:0 8px 22px -16px rgba(37,99,235,.22)}
+  .alumni-card:hover{border-color:var(--blue);transform:translateY(-4px);box-shadow:var(--float-shadow)}
   .alumni-card .av{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue-bright));margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:24px;color:#fff;font-weight:900}
   .alumni-card .nm{font-weight:800;font-size:13.5px;color:var(--text-primary);line-height:1.2}
   .alumni-card .dt{font-size:11.5px;color:var(--text-muted);margin-top:3px;line-height:1.4}
   .alumni-card .cmp{font-size:11.5px;color:var(--blue);font-weight:700;margin-top:6px}
-
-  .countdown-badge{display:inline-flex;align-items:center;gap:4px;background:var(--blue-light);color:var(--blue-dark);padding:3px 10px;border-radius:20px;font-size:10.5px;font-weight:800}
-  .countdown-badge.warning{background:#fef3c7;color:#92400e}
-  .countdown-badge.danger{background:#fee2e2;color:#991b1b}
 
   .upload-box{position:relative;aspect-ratio:1/1;background:var(--input-bg);border:2px dashed #cbd5e1;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px;cursor:pointer;transition:all .22s;overflow:hidden}
   .upload-box:hover{border-color:var(--blue);background:var(--blue-light)}
@@ -303,24 +478,22 @@
   .upload-box.filled .check{display:flex}
 
   .sub-list{display:grid;gap:10px}
-  .list-card{background:#fff;border:1px solid var(--border-color);border-radius:12px;padding:14px 16px;transition:.2s}
-  .list-card:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(37,99,235,.08)}
+  .list-card{background:#fff;border:1px solid var(--border-color);border-radius:12px;padding:14px 16px;transition:.25s;box-shadow:0 6px 18px -14px rgba(37,99,235,.20)}
+  .list-card:hover{border-color:var(--blue);box-shadow:var(--float-shadow)}
   .list-card .lc-h{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap;margin-bottom:6px}
   .list-card .lc-h .ttl{font-size:13.5px;font-weight:800;color:var(--text-primary);line-height:1.3}
   .list-card .lc-meta{font-size:11.5px;color:var(--text-muted);display:flex;gap:10px;flex-wrap:wrap;margin-bottom:6px}
   .list-card .lc-body{font-size:12.5px;color:#334155;line-height:1.55}
 
-  .notice-card{background:#fff;border-radius:16px;padding:20px;border:1px solid rgba(37,99,235,.12);box-shadow:0 4px 16px rgba(0,0,0,.04);margin-bottom:12px}
+  .notice-card{background:#fff;border-radius:16px;padding:20px;border:1px solid rgba(37,99,235,.12);box-shadow:0 10px 26px -18px rgba(37,99,235,.22);margin-bottom:12px;transition:.25s}
+  .notice-card:hover{transform:translateY(-3px);box-shadow:var(--float-shadow)}
   .notice-card .nc-hd{text-align:center;margin-bottom:12px;padding-bottom:12px;border-bottom:2px solid var(--blue-light)}
   .notice-card .nc-hd h3{font-size:15px;font-weight:900;color:var(--text-primary);border:none;padding:0;margin:0;justify-content:center}
   .notice-card .nc-hd .sub{font-size:11px;color:var(--text-muted);letter-spacing:1px;margin-top:2px}
   .notice-card p{font-size:13px;color:#334155;line-height:1.65;margin-bottom:8px}
 
-  /* ═══════════════════════════════════════════════════════════════
-     PENDING APPLICATION CARD
-     ═══════════════════════════════════════════════════════════════ */
-  .app-item{background:#fff;border:1px solid var(--border-color);border-radius:14px;padding:16px;margin-bottom:12px;border-left:5px solid var(--blue);position:relative;transition:.2s}
-  .app-item:hover{box-shadow:0 6px 22px rgba(37,99,235,.1);transform:translateY(-2px)}
+  .app-item{background:#fff;border:1px solid var(--border-color);border-radius:14px;padding:16px;margin-bottom:12px;border-left:5px solid var(--blue);position:relative;transition:.25s;box-shadow:0 8px 24px -18px rgba(37,99,235,.20)}
+  .app-item:hover{box-shadow:var(--float-shadow);transform:translateY(-2px)}
   .app-item.pending{border-left-color:var(--amber)}
   .app-item.approved{border-left-color:var(--green)}
   .app-item.rejected{border-left-color:var(--red)}
@@ -352,7 +525,7 @@
   .app-filter:not(.active) .cnt{background:var(--blue-light);color:var(--blue-dark)}
 
   .stat-mini-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:14px}
-  .stat-mini{background:#fff;border:1px solid var(--border-color);border-radius:12px;padding:12px 10px;text-align:center}
+  .stat-mini{background:var(--glass-bg);backdrop-filter:blur(12px);border:var(--glass-border);border-radius:14px;padding:12px 10px;text-align:center;box-shadow:0 8px 22px -16px rgba(37,99,235,.22)}
   .stat-mini .v{font-size:18px;font-weight:900;color:var(--text-primary)}
   .stat-mini .k{font-size:10px;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:.3px;margin-top:2px}
   .stat-mini.pending .v{color:var(--amber)}
@@ -360,10 +533,8 @@
   .stat-mini.rejected .v{color:var(--red)}
   .stat-mini.total .v{color:var(--blue)}
 
-  /* ═══════════════════════════════════════════════════════════════
-     TEVETA FORM — pixel-accurate
-     ═══════════════════════════════════════════════════════════════ */
-  .teveta-form-container{font-family:'Inter',sans-serif;background:#fff;padding:26px 24px;border:1px solid var(--border-color);border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
+  /* ═══ TEVETA FORM ═══ */
+  .teveta-form-container{font-family:'Inter',sans-serif;background:#fff;padding:26px 24px;border:1px solid var(--border-color);border-radius:16px;box-shadow:0 12px 32px -20px rgba(37,99,235,.28)}
   .teveta-form-container .form-header{text-align:center;margin-bottom:22px;padding-bottom:14px;border-bottom:2px solid #0f172a}
   .teveta-form-container .form-header h2{font-size:19px;font-weight:900;color:var(--text-primary);text-transform:uppercase;letter-spacing:.5px;margin-top:8px}
   .teveta-form-container .form-header .logo-section{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:10px}
@@ -393,7 +564,7 @@
   .teveta-form-container .subject-row .subject-text{color:var(--text-primary);flex:1;line-height:1.4}
   .teveta-form-container .subject-row .subject-line{flex:1;border-bottom:1.5px dotted var(--text-primary);height:1px;margin-left:6px;min-width:60px}
   .teveta-form-container .subject-row .subject-line.readonly{border-bottom-color:#94a3b8}
-  .teveta-form-container .btn-submit-teveta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:22px;padding:14px 32px;background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff;border:none;border-radius:50px;font-size:15px;font-weight:700;cursor:pointer;transition:.2s;font-family:'Inter',sans-serif;box-shadow:0 8px 26px rgba(37,99,235,.35)}
+  .teveta-form-container .btn-submit-teveta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:22px;padding:14px 32px;background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff;border:none;border-radius:50px;font-size:15px;font-weight:700;cursor:pointer;transition:.25s;font-family:'Inter',sans-serif;box-shadow:0 8px 26px rgba(37,99,235,.35)}
   .teveta-form-container .btn-submit-teveta:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(37,99,235,.45)}
   .teveta-form-container .btn-submit-teveta:active{transform:scale(.97)}
   .teveta-form-container .btn-submit-teveta:disabled{opacity:.6;cursor:not-allowed;transform:none!important}
@@ -405,7 +576,7 @@
   .teveta-status-banner{background:#f0fdf4;border-left:4px solid #10b981;padding:12px 14px;border-radius:10px;margin-bottom:18px;font-size:13px;color:#065f46}
 
   @media (max-width:560px){.teveta-form-container{padding:18px 14px}.teveta-form-container .form-field .field-label{min-width:auto;flex:1 1 100%}.teveta-form-container .form-field .field-number{min-width:22px}.teveta-form-container .box-input{width:30px;padding:4px 2px;font-size:12px}}
-  @media (max-width:480px){.header-center .name{font-size:14px}.welcome-banner{padding:18px}.grid-cards{grid-template-columns:1fr 1fr}.quick-grid{grid-template-columns:repeat(3,1fr)}.course-grid{grid-template-columns:1fr}.sidebar{width:280px}}
+  @media (max-width:480px){.header-center .name{font-size:14px}.hero-card{padding:20px 18px}.hero-photo{width:78px;height:78px;font-size:30px}.hero-info .nm{font-size:20px}.grid-cards{grid-template-columns:1fr 1fr}.quick-grid{grid-template-columns:repeat(3,1fr)}.course-grid{grid-template-columns:1fr}.sidebar{width:280px}}
   @supports(padding:env(safe-area-inset-top)){.top-bar{padding-top:calc(12px + env(safe-area-inset-top))}}
 </style>
 </head>
@@ -714,7 +885,6 @@ window.showPage = showPage;
 function buildAllApplications(){
   const list = [];
 
-  // 1. Enrollment application
   if(appData && appData.applicationId){
     list.push({
       kind: 'enrollment',
@@ -735,7 +905,6 @@ function buildAllApplications(){
     });
   }
 
-  // 2. TEVETA application
   if(dbTeveta && Object.keys(dbTeveta).length){
     list.push({
       kind: 'teveta',
@@ -758,7 +927,6 @@ function buildAllApplications(){
     });
   }
 
-  // 3. Accommodation request
   if(dbAccommodationRequests && Object.keys(dbAccommodationRequests).length){
     const ar = dbAccommodationRequests;
     list.push({
@@ -778,7 +946,6 @@ function buildAllApplications(){
     });
   }
 
-  // 4. Accommodation allocation (approved)
   if(dbAccommodation && Object.keys(dbAccommodation).length){
     list.push({
       kind: 'accommodation-alloc',
@@ -799,7 +966,6 @@ function buildAllApplications(){
     });
   }
 
-  // 5. Appeal
   if(dbAppeal && Object.keys(dbAppeal).length){
     list.push({
       kind: 'appeal',
@@ -819,7 +985,6 @@ function buildAllApplications(){
     });
   }
 
-  // 6. SUP extension request
   if(dbSupRequests && Object.keys(dbSupRequests).length){
     const sr = dbSupRequests;
     list.push({
@@ -837,7 +1002,6 @@ function buildAllApplications(){
     });
   }
 
-  // 7. Complaints (many)
   dbComplaints.forEach(c => {
     list.push({
       kind: 'complaint',
@@ -856,7 +1020,6 @@ function buildAllApplications(){
     });
   });
 
-  // 8. Mentor applications
   dbMentorApplications.forEach(m => {
     list.push({
       kind: 'mentor',
@@ -877,7 +1040,6 @@ function buildAllApplications(){
     });
   });
 
-  // 9. Job applications
   dbJobApplications.forEach(j => {
     list.push({
       kind: 'job',
@@ -895,7 +1057,6 @@ function buildAllApplications(){
     });
   });
 
-  // 10. Pending purchase / payment submissions
   allUserTransactions.forEach(t => {
     list.push({
       kind: 'payment',
@@ -917,13 +1078,12 @@ function buildAllApplications(){
     });
   });
 
-  // Sort newest first
   list.sort((a,b) => (b.date || 0) - (a.date || 0));
   return list;
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   RENDER: MY APPLICATIONS (PENDING)
+   RENDER: MY APPLICATIONS
    ═══════════════════════════════════════════════════════════════ */
 function renderPending(){
   const all = buildAllApplications();
@@ -943,22 +1103,10 @@ function renderPending(){
     </p>
 
     <div class="stat-mini-row">
-      <div class="stat-mini total">
-        <div class="v">${all.length}</div>
-        <div class="k">Total</div>
-      </div>
-      <div class="stat-mini pending">
-        <div class="v">${pending.length}</div>
-        <div class="k">Pending</div>
-      </div>
-      <div class="stat-mini approved">
-        <div class="v">${approved.length}</div>
-        <div class="k">Approved</div>
-      </div>
-      <div class="stat-mini rejected">
-        <div class="v">${rejected.length}</div>
-        <div class="k">Rejected</div>
-      </div>
+      <div class="stat-mini total"><div class="v">${all.length}</div><div class="k">Total</div></div>
+      <div class="stat-mini pending"><div class="v">${pending.length}</div><div class="k">Pending</div></div>
+      <div class="stat-mini approved"><div class="v">${approved.length}</div><div class="k">Approved</div></div>
+      <div class="stat-mini rejected"><div class="v">${rejected.length}</div><div class="k">Rejected</div></div>
     </div>
 
     <div class="app-filter-row">
@@ -974,7 +1122,6 @@ function renderPending(){
   `;
   $('#pendingContent').innerHTML = html;
 
-  // Wire filter buttons
   $$('#pendingContent .app-filter').forEach(btn => {
     btn.addEventListener('click', function(){
       appFilter = this.dataset.filter;
@@ -1031,132 +1178,76 @@ function updatePendingBadge(){
   const pend = all.filter(a => ['pending','awaiting','submitted','in-review','in_review'].includes(String(a.status||'').toLowerCase())).length;
   const navBadge = $('#navPendingBadge');
   const bnBadge = $('#bnPendingBadge');
-  if(navBadge){
-    navBadge.textContent = pend;
-    navBadge.style.display = pend > 0 ? 'flex' : 'none';
-  }
-  if(bnBadge){
-    bnBadge.textContent = pend;
-    bnBadge.style.display = pend > 0 ? 'flex' : 'none';
-  }
+  if(navBadge){ navBadge.textContent = pend; navBadge.style.display = pend > 0 ? 'flex' : 'none'; }
+  if(bnBadge){ bnBadge.textContent = pend; bnBadge.style.display = pend > 0 ? 'flex' : 'none'; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   HOME
+   HOME — SIMPLIFIED: Name, Course, Picture, Phone, Notice Board
    ═══════════════════════════════════════════════════════════════ */
 function renderHome(){
   const name = appData.fullName || userData.fullName || 'Student';
   const firstName = getFirstName(name);
+  const photo = appData.personal?.profilePhoto || userData.photoURL || '';
   const programme = appData.programme?.title || '—';
+  const phone = appData.personal?.phone || appData.phone || '—';
   const studentNumber = appData.studentNumber || '—';
-  const intake = appData.programme?.intakeLabel || '—';
-
-  const balance = (dbFinanceTransactions.find(t => t.isBalance)?.balance) || 0;
-  const caAvg = allCourses.length ? Math.round(allCourses.reduce((s,c)=>s+(c.ca||0),0)/allCourses.length) : 0;
-  const attendancePct = dbAttendance.length ? Math.round(dbAttendance.reduce((s,a)=>s+(a.pct||0),0)/dbAttendance.length) : 0;
-  const clearedCount = dbClearance.filter(c => c.status === 'cleared').length;
-  const allApps = buildAllApplications();
-  const pendingAppsCount = allApps.filter(a => ['pending','awaiting','submitted','in-review','in_review'].includes(String(a.status||'').toLowerCase())).length;
 
   $('#headerName').innerHTML = `${esc(firstName)} <span class="accent">Dashboard</span>`;
 
+  const notices = (dbNotices || []).slice().sort((a,b) => (b.createdAt||0) - (a.createdAt||0)).slice(0, 6);
+
+  const noticesHtml = notices.length
+    ? notices.map(n => `
+        <div class="notice-tile">
+          <div class="notice-head">
+            <div class="notice-icon"><i class="fas fa-bullhorn"></i></div>
+            <div class="notice-head-body">
+              <div class="notice-title">${esc(n.title || 'Notice')}</div>
+              <div class="notice-meta">
+                <span><i class="fas fa-calendar-day"></i> ${esc(n.date || fmtDate(n.createdAt))}</span>
+                ${n.issuedBy ? `<span><i class="fas fa-user-tie"></i> ${esc(n.issuedBy)}</span>` : ''}
+              </div>
+            </div>
+          </div>
+          <div class="notice-body">${esc(n.body || '')}</div>
+          ${n.issuedBy ? `<div class="notice-issuer"><i class="fas fa-stamp"></i> Issued by ${esc(n.issuedBy)}</div>` : ''}
+        </div>
+      `).join('')
+    : `<div class="empty-glass">
+        <i class="fas fa-bullhorn"></i>
+        <div class="e-ttl">No notices yet</div>
+        <div>Notices from management will appear here.</div>
+      </div>`;
+
   $('#homeContent').innerHTML = `
-    <div class="welcome-banner">
-      <div class="wb-left">
-        <div class="hi">👋 Welcome back,</div>
-        <div class="nm">${esc(name)}</div>
-        <div class="meta">
-          <span class="chip"><i class="fas fa-id-card"></i> ${esc(studentNumber)}</span>
-          <span class="chip"><i class="fas fa-calendar"></i> ${esc(intake)}</span>
+    <div class="hero-card">
+      <div class="hero-inner">
+        <div class="hero-photo">
+          ${photo ? `<img src="${esc(photo)}" alt="${esc(name)}" />` : esc(getInitials(name))}
+        </div>
+        <div class="hero-info">
+          <div class="hi">Welcome back</div>
+          <div class="nm">${esc(name)}</div>
+          <div class="hero-chips">
+            <span class="hero-chip"><i class="fas fa-graduation-cap"></i> ${esc(programme)}</span>
+            <span class="hero-chip"><i class="fas fa-id-card"></i> ${esc(studentNumber)}</span>
+            <span class="hero-chip"><i class="fas fa-phone-alt"></i> ${esc(phone)}</span>
+          </div>
         </div>
       </div>
-      <div class="wb-right">
-        <div class="lbl">GPA</div>
-        <div class="val">${userData.gpa || appData.gpa || '—'}</div>
-        <div class="sub">/ 4.0</div>
-      </div>
     </div>
 
-    <h2 class="section-title"><i class="fas fa-th-large"></i> Overview</h2>
-    <div class="grid-cards">
-      <div class="card-tile blue" onclick="showPage('courses')">
-        <span class="icon">📚</span>
-        <div class="ttl">Programme</div>
-        <div class="val" style="font-size:13px;line-height:1.3">${esc(programme)}</div>
-        <div class="sub">${esc(appData.programme?.category || '')}</div>
-      </div>
-      <div class="card-tile green" onclick="showPage('ca')">
-        <span class="icon">📊</span>
-        <div class="ttl">CA Average</div>
-        <div class="val">${caAvg}%</div>
-        <div class="sub">${allCourses.length} subjects</div>
-      </div>
-      <div class="card-tile purple" onclick="showPage('attendance')">
-        <span class="icon">✅</span>
-        <div class="ttl">Attendance</div>
-        <div class="val">${attendancePct}%</div>
-        <div class="sub">${dbAttendance.length} months tracked</div>
-      </div>
-      <div class="card-tile red" onclick="showPage('clearance')">
-        <span class="icon">⚠️</span>
-        <div class="ttl">Clearance</div>
-        <div class="val" style="font-size:14px;color:#ef4444">${clearedCount}/${dbClearance.length || 0}</div>
-        <div class="sub">${dbClearance.length - clearedCount} pending</div>
-      </div>
-      <div class="card-tile amber" onclick="showPage('finance')">
-        <span class="icon">💰</span>
-        <div class="ttl">Balance</div>
-        <div class="val">K${Number(balance).toLocaleString()}</div>
-        <div class="sub">Outstanding fees</div>
-      </div>
-      <div class="card-tile blue" onclick="showPage('pending')">
-        <span class="icon">📝</span>
-        <div class="ttl">Applications</div>
-        <div class="val">${allApps.length}</div>
-        <div class="sub">${pendingAppsCount} pending</div>
-      </div>
+    <div class="notice-section-title">
+      <div class="ttl-icon"><i class="fas fa-bullhorn"></i></div>
+      <span>Notice Board</span>
+      <span class="cnt">${notices.length}</span>
     </div>
 
-    <h2 class="section-title"><i class="fas fa-bolt"></i> Quick Actions</h2>
-    <div class="quick-grid">
-      <button class="quick-btn" onclick="showPage('pending')"><i class="fas fa-file-alt"></i> My Apps</button>
-      <button class="quick-btn" onclick="showPage('notices')"><i class="fas fa-bullhorn"></i> Notices</button>
-      <button class="quick-btn" onclick="showPage('complaints')"><i class="fas fa-comment-dots"></i> Complaints</button>
-      <button class="quick-btn" onclick="showPage('accommodation')"><i class="fas fa-bed"></i> Hostel</button>
-      <button class="quick-btn" onclick="showPage('exams')"><i class="fas fa-calendar-check"></i> Exams</button>
-      <button class="quick-btn" onclick="showPage('timetable')"><i class="fas fa-clock"></i> Timetable</button>
-      <button class="quick-btn" onclick="showPage('studentId')"><i class="fas fa-id-badge"></i> ID Card</button>
-      <button class="quick-btn" onclick="showPage('teveta')"><i class="fas fa-check-double"></i> TEVETA</button>
+    <div class="notice-board">
+      ${noticesHtml}
     </div>
-
-    <h2 class="section-title"><i class="fas fa-chart-line"></i> Quick Stats</h2>
-    <div class="stat-row">
-      <div class="stat-box"><div class="lbl">Applications</div><div class="val">${allApps.length}</div></div>
-      <div class="stat-box"><div class="lbl">Pending</div><div class="val" style="color:var(--amber)">${pendingAppsCount}</div></div>
-      <div class="stat-box"><div class="lbl">Notices</div><div class="val">${dbNotices.length}</div></div>
-      <div class="stat-box"><div class="lbl">Jobs</div><div class="val">${dbJobs.length}</div></div>
-    </div>
-
-    <h2 class="section-title"><i class="fas fa-clock"></i> Recent Activity</h2>
-    <div class="timeline" id="recentActivity">${renderRecentActivity()}</div>
   `;
-}
-
-function renderRecentActivity(){
-  const allApps = buildAllApplications().slice(0, 4);
-  if(!allApps.length) return emptyState('No recent activity yet', 'fa-clock');
-  return allApps.map(a => {
-    const statusLc = String(a.status||'').toLowerCase();
-    const type = statusLc === 'approved' || statusLc === 'resolved' || statusLc === 'allocated' ? 'done'
-               : statusLc === 'rejected' || statusLc === 'cancelled' ? 'rejected'
-               : 'pending';
-    return `
-      <div class="tl-item ${type}">
-        <div class="tl-ttl">${esc(a.title)}</div>
-        <div class="tl-desc">${esc(a.status)} · ${a.date ? fmtDateTime(a.date) : ''}</div>
-      </div>
-    `;
-  }).join('');
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1229,7 +1320,7 @@ function renderCA(){
       </tbody>
     </table></div>`;
     html += `<h3><i class="fas fa-chart-pie"></i> Progress</h3>
-      <div style="background:#fff;border:1px solid var(--border-color);border-radius:12px;padding:16px">
+      <div style="background:#fff;border:1px solid var(--border-color);border-radius:14px;padding:16px;box-shadow:0 8px 22px -16px rgba(37,99,235,.22)">
         ${coursesWithCA.map(c => `
           <div style="margin-bottom:12px">
             <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:4px">
@@ -1560,7 +1651,7 @@ function renderProfile(){
   const photo = p.profilePhoto || '';
   $('#profileContent').innerHTML = `
     <div style="text-align:center;margin-bottom:20px">
-      <div style="width:110px;height:110px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(135deg,var(--blue),var(--blue-bright));display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:900;color:#fff;border:4px solid #fff;box-shadow:0 8px 32px rgba(37,99,235,.3);overflow:hidden">
+      <div style="width:110px;height:110px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(135deg,var(--blue),var(--blue-bright));display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:900;color:#fff;border:4px solid #fff;box-shadow:0 12px 36px rgba(37,99,235,.35);overflow:hidden">
         ${photo ? `<img src="${esc(photo)}" alt="Profile" style="width:100%;height:100%;object-fit:cover" />` : esc(getInitials(appData.fullName))}
       </div>
       <h2 style="font-size:20px;font-weight:900;color:var(--text-primary)">${esc(appData.fullName||'—')}</h2>
@@ -1690,16 +1781,24 @@ function renderNotices(){
   let html = `<h3><i class="fas fa-bullhorn"></i> Notice Board</h3>`;
   if(!rows.length){ html += emptyState('No notices posted','fa-bullhorn'); }
   else {
+    html += `<div class="notice-board">`;
     html += rows.map(n => `
-      <div class="notice-card">
-        <div class="nc-hd">
-          <h3>${esc(n.title||'Notice')}</h3>
-          ${n.date ? `<div class="sub">${esc(n.date)}</div>` : ''}
+      <div class="notice-tile">
+        <div class="notice-head">
+          <div class="notice-icon"><i class="fas fa-bullhorn"></i></div>
+          <div class="notice-head-body">
+            <div class="notice-title">${esc(n.title||'Notice')}</div>
+            <div class="notice-meta">
+              <span><i class="fas fa-calendar-day"></i> ${esc(n.date || fmtDate(n.createdAt))}</span>
+              ${n.issuedBy ? `<span><i class="fas fa-user-tie"></i> ${esc(n.issuedBy)}</span>` : ''}
+            </div>
+          </div>
         </div>
-        <p style="white-space:pre-wrap">${esc(n.body||'')}</p>
-        ${n.issuedBy ? `<div style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:right;font-style:italic">— ${esc(n.issuedBy)}</div>`: ''}
+        <div class="notice-body">${esc(n.body||'')}</div>
+        ${n.issuedBy ? `<div class="notice-issuer"><i class="fas fa-stamp"></i> Issued by ${esc(n.issuedBy)}</div>` : ''}
       </div>
     `).join('');
+    html += `</div>`;
   }
   $('#noticesContent').innerHTML = html;
 }
@@ -1776,7 +1875,6 @@ function renderAccommodation(){
   const req = dbAccommodationRequests || {};
   let html = '';
 
-  // Show any pending request first
   if(req && Object.keys(req).length && (!a || Object.keys(a).length === 0)){
     html += `
       <h3><i class="fas fa-clock"></i> Pending Accommodation Request</h3>
@@ -1802,7 +1900,6 @@ function renderAccommodation(){
   }
 
   if(!a || Object.keys(a).length === 0){
-    // No allocation yet — show application form (unless already requested)
     html += `
       <h3 style="margin-top:${html ? '18px' : '0'}"><i class="fas fa-bed"></i> ${req && Object.keys(req).length ? 'Apply Again (New Request)' : 'Hostel Application'}</h3>
       <p style="font-size:13px;color:var(--text-muted)">You don't have an accommodation allocation yet. Apply below to request a room.</p>
@@ -1834,7 +1931,6 @@ function renderAccommodation(){
     return;
   }
 
-  // Has allocation — show details
   html += `
     <h3 style="margin-top:${html ? '18px' : '0'}"><i class="fas fa-home"></i> My Room</h3>
     <div class="info-grid">
@@ -2218,7 +2314,7 @@ async function submitTevetaForm(e){
     };
     await db.ref(`${ROOT}/teveta/${uid}`).set(record);
     dbTeveta = { id: uid, ...record };
-    toast('✅ TEVETA form submitted successfully!','ok');
+    toast('TEVETA form submitted successfully!','ok');
     setTimeout(renderTeveta, 600);
   }catch(err){
     console.error('TEVETA submit failed:', err);
@@ -2328,7 +2424,7 @@ function renderAlumni(){
             <div class="dt">${esc(a.program||'')} ${a.graduation?'· '+esc(a.graduation):''}</div>
             <div class="cmp">${esc(a.company||'')} ${a.position?'· '+esc(a.position):''}</div>
             <button class="btn-sm ${applied?'ghost':'primary'}" style="margin-top:10px;width:100%" ${applied?'disabled':''} onclick="applyMentor('${esc(a.name)}')">
-              ${applied?'✓ Applied':'Apply for Mentorship'}
+              ${applied?'Applied':'Apply for Mentorship'}
             </button>
           </div>
         `;
@@ -2578,7 +2674,6 @@ function bindRealtime(){
   db.ref(`${ROOT}/attendance/${uid}`).on('value', s => {
     dbAttendance = toArray(s.val());
     if($('#attendancePage').classList.contains('active-page')) renderAttendance();
-    if($('#homePage').classList.contains('active-page')) renderHome();
   });
 
   db.ref(`${ROOT}/exams/${uid}`).on('value', s => { dbExams = toArray(s.val()); if($('#examsPage').classList.contains('active-page')) renderExams(); });
@@ -2586,13 +2681,11 @@ function bindRealtime(){
   db.ref(`${ROOT}/clearance/${uid}`).on('value', s => {
     dbClearance = toArray(s.val());
     if($('#clearancePage').classList.contains('active-page')) renderClearance();
-    if($('#homePage').classList.contains('active-page')) renderHome();
   });
 
   db.ref(`${ROOT}/finance/${uid}`).on('value', s => {
     dbFinanceTransactions = toArray(s.val());
     if($('#financePage').classList.contains('active-page')) renderFinance();
-    if($('#homePage').classList.contains('active-page')) renderHome();
   });
 
   db.ref(`${ROOT}/library/books`).on('value', s => { dbLibraryBooks = toArray(s.val()); if($('#libraryPage').classList.contains('active-page')) renderLibrary(); });
@@ -2639,7 +2732,7 @@ function bindRealtime(){
     }
     liveClassData = found;
     liveClassId = found?.id || null;
-    if(liveClassData) toast('📡 Live class is ongoing','info');
+    if(liveClassData) toast('Live class is ongoing','info');
   });
 }
 
