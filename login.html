@@ -17,7 +17,6 @@
   :root{
     --bg:#0a0e17; --card:#ffffff; --text:#0f172a; --muted:#64748b;
     --border:#e2e8f0; --soft:#f8fafc;
-    /* ═══ BLUE PALETTE ═══ */
     --blue:#2563eb; --blue-dark:#1e40af; --blue-light:#eff6ff; --blue-soft:#dbeafe;
     --blue-bright:#3b82f6;
     --red:#ef4444; --amber:#f59e0b;
@@ -28,23 +27,19 @@
   html,body{width:100%;min-height:100%;background:var(--bg);color:var(--text);overflow-x:hidden}
   body{font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
 
-  /* ═══ BG ═══ */
   .bg-layer{position:fixed;inset:0;background-image:url('home.webp');background-size:cover;background-position:center;z-index:0;animation:zoomLoop 14s ease-in-out infinite alternate}
   .bg-layer::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,.55) 60%,rgba(0,0,0,.78) 100%);backdrop-filter:blur(2px)}
   @keyframes zoomLoop{0%{transform:scale(1)}50%{transform:scale(1.12)}100%{transform:scale(1)}}
 
-  /* ═══ SCREENS ═══ */
   .screen{position:fixed;inset:0;display:none;flex-direction:column;overflow-y:auto;z-index:1;-webkit-overflow-scrolling:touch;background:#f1f5f9}
   .screen.active{display:flex}
   .screen::-webkit-scrollbar{width:0}
 
-  /* ═══ LOADER ═══ */
   #appLoader{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .4s}
   #appLoader.hidden{opacity:0;pointer-events:none}
   .loader-spinner{width:52px;height:52px;border:4px solid rgba(255,255,255,.15);border-top-color:var(--blue-bright);border-radius:50%;animation:spin .9s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
 
-  /* ═══ LANDING ═══ */
   #landing{align-items:center;justify-content:center;padding:36px 22px;text-align:center;background:transparent}
   .logo-wrap{width:104px;height:104px;border-radius:24px;background:rgba(255,255,255,.92);backdrop-filter:blur(20px);padding:12px;box-shadow:0 20px 60px rgba(0,0,0,.35);margin-bottom:22px;display:flex;align-items:center;justify-content:center;animation:pop .6s cubic-bezier(.34,1.56,.64,1)}
   .logo-wrap img{width:100%;height:100%;object-fit:contain}
@@ -55,7 +50,6 @@
   .btn-group{width:100%;max-width:340px;display:flex;flex-direction:column;gap:14px}
   .footer-note{margin-top:26px;font-size:11px;color:rgba(255,255,255,.28);letter-spacing:.5px}
 
-  /* ═══ BUTTONS ═══ */
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:56px;padding:16px 24px;border:none;border-radius:60px;font-family:inherit;font-size:16px;font-weight:700;color:#fff;cursor:pointer;transition:all .25s cubic-bezier(.22,1,.36,1);box-shadow:0 8px 32px rgba(0,0,0,.25);position:relative;overflow:hidden;user-select:none}
   .btn::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.15) 0%,transparent 55%);pointer-events:none}
   .btn:active{transform:scale(.96)}
@@ -69,7 +63,6 @@
   .btn-danger{background:linear-gradient(135deg,#ef4444,#b91c1c);box-shadow:0 8px 26px rgba(239,68,68,.35)}
   .btn:disabled{opacity:.55;cursor:not-allowed;transform:none!important}
 
-  /* ═══ PAGE HEADER ═══ */
   .pg-header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,#1e40af,#2563eb);color:#fff;padding:18px 22px 16px;box-shadow:0 4px 20px rgba(37,99,235,.25)}
   .pg-header-inner{max-width:840px;margin:0 auto;display:flex;align-items:center;gap:14px}
   .pg-header img{width:44px;height:44px;border-radius:12px;background:#fff;padding:5px;object-fit:contain}
@@ -80,7 +73,6 @@
   .back-btn:hover{background:rgba(255,255,255,.32)}
   .back-btn i{font-size:12px}
 
-  /* ═══ STEP CONTAINER ═══ */
   .step-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:100px}
   .step-scroll::-webkit-scrollbar{width:0}
   .step-panel{display:none;width:100%;max-width:840px;margin:0 auto;padding:22px}
@@ -89,14 +81,12 @@
   .step-panel.slide-back{animation:stepBack .3s ease}
   @keyframes stepBack{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:none}}
 
-  /* ═══ STEP CARD ═══ */
   .step-card{background:#fff;border-radius:18px;padding:22px;box-shadow:var(--shadow)}
   .step-head{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:14px;border-bottom:2px solid var(--soft)}
   .step-head .num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(37,99,235,.35)}
   .step-head h3{font-size:17px;font-weight:800;color:var(--text)}
   .step-head p{font-size:12.5px;color:var(--muted);margin-top:1px}
 
-  /* ═══ FORM ═══ */
   .form-group{margin-bottom:14px}
   .form-group label{display:block;font-size:12px;font-weight:700;color:#334155;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
   .form-group label .req{color:var(--red)}
@@ -106,12 +96,10 @@
   .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   @media(max-width:560px){.row{grid-template-columns:1fr}}
 
-  /* ═══ PASSWORD ═══ */
   .pw-wrap{position:relative}
   .pw-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;padding:8px;font-size:15px;border-radius:50%;transition:.2s}
   .pw-toggle:hover{background:#e2e8f0;color:var(--text)}
 
-  /* ═══ STEPPER ═══ */
   .stepper{display:flex;justify-content:space-between;gap:4px;margin-bottom:18px;padding:14px 8px;background:#fff;border-radius:16px;border:1px solid var(--border);box-shadow:var(--shadow)}
   .stepper .step{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;min-width:0;position:relative;cursor:pointer}
   .stepper .step:not(:last-child)::after{content:'';position:absolute;top:14px;left:calc(50% + 16px);right:calc(-50% + 16px);height:2px;background:#e2e8f0;border-radius:2px;z-index:0}
@@ -124,7 +112,6 @@
   .stepper .step .lbl{font-size:9.5px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.3px;text-align:center;line-height:1.15}
   .stepper .step.active .lbl,.stepper .step.done .lbl{color:var(--blue-dark)}
 
-  /* ═══ UPLOAD BOXES ═══ */
   .upload-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
   @media(max-width:560px){.upload-grid{grid-template-columns:repeat(2,1fr)}}
   .upload-box{position:relative;aspect-ratio:1/1;background:var(--soft);border:2px dashed #cbd5e1;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px;cursor:pointer;transition:all .22s;overflow:hidden}
@@ -148,7 +135,6 @@
   .upload-box .remove-up{position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:rgba(239,68,68,.9);color:#fff;display:none;align-items:center;justify-content:center;font-size:12px;z-index:5;border:none;cursor:pointer}
   .upload-box.filled .remove-up{display:flex}
 
-  /* ═══ SUBJECTS/GRADES ═══ */
   .subjects-wrap{background:var(--soft);border:1.5px solid var(--border);border-radius:14px;padding:14px}
   .subject-row{display:grid;grid-template-columns:2fr 1fr auto;gap:8px;margin-bottom:10px;align-items:center;animation:rowIn .25s ease}
   @keyframes rowIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
@@ -160,7 +146,6 @@
   .add-subject-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;border:2px dashed #94a3b8;border-radius:10px;background:transparent;color:var(--blue-dark);font-weight:700;font-size:13.5px;cursor:pointer;font-family:inherit;transition:.2s;margin-top:6px}
   .add-subject-btn:hover{border-color:var(--blue);background:var(--blue-light)}
 
-  /* ═══ COURSE DESCRIPTION CARD ═══ */
   .course-desc{background:linear-gradient(135deg,#eff6ff,#ffffff);border:1.5px solid #bfdbfe;border-radius:14px;padding:16px;margin-top:8px;animation:rowIn .3s ease}
   .course-desc .cd-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px dashed #bfdbfe}
   .course-desc .cd-head .cd-icon{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
@@ -173,7 +158,6 @@
   .course-desc .cd-section{margin-top:12px}
   .course-desc .cd-section .cd-label{font-size:11.5px;font-weight:800;color:var(--blue-dark);letter-spacing:.5px;margin-bottom:4px}
 
-  /* ═══ DECLARATION ═══ */
   .declare-row{display:flex;align-items:flex-start;gap:12px;padding:16px;background:var(--soft);border-radius:14px;border:1.5px solid var(--border);margin-bottom:16px;cursor:pointer}
   .declare-row input[type="checkbox"]{width:20px;height:20px;accent-color:var(--blue);margin-top:2px;flex-shrink:0;cursor:pointer}
   .declare-row label{font-size:13.5px;color:var(--text);font-weight:500;line-height:1.55;cursor:pointer}
@@ -182,14 +166,12 @@
   .notice-box strong{color:var(--blue-dark)}
   .notice-box .badge-pending{display:inline-block;background:#fef3c7;color:#92400e;font-weight:800;font-size:11px;padding:3px 10px;border-radius:20px;letter-spacing:.5px}
 
-  /* ═══ BOTTOM NAV ═══ */
   .bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;border-top:1px solid var(--border);padding:12px 22px;display:flex;box-shadow:0 -4px 20px rgba(0,0,0,.06)}
   .bottom-nav-inner{width:100%;max-width:840px;margin:0 auto;display:flex;gap:10px}
   .bottom-nav .btn{min-height:50px;font-size:14.5px}
   .bottom-nav .btn-ghost{flex:0 0 auto;width:auto;padding:14px 24px}
   .bottom-nav .btn-primary{flex:1}
 
-  /* ═══ LOGIN SCREEN ═══ */
   #loginScreen{background:#f1f5f9;align-items:center;justify-content:center;padding:22px}
   .login-card{background:#fff;border-radius:22px;padding:32px 26px;max-width:420px;width:100%;box-shadow:var(--shadow-lg);border:1px solid rgba(0,0,0,.04)}
   .login-card .lh{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:22px;padding-bottom:20px;border-bottom:1px solid var(--border)}
@@ -199,7 +181,6 @@
   #loginBack{position:absolute;top:20px;left:20px;background:rgba(0,0,0,.05);border:1px solid var(--border);color:var(--text);border-radius:40px;font-size:12.5px;font-weight:700;padding:9px 16px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-family:inherit;transition:.2s;z-index:5}
   #loginBack:hover{background:rgba(0,0,0,.1)}
 
-  /* ═══ STATUS SCREEN ═══ */
   #statusScreen{background:#f1f5f9;padding:22px;align-items:center;justify-content:center}
   .status-card{background:#fff;border-radius:22px;padding:32px 26px;max-width:620px;width:100%;box-shadow:var(--shadow-lg);text-align:center;margin:auto}
   .status-icon{width:96px;height:96px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:42px;margin:0 auto 20px}
@@ -221,7 +202,6 @@
   .info-list .row-i .k{color:var(--muted);font-weight:500;flex-shrink:0}
   .info-list .row-i .v{font-weight:600;text-align:right;word-break:break-word}
 
-  /* ═══ TOAST ═══ */
   #toast{position:fixed;top:20px;right:20px;z-index:99999;display:flex;flex-direction:column;gap:10px;max-width:340px}
   .toast{padding:14px 18px;border-radius:14px;font-size:13.5px;font-weight:600;color:#fff;box-shadow:0 12px 34px rgba(0,0,0,.25);display:flex;align-items:center;gap:10px;animation:toastIn .3s ease}
   @keyframes toastIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:none}}
@@ -288,15 +268,11 @@
 
     <form id="enrollForm" novalidate>
 
-      <!-- ═══ STEP 1 · PERSONAL ═══ -->
       <div class="step-panel active" data-step="1">
         <div class="step-card">
           <div class="step-head">
             <div class="num">1</div>
-            <div>
-              <h3>Personal Details</h3>
-              <p>Tell us about yourself</p>
-            </div>
+            <div><h3>Personal Details</h3><p>Tell us about yourself</p></div>
           </div>
 
           <div class="form-group">
@@ -333,15 +309,11 @@
         </div>
       </div>
 
-      <!-- ═══ STEP 2 · ACADEMIC ═══ -->
       <div class="step-panel" data-step="2">
         <div class="step-card">
           <div class="step-head">
             <div class="num">2</div>
-            <div>
-              <h3>Academic Background</h3>
-              <p>Your education & documents</p>
-            </div>
+            <div><h3>Academic Background</h3><p>Your education & documents</p></div>
           </div>
 
           <div class="row">
@@ -411,15 +383,11 @@
         </div>
       </div>
 
-      <!-- ═══ STEP 3 · PROGRAMME ═══ -->
       <div class="step-panel" data-step="3">
         <div class="step-card">
           <div class="step-head">
             <div class="num">3</div>
-            <div>
-              <h3>Programme Selection</h3>
-              <p>Choose your intake & course</p>
-            </div>
+            <div><h3>Programme Selection</h3><p>Choose your intake & course</p></div>
           </div>
 
           <div class="form-group">
@@ -445,15 +413,11 @@
         </div>
       </div>
 
-      <!-- ═══ STEP 4 · SPONSOR & ACCOUNT ═══ -->
       <div class="step-panel" data-step="4">
         <div class="step-card">
           <div class="step-head">
             <div class="num">4</div>
-            <div>
-              <h3>Sponsor &amp; Login</h3>
-              <p>Who's funding you & your account</p>
-            </div>
+            <div><h3>Sponsor &amp; Login</h3><p>Who's funding you & your account</p></div>
           </div>
 
           <div class="row">
@@ -482,15 +446,11 @@
         </div>
       </div>
 
-      <!-- ═══ STEP 5 · DECLARATION ═══ -->
       <div class="step-panel" data-step="5">
         <div class="step-card">
           <div class="step-head">
             <div class="num">5</div>
-            <div>
-              <h3>Declaration &amp; Submit</h3>
-              <p>Review and confirm</p>
-            </div>
+            <div><h3>Declaration &amp; Submit</h3><p>Review and confirm</p></div>
           </div>
 
           <div class="declare-row">
@@ -500,7 +460,7 @@
 
           <div class="notice-box">
             <strong><i class="fas fa-info-circle"></i> What happens next?</strong><br/><br/>
-            Your application will be marked <span class="badge-pending">PENDING</span>. When an administrator reviews and approves it, a student number will be generated automatically in the format <strong>2601-0001</strong>. You'll be able to log in and view it.
+            Your application will be marked <span class="badge-pending">PENDING</span>. When an administrator reviews and approves it, a student number will be generated automatically in the format <strong>2601-0001</strong>. You'll be redirected to the student dashboard.
           </div>
 
           <div id="submitMsg" class="msg-box" style="margin-top:14px"></div>
@@ -510,7 +470,6 @@
     </form>
   </div>
 
-  <!-- STICKY BOTTOM NAV -->
   <div class="bottom-nav">
     <div class="bottom-nav-inner">
       <button type="button" class="btn btn-ghost" id="prevBtn" style="visibility:hidden"><i class="fas fa-arrow-left"></i> Previous</button>
@@ -585,6 +544,7 @@ const db = firebase.database();
 const CLOUD_NAME = "dd3lcymrk";
 const UPLOAD_PRESET = "h3eyhc2o";
 const ROOT = "nortec";
+const STUDENT_REDIRECT_URL = "student.html";
 
 /* ═══════════════════════════════════════════════════════════════
    2 · INTAKES & PROGRAMMES
@@ -763,7 +723,44 @@ function showMsg(id, text, type){
 function hideMsg(id){ document.getElementById(id).className = 'msg-box'; }
 
 /* ═══════════════════════════════════════════════════════════════
-   4 · SCREEN NAVIGATION + DEVICE BACK BUTTON
+   4 · REDIRECT LOGIC (student.html only when approved)
+   ═══════════════════════════════════════════════════════════════ */
+function redirectToStudent(){
+  // Small delay so user sees toast before redirect
+  toast('✅ Approved! Redirecting to student portal…', 'ok');
+  setTimeout(() => {
+    window.location.replace(STUDENT_REDIRECT_URL);
+  }, 600);
+}
+
+/**
+ * Central routing after fetching the application record.
+ * - approved  → redirect to student.html
+ * - pending   → show pending status screen
+ * - rejected  → show rejected status screen
+ */
+async function routeByApplicationStatus(appData){
+  const status = (appData.status || 'pending').toLowerCase();
+
+  if (status === 'approved'){
+    // Make sure student number exists before redirecting
+    if (!appData.studentNumber){
+      try {
+        await generateStudentNumber(appData.uid, appData);
+      } catch (e) {
+        console.warn('Could not generate student number:', e);
+      }
+    }
+    redirectToStudent();
+    return;
+  }
+
+  // Not approved → show pending / rejected screen
+  showStatusScreen(appData);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   5 · SCREEN NAVIGATION + DEVICE BACK BUTTON
    ═══════════════════════════════════════════════════════════════ */
 let navState = { screen: 'landing', step: 1 };
 
@@ -778,23 +775,16 @@ function showScreen(id, pushHistory=true){
   }
 }
 
-/* Main back-button handler */
 window.addEventListener('popstate', (e) => {
   const state = e.state;
-
-  // No state → user is leaving; let the browser handle it (back to previous site)
   if (!state){
-    // Still on our page → go to landing
     if (navState.screen !== 'landing'){
       showScreen('landing', false);
       return;
     }
-    return; // let the browser navigate away
+    return;
   }
-
-  // Enroll screen with step tracking
   if (state.screen === 'enroll' && state.step){
-    // If we're not on enroll screen, switch to it
     if (navState.screen !== 'enroll'){
       $$('.screen').forEach(s => s.classList.remove('active'));
       $('#enroll').classList.add('active');
@@ -805,15 +795,13 @@ window.addEventListener('popstate', (e) => {
     }
     return;
   }
-
-  // Otherwise, show the requested screen
   if (state.screen && state.screen !== navState.screen){
     showScreen(state.screen, false);
   }
 });
 
 /* ═══════════════════════════════════════════════════════════════
-   5 · CLOUDINARY UPLOAD
+   6 · CLOUDINARY UPLOAD
    ═══════════════════════════════════════════════════════════════ */
 function openCloudinaryUpload({ formats=['jpg','jpeg','png','pdf','heic','doc','docx'], maxSize=5000000 } = {}){
   return new Promise((resolve) => {
@@ -848,7 +836,7 @@ function openCloudinaryUpload({ formats=['jpg','jpeg','png','pdf','heic','doc','
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   6 · UPLOAD BOXES
+   7 · UPLOAD BOXES
    ═══════════════════════════════════════════════════════════════ */
 const uploads = {};
 
@@ -921,7 +909,7 @@ function bindUploadBoxes(){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   7 · SUBJECTS & GRADES
+   8 · SUBJECTS & GRADES
    ═══════════════════════════════════════════════════════════════ */
 function addSubjectRow(subject='', grade=''){
   const list = $('#subjectsList');
@@ -960,19 +948,13 @@ function collectSubjects(){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   8 · COURSE DESCRIPTION
+   9 · COURSE DESCRIPTION
    ═══════════════════════════════════════════════════════════════ */
 function renderCourseDescription(code){
   const box = $('#courseDescBox');
-  if (!code){
-    box.innerHTML = '';
-    return;
-  }
+  if (!code){ box.innerHTML = ''; return; }
   const p = PROGRAMMES.find(x => x.code === code);
-  if (!p){
-    box.innerHTML = '';
-    return;
-  }
+  if (!p){ box.innerHTML = ''; return; }
   box.innerHTML = `
     <div class="course-desc">
       <div class="cd-head">
@@ -995,7 +977,7 @@ function renderCourseDescription(code){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   9 · WIZARD — STEP NAVIGATION
+   10 · WIZARD
    ═══════════════════════════════════════════════════════════════ */
 let currentStep = 1;
 const TOTAL_STEPS = 5;
@@ -1021,7 +1003,6 @@ function buildStepper(){
       } else if (i === currentStep){
         // no-op
       } else {
-        // Forward jump → validate all previous
         for (let j = currentStep; j < i; j++){
           if (!validateStep(j, true)) {
             goToStep(j, false);
@@ -1100,7 +1081,6 @@ function goToStep(n, skipValidation=false, isBack=false){
   if (n < 1) n = 1;
   if (n > TOTAL_STEPS) n = TOTAL_STEPS;
 
-  // Validate when moving forward
   if (!skipValidation && n > currentStep){
     if (!validateStep(currentStep)) return;
   }
@@ -1109,7 +1089,6 @@ function goToStep(n, skipValidation=false, isBack=false){
   currentStep = n;
   buildStepper();
 
-  // Hide all panels, show current
   $$('.step-panel').forEach(p => p.classList.remove('active','slide-back'));
   const panel = $(`.step-panel[data-step="${n}"]`);
   if (panel){
@@ -1117,12 +1096,10 @@ function goToStep(n, skipValidation=false, isBack=false){
     panel.classList.add('active');
   }
 
-  // Update header
   const meta = STEP_TITLES[n-1];
   $('#enrollHeaderTitle').textContent = meta.title;
   $('#enrollHeaderSub').textContent = `Step ${n} of ${TOTAL_STEPS} · ${meta.sub}`;
 
-  // Nav buttons
   $('#prevBtn').style.visibility = currentStep === 1 ? 'hidden' : 'visible';
   if (currentStep === TOTAL_STEPS){
     $('#nextBtn').style.display = 'none';
@@ -1132,19 +1109,16 @@ function goToStep(n, skipValidation=false, isBack=false){
     $('#submitBtn').style.display = 'none';
   }
 
-  // Scroll to top of step scroll
   const scroller = $('.step-scroll');
   if (scroller) scroller.scrollTop = 0;
 
-  // Push history (only when navigating normally, not from popstate)
   if (!isBack || n < oldStep){
-    // Forward → new entry
     history.pushState({ screen: 'enroll', step: n }, '', '#enroll/step-' + n);
   }
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   10 · SUBMIT APPLICATION
+   11 · SUBMIT APPLICATION
    ═══════════════════════════════════════════════════════════════ */
 async function submitApplication(e){
   if (e) e.preventDefault();
@@ -1266,6 +1240,7 @@ async function submitApplication(e){
     showMsg('submitMsg', 'Application submitted! Status: PENDING. Redirecting…', 'ok');
 
     setTimeout(() => {
+      // After submission → always pending → show status screen (never redirect)
       showStatusScreen(application);
     }, 900);
 
@@ -1283,7 +1258,7 @@ async function submitApplication(e){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   11 · LOGIN
+   12 · LOGIN
    ═══════════════════════════════════════════════════════════════ */
 async function handleLogin(e){
   e.preventDefault();
@@ -1313,22 +1288,16 @@ async function handleLogin(e){
     if (!snap.exists()){
       showMsg('loginMsg', 'No application found for this account. Please enroll first.', 'err');
       await auth.signOut();
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
       return;
     }
 
     const appData = { uid, ...snap.val() };
 
-    if (appData.status === 'approved' && !appData.studentNumber){
-      try {
-        const num = await generateStudentNumber(uid, appData);
-        appData.studentNumber = num;
-        toast('Student number assigned: ' + num, 'ok');
-      } catch (err){
-        console.warn('Could not auto-generate student number:', err);
-      }
-    }
-
-    showStatusScreen(appData);
+    // ═══ Route based on status ═══
+    // approved → student.html   |   pending/rejected → status screen
+    await routeByApplicationStatus(appData);
 
   } catch (err){
     console.error(err);
@@ -1338,14 +1307,13 @@ async function handleLogin(e){
     if (err.code === 'auth/too-many-requests') msg = 'Too many attempts. Please try again later.';
     showMsg('loginMsg', msg, 'err');
     toast(msg, 'err');
-  } finally {
     btn.disabled = false;
     btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
   }
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   12 · AUTO STUDENT NUMBER
+   13 · AUTO STUDENT NUMBER
    ═══════════════════════════════════════════════════════════════ */
 async function generateStudentNumber(uid, appData){
   const year = new Date().getFullYear();
@@ -1365,11 +1333,17 @@ async function generateStudentNumber(uid, appData){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   13 · STATUS SCREEN
+   14 · STATUS SCREEN (pending + rejected)
    ═══════════════════════════════════════════════════════════════ */
 function showStatusScreen(appData){
   const card = $('#statusCard');
   const status = (appData.status || 'pending').toLowerCase();
+
+  // Safety: if somehow approved slips through, redirect instead of showing
+  if (status === 'approved'){
+    redirectToStudent();
+    return;
+  }
 
   let icon, title, subtitle, pillClass, bodyHtml = '';
 
@@ -1387,35 +1361,9 @@ function showStatusScreen(appData){
       </div>
       <div style="background:#fff7ed;border-radius:12px;padding:14px;font-size:12.5px;color:#92400e;text-align:left;line-height:1.6;margin-bottom:14px">
         <strong><i class="fas fa-clock"></i> What happens next?</strong><br/>
-        Once an admin approves your application, a student number will be generated automatically in the format <strong>2601-0001</strong>. Log back in to view it.
+        Once an admin approves your application, you will be redirected automatically to the student dashboard. Log back in to check your status.
       </div>
       <button class="btn btn-ghost" id="refreshStatusBtn" style="margin-bottom:10px"><i class="fas fa-sync-alt"></i> Refresh Status</button>
-      <button class="btn btn-danger" id="logoutBtn1"><i class="fas fa-sign-out-alt"></i> Log Out</button>
-    `;
-  } else if (status === 'approved'){
-    icon = 'approved'; pillClass = 'approved';
-    title = 'Application Approved 🎉';
-    subtitle = 'Welcome to Northern Technical College! Your admission is confirmed.';
-    bodyHtml = `
-      <div class="student-number">
-        <div class="lbl">Your Student Number</div>
-        <div class="val">${esc(appData.studentNumber || 'Generating…')}</div>
-      </div>
-      <div class="info-list">
-        <div class="row-i"><span class="k">Full Name</span><span class="v">${esc(appData.fullName || '—')}</span></div>
-        <div class="row-i"><span class="k">Programme</span><span class="v">${esc(appData.programme?.title || '—')}</span></div>
-        <div class="row-i"><span class="k">Category</span><span class="v">${esc(appData.programme?.category || '—')}</span></div>
-        <div class="row-i"><span class="k">Intake</span><span class="v">${esc(appData.programme?.intakeLabel || '—')}</span></div>
-        <div class="row-i"><span class="k">Mode</span><span class="v">${esc(appData.programme?.mode || '—')}</span></div>
-        <div class="row-i"><span class="k">Year of Study</span><span class="v">${esc(appData.programme?.yearStudy || '—')}</span></div>
-        <div class="row-i"><span class="k">Email</span><span class="v">${esc(appData.email || '—')}</span></div>
-        <div class="row-i"><span class="k">Approved</span><span class="v">${formatDate(appData.approvedAt)}</span></div>
-      </div>
-      <div style="background:var(--blue-light);border-radius:12px;padding:14px;font-size:12.5px;color:var(--blue-dark);text-align:left;line-height:1.6;margin-bottom:14px">
-        <strong><i class="fas fa-check-circle"></i> Next steps</strong><br/>
-        Keep your student number safe — you'll need it for registration, exams and campus access.
-      </div>
-      <button class="btn btn-ghost" id="refreshStatusBtn" style="margin-bottom:10px"><i class="fas fa-sync-alt"></i> Refresh</button>
       <button class="btn btn-danger" id="logoutBtn1"><i class="fas fa-sign-out-alt"></i> Log Out</button>
     `;
   } else {
@@ -1434,7 +1382,7 @@ function showStatusScreen(appData){
   }
 
   card.innerHTML = `
-    <div class="status-icon ${icon}"><i class="fas fa-${icon==='pending'?'hourglass-half':icon==='approved'?'check-circle':'times-circle'}"></i></div>
+    <div class="status-icon ${icon}"><i class="fas fa-${icon==='pending'?'hourglass-half':'times-circle'}"></i></div>
     <span class="status-pill ${pillClass}">${status}</span>
     <h2>${title}</h2>
     <p class="sub-t">${subtitle}</p>
@@ -1454,13 +1402,17 @@ async function refreshStatus(uid){
     const snap = await db.ref(`${ROOT}/applications/${uid}`).get();
     if (!snap.exists()) { toast('Application not found', 'err'); return; }
     const appData = { uid, ...snap.val() };
-    if (appData.status === 'approved' && !appData.studentNumber){
-      try {
-        const num = await generateStudentNumber(uid, appData);
-        appData.studentNumber = num;
-        toast('Student number assigned: ' + num, 'ok');
-      } catch(e){ console.warn(e); }
+
+    // ═══ Check status → maybe redirect now ═══
+    const status = (appData.status || 'pending').toLowerCase();
+    if (status === 'approved'){
+      if (!appData.studentNumber){
+        try { await generateStudentNumber(uid, appData); } catch(e){ console.warn(e); }
+      }
+      redirectToStudent();
+      return;
     }
+
     showStatusScreen(appData);
     toast('Status refreshed', 'ok');
   } catch(e){ toast('Refresh failed', 'err'); }
@@ -1474,7 +1426,7 @@ function doLogout(){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   14 · DROPDOWNS
+   15 · DROPDOWNS
    ═══════════════════════════════════════════════════════════════ */
 function buildIntakeSelect(){
   const sel = $('#enrollIntake');
@@ -1507,10 +1459,9 @@ function buildProgrammeSelect(){
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   15 · EVENT BINDINGS
+   16 · EVENT BINDINGS
    ═══════════════════════════════════════════════════════════════ */
 function bindEvents(){
-  /* Landing */
   $('#btnEnroll').addEventListener('click', () => {
     showScreen('enroll', true);
     goToStep(1, true);
@@ -1521,7 +1472,6 @@ function bindEvents(){
     goToStep(1, true);
   });
 
-  /* Enroll back button — same as device back */
   $('#enrollBack').addEventListener('click', () => {
     if (currentStep > 1){
       goToStep(currentStep - 1, true, true);
@@ -1533,12 +1483,10 @@ function bindEvents(){
     }
   });
 
-  /* Login back button */
   $('#loginBack').addEventListener('click', () => {
     showScreen('landing', true);
   });
 
-  /* Bottom nav */
   $('#prevBtn').addEventListener('click', () => {
     if (currentStep > 1) {
       goToStep(currentStep - 1, true, true);
@@ -1548,18 +1496,14 @@ function bindEvents(){
   $('#submitBtn').addEventListener('click', submitApplication);
   $('#enrollForm').addEventListener('submit', (e) => e.preventDefault());
 
-  /* Intake → programme */
   $('#enrollIntake').addEventListener('change', buildProgrammeSelect);
 
-  /* Programme → description */
   $('#enrollProgramme').addEventListener('change', function(){
     renderCourseDescription(this.value);
   });
 
-  /* Subjects add button */
   $('#addSubjectBtn').addEventListener('click', () => addSubjectRow());
 
-  /* Password toggles */
   $$('.pw-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
       const target = document.getElementById(btn.dataset.target);
@@ -1569,7 +1513,6 @@ function bindEvents(){
     });
   });
 
-  /* Login */
   $('#loginForm').addEventListener('submit', handleLogin);
   $('#forgotLink').addEventListener('click', async () => {
     const email = $('#loginForm [name="email"]').value.trim().toLowerCase();
@@ -1580,12 +1523,11 @@ function bindEvents(){
     } catch(e){ toast('Could not send reset email: ' + e.message, 'err'); }
   });
 
-  /* Uploads */
   bindUploadBoxes();
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   16 · BOOT
+   17 · BOOT
    ═══════════════════════════════════════════════════════════════ */
 window.addEventListener('DOMContentLoaded', () => {
   bindEvents();
@@ -1595,23 +1537,29 @@ window.addEventListener('DOMContentLoaded', () => {
   addSubjectRow();
   goToStep(1, true);
 
-  /* Replace the initial landing history entry so we can intercept back */
   history.replaceState({ screen: 'landing', step: 1 }, '', '#landing');
 
   setTimeout(() => $('#appLoader').classList.add('hidden'), 600);
 
+  /* ═══ AUTH STATE — main redirect gate ═══ */
   auth.onAuthStateChanged(async (user) => {
-    if (!user) return;
+    if (!user) return;  // stay on landing
     try {
       const snap = await db.ref(`${ROOT}/applications/${user.uid}`).get();
-      if (snap.exists()){
-        const appData = { uid: user.uid, ...snap.val() };
-        if (appData.status === 'approved' && !appData.studentNumber){
-          try { appData.studentNumber = await generateStudentNumber(user.uid, appData); } catch(e){}
-        }
-        showStatusScreen(appData);
+
+      // No application → sign out and stay on landing
+      if (!snap.exists()){
+        await auth.signOut();
+        return;
       }
-    } catch(e){ console.warn(e); }
+
+      const appData = { uid: user.uid, ...snap.val() };
+
+      // ═══ Route based on status ═══
+      // approved → student.html   |   pending/rejected → status screen
+      await routeByApplicationStatus(appData);
+
+    } catch(e){ console.warn('Auth state error:', e); }
   });
 });
 </script>
